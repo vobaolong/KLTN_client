@@ -1,0 +1,164 @@
+/* @media (min-width: 1400px) {
+
+} */
+
+/* xl */
+@media (max-width: 1199px) {
+	.res-hide-xl {
+		display: none !important;
+	}
+
+	.res-dis-inline-xl {
+		display: inline-block !important;
+	}
+
+	.cus-sidebar-item--db {
+		text-align: center !important;
+	}
+}
+
+@media (min-width: 1200px) {
+	.col-xl-2-5 {
+		flex: 0 0 auto;
+		width: 20%;
+	}
+}
+
+/* lg */
+@media (max-width: 991px) {
+	.res-hide-lg {
+		display: none !important;
+	}
+
+	.res-dis-lg {
+		display: block !important;
+	}
+
+	.res-dis-inline-lg {
+		display: inline-block !important;
+	}
+
+	.res-d-flex-end-lg {
+		display: flex !important;
+		justify-content: end !important;
+		align-items: center;
+		flex-wrap: nowrap;
+	}
+
+	.cus-sidebar-item {
+		padding: 0 10px !important;
+		text-align: center;
+	}
+
+	.res-smaller-lg {
+		font-size: 0.8rem !important;
+	}
+}
+
+@media (min-width: 992px) {}
+
+/* md */
+@media (max-width: 767px) {
+	.res-hide-md {
+		display: none !important;
+	}
+
+	.res-dis-md {
+		display: block !important;
+	}
+
+	.res-searchbar-md {
+		width: calc(100% - 100px);
+	}
+
+	.res-flex-reverse-md {
+		flex-direction: column-reverse !important;
+	}
+
+	.res-w-100-md {
+		width: 100% !important;
+	}
+
+	.res-account-sidebar {
+		width: 100%;
+		padding: 6px !important;
+		margin-top: -16px;
+	}
+
+	.res-account-sidebar .nav {
+		flex-direction: row !important;
+	}
+
+	.res-account-sidebar .cus-sidebar-item {
+		width: 46px;
+		padding: 0;
+		margin: 0 2px;
+	}
+
+	.res-sticky-top-md {
+		position: sticky;
+		top: calc(var(--header-height) + 16px);
+		z-index: 4;
+		box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+		padding: 0;
+	}
+
+	.res-mx--12-md {
+		margin-left: -12px !important;
+		margin-right: -12px !important;
+	}
+
+	.res-smaller-md {
+		font-size: 0.8rem !important;
+	}
+}
+
+@media (min-width: 768px) {}
+
+/* sm */
+@media (max-width: 575px) {
+	.res-hide {
+		display: none !important;
+	}
+
+	.res-dis {
+		display: block !important;
+	}
+
+	.avatar-absolute {
+		bottom: 6% !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+	}
+
+	.cus-avatar-name {
+		bottom: -6%;
+	}
+
+	.cus-tooltip:hover~.cus-tooltip-msg {
+		display: none !important;
+	}
+
+	.res-flex-column {
+		flex-direction: column !important;
+	}
+
+	.res-m-0 {
+		margin: 0 !important;
+	}
+
+	.res-flex-justify-between {
+		justify-content: space-between !important;
+	}
+
+	.cus-carousel-icon-wrap {
+		bottom: 50%;
+		transform: translateY(50%);
+	}
+
+	.res-smaller {
+		font-size: 0.8rem !important;
+	}
+}
+
+@media (min-width: 576px) {}
