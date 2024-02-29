@@ -101,11 +101,12 @@ const DetailPage = () => {
               </div>
 
               <div className='col-lg-5 col-md-6 mb-4'>
-                <strong className='text-primary text-lg-right hidden-avatar'>
+                <strong className='text-primary text-lg-right '>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
                 <h5 className=''>{product.name}</h5>
                 <small>{product.rating}</small>
+                <StarRating stars={product.rating} />
                 <div className='d-flex flex-wrap justify-content-right align-items-center mt-3'>
                   <h2 className='text-primary fs-3 m-0 me-2'>
                     {product.salePrice &&

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { authsocial, setToken } from '../../../apis/auth'
+import { authSocial, setToken } from '../../../apis/auth'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import Loading from '../../ui/Loading'
@@ -31,7 +31,7 @@ const SocialForm = (props) => {
     if (data.googleId) user.googleId = data.googleId
     if (data.userID) user.facebookId = data.userID
 
-    authsocial(user)
+    authSocial(user)
       .then((data) => {
         if (data.error) {
           setError(data.error)

@@ -203,7 +203,7 @@ const StoreProductsTable = ({
                 />
               </th> */}
 
-              <th scope='col'>
+              {/* <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -211,7 +211,7 @@ const StoreProductsTable = ({
                   sortBy='description'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
-              </th>
+              </th> */}
 
               <th scope='col'>
                 <SortByButton
@@ -376,7 +376,7 @@ const StoreProductsTable = ({
                     )}
                   </div>
                 </td> */}
-                <td style={{ whiteSpace: 'normal' }}>
+                {/* <td style={{ whiteSpace: 'normal' }}>
                   <div
                     style={{
                       width: '300px',
@@ -387,7 +387,7 @@ const StoreProductsTable = ({
                   >
                     <small>{product.description}</small>
                   </div>
-                </td>
+                </td> */}
 
                 <td>
                   <small>{formatPrice(product.price?.$numberDecimal)}₫</small>

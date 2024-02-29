@@ -96,7 +96,7 @@ const CollectionPage = (props) => {
           {listProducts &&
             listProducts.map((product, index) => (
               <div
-                className='col-xl-2-5 col-md-3 col-sm-4 col-6 mb-4'
+                className='col-xl-2-5 col-lg-3 col-md-3 col-sm-4 col-6 mb-4'
                 key={index}
               >
                 <ProductCard product={product} />

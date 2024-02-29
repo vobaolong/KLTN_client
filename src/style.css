@@ -6,13 +6,22 @@
 	--header-sub-nav-width: 180px;
 	--search-bar-width: calc(100vw - var(--logo-width) - var(--header-sub-nav-width));
 
-	/* --primary-color: #0072BC; */
-	--primary-color: #266EBF;
+	--primary-color: #be1e2d;
 	--muted-color: #6c757d;
 	--high-muted-color: #eaeaea;
 	--white-color: #fff;
 	--black-color: #000;
 	--danger-color: #dc3545;
+}
+
+.scroll-to-top {
+	background-color: var(--primary-color) !important;
+	border-radius: 10% !important;
+}
+
+.scroll-to-top>* {
+	width: 20px !important;
+	height: 20px !important;
 }
 
 * {
@@ -53,6 +62,50 @@ body::-webkit-scrollbar-track {
 	border-radius: 4px;
 }
 
+.btn-dark {
+	background-color: #006DAD !important;
+	border-color: #006DAD !important;
+	color: #fff !important;
+}
+
+.btn-dark:active {
+	border-color: #006dad !important;
+}
+
+.btn-outline-dark {
+	border-color: #006DAD !important;
+	color: #006DAD !important;
+}
+
+.btn-outline-dark:hover {
+	color: #fff !important;
+	background-color: #006DAD !important;
+	border-color: #006DAD !important;
+}
+
+.sticky-top {
+	position: -webkit-sticky;
+	position: sticky;
+	top: -1px !important;
+	z-index: 1020;
+}
+
+.bannerTopHead {
+	background-color: #e9efff;
+	padding: 5px;
+}
+
+.bth-container {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	position: relative;
+	width: 1200px;
+	padding: 0 10px;
+}
+
+
 .text-main {
 	color: #F9F9F9 !important;
 }
@@ -65,24 +118,34 @@ body::-webkit-scrollbar-track {
 .btn-outline-primary,
 .text-primary {
 	color: var(--primary-color) !important;
+	border-color: var(--primary-color);
 }
 
 .btn-primary {
+	border-color: var(--primary-color);
 	background-color: var(--primary-color);
 }
 
 .btn-outline-primary:hover,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-outline-primary:active,
+.btn-primary:active,
+.btn-check:focus+.btn-primary,
+.btn-primary:focus {
 	background-color: var(--primary-color) !important;
 	color: var(--white-color) !important;
+	border-color: var(--primary-color);
+
 }
 
 a {
 	text-decoration: none !important;
+	color: inherit;
 }
 
 a:hover {
 	text-decoration: none !important;
+	color: var(--primary-color);
 }
 
 header {
@@ -118,16 +181,17 @@ header {
 .mall-tag {
 	position: absolute;
 	display: inline-block;
-	padding: 1px 3px;
+	padding: 2px 5px;
 	background-color: #D0011B;
 	color: white;
 	font-size: 12px;
 	font-weight: 500;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
-	top: 10px;
+	top: 0px;
 	left: -5px;
 	max-width: fit-content;
+	width: 70px;
 }
 
 .mall-tag::after {
@@ -139,8 +203,25 @@ header {
 	border-left: 5px solid transparent;
 }
 
+.fav-tag {
+	position: absolute;
+	display: inline-block;
+	padding: 2px 5px;
+	background-color: rgba(240, 23, 52, 0.938);
+	color: white;
+	font-size: 12px;
+	font-weight: 500;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	top: 0px;
+	right: 0px;
+	max-width: fit-content;
+	width: 70px;
+}
+
 .hidden-avatar>span>a>img {
 	display: none;
+	margin-right: 0px !important;
 }
 
 .box-shadow {
@@ -189,9 +270,13 @@ small {
 	z-index: 4;
 }
 
+.border-primary {
+	border-color: var(--primary-color) !important;
+}
+
 /* main-layout */
 .body {
-	margin-top: calc(var(--header-height) + 20px);
+	margin-top: calc(var(--header-height) - 20px);
 	min-height: calc(100vh - var(--footer-height) - var(--header-height) - 60px);
 }
 
@@ -287,6 +372,8 @@ header {
 
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
 .cus-navbar-brand {
 	display: block;
 	min-width: var(--logo-width);
@@ -299,10 +386,9 @@ header {
 .logo {
 	text-transform: uppercase;
 	font-size: 32px;
-	font-family: 'Luckiest Guy', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	display: block;
 	min-width: var(--logo-width);
-	color: transparent;
 }
 
 /* search bar */
@@ -475,7 +561,6 @@ header {
 
 .bg-main-solid {
 	background-color: var(--primary-color) !important;
-	/* Thay đổi thành mã màu bạn muốn */
 }
 
 /* cus-input-group */
@@ -679,9 +764,9 @@ header {
 
 .cus-dropdown-label {
 	position: absolute;
-	color: var(--primary-color);
+	color: var(--muted-color);
 	pointer-events: none;
-	left: 12px;
+	left: 5px;
 	top: -18px;
 	font-size: 0.8rem;
 }
@@ -782,7 +867,7 @@ header {
 }
 
 .cus-outline.btn-outline-light:hover {
-	background-color: rgba(89, 173, 230, 0.493) !important;
+	background-color: #DF3346 !important;
 }
 
 .cus-tooltip-msg {
@@ -942,16 +1027,17 @@ header {
 .link-hover {
 	text-decoration: none !important;
 	cursor: pointer;
+	/* color: var(--muted-color) !important; */
 }
 
 .link-hover:hover {
-	color: #0072BC !important;
+	color: var(--primary-color) !important;
 	text-decoration: none !important;
 }
 
 .cus-link-hover:hover {
+	color: var(--primary-color) !important;
 	text-decoration: none !important;
-	color: #0072BC !important;
 }
 
 /* cus-caesural-img */
@@ -1427,12 +1513,12 @@ tfoot th:first-child {
 
 /* footer */
 .site-footer {
-	background-color: var(--primary-color);
-	padding: 45px 0 20px;
+	background-color: var(--high-muted-color);
+	padding: 25px 0 10px;
 	margin-top: 40px;
 	font-size: 15px;
 	line-height: 24px;
-	color: #fff;
+	color: #000;
 }
 
 .site-footer hr {
@@ -1446,7 +1532,7 @@ tfoot th:first-child {
 }
 
 .site-footer h6 {
-	color: #fff;
+	color: var(--primary-color);
 	font-size: 16px;
 	text-transform: uppercase;
 	margin-top: 5px;
@@ -1454,7 +1540,7 @@ tfoot th:first-child {
 }
 
 .site-footer a {
-	color: #fff;
+	color: var(--primary-color);
 }
 
 .site-footer a:hover {
@@ -1496,7 +1582,7 @@ tfoot th:first-child {
 
 @media (max-width: 991px) {
 	.site-footer [class^='col-'] {
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 	}
 }
 
@@ -1550,7 +1636,7 @@ tfoot th:first-child {
 .social-icons a:focus,
 .social-icons a:hover {
 	color: #fff;
-	background-color: rgba(89, 173, 230, 0.493);
+	background-color: #DF3346;
 }
 
 .social-icons.size-sm a {
@@ -1561,7 +1647,7 @@ tfoot th:first-child {
 }
 
 .social-icons a.social:hover {
-	background-color: #4e7bdb;
+	background-color: #DF3346;
 }
 
 

@@ -1,18 +1,18 @@
-import MainNav from './menu/MainNav';
-import Footer from './menu/Footer';
+import MainNav from './menu/MainNav'
+import Footer from './menu/Footer'
+import BannerTopHead from '../ui/BannerTopHead'
 
 const MainLayout = ({
-    container = 'container-lg',
-    navFor = 'user',
-    children = null,
+  container = 'container-lg',
+  navFor = 'user',
+  children = null
 }) => (
-    <div className="main-layout">
-        <MainNav navFor={navFor} />
+  <div className='main-layout'>
+    <BannerTopHead navFor={navFor} />
+    <MainNav navFor={navFor} />
+    <main className={`body ${container}`}>{children}</main>
+    {navFor !== 'admin' ? <Footer /> : <div className='mb-4'></div>}
+  </div>
+)
 
-        <main className={`body ${container}`}>{children}</main>
-
-        {navFor !== 'admin' ? <Footer /> : <div className="mb-4"></div>}
-    </div>
-);
-
-export default MainLayout;
+export default MainLayout

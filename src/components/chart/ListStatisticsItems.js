@@ -255,7 +255,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             <button
               type='button'
               className={`btn ${
-                options.flag === 'order' ? 'btn-danger' : 'btn-outline-danger'
+                options.flag === 'order' ? 'btn-dark' : 'btn-outline-dark'
               } btn-lg ripple w-100 py-4 mb-2`}
               onClick={() =>
                 setOptions({

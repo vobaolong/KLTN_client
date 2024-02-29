@@ -36,7 +36,7 @@ const MainNav = ({ navFor = 'user' }) => {
     const handleScroll = () => {
       const position = window.scrollY
       setScrollPosition(position)
-      setIsSolidBackground(position > 400)
+      setIsSolidBackground(position > 100)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
@@ -47,7 +47,11 @@ const MainNav = ({ navFor = 'user' }) => {
   const navBackgroundClass = isSolidBackground ? 'bg-main-solid' : ''
   return (
     <header
-      className={`main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark ${navBackgroundClass}`}
+      className={`main-nav cus-nav navbar sticky-top navbar-expand-md navbar-dark ${
+        navFor === 'user'
+          ? navBackgroundClass
+          : 'bg-primary text-white!important'
+      } border-b border`}
     >
       {isConfirming && (
         <ConfirmDialog
@@ -66,8 +70,8 @@ const MainNav = ({ navFor = 'user' }) => {
           <Logo />
         </Link>
 
-        {navFor == 'user' && <SearchBar />}
-        {navFor != 'user' && (
+        {navFor === 'user' && <SearchBar />}
+        {navFor !== 'user' && (
           <h1 className='logo text-white m-0'>
             {navFor} <span className='res-hide'>dashboard</span>
           </h1>
@@ -123,11 +127,11 @@ const MainNav = ({ navFor = 'user' }) => {
                       className='btn btn-outline-light cus-outline ripple cus-tooltip'
                       to='/cart'
                     >
-                      <i className='fas fa-shopping-basket'></i>
+                      <i className='fas fa-bag-shopping'></i>
                     </Link>
                     {
-                      <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info cus-tooltip'>
-                        {cartCount < 10 ? cartCount : '9+'}
+                      <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary cus-tooltip'>
+                        {cartCount < 100 ? cartCount : '99+'}
                         <span className='visually-hidden'>products</span>
                       </span>
                     }
@@ -242,7 +246,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   {navFor === 'user' && getToken().role === 'user' && (
                     <li className='nav-item p-2'>
                       <Link className='link-hover link-dark d-block' to='/cart'>
-                        <i className='fas fa-shopping-basket me-2'></i>
+                        <i className='fas fa-bag-shopping me-2'></i>
                         Cart
                       </Link>
                     </li>
@@ -261,7 +265,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   )}
 
                   <li
-                    className='nav-item p-2 link-hover link-dark ms-1'
+                    className='nav-item p-2 link-hover link-dark'
                     onClick={handleSignout}
                   >
                     <i className='fas fa-sign-out-alt me-2'></i>

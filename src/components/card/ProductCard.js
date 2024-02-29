@@ -89,7 +89,12 @@ const ProductCard = ({ product = {}, onRun }) => {
             alt={productValue.name}
           />
         </div>
-        <div class='mall-tag'>Mall</div>
+        <div class='mall-tag'>Giảm {-salePercent}%</div>
+        {productValue.numberOfFollowers > 1 ? (
+          <div class='fav-tag'>Yêu thích</div>
+        ) : (
+          ''
+        )}
       </Link>
 
       <div className='card-body border-top'>
@@ -138,9 +143,6 @@ const ProductCard = ({ product = {}, onRun }) => {
               formatPrice(productValue.price.$numberDecimal)}{' '}
             ₫
           </b>
-          <small className='badge text-md bg-danger align-items-center py-1'>
-            {-salePercent}%
-          </small>
         </small>
         {/* {getToken() && (
           <FollowProductButton
