@@ -313,7 +313,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple'
+                      className='btn btn-outline-success ripple'
                       style={{ width: '95px' }}
                       onClick={() => handleRestoreCommission(delivery)}
                     >

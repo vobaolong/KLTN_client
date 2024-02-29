@@ -469,7 +469,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 </tbody>
               </table>
             </div>
-            <div className='d-flex justify-content-end my-2'>
+            <div className='d-flex justify-content-start my-2'>
               <Link
                 to={`/${by}/${
                   by === 'admin' ? options.flag : options.flag + 's/' + storeId

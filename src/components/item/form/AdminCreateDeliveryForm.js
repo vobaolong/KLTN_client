@@ -115,7 +115,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
             value={delivery.name}
             isValid={delivery.isValidName}
             feedback='Please provide a valid delivery name.'
-            validator='level'
+            validator='name'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />

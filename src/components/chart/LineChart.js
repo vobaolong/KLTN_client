@@ -35,7 +35,7 @@ const LineChart = ({
           fill: false,
           tension: 0.4,
           borderWidth: 2,
-          borderColor: '#3B58E7'
+          borderColor: '#1162D5'
         }
       ]
     })

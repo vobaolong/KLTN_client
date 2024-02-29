@@ -223,7 +223,7 @@ const StoreOrdersTable = ({
                 </td>
                 <td>
                   <small className='text-nowrap'>
-                    For Store:{' '}
+                    <strong className=''>For Store: </strong>
                     {order.amountToStore &&
                       formatPrice(order.amountToStore.$numberDecimal)}{' '}
                     ₫
@@ -231,7 +231,7 @@ const StoreOrdersTable = ({
                   <br />
 
                   <small className='text-nowrap'>
-                    For ZenMetic:{' '}
+                    <strong>For ZenMetic: </strong>
                     {order.amountToGD &&
                       formatPrice(order.amountToGD.$numberDecimal)}{' '}
                     ₫

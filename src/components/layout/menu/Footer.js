@@ -29,7 +29,7 @@ const Footer = (props) => {
 
   return (
     <footer className='site-footer'>
-      <div className='container-lg'>
+      <div className='container-md'>
         <div className='row'>
           <div className='col-sm-12 col-md-6'>
             <div className='mb-4'>
@@ -88,7 +88,7 @@ const Footer = (props) => {
         </div>
         <hr />
       </div>
-      <div className='container'>
+      <div className='container-md'>
         <div className='row'>
           <div className='col-md-8 col-sm-6 col-xs-12'>
             <p className='copyright-text'>

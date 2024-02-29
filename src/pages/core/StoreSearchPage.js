@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getlistStores } from '../../apis/store'
+import { getListStores } from '../../apis/store'
 import useUpdateEffect from '../../hooks/useUpdateEffect'
 import MainLayout from '../../components/layout/MainLayout'
 import StoreCard from '../../components/card/StoreCard'
@@ -30,7 +30,7 @@ const StoreSearchPage = (props) => {
   const init = () => {
     setError('')
     setIsLoading(true)
-    getlistStores(filter)
+    getListStores(filter)
       .then((data) => {
         if (data.error) setError(data.error)
         else {

@@ -20,7 +20,7 @@ const ConfirmDialog = ({
         style={{
           display: 'block',
           paddingLeft: '0px',
-          animation: 'show 0.6s ease'
+          animation: 'show 0.5s ease'
         }}
       >
         <div className='modal-dialog' style={{ zIndex: '9999' }}>

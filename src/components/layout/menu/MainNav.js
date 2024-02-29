@@ -29,30 +29,9 @@ const MainNav = ({ navFor = 'user' }) => {
       history.go(0)
     })
   }
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [isSolidBackground, setIsSolidBackground] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY
-      setScrollPosition(position)
-      setIsSolidBackground(position > 100)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  const navBackgroundClass = isSolidBackground ? 'bg-main-solid' : ''
   return (
-    <header
-      className={`main-nav cus-nav navbar sticky-top navbar-expand-md navbar-dark ${
-        navFor === 'user'
-          ? navBackgroundClass
-          : 'bg-primary text-white!important'
-      } border-b border`}
-    >
+    <header className='main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
       {isConfirming && (
         <ConfirmDialog
           title='Sign out'
@@ -62,7 +41,7 @@ const MainNav = ({ navFor = 'user' }) => {
         />
       )}
 
-      <div className='container-lg'>
+      <div className='container-md'>
         <Link
           className='navbar-brand cus-navbar-brand me-4 ripple res-hide-md'
           to='/'

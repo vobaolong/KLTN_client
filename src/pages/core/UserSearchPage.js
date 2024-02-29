@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
-import { getlistUsers } from '../../apis/user'
+import { getListUsers } from '../../apis/user'
 import useUpdateEffect from '../../hooks/useUpdateEffect'
 import MainLayout from '../../components/layout/MainLayout'
 import UserCard from '../../components/card/UserCard'
@@ -31,7 +31,7 @@ const UserSearchPage = (props) => {
     setError('')
     setIsLoading(true)
 
-    getlistUsers(filter)
+    getListUsers(filter)
       .then((data) => {
         if (data.error) setError(data.error)
         else {

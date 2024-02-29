@@ -339,7 +339,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple cus-tooltip'
+                      className='btn btn-outline-success ripple cus-tooltip'
                       onClick={() => handleRestoreCategory(category)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>

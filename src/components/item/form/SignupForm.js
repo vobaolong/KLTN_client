@@ -216,6 +216,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             <span
               className='sign-in-item text-primary text-decoration-underline'
               onClick={onSwap}
+              style={{ cursor: 'pointer' }}
             >
               Sign in
             </span>

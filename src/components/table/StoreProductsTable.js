@@ -447,7 +447,7 @@ const StoreProductsTable = ({
                     <button
                       type='button'
                       className={`btn btn-outline-${
-                        !product.isSelling ? 'primary' : 'secondary'
+                        !product.isSelling ? 'success' : 'secondary'
                       } ripple me-2`}
                       onClick={() => handleSellingProduct(product)}
                     >

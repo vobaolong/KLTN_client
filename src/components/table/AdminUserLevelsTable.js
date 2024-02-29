@@ -327,7 +327,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple cus-tooltip'
+                      className='btn btn-outline-success ripple cus-tooltip'
                       style={{ width: '95px' }}
                       onClick={() => handleRestoreLevel(level)}
                     >

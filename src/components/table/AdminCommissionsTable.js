@@ -323,7 +323,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple'
+                      className='btn btn-outline-success ripple'
                       onClick={() => handleRestoreCommission(commission)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getlistStores } from '../../apis/store'
+import { getListStores } from '../../apis/store'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import StoreCard from '../card/StoreCard'
@@ -16,7 +16,7 @@ const ListHotStores = ({
   const init = () => {
     setError('')
     setIsLoading(true)
-    getlistStores({
+    getListStores({
       search: '',
       sortBy: 'rating',
       sortMoreBy: 'point',

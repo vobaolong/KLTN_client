@@ -75,12 +75,12 @@ const OpenCloseStoreButton = ({
         {openFlag ? (
           <span>
             <i className='fas fa-door-open'></i>
-            {detail && <span className='ms-2 res-hide'>open</span>}
+            {detail && <span className='ms-2 res-hide'>Open</span>}
           </span>
         ) : (
           <span>
             <i className='fas fa-door-closed'></i>
-            {detail && <span className='ms-2 res-hide'>closed</span>}
+            {detail && <span className='ms-2 res-hide'>Closed</span>}
           </span>
         )}
       </button>

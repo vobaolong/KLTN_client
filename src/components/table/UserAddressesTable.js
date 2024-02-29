@@ -117,7 +117,7 @@ const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
 
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple'
+                      className='btn btn-outline-primary ripple'
                       onClick={() => handleDeleteAddress(address, index)}
                     >
                       <i className='fas fa-trash-alt'></i>

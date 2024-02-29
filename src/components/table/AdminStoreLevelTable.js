@@ -327,7 +327,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple'
+                      className='btn btn-outline-success ripple'
                       style={{ width: '95px' }}
                       onClick={() => handleRestoreLevel(level)}
                     >

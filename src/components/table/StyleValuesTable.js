@@ -233,7 +233,7 @@ const StyleValuesTable = ({
                       ) : (
                         <button
                           type='button'
-                          className='btn btn-outline-primary ripple'
+                          className='btn btn-outline-success ripple'
                           onClick={() => handleRestore(value)}
                         >
                           <i className='fas fa-trash-restore-alt'></i>

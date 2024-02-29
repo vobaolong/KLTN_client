@@ -34,9 +34,7 @@ const VendorAddProductImagesItem = ({
         </Modal>
       )}
     </div>
-    {count >= 7 && (
-      <small className='cus-tooltip-msg'>The limit is 7 images</small>
-    )}
+    {count >= 8 && <small className='cus-tooltip-msg'>Limit is 7 images</small>}
   </div>
 )
 

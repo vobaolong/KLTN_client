@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
 import { createStore } from '../../../apis/store'
-import { listActiveCommissions as getlistCommissions } from '../../../apis/commission'
+import { listActiveCommissions as getListCommissions } from '../../../apis/commission'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import InputFile from '../../ui/InputFile'
@@ -36,7 +36,7 @@ const CreateStoreForm = (props) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    getlistCommissions()
+    getListCommissions()
       .then((data) => {
         if (data.error) setError1(data.error)
         else {

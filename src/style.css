@@ -83,11 +83,8 @@ body::-webkit-scrollbar-track {
 	border-color: #006DAD !important;
 }
 
-.sticky-top {
-	position: -webkit-sticky;
-	position: sticky;
-	top: -1px !important;
-	z-index: 1020;
+.modal-dialog {
+	z-index: 9999 !important;
 }
 
 .bannerTopHead {
@@ -126,6 +123,12 @@ body::-webkit-scrollbar-track {
 	background-color: var(--primary-color);
 }
 
+.btn-primary:disabled {
+	background-color: rgba(235, 102, 102, 0.877);
+	border-color: rgba(235, 102, 102, 0.877);
+}
+
+
 .btn-outline-primary:hover,
 .btn-primary:hover,
 .btn-outline-primary:active,
@@ -135,16 +138,14 @@ body::-webkit-scrollbar-track {
 	background-color: var(--primary-color) !important;
 	color: var(--white-color) !important;
 	border-color: var(--primary-color);
-
 }
 
 a {
-	text-decoration: none !important;
 	color: inherit;
 }
 
 a:hover {
-	text-decoration: none !important;
+	/* text-decoration: none !important; */
 	color: var(--primary-color);
 }
 
@@ -228,10 +229,6 @@ header {
 	box-shadow: 0 0 20px -4px rgba(0, 0, 0, .15);
 }
 
-.border-primary {
-	border-left: 4px solid var(--primary-color) !important;
-}
-
 /* bootstrap */
 .card {
 	max-width: 240px !important;
@@ -270,14 +267,19 @@ small {
 	z-index: 4;
 }
 
+.container-md {
+	max-width: 1200px !important;
+}
+
 .border-primary {
 	border-color: var(--primary-color) !important;
 }
 
 /* main-layout */
 .body {
-	margin-top: calc(var(--header-height) - 20px);
+	margin-top: calc(var(--header-height) + 20px);
 	min-height: calc(100vh - var(--footer-height) - var(--header-height) - 60px);
+	max-width: 1200px;
 }
 
 /* customs main-nav */
@@ -849,6 +851,8 @@ header {
 	display: block;
 }
 
+
+
 /* btn outline */
 .cus-outline.btn-outline-light {
 	background-color: var(--primary-color);
@@ -1025,9 +1029,9 @@ header {
 }
 
 .link-hover {
+	color: rgba(199, 91, 91, 0.9) !important;
 	text-decoration: none !important;
 	cursor: pointer;
-	/* color: var(--muted-color) !important; */
 }
 
 .link-hover:hover {
@@ -1116,8 +1120,10 @@ header {
 	top: 0;
 	left: 0;
 	object-fit: cover;
-	border-bottom-left-radius: 6px;
-	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
 }
 
 .cus-cover-img.cus-cover-img--input-file {

@@ -305,7 +305,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple'
+                      className='btn btn-outline-success ripple'
                       style={{ width: '95px' }}
                       onClick={() => handleRestore(style)}
                     >

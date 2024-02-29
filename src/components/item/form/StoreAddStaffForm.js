@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
-import { getlistUsers } from '../../../apis/user'
+import { getListUsers } from '../../../apis/user'
 import { addStaffs } from '../../../apis/store'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import UserSmallCard from '../../card/UserSmallCard'
@@ -27,7 +27,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    getlistUsers(filter)
+    getListUsers(filter)
       .then((data) => {
         if (data.error) return
         else {

@@ -3,7 +3,7 @@ import Footer from './menu/Footer'
 import BannerTopHead from '../ui/BannerTopHead'
 
 const MainLayout = ({
-  container = 'container-lg',
+  container = 'container-md',
   navFor = 'user',
   children = null
 }) => (

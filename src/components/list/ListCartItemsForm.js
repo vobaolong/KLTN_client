@@ -148,10 +148,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       )}
 
       {items.map((item, index) => (
-        <div
-          key={index}
-          className='d-flex align-items-center mb-2 res-flex-column'
-        >
+        <div key={index} className='d-flex align-items-center res-flex-column'>
           <div
             style={{
               position: 'relative',
@@ -181,7 +178,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           <div className='flex-grow-1 d-flex flex-wrap justify-content-between align-items-center ms-4 res-m-0'>
             <div className=''>
               <Link
-                className='text-reset text-decoration-none link-hover d-block mt-1'
+                className='text-reset text-decoration-none link-hover d-block py-1'
                 to={`/product/${item.productId && item.productId._id}`}
                 title={item.productId && item.productId.name}
               >
@@ -190,7 +187,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 </h3>
               </Link>
 
-              <div className='mt-2'>
+              <div className='mt-1'>
                 {item.styleValueIds &&
                   item.styleValueIds.map((value, index) => (
                     <p className='fs-6' key={index}>
@@ -199,7 +196,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   ))}
               </div>
 
-              <div className='mt-2'>
+              <div className='mt-1'>
                 <p className='text-decoration-line-through text-muted'>
                   {item.productId &&
                     item.productId.price &&

@@ -57,10 +57,12 @@ import StoreCollectionPage from './store/CollectionPage'
 import StoreReviewAndRatingPage from './store/ReviewAndRatingPage'
 //product
 import ProductDetailPage from './product/DetailPage'
+import ScrollToTops from '../hooks/ScrollToTops'
 
 const Routes = () => {
   return (
     <BrowserRouter>
+      <ScrollToTops />
       <Switch>
         {/* core */}
         <Route path='/' exact component={HomePage} />
