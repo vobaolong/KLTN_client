@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { getProduct } from '../../apis/product'
 import {
@@ -91,11 +91,14 @@ const DetailPage = () => {
           <Error msg={error} />
         ) : (
           <div className='container-fluid'>
-            <div className='mb-5'>
+            <div className='mb-2'>
               <CategorySmallCard category={product.categoryId} parent={true} />
             </div>
-            <div className='row bg-white p-2 rounded box-shadow'>
-              <div className='col-lg-5 col-md-6 mb-4 p-0-im'>
+            <div
+              className='row bg-white rounded box-shadow'
+              style={{ paddingTop: '12px', paddingBottom: '12px' }}
+            >
+              <div className='col-lg-5 col-md-6 '>
                 <Carousel
                   listImages={product.listImages}
                   alt={product.name}
@@ -105,15 +108,18 @@ const DetailPage = () => {
                 />
               </div>
 
-              <div className='col-lg-5 col-md-6 mb-4'>
+              <div className='col-lg-7 col-md-6'>
                 <strong className='text-primary text-lg-right'>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
                 <h5 className=''>{product.name}</h5>
                 <div className='d-flex'>
-                  <span className='me-2 border-bottom border-primary text-primary'>
+                  <a
+                    href='#review'
+                    className='me-2 border-bottom border-primary text-primary text-decoration-none'
+                  >
                     {product.rating}
-                  </span>
+                  </a>
                   <StarRating stars={product.rating} />
                   <span className='mx-2 px-2 border-start'>
                     {product.sold}
@@ -153,7 +159,6 @@ const DetailPage = () => {
                     getToken().role === 'user' && (
                       <AddToCartForm product={product} />
                     )}
-
                   {getToken() && (
                     <FollowProductButton
                       productId={product._id}
@@ -169,13 +174,13 @@ const DetailPage = () => {
                   )}
                 </div>
               </div>
-              <div className='col-lg-2 col-md-0 mb-4 bg-primary'></div>
+              {/* <div className='col-lg-2 col-md-0 bg-primary'></div> */}
             </div>
             <div className='row'>
               <div className='col-12'>
                 <div className='container-fluid p-0'>
                   <div className='row res-flex-reverse-md'>
-                    <div className='col-md-8 p-0'>
+                    <div id='review' className='col-md-8 p-0'>
                       <ListReviews productId={product._id} />
                     </div>
 

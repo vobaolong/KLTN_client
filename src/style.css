@@ -123,6 +123,23 @@ body::-webkit-scrollbar-track {
 	background-color: var(--primary-color);
 }
 
+.add-to-cart-btn {
+	background-color: rgba(208, 1, 27, .08);
+	border-color: var(--primary-color);
+	color: var(--primary-color);
+}
+
+.add-to-cart-btn:hover {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+	color: #fff;
+}
+
+.add-to-cart-btn:disabled {
+	background-color: rgba(235, 102, 102, 0.877);
+	border-color: rgba(235, 102, 102, 0.877);
+}
+
 .btn-primary:disabled {
 	background-color: rgba(235, 102, 102, 0.877);
 	border-color: rgba(235, 102, 102, 0.877);
@@ -233,6 +250,10 @@ header {
 .card {
 	max-width: 240px !important;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.card:hover {
+	/* border: 1px solid var(--primary-color) !important; */
 }
 
 .form-control:focus,
@@ -506,7 +527,6 @@ header {
 	width: 100%;
 	position: absolute;
 	top: -5%;
-	/* background-color: red; */
 	left: 0;
 	cursor: pointer;
 }
@@ -998,7 +1018,6 @@ header {
 
 /* cover */
 .cus-cover-wrap {
-	/* width: 828px; */
 	max-width: 100%;
 }
 
@@ -1010,8 +1029,6 @@ header {
 	position: relative;
 	padding-bottom: 38.04%;
 	height: 0;
-	/* margin: -1rem auto 0; */
-	/* overflow: hidden; */
 }
 
 .cus-cover.cus-cover--store {
@@ -1048,8 +1065,8 @@ header {
 .cus-carousel {
 	position: relative;
 	padding-bottom: 38.04%;
-	min-height: 480px;
 	height: 100%;
+	min-height: 466px;
 }
 
 .p-0-im {
@@ -1063,7 +1080,6 @@ header {
 	top: 0;
 	left: 0;
 	object-fit: contain;
-	/* border-radius: 6px; */
 	font-size: 1.6rem;
 }
 

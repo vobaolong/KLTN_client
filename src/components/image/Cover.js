@@ -11,7 +11,7 @@ const Cover = ({
 }) => (
   <div className='cus-cover-wrap'>
     <div className='cus-cover'>
-      <img src={`${IMG + cover}`} className='cus-cover-img' alt={alt} />
+      <img src={`${IMG + cover}`} className='cus-cover-img rounded' alt={alt} />
       {isEditable == 'user' && <UserCoverUpload />}
       {isEditable == 'store' && <StoreCoverUpload storeId={storeId} />}
     </div>

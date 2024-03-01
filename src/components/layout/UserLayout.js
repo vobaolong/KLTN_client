@@ -7,7 +7,7 @@ import UserLevelInfo from '../info/UserLevelInfo'
 const UserLayout = ({ user = {}, children = null }) => (
   <MainLayout>
     <div className='user-layout' style={{ margin: '0 auto' }}>
-      <div className='px-2 position-relative shadow'>
+      <div className='position-relative shadow'>
         <Cover cover={user.cover} alt={user.firstName + ' ' + user.lastName} />
         <div className='avatar-absolute avatar-absolute--store'>
           <Avatar

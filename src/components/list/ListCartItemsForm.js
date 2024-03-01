@@ -28,7 +28,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
   const [success, setSuccess] = useState('')
   const [run, setRun] = useState(false)
 
-  const [showCheckoutFlag, toogleShowCheckoutFlag] = useToggle(false)
+  const [showCheckoutFlag, toggleShowCheckoutFlag] = useToggle(false)
 
   const { level } = useSelector((state) => state.account.user)
   const [updateDispatch] = useUpdateDispatch()
@@ -327,7 +327,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
               showCheckoutFlag ? 'btn-primary' : 'btn-outline-primary'
             } ripple`}
             type='button'
-            onClick={toogleShowCheckoutFlag}
+            onClick={toggleShowCheckoutFlag}
           >
             Proceed to checkout
           </button>

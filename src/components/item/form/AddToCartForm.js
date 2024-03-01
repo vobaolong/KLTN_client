@@ -65,7 +65,6 @@ const AddToCartForm = ({ product = {} }) => {
     e.preventDefault()
     onSubmit()
   }
-
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
 
@@ -119,13 +118,14 @@ const AddToCartForm = ({ product = {} }) => {
           </div>
         )}
 
-        <div className='col-12 d-grid mt-4'>
+        <div className='col-lg-4 col-md-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple btn-lg'
+            className='btn add-to-cart-btn ripple btn-lg d-flex align-items-center justify-content-center add-to-cart'
             onClick={handleSubmit}
           >
             <i className='fas fa-cart-plus'></i>
+            <small className='ms-2'>Thêm vào giỏ hàng</small>
           </button>
         </div>
       </form>
