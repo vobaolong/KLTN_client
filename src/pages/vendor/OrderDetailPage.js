@@ -20,9 +20,9 @@ const OrderDetailPage = (props) => {
         <div className='mx-4'>
           <Link
             to={`/vendor/orders/${storeId}`}
-            className='text-decoration-none cus-link-hover'
+            className='text-decoration-none link-hover'
           >
-            <i className='fas fa-arrow-circle-left me-2'></i>Back to Orders
+            <i className='fas fa-arrow-turn-down-left me-2'></i>Back to Orders
             Manager
           </Link>
         </div>

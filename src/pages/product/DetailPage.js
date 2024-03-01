@@ -21,6 +21,7 @@ import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 import ListProductsByStore from '../../components/list/ListProductsByStore'
 import SigninButton from '../../components/item/SigninItem'
 import ListReviews from '../../components/list/ListReviews'
+import SalePercentLabel from '../../components/label/SalePercentLabel'
 
 const DetailPage = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -77,7 +78,11 @@ const DetailPage = () => {
   useEffect(() => {
     init()
   }, [productId])
-
+  const salePercent = Math.round(
+    ((product?.price?.$numberDecimal - product?.salePrice?.$numberDecimal) /
+      product?.price?.$numberDecimal) *
+      100
+  )
   return (
     <MainLayout>
       <div className='position-relative'>
@@ -89,8 +94,8 @@ const DetailPage = () => {
             <div className='mb-5'>
               <CategorySmallCard category={product.categoryId} parent={true} />
             </div>
-            <div className='row'>
-              <div className='col-lg-5 col-md-6 mb-4'>
+            <div className='row bg-white p-2 rounded box-shadow'>
+              <div className='col-lg-5 col-md-6 mb-4 p-0-im'>
                 <Carousel
                   listImages={product.listImages}
                   alt={product.name}
@@ -101,23 +106,31 @@ const DetailPage = () => {
               </div>
 
               <div className='col-lg-5 col-md-6 mb-4'>
-                <strong className='text-primary text-lg-right '>
+                <strong className='text-primary text-lg-right'>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
                 <h5 className=''>{product.name}</h5>
-                <small>{product.rating}</small>
-                <StarRating stars={product.rating} />
+                <div className='d-flex'>
+                  <span className='me-2 border-bottom border-primary text-primary'>
+                    {product.rating}
+                  </span>
+                  <StarRating stars={product.rating} />
+                  <span className='mx-2 px-2 border-start'>
+                    {product.sold}
+                    <span className='text-muted ms-1'>Đã Bán</span>
+                  </span>
+                </div>
                 <div className='d-flex flex-wrap justify-content-right align-items-center mt-3'>
-                  <h2 className='text-primary fs-3 m-0 me-2'>
-                    {product.salePrice &&
-                      formatPrice(product.salePrice.$numberDecimal)}{' '}
-                    ₫
-                  </h2>
-
                   <p className='text-decoration-line-through text-muted mt-1'>
                     {product.price && formatPrice(product.price.$numberDecimal)}{' '}
                     ₫
                   </p>
+                  <h2 className='text-primary fs-3 m-0 ms-3'>
+                    {product.salePrice &&
+                      formatPrice(product.salePrice.$numberDecimal)}{' '}
+                    ₫
+                  </h2>
+                  <SalePercentLabel salePercent={salePercent} />
                 </div>
 
                 <div className='mt-4'>
@@ -157,7 +170,8 @@ const DetailPage = () => {
                 </div>
               </div>
               <div className='col-lg-2 col-md-0 mb-4 bg-primary'></div>
-
+            </div>
+            <div className='row'>
               <div className='col-12'>
                 <div className='container-fluid p-0'>
                   <div className='row res-flex-reverse-md'>

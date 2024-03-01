@@ -276,7 +276,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 <td className='text-nowrap'>
                   <Link
                     type='button'
-                    className='btn btn-primary ripple me-2'
+                    className='btn btn-golden ripple me-2'
                     to={`/admin/style/values/${style._id}`}
                   >
                     <i className='fas fa-list-ul'></i>
@@ -285,7 +285,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
 
                   <Link
                     type='button'
-                    className='btn btn-primary ripple me-2'
+                    className='btn btn-dark ripple me-2'
                     to={`/admin/style/editStyle/${style._id}`}
                   >
                     <i className='fas fa-pen'></i>

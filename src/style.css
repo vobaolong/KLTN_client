@@ -6,7 +6,7 @@
 	--header-sub-nav-width: 180px;
 	--search-bar-width: calc(100vw - var(--logo-width) - var(--header-sub-nav-width));
 
-	--primary-color: #be1e2d;
+	--primary-color: #d0011b;
 	--muted-color: #6c757d;
 	--high-muted-color: #eaeaea;
 	--white-color: #fff;
@@ -183,7 +183,7 @@ header {
 	position: absolute;
 	display: inline-block;
 	padding: 2px 5px;
-	background-color: #D0011B;
+	background-color: var(--primary-color);
 	color: white;
 	font-size: 12px;
 	font-weight: 500;
@@ -200,7 +200,7 @@ header {
 	position: absolute;
 	bottom: -4px;
 	left: 0;
-	border-top: 5px solid #D0011B;
+	border-top: 5px solid var(--primary-color);
 	border-left: 5px solid transparent;
 }
 
@@ -1029,7 +1029,7 @@ header {
 }
 
 .link-hover {
-	color: rgba(199, 91, 91, 0.9) !important;
+	color: var(--muted-color) !important;
 	text-decoration: none !important;
 	cursor: pointer;
 }
@@ -1048,7 +1048,12 @@ header {
 .cus-carousel {
 	position: relative;
 	padding-bottom: 38.04%;
-	height: 0;
+	min-height: 480px;
+	height: 100%;
+}
+
+.p-0-im {
+	padding: 0 !important;
 }
 
 .cus-carousel-img {
@@ -1057,10 +1062,9 @@ header {
 	position: absolute;
 	top: 0;
 	left: 0;
-	object-fit: cover;
-	border-radius: 6px;
+	object-fit: contain;
+	/* border-radius: 6px; */
 	font-size: 1.6rem;
-	background-color: #f0f0f0;
 }
 
 .cus-carousel-icon-wrap {

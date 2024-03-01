@@ -20,7 +20,7 @@ const Carousel = ({
           type='button'
           data-bs-target='#carouselInterval'
           data-bs-slide-to={index}
-          className={index == 0 ? 'active' : ''}
+          className={index === 0 ? 'active' : ''}
         ></button>
       ))}
     </div>
@@ -29,7 +29,7 @@ const Carousel = ({
       {listImages?.map((image, index) => (
         <div
           key={index}
-          className={`carousel-item ${index == 0 && 'active'}`}
+          className={`carousel-item ${index === 0 && 'active'}`}
           data-bs-interval='3000'
         >
           <div className='cus-carousel' style={style}>
@@ -39,7 +39,7 @@ const Carousel = ({
               alt={alt}
             />
 
-            {isEditable == 'store' && (
+            {isEditable === 'store' && (
               <StoreCarouselUpload storeId={storeId} index={index} />
             )}
           </div>

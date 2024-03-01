@@ -245,7 +245,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                     type='button'
                     className={`btn ${
                       !store.isActive
-                        ? 'btn-outline-primary'
+                        ? 'btn-outline-success'
                         : 'btn-outline-danger'
                     } ripple cus-tooltip`}
                     onClick={() => handleActiveStore(store)}

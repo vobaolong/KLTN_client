@@ -15,11 +15,11 @@ const ProductStatusLabel = ({ isSelling = true, detail = true }) => (
         </span>
       )}
     </span>
-    <small className='cus-tooltip-msg'>
+    {/* <small className='cus-tooltip-msg'>
       {isSelling
         ? 'This product is selling, can order in this time.'
         : "This product is stored, can't order in this time"}
-    </small>
+    </small> */}
   </span>
 )
 

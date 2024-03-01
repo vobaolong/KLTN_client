@@ -259,7 +259,7 @@ const StoreOrdersTable = ({
                 <td className='text-center'>
                   <Link
                     type='button'
-                    className='btn btn-primary ripple cus-tooltip'
+                    className='btn btn-golden ripple cus-tooltip'
                     to={`/vendor/orders/detail/${order._id}/${storeId}`}
                   >
                     <i className='fas fa-info-circle'></i>

@@ -212,7 +212,7 @@ const StyleValuesTable = ({
                     <td className='text-nowrap'>
                       <button
                         type='button'
-                        className='btn btn-primary ripple me-2'
+                        className='btn btn-dark ripple me-2'
                         data-bs-toggle='modal'
                         data-bs-target='#edit-style-value-form'
                         onClick={() => setEditedStyleValue(value)}

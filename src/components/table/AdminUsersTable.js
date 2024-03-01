@@ -82,9 +82,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
       {error && <Error msg={error} />}
 
       <div className='d-flex justify-content-between align-items-end'>

@@ -11,14 +11,14 @@ const StoreSmallCard = ({
       borderName && 'bg-body shadow p-1 rounded-2'
     }`}
   >
-    <Link className='text-reset text-decoration-none me-2' to={link}>
+    <Link className='text-reset text-decoration-none' to={link}>
       <img
         src={`${IMG + store.avatar}`}
         className='small-card-img'
         alt={store.name}
       />
     </Link>
-    <Link className='text-reset link-hover m-auto' to={link}>
+    <Link className='text-reset link-hover m-auto ms-2' to={link}>
       <span className='fs-6'>{store.name}</span>
     </Link>
   </span>

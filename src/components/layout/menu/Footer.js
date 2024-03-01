@@ -33,16 +33,15 @@ const Footer = (props) => {
         <div className='row'>
           <div className='col-sm-12 col-md-6'>
             <div className='mb-4'>
-              <h6>About</h6>
-              <div className='mt-4 mb-2 d-block'>
+              <div className='mb-2 d-block'>
                 <Logo />
               </div>
               <p style={{ textAlign: 'justify' }}>
                 <i className='text-uppercase'>an e-commerce website, </i>
                 where people come together to make, sell, buy, and collect
-                unique items. We’re also a community pushing for positive change
+                unique items. We're also a community pushing for positive change
                 for small businesses, people, and the planet. Here are some of
-                the ways we’re making a positive impact, together.
+                the ways we're making a positive impact, together.
               </p>
             </div>
           </div>
@@ -54,7 +53,7 @@ const Footer = (props) => {
                 categories.map((category, index) => (
                   <li key={index}>
                     <Link
-                      className='text-reset'
+                      className='link-hover'
                       to={`/category/${category._id}`}
                       title={category.name}
                     >
@@ -91,8 +90,8 @@ const Footer = (props) => {
       <div className='container-md'>
         <div className='row'>
           <div className='col-md-8 col-sm-6 col-xs-12'>
-            <p className='copyright-text'>
-              Copyright &copy; 2024 All Rights Reserved by{' '}
+            <p className='copyright-text text-center'>
+              Copyright &copy; {new Date().getFullYear()} All Rights Reserved by{' '}
               <Link className='link-hover text-reset' to='#'>
                 ZenMetic
               </Link>
@@ -103,9 +102,14 @@ const Footer = (props) => {
           <div className='col-md-4 col-sm-6 col-xs-12'>
             <ul className='social-icons'>
               <li>
-                <Link className='social' to='#' target='_blank'>
+                <a
+                  className='social'
+                  href='https://www.facebook.com/baolong317/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   <i className='fab fa-facebook'></i>
-                </Link>
+                </a>
               </li>
               <li>
                 <Link className='social' to='#'>
@@ -113,14 +117,24 @@ const Footer = (props) => {
                 </Link>
               </li>
               <li>
-                <Link className='social' to='#' target='_blank'>
+                <a
+                  className='social'
+                  href='https://github.com/vobaolong/KLTN_client'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   <i className='fab fa-github'></i>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link className='social' to='#'>
+                <a
+                  className='social'
+                  href='https://www.linkedin.com/in/v%C3%B5-b%E1%BA%A3o-long-486ba9265/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
                   <i className='fab fa-linkedin'></i>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

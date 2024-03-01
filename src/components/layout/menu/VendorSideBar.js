@@ -15,7 +15,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             name={
               <span className='d-inline-flex align-items-center'>
                 {store.name}
-                {/* <small className='ms-2'>
+                <small className='ms-2'>
                   <ManagerRoleLabel
                     role={
                       store.ownerId && user._id == store.ownerId._id
@@ -27,7 +27,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
                 </small>
                 <small className='ms-1'>
                   <StoreLicenseLabel isActive={store.isActive} detail={false} />
-                </small> */}
+                </small>
               </span>
             }
             alt={store.name}

@@ -466,7 +466,7 @@ const StoreProductsTable = ({
 
                     <Link
                       type='button'
-                      className='btn btn-primary ripple'
+                      className='btn btn-dark ripple'
                       to={`/vendor/products/editProduct/${product._id}/${storeId}`}
                     >
                       <i className='fas fa-pen'></i>

@@ -320,7 +320,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
                 <td>
                   <Link
                     type='button'
-                    className='btn btn-primary ripple me-2'
+                    className='btn btn-dark ripple me-2'
                     to={`/admin/category/editCategory/${category._id}`}
                   >
                     <i className='fas fa-pen'></i>
