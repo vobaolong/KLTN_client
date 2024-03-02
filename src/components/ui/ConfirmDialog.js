@@ -1,6 +1,6 @@
 const ConfirmDialog = ({
   title = 'Confirm the action',
-  message = 'Are you sure about that?',
+  message = 'Bạn có chắc chắn về điều này không?',
   color = 'primary',
   onSubmit = () => {},
   onClose = () => {}
@@ -42,14 +42,14 @@ const ConfirmDialog = ({
                 className='btn btn-outline-danger ripple'
                 onClick={onClose}
               >
-                Cancel
+                Huỷ
               </button>
               <button
                 type='button'
                 className='btn btn-primary ripple'
                 onClick={onConfirm}
               >
-                Confirm
+                Xác Nhận
               </button>
             </div>
           </div>

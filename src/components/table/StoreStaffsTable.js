@@ -172,7 +172,7 @@ const StoreStaffsTable = ({
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 
@@ -246,7 +246,7 @@ const StoreStaffsTable = ({
                       onClick={() => handleDeleteStaff(staff)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Delete</span>
+                      <span className='ms-2 res-hide'>Xoá</span>
                     </button>
                   </td>
                 )}

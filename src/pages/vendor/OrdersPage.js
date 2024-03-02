@@ -29,7 +29,7 @@ const OrdersPage = (props) => {
           <button
             type='button'
             className={`btn ${
-              !flag ? 'btn-primary' : 'btn-outline-primary'
+              !flag ? 'btn-success' : 'btn-outline-success'
             } btn-lg ripple cus-tooltip`}
             onClick={() => toggleFlag(false)}
           >

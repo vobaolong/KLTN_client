@@ -8,8 +8,8 @@ const icons = {
 
 const colors = {
   'Not processed': 'warning',
-  Processing: 'primary',
-  Shipped: 'info',
+  Processing: 'blue',
+  Shipped: 'dark',
   Delivered: 'success',
   Cancelled: 'danger'
 }

@@ -19,7 +19,7 @@ import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
 
 const TransactionsTable = ({
-  heading = 'Your E-Wallet',
+  heading = 'Ví Của Tôi',
   storeId = '',
   by = 'admin',
   owner = {},
@@ -125,7 +125,7 @@ const TransactionsTable = ({
       {heading && by !== 'admin' ? (
         <h4 className='text-center text-uppercase'>{heading}</h4>
       ) : (
-        <h4 className='text-center text-uppercase'>Transactions in System</h4>
+        <h4 className='text-center text-uppercase'>Giao Dịch Trong Hệ Thống</h4>
       )}
 
       {isLoading && <Loading />}
@@ -136,7 +136,7 @@ const TransactionsTable = ({
           {by === 'store' && (
             <>
               <EWalletInfo eWallet={eWallet} />
-              {owner && userId == owner._id && (
+              {owner && userId === owner._id && (
                 <div className='ms-3'>
                   <CreateTransactionItem
                     storeId={storeId}
@@ -162,7 +162,7 @@ const TransactionsTable = ({
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 
@@ -175,7 +175,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Transaction'
+                  title='Giao Dịch'
                   sortBy='_id'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -184,7 +184,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Created at'
+                  title='Ngày Tạo'
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -193,7 +193,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Amount'
+                  title='Tổng Tiền'
                   sortBy='amount'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -213,7 +213,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title='Trạng Thái'
                   sortBy='isUp'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

@@ -12,7 +12,7 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => (
         data-bs-target='#create-transaction-form'
       >
         <i className='fas fa-comment-dollar'></i>
-        <span className='ms-2 res-hide'>Withdraw</span>
+        <span className='ms-2 res-hide'>Rút Tiền</span>
       </button>
 
       {eWallet > 0 && (
@@ -29,9 +29,7 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => (
         </Modal>
       )}
     </div>
-    {eWallet <= 0 && (
-      <small className='cus-tooltip-msg'>your wallet is empty</small>
-    )}
+    {eWallet <= 0 && <small className='cus-tooltip-msg'>Ví rỗng</small>}
   </div>
 )
 

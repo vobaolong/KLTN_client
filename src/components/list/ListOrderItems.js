@@ -87,109 +87,118 @@ const ListOrderItems = ({
         *Note: The products will sometimes differ from your original order, as
         it may have been updated
       </small>
-
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className='d-flex align-items-center mb-2 res-flex-column'
-        >
-          <div
-            style={{
-              position: 'relative',
-              paddingBottom: '150px',
-              width: '200px',
-              height: '0',
-              borderRadius: '4px',
-              border: '1px solid #ccc'
-            }}
-          >
-            <img
-              src={item.productId && IMG + item.productId.listImages[0]}
-              alt={item.productId && item.productId.name}
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: '0',
-                left: '0',
-                objectFit: 'contain'
-              }}
-            />
-          </div>
-
-          <div className='flex-grow-1 mx-4 my-2'>
-            <Link
-              className='text-reset text-decoration-none link-hover d-block mt-1'
-              to={`/product/${item.productId && item.productId._id}`}
-              title={item.productId && item.productId.name}
-            >
-              <h3 className='fs-5'>{item.productId && item.productId.name}</h3>
-            </Link>
-
-            <div className='mt-2'>
-              {item.styleValueIds &&
-                item.styleValueIds.map((value, index) => (
-                  <p key={index}>
-                    {value.styleId && value.styleId.name}: {value.name}
-                  </p>
-                ))}
-            </div>
-
-            <div className='mt-2'>
-              <p className='text-decoration-line-through text-muted'>
-                {item.productId &&
-                  item.productId.price &&
-                  formatPrice(
-                    item.productId && item.productId.price.$numberDecimal
-                  )}{' '}
-                ₫
-              </p>
-
-              <h4 className='text-primary fs-5'>
-                {item.productId &&
-                  item.productId.salePrice &&
-                  formatPrice(
-                    item.productId && item.productId.salePrice.$numberDecimal
-                  )}{' '}
-                ₫ x {item.count}
-              </h4>
-            </div>
-
-            {item.productId &&
-              item.productId.isActive &&
-              !item.productId.isSelling && (
-                <Error msg='The product is out of business, please remove it from your cart, you can continue with others!' />
-              )}
-
-            {item.productId &&
-              item.productId.isActive &&
-              item.productId.isSelling &&
-              item.productId.quantity <= 0 && (
-                <Error msg='The product is sold out, please remove it from your cart, you can continue with others!' />
-              )}
-
-            {item.productId &&
-              item.productId.isActive &&
-              item.productId.isSelling &&
-              item.productId.quantity > 0 &&
-              item.productId.quantity < item.count && (
-                <Error
-                  msg={`Only ${item.productId.quantity} products left, please update the count!`}
+      <div className='flex-column d-flex gap-2 justify-content-between'>
+        {items.map((item, index) => (
+          <div key={index} className='list-item-container'>
+            <div className='d-flex align-items-center mb-2 res-flex-column'>
+              <div
+                style={{
+                  position: 'relative',
+                  paddingBottom: '150px',
+                  maxWidth: '152px',
+                  width: '100%',
+                  height: '0',
+                  borderRadius: '4px',
+                  backgroundColor: 'red',
+                  border: '1px solid #ccc'
+                }}
+              >
+                <img
+                  src={item.productId && IMG + item.productId.listImages[0]}
+                  alt={item.productId && item.productId.name}
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    top: '0',
+                    left: '0',
+                    objectFit: 'contain',
+                    borderRadius: '4px'
+                  }}
                 />
-              )}
-          </div>
+              </div>
 
-          {by === 'user' && status === 'Delivered' && (
-            <div className='d-flex justify-content-between align-items-center my-2'>
-              <ReviewItem
-                orderId={item.orderId}
-                storeId={item.productId.storeId._id}
-                productId={item.productId._id}
-              />
+              <div
+                className='flex-grow-1 mx-3 align-items-start'
+                style={{ flexDirection: 'column-reverse' }}
+              >
+                <Link
+                  className='text-reset text-decoration-none link-hover d-block mt-1'
+                  to={`/product/${item.productId && item.productId._id}`}
+                  title={item.productId && item.productId.name}
+                >
+                  <h3 className='fs-5'>
+                    {item.productId && item.productId.name}
+                  </h3>
+                </Link>
+
+                <div className='mt-1'>
+                  {item.styleValueIds &&
+                    item.styleValueIds.map((value, index) => (
+                      <p key={index}>
+                        {value.styleId && value.styleId.name}: {value.name}
+                      </p>
+                    ))}
+                </div>
+
+                <div className='mt-1'>
+                  <p className='text-decoration-line-through text-muted'>
+                    {item.productId &&
+                      item.productId.price &&
+                      formatPrice(
+                        item.productId && item.productId.price.$numberDecimal
+                      )}{' '}
+                    ₫
+                  </p>
+
+                  <h4 className='text-primary fs-5'>
+                    {item.productId &&
+                      item.productId.salePrice &&
+                      formatPrice(
+                        item.productId &&
+                          item.productId.salePrice.$numberDecimal
+                      )}{' '}
+                    ₫ x {item.count}
+                  </h4>
+                </div>
+
+                {item.productId &&
+                  item.productId.isActive &&
+                  !item.productId.isSelling && (
+                    <Error msg='The product is out of business, please remove it from your cart, you can continue with others!' />
+                  )}
+
+                {item.productId &&
+                  item.productId.isActive &&
+                  item.productId.isSelling &&
+                  item.productId.quantity <= 0 && (
+                    <Error msg='The product is sold out, please remove it from your cart, you can continue with others!' />
+                  )}
+
+                {item.productId &&
+                  item.productId.isActive &&
+                  item.productId.isSelling &&
+                  item.productId.quantity > 0 &&
+                  item.productId.quantity < item.count && (
+                    <Error
+                      msg={`Only ${item.productId.quantity} products left, please update the count!`}
+                    />
+                  )}
+              </div>
+
+              {by === 'user' && status === 'Delivered' && (
+                <div className='d-flex justify-content-between align-items-center my-2'>
+                  <ReviewItem
+                    orderId={item.orderId}
+                    storeId={item.productId.storeId._id}
+                    productId={item.productId._id}
+                  />
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

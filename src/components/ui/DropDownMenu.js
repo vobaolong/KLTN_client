@@ -17,10 +17,16 @@ const DropDownMenu = ({
       : { value: value, label: value }
   )
   const [showDropDownFlag, toggleShowDropDownFlag] = useToggle(false)
+  const [iconClass, setIconClass] = useState('fas fa-angle-down')
 
   const handleSelect = (item) => {
     setValue(item.value)
     toggleShowDropDownFlag()
+  }
+
+  const toggleDropDown = () => {
+    toggleShowDropDownFlag()
+    setIconClass(showDropDownFlag ? 'fas fa-angle-down' : 'fas fa-angle-up')
   }
 
   useUpdateEffect(() => {
@@ -67,12 +73,15 @@ const DropDownMenu = ({
         className={`btn ${
           borderBtn ? 'cus-dropdown-btn--border' : 'cus-dropdown-btn'
         } ${size === 'large' && 'w-100'} ${size === 'small' && 'btn-sm'}`}
-        onClick={toggleShowDropDownFlag}
-        onBlur={() => toggleShowDropDownFlag(false)}
+        onClick={toggleDropDown}
+        onBlur={() => {
+          toggleShowDropDownFlag(false)
+          setIconClass('fas fa-angle-down')
+        }}
       >
         <span
           className={`d-inline-flex justify-content-start align-items-center ${
-            size == 'large' ? 'flex-grow-1 text-start' : ''
+            size === 'large' ? 'flex-grow-1 text-start' : ''
           }`}
         >
           {selectedItem && selectedItem.icon && (
@@ -84,8 +93,7 @@ const DropDownMenu = ({
             {selectedItem && selectedItem.label}
           </span>
         </span>
-
-        <i className='fas fa-sort-down ms-2'></i>
+        <i className={iconClass + ' ms-2'}></i>
       </button>
     </div>
   )

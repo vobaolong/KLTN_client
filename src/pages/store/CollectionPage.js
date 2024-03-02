@@ -89,7 +89,7 @@ const CollectionPage = (props) => {
           <div className=''>
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
-          <span className='me-3'>{pagination.size || 0} results</span>
+          <span className='me-3'>{pagination.size || 0} Kết Quả</span>
         </div>
 
         <div className='row mt-3'>

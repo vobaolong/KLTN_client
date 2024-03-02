@@ -28,7 +28,7 @@ const OrderPage = (props) => {
           <button
             type='button'
             className={`btn ${
-              flag ? 'btn-primary' : 'btn-outline-primary'
+              flag ? 'btn-dark' : 'btn-outline-dark'
             } btn-lg ripple cus-tooltip`}
             onClick={() => toggleFlag(true)}
           >

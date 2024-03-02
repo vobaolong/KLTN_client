@@ -34,7 +34,7 @@ const MainNav = ({ navFor = 'user' }) => {
     <header className='main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
       {isConfirming && (
         <ConfirmDialog
-          title='Sign out'
+          title='Đăng Xuất'
           color='danger'
           onSubmit={onSignoutSubmit}
           onClose={() => setIsConfirming(false)}
@@ -83,7 +83,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-heart'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Following</small>
+                  <small className='cus-tooltip-msg'>Yêu Thích</small>
                 </li>
               )}
 
@@ -95,7 +95,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-store'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Store Manager</small>
+                  <small className='cus-tooltip-msg'>Quản Lý Cửa Hàng</small>
                 </li>
               )}
 
@@ -114,7 +114,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         <span className='visually-hidden'>products</span>
                       </span>
                     }
-                    <small className='cus-tooltip-msg'>Cart</small>
+                    <small className='cus-tooltip-msg'>Giỏ Hàng</small>
                   </div>
                 </li>
               )}
@@ -248,7 +248,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     onClick={handleSignout}
                   >
                     <i className='fas fa-sign-out-alt me-2'></i>
-                    Sign out
+                    Đăng Xuất
                   </li>
                 </ul>
               </div>

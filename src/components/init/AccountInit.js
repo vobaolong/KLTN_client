@@ -92,7 +92,7 @@ const AccountInit = ({ user, actions }) => {
     <div className='your-account-wrap'>
       {isConfirming && (
         <ConfirmDialog
-          title='Sign out'
+          title='Đăng Xuất'
           color='danger'
           onSubmit={onSignoutSubmit}
           onClose={() => setIsConfirming(false)}
@@ -121,7 +121,7 @@ const AccountInit = ({ user, actions }) => {
             to='/account/profile'
           >
             <i className='fas fa-user-circle'></i>
-            Your profile
+            Tài Khoản Của Tôi
           </Link>
 
           {role === 'user' && (
@@ -130,7 +130,7 @@ const AccountInit = ({ user, actions }) => {
               to='/account/purchase'
             >
               <i className='fas fa-shopping-bag'></i>
-              Purchases
+              Đơn Mua
             </Link>
           )}
 
@@ -139,7 +139,7 @@ const AccountInit = ({ user, actions }) => {
             onClick={handleSignout}
           >
             <i className='fas fa-sign-out-alt'></i>
-            Sign out
+            Đăng Xuất
           </li>
         </ul>
       </div>

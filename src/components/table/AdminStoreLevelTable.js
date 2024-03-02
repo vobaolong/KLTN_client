@@ -205,7 +205,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 
@@ -322,7 +322,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                       onClick={() => handleDeleteLevel(level)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Delete</span>
+                      <span className='ms-2 res-hide'>Xoá</span>
                     </button>
                   ) : (
                     <button
@@ -332,7 +332,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                       onClick={() => handleRestoreLevel(level)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Restore</span>
+                      <span className='ms-2 res-hide'>Khôi Phục</span>
                     </button>
                   )}
                 </td>

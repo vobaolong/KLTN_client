@@ -110,7 +110,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               onClick={() => handleRemove(index)}
             >
               <i className='fas fa-trash-alt'></i>
-              <span className='ms-2 res-hide-md'>Remove</span>
+              <span className='ms-2 res-hide-md'>Xoá</span>
             </label>
           </div>
 

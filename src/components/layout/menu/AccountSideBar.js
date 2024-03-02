@@ -24,7 +24,7 @@ const AccountSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-user-circle'></i>
-            <span className='ms-3 res-hide-xl'>Your profile</span>
+            <span className='ms-3 res-hide-xl'>Tài Khoản Của Tôi</span>
             <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
               Profile
             </span>
@@ -40,7 +40,7 @@ const AccountSideBar = ({ user = {} }) => {
               }`}
             >
               <i className='fas fa-shopping-bag'></i>
-              <span className='ms-3 res-hide-xl'>Purchase history</span>
+              <span className='ms-3 res-hide-xl'>Đơn Mua</span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
                 Purchases
               </span>
@@ -48,16 +48,16 @@ const AccountSideBar = ({ user = {} }) => {
           </li>
         )}
 
-        {user.role == 'user' && (
+        {user.role === 'user' && (
           <li className='nav-item'>
             <Link
               to='/account/addresses'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path == 'addresses' ? 'active' : ''
+                path === 'addresses' ? 'active' : ''
               }`}
             >
               <i className='fas fa-map-marker-alt'></i>
-              <span className='ms-3 res-hide-xl'>Your addresses</span>
+              <span className='ms-3 res-hide-xl'>Địa Chỉ</span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
                 Address
               </span>
@@ -65,16 +65,16 @@ const AccountSideBar = ({ user = {} }) => {
           </li>
         )}
 
-        {user.role == 'user' && (
+        {user.role === 'user' && (
           <li className='nav-item'>
             <Link
               to='/account/storeManager'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path == 'storeManager' ? 'active' : ''
+                path === 'storeManager' ? 'active' : ''
               }`}
             >
               <i className='fas fa-store'></i>
-              <span className='ms-3 res-hide-xl'>Store manager</span>
+              <span className='ms-3 res-hide-xl'>Quản Lý Cửa Hàng</span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
                 Stores
               </span>
@@ -86,11 +86,11 @@ const AccountSideBar = ({ user = {} }) => {
           <Link
             to='/account/following'
             className={`nav-link cus-sidebar-item ripple link-dark ${
-              path == 'following' ? 'active' : ''
+              path === 'following' ? 'active' : ''
             }`}
           >
             <i className='fas fa-heart'></i>
-            <span className='ms-3 res-hide-lg'>Following</span>
+            <span className='ms-3 res-hide-lg'>Yêu Thích</span>
           </Link>
         </li>
 
@@ -99,11 +99,11 @@ const AccountSideBar = ({ user = {} }) => {
             <Link
               to='/account/GDCoins'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path == 'GDCoins' ? 'active' : ''
+                path === 'GDCoins' ? 'active' : ''
               }`}
             >
               <i className='fas fa-coins'></i>
-              <span className='ms-3 res-hide-lg'>GD coins</span>
+              <span className='ms-3 res-hide-lg'>Ví</span>
             </Link>
           </li>
         )}

@@ -9,6 +9,7 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import EditReviewItem from '../item/EditReviewItem'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +48,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title='Remove your review'
+          title='Xoá Bình Luận'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -79,7 +80,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
                 <i className='fas fa-trash-alt'></i>
               </button>
 
-              <small className='cus-tooltip-msg'>Remove your review</small>
+              <small className='cus-tooltip-msg'>Xoá Bình Luận</small>
             </div>
           </div>
         )}
@@ -93,6 +94,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
             </small>
           }
           value={review.content}
+          time={humanReadableDate(review.createdAt)}
         />
       </div>
     </div>

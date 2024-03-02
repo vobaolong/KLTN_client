@@ -148,7 +148,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 

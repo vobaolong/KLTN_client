@@ -38,7 +38,6 @@ const Carousel = ({
               className='d-block cus-carousel-img'
               alt={alt}
             />
-
             {isEditable === 'store' && (
               <StoreCarouselUpload storeId={storeId} index={index} />
             )}
@@ -54,7 +53,7 @@ const Carousel = ({
       data-bs-slide='prev'
     >
       <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-      <span className='visually-hidden'>Pre</span>
+      <span className='visually-hidden'>{'<'}</span>
     </button>
 
     <button
@@ -64,7 +63,7 @@ const Carousel = ({
       data-bs-slide='next'
     >
       <span className='carousel-control-next-icon ' aria-hidden='true'></span>
-      <span className='visually-hidden'>Next</span>
+      <span className='visually-hidden'>{'>'}</span>
     </button>
   </div>
 )

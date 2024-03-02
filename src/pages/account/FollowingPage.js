@@ -21,7 +21,7 @@ const FollowingPage = (props) => {
             <i className='fas fa-box'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Following products</small>
+          <small className='cus-tooltip-msg'>Sản phẩm yêu thích</small>
         </div>
 
         <div className='position-relative d-inline-block'>
@@ -35,7 +35,7 @@ const FollowingPage = (props) => {
             <i className='fas fa-store'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Following stores</small>
+          <small className='cus-tooltip-msg'>Cửa hàng yêu thích</small>
         </div>
       </div>
 

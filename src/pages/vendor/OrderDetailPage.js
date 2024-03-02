@@ -9,7 +9,7 @@ const OrderDetailPage = (props) => {
   const { orderId, storeId } = useParams()
   return (
     <VendorLayout user={user} store={store}>
-      <div className='res-mx--12-md'>
+      <div className='res-mx--12-md shadow bg-white rounded rounded-lg py-4'>
         <OrderDetailInfo
           orderId={orderId}
           storeId={storeId}
@@ -22,8 +22,7 @@ const OrderDetailPage = (props) => {
             to={`/vendor/orders/${storeId}`}
             className='text-decoration-none link-hover'
           >
-            <i className='fas fa-arrow-turn-down-left me-2'></i>Back to Orders
-            Manager
+            <i class='fas fa-chevron-left me-2'></i>Back to Orders Manager
           </Link>
         </div>
       </div>

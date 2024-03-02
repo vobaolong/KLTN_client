@@ -76,7 +76,7 @@ const UserSearchPage = (props) => {
         {error && <Error msg={error} />}
 
         <div className='d-flex justify-content-end'>
-          <span className='me-3'>{pagination.size || 0} results</span>
+          <span className='me-3'>{pagination.size || 0} Kết Quả</span>
         </div>
 
         <div className='row mt-3'>

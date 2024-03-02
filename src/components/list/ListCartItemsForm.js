@@ -140,7 +140,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       {success && <Success msg={success} />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete product'
+          title='Xoá Sản Phẩm Khỏi Giỏ Hàng'
           color='danger'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
@@ -280,7 +280,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 onClick={() => handleDelete(item)}
               >
                 <i className='fas fa-trash-alt'></i>
-                <span className='ms-2 res-hide'>Delete</span>
+                <span className='ms-2 res-hide'>Xoá</span>
               </button>
             </div>
           </div>

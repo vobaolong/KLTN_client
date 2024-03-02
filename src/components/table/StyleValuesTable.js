@@ -173,7 +173,7 @@ const StyleValuesTable = ({
           onRun={() => setRun(!run)}
         />
         <span className='me-2 text-nowrap res-hide'>
-          {styleValues.length || 0} results
+          {styleValues.length || 0} Kết Quả
         </span>
       </div>
 

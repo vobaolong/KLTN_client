@@ -87,7 +87,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
             isValidCurrentPassword: true
           })
           updateDispatch('vendor', data.store)
-          setSuccess('Withdraw successfully!')
+          setSuccess('Rút tiền thành công!')
           if (onRun) onRun()
         }
         setIsLoading(false)

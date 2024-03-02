@@ -190,7 +190,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 
@@ -300,7 +300,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                       onClick={() => handleDelete(style)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Delete</span>
+                      <span className='ms-2 res-hide'>Xoá</span>
                     </button>
                   ) : (
                     <button
@@ -310,7 +310,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                       onClick={() => handleRestore(style)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Restore</span>
+                      <span className='ms-2 res-hide'>Khôi Phục</span>
                     </button>
                   )}
                 </td>

@@ -15,12 +15,12 @@ const EditReviewItem = ({ oldReview = {}, onRun }) => (
     <Modal
       id={`review-edit-form-${oldReview._id}`}
       hasCloseBtn={false}
-      title='Edit Reivew'
+      title='Edit Review'
     >
       <EditReviewForm oldReview={oldReview} onRun={onRun} />
     </Modal>
 
-    <small className='cus-tooltip-msg'>Edit your review</small>
+    <small className='cus-tooltip-msg'>Chỉnh Sửa Bình Luận</small>
   </div>
 )
 

@@ -4,7 +4,7 @@ const IMG = process.env.REACT_APP_STATIC_URL
 const CategorySmallCard = ({ category = {}, style = {}, parent = true }) => (
   <span className='d-inline-flex align-items-center' style={style}>
     <Link
-      className='text-reset text-decoration-none me-2'
+      className='text-reset text-decoration-none'
       to={`/category/${category._id}`}
     >
       <img
@@ -15,7 +15,7 @@ const CategorySmallCard = ({ category = {}, style = {}, parent = true }) => (
     </Link>
 
     <Link
-      className='text-reset text-decoration-none mt-2 cus-link-hover'
+      className='text-reset text-decoration-none mt-2 ms-2 cus-link-hover'
       to={`/category/${category._id}`}
     >
       <span className='fs-6'>

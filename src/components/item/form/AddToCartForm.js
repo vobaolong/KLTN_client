@@ -125,7 +125,7 @@ const AddToCartForm = ({ product = {} }) => {
             onClick={handleSubmit}
           >
             <i className='fas fa-cart-plus'></i>
-            <small className='ms-2'>Thêm vào giỏ hàng</small>
+            <span className='ms-2 fs-6'>Thêm vào giỏ hàng</span>
           </button>
         </div>
       </form>

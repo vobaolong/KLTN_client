@@ -84,7 +84,7 @@ const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
       <div className='d-flex justify-content-between align-items-end'>
         <UserAddAddressItem count={(addresses && addresses.length) || 0} />
         <span className='me-2 text-nowrap'>
-          {(addresses && addresses.length) || 0} results
+          {(addresses && addresses.length) || 0} Kết Quả
         </span>
       </div>
 
@@ -121,7 +121,7 @@ const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
                       onClick={() => handleDeleteAddress(address, index)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Delete</span>
+                      <span className='ms-2 res-hide'>Xoá</span>
                     </button>
                   </td>
                 </tr>

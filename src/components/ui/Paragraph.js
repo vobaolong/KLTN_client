@@ -1,6 +1,12 @@
-const Paragraph = ({ value = '-', label = '-', multiLine = false }) => (
+const Paragraph = ({
+  value = '-',
+  label = '-',
+  multiLine = false,
+  time = '-'
+}) => (
   <div className='cus-paragraph-group'>
     <label className='cus-paragraph-group-label text-nowrap'>{label}</label>
+    <label className='cus-paragraph-group-time text-nowrap'>{time}</label>
     {!multiLine ? (
       <p className='cus-paragraph-group-paragraph form-control'>{value}</p>
     ) : (

@@ -93,11 +93,11 @@ const CategoryPage = (props) => {
         {error && <Error msg={error} />}
 
         <nav aria-label='breadcrumb'>
-          <ol className='breadcrumb'>
+          <ol className='breadcrumb bg-white'>
             {category.categoryId && category.categoryId.categoryId && (
               <Link
                 to={`/category/${category.categoryId.categoryId._id}`}
-                className='breadcrumb-item'
+                className='breadcrumb-item text-decoration-none'
               >
                 {category.categoryId.categoryId.name}
               </Link>
@@ -106,7 +106,7 @@ const CategoryPage = (props) => {
             {category.categoryId && (
               <Link
                 to={`/category/${category.categoryId._id}`}
-                className='breadcrumb-item'
+                className='breadcrumb-item text-decoration-none'
               >
                 {category.categoryId.name}
               </Link>
@@ -134,7 +134,7 @@ const CategoryPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <span className='me-3 text-nowrap'>
-            {pagination.size || 0} results
+            {pagination.size || 0} Kết Quả
           </span>
         </div>
 

@@ -25,7 +25,7 @@ const CartPage = (props) => {
     listCarts(_id, accessToken, { limit: '1000', page: '1' })
       .then((data) => {
         if (data.error) setError(data.error)
-        else if (data.carts.length <= 0) setSuccess('Your cart is empty.')
+        else if (data.carts.length <= 0) setSuccess('Bạn Chưa Chọn Sản Phẩm')
         else setCarts(data.carts)
         setIsLoading(false)
       })

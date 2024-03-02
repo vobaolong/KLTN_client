@@ -88,7 +88,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} results
+          {pagination.size || 0} Kết Quả
         </span>
       </div>
 

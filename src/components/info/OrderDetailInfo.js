@@ -27,9 +27,7 @@ const OrderDetailInfo = ({
   const [isLoading, setIsLoading] = useState(false)
   const [run, setRun] = useState(false)
   const [error, setError] = useState('')
-
   const [order, setOrder] = useState({})
-
   const { _id, accessToken } = getToken()
 
   const init = () => {
@@ -136,7 +134,7 @@ const OrderDetailInfo = ({
         <div className='row py-2 border border-primary rounded-3'>
           <div className='col-sm-6'>
             <Paragraph
-              label='Created at'
+              label='Created At'
               value={humanReadableDate(order.createdAt)}
             />
           </div>

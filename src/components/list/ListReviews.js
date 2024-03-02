@@ -10,7 +10,7 @@ const ListReviews = ({
   productId = '',
   storeId = '',
   userId = '',
-  heading = 'Reviews & Rating'
+  heading = 'Đánh Giá Sản Phẩm'
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -128,16 +128,16 @@ const ListReviews = ({
 
   return (
     <div className='container-fluid position-relative'>
-      {heading && <h4 className='mb-3'>{heading}</h4>}
+      {heading && <h5 className='mb-3'>{heading}</h5>}
 
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
 
-      <div className='d-flex justify-content-between align-items-end'>
+      <div className='d-flex justify-content-between align-items-end p-2 rounded-sm rounded border'>
         <div className='d-flex flex-wrap justify-content-start align-items-center'>
           {renderFilterRating()}
         </div>
-        <span className='me-2 text-nowrap'>{pagination.size || 0} results</span>
+        <span className='me-2 text-nowrap'>{pagination.size || 0} Kết Quả</span>
       </div>
 
       <div className='row mt-2'>

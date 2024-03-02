@@ -58,7 +58,7 @@ const Pagination = ({
             style={{ minWidth: '60px' }}
             onClick={() => handleChangePage(pageCurrent - 1)}
           >
-            Pre
+            {'<'}
           </button>
 
           {!isSmall && (
@@ -136,7 +136,7 @@ const Pagination = ({
             style={{ minWidth: '60px' }}
             onClick={() => handleChangePage(pageCurrent + 1)}
           >
-            Next
+            {'>'}
           </button>
         </div>
       </ul>

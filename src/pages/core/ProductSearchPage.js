@@ -80,7 +80,7 @@ const ProductSearchPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <span className='me-3 text-nowrap'>
-            {pagination.size || 0} results
+            {pagination.size || 0} Kết Quả
           </span>
         </div>
 

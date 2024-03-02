@@ -91,7 +91,7 @@ const DetailPage = () => {
           <Error msg={error} />
         ) : (
           <div className='container-fluid'>
-            <div className='mb-2'>
+            <div className='mb-2 hidden-avatar mx-0!important'>
               <CategorySmallCard category={product.categoryId} parent={true} />
             </div>
             <div
@@ -107,8 +107,7 @@ const DetailPage = () => {
                   }}
                 />
               </div>
-
-              <div className='col-lg-7 col-md-6'>
+              <div className='col-lg-7 col-md-6 pe-5'>
                 <strong className='text-primary text-lg-right'>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
@@ -126,7 +125,7 @@ const DetailPage = () => {
                     <span className='text-muted ms-1'>Đã Bán</span>
                   </span>
                 </div>
-                <div className='d-flex flex-wrap justify-content-right align-items-center mt-3'>
+                <div className='d-flex flex-wrap justify-content-right align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
                   <p className='text-decoration-line-through text-muted mt-1'>
                     {product.price && formatPrice(product.price.$numberDecimal)}{' '}
                     ₫
@@ -137,6 +136,8 @@ const DetailPage = () => {
                     ₫
                   </h2>
                   <SalePercentLabel salePercent={salePercent} />
+
+                  <small className='ms-2'>(Đã bao gồm VAT)</small>
                 </div>
 
                 <div className='mt-4'>
@@ -169,14 +170,13 @@ const DetailPage = () => {
                           isFollowing: !product.isFollowing
                         })
                       }
-                      className='mt-2 w-100 btn-lg'
+                      className='mt-2 btn-lg'
                     />
                   )}
                 </div>
               </div>
-              {/* <div className='col-lg-2 col-md-0 bg-primary'></div> */}
             </div>
-            <div className='row'>
+            <div className='row mt-3 rounded box-shadow py-3 bg-white'>
               <div className='col-12'>
                 <div className='container-fluid p-0'>
                   <div className='row res-flex-reverse-md'>
