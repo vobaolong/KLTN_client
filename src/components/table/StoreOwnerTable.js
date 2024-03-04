@@ -9,7 +9,7 @@ const StoreOwnerTable = ({ ownerId = {} }) => {
         <table className='table align-middle table-hover table-sm text-center'>
           <thead>
             <tr>
-              <th scope='col'>#</th>
+              <th scope='col'></th>
               <th scope='col'>Owner</th>
               <th scope='col'>Id card</th>
               <th scope='col'>Email</th>

@@ -213,7 +213,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
         <table className='table table-hover table-sm align-middle text-center'>
           <thead>
             <tr>
-              <th scope='col'>#</th>
+              <th scope='col'></th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}

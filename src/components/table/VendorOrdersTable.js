@@ -115,7 +115,7 @@ const StoreOrdersTable = ({
         <table className='table align-middle table-hover table-sm text-end'>
           <thead>
             <tr>
-              <th scope='col'>#</th>
+              <th scope='col'></th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}

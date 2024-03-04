@@ -73,7 +73,6 @@ const Routes = () => {
         <Route path='/users/search' exact component={UserSearchPage} />
         <Route path='/category/:categoryId' exact component={CategoryPage} />
         <Route path='/legal/privacy' exact component={Policy} />
-        <Route path='*' exact component={PageNotFound} />
 
         {/* admin */}
         <AdminRoute
@@ -258,6 +257,8 @@ const Routes = () => {
 
         {/* product */}
         <Route path='/product/:productId' exact component={ProductDetailPage} />
+        {/* Route 404 */}
+        <Route path='*' exact component={PageNotFound} />
       </Switch>
     </BrowserRouter>
   )

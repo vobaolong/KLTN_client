@@ -81,7 +81,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
       })
   }
 
-  const handleForgorPassword = () => {
+  const handleForgotPassword = () => {
     const { username } = account
     if (!username) {
       setAccount({
@@ -129,10 +129,10 @@ const SigninForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Email address or phone number'
+            label='Địa chỉ Email hoặc số điện thoại'
             value={account.username}
             isValid={account.isValidUsername}
-            feedback='Please provide a valid email address or phone number.'
+            feedback='Vui lòng cung cấp địa chỉ Email hoặc số điện thoại hợp lệ!'
             validator='email|phone'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
@@ -144,11 +144,11 @@ const SigninForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Password'
+            label='Mật khẩu'
             validator='password'
             value={account.password}
             isValid={account.isValidPassword}
-            feedback='Please provide a valid password.'
+            feedback='Vui lòng nhập mật khẩu chính xác!'
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
             }
@@ -174,58 +174,53 @@ const SigninForm = ({ onSwap = () => {} }) => {
             className='btn btn-primary ripple fw-bold'
             onClick={handleFormSubmit}
           >
-            Sign in
+            Đăng nhập
           </button>
         </div>
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block text-muted'>
-            Forgot password?{' '}
+            Quên mật khẩu?{' '}
             <span
               className='text-primary text-decoration-underline'
               style={{ cursor: 'pointer' }}
-              onClick={handleForgorPassword}
+              onClick={handleForgotPassword}
             >
-              Send email
+              Gửi Email
             </span>
           </small>
 
           <small className='text-center d-block text-muted'>
-            Don't have an account?{' '}
+            Bạn không có tài khoản?{' '}
             <span
               className='text-primary text-decoration-underline'
               style={{ cursor: 'pointer' }}
               onClick={onSwap}
             >
-              Sign up
+              Đăng ký ngay
             </span>
           </small>
         </div>
 
-        <div className='col-12 mt-4 cus-decoration-paragraph'>
+        {/* <div className='col-12 mt-4 cus-decoration-paragraph'>
           <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
-            OR
+            HOẶC
           </p>
         </div>
 
         <div className='col-12 d-grid gap-2 mt-4'>
           <SocialForm />
-        </div>
+        </div> */}
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block mx-4'>
             <span className='text-muted'>
-              By Signing in or Continue with Google or Facebook, you agree to
-              ZenMetic's{' '}
+              Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
             </span>
-            <Link to='/legal/termsOfUse' target='_blank'>
-              Terms of Use
-            </Link>
-            <span className='text-muted'> and </span>
             <Link to='/legal/privacy' target='_blank'>
-              Privacy Policy
-            </Link>
-            .
+              Chính sách bảo mật
+            </Link>{' '}
+            của ZenMetic .
           </small>
         </div>
       </form>

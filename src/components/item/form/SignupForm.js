@@ -106,19 +106,16 @@ const SignupForm = ({ onSwap = () => {} }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Sign up'
+          title='Đăng ký'
           message={
             <small className=''>
-              By Signing up or Continue with Google or Facebook, you agree to
-              ZenMetic's{' '}
-              <Link to='/legal/termsOfUse' target='_blank'>
-                Terms of Use
-              </Link>{' '}
-              and{' '}
+              <span className='text-muted'>
+                Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
+              </span>
               <Link to='/legal/privacy' target='_blank'>
-                Privacy Policy
-              </Link>
-              .
+                Chính sách bảo mật
+              </Link>{' '}
+              của ZenMetic .
             </small>
           }
           onSubmit={onSignupSubmit}
@@ -130,10 +127,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-6'>
           <Input
             type='text'
-            label='First name'
+            label='Họ và tên đệm'
             value={account.firstName}
             isValid={account.isValidFirstName}
-            feedback='Please provide a valid firstName.'
+            feedback='Vui lòng cung cấp họ và tên đệm hợp lệ!'
             validator='name'
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
@@ -145,10 +142,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-6'>
           <Input
             type='text'
-            label='Last name'
+            label='Tên'
             value={account.lastName}
             isValid={account.isValidLastName}
-            feedback='Please provide a valid lastName.'
+            feedback='Vui lòng cung cấp tên hợp lệ!'
             validator='name'
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
@@ -160,10 +157,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Email address or phone number'
+            label='Địa chỉ Email hoặc số điện thoại'
             value={account.username}
             isValid={account.isValidUsername}
-            feedback='Please provide a valid email address or phone number.'
+            feedback='Vui lòng cung cấp địa chỉ Email hoặc số điện thoại hợp lệ!'
             validator='email|phone'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
@@ -175,11 +172,11 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Password'
+            label='Mật khẩu'
             hasEditBtn={true}
             value={account.password}
             isValid={account.isValidPassword}
-            feedback='Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &.'
+            feedback='Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!'
             validator='password'
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
@@ -206,47 +203,42 @@ const SignupForm = ({ onSwap = () => {} }) => {
             className='btn btn-primary ripple fw-bold'
             onClick={handleSubmit}
           >
-            Sign up
+            Đăng ký
           </button>
         </div>
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block text-muted'>
-            Have an account?{' '}
+            Đã có tài khoản?{' '}
             <span
               className='sign-in-item text-primary text-decoration-underline'
               onClick={onSwap}
               style={{ cursor: 'pointer' }}
             >
-              Sign in
+              Đăng nhập ngay
             </span>
           </small>
         </div>
 
-        <div className='col-12 mt-4 cus-decoration-paragraph'>
+        {/* <div className='col-12 mt-4 cus-decoration-paragraph'>
           <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
-            OR
+            HOẶC
           </p>
         </div>
 
         <div className='col-12 d-grid gap-2 mt-4'>
           <SocialForm />
-        </div>
+        </div> */}
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block mx-4'>
             <span className='text-muted'>
-              By Signing up or Continue with Google or Facebook, you agree to
-              ZenMetic's{' '}
+              Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
             </span>
-            <Link to='/legal/termsOfUse' target='_blank'>
-              Terms of Use
-            </Link>
-            <span className='text-muted'> and </span>
             <Link to='/legal/privacy' target='_blank'>
-              Privacy Policy
-            </Link>
-            .
+              Chính sách bảo mật
+            </Link>{' '}
+            của ZenMetic .
           </small>
         </div>
       </form>

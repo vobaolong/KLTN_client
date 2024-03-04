@@ -2,22 +2,19 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { authSocial, setToken } from '../../../apis/auth'
 import { GoogleLogin } from 'react-google-login'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+// import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 
 const SocialForm = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
   const history = useHistory()
-
   const onSuccess = (res) => {
     if (!res.profileObj && !res.accessToken) {
       setIsLoading(false)
       return
     }
-
     setIsLoading(true)
     const data = res.profileObj || res
     const user = {
@@ -82,13 +79,14 @@ const SocialForm = (props) => {
             <img
               className='social-img me-2 rounded-circle'
               src='https://img.icons8.com/color/48/000000/google-logo.png'
+              alt=''
             />
             Continue with Google
           </button>
         )}
       />
 
-      <FacebookLogin
+      {/* <FacebookLogin
         appId={process.env.REACT_APP_FACEBOOK_APP_ID}
         autoLoad
         fields='name,email,picture'
@@ -107,7 +105,7 @@ const SocialForm = (props) => {
             Continue with Facebook
           </button>
         )}
-      />
+      /> */}
     </>
   )
 }

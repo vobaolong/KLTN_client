@@ -69,18 +69,43 @@ const ProductFilter = ({ filter, setFilter }) => {
   }
 
   return (
-    <div>
-      <button
-        className='btn btn-primary ripple'
-        type='button'
-        data-bs-toggle='offcanvas'
-        data-bs-target='#offcanvasFilter'
-        aria-controls='offcanvasFilter'
+    <div style={{ width: '100%' }}>
+      <div
+        className='d-flex align-items-center justify-content-between'
+        style={{ width: '100%' }}
       >
-        <i className='fas fa-sliders-h'></i>
-        <span className='ms-2'>Bộ Lọc</span>
-      </button>
-
+        <button
+          className='btn btn-primary ripple'
+          style={{ width: 'max-content' }}
+          type='button'
+          data-bs-toggle='offcanvas'
+          data-bs-target='#offcanvasFilter'
+          aria-controls='offcanvasFilter'
+        >
+          <i className='fas fa-sliders-h'></i>
+          <span className='ms-2'>Bộ Lọc</span>
+        </button>
+        <select
+          className='form-select me-2'
+          style={{ width: 'max-content', cursor: 'pointer' }}
+          value={filter.sortBy === 'salePrice' ? filter.order : filter.sortBy}
+          onChange={(e) => {
+            const value =
+              e.target.value === 'sold'
+                ? 'sold'
+                : e.target.value === 'createdAt'
+                ? 'createdAt'
+                : 'salePrice'
+            const order = e.target.value === 'asc' ? 'asc' : 'desc'
+            handleFilter('sortBy', value, order)
+          }}
+        >
+          <option value='sold'>Bán chạy</option>
+          <option value='createdAt'>Sản phẩm mới</option>
+          <option value='asc'>Giá tăng dần</option>
+          <option value='desc'>Giá giảm dần</option>
+        </select>
+      </div>
       <div
         className='offcanvas offcanvas-start'
         tabIndex='-1'
@@ -99,7 +124,7 @@ const ProductFilter = ({ filter, setFilter }) => {
           ></button>
         </div>
         <div className='offcanvas-body'>
-          <div className='mb-4'>
+          {/* <div className='mb-4'>
             <h6>Sắp Xếp</h6>
 
             <div className='form-check'>
@@ -156,8 +181,8 @@ const ProductFilter = ({ filter, setFilter }) => {
                 id='sortBy3'
                 checked={
                   filter.sortBy === 'salePrice' && filter.order !== 'asc'
-                } // Đảo ngược điều kiện ở đây
-                onChange={() => handleFilter('sortBy', 'salePrice', 'desc')} // Thêm 'desc' vào đây
+                }
+                onChange={() => handleFilter('sortBy', 'salePrice', 'desc')}
                 style={{ cursor: 'pointer' }}
               />
               <label
@@ -177,7 +202,7 @@ const ProductFilter = ({ filter, setFilter }) => {
                 checked={
                   filter.sortBy === 'salePrice' && filter.order === 'asc'
                 } // Kiểm tra order === 'asc'
-                onChange={() => handleFilter('sortBy', 'salePrice', 'asc')} // Thêm 'asc' vào đây
+                onChange={() => handleFilter('sortBy', 'salePrice', 'asc')}
                 style={{ cursor: 'pointer' }}
               />
               <label
@@ -188,8 +213,7 @@ const ProductFilter = ({ filter, setFilter }) => {
                 Tăng dần
               </label>
             </div>
-          </div>
-
+          </div> */}
           <div className='mb-4'>
             <h6>Đánh Giá</h6>
             {renderFilterRating()}

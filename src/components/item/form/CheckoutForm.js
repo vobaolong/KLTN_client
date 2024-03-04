@@ -299,7 +299,7 @@ const CheckoutForm = ({
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Only order'
+          title='Thanh Toán Khi Nhận Hàng'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -515,7 +515,7 @@ const CheckoutForm = ({
                 className='btn btn-primary btn-lg ripple w-100 mb-1'
                 onClick={handleSubmit}
               >
-                Only order
+                Thanh Toán Khi Nhận Hàng
               </button>
 
               <div style={{ position: 'relative', zIndex: '1' }}>

@@ -95,7 +95,6 @@ const Footer = (props) => {
               </li>
               <li>
                 <Link className='link-hover text-reset' to='#'>
-                  Liên hệ
                 </Link>
               </li>
               <li>

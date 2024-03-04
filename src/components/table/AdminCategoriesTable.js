@@ -216,7 +216,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
         <table className='table table-hover table-sm align-middle text-center'>
           <thead>
             <tr>
-              <th scope='col'>#</th>
+              <th scope='col'></th>
               <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}

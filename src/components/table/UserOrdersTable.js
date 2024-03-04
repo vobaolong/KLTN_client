@@ -113,7 +113,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         <table className='table table-sm table-hover align-middle text-center'>
           <thead>
             <tr>
-              <th scope='col'>#</th>
+              <th scope='col'></th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}

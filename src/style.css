@@ -419,6 +419,14 @@ header {
 	background-color: var(--primary-color) !important;
 }
 
+.item {
+	border-bottom: 1px solid #ccc;
+}
+
+.last-item {
+	border-bottom: none;
+}
+
 .logo {
 	text-transform: uppercase;
 	font-size: 32px;

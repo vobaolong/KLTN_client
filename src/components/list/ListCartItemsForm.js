@@ -148,7 +148,12 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       )}
 
       {items.map((item, index) => (
-        <div key={index} className='d-flex align-items-center res-flex-column'>
+        <div
+          key={index}
+          className={`d-flex align-items-center res-flex-column item${
+            index === items.length - 1 ? ' last-item' : ''
+          }`}
+        >
           <div
             style={{
               position: 'relative',
@@ -252,8 +257,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   <div className='me-2'>
                     <DropDownMenu
                       listItem={
-                        item.productId &&
-                        item.productId.quantity &&
+                        item.productId?.quantity &&
                         Array.from(
                           {
                             length: item.productId.quantity

@@ -414,7 +414,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
               <table className='table align-middle table-hover table-sm text-center'>
                 <thead>
                   <tr>
-                    <th scope='col'>#</th>
+                    <th scope='col'></th>
                     <th scope='col'>
                       {options.flag[0].toUpperCase() +
                         options.flag.substring(1)}
