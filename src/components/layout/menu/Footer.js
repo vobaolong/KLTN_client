@@ -37,17 +37,38 @@ const Footer = (props) => {
                 <Logo />
               </div>
               <p style={{ textAlign: 'justify' }}>
-                <i className='text-uppercase'>an e-commerce website, </i>
-                where people come together to make, sell, buy, and collect
-                unique items. We're also a community pushing for positive change
-                for small businesses, people, and the planet. Here are some of
-                the ways we're making a positive impact, together.
+                <b>ZenMetic - Thật nhanh, thật chất lượng, thật rẻ</b>
+                <p className='text-muted'>
+                  <p className='mt-2 font-weight-bold'>ZenMetic có tất cả</p>
+                  <small className='lh-1'>
+                    Với hàng triệu sản phẩm từ các thương hiệu, cửa hàng uy tín,
+                    hàng nghìn loại mặt hàng từ Điện thoại smartphone tới Rau củ
+                    quả tươi, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,
+                    ZenMetic mang đến cho bạn một trải nghiệm mua sắm online bắt
+                    đầu bằng chữ tín.
+                  </small>
+                </p>
+                <p className='text-muted'>
+                  <p className='mt-2 font-weight-bold'>
+                    Khuyến mãi, ưu đãi tràn ngập
+                  </p>
+                  <small>
+                    Bạn muốn săn giá sốc, ZenMetic có giá sốc mỗi ngày cho bạn!
+                    Bạn là tín đồ của các thương hiệu, các cửa hàng Official
+                    chính hãng đang chờ đón bạn. Không cần săn mã freeship, vì
+                    ZenMetic đã có hàng triệu sản phẩm trong chương trình
+                    Freeship+, không giới hạn lượt đặt, tiết kiệm thời gian vàng
+                    bạc của bạn. Gói ZenNOW (Áp dụng đơn hàng trên 200k) tiết
+                    kiệm để nhận 100% free ship 2h & trong ngày, áp dụng cho
+                    100% sản phẩm, 100% tỉnh thành Việt Nam.
+                  </small>
+                </p>
               </p>
             </div>
           </div>
 
           <div className='col-xs-6 col-md-3'>
-            <h6>Categories</h6>
+            <h6>Danh mục sản phẩm</h6>
             <ul className='footer-links'>
               {categories &&
                 categories.map((category, index) => (
@@ -65,21 +86,21 @@ const Footer = (props) => {
           </div>
 
           <div className='col-xs-6 col-md-3'>
-            <h6>Quick Links</h6>
+            <h6>Truy cập nhanh</h6>
             <ul className='footer-links'>
               <li>
                 <Link className='link-hover text-reset' to='#'>
-                  About Us
+                  Về ZenMetic
                 </Link>
               </li>
               <li>
                 <Link className='link-hover text-reset' to='#'>
-                  Contact Us
+                  Liên hệ
                 </Link>
               </li>
               <li>
-                <Link className='link-hover text-reset' to='#'>
-                  Privacy Policy
+                <Link className='link-hover text-reset' to='/legal/privacy'>
+                  Chính sách bảo mật
                 </Link>
               </li>
             </ul>

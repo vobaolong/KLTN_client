@@ -2,18 +2,15 @@ import { useState, useRef } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
 
-const ProductFilter = ({ filter, setFilter, onReset }) => {
+const ProductFilter = ({ filter, setFilter }) => {
   const [price, setPrice] = useState({
     min: 0,
     max: ''
   })
   const typingTimeoutRef = useRef(null)
 
-  const handleFilter = (name, value) => {
-    setFilter({
-      ...filter,
-      [name]: value
-    })
+  const handleFilter = (name, value, order) => {
+    setFilter({ ...filter, [name]: value, order: order })
   }
 
   const handleSetPrice = (name1, name2, value) => {
@@ -21,33 +18,15 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
       ...price,
       [name1]: value
     })
-
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current)
-    }
-
-    typingTimeoutRef.current = setTimeout(() => {
-      handleFilter(name2, value)
-    }, 600)
+    // if (typingTimeoutRef.current) {
+    //   clearTimeout(typingTimeoutRef.current)
+    // }
+    // typingTimeoutRef.current = setTimeout(() => {
+    //   handleFilter(name2, value)
+    // }, 600)
+    handleFilter(name2, value)
   }
-  const resetFilter = () => {
-    // Reset filter state and price state
-    setFilter({
-      sortBy: '',
-      rating: '',
-      minPrice: 0,
-      maxPrice: ''
-    })
-    setPrice({
-      min: 0,
-      max: ''
-    })
 
-    // Call the onReset callback function if provided
-    if (onReset) {
-      onReset()
-    }
-  }
   const renderFilterRating = () => {
     const render = []
     for (let i = 0; i <= 5; i++)
@@ -77,10 +56,10 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
             }}
           >
             {i === 0 ? (
-              <span>All</span>
+              <span>Tất cả</span>
             ) : (
               <small>
-                <StarRating stars={i} /> {i !== 5 && 'up'}
+                <StarRating stars={i} /> {i !== 5 && 'trở lên'}
               </small>
             )}
           </label>
@@ -99,7 +78,7 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
         aria-controls='offcanvasFilter'
       >
         <i className='fas fa-sliders-h'></i>
-        <span className='ms-2'>All filters</span>
+        <span className='ms-2'>Bộ Lọc</span>
       </button>
 
       <div
@@ -110,7 +89,7 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
       >
         <div className='offcanvas-header'>
           <h2 className='offcanvas-title' id='offcanvasFilterLabel'>
-            Filters
+            Bộ Lọc
           </h2>
           <button
             type='button'
@@ -121,7 +100,7 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
         </div>
         <div className='offcanvas-body'>
           <div className='mb-4'>
-            <h6>Sort by</h6>
+            <h6>Sắp Xếp</h6>
 
             <div className='form-check'>
               <input
@@ -142,7 +121,7 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
                   cursor: 'pointer'
                 }}
               >
-                Best seller
+                Bán Chạy
               </label>
             </div>
 
@@ -165,23 +144,64 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
                   cursor: 'pointer'
                 }}
               >
-                New product
+                Sản Phẩm Mới
+              </label>
+            </div>
+
+            <div className='form-check'>
+              <input
+                className='form-check-input'
+                type='radio'
+                name='sortBy'
+                id='sortBy3'
+                checked={
+                  filter.sortBy === 'salePrice' && filter.order !== 'asc'
+                } // Đảo ngược điều kiện ở đây
+                onChange={() => handleFilter('sortBy', 'salePrice', 'desc')} // Thêm 'desc' vào đây
+                style={{ cursor: 'pointer' }}
+              />
+              <label
+                className='form-check-label'
+                htmlFor='sortBy3'
+                style={{ cursor: 'pointer' }}
+              >
+                Giảm dần
+              </label>
+            </div>
+            <div className='form-check'>
+              <input
+                className='form-check-input'
+                type='radio'
+                name='sortBy'
+                id='sortBy4'
+                checked={
+                  filter.sortBy === 'salePrice' && filter.order === 'asc'
+                } // Kiểm tra order === 'asc'
+                onChange={() => handleFilter('sortBy', 'salePrice', 'asc')} // Thêm 'asc' vào đây
+                style={{ cursor: 'pointer' }}
+              />
+              <label
+                className='form-check-label'
+                htmlFor='sortBy4'
+                style={{ cursor: 'pointer' }}
+              >
+                Tăng dần
               </label>
             </div>
           </div>
 
           <div className='mb-4'>
-            <h6>Rating</h6>
+            <h6>Đánh Giá</h6>
             {renderFilterRating()}
           </div>
 
           <div className='mb-4'>
-            <h6 className='mb-0'>Price</h6>
+            <h6 className='mb-0'>Giá</h6>
             <form className='row'>
               <div className='col-12'>
                 <Input
                   type='number'
-                  label='Min price'
+                  label='Giá thấp nhất'
                   feedback='Please provide a valid price.'
                   validator='position|zero'
                   value={price.min}
@@ -191,7 +211,7 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
               <div className='col-12'>
                 <Input
                   type='number'
-                  label='Max price'
+                  label='Giá cao nhất'
                   feedback='Please provide a valid price.'
                   validator='position|zero'
                   value={price.max}
@@ -200,9 +220,9 @@ const ProductFilter = ({ filter, setFilter, onReset }) => {
               </div>
             </form>
           </div>
-          <button className='btn btn-secondary mb-2' onClick={resetFilter}>
+          {/* <button className='btn btn-secondary mb-2' onClick={resetFilter}>
             Reset filters
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@ const StoreNav = ({ store = {} }) => {
                 }`}
                 to={`/store/about/${store._id}`}
               >
-                About
+                Thông Tin
               </Link>
             </li>
           </ul>

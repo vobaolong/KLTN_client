@@ -32,7 +32,7 @@ const UserNav = ({ user = {} }) => {
                 className={`nav-link ${path === 'about' ? 'active' : ''}`}
                 to={`/user/about/${user._id}`}
               >
-                About
+                Thông Tin
               </Link>
             </li>
           </ul>
@@ -82,7 +82,7 @@ const UserNav = ({ user = {} }) => {
                   to={`/user/about/${user._id}`}
                 >
                   <i className='fas fa-info-circle me-2'></i>
-                  About
+                  Thông Tin
                 </Link>
               </li>
             </ul>

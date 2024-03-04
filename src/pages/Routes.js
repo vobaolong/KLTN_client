@@ -7,6 +7,7 @@ import ProductSearchPage from './core/ProductSearchPage'
 import StoreSearchPage from './core/StoreSearchPage'
 import UserSearchPage from './core/UserSearchPage'
 import CategoryPage from './core/CategoryPage'
+import Policy from './core/Policy'
 //admin
 import AdminDashboardPage from './admin/DashboardPage'
 import AdminLevelPage from './admin/LevelPage'
@@ -58,6 +59,7 @@ import StoreReviewAndRatingPage from './store/ReviewAndRatingPage'
 //product
 import ProductDetailPage from './product/DetailPage'
 import ScrollToTops from '../hooks/ScrollToTops'
+import PageNotFound from '../components/ui/PageNotFound'
 
 const Routes = () => {
   return (
@@ -70,6 +72,8 @@ const Routes = () => {
         <Route path='/stores/search' exact component={StoreSearchPage} />
         <Route path='/users/search' exact component={UserSearchPage} />
         <Route path='/category/:categoryId' exact component={CategoryPage} />
+        <Route path='/legal/privacy' exact component={Policy} />
+        <Route path='*' exact component={PageNotFound} />
 
         {/* admin */}
         <AdminRoute

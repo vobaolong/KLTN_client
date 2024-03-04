@@ -24,7 +24,7 @@ const UserEditProfileItem = ({ user = {} }) => (
       />
     </Modal>
 
-    <small className='cus-tooltip-msg'>Edit Profile</small>
+    <small className='cus-tooltip-msg'>Sửa thông tin</small>
   </div>
 )
 

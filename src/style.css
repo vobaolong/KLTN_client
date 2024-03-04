@@ -427,6 +427,10 @@ header {
 	min-width: var(--logo-width);
 }
 
+.back {
+	bottom: 80px;
+}
+
 /* search bar */
 
 .search-bar input.form-control {

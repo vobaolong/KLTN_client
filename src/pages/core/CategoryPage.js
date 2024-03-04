@@ -93,7 +93,7 @@ const CategoryPage = (props) => {
         {error && <Error msg={error} />}
 
         <nav aria-label='breadcrumb'>
-          <ol className='breadcrumb bg-white'>
+          <ol className='breadcrumb'>
             {category.categoryId && category.categoryId.categoryId && (
               <Link
                 to={`/category/${category.categoryId.categoryId._id}`}

@@ -34,11 +34,11 @@ const UserJoinedInfo = ({ user = {} }) => (
   <div className='container-fluid'>
     <div className='row py-2 border border-primary rounded-3'>
       <div className='col-12'>
-        <Paragraph label='Role' value={<UserRoleLabel role={user.role} />} />
+        <Paragraph label='Vai Trò' value={<UserRoleLabel role={user.role} />} />
       </div>
 
       <div className='col-12'>
-        <Paragraph label='Joined' value={humanReadableDate(user.createdAt)} />
+        <Paragraph label='Tham Gia' value={humanReadableDate(user.createdAt)} />
       </div>
     </div>
   </div>

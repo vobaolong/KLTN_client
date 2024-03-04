@@ -12,22 +12,16 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => (
         data-bs-target='#add-address-form'
       >
         <i className='fas fa-plus-circle'></i>
-        {detail && <span className='ms-2 res-hide'>Add address</span>}
+        {detail && <span className='ms-2 res-hide'>Thêm địa chỉ</span>}
       </button>
 
       {count < 6 && (
-        <Modal
-          id='add-address-form'
-          hasCloseBtn={false}
-          title='Add new address'
-        >
+        <Modal id='add-address-form' hasCloseBtn={false} title='Thêm Địa Chỉ'>
           <UserAddAddressForm />
         </Modal>
       )}
     </div>
-    {count >= 6 && (
-      <small className='cus-tooltip-msg'>The limit is 6 addresses</small>
-    )}
+    {count >= 6 && <small className='cus-tooltip-msg'>Tối đa 6 địa chỉ</small>}
   </div>
 )
 

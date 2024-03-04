@@ -55,21 +55,21 @@ const UserEditProfileForm = ({
       case 'isValidEmail': {
         setProfile({
           ...profile,
-          [isValidName]: flag || (!email && profile.email == '')
+          [isValidName]: flag || (!email && profile.email === '')
         })
         return
       }
       case 'isValidPhone': {
         setProfile({
           ...profile,
-          [isValidName]: flag || (!phone && profile.phone == '')
+          [isValidName]: flag || (!phone && profile.phone === '')
         })
         return
       }
       case 'isValidIdCard': {
         setProfile({
           ...profile,
-          [isValidName]: flag || (!id_card && profile.id_card == '')
+          [isValidName]: flag || (!id_card && profile.id_card === '')
         })
         return
       }
@@ -136,7 +136,7 @@ const UserEditProfileForm = ({
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit profile'
+          title='Chỉnh Sửa Thông Tin'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -146,10 +146,10 @@ const UserEditProfileForm = ({
         <div className='col-6'>
           <Input
             type='text'
-            label='First name'
+            label='Họ và tên lót'
             value={profile.firstName}
             isValid={profile.isValidFirstName}
-            feedback='Please provide a valid firstName.'
+            feedback='Vui lòng cung cấp họ hợp lệ!'
             validator='name'
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
@@ -161,10 +161,10 @@ const UserEditProfileForm = ({
         <div className='col-6'>
           <Input
             type='text'
-            label='Last name'
+            label='Tên'
             value={profile.lastName}
             isValid={profile.isValidLastName}
-            feedback='Please provide a valid lastName.'
+            feedback='Vui lòng cung cấp tên hợp lệ!'
             validator='name'
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
@@ -177,10 +177,10 @@ const UserEditProfileForm = ({
           <div className='col-12'>
             <Input
               type='text'
-              label='Email address'
+              label='Email'
               value={profile.email}
               isValid={profile.isValidEmail}
-              feedback='Please provide a valid email address.'
+              feedback='Vui lòng cung cấp Email hợp lệ!'
               validator='email'
               onChange={(value) => handleChange('email', 'isValidEmail', value)}
               onValidate={(flag) => handleValidate('isValidEmail', flag)}
@@ -191,10 +191,10 @@ const UserEditProfileForm = ({
         <div className='col-12'>
           <Input
             type='text'
-            label='Phone number'
+            label='Số điện thoại'
             value={profile.phone}
             isValid={profile.isValidPhone}
-            feedback='Please provide a valid phone number.'
+            feedback='Vui lòng cung cấp số điện thoại hợp lệ!'
             validator='phone'
             onChange={(value) => handleChange('phone', 'isValidPhone', value)}
             onValidate={(flag) => handleValidate('isValidPhone', flag)}
@@ -204,10 +204,10 @@ const UserEditProfileForm = ({
         <div className='col-12'>
           <Input
             type='text'
-            label='Id card'
+            label='ID Card'
             value={profile.id_card}
             isValid={profile.isValidIdCard}
-            feedback='Please provide a valid id card.'
+            feedback='Vui lòng cung cấp số thẻ hợp lệ!'
             validator='id_card'
             onChange={(value) =>
               handleChange('id_card', 'isValidIdCard', value)
@@ -234,7 +234,7 @@ const UserEditProfileForm = ({
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Save
+            Lưu
           </button>
         </div>
       </form>

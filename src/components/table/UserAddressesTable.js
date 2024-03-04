@@ -10,7 +10,7 @@ import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 
-const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
+const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
   const [editAddress, setEditAddress] = useState({})
   const [deleteAddress, setDeleteAddress] = useState({})
 
@@ -93,8 +93,8 @@ const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
           <thead>
             <tr>
               <th scope='col'>#</th>
-              <th scope='col'>Address</th>
-              <th scope='col'></th>
+              <th scope='col'>Địa Chỉ</th>
+              <th scope='col'>Hành Động</th>
             </tr>
           </thead>
           <tbody>
@@ -112,7 +112,7 @@ const UserAddressesTable = ({ heading = 'Your addresses', addresses = [] }) => {
                       onClick={() => handleEditAddress(address, index)}
                     >
                       <i className='fas fa-pen'></i>
-                      <span className='ms-2 res-hide'>Edit</span>
+                      <span className='ms-2 res-hide'>Sửa</span>
                     </button>
 
                     <button

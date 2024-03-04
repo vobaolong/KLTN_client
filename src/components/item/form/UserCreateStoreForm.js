@@ -165,16 +165,15 @@ const CreateStoreForm = (props) => {
       >
         <div className='col-12 bg-primary p-3'>
           <Logo />
-          <p className='text-white ms-2 fw-light'>Creating store is easy.</p>
         </div>
 
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Store Name'
+            label='Tên Shop'
             value={store.name}
             isValid={store.isValidName}
-            feedback='Please provide a valid store name.'
+            feedback='Vui lòng cung cấp tên shop phù hợp!'
             validator='name'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -187,7 +186,7 @@ const CreateStoreForm = (props) => {
             label='Bio'
             value={store.bio}
             isValid={store.isValidBio}
-            feedback='Please provide a valid store bio.'
+            feedback='Vui lòng cung cấp bio phù hợp!'
             validator='bio'
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
@@ -196,11 +195,11 @@ const CreateStoreForm = (props) => {
 
         <div className='col-12 px-4'>
           <InputFile
-            label='Store Avatar'
+            label='Ảnh Nền'
             size='avatar'
             value={store.avatar}
             isValid={store.isValidAvatar}
-            feedback='Please provide a valid store avatar.'
+            feedback='Vui lòng cung cấp ảnh nền phù hợp!'
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('avatar', 'isValidAvatar', value)}
             onValidate={(flag) => handleValidate('isValidAvatar', flag)}
@@ -209,11 +208,11 @@ const CreateStoreForm = (props) => {
 
         <div className='col-12 px-4'>
           <InputFile
-            label='Store Cover'
+            label='Ảnh Bìa'
             size='cover'
             value={store.cover}
             isValid={store.isValidCover}
-            feedback='Please provide a valid store cover.'
+            feedback='Vui lòng cung cấp ảnh bìa phù hợp!'
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('cover', 'isValidCover', value)}
             onValidate={(flag) => handleValidate('isValidCover', flag)}
@@ -237,7 +236,7 @@ const CreateStoreForm = (props) => {
               value={store.commissionId}
               setValue={handleSelect}
               size='large'
-              label='Commission'
+              label='Hoa Hồng'
             />
           )}
         </div>
@@ -251,23 +250,18 @@ const CreateStoreForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <small className='text-center d-block mx-2'>
             <span className='text-muted'>
-              How you'll get paid? Set up billing?{' '}
+              Bạn sẽ được trả tiền bằng cách nào?{' '}
             </span>
             <Link to='/legal/sellOnZenMetic' target='_blank'>
-              Sell on ZenMetic
+              Bán trên ZenMetic
             </Link>
-            . <br className='res-hide' />
+            <br className='res-hide' />
             <span className='text-muted'>
-              By Creating store, you agree to ZenMetic's{' '}
+              Bằng việc tạo cửa hàng, bạn đồng ý với ZenMetic{' '}
             </span>
-            <Link to='/legal/termsOfUse' target='_blank'>
-              Terms of Use
-            </Link>
-            <span className='text-muted'> and </span>
             <Link to='/legal/privacy' target='_blank'>
-              Privacy Policy
+              Chính sách bảo mật
             </Link>
-            .
           </small>
         </div>
 
@@ -276,15 +270,15 @@ const CreateStoreForm = (props) => {
             to='/account/storeManager'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Back to store Manager
+            <i className='fas fa-arrow-circle-left'></i> Quay lại trang quản lý
           </Link>
           <button
             type='submit'
             className='btn btn-primary ripple res-w-100-md'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '200px', maxWidth: '100%' }}
           >
-            Submit
+            Nộp
           </button>
         </div>
       </form>

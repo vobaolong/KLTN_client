@@ -16,7 +16,7 @@ const UserEditPasswordItem = (props) => (
       <UserEditPasswordForm />
     </Modal>
 
-    <small className='cus-tooltip-msg'>Edit Password</small>
+    <small className='cus-tooltip-msg'>Thay đổi mật khẩu</small>
   </div>
 )
 

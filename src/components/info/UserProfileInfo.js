@@ -8,11 +8,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => (
   <div className='container-fluid'>
     <div className='row py-2 border border-primary rounded-3'>
       <div className='col-sm-6'>
-        <Paragraph label='First name' value={user.firstName} />
+        <Paragraph label='Họ và tên đệm' value={user.firstName} />
       </div>
 
       <div className='col-sm-6'>
-        <Paragraph label='Last name' value={user.lastName} />
+        <Paragraph label='Tên' value={user.lastName} />
       </div>
 
       {!isEditable ? (
@@ -56,7 +56,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => (
       )}
 
       <div className='col-sm-6'>
-        <Paragraph label='Id card' value={user.id_card || '-'} />
+        <Paragraph label='ID Card' value={user.id_card || '-'} />
       </div>
 
       {isEditable && (

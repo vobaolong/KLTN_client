@@ -12,7 +12,7 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import SortByButton from './sub/SortByButton'
 
-const UserStoresTable = ({ heading = 'Your stores' }) => {
+const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -97,7 +97,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
               to='/account/storeManager/createNewStore'
             >
               <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>Create store</span>
+              <span className='ms-2 res-hide'>Tạo Shop</span>
             </Link>
           </div>
         </div>
@@ -121,7 +121,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Store Name'
+                  title='Tên Shop'
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -129,7 +129,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Role'
+                  title='Vai Trò'
                   sortBy='ownerId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -137,7 +137,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='License'
+                  title='Cấp Phép'
                   sortBy='isActive'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -145,7 +145,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title='Trạng Thái'
                   sortBy='isOpen'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -156,7 +156,7 @@ const UserStoresTable = ({ heading = 'Your stores' }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  Action
+                  Xem
                 </span>
               </th>
             </tr>

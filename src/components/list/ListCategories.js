@@ -5,7 +5,7 @@ import Error from '../ui/Error'
 import CategoryCard from '../card/CategoryCard'
 
 const ListCategories = ({
-  heading = 'Discover',
+  heading = 'Danh Mục',
   categoryId = null,
   col = 'col-xl-2-5 col-md-3 col-sm-4 col-6',
   limit = '5'

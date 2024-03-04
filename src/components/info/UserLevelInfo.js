@@ -12,7 +12,7 @@ const UserLevelInfo = ({ user = {}, border = true }) => (
     >
       <div className='col-12'>
         <Paragraph
-          label='Point'
+          label='Điểm'
           value={
             <span className='d-flex justify-content-right align-items-center'>
               {user.point}
@@ -26,7 +26,7 @@ const UserLevelInfo = ({ user = {}, border = true }) => (
 
       <div className='col-12'>
         <Paragraph
-          label='Successful / failed orders'
+          label='Đơn Hoàn Thành / Huỷ'
           value={
             <span>
               <i className='far fa-check-circle me-1 text-info'></i>

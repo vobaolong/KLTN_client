@@ -23,7 +23,7 @@ const SearchInput = ({ onChange = () => {} }) => {
     <input
       className='form-control'
       type='search'
-      placeholder='Search'
+      placeholder='Tìm kiếm'
       style={{ maxWidth: '206px' }}
       value={keyword}
       onChange={handleChangeKeyword}
