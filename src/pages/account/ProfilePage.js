@@ -6,9 +6,11 @@ import UserProfileInfo from '../../components/info/UserProfileInfo'
 import UserJoinedInfo from '../../components/info/UserJoinedInfo'
 import Cover from '../../components/image/Cover'
 import Avatar from '../../components/image/Avatar'
+import { useTranslation } from 'react-i18next'
 
 const ProfilePage = (props) => {
   const user = useSelector((state) => state.account.user)
+  const { t } = useTranslation()
   return (
     <AccountLayout user={user}>
       <div className='res-mx--12-md'>
@@ -38,7 +40,7 @@ const ProfilePage = (props) => {
             to={`/user/${user._id}`}
             target='_blank'
           >
-            <span className='me-2 res-hide'>Đến Kênh Của Tôi</span>
+            <span className='me-2 res-hide'>{t('visitMyPage')}</span>
             <i className='fas fa-external-link-alt'></i>
           </Link>
         </div>

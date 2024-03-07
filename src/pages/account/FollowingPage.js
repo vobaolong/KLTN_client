@@ -3,9 +3,11 @@ import useToggle from '../../hooks/useToggle'
 import AccountLayout from '../../components/layout/AccountLayout'
 import FollowingProductsCollection from '../../components/collection/FollowingProductsCollection'
 import FollowingStoresCollection from '../../components/collection/FollowingStoreCollection'
+import { useTranslation } from 'react-i18next'
 
 const FollowingPage = (props) => {
   const user = useSelector((state) => state.account.user)
+  const { t } = useTranslation()
   const [flag, toggleFlag] = useToggle(true)
   return (
     <AccountLayout user={user}>
@@ -21,7 +23,7 @@ const FollowingPage = (props) => {
             <i className='fas fa-box'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Sản phẩm yêu thích</small>
+          <small className='cus-tooltip-msg'>{t('favProduct')}</small>
         </div>
 
         <div className='position-relative d-inline-block'>
@@ -35,7 +37,7 @@ const FollowingPage = (props) => {
             <i className='fas fa-store'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Cửa hàng yêu thích</small>
+          <small className='cus-tooltip-msg'>{t('favShop')}</small>
         </div>
       </div>
 

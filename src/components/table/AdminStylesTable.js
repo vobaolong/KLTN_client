@@ -12,8 +12,11 @@ import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import CategorySmallCard from '../card/CategorySmallCard'
 import ActiveLabel from '../label/ActiveLabel'
+import { useTranslation } from 'react-i18next'
 
 const AdminStylesTable = ({ heading = 'Style' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -190,7 +193,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
@@ -300,7 +303,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                       onClick={() => handleDelete(style)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Xoá</span>
+                      <span className='ms-2 res-hide'>{t('delete')}</span>
                     </button>
                   ) : (
                     <button

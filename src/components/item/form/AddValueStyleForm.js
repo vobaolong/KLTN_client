@@ -7,8 +7,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -138,7 +140,7 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

@@ -8,8 +8,11 @@ import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import TextArea from '../../ui/TextArea'
 import RatingInput from '../../ui/RatingInput'
+import { useTranslation } from 'react-i18next'
 
 const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -156,7 +159,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

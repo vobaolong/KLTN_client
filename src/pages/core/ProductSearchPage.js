@@ -8,8 +8,10 @@ import Pagination from '../../components/ui/Pagination.js'
 import Loading from '../../components/ui/Loading'
 import Error from '../../components/ui/Error'
 import ProductFilter from '../../components/filter/ProductFilter'
+import { useTranslation } from 'react-i18next'
 
 const ProductSearchPage = (props) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -18,6 +20,7 @@ const ProductSearchPage = (props) => {
   const [pagination, setPagination] = useState({
     size: 0
   })
+
   const [filter, setFilter] = useState({
     search: keyword,
     rating: '',
@@ -80,7 +83,7 @@ const ProductSearchPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <span className='me-3 text-nowrap'>
-            {pagination.size || 0} Kết Quả
+            {pagination.size || 0} {t('result')}
           </span>
         </div>
 

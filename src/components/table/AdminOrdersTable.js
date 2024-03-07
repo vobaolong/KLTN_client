@@ -13,8 +13,11 @@ import OrderPaymentLabel from '../label/OrderPaymentLabel'
 import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
+import { useTranslation } from 'react-i18next'
 
 const AdminOrdersTable = ({ heading = true, status = '' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [orders, setOrders] = useState([])
@@ -106,7 +109,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

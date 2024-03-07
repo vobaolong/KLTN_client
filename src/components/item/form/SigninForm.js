@@ -182,8 +182,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           <small className='text-center d-block text-muted'>
             Quên mật khẩu?{' '}
             <span
-              className='text-primary text-decoration-underline'
-              style={{ cursor: 'pointer' }}
+              className='pointer text-primary text-decoration-underline'
               onClick={handleForgotPassword}
             >
               Gửi Email
@@ -193,8 +192,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           <small className='text-center d-block text-muted'>
             Bạn không có tài khoản?{' '}
             <span
-              className='text-primary text-decoration-underline'
-              style={{ cursor: 'pointer' }}
+              className='text-primary pointer text-decoration-underline'
               onClick={onSwap}
             >
               Đăng ký ngay

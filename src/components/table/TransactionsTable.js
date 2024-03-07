@@ -17,6 +17,7 @@ import CreateTransactionItem from '../item/CreateTransactionItem'
 import CreateTransactionItemForUser from '../item/CreateTransactionItemForUser'
 import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
+import { useTranslation } from 'react-i18next'
 
 const TransactionsTable = ({
   heading = 'Ví Của Tôi',
@@ -25,6 +26,8 @@ const TransactionsTable = ({
   owner = {},
   eWallet = 0
 }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(false)
@@ -162,7 +165,7 @@ const TransactionsTable = ({
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

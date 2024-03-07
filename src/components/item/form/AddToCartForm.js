@@ -118,7 +118,10 @@ const AddToCartForm = ({ product = {} }) => {
           </div>
         )}
 
-        <div className='col-lg-4 col-md-12 d-grid mt-4'>
+        <div
+          className='col-md-12 d-grid mt-4'
+          style={{ maxWidth: 'fit-content' }}
+        >
           <button
             type='submit'
             className='btn add-to-cart-btn ripple btn-lg d-flex align-items-center justify-content-center add-to-cart'

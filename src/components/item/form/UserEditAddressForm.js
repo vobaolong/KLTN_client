@@ -139,7 +139,7 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit address'
+          title='Chỉnh sửa địa chỉ'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -149,36 +149,34 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Street address'
+            label='Số nhà/tên đường'
             value={address.street}
             isValid={address.isValidStreet}
-            feedback='Please provide a valid street address ("," is not allowed).'
+            feedback='Vui lòng cung cấp số nhà/tên đường phù hợp ("," không được chấp nhận)'
             validator='address'
             onChange={(value) => handleChange('street', 'isValidStreet', value)}
             onValidate={(flag) => handleValidate('isValidStreet', flag)}
           />
         </div>
-
         <div className='col-12'>
           <Input
             type='text'
-            label='Ward'
+            label='Phường/Xã'
             value={address.ward}
             isValid={address.isValidWard}
-            feedback='Please provide a valid ward ("," is not allowed).'
+            feedback='Vui lòng cung cấp phường/xã phù hợp ("," không được chấp nhận)'
             validator='address'
             onChange={(value) => handleChange('ward', 'isValidWard', value)}
             onValidate={(flag) => handleValidate('isValidWard', flag)}
           />
         </div>
-
         <div className='col-12'>
           <Input
             type='text'
-            label='City / district'
+            label='Quận/Huyện'
             value={address.district_city}
             isValid={address.isValidDistrict}
-            feedback='Please provide a valid city / district ("," is not allowed).'
+            feedback='Vui lòng cung cấp quận/huyện phù hợp ("," không được chấp nhận)'
             validator='address'
             onChange={(value) =>
               handleChange('district_city', 'isValidDistrict', value)
@@ -190,10 +188,10 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Province / city'
+            label='Thành Phố/Tỉnh'
             value={address.city_province}
             isValid={address.isValidProvince}
-            feedback='Please provide a valid province / city ("," is not allowed).'
+            feedback='Vui lòng cung cấp thành phố/tỉnh phù hợp ("," không được chấp nhận)'
             validator='address'
             onChange={(value) =>
               handleChange('city_province', 'isValidProvince', value)
@@ -205,10 +203,10 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Country'
+            label='Tên Quốc Gia'
             value={address.country}
             isValid={address.isValidCountry}
-            feedback='Please provide a valid country ("," is not allowed).'
+            feedback='Vui lòng cung cấp quốc gia phù hợp ("," không được chấp nhận)'
             validator='address'
             onChange={(value) =>
               handleChange('country', 'isValidCountry', value)

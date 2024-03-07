@@ -9,12 +9,14 @@ import {
 import FollowLabel from '../label/StoreFollowLabel'
 import StarRating from '../label/StarRating'
 import FollowProductButton from '../button/FollowProductButton'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ProductCard = ({ product = {}, onRun }) => {
   const [productValue, setProductValue] = useState({})
   const [isHovered, setIsHovered] = useState(false)
+  const { t } = useTranslation()
   const salePercent = Math.round(
     ((productValue?.price?.$numberDecimal -
       productValue?.salePrice?.$numberDecimal) /
@@ -91,7 +93,7 @@ const ProductCard = ({ product = {}, onRun }) => {
         </div>
         <div class='mall-tag'>Giảm {-salePercent}%</div>
         {productValue.numberOfFollowers > 1 ? (
-          <div class='fav-tag'>Yêu thích</div>
+          <div class='fav-tag'>{t('favorite')}</div>
         ) : (
           ''
         )}

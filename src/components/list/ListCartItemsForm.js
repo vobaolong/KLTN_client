@@ -18,10 +18,13 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import DropDownMenu from '../ui/DropDownMenu'
 import UserLevelLabel from '../label/UserLevelLabel'
 import CheckoutForm from '../item/form/CheckoutForm'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -284,7 +287,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 onClick={() => handleDelete(item)}
               >
                 <i className='fas fa-trash-alt'></i>
-                <span className='ms-2 res-hide'>Xoá</span>
+                <span className='ms-2 res-hide'>{t('delete')}</span>
               </button>
             </div>
           </div>

@@ -8,7 +8,7 @@ const VendorLayout = ({ user = {}, store = {}, children = null }) => (
         <VendorSideBar user={user} store={store} />
       </div>
 
-      <div className='col-md-9'>{children}</div>
+      <div className='col-md-9 p-0'>{children}</div>
     </div>
   </MainLayout>
 )

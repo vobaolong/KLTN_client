@@ -15,12 +15,15 @@ import Modal from '../ui/Modal'
 import AddValueStyleItem from '../item/AddValueStyleItem'
 import AdminEditStyleValueForm from '../item/form/AdminEditStyleValueForm'
 import ActiveLabel from '../label/ActiveLabel'
+import { useTranslation } from 'react-i18next'
 
 const StyleValuesTable = ({
   heading = true,
   styleId = '',
   isActive = false
 }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -173,7 +176,7 @@ const StyleValuesTable = ({
           onRun={() => setRun(!run)}
         />
         <span className='me-2 text-nowrap res-hide'>
-          {styleValues.length || 0} Kết Quả
+          {styleValues.length || 0} {t('result')}
         </span>
       </div>
 

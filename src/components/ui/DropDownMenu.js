@@ -53,19 +53,16 @@ const DropDownMenu = ({
           overflow: 'auto'
         }}
       >
-        {listItem &&
-          listItem.map((item, index) => (
-            <li
-              key={index}
-              className='list-group-item cus-dropdown-menu-item'
-              onMouseDown={() => handleSelect(item)}
-            >
-              {item && item.icon}
-              <span className={item && item.icon && 'res-hide'}>
-                {item && item.label}
-              </span>
-            </li>
-          ))}
+        {listItem?.map((item, index) => (
+          <li
+            key={index}
+            className='list-group-item cus-dropdown-menu-item'
+            onMouseDown={() => handleSelect(item)}
+          >
+            {item?.icon}
+            <span className={item?.icon && 'res-hide'}>{item?.label}</span>
+          </li>
+        ))}
       </ul>
 
       <button
@@ -84,13 +81,11 @@ const DropDownMenu = ({
             size === 'large' ? 'flex-grow-1 text-start' : ''
           }`}
         >
-          {selectedItem && selectedItem.icon && (
+          {selectedItem?.icon && (
             <span className='me-2'>{selectedItem.icon}</span>
           )}
-          <span
-            className={`${selectedItem && selectedItem.icon && 'res-hide'}`}
-          >
-            {selectedItem && selectedItem.label}
+          <span className={`${selectedItem?.icon && 'res-hide'}`}>
+            {selectedItem?.label}
           </span>
         </span>
         <i className={iconClass + ' ms-2'}></i>

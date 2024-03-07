@@ -12,8 +12,10 @@ import SortByButton from './sub/SortByButton'
 import OrderStatusLabel from '../label/OrderStatusLabel'
 import OrderPaymentLabel from '../label/OrderPaymentLabel'
 import SearchInput from '../ui/SearchInput'
+import { useTranslation } from 'react-i18next'
 
 const UserOrdersTable = ({ heading = true, status = '' }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -91,9 +93,9 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
   return (
     <div className='position-relative'>
       {heading && status === 'Not processed|Processing|Shipped' ? (
-        <h4 className='text-center text-uppercase'>Đơn Hàng Đang Thực Hiện</h4>
+        <h4 className='text-center text-uppercase'>{t('processingOrders')}</h4>
       ) : (
-        <h4 className='text-center text-uppercase'>Đơn Hàng Đã Giao</h4>
+        <h4 className='text-center text-uppercase'>{t('processedOrders')}</h4>
       )}
 
       {isLoading && <Loading />}
@@ -105,7 +107,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
@@ -118,7 +120,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Mã Đơn'
+                  title={t('orderDetail.id')}
                   sortBy='_id'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -127,7 +129,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Ngày Tạo'
+                  title={t('orderDetail.date')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -136,7 +138,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Giá Tiền'
+                  title={t('orderDetail.price')}
                   sortBy='amountFromUser'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -145,7 +147,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Shop'
+                  title={t('orderDetail.shop')}
                   sortBy='orderId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -154,7 +156,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Vận Chuyển'
+                  title={t('orderDetail.deliveryUnit')}
                   sortBy='deliveryId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -163,7 +165,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Thanh Toán'
+                  title={t('orderDetail.payment')}
                   sortBy='isPaidBefore'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -172,23 +174,23 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Trạng Thái'
+                  title={t('orderDetail.status')}
                   sortBy='status'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
               <th scope='col'>
-                <span
+                {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Xem
-                </span>
+                </span> */}
               </th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order, index) => (
+            {orders?.map((order, index) => (
               <tr key={index}>
                 <th scope='row'>
                   {index + 1 + (filter.page - 1) * filter.limit}
@@ -206,7 +208,10 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     ₫
                   </small>
                 </td>
-                <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
+                <td
+                  className='text-start hidden-avatar'
+                  style={{ maxWidth: '300px' }}
+                >
                   <StoreSmallCard store={order.storeId} />
                 </td>
                 <td className='text-end'>

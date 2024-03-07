@@ -1,5 +1,5 @@
 const BannerTopHead = ({ navFor = 'user' }) => (
-  <div className={`bannerTopHead ${navFor !== 'user' ? 'd-none' : ''}`}>
+  <div className='bannerTopHead'>
     <div className='bth-container'>
       <span>Đổi trả Thoải mái</span>
       <span>Sản phẩm chính hãng - xuất VAT đầy đủ</span>

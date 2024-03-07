@@ -9,8 +9,11 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
-const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
+const UserAddressesTable = ({ addresses = [] }) => {
+  const { t } = useTranslation()
+
   const [editAddress, setEditAddress] = useState({})
   const [deleteAddress, setDeleteAddress] = useState({})
 
@@ -68,7 +71,7 @@ const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete address'
+          title={t('delAddress')}
           message={deleteAddress.address}
           color='danger'
           onSubmit={onSubmit}
@@ -76,7 +79,9 @@ const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
         />
       )}
 
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
+      {t('address') && (
+        <h4 className='text-center text-uppercase'>{t('address')}</h4>
+      )}
 
       {error && <Error msg={error} />}
       {success && <Success msg={success} />}
@@ -84,7 +89,7 @@ const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
       <div className='d-flex justify-content-between align-items-end'>
         <UserAddAddressItem count={(addresses && addresses.length) || 0} />
         <span className='me-2 text-nowrap'>
-          {(addresses && addresses.length) || 0} Kết Quả
+          {(addresses && addresses.length) || 0} {t('result')}
         </span>
       </div>
 
@@ -93,44 +98,60 @@ const UserAddressesTable = ({ heading = 'Địa Chỉ', addresses = [] }) => {
           <thead>
             <tr>
               <th scope='col'></th>
-              <th scope='col'>Địa Chỉ</th>
-              <th scope='col'>Hành Động</th>
+              <th scope='col'>
+                <span
+                  style={{ fontWeight: '500', fontSize: '.875rem' }}
+                  className='text-secondary'
+                >
+                  {t('address')}
+                </span>
+              </th>
+              <th scope='col'>
+                <span
+                  style={{ fontWeight: '500', fontSize: '.875rem' }}
+                  className='text-secondary'
+                >
+                  Action
+                </span>
+              </th>
             </tr>
           </thead>
           <tbody>
-            {addresses &&
-              addresses.map((address, index) => (
-                <tr key={index}>
-                  <th scope='row'>{index + 1}</th>
-                  <td>{address}</td>
-                  <td>
-                    <button
-                      type='button'
-                      className='btn btn-dark ripple me-2'
-                      data-bs-toggle='modal'
-                      data-bs-target='#edit-address-form'
-                      onClick={() => handleEditAddress(address, index)}
-                    >
-                      <i className='fas fa-pen'></i>
-                      <span className='ms-2 res-hide'>Sửa</span>
-                    </button>
-
-                    <button
-                      type='button'
-                      className='btn btn-outline-primary ripple'
-                      onClick={() => handleDeleteAddress(address, index)}
-                    >
-                      <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Xoá</span>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            {addresses?.map((address, index) => (
+              <tr key={index}>
+                <th scope='row'>{index + 1}</th>
+                <td>{address}</td>
+                <td>
+                  <button
+                    type='button'
+                    className='btn btn-dark ripple me-2 my-1'
+                    data-bs-toggle='modal'
+                    data-bs-target='#edit-address-form'
+                    onClick={() => handleEditAddress(address, index)}
+                  >
+                    <i className='fas fa-pen'></i>
+                    <span className='ms-2 res-hide'>{t('edit')}</span>
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-outline-primary ripple my-1'
+                    onClick={() => handleDeleteAddress(address, index)}
+                  >
+                    <i className='fas fa-trash-alt'></i>
+                    <span className='ms-2 res-hide'>{t('delete')}</span>
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <Modal id='edit-address-form' hasCloseBtn={false} title='Edit Address'>
+      <Modal
+        id='edit-address-form'
+        hasCloseBtn={false}
+        title='Chỉnh Sửa Địa Chỉ'
+      >
         <UserEditAddressForm
           oldAddress={editAddress.address}
           index={editAddress.index}

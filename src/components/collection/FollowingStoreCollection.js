@@ -5,8 +5,10 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import StoreCard from '../card/StoreCard'
 import Pagination from '../ui/Pagination'
+import { useTranslation } from 'react-i18next'
 
 const FollowingStoresCollection = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(false)
@@ -64,9 +66,9 @@ const FollowingStoresCollection = (props) => {
       {error && <Error msg={error} />}
 
       <div className='d-flex justify-content-between align-items-end'>
-        <h4>Cửa Hàng Yêu Thích</h4>
+        <h4>{t('favShop')}</h4>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

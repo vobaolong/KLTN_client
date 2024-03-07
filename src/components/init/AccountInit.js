@@ -10,6 +10,7 @@ import { addAccount } from '../../actions/account'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -21,7 +22,6 @@ const AccountInit = ({ user, actions }) => {
   const { firstName, lastName, avatar } = user
   const history = useHistory()
   const { _id, accessToken, refreshToken, role } = getToken()
-
   const init = () => {
     setIsLoading(true)
     setError('')
@@ -83,6 +83,7 @@ const AccountInit = ({ user, actions }) => {
       history.go(0)
     })
   }
+  const { t } = useTranslation()
 
   return isLoading ? (
     <div className='cus-position-relative-loading'>
@@ -92,7 +93,7 @@ const AccountInit = ({ user, actions }) => {
     <div className='your-account-wrap'>
       {isConfirming && (
         <ConfirmDialog
-          title='Đăng Xuất'
+          title={t('logOut')}
           color='danger'
           onSubmit={onSignoutSubmit}
           onClose={() => setIsConfirming(false)}
@@ -117,29 +118,29 @@ const AccountInit = ({ user, actions }) => {
 
         <ul className='list-group your-account-options'>
           <Link
-            className='list-group-item your-account-options-item ripple'
+            className='list-group-item your-account-options-item ripple text-capitalize'
             to='/account/profile'
           >
             <i className='fas fa-user-circle'></i>
-            Tài Khoản Của Tôi
+            {t('myAccount')}
           </Link>
 
           {role === 'user' && (
             <Link
-              className='list-group-item your-account-options-item ripple'
+              className='list-group-item your-account-options-item ripple text-capitalize'
               to='/account/purchase'
             >
               <i className='fas fa-shopping-bag'></i>
-              Đơn Mua
+              {t('myPurchase')}
             </Link>
           )}
 
           <li
-            className='list-group-item your-account-options-item ripple'
+            className='list-group-item your-account-options-item ripple text-capitalize'
             onClick={handleSignout}
           >
             <i className='fas fa-sign-out-alt'></i>
-            Đăng Xuất
+            {t('logOut')}
           </li>
         </ul>
       </div>

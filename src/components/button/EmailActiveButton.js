@@ -4,6 +4,7 @@ import { sendConfirmationEmail } from '../../apis/auth'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import Success from '../ui/Success'
+import { useTranslation } from 'react-i18next'
 
 const EmailActiveButton = ({
   email = '',
@@ -15,11 +16,11 @@ const EmailActiveButton = ({
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
+  const { t } = useTranslation()
   const handleSendEmail = () => {
     setError('')
     setSuccess('')
     setIsLoading(true)
-
     const { _id, accessToken } = getToken()
 
     sendConfirmationEmail(_id, accessToken)
@@ -47,9 +48,9 @@ const EmailActiveButton = ({
         <div className='position-relative d-inline-block'>
           <span className='badge bg-primary cus-tooltip'>
             <i className='fas fa-check-circle me-2'></i>
-            verified
+            {t('verified')}
           </span>
-          <small className='cus-tooltip-msg'>Email Verified</small>
+          <small className='cus-tooltip-msg'>Email {t('verified')}</small>
         </div>
       )}
 
@@ -84,11 +85,9 @@ const EmailActiveButton = ({
             onClick={handleSendEmail}
           >
             <i className='fas fa-paper-plane me-2'></i>
-            verify now!
+            {t('verifyNow')}!
           </button>
-          <small className='cus-tooltip-msg'>
-            Click to send confirmation email
-          </small>
+          <small className='cus-tooltip-msg'>{t('confirmEmail')}</small>
           {error && (
             <span>
               <Error msg={error} />

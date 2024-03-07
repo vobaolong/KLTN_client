@@ -8,8 +8,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const UserAddAddressForm = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -136,7 +138,7 @@ const UserAddAddressForm = (props) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Thêm Địa Chỉ'
+          title={t('addAddress')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -146,36 +148,34 @@ const UserAddAddressForm = (props) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Số nhà / tên đường'
+            label={t('addressForm.street')}
             value={address.street}
             isValid={address.isValidStreet}
-            feedback='Vui lòng cung cấp số nhà / tên đường phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.streetValid')}
             validator='address'
             onChange={(value) => handleChange('street', 'isValidStreet', value)}
             onValidate={(flag) => handleValidate('isValidStreet', flag)}
           />
         </div>
-
         <div className='col-12'>
           <Input
             type='text'
-            label='Phường / Xã'
+            label={t('addressForm.ward')}
             value={address.ward}
             isValid={address.isValidWard}
-            feedback='Vui lòng cung cấp phường / xã phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.wardValid')}
             validator='address'
             onChange={(value) => handleChange('ward', 'isValidWard', value)}
             onValidate={(flag) => handleValidate('isValidWard', flag)}
           />
         </div>
-
         <div className='col-12'>
           <Input
             type='text'
-            label='Quận / Huyện'
+            label={t('addressForm.district')}
             value={address.district_city}
             isValid={address.isValidDistrict}
-            feedback='Vui lòng cung cấp quận / huyện phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.districtValid')}
             validator='address'
             onChange={(value) =>
               handleChange('district_city', 'isValidDistrict', value)
@@ -187,10 +187,10 @@ const UserAddAddressForm = (props) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Thành Phố / Tỉnh'
+            label={t('addressForm.provinceCity')}
             value={address.city_province}
             isValid={address.isValidProvince}
-            feedback='Vui lòng cung cấp thành phố/tỉnh phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.provinceCityValid')}
             validator='address'
             onChange={(value) =>
               handleChange('city_province', 'isValidProvince', value)
@@ -202,10 +202,10 @@ const UserAddAddressForm = (props) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Tên Quốc Gia'
+            label={t('addressForm.country')}
             value={address.country}
             isValid={address.isValidCountry}
-            feedback='Vui lòng cung cấp quốc gia phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.countryValid')}
             validator='address'
             onChange={(value) =>
               handleChange('country', 'isValidCountry', value)
@@ -232,7 +232,7 @@ const UserAddAddressForm = (props) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

@@ -21,7 +21,7 @@ const OrderStatusLabel = ({ status = '', detail = true }) => {
         {icons[status]}
         {detail && <span className='ms-2'>{status}</span>}
       </span>
-      {/* <small className="cus-tooltip-msg">{status}</small> */}
+      {/* <small className='cus-tooltip-msg'>{status}</small> */}
     </span>
   )
 }

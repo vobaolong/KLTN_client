@@ -15,8 +15,11 @@ import StarRating from '../label/StarRating'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AdminProductsTable = ({ heading = true, isActive = true }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -147,7 +150,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

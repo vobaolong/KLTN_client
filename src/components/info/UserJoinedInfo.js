@@ -1,5 +1,6 @@
 import Paragraph from '../ui/Paragraph'
 import UserRoleLabel from '../label/UserRoleLabel'
+import { useTranslation } from 'react-i18next'
 
 const humanReadableDate = (date) => {
   const months = [
@@ -30,18 +31,28 @@ const humanReadableDate = (date) => {
   )
 }
 
-const UserJoinedInfo = ({ user = {} }) => (
-  <div className='container-fluid'>
-    <div className='row py-2 border border-primary rounded-3'>
-      <div className='col-12'>
-        <Paragraph label='Vai Trò' value={<UserRoleLabel role={user.role} />} />
-      </div>
+const UserJoinedInfo = ({ user = {} }) => {
+  const { t } = useTranslation()
 
-      <div className='col-12'>
-        <Paragraph label='Tham Gia' value={humanReadableDate(user.createdAt)} />
+  return (
+    <div className='container-fluid'>
+      <div className='row py-2 border border-primary rounded-3'>
+        <div className='col-12'>
+          <Paragraph
+            label={t('role')}
+            value={<UserRoleLabel role={user.role} />}
+          />
+        </div>
+
+        <div className='col-12'>
+          <Paragraph
+            label={t('join')}
+            value={humanReadableDate(user.createdAt)}
+          />
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default UserJoinedInfo

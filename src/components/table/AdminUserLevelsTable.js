@@ -18,8 +18,11 @@ import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import ActiveLabel from '../label/ActiveLabel'
+import { useTranslation } from 'react-i18next'
 
 const AdminUserLevelsTable = ({ heading = 'User level' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -205,7 +208,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
@@ -322,7 +325,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                       onClick={() => handleDeleteLevel(level)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Xoá</span>
+                      <span className='ms-2 res-hide'>{t('delete')}</span>
                     </button>
                   ) : (
                     <button

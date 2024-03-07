@@ -211,9 +211,8 @@ const SignupForm = ({ onSwap = () => {} }) => {
           <small className='text-center d-block text-muted'>
             Đã có tài khoản?{' '}
             <span
-              className='sign-in-item text-primary text-decoration-underline'
+              className='sign-in-item text-primary text-decoration-underline pointer'
               onClick={onSwap}
-              style={{ cursor: 'pointer' }}
             >
               Đăng nhập ngay
             </span>

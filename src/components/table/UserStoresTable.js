@@ -11,8 +11,10 @@ import SearchInput from '../ui/SearchInput'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import SortByButton from './sub/SortByButton'
+import { useTranslation } from 'react-i18next'
 
-const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
+const UserStoresTable = () => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -82,11 +84,11 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
 
   return (
     <div className='position-relative'>
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
+      {t('myShop') && (
+        <h4 className='text-center text-uppercase'>{t('myShop')}</h4>
+      )}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <div className='d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
@@ -97,31 +99,38 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
               to='/account/storeManager/createNewStore'
             >
               <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>Tạo Shop</span>
+              <span className='ms-2 res-hide'>{t('createShop')}</span>
             </Link>
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
-
       <div className='table-scroll my-2'>
         <table className='table table-sm table-hover align-middle text-center'>
           <thead>
             <tr>
               <th scope='col'>
-                <SortByButton
+                {/* <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='#'
+                  title=''
                   sortBy='point'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
+                /> */}
+              </th>
+              <th scope='col'>
+                <span
+                  style={{ fontWeight: '400', fontSize: '.875rem' }}
+                  className='text-secondary'
+                >
+                  Avatar
+                </span>
               </th>
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Tên Shop'
+                  title={t('shopDetail.name')}
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -129,7 +138,7 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Vai Trò'
+                  title={t('shopDetail.role')}
                   sortBy='ownerId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -137,7 +146,7 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Cấp Phép'
+                  title={t('shopDetail.licensed')}
                   sortBy='isActive'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -145,20 +154,13 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title='Trạng Thái'
+                  title={t('shopDetail.status')}
                   sortBy='isOpen'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
 
-              <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  Xem
-                </span>
-              </th>
+              <th scope='col'></th>
             </tr>
           </thead>
           <tbody>
@@ -167,20 +169,25 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
                 <th scope='row'>
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td className='text-start ps-4'>
-                  <small>
+                <th scope='text-start'>
+                  <small className='hidden-name'>
+                    <StoreSmallCard store={store} />
+                  </small>
+                </th>
+                <td className='text-start'>
+                  <small className='hidden-avatar'>
                     <StoreSmallCard store={store} />
                   </small>
                 </td>
-                <td className='text-start ps-5'>
+                <td className='text-center'>
                   <ManagerRoleLabel
-                    role={_id == store.ownerId._id ? 'Owner' : 'Staff'}
+                    role={_id === store.ownerId._id ? 'Owner' : 'Staff'}
                   />
                 </td>
-                <td className='text-start ps-5'>
+                <td className='text-center'>
                   <StoreLicenseLabel isActive={store.isActive} />
                 </td>
-                <td className='text-start ps-5'>
+                <td className='text-center'>
                   <StoreStatusLabel isOpen={store.isOpen} />
                 </td>
                 <td>
@@ -188,7 +195,7 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
                     type='button'
                     className='btn btn-primary ripple'
                     to={`/vendor/${store._id}`}
-                    title='Manage'
+                    title='Quản lý'
                   >
                     <i className='fas fa-user-tie'></i>
                   </Link>
@@ -198,7 +205,6 @@ const UserStoresTable = ({ heading = 'Cửa Hàng Của Bạn' }) => {
           </tbody>
         </table>
       </div>
-
       {pagination.size !== 0 && (
         <Pagination pagination={pagination} onChangePage={handleChangePage} />
       )}

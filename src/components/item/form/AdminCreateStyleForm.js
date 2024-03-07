@@ -153,7 +153,7 @@ const AdminCreateStyleForm = (props) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

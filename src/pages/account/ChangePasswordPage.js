@@ -95,8 +95,7 @@ const ChangePasswordPage = (props) => {
           <div className='p-2'>
             <Success msg={success} />
             <span
-              className='text-primary text-decoration-underline'
-              style={{ cursor: 'pointer' }}
+              className='text-primary text-decoration-underline pointer'
               onClick={() => setRedirect('/')}
             >
               Back to Login

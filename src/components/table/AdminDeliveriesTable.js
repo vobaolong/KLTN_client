@@ -17,8 +17,11 @@ import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import ActiveLabel from '../label/ActiveLabel'
+import { useTranslation } from 'react-i18next'
 
 const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -192,7 +195,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
@@ -308,7 +311,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                       onClick={() => handleDeleteCommission(delivery)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Xoá</span>
+                      <span className='ms-2 res-hide'>{t('delete')}</span>
                     </button>
                   ) : (
                     <button

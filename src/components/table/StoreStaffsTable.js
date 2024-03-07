@@ -12,6 +12,7 @@ import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import SortByButton from './sub/SortByButton'
+import { useTranslation } from 'react-i18next'
 
 const StoreStaffsTable = ({
   heading = `Store's staffs`,
@@ -19,6 +20,8 @@ const StoreStaffsTable = ({
   ownerId = {},
   storeId = ''
 }) => {
+  const { t } = useTranslation()
+
   const [deletedStaff, setDeletedStaff] = useState({})
 
   const [isLoading, setIsLoading] = useState(false)
@@ -172,7 +175,7 @@ const StoreStaffsTable = ({
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
@@ -246,7 +249,7 @@ const StoreStaffsTable = ({
                       onClick={() => handleDeleteStaff(staff)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>Xoá</span>
+                      <span className='ms-2 res-hide'>{t('delete')}</span>
                     </button>
                   </td>
                 )}

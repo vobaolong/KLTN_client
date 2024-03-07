@@ -10,12 +10,16 @@ import VendorInit from '../../init/VendorInit'
 import UserSmallCard from '../../card/UserSmallCard'
 import StoreSmallCard from '../../card/StoreSmallCard'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
+import { locales } from '../../../i18n/i18n'
 
 const MainNav = ({ navFor = 'user' }) => {
   const { cartCount } = useSelector((state) => state.account.user)
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
 
+  const { i18n } = useTranslation()
+  const currentLanguage = locales[i18n.language]
   const [isConfirming, setIsConfirming] = useState(false)
   const history = useHistory()
   const { refreshToken } = getToken()
@@ -23,15 +27,18 @@ const MainNav = ({ navFor = 'user' }) => {
   const handleSignout = () => {
     setIsConfirming(true)
   }
-
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang)
+  }
   const onSignoutSubmit = () => {
     signout(refreshToken, () => {
       history.go(0)
     })
   }
+  console.log(currentLanguage)
 
   return (
-    <header className='main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
+    <header className='d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
       {isConfirming && (
         <ConfirmDialog
           title='Đăng Xuất'
@@ -40,7 +47,29 @@ const MainNav = ({ navFor = 'user' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-
+      <div className='text-white container-md justify-content-end ms-2'>
+        <div className='your-account'>
+          <div className='mb-1'>
+            <i class='fas fa-globe me-1'></i>
+            {currentLanguage}
+            <i class='fas fa-angle-down ms-1'></i>
+          </div>
+          <ul className='list-group your-account-options z-10'>
+            <li
+              className='list-group-item your-account-options-item ripple'
+              onClick={() => changeLanguage('vi')}
+            >
+              Tiếng Việt
+            </li>
+            <li
+              className='list-group-item your-account-options-item ripple'
+              onClick={() => changeLanguage('en')}
+            >
+              English
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className='container-md'>
         <Link
           className='navbar-brand cus-navbar-brand me-4 ripple res-hide-md'
@@ -131,7 +160,7 @@ const MainNav = ({ navFor = 'user' }) => {
                 </li>
               )}
 
-              {navFor !== 'user' && (
+              {/* {navFor !== 'user' && (
                 <li className='nav-item position-relative'>
                   <Link
                     className='btn btn-outline-light cus-outline ripple cus-tooltip'
@@ -139,9 +168,9 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-home'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Back to ZenMetic!</small>
+                  <small className='cus-tooltip-msg'>Quay lại trang chủ</small>
                 </li>
-              )}
+              )} */}
             </ul>
 
             <button
@@ -159,7 +188,7 @@ const MainNav = ({ navFor = 'user' }) => {
               tabIndex='-1'
               id='offcanvasNavbarMainNav'
               aria-labelledby='offcanvasNavbarMainNavLabel'
-              style={{ flexGrow: 'unset', width: 'unset' }}
+              style={{ flexGrow: 'unset', width: '40%' }}
             >
               <div className='offcanvas-header bg-primary'>
                 <h5
@@ -194,7 +223,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   <li className='nav-item p-2'>
                     <Link className='link-hover link-dark d-block' to='/'>
                       <i className='fas fa-home me-2'></i>
-                      Home
+                      Trang Chủ
                     </Link>
                   </li>
 
@@ -205,7 +234,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/following'
                       >
                         <i className='fas fa-heart me-2'></i>
-                        Following
+                        Yêu Thích
                       </Link>
                     </li>
                   )}
@@ -217,7 +246,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/storeManager'
                       >
                         <i className='fas fa-store me-2'></i>
-                        Store Manager
+                        Quản Lý Shop
                       </Link>
                     </li>
                   )}
@@ -226,7 +255,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     <li className='nav-item p-2'>
                       <Link className='link-hover link-dark d-block' to='/cart'>
                         <i className='fas fa-bag-shopping me-2'></i>
-                        Cart
+                        Giỏ Hàng
                       </Link>
                     </li>
                   )}
@@ -238,7 +267,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/admin/dashboard'
                       >
                         <i className='fas fa-user-tie me-2'></i>
-                        Dashboard
+                        Quản Lý
                       </Link>
                     </li>
                   )}

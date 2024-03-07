@@ -264,7 +264,7 @@ const MultiCategorySelector = ({
                 ))
               ) : (
                 <span className={isRequired && 'text-danger'}>
-                  No category chosen
+                  Không danh mục nào được chọn
                 </span>
               )}
             </div>

@@ -12,6 +12,7 @@ import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import StyleSelector from '../../selector/StyleSelector'
+import { useTranslation } from 'react-i18next'
 
 const VendorCreateProductForm = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -47,6 +48,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     isValidPrice: true,
     isValidSalePrice: true
   })
+  const { t } = useTranslation()
 
   const { _id, accessToken } = getToken()
 
@@ -409,7 +411,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

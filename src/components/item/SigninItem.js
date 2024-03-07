@@ -32,7 +32,7 @@ const SigninButton = ({ title = 'Đăng nhập', className = '' }) => {
         )}
       </Modal>
 
-      <small className='cus-tooltip-msg'>Join with us!</small>
+      <small className='cus-tooltip-msg'>Đăng nhập</small>
     </div>
   )
 }

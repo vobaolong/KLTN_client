@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import Avatar from '../../image/Avatar'
+import { useTranslation } from 'react-i18next'
 
 const AccountSideBar = ({ user = {} }) => {
+  const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-3 shadow bg-body rounded res-account-sidebar'>
@@ -20,29 +22,33 @@ const AccountSideBar = ({ user = {} }) => {
           <Link
             to='/account/profile'
             className={`nav-link cus-sidebar-item ripple link-dark ${
-              path == 'profile' ? 'active' : ''
+              path === 'profile' ? 'active' : ''
             }`}
           >
             <i className='fas fa-user-circle'></i>
-            <span className='ms-3 res-hide-xl'>Tài Khoản Của Tôi</span>
-            <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
-              Profile
+            <span className='ms-3 res-hide-xl text-capitalize'>
+              {t('profile')}
+            </span>
+            <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              {t('profile')}
             </span>
           </Link>
         </li>
 
-        {user.role == 'user' && (
+        {user.role === 'user' && (
           <li className='nav-item'>
             <Link
               to='/account/purchase'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path == 'purchase' ? 'active' : ''
+                path === 'purchase' ? 'active' : ''
               }`}
             >
               <i className='fas fa-shopping-bag'></i>
-              <span className='ms-3 res-hide-xl'>Đơn Mua</span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
-                Purchases
+              <span className='ms-3 res-hide-xl text-capitalize'>
+                {t('myPurchase')}
+              </span>
+              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+                {t('myPurchase')}
               </span>
             </Link>
           </li>
@@ -57,9 +63,11 @@ const AccountSideBar = ({ user = {} }) => {
               }`}
             >
               <i className='fas fa-map-marker-alt'></i>
-              <span className='ms-3 res-hide-xl'>Địa Chỉ</span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
-                Address
+              <span className='ms-3 res-hide-xl text-capitalize'>
+                {t('address')}
+              </span>
+              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+                {t('address')}
               </span>
             </Link>
           </li>
@@ -74,9 +82,11 @@ const AccountSideBar = ({ user = {} }) => {
               }`}
             >
               <i className='fas fa-store'></i>
-              <span className='ms-3 res-hide-xl'>Quản Lý Cửa Hàng</span>
+              <span className='ms-3 res-hide-xl text-capitalize'>
+                {t('manageShop')}
+              </span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
-                Stores
+                {t('manageShop')}
               </span>
             </Link>
           </li>
@@ -90,11 +100,11 @@ const AccountSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-heart'></i>
-            <span className='ms-3 res-hide-lg'>Yêu Thích</span>
+            <span className='ms-3 res-hide-lg'>{t('favorite')}</span>
           </Link>
         </li>
 
-        {user.role == 'user' && (
+        {user.role === 'user' && (
           <li className='nav-item'>
             <Link
               to='/account/GDCoins'
@@ -103,7 +113,7 @@ const AccountSideBar = ({ user = {} }) => {
               }`}
             >
               <i className='fas fa-coins'></i>
-              <span className='ms-3 res-hide-lg'>Ví</span>
+              <span className='ms-3 res-hide-lg'>{t('wallet')}</span>
             </Link>
           </li>
         )}

@@ -121,6 +121,10 @@
 
 /* sm */
 @media (max-width: 575px) {
+	.price-div {
+		justify-content: center !important;
+	}
+
 	.res-hide {
 		display: none !important;
 	}
@@ -131,7 +135,7 @@
 
 	.avatar-absolute {
 		bottom: 6% !important;
-		left: 50% !important;
+		left: 25% !important;
 		transform: translateX(-50%) !important;
 	}
 

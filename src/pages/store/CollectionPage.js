@@ -10,9 +10,11 @@ import Error from '../../components/ui/Error'
 import ProductFilter from '../../components/filter/ProductFilter'
 import StoreLayout from '../../components/layout/StoreLayout'
 import MainLayout from '../../components/layout/MainLayout'
+import { useTranslation } from 'react-i18next'
 
 const CollectionPage = (props) => {
   const store = useSelector((state) => state.store.store)
+  const { t } = useTranslation()
 
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -89,19 +91,20 @@ const CollectionPage = (props) => {
           <div className=''>
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
-          <span className='me-3'>{pagination.size || 0} Kết Quả</span>
+          <span className='me-3'>
+            {pagination.size || 0} {t('result')}
+          </span>
         </div>
 
         <div className='row mt-3'>
-          {listProducts &&
-            listProducts.map((product, index) => (
-              <div
-                className='col-xl-2-5 col-lg-3 col-md-3 col-sm-4 col-6 mb-4'
-                key={index}
-              >
-                <ProductCard product={product} />
-              </div>
-            ))}
+          {listProducts?.map((product, index) => (
+            <div
+              className='col-xl-2-5 col-lg-3 col-md-3 col-sm-4 col-6 mb-4'
+              key={index}
+            >
+              <ProductCard product={product} />
+            </div>
+          ))}
         </div>
 
         {pagination.size !== 0 && (

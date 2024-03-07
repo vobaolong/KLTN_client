@@ -8,7 +8,7 @@ const MainLayout = ({
   children = null
 }) => (
   <div className='main-layout'>
-    <BannerTopHead navFor={navFor} />
+    {/* <BannerTopHead /> */}
     <MainNav navFor={navFor} />
     <main className={`body ${container}`}>{children}</main>
     {navFor !== 'admin' ? <Footer /> : <div className='mb-4'></div>}

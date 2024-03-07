@@ -6,6 +6,7 @@ import store from './store'
 import './style.css'
 import './responsive.css'
 import ScrollToTop from 'react-scroll-to-top'
+import './i18n/i18n'
 
 ReactDOM.render(
   <Provider store={store}>

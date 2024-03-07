@@ -7,8 +7,10 @@ import StoreCard from '../../components/card/StoreCard'
 import Pagination from '../../components/ui/Pagination.js'
 import Loading from '../../components/ui/Loading'
 import Error from '../../components/ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const StoreSearchPage = (props) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -75,7 +77,9 @@ const StoreSearchPage = (props) => {
         {error && <Error msg={error} />}
 
         <div className='d-flex justify-content-end'>
-          <span className='me-3'>{pagination.size || 0} Kết Quả</span>
+          <span className='me-3'>
+            {pagination.size || 0} {t('result')}
+          </span>
         </div>
 
         <div className='row mt-3'>

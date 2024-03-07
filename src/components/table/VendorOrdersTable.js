@@ -12,6 +12,7 @@ import OrderStatusLabel from '../label/OrderStatusLabel'
 import OrderPaymentLabel from '../label/OrderPaymentLabel'
 import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
+import { useTranslation } from 'react-i18next'
 
 const StoreOrdersTable = ({
   heading = true,
@@ -19,6 +20,7 @@ const StoreOrdersTable = ({
   isEditable = false,
   status = ''
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -96,9 +98,9 @@ const StoreOrdersTable = ({
   return (
     <div className='position-relative'>
       {heading && isEditable ? (
-        <h4 className='text-center text-uppercase'>Processing Orders</h4>
+        <h4 className='text-center text-uppercase'>{t('processingOrders')}</h4>
       ) : (
-        <h4 className='text-center text-uppercase'>Processed Orders</h4>
+        <h4 className='text-center text-uppercase'>{t('processedOrders')}</h4>
       )}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
@@ -107,7 +109,7 @@ const StoreOrdersTable = ({
         <SearchInput onChange={handleChangeKeyword} />
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

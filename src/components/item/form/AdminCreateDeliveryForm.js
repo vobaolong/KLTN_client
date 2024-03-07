@@ -167,7 +167,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

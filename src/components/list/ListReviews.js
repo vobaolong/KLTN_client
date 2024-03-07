@@ -5,6 +5,7 @@ import Error from '../ui/Error'
 import Pagination from '../ui/Pagination'
 import ReviewInfo from '../info/ReviewInfo'
 import StarRating from '../label/StarRating'
+import { useTranslation } from 'react-i18next'
 
 const ListReviews = ({
   productId = '',
@@ -12,6 +13,8 @@ const ListReviews = ({
   userId = '',
   heading = 'Đánh Giá Sản Phẩm'
 }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(true)
@@ -83,7 +86,7 @@ const ListReviews = ({
           className='form-check me-3 d-flex justify-content-start align-items-center'
         >
           <input
-            className='form-check-input'
+            className='form-check-input pointer'
             type='radio'
             name='rating'
             id={`rating${i}`}
@@ -102,16 +105,10 @@ const ListReviews = ({
                   rating: i
                 })
             }}
-            style={{
-              cursor: 'pointer'
-            }}
           />
           <label
-            className='form-check-label ms-1'
+            className='form-check-label ms-1 pointer'
             htmlFor={`rating${i}`}
-            style={{
-              cursor: 'pointer'
-            }}
           >
             {i === 0 ? (
               <span>All</span>
@@ -137,7 +134,9 @@ const ListReviews = ({
         <div className='d-flex flex-wrap justify-content-start align-items-center'>
           {renderFilterRating()}
         </div>
-        <span className='me-2 text-nowrap'>{pagination.size || 0} Kết Quả</span>
+        <span className='me-2 text-nowrap'>
+          {pagination.size || 0} {t('result')}
+        </span>
       </div>
 
       <div className='row mt-2'>

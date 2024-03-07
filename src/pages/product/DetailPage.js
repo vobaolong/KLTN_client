@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { getProduct } from '../../apis/product'
 import {
@@ -22,8 +22,10 @@ import ListProductsByStore from '../../components/list/ListProductsByStore'
 import SigninButton from '../../components/item/SigninItem'
 import ListReviews from '../../components/list/ListReviews'
 import SalePercentLabel from '../../components/label/SalePercentLabel'
+import { useTranslation } from 'react-i18next'
 
 const DetailPage = () => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -83,6 +85,7 @@ const DetailPage = () => {
       product?.price?.$numberDecimal) *
       100
   )
+
   return (
     <MainLayout>
       <div className='position-relative'>
@@ -107,7 +110,7 @@ const DetailPage = () => {
                   }}
                 />
               </div>
-              <div className='col-lg-7 col-md-6 pe-5'>
+              <div className='col-lg-7 col-md-6'>
                 <strong className='text-primary text-lg-right'>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
@@ -125,7 +128,7 @@ const DetailPage = () => {
                     <span className='text-muted ms-1'>Đã Bán</span>
                   </span>
                 </div>
-                <div className='d-flex flex-wrap justify-content-right align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
+                <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
                   <p className='text-decoration-line-through text-muted mt-1'>
                     {product.price && formatPrice(product.price.$numberDecimal)}{' '}
                     ₫

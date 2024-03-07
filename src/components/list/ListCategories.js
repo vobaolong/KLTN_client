@@ -5,7 +5,7 @@ import Error from '../ui/Error'
 import CategoryCard from '../card/CategoryCard'
 
 const ListCategories = ({
-  heading = 'Danh Mục',
+  heading = '',
   categoryId = null,
   col = 'col-xl-2-5 col-md-3 col-sm-4 col-6',
   limit = '5'
@@ -44,10 +44,8 @@ const ListCategories = ({
   return (
     <div className='position-relative'>
       {heading && <h4>{heading}</h4>}
-
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-
       <div className='row mt-3'>
         {categories &&
           categories.map((category, index) => (

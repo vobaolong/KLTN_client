@@ -17,6 +17,7 @@ import ListOrderItems from '../list/ListOrderItems'
 import VendorUpdateOrderStatus from '../button/VendorUpdateOrderStatus'
 import AdminUpdateOrderStatus from '../button/AdminUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
+import { useTranslation } from 'react-i18next'
 
 const OrderDetailInfo = ({
   orderId = '',
@@ -24,6 +25,7 @@ const OrderDetailInfo = ({
   by = 'user',
   isEditable = false
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [run, setRun] = useState(false)
   const [error, setError] = useState('')
@@ -87,6 +89,16 @@ const OrderDetailInfo = ({
           (isEditable && by === 'admin' && order.status !== 'Shipped')) && (
           <span className='fs-6 mx-4 mb-2'>
             <OrderStatusLabel status={order.status} />
+            <span className='d-inline-block position-relative'>
+              <i
+                style={{ fontSize: '10px' }}
+                className='fa-solid detail fa-question text-sm ms-1 border rounded-circle cus-tooltip'
+              ></i>
+              <small className='cus-tooltip-msg'>
+                {t('orderDetail.lastUpdateTime')}{' '}
+                {humanReadableDate(order.updatedAt)}
+              </small>
+            </span>
           </span>
         )}
 

@@ -6,8 +6,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -110,7 +112,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               onClick={() => handleRemove(index)}
             >
               <i className='fas fa-trash-alt'></i>
-              <span className='ms-2 res-hide-md'>Xoá</span>
+              <span className='ms-2 res-hide-md'>{t('delete')}</span>
             </label>
           </div>
 

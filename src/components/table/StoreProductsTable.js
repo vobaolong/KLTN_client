@@ -16,6 +16,7 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import StyleValueSelector from '../selector/StyleValueSelector'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -24,6 +25,8 @@ const StoreProductsTable = ({
   isSelling = true,
   storeId = ''
 }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -164,7 +167,7 @@ const StoreProductsTable = ({
           )}
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 

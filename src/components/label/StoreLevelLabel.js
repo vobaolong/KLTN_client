@@ -11,7 +11,7 @@ const StoreLevelLabel = ({ level = {}, detail = true }) => (
       <small className='cus-tooltip-msg'>{level.name}</small>
     ) : (
       <small className='cus-tooltip-msg'>
-        Floor point: {level.minPoint} - Discount:{' '}
+        Điểm gốc: {level.minPoint} - Giảm giá:{' '}
         {level.discount && (level.discount.$numberDecimal * 100).toFixed(2)}%
       </small>
     )}

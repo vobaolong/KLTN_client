@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import DropDownMenu from '../../ui/DropDownMenu'
-
-const listOptions = [
-  {
-    value: 'products',
-    label: 'Sản Phẩm',
-    icon: <i className='fas fa-box'></i>
-  },
-  {
-    value: 'stores',
-    label: 'Cửa Hàng',
-    icon: <i className='fas fa-store'></i>
-  }
-]
+import { useTranslation } from 'react-i18next'
 
 const SearchBar = (props) => {
+  const { t } = useTranslation()
+  const listOptions = [
+    {
+      value: 'products',
+      label: t('product'),
+      icon: <i className='fas fa-box'></i>
+    },
+    {
+      value: 'stores',
+      label: t('shop'),
+      icon: <i className='fas fa-store'></i>
+    }
+  ]
   const location = useLocation()
   const history = useHistory()
 
@@ -55,7 +56,7 @@ const SearchBar = (props) => {
       <input
         className='form-control'
         type='search'
-        placeholder='Tìm sản phẩm và tên shop'
+        placeholder={t('searchHolder')}
         value={query}
         onChange={handleChange}
       />

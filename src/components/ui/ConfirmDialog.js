@@ -1,76 +1,56 @@
+import { useTranslation } from 'react-i18next'
+
 const ConfirmDialog = ({
   title = 'Confirm the action',
-  message = 'Bạn có chắc chắn về điều này không?',
+  messageKey = 'confirmDialog',
   color = 'primary',
   onSubmit = () => {},
   onClose = () => {}
 }) => {
+  const { t } = useTranslation()
+
+  const message = t(messageKey)
+
   const onConfirm = () => {
     onSubmit()
     onClose()
   }
 
   return (
-    <div className='fixed-top'>
-      <div
-        className='modal fade show'
-        tabIndex='-1'
-        aria-modal='true'
-        role='dialog'
-        style={{
-          display: 'block',
-          paddingLeft: '0px',
-          animation: 'show 0.5s ease'
-        }}
-      >
-        <div className='modal-dialog' style={{ zIndex: '9999' }}>
+    <>
+      <div className='modal-backdrop fade show'></div>
+      <div className='modal d-block' tabIndex='-1' role='dialog'>
+        <div className='modal-dialog' role='document'>
           <div className='modal-content'>
-            <div className='modal-header'>
-              <h5 className={`modal-title text-${color} text-capitalize`}>
-                {title}
-              </h5>
+            <div className={`modal-header text-${color}`}>
+              <h5 className='modal-title'>{title}</h5>
               <button
                 type='button'
                 className='btn-close'
                 onClick={onClose}
               ></button>
             </div>
-            <div className='modal-body pt-0'>{message}</div>
-            <div className='modal-footer border-top-0'>
+            <div className='modal-body'>{message}</div>
+            <div className='modal-footer'>
               <button
                 type='button'
-                className='btn btn-outline-danger ripple'
+                className='btn btn-outline-danger'
                 onClick={onClose}
               >
-                Huỷ
+                {t('cancel')}
               </button>
               <button
                 type='button'
-                className='btn btn-primary ripple'
+                className='btn btn-primary'
                 onClick={onConfirm}
               >
-                Xác Nhận
+                {t('confirm')}
               </button>
             </div>
           </div>
         </div>
       </div>
-
-      <div
-        className='fade'
-        style={{
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          zIndex: '4',
-          width: '100vw',
-          height: '100vh',
-          animation: 'fade 0.6s ease',
-          backgroundColor: '#000',
-          opacity: '0.5'
-        }}
-      ></div>
-    </div>
+    </>
   )
 }
 

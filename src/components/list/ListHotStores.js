@@ -5,7 +5,7 @@ import Error from '../ui/Error'
 import StoreCard from '../card/StoreCard'
 
 const ListHotStores = ({
-  heading = 'Hot Stores',
+  heading = '',
   col = 'col-xl-2-5 col-md-3 col-sm-4 col-6'
 }) => {
   const [isLoading, setIsLoading] = useState(false)

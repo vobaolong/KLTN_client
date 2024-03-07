@@ -4,6 +4,7 @@ import { updateCover } from '../../../apis/user'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const UserCoverUpload = (props) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -11,7 +12,7 @@ const UserCoverUpload = (props) => {
 
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
-
+  const { t } = useTranslation()
   const handleChange = (e) => {
     if (e.target.files[0] == null) return
     const formData = new FormData()
@@ -42,7 +43,7 @@ const UserCoverUpload = (props) => {
       {isLoading && <Loading />}
       <label className='cus-cover-icon'>
         <i className='fas fa-camera'></i>
-        <span className='ms-2 res-hide-md'>Chỉnh Sửa Ảnh Bìa</span>
+        <span className='ms-2 res-hide-md'>{t('editCover')}</span>
         {error && <Error msg={error} />}
         <input
           className='visually-hidden'

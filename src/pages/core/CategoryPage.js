@@ -9,8 +9,11 @@ import Loading from '../../components/ui/Loading'
 import Error from '../../components/ui/Error'
 import ProductFilter from '../../components/filter/ProductFilter'
 import ListCategories from '../../components/list/ListCategories'
+import { useTranslation } from 'react-i18next'
 
 const CategoryPage = (props) => {
+  const { t } = useTranslation()
+
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -134,7 +137,7 @@ const CategoryPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <span className='me-3 text-nowrap'>
-            {pagination.size || 0} Kết Quả
+            {pagination.size || 0} {t('result')}
           </span>
         </div>
 

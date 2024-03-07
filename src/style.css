@@ -1,5 +1,5 @@
 :root {
-	--header-height: 80px;
+	--header-height: 100px;
 	--footer-height: 384px;
 	--body-height: calc(100vh - var(--footer-height));
 	--logo-width: 180px;
@@ -63,6 +63,26 @@ body::-webkit-scrollbar-track {
 	border-radius: 4px;
 }
 
+.detail {
+	padding: 4px 6px;
+}
+
+.detail:hover {
+	border-color: var(--primary-color) !important;
+}
+
+.modal-footer {
+	border-top: none !important;
+}
+
+.form-control:focus {
+	border-color: var(--primary-color);
+}
+
+.z-10 {
+	z-index: 10 !important;
+}
+
 .list-item-container {
 	display: flex;
 	flex-direction: column;
@@ -110,6 +130,9 @@ body::-webkit-scrollbar-track {
 	padding: 0 10px;
 }
 
+.pointer {
+	cursor: pointer !important;
+}
 
 .text-main {
 	color: #F9F9F9 !important;
@@ -123,7 +146,7 @@ body::-webkit-scrollbar-track {
 .btn-outline-primary,
 .text-primary {
 	color: var(--primary-color) !important;
-	border-color: var(--primary-color);
+	border-color: var(--primary-color) !important;
 }
 
 .btn-primary {
@@ -250,6 +273,11 @@ header {
 	margin-right: 0px !important;
 }
 
+.hidden-name>span>:last-child {
+	display: none;
+	margin-right: 0px !important;
+}
+
 .box-shadow {
 	box-shadow: 0 0 20px -4px rgba(0, 0, 0, .15);
 }
@@ -295,10 +323,6 @@ small {
 
 .invalid-feedback {
 	font-size: 0.8rem;
-}
-
-.fixed-top {
-	z-index: 4;
 }
 
 .container-md {
@@ -729,7 +753,7 @@ header {
 @keyframes show {
 	from {
 		opacity: 0;
-		transform: translateY(-60%);
+		transform: translateY(-50%);
 	}
 
 	to {
@@ -849,7 +873,7 @@ header {
 .cus-dropdown-menu.show~.cus-dropdown-btn {
 	color: var(--primary-color);
 	border-color: var(--primary-color);
-	/* background-color: var(--high-muted-color); */
+	background-color: var(--high-muted-color);
 }
 
 .cus-dropdown:hover .cus-dropdown-btn--border,
@@ -988,7 +1012,8 @@ header {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-	background-color: var(--primary-color)
+	background-color: var(--primary-color);
+	color: #fff !important;
 }
 
 .form-check-input:checked {
@@ -1502,7 +1527,6 @@ textarea {
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
-	/* after 3 line show ... */
 	-webkit-box-orient: vertical;
 	padding-bottom: 0 !important;
 }
@@ -1536,7 +1560,6 @@ textarea {
 }
 
 .table-scroll table {
-	/* width: 400px; */
 	max-width: 100%;
 	margin: auto;
 	border-collapse: separate;
@@ -1546,7 +1569,7 @@ textarea {
 .table-scroll th,
 .table-scroll td {
 	padding: 2px 5px;
-	border: 1px solid #cccccc;
+	border: 0.5px solid #cccccc;
 	background: #fff;
 	z-index: 1;
 	vertical-align: middle;

@@ -8,8 +8,11 @@ import SortByButton from './sub/SortByButton'
 import UserSmallCard from '../card/UserSmallCard'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const AdminUsersTable = ({ heading = 'Users in the system' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -88,7 +91,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} Kết Quả
+          {pagination.size || 0} {t('result')}
         </span>
       </div>
 
