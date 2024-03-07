@@ -71,7 +71,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title={t('delAddress')}
+          title={t('userDetail.delAddress')}
           message={deleteAddress.address}
           color='danger'
           onSubmit={onSubmit}
@@ -80,7 +80,9 @@ const UserAddressesTable = ({ addresses = [] }) => {
       )}
 
       {t('address') && (
-        <h4 className='text-center text-uppercase'>{t('address')}</h4>
+        <h4 className='text-center text-uppercase'>
+          {t('userDetail.address')}
+        </h4>
       )}
 
       {error && <Error msg={error} />}
@@ -103,7 +105,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                   style={{ fontWeight: '500', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  {t('address')}
+                  {t('userDetail.address')}
                 </span>
               </th>
               <th scope='col'>
@@ -130,7 +132,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                     onClick={() => handleEditAddress(address, index)}
                   >
                     <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>{t('edit')}</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
                   <button
                     type='button'
@@ -138,7 +140,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                     onClick={() => handleDeleteAddress(address, index)}
                   >
                     <i className='fas fa-trash-alt'></i>
-                    <span className='ms-2 res-hide'>{t('delete')}</span>
+                    <span className='ms-2 res-hide'>{t('button.delete')}</span>
                   </button>
                 </td>
               </tr>

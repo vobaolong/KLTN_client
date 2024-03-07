@@ -75,29 +75,22 @@ const FollowProductButton = ({
   }
 
   return (
-    <div className='col-lg-3 col-md-12 d-grid'>
-      <button
-        type='button'
-        className={`btn d-flex align-items-center mt-3 justify-content-center ${
-          followingFlag ? 'btn-primary' : 'btn-outline-primary '
-        } ripple ${className}`}
+    <div className='col-1 d-grid'>
+      <span
+        className={`d-flex align-items-center mt-3 justify-content-center ${
+          followingFlag ? 'text-primary' : 'text-secondary'
+        } ${className}`}
         onClick={handleFollowProduct}
       >
-        {isLoading && <Loading size='small' />}
+        {isLoading && <Loading size='large' />}
         {error ? (
           <Error msg={error} />
         ) : followingFlag ? (
-          <span>
-            <i className='fas fa-heart'></i>
-            <span className='ms-2 res-hide-md fs-6'>Following</span>
-          </span>
+          <i style={{ fontSize: '20px' }} className='pointer fas fa-heart'></i>
         ) : (
-          <span>
-            <i className='far fa-heart'></i>
-            <small className='ms-2 res-hide-md fs-6'>Follow</small>
-          </span>
+          <i style={{ fontSize: '20px' }} className='pointer far fa-heart'></i>
         )}
-      </button>
+      </span>
     </div>
   )
 }

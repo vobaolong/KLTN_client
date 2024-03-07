@@ -11,11 +11,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
     <div className='container-fluid'>
       <div className='row py-2 border border-primary rounded-3'>
         <div className='col-sm-6'>
-          <Paragraph label={t('firstName')} value={user.firstName} />
+          <Paragraph label={t('userDetail.firstName')} value={user.firstName} />
         </div>
 
         <div className='col-sm-6'>
-          <Paragraph label={t('lastName')} value={user.lastName} />
+          <Paragraph label={t('userDetail.lastName')} value={user.lastName} />
         </div>
 
         {!isEditable ? (
@@ -41,12 +41,18 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 
         {!isEditable ? (
           <div className='col-sm-6'>
-            <Paragraph label={t('phone')} value={user.phone || '-'} />
+            <Paragraph
+              label={t('userDetail.phone')}
+              value={user.phone || '-'}
+            />
           </div>
         ) : (
           <>
             <div className='col-sm-6'>
-              <Paragraph label={t('phone')} value={user.phone || '-'} />
+              <Paragraph
+                label={t('userDetail.phone')}
+                value={user.phone || '-'}
+              />
             </div>
 
             {/* <div className='col-sm-6 mt-2'>

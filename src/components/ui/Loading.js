@@ -18,7 +18,7 @@ const Loading = ({ size = 'medium' }) => (
       }}
     >
       <div
-        className='d-flex justify-content-center align-items-center bg-body shadow-sm rounded-circle position-absolute m-2'
+        className='d-flex justify-content-center align-items-center bg-white shadow-sm rounded-circle position-absolute m-2'
         style={{
           width: `${size === 'small' ? '1.6rem' : '3.6rem'}`,
           height: `${size === 'small' ? '1.6rem' : '3.6rem'}`,
@@ -31,7 +31,7 @@ const Loading = ({ size = 'medium' }) => (
         }}
       >
         <div
-          className={`spinner-border text-primary ${
+          className={`spinner-border text-danger ${
             size === 'small' && 'spinner-border-sm'
           }`}
           role='status'

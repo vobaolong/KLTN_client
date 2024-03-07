@@ -411,7 +411,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            {t('submit')}
+            {t('button.submit')}
           </button>
         </div>
       </form>

@@ -1,8 +1,8 @@
 const Paragraph = ({
-  value = '-',
-  label = '-',
+  value = '',
+  label = '',
   multiLine = false,
-  time = '-'
+  time = ''
 }) => (
   <div className='cus-paragraph-group'>
     <label className='cus-paragraph-group-label text-nowrap'>{label}</label>

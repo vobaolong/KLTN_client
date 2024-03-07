@@ -103,7 +103,7 @@ const Footer = (props) => {
           </div>
 
           <div className='col-md-4 col-sm-6 col-xs-12'>
-            <ul className='social-icons'>
+            <ul className='social-icons text-start'>
               <li>
                 <a
                   className='social'

@@ -91,7 +91,9 @@ const ProductCard = ({ product = {}, onRun }) => {
             alt={productValue.name}
           />
         </div>
-        <div class='mall-tag'>Giảm {-salePercent}%</div>
+        <div class='mall-tag'>
+          {-salePercent}% {t('productDetail.sale')}
+        </div>
         {productValue.numberOfFollowers > 1 ? (
           <div class='fav-tag'>{t('favorite')}</div>
         ) : (
@@ -111,7 +113,9 @@ const ProductCard = ({ product = {}, onRun }) => {
             </div> */}
           </div>
           <StarRating stars={productValue.rating} />{' '}
-          <small>Đã bán {productValue.sold}</small>
+          <small>
+            {productValue.sold} {t('productDetail.sold')}
+          </small>
         </small>
 
         <Link

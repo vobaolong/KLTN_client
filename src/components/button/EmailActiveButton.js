@@ -46,7 +46,7 @@ const EmailActiveButton = ({
     <div className='d-inline-flex flex-column'>
       {email && isEmailActive && (
         <div className='position-relative d-inline-block'>
-          <span className='badge bg-primary cus-tooltip'>
+          <span className='badge bg-success cus-tooltip'>
             <i className='fas fa-check-circle me-2'></i>
             {t('verified')}
           </span>

@@ -2,8 +2,10 @@ import Modal from '../ui/Modal'
 import SignupForm from './form/SignupForm'
 import SigninForm from './form/SigninForm'
 import useToggle from '../../hooks/useToggle'
+import { useTranslation } from 'react-i18next'
 
-const SigninButton = ({ title = 'Đăng nhập', className = '' }) => {
+const SigninButton = (className = '') => {
+  const { t } = useTranslation()
   const [signinFlag, toggleSigninFlag] = useToggle(true)
 
   return (
@@ -15,14 +17,14 @@ const SigninButton = ({ title = 'Đăng nhập', className = '' }) => {
         data-bs-target='#signin-signup-form'
         onClick={() => toggleSigninFlag(true)}
       >
-        {title}
+        {t('button.signIn')}
       </button>
 
       <Modal
         id='signin-signup-form'
         hasCloseBtn={false}
         subTitle={
-          !signinFlag ? 'Đăng ký thật dễ dàng' : 'Chào mừng đã quay lại!'
+          !signinFlag ? t('signInForm.signUp') : t('signInForm.comeBack')
         }
       >
         {signinFlag ? (
@@ -32,7 +34,7 @@ const SigninButton = ({ title = 'Đăng nhập', className = '' }) => {
         )}
       </Modal>
 
-      <small className='cus-tooltip-msg'>Đăng nhập</small>
+      <small className='cus-tooltip-msg'>{t('button.signIn')}</small>
     </div>
   )
 }

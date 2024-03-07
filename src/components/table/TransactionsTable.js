@@ -20,7 +20,6 @@ import UserSmallCard from '../card/UserSmallCard'
 import { useTranslation } from 'react-i18next'
 
 const TransactionsTable = ({
-  heading = 'Ví Của Tôi',
   storeId = '',
   by = 'admin',
   owner = {},
@@ -125,8 +124,8 @@ const TransactionsTable = ({
 
   return (
     <div className='position-relative'>
-      {heading && by !== 'admin' ? (
-        <h4 className='text-center text-uppercase'>{heading}</h4>
+      {t('userDetail.wallet') && by !== 'admin' ? (
+        <h4 className='text-center text-uppercase'>{t('userDetail.wallet')}</h4>
       ) : (
         <h4 className='text-center text-uppercase'>Giao Dịch Trong Hệ Thống</h4>
       )}
@@ -178,7 +177,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Giao Dịch'
+                  title={t('userDetail.transaction')}
                   sortBy='_id'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -187,7 +186,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Ngày Tạo'
+                  title={t('userDetail.date')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -196,7 +195,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Tổng Tiền'
+                  title={t('userDetail.total')}
                   sortBy='amount'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -216,7 +215,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Trạng Thái'
+                  title={t('shopDetail.status')}
                   sortBy='isUp'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

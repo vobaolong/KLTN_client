@@ -190,7 +190,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            {t('submit')}
+            {t('button.submit')}
           </button>
         </div>
       </form>

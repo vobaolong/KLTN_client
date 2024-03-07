@@ -27,10 +27,10 @@ const AccountSideBar = ({ user = {} }) => {
           >
             <i className='fas fa-user-circle'></i>
             <span className='ms-3 res-hide-xl text-capitalize'>
-              {t('profile')}
+              {t('userDetail.profile')}
             </span>
             <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
-              {t('profile')}
+              {t('userDetail.profile')}
             </span>
           </Link>
         </li>
@@ -45,10 +45,10 @@ const AccountSideBar = ({ user = {} }) => {
             >
               <i className='fas fa-shopping-bag'></i>
               <span className='ms-3 res-hide-xl text-capitalize'>
-                {t('myPurchase')}
+                {t('userDetail.myPurchase')}
               </span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
-                {t('myPurchase')}
+                {t('userDetail.myPurchase')}
               </span>
             </Link>
           </li>
@@ -64,10 +64,10 @@ const AccountSideBar = ({ user = {} }) => {
             >
               <i className='fas fa-map-marker-alt'></i>
               <span className='ms-3 res-hide-xl text-capitalize'>
-                {t('address')}
+                {t('userDetail.address')}
               </span>
               <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
-                {t('address')}
+                {t('userDetail.address')}
               </span>
             </Link>
           </li>

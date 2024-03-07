@@ -8,8 +8,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const SignupForm = ({ onSwap = () => {} }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -127,10 +129,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-6'>
           <Input
             type='text'
-            label='Họ và tên đệm'
+            label={t('userDetail.firstName')}
             value={account.firstName}
             isValid={account.isValidFirstName}
-            feedback='Vui lòng cung cấp họ và tên đệm hợp lệ!'
+            feedback={t('userDetail.firstNameValid')}
             validator='name'
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
@@ -142,10 +144,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-6'>
           <Input
             type='text'
-            label='Tên'
+            label={t('userDetail.lastName')}
             value={account.lastName}
             isValid={account.isValidLastName}
-            feedback='Vui lòng cung cấp tên hợp lệ!'
+            feedback={t('userDetail.lastNameValid')}
             validator='name'
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
@@ -157,10 +159,10 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Địa chỉ Email hoặc số điện thoại'
+            label={t('signInForm.emailLabel')}
             value={account.username}
             isValid={account.isValidUsername}
-            feedback='Vui lòng cung cấp địa chỉ Email hoặc số điện thoại hợp lệ!'
+            feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
@@ -172,11 +174,11 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Mật khẩu'
+            label={t('signInForm.passwordLabel')}
             hasEditBtn={true}
             value={account.password}
             isValid={account.isValidPassword}
-            feedback='Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!'
+            feedback={t('signUpForm.passwordFeedback')}
             validator='password'
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
@@ -203,18 +205,18 @@ const SignupForm = ({ onSwap = () => {} }) => {
             className='btn btn-primary ripple fw-bold'
             onClick={handleSubmit}
           >
-            Đăng ký
+            {t('button.signUp')}
           </button>
         </div>
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block text-muted'>
-            Đã có tài khoản?{' '}
+            {t('signInForm.haveAnAccount')}{' '}
             <span
               className='sign-in-item text-primary text-decoration-underline pointer'
               onClick={onSwap}
             >
-              Đăng nhập ngay
+              {t('button.signIn')}
             </span>
           </small>
         </div>
@@ -228,18 +230,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12 d-grid gap-2 mt-4'>
           <SocialForm />
         </div> */}
-
-        <div className='col-12 mt-4'>
-          <small className='text-center d-block mx-4'>
-            <span className='text-muted'>
-              Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
-            </span>
-            <Link to='/legal/privacy' target='_blank'>
-              Chính sách bảo mật
-            </Link>{' '}
-            của ZenMetic .
-          </small>
-        </div>
       </form>
     </div>
   )

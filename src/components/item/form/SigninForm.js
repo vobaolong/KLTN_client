@@ -7,8 +7,10 @@ import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
+import { useTranslation } from 'react-i18next'
 
 const SigninForm = ({ onSwap = () => {} }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -129,10 +131,10 @@ const SigninForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Địa chỉ Email hoặc số điện thoại'
+            label={t('signInForm.emailLabel')}
             value={account.username}
             isValid={account.isValidUsername}
-            feedback='Vui lòng cung cấp địa chỉ Email hoặc số điện thoại hợp lệ!'
+            feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
@@ -144,11 +146,11 @@ const SigninForm = ({ onSwap = () => {} }) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Mật khẩu'
+            label={t('signInForm.passwordLabel')}
             validator='password'
             value={account.password}
             isValid={account.isValidPassword}
-            feedback='Vui lòng nhập mật khẩu chính xác!'
+            feedback={t('signInForm.passwordFeedback')}
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
             }
@@ -174,28 +176,28 @@ const SigninForm = ({ onSwap = () => {} }) => {
             className='btn btn-primary ripple fw-bold'
             onClick={handleFormSubmit}
           >
-            Đăng nhập
+            {t('button.signIn')}
           </button>
         </div>
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block text-muted'>
-            Quên mật khẩu?{' '}
+            {t('button.forgotPW')}?{' '}
             <span
               className='pointer text-primary text-decoration-underline'
               onClick={handleForgotPassword}
             >
-              Gửi Email
+              {t('button.sendEmail')}
             </span>
           </small>
 
           <small className='text-center d-block text-muted'>
-            Bạn không có tài khoản?{' '}
+            {t('signInForm.dontHaveAccount')}{' '}
             <span
               className='text-primary pointer text-decoration-underline'
               onClick={onSwap}
             >
-              Đăng ký ngay
+              {t('button.signUp')}
             </span>
           </small>
         </div>
@@ -212,13 +214,10 @@ const SigninForm = ({ onSwap = () => {} }) => {
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block mx-4'>
-            <span className='text-muted'>
-              Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
-            </span>
+            <span className='text-muted'>{t('signInForm.agreeBy')} </span>
             <Link to='/legal/privacy' target='_blank'>
-              Chính sách bảo mật
-            </Link>{' '}
-            của ZenMetic .
+              {t('footer.policy')}
+            </Link>
           </small>
         </div>
       </form>

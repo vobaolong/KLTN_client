@@ -18,7 +18,7 @@ const UserEditProfileItem = ({ user = {} }) => {
       <Modal
         id='profile-edit-form'
         hasCloseBtn={false}
-        title='Chỉnh sửa thông tin cá nhân'
+        title={t('userDetail.editProfile')}
       >
         <UserEditProfileForm
           firstName={user.firstName}
@@ -31,7 +31,7 @@ const UserEditProfileItem = ({ user = {} }) => {
         />
       </Modal>
 
-      <small className='cus-tooltip-msg'>{t('editProfile')}</small>
+      <small className='cus-tooltip-msg'>{t('userDetail.editProfile')}</small>
     </div>
   )
 }

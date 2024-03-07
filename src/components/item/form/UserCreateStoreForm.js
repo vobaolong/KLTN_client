@@ -12,8 +12,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import Logo from '../../layout/menu/Logo'
+import { useTranslation } from 'react-i18next'
 
 const CreateStoreForm = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error1, setError1] = useState('')
@@ -170,10 +172,10 @@ const CreateStoreForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Tên Shop'
+            label={t('shopDetail.shopName')}
             value={store.name}
             isValid={store.isValidName}
-            feedback='Vui lòng cung cấp tên shop phù hợp!'
+            feedback={t('shopDetailValid.nameValid')}
             validator='name'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -186,7 +188,7 @@ const CreateStoreForm = (props) => {
             label='Bio'
             value={store.bio}
             isValid={store.isValidBio}
-            feedback='Vui lòng cung cấp bio phù hợp!'
+            feedback={t('shopDetailValid.bioValid')}
             validator='bio'
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
@@ -199,7 +201,7 @@ const CreateStoreForm = (props) => {
             size='avatar'
             value={store.avatar}
             isValid={store.isValidAvatar}
-            feedback='Vui lòng cung cấp ảnh nền phù hợp!'
+            feedback={t('shopDetailValid.avatarValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('avatar', 'isValidAvatar', value)}
             onValidate={(flag) => handleValidate('isValidAvatar', flag)}
@@ -212,7 +214,8 @@ const CreateStoreForm = (props) => {
             size='cover'
             value={store.cover}
             isValid={store.isValidCover}
-            feedback='Vui lòng cung cấp ảnh bìa phù hợp!'
+            f
+            feedback={t('shopDetailValid.coverValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('cover', 'isValidCover', value)}
             onValidate={(flag) => handleValidate('isValidCover', flag)}
@@ -223,20 +226,17 @@ const CreateStoreForm = (props) => {
           {error1 && <Error msg={error1} />}
           {!error1 && (
             <DropDownMenu
-              listItem={
-                listActiveCommissions &&
-                listActiveCommissions.map((c, i) => {
-                  const newC = {
-                    value: c._id,
-                    label: c.name + ' (' + c.cost.$numberDecimal + '%/order)'
-                  }
-                  return newC
-                })
-              }
+              listItem={listActiveCommissions?.map((c, i) => {
+                const newC = {
+                  value: c._id,
+                  label: c.name + ' (' + c.cost.$numberDecimal + '%/order)'
+                }
+                return newC
+              })}
               value={store.commissionId}
               setValue={handleSelect}
               size='large'
-              label='Hoa Hồng'
+              label={t('shopDetail.commissions')}
             />
           )}
         </div>
@@ -249,18 +249,14 @@ const CreateStoreForm = (props) => {
 
         <div className='col-12 px-4 mt-2'>
           <small className='text-center d-block mx-2'>
-            <span className='text-muted'>
-              Bạn sẽ được trả tiền bằng cách nào?{' '}
-            </span>
+            <span className='text-muted'>{t('shopDetail.getPaid')}</span>{' '}
             <Link to='/legal/sellOnZenMetic' target='_blank'>
-              Bán trên ZenMetic
+              {t('shopDetail.sellOn')}
             </Link>
             <br className='res-hide' />
-            <span className='text-muted'>
-              Bằng việc tạo cửa hàng, bạn đồng ý với ZenMetic{' '}
-            </span>
+            <span className='text-muted'>{t('shopDetail.agreeBy')} </span>
             <Link to='/legal/privacy' target='_blank'>
-              Chính sách bảo mật
+              {t('footer.policy')}
             </Link>
           </small>
         </div>
@@ -270,7 +266,8 @@ const CreateStoreForm = (props) => {
             to='/account/storeManager'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Quay lại trang quản lý
+            <i className='fas fa-arrow-circle-left'></i>{' '}
+            {t('shopDetail.backToShop')}
           </Link>
           <button
             type='submit'
@@ -278,7 +275,7 @@ const CreateStoreForm = (props) => {
             onClick={handleSubmit}
             style={{ width: '200px', maxWidth: '100%' }}
           >
-            Nộp
+            {t('button.submit')}
           </button>
         </div>
       </form>

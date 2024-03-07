@@ -19,7 +19,9 @@ const UserEditPasswordItem = (props) => {
         <UserEditPasswordForm />
       </Modal>
 
-      <small className='cus-tooltip-msg'>{t('changePassword')}</small>
+      <small className='cus-tooltip-msg'>
+        {t('userDetail.changePassword')}
+      </small>
     </div>
   )
 }

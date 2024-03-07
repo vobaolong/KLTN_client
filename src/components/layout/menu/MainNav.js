@@ -11,15 +11,14 @@ import UserSmallCard from '../../card/UserSmallCard'
 import StoreSmallCard from '../../card/StoreSmallCard'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
-import { locales } from '../../../i18n/i18n'
+import Language from '../../ui/Language'
 
 const MainNav = ({ navFor = 'user' }) => {
+  const { t } = useTranslation()
   const { cartCount } = useSelector((state) => state.account.user)
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
 
-  const { i18n } = useTranslation()
-  const currentLanguage = locales[i18n.language]
   const [isConfirming, setIsConfirming] = useState(false)
   const history = useHistory()
   const { refreshToken } = getToken()
@@ -27,15 +26,12 @@ const MainNav = ({ navFor = 'user' }) => {
   const handleSignout = () => {
     setIsConfirming(true)
   }
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang)
-  }
+
   const onSignoutSubmit = () => {
     signout(refreshToken, () => {
       history.go(0)
     })
   }
-  console.log(currentLanguage)
 
   return (
     <header className='d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
@@ -47,29 +43,7 @@ const MainNav = ({ navFor = 'user' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      <div className='text-white container-md justify-content-end ms-2'>
-        <div className='your-account'>
-          <div className='mb-1'>
-            <i class='fas fa-globe me-1'></i>
-            {currentLanguage}
-            <i class='fas fa-angle-down ms-1'></i>
-          </div>
-          <ul className='list-group your-account-options z-10'>
-            <li
-              className='list-group-item your-account-options-item ripple'
-              onClick={() => changeLanguage('vi')}
-            >
-              Tiếng Việt
-            </li>
-            <li
-              className='list-group-item your-account-options-item ripple'
-              onClick={() => changeLanguage('en')}
-            >
-              English
-            </li>
-          </ul>
-        </div>
-      </div>
+
       <div className='container-md'>
         <Link
           className='navbar-brand cus-navbar-brand me-4 ripple res-hide-md'
@@ -84,9 +58,9 @@ const MainNav = ({ navFor = 'user' }) => {
             {navFor} <span className='res-hide'>dashboard</span>
           </h1>
         )}
-
+        <Language />
         {!getToken() ? (
-          <ul className='nav cus-sub-nav ms-4' style={{ minWidth: 'unset' }}>
+          <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
               <SigninItem />
             </li>
@@ -112,7 +86,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-heart'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Yêu Thích</small>
+                  <small className='cus-tooltip-msg'>{t('favorite')}</small>
                 </li>
               )}
 
@@ -124,7 +98,9 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-store'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Quản Lý Cửa Hàng</small>
+                  <small className='cus-tooltip-msg text-capitalize'>
+                    {t('manageShop')}
+                  </small>
                 </li>
               )}
 
@@ -143,7 +119,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         <span className='visually-hidden'>products</span>
                       </span>
                     }
-                    <small className='cus-tooltip-msg'>Giỏ Hàng</small>
+                    <small className='cus-tooltip-msg'>{t('cart')}</small>
                   </div>
                 </li>
               )}
@@ -223,7 +199,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   <li className='nav-item p-2'>
                     <Link className='link-hover link-dark d-block' to='/'>
                       <i className='fas fa-home me-2'></i>
-                      Trang Chủ
+                      {t('home')}
                     </Link>
                   </li>
 
@@ -234,7 +210,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/following'
                       >
                         <i className='fas fa-heart me-2'></i>
-                        Yêu Thích
+                        {t('favorite')}
                       </Link>
                     </li>
                   )}
@@ -246,7 +222,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/storeManager'
                       >
                         <i className='fas fa-store me-2'></i>
-                        Quản Lý Shop
+                        {t('manageShop')}
                       </Link>
                     </li>
                   )}
@@ -255,7 +231,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     <li className='nav-item p-2'>
                       <Link className='link-hover link-dark d-block' to='/cart'>
                         <i className='fas fa-bag-shopping me-2'></i>
-                        Giỏ Hàng
+                        {t('cart')}
                       </Link>
                     </li>
                   )}
@@ -267,7 +243,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/admin/dashboard'
                       >
                         <i className='fas fa-user-tie me-2'></i>
-                        Quản Lý
+                        Dashboard
                       </Link>
                     </li>
                   )}
@@ -277,7 +253,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     onClick={handleSignout}
                   >
                     <i className='fas fa-sign-out-alt me-2'></i>
-                    Đăng Xuất
+                    {t('button.logout')}
                   </li>
                 </ul>
               </div>

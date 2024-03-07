@@ -89,6 +89,10 @@ body::-webkit-scrollbar-track {
 	margin-bottom: 20px;
 }
 
+.btn-lg {
+	border-radius: 4px !important;
+}
+
 .btn-dark,
 .bg-dark {
 	background-color: var(--dark-color) !important;
@@ -1679,23 +1683,6 @@ tfoot th:first-child {
 	margin: 0;
 }
 
-@media (max-width: 991px) {
-	.site-footer [class^='col-'] {
-		margin-bottom: 10px;
-	}
-}
-
-@media (max-width: 767px) {
-	.site-footer {
-		padding-bottom: 0;
-	}
-
-	.site-footer .copyright-text,
-	.site-footer .social-icons {
-		text-align: center;
-	}
-}
-
 .social-icons {
 	padding-left: 0;
 	margin-bottom: 0;
@@ -1749,14 +1736,6 @@ tfoot th:first-child {
 	background-color: #DF3346;
 }
 
-
-@media (max-width: 767px) {
-	.social-icons li.title {
-		display: block;
-		margin-right: 0;
-		font-weight: 600;
-	}
-}
 
 /* cus-btn-style */
 .cus-btn-style:disabled {

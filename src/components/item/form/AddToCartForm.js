@@ -6,8 +6,10 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import StyleValueSelector from '../../selector/StyleValueSelector'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
+import { useTranslation } from 'react-i18next'
 
 const AddToCartForm = ({ product = {} }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -124,11 +126,11 @@ const AddToCartForm = ({ product = {} }) => {
         >
           <button
             type='submit'
-            className='btn add-to-cart-btn ripple btn-lg d-flex align-items-center justify-content-center add-to-cart'
+            className='btn add-to-cart-btn ripple btn-lg px-3 py-2 d-flex align-items-center justify-content-center add-to-cart'
             onClick={handleSubmit}
           >
             <i className='fas fa-cart-plus'></i>
-            <span className='ms-2 fs-6'>Thêm vào giỏ hàng</span>
+            <span className='ms-2 fs-6'>{t('productDetail.addToCart')}</span>
           </button>
         </div>
       </form>

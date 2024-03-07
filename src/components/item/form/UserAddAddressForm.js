@@ -138,7 +138,7 @@ const UserAddAddressForm = (props) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title={t('addAddress')}
+          title={t('userDetail.addAddress')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -232,7 +232,7 @@ const UserAddAddressForm = (props) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            {t('submit')}
+            {t('button.submit')}
           </button>
         </div>
       </form>

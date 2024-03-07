@@ -37,14 +37,14 @@ const ConfirmDialog = ({
                 className='btn btn-outline-danger'
                 onClick={onClose}
               >
-                {t('cancel')}
+                {t('button.cancel')}
               </button>
               <button
                 type='button'
                 className='btn btn-primary'
                 onClick={onConfirm}
               >
-                {t('confirm')}
+                {t('button.confirm')}
               </button>
             </div>
           </div>

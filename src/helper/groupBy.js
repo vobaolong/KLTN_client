@@ -26,7 +26,7 @@ export const groupByDate = (items, by, role) => {
       let flag = false
 
       while (i < acc.length) {
-        if (acc[i][0] == value.createdAt) {
+        if (acc[i][0] === value.createdAt) {
           acc[i][1] = parseFloat(acc[i][1]) + parseFloat(value.amount)
           flag = true
           i = acc.length
@@ -56,7 +56,7 @@ export const groupByJoined = (items, by) => {
       let flag = false
 
       while (i < acc.length) {
-        if (acc[i][0] == value.createdAt) {
+        if (acc[i][0] === value.createdAt) {
           acc[i][1] += 1
           flag = true
           i = acc.length
@@ -82,7 +82,7 @@ export const groupBySold = (items, by, role, sliceEnd) => {
       let flag = false
 
       while (i < acc.length) {
-        if (acc[i][0] == value.name) {
+        if (acc[i][0] === value.name) {
           acc[i][1] = parseFloat(acc[i][1]) + parseFloat(value.sold)
           flag = true
           i = acc.length

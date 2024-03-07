@@ -70,7 +70,7 @@ const StoreNav = ({ store = {} }) => {
           <div className='d-inline-block ms-2'>
             <FollowStoreButton
               storeId={store._id}
-              isFollowing={store.isFollowing}
+              isFavorite={store.isFavorite}
               onRun={(store) => onHandleRun(store)}
             />
           </div>

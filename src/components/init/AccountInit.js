@@ -93,7 +93,7 @@ const AccountInit = ({ user, actions }) => {
     <div className='your-account-wrap'>
       {isConfirming && (
         <ConfirmDialog
-          title={t('logOut')}
+          title={t('button.logout')}
           color='danger'
           onSubmit={onSignoutSubmit}
           onClose={() => setIsConfirming(false)}
@@ -122,7 +122,7 @@ const AccountInit = ({ user, actions }) => {
             to='/account/profile'
           >
             <i className='fas fa-user-circle'></i>
-            {t('myAccount')}
+            {t('userDetail.myAccount')}
           </Link>
 
           {role === 'user' && (
@@ -131,7 +131,7 @@ const AccountInit = ({ user, actions }) => {
               to='/account/purchase'
             >
               <i className='fas fa-shopping-bag'></i>
-              {t('myPurchase')}
+              {t('userDetail.myPurchase')}
             </Link>
           )}
 
@@ -140,7 +140,7 @@ const AccountInit = ({ user, actions }) => {
             onClick={handleSignout}
           >
             <i className='fas fa-sign-out-alt'></i>
-            {t('logOut')}
+            {t('button.logout')}
           </li>
         </ul>
       </div>

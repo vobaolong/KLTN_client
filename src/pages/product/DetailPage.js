@@ -125,7 +125,9 @@ const DetailPage = () => {
                   <StarRating stars={product.rating} />
                   <span className='mx-2 px-2 border-start'>
                     {product.sold}
-                    <span className='text-muted ms-1'>Đã Bán</span>
+                    <span className='text-muted ms-1'>
+                      {t('productDetail.sold')}
+                    </span>
                   </span>
                 </div>
                 <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
@@ -140,7 +142,7 @@ const DetailPage = () => {
                   </h2>
                   <SalePercentLabel salePercent={salePercent} />
 
-                  <small className='ms-2'>(Đã bao gồm VAT)</small>
+                  <small className='ms-2'> {t('productDetail.vat')}</small>
                 </div>
 
                 <div className='mt-4'>
@@ -148,7 +150,7 @@ const DetailPage = () => {
                     <Error msg="This store is closed, can' t order in this time!" />
                   )}
                   {product.quantity <= 0 && (
-                    <Error msg='The product is sold out!' />
+                    <Error msg={t('productDetail.soldOut')} />
                   )}
                   {!getToken() && (
                     <SigninButton
@@ -156,8 +158,7 @@ const DetailPage = () => {
                       title='Sign in to shop!'
                     />
                   )}
-                  {product.storeId &&
-                    product.storeId.isOpen &&
+                  {product.storeId?.isOpen &&
                     product.quantity > 0 &&
                     getToken() &&
                     getToken().role === 'user' && (

@@ -325,7 +325,9 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                       onClick={() => handleDeleteLevel(level)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>{t('delete')}</span>
+                      <span className='ms-2 res-hide'>
+                        {t('button.delete')}
+                      </span>
                     </button>
                   ) : (
                     <button

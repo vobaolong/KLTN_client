@@ -42,20 +42,20 @@ const InputFile = ({
   return (
     <div
       className={`cus-input-group cus-input-group--file ${
-        size == 'avatar' ? 'cus-avatar-wrap' : 'cus-cover-wrap'
+        size === 'avatar' ? 'cus-avatar-wrap' : 'cus-cover-wrap'
       }`}
     >
       <label className='cus-input-group-label cus-input-group-label--file text-muted'>
         {label}
       </label>
       <div
-        className={`${size == 'avatar' ? 'cus-avatar-box' : 'cus-cover-box '}`}
+        className={`${size === 'avatar' ? 'cus-avatar-box' : 'cus-cover-box '}`}
       >
-        <div className={`${size == 'avatar' ? 'cus-avatar' : 'cus-cover'}`}>
+        <div className={`${size === 'avatar' ? 'cus-avatar' : 'cus-cover'}`}>
           {src && (
             <img
               src={src}
-              className={size == 'avatar' ? 'cus-avatar-img' : 'cus-cover-img'}
+              className={size === 'avatar' ? 'cus-avatar-img' : 'cus-cover-img'}
               style={{ borderRadius: `${noRadius && 'unset'}` }}
               alt=''
             />
@@ -64,7 +64,7 @@ const InputFile = ({
           {src && (
             <label
               className={`${
-                size == 'avatar'
+                size === 'avatar'
                   ? 'cus-avatar-icon cus-avatar-icon--rm'
                   : 'cus-cover-icon cus-cover-icon--rm'
               }`}
@@ -77,7 +77,7 @@ const InputFile = ({
           {src && (
             <label
               className={`${
-                size == 'avatar' ? 'cus-avatar-icon' : 'cus-cover-icon'
+                size === 'avatar' ? 'cus-avatar-icon' : 'cus-cover-icon'
               }`}
             >
               <i className='fas fa-camera'></i>
@@ -96,7 +96,7 @@ const InputFile = ({
           {!src && (
             <label
               className={`${
-                size == 'avatar' ? 'cus-avatar-label' : 'cus-cover-label'
+                size === 'avatar' ? 'cus-avatar-label' : 'cus-cover-label'
               }`}
               style={{ borderRadius: `${noRadius && '0'}` }}
             >

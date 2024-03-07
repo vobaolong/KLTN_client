@@ -15,21 +15,25 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
           data-bs-target='#add-address-form'
         >
           <i className='fas fa-plus-circle'></i>
-          {detail && <span className='ms-2 res-hide'>{t('addAddress')}</span>}
+          {detail && (
+            <span className='ms-2 res-hide'>{t('userDetail.addAddress')}</span>
+          )}
         </button>
 
         {count < 6 && (
           <Modal
             id='add-address-form'
             hasCloseBtn={false}
-            title={t('addAddress')}
+            title={t('userDetail.addAddress')}
           >
             <UserAddAddressForm />
           </Modal>
         )}
       </div>
       {count >= 6 && (
-        <small className='cus-tooltip-msg'>{t('limit6Addresses')}</small>
+        <small className='cus-tooltip-msg'>
+          {t('userDetail.limit6Addresses')}
+        </small>
       )}
     </div>
   )

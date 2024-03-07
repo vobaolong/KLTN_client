@@ -19,7 +19,7 @@ const SortByButton = ({
       onSet('asc', sortBy)
       setFlag('asc')
     } else {
-      const newFlag = flag == 'asc' ? 'desc' : 'asc'
+      const newFlag = flag === 'asc' ? 'desc' : 'asc'
       onSet(newFlag, sortBy)
       setFlag(newFlag)
     }
@@ -33,7 +33,7 @@ const SortByButton = ({
       {title}
       {!flag ? (
         <i className='fas fa-sort ms-2'></i>
-      ) : flag == 'asc' ? (
+      ) : flag === 'asc' ? (
         <i className='fas fa-sort-alpha-down ms-2'></i>
       ) : (
         <i className='fas fa-sort-alpha-up-alt ms-2'></i>

@@ -7,8 +7,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -135,7 +137,7 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            {t('submit')}
+            {t('button.submit')}
           </button>
         </div>
       </form>

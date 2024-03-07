@@ -88,7 +88,7 @@ const DropDownMenu = ({
             {selectedItem?.label}
           </span>
         </span>
-        <i className={iconClass + ' ms-2'}></i>
+        <i className={iconClass}></i>
       </button>
     </div>
   )

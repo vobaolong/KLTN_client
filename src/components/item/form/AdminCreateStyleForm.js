@@ -9,8 +9,11 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import MultiCategorySelector from '../../selector/MultiCategorySelector'
+import { useTranslation } from 'react-i18next'
 
 const AdminCreateStyleForm = (props) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -153,7 +156,7 @@ const AdminCreateStyleForm = (props) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            {t('submit')}
+            {t('button.submit')}
           </button>
         </div>
       </form>

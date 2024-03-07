@@ -75,7 +75,7 @@ const Pagination = ({
                 </button>
               ))}
 
-              {midPages[0] - 1 != topPages[topPages.length - 1] &&
+              {midPages[0] - 1 !== topPages[topPages.length - 1] &&
                 midPages[0] > 1 && (
                   <button
                     disabled
@@ -92,18 +92,18 @@ const Pagination = ({
                   type='button'
                   key={p}
                   className={`btn ${
-                    p == pageCurrent ? 'btn-primary' : 'btn-outline-primary'
+                    p === pageCurrent ? 'btn-primary' : 'btn-outline-primary'
                   } ripple res-hide-md`}
                   style={{ minWidth: '60px' }}
                   onClick={
-                    p == pageCurrent ? () => {} : () => handleChangePage(p)
+                    p === pageCurrent ? () => {} : () => handleChangePage(p)
                   }
                 >
                   {p}
                 </button>
               ))}
 
-              {midPages[midPages.length - 1] != botPages[0] - 1 &&
+              {midPages[midPages.length - 1] !== botPages[0] - 1 &&
                 midPages[midPages.length - 1] < pageCount && (
                   <button
                     disabled
