@@ -8,7 +8,7 @@ const icons = {
 
 const colors = {
   'Not processed': 'warning',
-  Processing: 'blue',
+  Processing: 'orange',
   Shipped: 'dark',
   Delivered: 'success',
   Cancelled: 'danger'
@@ -17,7 +17,9 @@ const colors = {
 const OrderStatusLabel = ({ status = '', detail = true }) => {
   return (
     <span className='d-inline-block position-relative'>
-      <span className={`badge text-white bg-${colors[status]} cus-tooltip`}>
+      <span
+        className={`badge rounded-1 text-white bg-${colors[status]} cus-tooltip`}
+      >
         {icons[status]}
         {detail && <span className='ms-2'>{status}</span>}
       </span>

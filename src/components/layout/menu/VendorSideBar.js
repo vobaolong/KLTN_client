@@ -7,7 +7,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
   const path = useLocation().pathname.split('/')[2]
 
   return (
-    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-3 shadow bg-body rounded res-account-sidebar'>
+    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-3 shadow bg-body rounded-1 res-account-sidebar'>
       <ul className='nav nav-pills flex-column mb-auto'>
         <div className='position-relative mx-auto mb-4 res-hide-xl'>
           <Avatar

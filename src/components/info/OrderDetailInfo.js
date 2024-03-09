@@ -11,13 +11,12 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import OrderStatusLabel from '../label/OrderStatusLabel'
 import Paragraph from '../ui/Paragraph'
-import UserSmallCard from '../card/UserSmallCard'
-import StoreSmallCard from '../card/StoreSmallCard'
 import ListOrderItems from '../list/ListOrderItems'
 import VendorUpdateOrderStatus from '../button/VendorUpdateOrderStatus'
 import AdminUpdateOrderStatus from '../button/AdminUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 const OrderDetailInfo = ({
   orderId = '',
@@ -74,12 +73,15 @@ const OrderDetailInfo = ({
     init()
   }, [orderId, storeId, by, run])
 
+  console.log(order)
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
 
       <div className='d-flex flex-wrap justify-content-start align-items-center'>
-        <h4 className='mx-4'>Order #{order._id}</h4>
+        <h6 className='mx-1 orderID text-uppercase border-end pe-3'>
+          {t('orderDetail.id')} #{order._id}
+        </h6>
 
         {(!isEditable ||
           (isEditable &&
@@ -87,7 +89,7 @@ const OrderDetailInfo = ({
             order.status !== 'Not processed' &&
             order.status !== 'Processing') ||
           (isEditable && by === 'admin' && order.status !== 'Shipped')) && (
-          <span className='fs-6 mx-4 mb-2'>
+          <span className='fs-6 mx-3 mb-2 status'>
             <OrderStatusLabel status={order.status} />
             <span className='d-inline-block position-relative'>
               <i
@@ -142,72 +144,90 @@ const OrderDetailInfo = ({
 
       {error && <Error msg={error} />}
 
-      <div className='container-fluid mb-2'>
-        <div className='row py-2 border border-primary rounded-3'>
+      <div className='container-fluid mb-3'>
+        <div className='row py-2 border rounded-1'>
           <div className='col-sm-6'>
             <Paragraph
-              label='Created At'
+              label={t('orderDetail.date')}
+              colon
               value={humanReadableDate(order.createdAt)}
             />
           </div>
-
           <div className='col-sm-6'>
             <Paragraph
-              label='Seller'
-              value={<StoreSmallCard store={order.storeId} />}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className='container-fluid mb-2'>
-        <div className='row py-2 border border-primary rounded-3'>
-          <div className='col-sm-6'>
-            <Paragraph
-              label='Receiver'
-              value={<UserSmallCard user={order.userId} />}
-            />
-          </div>
-
-          <div className='col-sm-6'>
-            <Paragraph label='Phone' value={order.phone} />
-          </div>
-
-          <div className='col-12'>
-            <Paragraph label='To address' value={order.address} />
-          </div>
-        </div>
-      </div>
-
-      <div className='container-fluid mb-2'>
-        <div className='row py-2 border border-primary rounded-3'>
-          {order.deliveryId && (
-            <div className='col-12'>
-              <Paragraph
-                label='Delivery unit'
-                value={
-                  <span>
-                    {order.deliveryId.name} -{' '}
-                    {order.deliveryId.price.$numberDecimal} ₫
-                  </span>
-                }
-              />
-            </div>
-          )}
-
-          <div className='col-12'>
-            <Paragraph
-              label='Payment'
+              label={t('orderDetail.shop')}
+              colon
               value={
-                order.isPaidBefore ? 'Online payment' : 'Payment on delivery'
+                <Link
+                  className='link-hover'
+                  title=''
+                  to={`/store/${order.storeId?._id}`}
+                >
+                  <label>{order.storeId?.name}</label>
+                </Link>
               }
             />
           </div>
         </div>
       </div>
 
-      <div className='container-fluid mb-2'>
-        <div className='row py-2 border border-primary rounded-3'>
+      <div className='container-fluid mb-3'>
+        <div className='row py-2 border rounded-1'>
+          <div className='border-bottom pb-2'>
+            <p style={{ fontWeight: '500' }}>{t('orderDetail.userReceiver')}</p>
+          </div>
+          <div>
+            <Paragraph
+              label={t('userDetail.name')}
+              colon
+              value={`${order.userId?.firstName} ${order.userId?.lastName}`}
+            />
+            <Paragraph
+              label={t('userDetail.phone')}
+              colon
+              value={order.phone}
+            />
+            <Paragraph
+              label={t('userDetail.address')}
+              colon
+              value={order.address}
+            />
+          </div>
+        </div>
+      </div>
+      <div className='container-fluid mb-3'>
+        <div className='row py-2 border rounded-1'>
+          <div className='border-bottom pb-2'>
+            <p style={{ fontWeight: '500' }}>{t('orderDetail.ship_payment')}</p>
+          </div>
+          <div>
+            <Paragraph
+              label={t('orderDetail.deliveryUnit')}
+              colon
+              value={order.deliveryId?.name}
+            />
+            <Paragraph
+              label={t('orderDetail.deliveryId')}
+              colon
+              value={order.deliveryId?._id.toUpperCase()}
+            />
+            <Paragraph
+              label={t('orderDetail.paymentMethod')}
+              colon
+              value={
+                order.isPaidBefore
+                  ? t('orderDetail.onlinePayment')
+                  : t('orderDetail.cod')
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div className='container-fluid mb-3'>
+        <div className='row py-2 border rounded-1'>
+          <div className='border-bottom pb-2'>
+            <p style={{ fontWeight: '500' }}>{t('orderDetail.listProducts')}</p>
+          </div>
           <ListOrderItems
             orderId={orderId}
             storeId={storeId}

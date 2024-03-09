@@ -36,7 +36,7 @@ const UserJoinedInfo = ({ user = {} }) => {
 
   return (
     <div className='container-fluid'>
-      <div className='row py-2 border border-primary rounded-3'>
+      <div className='row py-2 border border-primary rounded-1'>
         <div className='col-12'>
           <Paragraph
             label={t('role')}
@@ -46,7 +46,7 @@ const UserJoinedInfo = ({ user = {} }) => {
 
         <div className='col-12'>
           <Paragraph
-            label={t('join')}
+            label={t('joined')}
             value={humanReadableDate(user.createdAt)}
           />
         </div>

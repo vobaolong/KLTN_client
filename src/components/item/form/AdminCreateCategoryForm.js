@@ -10,8 +10,10 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
+import { useTranslation } from 'react-i18next'
 
 const AdminCreateCategoryForm = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -167,8 +169,7 @@ const AdminCreateCategoryForm = (props) => {
             to='/admin/category'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Quay lại quản lý danh
-            mục
+            <i className='fas fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

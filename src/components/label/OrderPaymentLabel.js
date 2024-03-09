@@ -1,22 +1,27 @@
-const OrderPaymentLabel = ({ isPaidBefore = false, detail = true }) => (
-  <span className='position-relative d-inline-block'>
-    {isPaidBefore ? (
-      <span className='badge bg-warning cus-tooltip'>
-        <i className='fab fa-paypal'></i>
-        {detail && <span className='ms-2'>Paypal</span>}
-      </span>
-    ) : (
-      <span className='badge bg-primary cus-tooltip'>
-        <i className='fas fa-truck-fast'></i>
-        {detail && <span className='ms-2'>On Delivery</span>}
-      </span>
-    )}
-    {/* {isPaidBefore ? (
+import { useTranslation } from 'react-i18next'
+
+const OrderPaymentLabel = ({ isPaidBefore = false, detail = true }) => {
+  const { t } = useTranslation()
+  return (
+    <span className='position-relative d-inline-block'>
+      {isPaidBefore ? (
+        <span className='badge rounded-1 bg-dark cus-tooltip'>
+          {detail && (
+            <span className='ms-2'>{t('orderDetail.onlinePayment')}</span>
+          )}
+        </span>
+      ) : (
+        <span className='badge rounded-1 bg-primary cus-tooltip'>
+          {detail && <span className='ms-2'>{t('orderDetail.cod')}</span>}
+        </span>
+      )}
+      {/* {isPaidBefore ? (
       <small className='cus-tooltip-msg'>Payment with paypal</small>
     ) : (
       <small className='cus-tooltip-msg'>Payment on delivery</small>
     )} */}
-  </span>
-)
+    </span>
+  )
+}
 
 export default OrderPaymentLabel

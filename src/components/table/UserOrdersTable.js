@@ -236,7 +236,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <td className='text-nowrap text-start'>
                   <Link
                     type='button'
-                    className='btn btn-golden ripple'
+                    className='btn btn-secondary opacity-75 ripple'
                     to={`/account/purchase/detail/${order._id}`}
                   >
                     <i className='fas fa-info-circle'></i>

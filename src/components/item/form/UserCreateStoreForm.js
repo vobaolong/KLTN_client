@@ -266,8 +266,7 @@ const CreateStoreForm = (props) => {
             to='/account/storeManager'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i>{' '}
-            {t('shopDetail.backToShop')}
+            <i className='fas fa-angle-left'></i> {t('shopDetail.backToShop')}
           </Link>
           <button
             type='submit'

@@ -3,6 +3,7 @@ import { getToken } from '../../apis/auth'
 import { followStore, unfollowStore } from '../../apis/follow'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const FollowStoreButton = ({
   storeId = '',
@@ -10,6 +11,7 @@ const FollowStoreButton = ({
   className = '',
   onRun
 }) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [followingFlag, setFollowingFlag] = useState(isFollowing)
@@ -88,12 +90,12 @@ const FollowStoreButton = ({
       ) : followingFlag ? (
         <span>
           <i className='fas fa-heart'></i>
-          <span className='ms-2 res-hide-md'>Following</span>
+          <span className='ms-2 res-hide-md'>{t('shopDetail.following')}</span>
         </span>
       ) : (
         <span>
           <i className='far fa-heart'></i>
-          <span className='ms-2 res-hide-md'>Follow</span>
+          <span className='ms-2 res-hide-md'>{t('shopDetail.follow')}</span>
         </span>
       )}
     </button>

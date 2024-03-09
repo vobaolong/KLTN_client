@@ -43,7 +43,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   }
 
   return (
-    <div className='row py-2 border border-primary rounded-3 position-relative'>
+    <div className='row py-2 border border-primary rounded-1 position-relative'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       {isConfirming && (
@@ -93,8 +93,8 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               <StarRating stars={review.rating} />
             </small>
           }
-          value={review.content}
           time={humanReadableDate(review.createdAt)}
+          value={review.content}
         />
       </div>
     </div>

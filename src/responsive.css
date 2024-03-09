@@ -1,6 +1,8 @@
-/* @media (min-width: 1400px) {
-
-} */
+@media (min-width: 1400px) {
+	.res-mx--12-md {
+		padding: 16px 24px !important;
+	}
+}
 
 /* xl */
 @media (max-width: 1199px) {
@@ -14,6 +16,10 @@
 
 	.cus-sidebar-item--db {
 		text-align: center !important;
+	}
+
+	.res-mx--12-md {
+		padding: 16px 24px !important;
 	}
 }
 
@@ -60,6 +66,10 @@
 
 	.lang {
 		display: none;
+	}
+
+	.res-mx--12-md {
+		padding: 16px 24px !important;
 	}
 }
 
@@ -212,5 +222,21 @@
 		display: flex;
 		text-align: center !important;
 		gap: 15px !important;
+	}
+}
+
+@media (max-width:575px) {
+	.res-mx--12-md {
+		padding: 8px 12px !important;
+	}
+
+	.orderID {
+		font-size: 13px;
+		border-right: none !important;
+		padding: 0 !important;
+	}
+
+	.status {
+		margin: 0px 0px 8px 0px !important;
 	}
 }

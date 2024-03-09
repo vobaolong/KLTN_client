@@ -6,8 +6,10 @@ import Error from '../../ui/Error'
 import Loading from '../../ui/Loading'
 import VendorEditProductProfileForm from './VendorEditProductProfileForm'
 import VendorEditProductImagesForm from './VendorEditProductImagesForm'
+import { useTranslation } from 'react-i18next'
 
 const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(false)
@@ -56,7 +58,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
           to={`/vendor/products/${storeId}`}
           className='text-decoration-none cus-link-hover'
         >
-          <i className='fas fa-arrow-circle-left'></i> Back to Product Manager
+          <i className='fas fa-angle-left'></i> {t('button.back')}
         </Link>
       </div>
     </div>

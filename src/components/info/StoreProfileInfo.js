@@ -3,13 +3,9 @@ import StoreEditProfileItem from '../item/StoreEditProfileItem'
 
 const StoreProfileInfo = ({ store = {}, isEditable = false }) => (
   <div className='container-fluid'>
-    <div className='row py-2 border border-primary rounded-3'>
+    <div className='row py-2 border rounded-1'>
       <div className='col-12'>
-        <Paragraph label='Name' value={store.name} />
-      </div>
-
-      <div className='col-12'>
-        <Paragraph label='Bio' value={store.bio} multiLine={true} />
+        <Paragraph label='Bio:' value={store.bio} multiLine={true} />
       </div>
 
       {isEditable && (

@@ -5,10 +5,12 @@ import StoreSearchBar from './StoreSearchBar'
 import StoreInit from '../../init/StoreInit'
 import FollowStoreButton from '../../button/FollowStoreButton'
 import StoreSmallCard from '../../card/StoreSmallCard'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const StoreNav = ({ store = {} }) => {
+  const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
   const [updateDispatch] = useUpdateDispatch()
 
@@ -30,33 +32,33 @@ const StoreNav = ({ store = {} }) => {
           <ul className='navbar-nav me-auto mb-2 mb-lg-0 gap-2'>
             <li className='nav-item'>
               <Link
-                className={`hover nav-link ${
+                className={`rounded-1 hover nav-link ${
                   path === 'collection' ? 'active link-active' : ''
                 }`}
                 to={`/store/collection/${store._id}`}
               >
-                Collection
+                {t('shopDetail.allProduct')}
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                className={`nav-link hover ${
+                className={`rounded-1 nav-link hover ${
                   path === 'review&rating' ? 'active link-active' : ''
                 }`}
                 to={`/store/review&rating/${store._id}`}
               >
-                <span className='res-hide-lg'>Review & Rating</span>
+                <span className='res-hide-lg'>{t('shopDetail.rating')}</span>
                 <span className='d-none res-dis-lg'>Review</span>
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                className={`hover nav-link ${
+                className={`rounded-1 hover nav-link ${
                   path === 'about' ? 'active link-active' : ''
                 }`}
                 to={`/store/about/${store._id}`}
               >
-                Thông Tin
+                {t('shopDetail.about')}
               </Link>
             </li>
           </ul>

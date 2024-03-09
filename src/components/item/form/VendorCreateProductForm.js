@@ -403,7 +403,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             to={`/vendor/products/${storeId}`}
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Back to Product Manager
+            <i className='fas fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

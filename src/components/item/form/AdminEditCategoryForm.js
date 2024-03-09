@@ -10,8 +10,11 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditCategoryForm = ({ categoryId = '' }) => {
+  const { t } = useTranslation()
+
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -202,8 +205,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             to='/admin/category'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Back to Category
-            Manager
+            <i className='fas fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

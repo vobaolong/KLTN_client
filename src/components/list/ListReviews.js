@@ -140,16 +140,15 @@ const ListReviews = ({
       </div>
 
       <div className='row mt-2'>
-        {reviews &&
-          reviews.map((review, index) => (
-            <div className='col-12 mb-2' key={index}>
-              <ReviewInfo
-                review={review}
-                about={!!storeId}
-                onRun={() => setRun(!run)}
-              />
-            </div>
-          ))}
+        {reviews?.map((review, index) => (
+          <div className='col-12 mb-2' key={index}>
+            <ReviewInfo
+              review={review}
+              about={!!storeId}
+              onRun={() => setRun(!run)}
+            />
+          </div>
+        ))}
       </div>
 
       {pagination.size !== 0 && (

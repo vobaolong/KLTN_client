@@ -10,6 +10,7 @@ import { formatPrice } from '../../helper/formatPrice'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ReviewItem from '../item/ReviewItem'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -19,6 +20,7 @@ const ListOrderItems = ({
   storeId = '',
   by = 'user'
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [items, setItems] = useState([])
@@ -68,52 +70,37 @@ const ListOrderItems = ({
   }, [orderId, storeId, by])
 
   return (
-    <div className='list-order-items mt-4 position-relative'>
+    <div className='list-order-items position-relative'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-
-      <label
-        className='position-absolute text-primary'
-        style={{
-          fontSize: '0.8rem',
-          left: '12px',
-          top: '-16px'
-        }}
-      >
-        List products
-      </label>
-
       <small className='text-muted d-inline-block mb-2'>
-        *Note: The products will sometimes differ from your original order, as
-        it may have been updated
+        {t('orderDetail.note')}
       </small>
       <div className='flex-column d-flex gap-2 justify-content-between'>
         {items.map((item, index) => (
           <div key={index} className='list-item-container'>
             <div className='d-flex align-items-center mb-2 res-flex-column'>
               <div
+                className='border rounded-1'
                 style={{
                   position: 'relative',
-                  paddingBottom: '150px',
-                  maxWidth: '152px',
+                  paddingBottom: '97px',
+                  maxWidth: '98px',
                   width: '100%',
-                  height: '0',
-                  borderRadius: '4px',
-                  backgroundColor: 'red',
-                  border: '1px solid #ccc'
+                  height: '0'
                 }}
               >
                 <img
-                  src={item.productId && IMG + item.productId.listImages[0]}
-                  alt={item.productId && item.productId.name}
+                  className='rounded-1'
+                  src={IMG + item.productId?.listImages[0]}
+                  alt={item.productId?.name}
                   style={{
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
                     top: '0',
                     left: '0',
-                    objectFit: 'contain',
-                    borderRadius: '4px'
+                    objectFit: 'contain'
                   }}
                 />
               </div>
@@ -124,64 +111,51 @@ const ListOrderItems = ({
               >
                 <Link
                   className='text-reset text-decoration-none link-hover d-block mt-1'
-                  to={`/product/${item.productId && item.productId._id}`}
-                  title={item.productId && item.productId.name}
+                  to={`/product/${item.productId?._id}`}
+                  title={item.productId?.name}
                 >
-                  <h3 className='fs-5'>
-                    {item.productId && item.productId.name}
-                  </h3>
+                  <span>{item.productId?.name}</span>
                 </Link>
 
                 <div className='mt-1'>
-                  {item.styleValueIds &&
-                    item.styleValueIds.map((value, index) => (
-                      <p key={index}>
-                        {value.styleId && value.styleId.name}: {value.name}
-                      </p>
-                    ))}
+                  {item.styleValueIds?.map((value, index) => (
+                    <p key={index}>
+                      {value.styleId?.name}: {value.name}
+                    </p>
+                  ))}
                 </div>
 
                 <div className='mt-1'>
                   <p className='text-decoration-line-through text-muted'>
-                    {item.productId &&
-                      item.productId.price &&
-                      formatPrice(
-                        item.productId && item.productId.price.$numberDecimal
-                      )}{' '}
+                    {item.productId?.price &&
+                      formatPrice(item.productId?.price.$numberDecimal)}{' '}
                     ₫
                   </p>
 
                   <h4 className='text-primary fs-5'>
-                    {item.productId &&
-                      item.productId.salePrice &&
-                      formatPrice(
-                        item.productId &&
-                          item.productId.salePrice.$numberDecimal
-                      )}{' '}
-                    ₫ x {item.count}
+                    {formatPrice(item.productId?.salePrice?.$numberDecimal)} ₫ x{' '}
+                    {item.count}
                   </h4>
                 </div>
 
-                {item.productId &&
-                  item.productId.isActive &&
-                  !item.productId.isSelling && (
-                    <Error msg='The product is out of business, please remove it from your cart, you can continue with others!' />
+                {item.productId?.isActive && !item.productId?.isSelling && (
+                  <Error msg={t('productDetail.error')} />
+                )}
+
+                {item.productId?.isActive &&
+                  item.productId?.isSelling &&
+                  item.productId?.quantity <= 0 && (
+                    <Error msg={t('productDetail.soldOut')} />
                   )}
 
-                {item.productId &&
-                  item.productId.isActive &&
-                  item.productId.isSelling &&
-                  item.productId.quantity <= 0 && (
-                    <Error msg='The product is sold out, please remove it from your cart, you can continue with others!' />
-                  )}
-
-                {item.productId &&
-                  item.productId.isActive &&
-                  item.productId.isSelling &&
-                  item.productId.quantity > 0 &&
-                  item.productId.quantity < item.count && (
+                {item.productId?.isActive &&
+                  item.productId?.isSelling &&
+                  item.productId?.quantity > 0 &&
+                  item.productId?.quantity < item.count && (
                     <Error
-                      msg={`Only ${item.productId.quantity} products left, please update the count!`}
+                      msg={`${t('productDetail.warning')} ${
+                        item.productId?.quantity
+                      } `}
                     />
                   )}
               </div>

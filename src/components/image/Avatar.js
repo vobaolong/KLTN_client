@@ -26,9 +26,9 @@ const Avatar = ({
           style={{ borderRadius: `${noRadius && '5px'}` }}
           alt={alt}
         />
-        {isEditable == 'user' && <UserAvatarUpload />}
-        {isEditable == 'store' && <StoreAvatarUpload storeId={storeId} />}
-        {isEditable == 'product' && (
+        {isEditable === 'user' && <UserAvatarUpload />}
+        {isEditable === 'store' && <StoreAvatarUpload storeId={storeId} />}
+        {isEditable === 'product' && (
           <ProductUpload
             productId={productId}
             index={productIndex}
@@ -39,9 +39,9 @@ const Avatar = ({
       </div>
     </div>
 
-    {size != 'small' && (
+    {size !== 'small' && (
       <h1
-        className={`cus-avatar-name m-0 p-1 rounded d-inline-block fs-5 ${
+        className={`cus-avatar-name m-0 p-1 rounded-1 d-inline-block fs-5 ${
           borderName && 'bg-body shadow'
         }`}
       >

@@ -1,7 +1,8 @@
 {
   "home": "Home",
   "categories": "Categories",
-  "bestSeller": "Best Seller",
+  "bestSeller": "Top Sales",
+  "newProduct": "New Product",
   "hotShop": "Hot Shop",
   "cart": "Cart",
   "favProduct": "Favorite Product",
@@ -12,7 +13,25 @@
     "sale": "OFF",
     "vat": "(VAT included)",
     "soldOut": "The product has been sold out!",
-    "addToCart": "Add To Cart"
+    "addToCart": "Add To Cart",
+    "error": "The product is out of business, please remove it from your cart, you can continue with others",
+    "warning": "Please update the quantity. Product only"
+  },
+  "filters": {
+    "filter": "Filters",
+    "rating": "Rating",
+    "price": "Price",
+    "all": "All",
+    "min": "Min Price",
+    "max": "Max Price",
+    "latest": "Latest",
+    "topSale": "Top Sales",
+    "lowToHigh": "Price: Low to Hight",
+    "hightToLow": "Price: Hight to Low",
+    "up": "up"
+  },
+  "cartDetail": {
+    "remove": "Remove Product From Cart"
   },
   "shop": "Shop",
   "searchHolder": "Search for products and shops",
@@ -32,9 +51,13 @@
     "total": "Total",
     "firstName": "First Name",
     "lastName": "Last Name",
+    "name": "Full name",
     "phone": "Phone",
     "firstNameValid": "Please provide a valid First Name!",
-    "lastNameValid": "Please provide a valid Last Name!"
+    "lastNameValid": "Please provide a valid Last Name!",
+    "emailValid": "Please provide a valid Email!",
+    "phoneValid": "Please provide a valid Phone!",
+    "idCardValid": "Please provide a valid ID Card!"
   },
   "draw": "Drawing",
   "empty": "Your e-wallet is empty",
@@ -51,7 +74,14 @@
     "getPaid": "How you'll get paid?",
     "sellOn": "Sell on ZenMetic",
     "agreeBy": "By Creating store, you agree to ZenMetic's",
-    "backToShop": "Back to shop manager"
+    "backToShop": "Back to shop manager",
+    "follow": "Follow",
+    "following": "Following",
+    "open": "Opening",
+    "close": "Closed",
+    "allProduct": "All Products",
+    "rating": "Rating",
+    "about": "About"
   },
   "shopDetailValid": {
     "nameValid": "Please provide a valid store name!",
@@ -72,7 +102,9 @@
     "logout": "Logout",
     "signUp": "Sign Up",
     "forgotPW": "Forgot Password",
-    "sendEmail": "Send Email"
+    "sendEmail": "Send Email",
+    "save": "Save",
+    "back": "Back"
   },
   "signInForm": {
     "comeBack": "Welcome back!",
@@ -94,18 +126,27 @@
     "id": "Order ID",
     "date": "Order placed",
     "price": "Total",
-    "shop": "Seller",
+    "shop": "Shop",
     "deliveryUnit": "Delivery",
     "payment": "Payment",
+    "paymentMethod": "Payment Method",
     "status": "Status",
-    "lastUpdateTime": "Last Update Time"
+    "lastUpdateTime": "Last Update Time",
+    "cancel": "Cancel Order",
+    "cod": "Cash on Delivery",
+    "onlinePayment": "Online Payment",
+    "userReceiver": "Delivery Address",
+    "deliveryId": "Tracking number",
+    "note": "*Note: The products will sometimes differ from your original order, as it may have been updated",
+    "ship_payment": "Shipping & Payment Info",
+    "listProducts": "List Products"
   },
 
   "verified": "Verified",
   "verifyNow": "Verify now",
   "confirmEmail": "Click to send confirmation email",
   "role": "Role",
-  "join": "Join",
+  "joined": "Joined",
   "visitMyPage": "Visit My Page",
   "editCover": "Edit Cover",
   "processingOrders": "Processing Orders",

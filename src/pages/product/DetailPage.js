@@ -184,44 +184,88 @@ const DetailPage = () => {
               <div className='col-12'>
                 <div className='container-fluid p-0'>
                   <div className='row res-flex-reverse-md'>
-                    <div id='review' className='col-md-8 p-0'>
-                      <ListReviews productId={product._id} />
-                    </div>
-
-                    <div className='col-md-4 mb-5'>
-                      <Paragraph
-                        value={product.description}
-                        label='Description'
-                        multiLine={true}
-                      />
+                    <div class='container'>
+                      <ul class='nav nav-tabs' id='myTab' role='tablist'>
+                        <li class='nav-item' role='presentation'>
+                          <a
+                            class='nav-link active'
+                            id='details-tab'
+                            data-bs-toggle='tab'
+                            href='#details'
+                            role='tab'
+                            aria-controls='details'
+                            aria-selected='true'
+                          >
+                            Chi tiết sản phẩm
+                          </a>
+                        </li>
+                        <li class='nav-item' role='presentation'>
+                          <a
+                            class='nav-link'
+                            id='reviews-tab'
+                            data-bs-toggle='tab'
+                            href='#reviews'
+                            role='tab'
+                            aria-controls='reviews'
+                            aria-selected='false'
+                          >
+                            Review
+                          </a>
+                        </li>
+                      </ul>
+                      <div class='tab-content' id='myTabContent'>
+                        <div
+                          class='tab-pane fade show active'
+                          id='details'
+                          role='tabpanel'
+                          aria-labelledby='details-tab'
+                        >
+                          <div className=' mb-5'>
+                            <Paragraph
+                              label='Description'
+                              des={product.description}
+                              multiLine={true}
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class='tab-pane fade'
+                          id='reviews'
+                          role='tabpanel'
+                          aria-labelledby='reviews-tab'
+                        >
+                          <div id='review'>
+                            <ListReviews productId={product._id} />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div className='col-12'>
+              {product.categoryId && (
+                <div className='mt-4'>
+                  <ListBestSellerProducts
+                    heading='Similar Products'
+                    categoryId={product.categoryId._id}
+                  />
+                </div>
+              )}
 
-              <div className='col-12'>
-                {product.categoryId && (
-                  <div className='mt-4'>
-                    <ListBestSellerProducts
-                      heading='Similar Products'
-                      categoryId={product.categoryId._id}
-                    />
-                  </div>
-                )}
-
-                {product.storeId && (
-                  <div className='mt-4'>
-                    <ListProductsByStore
-                      heading={`${
-                        product.storeId && product.storeId.name
-                          ? product.storeId.name
-                          : 'Store'
-                      }'s Other Products`}
-                      storeId={product.storeId._id}
-                    />
-                  </div>
-                )}
-              </div>
+              {product.storeId && (
+                <div className='mt-4'>
+                  <ListProductsByStore
+                    heading={`${
+                      product.storeId && product.storeId.name
+                        ? product.storeId.name
+                        : 'Store'
+                    }'s Other Products`}
+                    storeId={product.storeId._id}
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}

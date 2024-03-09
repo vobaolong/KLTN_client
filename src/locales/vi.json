@@ -2,6 +2,7 @@
   "home": "Trang chủ",
   "categories": "Danh Mục",
   "bestSeller": "Bán Chạy",
+  "newProduct": "Sản Phẩm Mới",
   "hotShop": "Shop Nổi Bật",
   "cart": "Giỏ hàng",
   "favProduct": "Sản Phẩm Yêu Thích",
@@ -12,10 +13,28 @@
     "sale": "Giảm",
     "vat": "(Đã bao gồm VAT)",
     "soldOut": "Sản phẩm đã được bán hết!",
-    "addToCart": "Thêm vào giỏ hàng"
+    "addToCart": "Thêm vào giỏ hàng",
+    "error": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa nó khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác",
+    "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn"
+  },
+  "filters": {
+    "filter": "Bộ lọc",
+    "rating": "Đánh giá",
+    "price": "Giá",
+    "all": "Tất cả",
+    "min": "Giá thấp nhất",
+    "max": "Giá cao nhất",
+    "latest": "Mới nhất",
+    "topSale": "Bán chạy",
+    "lowToHigh": "Giá: Thấp tới cao",
+    "hightToLow": "Giá: Cao tới thấp",
+    "up": "trở lên"
+  },
+  "cartDetail": {
+    "remove": "Xoá sản phẩm khỏi giỏ hàng"
   },
 
-  "shop": "Cửa Hàng",
+  "shop": "Shop",
   "searchHolder": "Tìm sản phẩm và tên shop",
   "userDetail": {
     "myAccount": "Tài khoản của tôi",
@@ -29,13 +48,17 @@
     "changePassword": "Thay đổi mật khẩu",
     "wallet": "Ví của tôi",
     "transaction": "Giao dịch",
-    "date": "Ngày tạo",
+    "date": "Ngày đặt",
     "total": "Tổng",
     "firstName": "Họ và tên đệm",
     "lastName": "Tên",
-    "phone": "Số điện thoại",
+    "name": "Họ và tên",
+    "phone": "Điện thoại",
     "firstNameValid": "Vui lòng cung cấp họ và tên đệm hợp lệ!",
-    "lastNameValid": "Vui lòng cung cấp tên hợp lệ!"
+    "lastNameValid": "Vui lòng cung cấp tên hợp lệ!",
+    "emailValid": "Vui lòng cung cấp Email hợp lệ!",
+    "phoneValid": "Vui lòng cung cấp số điện thoại hợp lệ!",
+    "idCardValid": "Vui lòng cung cấp số thẻ hợp lệ!"
   },
   "draw": "Rút tiền",
   "empty": "Ví rỗng",
@@ -52,7 +75,14 @@
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên ZenMetic",
     "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ZenMetic",
-    "backToShop": "Quay lại trang quản lý"
+    "backToShop": "Quay lại trang quản lý",
+    "follow": "Theo dõi",
+    "following": "Đang theo dõi",
+    "open": "Mở",
+    "close": "Đóng",
+    "allProduct": "Tất cả sản phẩm",
+    "rating": "Đánh giá",
+    "about": "Thông tin"
   },
   "shopDetailValid": {
     "nameValid": "Vui lòng cung cấp tên shop phù hợp!",
@@ -73,7 +103,9 @@
     "logout": "Đăng xuất",
     "signUp": "Đăng ký",
     "forgotPW": "Quên mật khẩu",
-    "sendEmail": "Gửi Email"
+    "sendEmail": "Gửi Email",
+    "save": "Lưu",
+    "back": "Trở lại"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",
@@ -92,21 +124,30 @@
   "point": "Điểm",
   "success/failure": "Đơn Hoàn Thành/Huỷ",
   "orderDetail": {
-    "id": "Mã đơn",
-    "date": "Ngày đặt",
+    "id": "Mã đơn hàng",
+    "date": "Ngày đặt hàng",
     "price": "Tổng",
     "shop": "Shop",
-    "deliveryUnit": "Vận chuyển",
+    "deliveryUnit": "Đơn vị vận chuyển",
     "payment": "Thanh toán",
+    "paymentMethod": "Phương thức Thanh toán",
     "status": "Trạng thái",
-    "lastUpdateTime": "Cập nhật lần cuối"
+    "lastUpdateTime": "Cập nhật lần cuối",
+    "cancel": "Huỷ Đơn Hàng",
+    "cod": "Thanh toán khi nhận hàng",
+    "onlinePayment": "Thanh toán trực tuyến",
+    "userReceiver": "Địa Chỉ Người Nhận",
+    "deliveryId": "Mã vận đơn",
+    "note": "*Ghi chú: Các sản phẩm đôi khi sẽ khác so với đơn đặt hàng ban đầu của bạn, vì chúng có thể đã được cập nhật",
+    "ship_payment": "Thông tin Vận chuyển & Thanh toán",
+    "listProducts": "Danh sách sản phẩm"
   },
 
   "verified": "Đã xác thực",
   "verifyNow": "Xác thực ngay",
   "confirmEmail": "Nhấn để xác thực Email",
   "role": "Vai trò",
-  "join": "Tham gia",
+  "joined": "Tham gia",
   "visitMyPage": "Đến Kênh Của Tôi",
   "editCover": "Chỉnh Sửa Ảnh Bìa",
   "processingOrders": "Đơn hàng đang thực hiện",

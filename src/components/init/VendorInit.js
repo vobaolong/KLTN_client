@@ -131,7 +131,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-shop-options-item ripple'
                 to='/account/storeManager'
               >
-                <i className='fas fa-arrow-circle-left me-1'></i>
+                <i className='fas fa-angle-left me-1'></i>
                 Back
               </Link>
             </ul>

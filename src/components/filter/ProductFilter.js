@@ -1,14 +1,15 @@
 import { useState, useRef } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
+import { useTranslation } from 'react-i18next'
 
 const ProductFilter = ({ filter, setFilter }) => {
+  const { t } = useTranslation()
   const [price, setPrice] = useState({
     min: 0,
     max: ''
   })
   const typingTimeoutRef = useRef(null)
-
   const handleFilter = (name, value, order) => {
     setFilter({ ...filter, [name]: value, order: order })
   }
@@ -18,12 +19,12 @@ const ProductFilter = ({ filter, setFilter }) => {
       ...price,
       [name1]: value
     })
-    // if (typingTimeoutRef.current) {
-    //   clearTimeout(typingTimeoutRef.current)
-    // }
-    // typingTimeoutRef.current = setTimeout(() => {
-    //   handleFilter(name2, value)
-    // }, 600)
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current)
+    }
+    typingTimeoutRef.current = setTimeout(() => {
+      handleFilter(name2, value)
+    }, 3000)
     handleFilter(name2, value)
   }
 
@@ -56,10 +57,10 @@ const ProductFilter = ({ filter, setFilter }) => {
             }}
           >
             {i === 0 ? (
-              <span>Tất cả</span>
+              <span>{t('filters.all')}</span>
             ) : (
               <small>
-                <StarRating stars={i} /> {i !== 5 && 'trở lên'}
+                <StarRating stars={i} /> {i !== 5 && t('filters.up')}
               </small>
             )}
           </label>
@@ -75,7 +76,7 @@ const ProductFilter = ({ filter, setFilter }) => {
         style={{ width: '100%' }}
       >
         <button
-          className='btn btn-primary ripple'
+          className='btn btn-primary rounded-1 ripple'
           style={{ width: 'max-content' }}
           type='button'
           data-bs-toggle='offcanvas'
@@ -83,10 +84,10 @@ const ProductFilter = ({ filter, setFilter }) => {
           aria-controls='offcanvasFilter'
         >
           <i className='fas fa-sliders-h'></i>
-          <span className='ms-2'>Bộ Lọc</span>
+          <span className='ms-2'>{t('filters.filter')}</span>
         </button>
         <select
-          className='form-select me-2'
+          className='form-select mx-3 rounded-1'
           style={{ width: 'max-content', cursor: 'pointer' }}
           value={filter.sortBy === 'salePrice' ? filter.order : filter.sortBy}
           onChange={(e) => {
@@ -100,10 +101,10 @@ const ProductFilter = ({ filter, setFilter }) => {
             handleFilter('sortBy', value, order)
           }}
         >
-          <option value='sold'>Bán chạy</option>
-          <option value='createdAt'>Sản phẩm mới</option>
-          <option value='asc'>Giá tăng dần</option>
-          <option value='desc'>Giá giảm dần</option>
+          <option value='sold'>{t('filters.topSale')}</option>
+          <option value='createdAt'>{t('filters.latest')}</option>
+          <option value='asc'>{t('filters.lowToHigh')}</option>
+          <option value='desc'>{t('filters.hightToLow')}</option>
         </select>
       </div>
       <div
@@ -114,7 +115,7 @@ const ProductFilter = ({ filter, setFilter }) => {
       >
         <div className='offcanvas-header'>
           <h2 className='offcanvas-title' id='offcanvasFilterLabel'>
-            Bộ Lọc
+            {t('filters.filter')}
           </h2>
           <button
             type='button'
@@ -215,17 +216,17 @@ const ProductFilter = ({ filter, setFilter }) => {
             </div>
           </div> */}
           <div className='mb-4'>
-            <h6>Đánh Giá</h6>
+            <h6>{t('filters.rating')}</h6>
             {renderFilterRating()}
           </div>
 
           <div className='mb-4'>
-            <h6 className='mb-0'>Giá</h6>
+            <h6 className='mb-0'>{t('filters.price')}</h6>
             <form className='row'>
               <div className='col-12'>
                 <Input
                   type='number'
-                  label='Giá thấp nhất'
+                  label={t('filters.min')}
                   feedback='Please provide a valid price.'
                   validator='position|zero'
                   value={price.min}
@@ -235,7 +236,7 @@ const ProductFilter = ({ filter, setFilter }) => {
               <div className='col-12'>
                 <Input
                   type='number'
-                  label='Giá cao nhất'
+                  label={t('filters.max')}
                   feedback='Please provide a valid price.'
                   validator='position|zero'
                   value={price.max}

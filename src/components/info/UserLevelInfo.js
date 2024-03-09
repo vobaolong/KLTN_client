@@ -11,7 +11,7 @@ const UserLevelInfo = ({ user = {}, border = true }) => {
         className={
           border
             ? 'row bg-body shadow rounded-3'
-            : 'row py-2 border border-primary rounded-3'
+            : 'row py-2 border border-primary rounded-1'
         }
       >
         <div className='col-12'>

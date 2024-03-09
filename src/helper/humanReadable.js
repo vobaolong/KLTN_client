@@ -16,19 +16,25 @@ const months = [
 
 export const humanReadableDate = (date) => {
   date = new Date(date)
+  const hours = ('0' + date.getHours()).slice(-2)
+  const minutes = ('0' + date.getMinutes()).slice(-2)
+  const day = ('0' + date.getDate()).slice(-2)
+  const month = ('0' + (date.getMonth() + 1)).slice(-2)
   return (
-    date.getHours() +
-    ':' +
-    date.getMinutes() +
-    ' ' +
-    date.getDate() +
-    '/' +
-    months[date.getMonth()] +
-    '/' +
-    date.getFullYear()
-    // days[date.getDay()] +
-    // ' ' +
+    hours + ':' + minutes + ' ' + day + '/' + month + '/' + date.getFullYear()
   )
+}
+export const calculateDaysDifference = (date) => {
+  const today = new Date()
+  const createdDate = new Date(date)
+
+  const differenceInMilliseconds = today.getTime() - createdDate.getTime()
+
+  const differenceInDays = Math.floor(
+    differenceInMilliseconds / (1000 * 60 * 60 * 24)
+  )
+
+  return differenceInDays
 }
 
 export const formatDate = (date) => {

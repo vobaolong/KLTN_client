@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 
 const StoreSearchBar = ({ storeId = '' }) => {
+  const { t } = useTranslation()
   const location = useLocation()
   const history = useHistory()
 
@@ -26,7 +28,7 @@ const StoreSearchBar = ({ storeId = '' }) => {
       <input
         className='form-control'
         type='search'
-        placeholder='Search'
+        placeholder={t('search')}
         aria-label='Search'
         value={query}
         onChange={handleChange}

@@ -9,7 +9,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
   const { t } = useTranslation()
   return (
     <div className='container-fluid'>
-      <div className='row py-2 border border-primary rounded-3'>
+      <div className='row py-2 border border-primary rounded-1'>
         <div className='col-sm-6'>
           <Paragraph label={t('userDetail.firstName')} value={user.firstName} />
         </div>

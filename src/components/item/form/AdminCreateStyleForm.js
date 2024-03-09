@@ -148,7 +148,7 @@ const AdminCreateStyleForm = (props) => {
             to='/admin/style'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-arrow-circle-left'></i> Back to Style Manager
+            <i className='fas fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'
