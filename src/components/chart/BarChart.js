@@ -43,7 +43,23 @@ const BarChart = ({
   }, [items, by, role, sliceEnd])
 
   return (
-    <div style={{ border: '1px solid #000' }}>
+    <div
+      style={{
+        boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
+        borderRadius: '0.3rem',
+        backgroundColor: '#fff',
+        width: '99%'
+      }}
+    >
+      <h6
+        style={{
+          textAlign: 'start',
+          padding: '10px 0 10px 10px',
+          borderBottom: '1px solid #ccc'
+        }}
+      >
+        Order Overview
+      </h6>
       <Bar
         data={data}
         options={{

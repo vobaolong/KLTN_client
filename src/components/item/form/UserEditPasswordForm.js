@@ -7,8 +7,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const UserEditPasswordForm = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -98,7 +100,7 @@ const UserEditPasswordForm = (props) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Change password'
+          title={t('changePassword')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -108,10 +110,10 @@ const UserEditPasswordForm = (props) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Current password'
+            label={t('userDetail.currentPw')}
             value={account.currentPassword}
             isValid={account.isValidCurrentPassword}
-            feedback='Please provide a valid password.'
+            feedback={t('userDetail.pwValid')}
             validator='password'
             onChange={(value) =>
               handleChange('currentPassword', 'isValidCurrentPassword', value)
@@ -125,11 +127,10 @@ const UserEditPasswordForm = (props) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='New password'
+            label={t('userDetail.newPw')}
             value={account.newPassword}
             isValid={account.isValidNewPassword}
-            feedback='Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &.'
-            validator='password'
+            feedback={t('signUpForm.passwordFeedback')}
             onChange={(value) =>
               handleChange('newPassword', 'isValidNewPassword', value)
             }
@@ -155,7 +156,7 @@ const UserEditPasswordForm = (props) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Save
+            {t('button.save')}
           </button>
         </div>
       </form>

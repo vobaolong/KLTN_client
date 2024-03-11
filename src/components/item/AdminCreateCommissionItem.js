@@ -5,7 +5,7 @@ const AdminCreateCommissionItem = ({ onRun = () => {} }) => (
   <div className='admin-create-commission-item d-inline-block'>
     <button
       type='button'
-      className='btn btn-primary ripple text-nowrap'
+      className='btn btn-primary ripple text-nowrap rounded-1'
       data-bs-toggle='modal'
       data-bs-target='#admin-create-commission-form'
     >

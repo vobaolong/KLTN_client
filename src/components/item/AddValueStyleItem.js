@@ -12,7 +12,7 @@ const AddValueStyleItem = ({
   >
     <button
       type='button'
-      className={`btn btn-primary ripple text-nowrap ${
+      className={`btn btn-primary ripple text-nowrap rounded-1 ${
         isFullWidth ? 'w-100' : ''
       }`}
       data-bs-toggle='modal'

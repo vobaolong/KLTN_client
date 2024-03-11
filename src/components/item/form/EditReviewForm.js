@@ -8,8 +8,10 @@ import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import TextArea from '../../ui/TextArea'
 import RatingInput from '../../ui/RatingInput'
+import { useTranslation } from 'react-i18next'
 
 const EditReviewForm = ({ oldReview = {}, onRun }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -94,7 +96,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Edit Review'
+          title={t('reviewDetail.edit')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -106,7 +108,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
             label='Rate'
             value={newReview.rating}
             isValid={newReview.isValidRating}
-            feedback='Please provide a valid rating.'
+            feedback={t('reviewDetail.isValid')}
             onChange={(value) => handleChange('rating', 'isValidRating', value)}
           />
         </div>
@@ -114,10 +116,10 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Content'
+            label={t('reviewDetail.content')}
             value={newReview.content}
             isValid={newReview.isValidContent}
-            feedback='Please provide a valid content.'
+            feedback={t('reviewDetail.isValid')}
             validator='nullable'
             onChange={(value) =>
               handleChange('content', 'isValidContent', value)
@@ -144,7 +146,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Edit
+            {t('button.edit')}
           </button>
         </div>
       </form>

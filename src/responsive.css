@@ -1,9 +1,3 @@
-@media (min-width: 1400px) {
-	.res-mx--12-md {
-		padding: 16px 24px !important;
-	}
-}
-
 /* xl */
 @media (max-width: 1199px) {
 	.res-hide-xl {

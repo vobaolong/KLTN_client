@@ -6,7 +6,7 @@ const PhoneActiveItem = ({ phone = '', isPhoneActive = false }) => {
     <>
       {phone && isPhoneActive && (
         <div className='position-relative d-inline-block'>
-          <span className='badge bg-primary cus-tooltip'>
+          <span className='badge bg-primary cus-tooltip rounded-1'>
             <i className='fas fa-check-circle me-2'></i>
             {t('verified')}
           </span>

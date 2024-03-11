@@ -224,7 +224,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 >
                   <i className='fas fa-store'></i>
                   <span className='ms-3 res-hide'>{sizes.store}</span>
-                  <span className='ms-1 res-hide-lg'>Stores</span>
+                  <span className='ms-1 res-hide-lg'>Shops</span>
                 </button>
               </div>
             </>
@@ -357,12 +357,12 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                       label: 'Bar',
                       value: 'bar',
                       icon: <i className='fas fa-chart-bar'></i>
-                    },
-                    {
-                      label: 'Doughnut',
-                      value: 'doughnut',
-                      icon: <i className='fas fa-chart-pie'></i>
                     }
+                    // {
+                    //   label: 'Doughnut',
+                    //   value: 'doughnut',
+                    //   icon: <i className='fas fa-chart-pie'></i>
+                    // }
                   ]}
                   value={options.type}
                   setValue={(value) =>

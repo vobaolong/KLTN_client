@@ -7,6 +7,7 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const UserEditProfileForm = ({
   firstName = '',
@@ -17,6 +18,7 @@ const UserEditProfileForm = ({
   googleId = false,
   facebookId = false
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -136,7 +138,7 @@ const UserEditProfileForm = ({
 
       {isConfirming && (
         <ConfirmDialog
-          title='Chỉnh Sửa Thông Tin'
+          title={t('userDetail.editProfile')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -146,10 +148,10 @@ const UserEditProfileForm = ({
         <div className='col-6'>
           <Input
             type='text'
-            label='Họ và tên lót'
+            label={t('userDetail.firstName')}
             value={profile.firstName}
             isValid={profile.isValidFirstName}
-            feedback='Vui lòng cung cấp họ hợp lệ!'
+            feedback={t('userDetail.firstNameValid')}
             validator='name'
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
@@ -161,10 +163,10 @@ const UserEditProfileForm = ({
         <div className='col-6'>
           <Input
             type='text'
-            label='Tên'
+            label={t('userDetail.lastName')}
             value={profile.lastName}
             isValid={profile.isValidLastName}
-            feedback='Vui lòng cung cấp tên hợp lệ!'
+            feedback={t('userDetail.lastNameValid')}
             validator='name'
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
@@ -180,7 +182,7 @@ const UserEditProfileForm = ({
               label='Email'
               value={profile.email}
               isValid={profile.isValidEmail}
-              feedback='Vui lòng cung cấp Email hợp lệ!'
+              feedback={t('userDetail.emailValid')}
               validator='email'
               onChange={(value) => handleChange('email', 'isValidEmail', value)}
               onValidate={(flag) => handleValidate('isValidEmail', flag)}
@@ -191,10 +193,10 @@ const UserEditProfileForm = ({
         <div className='col-12'>
           <Input
             type='text'
-            label='Số điện thoại'
+            label={t('userDetail.phone')}
             value={profile.phone}
             isValid={profile.isValidPhone}
-            feedback='Vui lòng cung cấp số điện thoại hợp lệ!'
+            feedback={t('userDetail.phoneValid')}
             validator='phone'
             onChange={(value) => handleChange('phone', 'isValidPhone', value)}
             onValidate={(flag) => handleValidate('isValidPhone', flag)}
@@ -207,7 +209,7 @@ const UserEditProfileForm = ({
             label='ID Card'
             value={profile.id_card}
             isValid={profile.isValidIdCard}
-            feedback='Vui lòng cung cấp số thẻ hợp lệ!'
+            feedback={t('userDetail.idCardValid')}
             validator='id_card'
             onChange={(value) =>
               handleChange('id_card', 'isValidIdCard', value)
@@ -234,7 +236,7 @@ const UserEditProfileForm = ({
             className='btn btn-primary ripple'
             onClick={handleSubmit}
           >
-            Lưu
+            {t('button.save')}
           </button>
         </div>
       </form>

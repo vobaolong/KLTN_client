@@ -36,10 +36,11 @@ const UserJoinedInfo = ({ user = {} }) => {
 
   return (
     <div className='container-fluid'>
-      <div className='row py-2 border border-primary rounded-1'>
+      <div className='row py-2 border rounded-1'>
         <div className='col-12'>
           <Paragraph
             label={t('role')}
+            colon
             value={<UserRoleLabel role={user.role} />}
           />
         </div>
@@ -47,7 +48,8 @@ const UserJoinedInfo = ({ user = {} }) => {
         <div className='col-12'>
           <Paragraph
             label={t('joined')}
-            value={humanReadableDate(user.createdAt)}
+            colon
+            time={humanReadableDate(user.createdAt)}
           />
         </div>
       </div>

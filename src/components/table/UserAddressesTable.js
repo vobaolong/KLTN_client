@@ -122,7 +122,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
             {addresses?.map((address, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td>{address}</td>
+                <td className='text-start px-2'>{address}</td>
                 <td>
                   <button
                     type='button'

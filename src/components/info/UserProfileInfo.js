@@ -7,28 +7,43 @@ import { useTranslation } from 'react-i18next'
 
 const UserProfileInfo = ({ user = {}, isEditable = false }) => {
   const { t } = useTranslation()
+  const hideLastDigits = (str, numDigitsToHide, position) => {
+    if (str && str.length > numDigitsToHide) {
+      const hiddenPart = '*'.repeat(numDigitsToHide)
+      return (
+        str.slice(0, position) +
+        hiddenPart +
+        str.slice(position + numDigitsToHide)
+      )
+    }
+    return str
+  }
   return (
     <div className='container-fluid'>
-      <div className='row py-2 border border-primary rounded-1'>
-        <div className='col-sm-6'>
-          <Paragraph label={t('userDetail.firstName')} value={user.firstName} />
-        </div>
-
-        <div className='col-sm-6'>
-          <Paragraph label={t('userDetail.lastName')} value={user.lastName} />
+      <div className='row py-2 border rounded-1'>
+        <div className='col-12'>
+          <Paragraph
+            label={t('userDetail.name')}
+            colon
+            value={`${user.firstName} ${user.lastName}`}
+          />
         </div>
 
         {!isEditable ? (
-          <div className='col-sm-6'>
-            <Paragraph label='Email' value={user.email || '-'} />
+          <div className='col-sm-12'>
+            <Paragraph
+              label='Email'
+              value={hideLastDigits(user.email, 3, 1) || '-'}
+            />
           </div>
         ) : (
           <>
-            <div className='col-sm-6'>
-              <Paragraph label='Email' value={user.email || '-'} />
-            </div>
-
-            <div className='col-sm-6 mt-2 ps-4'>
+            <div className='col-sm-12 d-flex'>
+              <Paragraph
+                label='Email'
+                colon
+                value={hideLastDigits(user.email, 3, 1) || '-'}
+              />
               <EmailActiveButton
                 email={user.email}
                 isEmailActive={user.isEmailActive}
@@ -43,6 +58,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           <div className='col-sm-6'>
             <Paragraph
               label={t('userDetail.phone')}
+              colon
               value={user.phone || '-'}
             />
           </div>
@@ -51,7 +67,8 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
             <div className='col-sm-6'>
               <Paragraph
                 label={t('userDetail.phone')}
-                value={user.phone || '-'}
+                colon
+                value={hideLastDigits(user.phone, 8, 0) || '-'}
               />
             </div>
 
@@ -65,7 +82,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
         )}
 
         <div className='col-sm-6'>
-          <Paragraph label='ID Card' value={user.id_card || '-'} />
+          <Paragraph
+            label='ID Card'
+            colon
+            value={hideLastDigits(user.id_card, 8, 0) || '-'}
+          />
         </div>
 
         {isEditable && (

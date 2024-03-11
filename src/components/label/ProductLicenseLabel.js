@@ -1,7 +1,7 @@
 const ProductLicenseLabel = ({ isActive = false, detail = true }) => (
   <span className='position-relative d-inline-block'>
     {isActive ? (
-      <span className='badge bg-success cus-tooltip'>
+      <span className='badge bg-success cus-tooltip rounded-1'>
         <i className='fas fa-check-circle'></i>
         {detail && <span className='ms-2'>Licensed</span>}
       </span>

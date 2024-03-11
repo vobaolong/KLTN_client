@@ -202,7 +202,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
           <div className='ms-2'>
             <Link
               type='button'
-              className='btn btn-primary ripple text-nowrap'
+              className='btn btn-primary ripple text-nowrap rounded-1'
               to='/admin/category/createNewCategory'
             >
               <i className='fas fa-plus-circle'></i>
@@ -260,12 +260,12 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
               </th>
 
               <th scope='col'>
-                <span
+                {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Action
-                </span>
+                </span> */}
               </th>
             </tr>
           </thead>

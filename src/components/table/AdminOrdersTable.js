@@ -200,15 +200,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 />
               </th>
 
-              <th scope='col'>
-                {' '}
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  Action
-                </span>
-              </th>
+              <th scope='col'> </th>
             </tr>
           </thead>
           <tbody>

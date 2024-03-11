@@ -54,8 +54,8 @@ const Pagination = ({
           <button
             type='button'
             disabled={pageCurrent <= 1}
-            className='btn btn-outline-primary ripple'
-            style={{ minWidth: '60px' }}
+            className='btn btn-outline-primary ripple p-1'
+            style={{ minWidth: '30px' }}
             onClick={() => handleChangePage(pageCurrent - 1)}
           >
             {'<'}
@@ -68,7 +68,7 @@ const Pagination = ({
                   type='button'
                   key={p}
                   className='btn btn-outline-primary ripple res-hide-md'
-                  style={{ minWidth: '60px' }}
+                  style={{ minWidth: '30px' }}
                   onClick={() => handleChangePage(p)}
                 >
                   {p}
@@ -80,8 +80,8 @@ const Pagination = ({
                   <button
                     disabled
                     type='button'
-                    className='btn btn-outline-primary ripple res-hide-md'
-                    style={{ minWidth: '60px' }}
+                    className='btn btn-outline-primary ripple res-hide-md p-1'
+                    style={{ minWidth: '30px' }}
                   >
                     ...
                   </button>
@@ -91,10 +91,10 @@ const Pagination = ({
                 <button
                   type='button'
                   key={p}
-                  className={`btn ${
+                  className={`btn p-1 ${
                     p === pageCurrent ? 'btn-primary' : 'btn-outline-primary'
                   } ripple res-hide-md`}
-                  style={{ minWidth: '60px' }}
+                  style={{ minWidth: '30px' }}
                   onClick={
                     p === pageCurrent ? () => {} : () => handleChangePage(p)
                   }
@@ -108,8 +108,8 @@ const Pagination = ({
                   <button
                     disabled
                     type='button'
-                    className='btn btn-outline-primary ripple res-hide-md'
-                    style={{ minWidth: '60px' }}
+                    className='btn btn-outline-primary ripple res-hide-md p-1'
+                    style={{ minWidth: '30px' }}
                   >
                     ...
                   </button>
@@ -119,8 +119,8 @@ const Pagination = ({
                 <button
                   type='button'
                   key={p}
-                  className='btn btn-outline-primary ripple res-hide-md'
-                  style={{ minWidth: '60px' }}
+                  className='btn btn-outline-primary ripple res-hide-md p-1'
+                  style={{ minWidth: '30px' }}
                   onClick={() => handleChangePage(p)}
                 >
                   {p}
@@ -132,8 +132,8 @@ const Pagination = ({
           <button
             type='button'
             disabled={pageCurrent >= pageCount}
-            className='btn btn-outline-primary ripple'
-            style={{ minWidth: '60px' }}
+            className='btn btn-outline-primary ripple p-1'
+            style={{ minWidth: '30px' }}
             onClick={() => handleChangePage(pageCurrent + 1)}
           >
             {'>'}

@@ -21,7 +21,7 @@ const ConfirmDialog = ({
       <div className='modal-backdrop fade show'></div>
       <div className='modal d-block' tabIndex='-1' role='dialog'>
         <div className='modal-dialog' role='document'>
-          <div className='modal-content'>
+          <div className='modal-content rounded-1'>
             <div className={`modal-header text-${color}`}>
               <h5 className='modal-title'>{title}</h5>
               <button

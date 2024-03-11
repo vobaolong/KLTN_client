@@ -7,7 +7,8 @@
 	--search-bar-width: calc(100vw - var(--logo-width) - var(--header-sub-nav-width));
 
 	--primary-color: #d0011b;
-	--muted-color: #6c757d;
+	--muted-color: #343638;
+	--ccc-color: #949494;
 	--high-muted-color: #eaeaea;
 	--white-color: #fff;
 	--black-color: #000;
@@ -566,7 +567,7 @@ header {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	color: var(--white-color);
-	margin-left: 4px;
+	/* margin-left: 4px; */
 }
 
 .your-account-options,
@@ -1527,7 +1528,7 @@ textarea {
 }
 
 .cus-paragraph-group-time {
-	color: var(--muted-color);
+	color: var(--ccc-color);
 	font-size: 0.9rem;
 }
 
@@ -1608,20 +1609,20 @@ textarea {
 	margin: auto;
 	border-collapse: separate;
 	border-spacing: 0;
+	border: 1px solid #ccc;
 }
 
 .table-scroll th,
 .table-scroll td {
 	padding: 2px 5px;
-	border: 0.5px solid #cccccc;
 	background: #fff;
 	z-index: 1;
 	vertical-align: middle;
-
+	border-left: 1px solid #ccc;
 }
 
 .table-scroll thead th {
-	background: #F5F9FC;
+	background: #b0b2b4;
 	color: #575757;
 	position: -webkit-sticky;
 	position: sticky;

@@ -36,15 +36,19 @@
   "shop": "Shop",
   "searchHolder": "Search for products and shops",
   "userDetail": {
-    "myAccount": "my account",
-    "myPurchase": "my purchase",
-    "profile": "profile",
+    "followers": "Followers",
+    "myAccount": "My account",
+    "myPurchase": "My purchase",
+    "profile": "Profile",
     "editProfile": "Edit Profile",
     "address": "Address",
     "addAddress": "Add Address",
     "delAddress": "Delete Address",
     "limit6Addresses": "Maximum 6 addresses",
     "changePassword": "Change Password",
+    "currentPw": "Current Password",
+    "newPw": "New Password",
+    "pwValid": "Please provide a valid password!",
     "wallet": "My E-Wallet",
     "transaction": "Transaction",
     "date": "Created at",
@@ -61,7 +65,7 @@
   },
   "draw": "Drawing",
   "empty": "Your e-wallet is empty",
-  "manageShop": "shop manager",
+  "manageShop": "Shop manager",
   "myShop": "My Shops",
   "createShop": "Create shop",
   "shopDetail": {
@@ -112,11 +116,12 @@
     "emailLabel": "Email address or phone number",
     "emailFeedback": "Please provide a valid email address or phone number!",
     "passwordLabel": "Password",
-    "passwordFeedback": "Please provide a exact password!",
+    "passwordFeedback": "Please provide a valid password!",
     "dontHaveAccount": "Don't have an account?",
     "haveAnAccount": "Already have an account?",
     "agreeBy": "By Signing in, you agree to"
   },
+  "userLabel": { "pointFloor": "Floor point", "discount": "Discount" },
   "signUpForm": {
     "passwordFeedback": "Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &."
   },
@@ -141,7 +146,12 @@
     "ship_payment": "Shipping & Payment Info",
     "listProducts": "List Products"
   },
-
+  "reviewDetail": {
+    "delete": "Delete Rating",
+    "edit": "Edit Rating",
+    "content": "Content",
+    "isValid": "Please provide a valid content!"
+  },
   "verified": "Verified",
   "verifyNow": "Verify now",
   "confirmEmail": "Click to send confirmation email",

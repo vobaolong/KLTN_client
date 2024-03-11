@@ -15,7 +15,11 @@ const UserEditPasswordItem = (props) => {
         <i className='fas fa-key'></i>
       </button>
 
-      <Modal id='password-edit-form' hasCloseBtn={false} title='Edit Password'>
+      <Modal
+        id='password-edit-form'
+        hasCloseBtn={false}
+        title={t('userDetail.changePassword')}
+      >
         <UserEditPasswordForm />
       </Modal>
 

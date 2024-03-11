@@ -7,7 +7,7 @@ const StoreAddFeaturedImageItem = ({ count = 6, storeId = '' }) => (
       <button
         type='button'
         disabled={count >= 6 ? true : false}
-        className='btn btn-primary ripple text-nowrap btn-sm'
+        className='btn btn-primary ripple text-nowrap rounded-1 btn-sm'
         data-bs-toggle='modal'
         data-bs-target='#add-featured-image-form'
       >

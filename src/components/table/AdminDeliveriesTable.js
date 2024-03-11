@@ -241,12 +241,13 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
               </th>
 
               <th scope='col'>
-                <span
+                {' '}
+                {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Action
-                </span>
+                </span> */}
               </th>
             </tr>
           </thead>

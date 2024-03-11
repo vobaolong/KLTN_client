@@ -158,7 +158,7 @@ const StoreProductsTable = ({
           {isSelling && (
             <Link
               type='button'
-              className='btn btn-primary ripple text-nowrap ms-2'
+              className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
               to={`/vendor/products/createNewProduct/${storeId}`}
             >
               <i className='fas fa-plus-circle'></i>
@@ -289,7 +289,15 @@ const StoreProductsTable = ({
                 />
               </th>
 
-              <th scope='col'></th>
+              <th scope='col'>
+                {' '}
+                {/* <span
+                  style={{ fontWeight: '400', fontSize: '.875rem' }}
+                  className='text-secondary'
+                >
+                  Action
+                </span> */}
+              </th>
             </tr>
           </thead>
           <tbody>

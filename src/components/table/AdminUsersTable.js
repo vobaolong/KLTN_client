@@ -101,13 +101,12 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
             <tr>
               <th scope='col'></th>
               <th scope='col' className='text-start'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Profiles'
-                  sortBy='firstName'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
+                <span
+                  style={{ fontWeight: '400', fontSize: '.875rem' }}
+                  className='text-dark'
+                >
+                  User Name
+                </span>
               </th>
               <th scope='col'>
                 <SortByButton
@@ -138,13 +137,19 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
               </th>
 
               <th scope='col'>
-                <SortByButton
+                <span
+                  style={{ fontWeight: '400', fontSize: '.875rem' }}
+                  className='text-dark'
+                >
+                  Phone
+                </span>
+                {/* <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Contact'
+                  title={t('userDetail.phone')}
                   sortBy=''
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
+                /> */}
               </th>
 
               <th scope='col'>

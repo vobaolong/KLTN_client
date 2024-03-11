@@ -184,7 +184,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
           <div className='ms-2'>
             <Link
               type='button'
-              className='btn btn-primary ripple text-nowrap'
+              className='btn btn-primary ripple text-nowrap rounded-1'
               to='/admin/style/createNewStyle'
             >
               <i className='fas fa-plus-circle'></i>
@@ -230,12 +230,12 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 />
               </th>
               <th scope='col'>
-                <span
+                {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Action
-                </span>
+                </span> */}
               </th>
             </tr>
           </thead>

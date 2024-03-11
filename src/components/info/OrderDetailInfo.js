@@ -92,10 +92,7 @@ const OrderDetailInfo = ({
           <span className='fs-6 mx-3 mb-2 status'>
             <OrderStatusLabel status={order.status} />
             <span className='d-inline-block position-relative'>
-              <i
-                style={{ fontSize: '10px' }}
-                className='fa-solid detail fa-question text-sm ms-1 border rounded-circle cus-tooltip'
-              ></i>
+              <i className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'></i>
               <small className='cus-tooltip-msg'>
                 {t('orderDetail.lastUpdateTime')}{' '}
                 {humanReadableDate(order.updatedAt)}

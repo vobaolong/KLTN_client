@@ -14,7 +14,7 @@ const ProfilePage = (props) => {
   return (
     <AccountLayout user={user}>
       <div className='res-mx--12-md'>
-        <div className='position-relative px-2'>
+        <div className='position-relative'>
           <Cover
             cover={user.cover}
             alt={user.firstName + ' ' + user.lastName}

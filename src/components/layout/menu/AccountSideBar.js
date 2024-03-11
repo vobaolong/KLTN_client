@@ -85,7 +85,7 @@ const AccountSideBar = ({ user = {} }) => {
               <span className='ms-3 res-hide-xl text-capitalize'>
                 {t('manageShop')}
               </span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg'>
+              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
                 {t('manageShop')}
               </span>
             </Link>
@@ -100,7 +100,9 @@ const AccountSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-heart'></i>
-            <span className='ms-3 res-hide-lg'>{t('favorite')}</span>
+            <span className='ms-3 res-hide-lg text-capitalize'>
+              {t('favorite')}
+            </span>
           </Link>
         </li>
 

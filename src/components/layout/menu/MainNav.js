@@ -58,7 +58,7 @@ const MainNav = ({ navFor = 'user' }) => {
             {navFor} <span className='res-hide'>dashboard</span>
           </h1>
         )}
-        <Language />
+        {navFor === 'user' && getToken().role !== 'admin' && <Language />}
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -89,7 +89,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   <small className='cus-tooltip-msg'>{t('favorite')}</small>
                 </li>
               )}
-
+              {/*
               {navFor === 'user' && getToken().role === 'user' && (
                 <li className='nav-item position-relative'>
                   <Link
@@ -102,7 +102,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     {t('manageShop')}
                   </small>
                 </li>
-              )}
+              )} */}
 
               {navFor === 'user' && getToken().role === 'user' && (
                 <li className='nav-item'>

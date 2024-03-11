@@ -15,7 +15,7 @@ const Modal = ({
       aria-hidden='true'
     >
       <div className='modal-dialog modal-dialog-centered'>
-        <div className='modal-content'>
+        <div className='modal-content rounded-1'>
           <div className='modal-header'>
             <div>
               {title ? (

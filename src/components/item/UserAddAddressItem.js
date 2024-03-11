@@ -10,7 +10,7 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
         <button
           type='button'
           disabled={count >= 6 ? true : false}
-          className='btn btn-primary ripple text-nowrap'
+          className='btn btn-primary ripple text-nowrap rounded-1'
           data-bs-toggle='modal'
           data-bs-target='#add-address-form'
         >

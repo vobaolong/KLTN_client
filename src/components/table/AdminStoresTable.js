@@ -19,7 +19,6 @@ import { useTranslation } from 'react-i18next'
 
 const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -164,7 +163,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Store'
+                  title='Shop'
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -173,7 +172,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Rating'
+                  title={t('shopDetail.rating')}
                   sortBy='rating'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -182,7 +181,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('shopDetail.status')}
                   sortBy='isOpen'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -191,28 +190,28 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Commission'
+                  title={t('shopDetail.commissions')}
                   sortBy='commissionId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-end'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Joined'
+                  title={t('joined')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
 
               <th scope='col'>
-                <span
+                {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Action
-                </span>
+                </span> */}
               </th>
             </tr>
           </thead>

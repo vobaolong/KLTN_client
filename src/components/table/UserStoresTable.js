@@ -95,7 +95,7 @@ const UserStoresTable = () => {
           <div className='ms-2'>
             <Link
               type='button'
-              className='btn btn-primary ripple text-nowrap'
+              className='btn btn-primary ripple text-nowrap rounded-1'
               to='/account/storeManager/createNewStore'
             >
               <i className='fas fa-plus-circle'></i>
@@ -193,7 +193,7 @@ const UserStoresTable = () => {
                 <td>
                   <Link
                     type='button'
-                    className='btn btn-primary ripple'
+                    className='btn btn-primary ripple rounded-1'
                     to={`/vendor/${store._id}`}
                     title='Quản lý'
                   >

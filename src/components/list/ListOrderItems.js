@@ -114,12 +114,16 @@ const ListOrderItems = ({
                   to={`/product/${item.productId?._id}`}
                   title={item.productId?.name}
                 >
-                  <span>{item.productId?.name}</span>
+                  <p>{item.productId?.name}</p>
                 </Link>
 
                 <div className='mt-1'>
                   {item.styleValueIds?.map((value, index) => (
-                    <p key={index}>
+                    <p
+                      className='text-muted'
+                      style={{ fontSize: '0.9rem' }}
+                      key={index}
+                    >
                       {value.styleId?.name}: {value.name}
                     </p>
                   ))}

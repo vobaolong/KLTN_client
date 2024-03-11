@@ -191,14 +191,7 @@ const StoreOrdersTable = ({
                 />
               </th>
 
-              <th scope='col' className='text-center'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  Action
-                </span>
-              </th>
+              <th scope='col' className='text-center'></th>
             </tr>
           </thead>
           <tbody>

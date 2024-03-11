@@ -111,7 +111,7 @@ const ListReviews = ({
             htmlFor={`rating${i}`}
           >
             {i === 0 ? (
-              <span>All</span>
+              <span>{t('filters.all')}</span>
             ) : (
               <small>
                 <StarRating stars={i} />
@@ -139,7 +139,7 @@ const ListReviews = ({
         </span>
       </div>
 
-      <div className='row mt-2'>
+      <div className='row mt-2 px-2'>
         {reviews?.map((review, index) => (
           <div className='col-12 mb-2' key={index}>
             <ReviewInfo

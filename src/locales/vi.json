@@ -37,15 +37,19 @@
   "shop": "Shop",
   "searchHolder": "Tìm sản phẩm và tên shop",
   "userDetail": {
+    "followers": "Số người theo dõi",
     "myAccount": "Tài khoản của tôi",
-    "myPurchase": "đơn mua",
-    "profile": "thông tin cá nhân",
+    "myPurchase": "Đơn mua",
+    "profile": "Thông tin cá nhân",
     "editProfile": "Chỉnh sửa thông tin",
     "address": "Địa chỉ",
     "addAddress": "Thêm địa chỉ",
     "delAddress": "Xoá địa chỉ",
     "limit6Addresses": "Tối đa 6 địa chỉ",
     "changePassword": "Thay đổi mật khẩu",
+    "currentPw": "Mật khẩu hiện tại",
+    "newPw": "Mật khẩu mới",
+    "pwValid": "Vui lòng cung cấp mật khẩu hợp lệ!",
     "wallet": "Ví của tôi",
     "transaction": "Giao dịch",
     "date": "Ngày đặt",
@@ -62,7 +66,7 @@
   },
   "draw": "Rút tiền",
   "empty": "Ví rỗng",
-  "manageShop": "quản lý shop",
+  "manageShop": "Quản lý shop",
   "myShop": "Shop của tôi",
   "createShop": "Tạo shop",
   "shopDetail": {
@@ -118,6 +122,7 @@
     "haveAnAccount": "Đã có sẵn tài khoản?",
     "agreeBy": "Bằng việc đăng ký, bạn đã đồng ý với"
   },
+  "userLabel": { "pointFloor": "Điểm sàn", "discount": "Giảm giá" },
   "signUpForm": {
     "passwordFeedback": "Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!"
   },
@@ -128,7 +133,7 @@
     "date": "Ngày đặt hàng",
     "price": "Tổng",
     "shop": "Shop",
-    "deliveryUnit": "Đơn vị vận chuyển",
+    "deliveryUnit": "Vận chuyển",
     "payment": "Thanh toán",
     "paymentMethod": "Phương thức Thanh toán",
     "status": "Trạng thái",
@@ -142,7 +147,12 @@
     "ship_payment": "Thông tin Vận chuyển & Thanh toán",
     "listProducts": "Danh sách sản phẩm"
   },
-
+  "reviewDetail": {
+    "delete": "Xoá Đánh Giá",
+    "edit": "Chỉnh Sửa Đánh Giá",
+    "content": "Nội dung",
+    "isValid": "Vui lòng đánh giá phù hợp!"
+  },
   "verified": "Đã xác thực",
   "verifyNow": "Xác thực ngay",
   "confirmEmail": "Nhấn để xác thực Email",

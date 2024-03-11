@@ -23,7 +23,7 @@ const ProfilePage = (props) => {
   return (
     <VendorLayout user={user} store={store}>
       <div className='res-mx--12-md'>
-        <div className='position-relative px-2'>
+        <div className='position-relative'>
           <Cover
             cover={store.cover}
             alt={store.name}

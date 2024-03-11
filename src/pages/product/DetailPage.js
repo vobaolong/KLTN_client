@@ -132,13 +132,10 @@ const DetailPage = () => {
                 </div>
                 <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
                   <p className='text-decoration-line-through text-muted mt-1'>
-                    {product.price && formatPrice(product.price.$numberDecimal)}{' '}
-                    ₫
+                    {formatPrice(product.price?.$numberDecimal)} ₫
                   </p>
                   <h2 className='text-primary fs-3 m-0 ms-3'>
-                    {product.salePrice &&
-                      formatPrice(product.salePrice.$numberDecimal)}{' '}
-                    ₫
+                    {formatPrice(product.salePrice?.$numberDecimal)} ₫
                   </h2>
                   <SalePercentLabel salePercent={salePercent} />
 

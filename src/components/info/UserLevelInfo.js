@@ -9,14 +9,13 @@ const UserLevelInfo = ({ user = {}, border = true }) => {
     <div className='container-fluid'>
       <div
         className={
-          border
-            ? 'row bg-body shadow rounded-3'
-            : 'row py-2 border border-primary rounded-1'
+          border ? 'row bg-body shadow rounded-1' : 'row py-2 border rounded-1'
         }
       >
         <div className='col-12'>
           <Paragraph
             label={t('point')}
+            colon
             value={
               <span className='d-flex justify-content-right align-items-center'>
                 {user.point}
@@ -32,8 +31,8 @@ const UserLevelInfo = ({ user = {}, border = true }) => {
             label={t('success/failure')}
             value={
               <span>
-                <i className='far fa-check-circle me-1 text-info'></i>
-                {user.numberOfSuccessfulOrders} /{' '}
+                <i className='far fa-check-circle me-1 text-success'></i>
+                {user.numberOfSuccessfulOrders}/
                 <i className='far fa-times-circle me-1 text-danger'></i>
                 {user.numberOfFailedOrders}
               </span>

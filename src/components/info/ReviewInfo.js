@@ -10,8 +10,10 @@ import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import EditReviewItem from '../item/EditReviewItem'
 import { humanReadableDate } from '../../helper/humanReadable'
+import { useTranslation } from 'react-i18next'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -43,19 +45,19 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   }
 
   return (
-    <div className='row py-2 border border-primary rounded-1 position-relative'>
+    <div className='row py-2 border-bottom position-relative'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title='Xoá Bình Luận'
+          title={t('reviewDetail.delete')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
       )}
 
       <div className='col-12 mx-2 d-flex justify-content-between align-items-center'>
-        <div className='d-flex justify-content-start align-items-center flex-grow-1'>
+        <div className='d-flex justify-content-between align-items-center flex-grow-1'>
           <UserSmallCard user={review.userId} />
           {about && (
             <>
@@ -63,6 +65,12 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               <ProductSmallCard product={review.productId} />
             </>
           )}
+          <span
+            className='text-start top-0'
+            style={{ fontSize: '0.8rem', color: '#555' }}
+          >
+            {humanReadableDate(review.createdAt)}
+          </span>
         </div>
 
         {getToken() && review.userId && getToken()._id === review.userId._id && (
@@ -80,22 +88,21 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
                 <i className='fas fa-trash-alt'></i>
               </button>
 
-              <small className='cus-tooltip-msg'>Xoá Bình Luận</small>
+              <small className='cus-tooltip-msg'>
+                {t('reviewDetail.delete')}
+              </small>
             </div>
           </div>
         )}
       </div>
 
       <div className='col-12'>
-        <Paragraph
-          label={
-            <small>
-              <StarRating stars={review.rating} />
-            </small>
-          }
-          time={humanReadableDate(review.createdAt)}
-          value={review.content}
-        />
+        <div className='row'>
+          <small>
+            <StarRating stars={review.rating} />
+          </small>
+        </div>
+        {review.content}
       </div>
     </div>
   )
