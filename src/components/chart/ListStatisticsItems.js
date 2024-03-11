@@ -19,6 +19,7 @@ import Error from '../ui/Error'
 import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductSmallCard from '../card/ProductSmallCard'
+import { useTranslation } from 'react-i18next'
 
 const groupByFunc = {
   order: groupByDate,
@@ -35,6 +36,7 @@ const titles = {
 }
 
 const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -203,7 +205,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 >
                   <i className='fas fa-user-friends'></i>
                   <span className='ms-3 res-hide'>{sizes.user}</span>
-                  <span className='ms-1 res-hide-lg'>Users</span>
+                  <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
                 </button>
               </div>
 
@@ -224,7 +226,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 >
                   <i className='fas fa-store'></i>
                   <span className='ms-3 res-hide'>{sizes.store}</span>
-                  <span className='ms-1 res-hide-lg'>Stores</span>
+                  <span className='ms-1 res-hide-lg'>{t('admin.stores')}</span>
                 </button>
               </div>
             </>
@@ -247,7 +249,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             >
               <i className='fas fa-box'></i>
               <span className='ms-3 res-hide'>{sizes.product}</span>
-              <span className='ms-1 res-hide-lg'>Products</span>
+              <span className='ms-1 res-hide-lg'>{t('admin.products')}</span>
             </button>
           </div>
 
@@ -266,7 +268,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             >
               <i className='fas fa-clipboard'></i>
               <span className='ms-3 res-hide'>{sizes.order}</span>
-              <span className='ms-1 res-hide-lg'>Orders</span>
+              <span className='ms-1 res-hide-lg'>{t('admin.orders')}</span>
             </button>
           </div>
         </div>
@@ -281,22 +283,22 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   <DropDownMenu
                     listItem={[
                       {
-                        label: 'Hour',
+                        label: t('admin.adDashboard.hour'),
                         value: 'hours',
                         icon: <i className='far fa-clock'></i>
                       },
                       {
-                        label: 'Day',
+                        label: t('admin.adDashboard.day'),
                         value: 'date',
                         icon: <i className='fas fa-calendar-day'></i>
                       },
                       {
-                        label: 'Month',
+                        label: t('admin.adDashboard.month'),
                         value: 'month',
                         icon: <i className='fas fa-calendar-alt'></i>
                       },
                       {
-                        label: 'Year',
+                        label: t('admin.adDashboard.year'),
                         value: 'year',
                         icon: <i className='fas fa-calendar-minus'></i>
                       }
@@ -308,7 +310,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         by: value
                       })
                     }
-                    label='Statistics by'
+                    label={t('admin.adDashboard.statisticsBy')}
                     borderBtn={true}
                   />
                 </div>
@@ -317,19 +319,19 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   <DropDownMenu
                     listItem={[
                       {
-                        label: '5 Products',
+                        label: `5 ${t('admin.products')}`,
                         value: 5
                       },
                       {
-                        label: '10 Products',
+                        label: `10 ${t('admin.products')}`,
                         value: 10
                       },
                       {
-                        label: '50 Products',
+                        label: `50 ${t('admin.products')}`,
                         value: 50
                       },
                       {
-                        label: '100 Products',
+                        label: `100 ${t('admin.products')}`,
                         value: 100
                       }
                     ]}
@@ -340,7 +342,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         sliceEnd: value
                       })
                     }
-                    label='Statistics by'
+                    label={t('admin.adDashboard.statisticsBy')}
                     borderBtn={true}
                   />
                 </div>
@@ -349,12 +351,12 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 <DropDownMenu
                   listItem={[
                     {
-                      label: 'Line',
+                      label: t('admin.adDashboard.line'),
                       value: 'line',
                       icon: <i className='fas fa-chart-line'></i>
                     },
                     {
-                      label: 'Bar',
+                      label: t('admin.adDashboard.bar'),
                       value: 'bar',
                       icon: <i className='fas fa-chart-bar'></i>
                     }
@@ -371,7 +373,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                       type: value
                     })
                   }
-                  label='Chart type'
+                  label={t('admin.adDashboard.chartType')}
                   borderBtn={true}
                 />
               </div>
@@ -396,7 +398,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   sliceEnd={options.sliceEnd}
                 />
               )}
-              {options.type === 'doughnut' && (
+              {/* {options.type === 'doughnut' && (
                 <DoughnutChart
                   by={options.by}
                   items={items[options.flag]}
@@ -404,7 +406,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   title={titles[options.flag]}
                   sliceEnd={options.sliceEnd}
                 />
-              )}
+              )} */}
             </div>
           </div>
 

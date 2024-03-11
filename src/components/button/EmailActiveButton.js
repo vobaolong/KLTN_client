@@ -56,7 +56,7 @@ const EmailActiveButton = ({
 
       {(googleId || facebookId) && (
         <div className='position-relative d-inline-block'>
-          <span className='badge bg-primary d-inline-flex align-items-end cus-tooltip cus-tooltip'>
+          <span className='badge bg-primary d-inline-flex align-items-end cus-tooltip'>
             {googleId && (
               <img
                 className='social-img rounded-circle me-1 social-img--small'

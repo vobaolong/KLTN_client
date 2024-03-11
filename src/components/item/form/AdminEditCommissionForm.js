@@ -106,7 +106,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title={t('commissDetail.edit')}
+          title={t('commisDetail.edit')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />

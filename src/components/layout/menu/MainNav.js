@@ -110,7 +110,7 @@ const MainNav = ({ navFor = 'user' }) => {
                       className='btn btn-outline-light cus-outline ripple cus-tooltip'
                       to='/cart'
                     >
-                      <i className='fas fa-bag-storeping'></i>
+                      <i className='fas fa-bag-shopping'></i>
                     </Link>
                     {
                       <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary cus-tooltip'>
@@ -131,7 +131,9 @@ const MainNav = ({ navFor = 'user' }) => {
                   >
                     <i className='fas fa-user-tie'></i>
                   </Link>
-                  <small className='cus-tooltip-msg'>Dashboard</small>
+                  <small className='cus-tooltip-msg'>
+                    {t('admin.adDashboard.dashboard')}
+                  </small>
                 </li>
               )}
 
@@ -229,7 +231,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   {navFor === 'user' && getToken().role === 'user' && (
                     <li className='nav-item p-2'>
                       <Link className='link-hover link-dark d-block' to='/cart'>
-                        <i className='fas fa-bag-storeping me-2'></i>
+                        <i className='fas fa-bag-shopping me-2'></i>
                         {t('cart')}
                       </Link>
                     </li>
@@ -242,7 +244,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/admin/dashboard'
                       >
                         <i className='fas fa-user-tie me-2'></i>
-                        Dashboard
+                        {t('admin.adDashboard.dashboard')}
                       </Link>
                     </li>
                   )}

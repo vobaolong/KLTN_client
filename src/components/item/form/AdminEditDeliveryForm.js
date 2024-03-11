@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next'
 
 const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -107,7 +106,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit delivery'
+          title={t('deliveryDetail.edit')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -117,10 +116,10 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Delivery unit name'
+            label={t('deliveryDetail.name')}
             value={delivery.name}
             isValid={delivery.isValidName}
-            feedback='Please provide a valid delivery name.'
+            feedback={t('deliveryDetail.nameValid')}
             validator='name'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -130,10 +129,10 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Description'
+            label={t('deliveryDetail.description')}
             value={delivery.description}
             isValid={delivery.isValidDescription}
-            feedback='Please provide a valid delivery description.'
+            feedback={t('deliveryDetail.bioValid')}
             validator='bio'
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
@@ -145,10 +144,10 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Price (₫)'
+            label={`${t('deliveryDetail.cost')} (₫)`}
             value={delivery.price}
             isValid={delivery.isValidPrice}
-            feedback='Please provide a valid price (>0).'
+            feedback={t('deliveryDetail.costValid')}
             validator='greaterThanOrEqualTo'
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}

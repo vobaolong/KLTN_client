@@ -168,7 +168,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title={t('commissDetail.del')}
+          title={t('commisDetail.del')}
           // message={
           //   <span>
           //     Are you sure you want to delete{' '}
@@ -230,7 +230,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('commissDetail.cost')}
+                  title={t('commisDetail.cost')}
                   sortBy='cost'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -240,7 +240,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-black'
                 >
-                  {t('commissDetail.description')}
+                  {t('commisDetail.description')}
                 </span>
               </th>
               <th scope='col'>
@@ -333,7 +333,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                       onClick={() => handleRestoreCommission(commission)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
+                      <span className='ms-2 res-hide'>Hoàn lại</span>
                     </button>
                   )}
                 </td>
@@ -346,7 +346,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       <Modal
         id='edit-commission-form'
         hasCloseBtn={false}
-        title={t('commissDetail.edit')}
+        title={t('commisDetail.edit')}
       >
         <AdminEditCommissionForm
           oldCommission={editedCommission}

@@ -130,7 +130,7 @@ const AccountInit = ({ user, actions }) => {
               className='list-group-item your-account-options-item ripple text-capitalize'
               to='/account/purchase'
             >
-              <i className='fas fa-storeping-bag'></i>
+              <i class='fa-solid fa-bag-shopping'></i>
               {t('userDetail.myPurchase')}
             </Link>
           )}

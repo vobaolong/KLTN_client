@@ -1,4 +1,29 @@
 {
+  "admin": {
+    "adDashboard": {
+      "dashboard": "Dashboard",
+      "hour": "Hour",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year",
+      "statisticsBy": "Statistics by",
+      "chartType": "Chart type",
+      "line": "Line",
+      "bar": "Bar"
+    },
+    "users": "Users",
+    "stores": "Shops",
+    "orders": "Orders",
+    "transactions": "Transactions",
+    "categories": "Categories",
+    "variants": "Variants",
+    "products": "products",
+    "levels": "Levels",
+    "commissions": "Commissions",
+    "deliveries": "Deliveries",
+    "setting": "Setting",
+    "language": "Language"
+  },
   "order": "Order",
   "home": "Home",
   "categories": "Categories",
@@ -9,18 +34,16 @@
   "favProduct": "Favorite Product",
   "favStore": "Favorite Store",
   "product": "Product",
-  "settingDetail": {
-    "setting": "Setting",
-    "language": "Language"
-  },
   "productDetail": {
     "sold": "Sold",
     "sale": "OFF",
+    "description": "Description",
     "vat": "(VAT included)",
     "soldOut": "The product has been sold out!",
     "addToCart": "Add To Cart",
     "error": "The product is out of business, please remove it from your cart, you can continue with others",
-    "warning": "Please update the quantity. Product only"
+    "warning": "Please update the quantity. Product only",
+    "productReview": "Product Review"
   },
   "filters": {
     "filter": "Filters",
@@ -77,13 +100,47 @@
   "manageStore": "Store manager",
   "myStore": "My Stores",
   "createStore": "Create store",
-  "commissDetail": {
+  "commisDetail": {
     "description": "Description",
     "cost": "Cost",
     "add": "Add Commission",
     "del": "Delete Commission",
     "edit": "Edit Commission"
   },
+  "deliveryDetail": {
+    "deliveryUnit": "Delivery Unit",
+    "name": "Delivery unit name",
+    "description": "Description",
+    "cost": "Cost",
+    "add": "Add Delivery Unit",
+    "del": "Delete Delivery Unit",
+    "edit": "Edit Delivery Unit",
+    "nameValid": "Please provide a valid delivery unit name!",
+    "bioValid": "Please provide a valid delivery unit  description!",
+    "costValid": "Please provide a valid cost (>0₫)"
+  },
+  "variantDetail": {
+    "variants": "Variants",
+    "categories": "Categories",
+    "add": "Add Variant",
+    "edit": "Edit Variant",
+    "del": "Delete Variant",
+    "res": "Restore Variant",
+    "name": "Variant name",
+    "status": "Status",
+    "nameValid": "Please provide a valid style name!",
+    "selectCategory": "Select category",
+    "required": "No categories selected",
+    "value": {
+      "addBtn": "Add variant value",
+      "edit": "Edit variant value",
+      "res": "Restore variant value",
+      "add": "Add New Value For",
+      "value": "Value",
+      "valueOf": "Value of"
+    }
+  },
+
   "storeDetail": {
     "storeName": "Store Name",
     "name": "Name",
@@ -119,6 +176,7 @@
     "delete": "Delete",
     "submit": "Submit",
     "signIn": "Sign In",
+    "signInToShopping": "Sign In To Shopping",
     "logout": "Logout",
     "signUp": "Sign Up",
     "forgotPW": "Forgot Password",
@@ -199,7 +257,7 @@
     "policy": "Policy",
     "title": "ZenMetic - Fast, Quality, Affordable",
     "p1": "ZenMetic has it all",
-    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, ZenMetic brings you an online storeping experience that starts with trust.",
+    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, ZenMetic brings you an online shopping experience that starts with trust.",
     "p2": "Overflowing with promotions and offers",
     "small2": "Do you want to hunt for hot deals? ZenMetic has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because ZenMetic has millions of products in the Freeship+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
   }

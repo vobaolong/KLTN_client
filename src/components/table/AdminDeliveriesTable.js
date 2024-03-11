@@ -19,7 +19,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 
-const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
+const AdminDeliveriesTable = ({ heading = '' }) => {
   const { t } = useTranslation()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -208,7 +208,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Name'
+                  title={t('deliveryDetail.name')}
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -217,7 +217,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Price'
+                  title={t('deliveryDetail.cost')}
                   sortBy='price'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -225,23 +225,22 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
               <th scope='col'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
-                  Delivery
+                  {t('deliveryDetail.description')}
                 </span>
               </th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('orderDetail.status')}
                   sortBy='isDeleted'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
 
               <th scope='col'>
-                {' '}
                 {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
@@ -266,8 +265,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                 <td
                   className='text-start p-2 lh-sm'
                   style={{
-                    whiteSpace: 'normal',
-                    width: '600px'
+                    whiteSpace: 'normal'
                   }}
                 >
                   <div
@@ -301,7 +299,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                     onClick={() => handleEditCommission(delivery)}
                   >
                     <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>Edit</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 
                   {!delivery.isDeleted ? (
@@ -320,11 +318,10 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                     <button
                       type='button'
                       className='btn btn-outline-success ripple'
-                      style={{ width: '95px' }}
                       onClick={() => handleRestoreCommission(delivery)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
+                      <span className='ms-2 res-hide'>Hoàn lại</span>
                     </button>
                   )}
                 </td>
@@ -334,7 +331,11 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
         </table>
       </div>
 
-      <Modal id='edit-delivery-form' hasCloseBtn={false} title='Edit delivery'>
+      <Modal
+        id='edit-delivery-form'
+        hasCloseBtn={false}
+        title={t('deliveryDetail.edit')}
+      >
         <AdminEditDeliveryForm
           oldDelivery={editedDelivery}
           onRun={() => setRun(!run)}

@@ -2,8 +2,10 @@ import { Link, useLocation } from 'react-router-dom'
 import Avatar from '../../image/Avatar'
 import ManagerRoleLabel from '../../label/ManagerRoleLabel'
 import StoreLicenseLabel from '../../label/StoreLicenseLabel'
+import { useTranslation } from 'react-i18next'
 
 const VendorSideBar = ({ user = {}, store = {} }) => {
+  const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
 
   return (
@@ -58,7 +60,9 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             style={{ height: '48px' }}
           >
             <i className='fas fa-chart-pie'></i>
-            <span className='ms-3 res-hide-xl'>Dashboard</span>
+            <span className='ms-3 res-hide-xl'>
+              {t('admin.adDashboard.dashboard')}
+            </span>
           </Link>
         </li>
 

@@ -8,7 +8,7 @@ const SettingPage = (props) => {
   const user = useSelector((state) => state.account.user)
   return (
     <AdminLayout user={user}>
-      <AdminSetting heading={t('settingDetail.setting')} />
+      <AdminSetting heading={t('admin.setting')} />
     </AdminLayout>
   )
 }

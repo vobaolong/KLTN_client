@@ -12,11 +12,7 @@ const AdminSetting = ({ heading = '' }) => {
       {isLoading && <Loading />}
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
       <div style={{ maxWidth: 'fit-content' }}>
-        <Paragraph
-          label={t('settingDetail.language')}
-          colon
-          value={<Language />}
-        />
+        <Paragraph label={t('admin.language')} colon value={<Language />} />
       </div>
     </div>
   )

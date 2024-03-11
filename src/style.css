@@ -1030,6 +1030,12 @@ header {
 	border-color: #ed4956;
 }
 
+.nav-link,
+.nav-link:focus,
+.nav-link:hover {
+	color: var(--primary-color);
+}
+
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
 	background-color: var(--primary-color);
@@ -1595,7 +1601,7 @@ textarea {
 .cus-rating span.checked label i,
 .cus-rating span.checked~span label i {
 	color: #ffd700 !important;
-	/* transition: color 0.3s ease-in; */
+	transition: color 0.3s ease-in;
 }
 
 .offcanvas-start {

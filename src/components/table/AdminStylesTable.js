@@ -14,7 +14,7 @@ import CategorySmallCard from '../card/CategorySmallCard'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 
-const AdminStylesTable = ({ heading = 'Style' }) => {
+const AdminStylesTable = ({ heading = '' }) => {
   const { t } = useTranslation()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -158,7 +158,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete style'
+          title={t('variantDetail.del')}
           color='danger'
           onSubmit={onSubmitDelete}
           onClose={() => setIsConfirming(false)}
@@ -166,7 +166,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
       )}
       {isConfirming1 && (
         <ConfirmDialog
-          title='Restore style'
+          title={t('variantDetail.res')}
           onSubmit={onSubmitRestore}
           onClose={() => setIsConfirming1(false)}
         />
@@ -188,7 +188,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
               to='/admin/style/createNewStyle'
             >
               <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>Add style</span>
+              <span className='ms-2 res-hide'>{t('variantDetail.add')}</span>
             </Link>
           </div>
         </div>
@@ -206,7 +206,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Style'
+                  title={t('variantDetail.name')}
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -215,7 +215,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Of categories'
+                  title={t('variantDetail.categories')}
                   sortBy='categoryIds '
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -224,7 +224,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('variantDetail.status')}
                   sortBy='isDeleted'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -279,11 +279,10 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                 <td className='text-nowrap'>
                   <Link
                     type='button'
-                    className='btn btn-golden ripple me-2'
+                    className='btn btn-secondary ripple me-2'
                     to={`/admin/style/values/${style._id}`}
                   >
-                    <i className='fas fa-list-ul'></i>
-                    <span className='ms-2 res-hide'>Detail</span>
+                    <i class='fas fa-info-circle'></i>
                   </Link>
 
                   <Link
@@ -292,7 +291,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                     to={`/admin/style/editStyle/${style._id}`}
                   >
                     <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>Edit</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </Link>
 
                   {!style.isDeleted ? (
@@ -308,15 +307,16 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                       </span>
                     </button>
                   ) : (
-                    <button
-                      type='button'
-                      className='btn btn-outline-success ripple'
-                      style={{ width: '95px' }}
-                      onClick={() => handleRestore(style)}
-                    >
-                      <i className='fas fa-trash-restore-alt'></i>
-                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
-                    </button>
+                    <>
+                      <button
+                        type='button'
+                        className='btn btn-outline-success ripple cus-tooltip'
+                        onClick={() => handleRestore(style)}
+                      >
+                        <i className='fas fa-trash-restore-alt'></i>
+                      </button>
+                      <small className='cus-tooltip-msg'>Hoàn lại</small>
+                    </>
                   )}
                 </td>
               </tr>

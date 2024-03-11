@@ -57,7 +57,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
       )}
 
       <div className='col-12 mx-2 d-flex justify-content-between align-items-center'>
-        <div className='d-flex justify-content-between align-items-center flex-grow-1'>
+        <div className='d-flex justify-content-between  flex-grow-1 me-3'>
           <UserSmallCard user={review.userId} />
           {about && (
             <>
@@ -65,10 +65,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               <ProductSmallCard product={review.productId} />
             </>
           )}
-          <span
-            className='text-start top-0'
-            style={{ fontSize: '0.8rem', color: '#555' }}
-          >
+          <span style={{ fontSize: '0.8rem', top: '0px', color: '#555' }}>
             {humanReadableDate(review.createdAt)}
           </span>
         </div>

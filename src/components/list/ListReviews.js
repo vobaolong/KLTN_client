@@ -11,7 +11,7 @@ const ListReviews = ({
   productId = '',
   storeId = '',
   userId = '',
-  heading = 'Đánh Giá Sản Phẩm'
+  heading = ''
 }) => {
   const { t } = useTranslation()
 
@@ -30,7 +30,7 @@ const ListReviews = ({
     rating: '',
     sortBy: 'rating',
     order: 'desc',
-    limit: 6,
+    limit: 10,
     page: 1
   })
 
@@ -125,7 +125,7 @@ const ListReviews = ({
 
   return (
     <div className='container-fluid position-relative'>
-      {heading && <h5 className='mb-3'>{heading}</h5>}
+      {heading && <h5 className='my-3'>{heading}</h5>}
 
       {isLoading && <Loading />}
       {error && <Error msg={error} />}

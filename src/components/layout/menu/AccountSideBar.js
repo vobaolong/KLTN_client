@@ -43,7 +43,7 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'purchase' ? 'active' : ''
               }`}
             >
-              <i className='fas fa-storeping-bag'></i>
+              <i class='fa-solid fa-bag-shopping'></i>
               <span className='ms-3 res-hide-xl text-capitalize'>
                 {t('userDetail.myPurchase')}
               </span>

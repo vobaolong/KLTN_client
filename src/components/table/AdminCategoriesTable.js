@@ -348,7 +348,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
                       onClick={() => handleRestoreCategory(category)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
+                      <span className='ms-2 res-hide'>Hoàn lại</span>
                     </button>
                   )}
                 </td>

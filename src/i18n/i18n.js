@@ -15,8 +15,8 @@ const defaultNS = 'home'
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'vi',
-  fallbackLng: 'vi',
+  lng: 'en',
+  fallbackLng: 'en',
   ns: 'home',
   defaultNS,
   interpolation: {

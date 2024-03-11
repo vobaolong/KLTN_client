@@ -13,7 +13,7 @@ const AdminCreateCommissionItem = ({ onRun = () => {} }) => {
         data-bs-target='#admin-create-commission-form'
       >
         <i className='fas fa-plus-circle'></i>
-        <span className='ms-2 res-hide'>{t('commissDetail.add')}</span>
+        <span className='ms-2 res-hide'>{t('commisDetail.add')}</span>
       </button>
 
       <Modal

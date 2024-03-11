@@ -1,4 +1,29 @@
 {
+  "admin": {
+    "adDashboard": {
+      "dashboard": "Quản lý",
+      "hour": "Giờ",
+      "day": "Ngày",
+      "month": "Tháng",
+      "year": "Năm",
+      "statisticsBy": "Thống kê theo",
+      "chartType": "Loại biểu đồ",
+      "line": "Đường",
+      "bar": "Cột"
+    },
+    "users": "Người dùng",
+    "stores": "Shops",
+    "orders": "Đơn hàng",
+    "transactions": "Giao dịch",
+    "categories": "Danh mục",
+    "variants": "Biến thể",
+    "products": "Sản phẩm",
+    "levels": "Cấp",
+    "commissions": "Commissions",
+    "deliveries": "Vận chuyển",
+    "setting": "Cài đặt",
+    "language": "Ngôn ngữ"
+  },
   "order": "Đơn hàng",
   "home": "Trang chủ",
   "categories": "Danh Mục",
@@ -9,18 +34,16 @@
   "favProduct": "Sản Phẩm Yêu Thích",
   "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
-  "settingDetail": {
-    "setting": "Cài đặt",
-    "language": "Ngôn ngữ"
-  },
   "productDetail": {
     "sold": "Đã bán",
     "sale": "Giảm",
+    "description": "Thông tin sản phẩm",
     "vat": "(Đã bao gồm VAT)",
     "soldOut": "Sản phẩm đã được bán hết!",
     "addToCart": "Thêm vào giỏ hàng",
     "error": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa nó khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác",
-    "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn"
+    "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn",
+    "productReview": "Đánh giá sản phẩm"
   },
   "filters": {
     "filter": "Bộ lọc",
@@ -79,13 +102,47 @@
   "manageStore": "Quản lý store",
   "myStore": "Store của tôi",
   "createStore": "Tạo store",
-  "commissDetail": {
+  "commisDetail": {
     "description": "Mô tả",
     "cost": "Phí",
     "add": "Thêm Commission",
     "del": "Xoá Commission",
     "edit": "Sửa Commission"
   },
+  "deliveryDetail": {
+    "deliveryUnit": "Đơn vị vận chuyển",
+    "name": "Tên ĐVVC",
+    "description": "Mô tả",
+    "cost": "Phí",
+    "add": "Thêm Đơn Vị Vận Chuyển",
+    "del": "Xoá Đơn Vị Vận Chuyển",
+    "edit": "Sửa Đơn Vị Vận Chuyển",
+    "nameValid": "Vui lòng cung cấp tên đvvc phù hợp!",
+    "bioValid": "Vui lòng cung cấp mô tả phù hợp!",
+    "costValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
+  },
+  "variantDetail": {
+    "variants": "Biến thể",
+    "categories": "Danh mục",
+    "add": "Thêm Biến thể",
+    "edit": "Sửa Biến thể",
+    "del": "Xoá Biến thể",
+    "res": "Khôi phục biến thể",
+    "name": "Tên Biến thể",
+    "status": "Trạng thái",
+    "nameValid": "Vui lòng cung cấp tên biến thể phù hợp!",
+    "selectCategory": "Chọn danh mục",
+    "required": "Không danh mục nào được chọn",
+    "value": {
+      "addBtn": "Thêm giá trị biến thể",
+      "edit": "Sửa giá trị biến thể",
+      "res": "Khôi phục giá trị biến thể",
+      "add": "Thêm giá trị mới cho",
+      "value": "Giá trị",
+      "valueOf": "Giá trị của"
+    }
+  },
+
   "storeDetail": {
     "storeName": "Tên Store",
     "name": "Tên",
@@ -121,6 +178,7 @@
     "delete": "Xoá",
     "submit": "Gửi",
     "signIn": "Đăng nhập",
+    "signInToShopping": "Đăng nhập để mua hàng",
     "logout": "Đăng xuất",
     "signUp": "Đăng ký",
     "forgotPW": "Quên mật khẩu",

@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import Avatar from '../../image/Avatar'
+import { useTranslation } from 'react-i18next'
 
 const AdminSideBar = ({ user = {} }) => {
+  const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 shadow bg-body rounded res-account-sidebar'>
@@ -23,7 +25,9 @@ const AdminSideBar = ({ user = {} }) => {
             style={{ height: '48px' }}
           >
             <i className='fas fa-chart-pie'></i>
-            <span className='ms-3 res-hide-xl'>Dashboard</span>
+            <span className='ms-3 res-hide-xl'>
+              {t('admin.adDashboard.dashboard')}
+            </span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -34,7 +38,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-user-friends'></i>
-            <span className='ms-3 res-hide-xl'>Users</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.users')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -45,7 +49,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-store'></i>
-            <span className='ms-3 res-hide-xl'>Stores</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.stores')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -56,7 +60,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-clipboard'></i>
-            <span className='ms-3 res-hide-xl'>Orders</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.orders')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -68,7 +72,7 @@ const AdminSideBar = ({ user = {} }) => {
             style={{ height: '48px', whiteSpace: 'nowrap' }}
           >
             <i className='fas fa-retweet'></i>
-            <span className='ms-3 res-hide-xl'>Transaction</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.transactions')}</span>
             {/* <span className="ms-3 d-none res-dis-lg res-hide-xl">Trans</span> */}
           </Link>
         </li>
@@ -79,8 +83,8 @@ const AdminSideBar = ({ user = {} }) => {
               path === 'category' ? 'active' : ''
             }`}
           >
-            <i className='fas fa-boxes'></i>
-            <span className='ms-3 res-hide-xl'>Category</span>
+            <i class='fa-solid fa-list'></i>
+            <span className='ms-3 res-hide-xl'>{t('admin.categories')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -90,8 +94,8 @@ const AdminSideBar = ({ user = {} }) => {
               path === 'style' ? 'active' : ''
             }`}
           >
-            <i className='fab fa-black-tie'></i>
-            <span className='ms-3 res-hide-xl'>Style</span>
+            <i class='fa-solid fa-palette'></i>
+            <span className='ms-3 res-hide-xl'>{t('admin.variants')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -102,7 +106,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-box'></i>
-            <span className='ms-3 res-hide-xl'>Products</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.products')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -113,7 +117,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-shield-alt'></i>
-            <span className='ms-3 res-hide-xl'>Level</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.levels')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -125,7 +129,7 @@ const AdminSideBar = ({ user = {} }) => {
             style={{ height: '48px', whiteSpace: 'nowrap' }}
           >
             <i className='fas fa-calculator'></i>
-            <span className='ms-3 res-hide-xl'>Commission</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.commissions')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -136,7 +140,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i className='fas fa-truck'></i>
-            <span className='ms-3 res-hide-xl'>Delivery</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.deliveries')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -147,7 +151,7 @@ const AdminSideBar = ({ user = {} }) => {
             }`}
           >
             <i class='fa-solid fa-gear'></i>
-            <span className='ms-3 res-hide-xl'>Setting</span>
+            <span className='ms-3 res-hide-xl'>{t('admin.setting')}</span>
           </Link>
         </li>
       </ul>

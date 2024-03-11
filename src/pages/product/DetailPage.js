@@ -23,6 +23,7 @@ import SigninButton from '../../components/item/SigninItem'
 import ListReviews from '../../components/list/ListReviews'
 import SalePercentLabel from '../../components/label/SalePercentLabel'
 import { useTranslation } from 'react-i18next'
+import { FacebookShareButton } from 'react-share'
 
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -152,7 +153,7 @@ const DetailPage = () => {
                   {!getToken() && (
                     <SigninButton
                       className='w-100 btn-lg'
-                      title='Sign in to store!'
+                      title={t('button.signInToShopping')}
                     />
                   )}
                   {product.storeId?.isOpen &&
@@ -174,6 +175,20 @@ const DetailPage = () => {
                       className='mt-2 btn-lg'
                     />
                   )}
+                  <div>
+                    <FacebookShareButton
+                      className='mt-2 cus-tooltip ripple'
+                      url={
+                        window.location.href
+                          ? 'https://hasaki.vn/san-pham/gel-rua-mat-la-roche-posay-cho-da-dau-nhay-cam-400ml-68810.html?gad_source=1&gclid=CjwKCAjw17qvBhBrEiwA1rU9wwx0pGlaJp9LXom7lUNIZFUsUSDTAe2iT_w7EfZcGZdnsMMcaIJROxoCL-oQAvD_BwE'
+                          : ''
+                      } // Set the URL to the current page
+                      quote={product.name} // Set the quote to the product name
+                    >
+                      <i className='fa-solid fa-share-from-square text-secondary'></i>
+                    </FacebookShareButton>
+                    <small className='cus-tooltip-msg'>hello</small>
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,7 +200,7 @@ const DetailPage = () => {
                       <ul class='nav nav-tabs' id='myTab' role='tablist'>
                         <li class='nav-item' role='presentation'>
                           <a
-                            class='nav-link active'
+                            className='nav-link active'
                             id='details-tab'
                             data-bs-toggle='tab'
                             href='#details'
@@ -193,12 +208,12 @@ const DetailPage = () => {
                             aria-controls='details'
                             aria-selected='true'
                           >
-                            Chi tiết sản phẩm
+                            {t('productDetail.description')}
                           </a>
                         </li>
                         <li class='nav-item' role='presentation'>
                           <a
-                            class='nav-link'
+                            className='nav-link'
                             id='reviews-tab'
                             data-bs-toggle='tab'
                             href='#reviews'
@@ -206,7 +221,7 @@ const DetailPage = () => {
                             aria-controls='reviews'
                             aria-selected='false'
                           >
-                            Review
+                            {t('productDetail.productReview')}
                           </a>
                         </li>
                       </ul>
@@ -232,7 +247,10 @@ const DetailPage = () => {
                           aria-labelledby='reviews-tab'
                         >
                           <div id='review'>
-                            <ListReviews productId={product._id} />
+                            <ListReviews
+                              heading={t('productDetail.productReview')}
+                              productId={product._id}
+                            />
                           </div>
                         </div>
                       </div>

@@ -33,8 +33,6 @@ const SigninButton = (className = '') => {
           <SignupForm onSwap={toggleSigninFlag} />
         )}
       </Modal>
-
-      <small className='cus-tooltip-msg'>{t('button.signIn')}</small>
     </div>
   )
 }
