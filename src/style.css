@@ -16,6 +16,10 @@
 	--dark-color: #2962FF;
 }
 
+.bg-muted {
+	background-color: #615c5c24;
+}
+
 .scroll-to-top {
 	background-color: var(--primary-color) !important;
 	border-radius: 10% !important;
@@ -282,11 +286,17 @@ header {
 .hidden-avatar>span>a>img {
 	display: none;
 	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+
+.hidden-avatar>span>:last-child {
+	margin-left: 0px !important;
 }
 
 .hidden-name>span>:last-child {
 	display: none;
 	margin-right: 0px !important;
+	margin-left: 0px !important;
 }
 
 .box-shadow {
@@ -533,7 +543,7 @@ header {
 }
 
 .your-account,
-.your-shop {
+.your-store {
 	display: block;
 	text-decoration: none;
 	position: relative;
@@ -541,7 +551,7 @@ header {
 }
 
 .your-account-card,
-.your-shop-card {
+.your-store-card {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -550,7 +560,7 @@ header {
 }
 
 .your-account-img,
-.your-shop-img {
+.your-store-img {
 	width: 26px;
 	height: 26px;
 	object-fit: cover;
@@ -560,7 +570,7 @@ header {
 }
 
 .your-account-name,
-.your-shop-name {
+.your-store-name {
 	font-size: 0.9rem;
 	max-width: fit-content;
 	overflow: hidden;
@@ -571,7 +581,7 @@ header {
 }
 
 .your-account-options,
-.your-shop-options {
+.your-store-options {
 	position: absolute;
 	top: 110%;
 	left: 50%;
@@ -581,7 +591,7 @@ header {
 }
 
 .your-account-options::before,
-.your-shop-options::before {
+.your-store-options::before {
 	content: '';
 	height: 10px;
 	width: 100%;
@@ -592,7 +602,7 @@ header {
 }
 
 .your-account-options::after,
-.your-shop-options::after {
+.your-store-options::after {
 	content: '';
 	position: absolute;
 	top: -14px;
@@ -606,12 +616,12 @@ header {
 }
 
 .your-account:hover .your-account-options,
-.your-shop:hover .your-shop-options {
+.your-store:hover .your-store-options {
 	display: block;
 }
 
 .your-account-options-item,
-.your-shop-options-item {
+.your-store-options-item {
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: left;
@@ -623,14 +633,14 @@ header {
 
 .your-account-options-item:hover,
 .your-account-options-item:hover i,
-.your-shop-options-item:hover,
-.your-shop-options-item:hover i {
+.your-store-options-item:hover,
+.your-store-options-item:hover i {
 	color: var(--white-color);
 	background-color: var(--primary-color);
 }
 
 .your-account-options-item i,
-.your-shop-options-item i {
+.your-store-options-item i {
 	display: block;
 	font-size: 1.2rem;
 	width: 24px;

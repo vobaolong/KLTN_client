@@ -315,7 +315,7 @@ const AdminStylesTable = ({ heading = 'Style' }) => {
                       onClick={() => handleRestore(style)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Khôi Phục</span>
+                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
                     </button>
                   )}
                 </td>

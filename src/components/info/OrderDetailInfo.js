@@ -152,7 +152,7 @@ const OrderDetailInfo = ({
           </div>
           <div className='col-sm-6'>
             <Paragraph
-              label={t('orderDetail.shop')}
+              label={t('orderDetail.store')}
               colon
               value={
                 <Link

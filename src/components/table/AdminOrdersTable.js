@@ -114,11 +114,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-end'>
+        <table className='table align-middle table-hover table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -127,16 +127,16 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-end'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Created at'
+                  title='Order Placed'
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-end'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -145,7 +145,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -154,16 +154,16 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Seller'
+                  title='Store'
                   sortBy='storeId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-end'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -172,11 +172,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-end'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Delivery'
+                  title='Delivery Unit'
                   sortBy='deliveryId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -185,7 +185,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Payment'
+                  title='Payment Method'
                   sortBy='isPaidBefore'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -222,15 +222,17 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     ₫
                   </small>
                 </td>
-                <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
-                  <small>
+                <td className='text-start' style={{ maxWidth: '300px' }}>
+                  <small className='hidden-avatar px-2'>
                     <UserSmallCard user={order.userId} />
                   </small>
                 </td>
-                <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
-                  <StoreSmallCard store={order.storeId} />
+                <td className='text-start' style={{ maxWidth: '300px' }}>
+                  <small className='hidden-avatar'>
+                    <StoreSmallCard store={order.storeId} />
+                  </small>
                 </td>
-                <td>
+                <td className='text-start'>
                   <small className='text-nowrap'>
                     <strong>For Seller: </strong>
                     {order.amountToStore &&
@@ -245,7 +247,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     ₫
                   </small>
                 </td>
-                <td>
+                <td className='text-end'>
                   {order.deliveryId && (
                     <small>
                       <strong>{order.deliveryId.name}</strong>
@@ -268,7 +270,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   <div className='position-relative d-inline-block'>
                     <Link
                       type='button'
-                      className='btn btn-primary ripple cus-tooltip'
+                      className='btn btn-secondary rounded-1 ripple cus-tooltip'
                       to={`/admin/order/detail/${order._id}`}
                     >
                       <i className='fas fa-info-circle'></i>

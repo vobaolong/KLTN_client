@@ -14,7 +14,7 @@ const UserSmallCard = ({
     style={style}
   >
     <Link
-      className='text-reset text-decoration-none me-2'
+      className='text-reset text-decoration-none'
       title={user.firstName + ' ' + user.lastName}
       to={link}
     >
@@ -26,7 +26,7 @@ const UserSmallCard = ({
     </Link>
 
     <Link
-      className='text-reset link-hover'
+      className='text-reset link-hover ms-2'
       title={user.firstName + ' ' + user.lastName}
       to={link}
       style={style}

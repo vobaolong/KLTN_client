@@ -51,14 +51,13 @@ const MainNav = ({ navFor = 'user' }) => {
         >
           <Logo />
         </Link>
-
         {navFor === 'user' && <SearchBar />}
         {navFor !== 'user' && (
           <h1 className='logo text-white m-0'>
             {navFor} <span className='res-hide'>dashboard</span>
           </h1>
         )}
-        {navFor === 'user' && getToken().role !== 'admin' && <Language />}
+        {navFor === 'user' && getToken().role === 'user' && <Language />}
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -99,7 +98,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     <i className='fas fa-store'></i>
                   </Link>
                   <small className='cus-tooltip-msg text-capitalize'>
-                    {t('manageShop')}
+                    {t('manageStore')}
                   </small>
                 </li>
               )} */}
@@ -111,7 +110,7 @@ const MainNav = ({ navFor = 'user' }) => {
                       className='btn btn-outline-light cus-outline ripple cus-tooltip'
                       to='/cart'
                     >
-                      <i className='fas fa-bag-shopping'></i>
+                      <i className='fas fa-bag-storeping'></i>
                     </Link>
                     {
                       <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary cus-tooltip'>
@@ -222,7 +221,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/storeManager'
                       >
                         <i className='fas fa-store me-2'></i>
-                        {t('manageShop')}
+                        {t('manageStore')}
                       </Link>
                     </li>
                   )}
@@ -230,7 +229,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   {navFor === 'user' && getToken().role === 'user' && (
                     <li className='nav-item p-2'>
                       <Link className='link-hover link-dark d-block' to='/cart'>
-                        <i className='fas fa-bag-shopping me-2'></i>
+                        <i className='fas fa-bag-storeping me-2'></i>
                         {t('cart')}
                       </Link>
                     </li>

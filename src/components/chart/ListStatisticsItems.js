@@ -224,7 +224,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 >
                   <i className='fas fa-store'></i>
                   <span className='ms-3 res-hide'>{sizes.store}</span>
-                  <span className='ms-1 res-hide-lg'>Shops</span>
+                  <span className='ms-1 res-hide-lg'>Stores</span>
                 </button>
               </div>
             </>

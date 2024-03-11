@@ -160,19 +160,18 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
             <tr>
               <th scope='col'></th>
               <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Shop'
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
+                <span
+                  style={{ fontWeight: '400', fontSize: '.875rem' }}
+                  className='text-dark'
+                >
+                  Store Name
+                </span>
               </th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.rating')}
+                  title='Rating'
                   sortBy='rating'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -181,7 +180,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.status')}
+                  title='Status'
                   sortBy='isOpen'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -190,7 +189,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.commissions')}
+                  title='Commission'
                   sortBy='commissionId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -199,7 +198,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('joined')}
+                  title='Joined'
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

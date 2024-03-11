@@ -172,10 +172,10 @@ const CreateStoreForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label={t('shopDetail.shopName')}
+            label={t('storeDetail.storeName')}
             value={store.name}
             isValid={store.isValidName}
-            feedback={t('shopDetailValid.nameValid')}
+            feedback={t('storeDetailValid.nameValid')}
             validator='name'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -188,7 +188,7 @@ const CreateStoreForm = (props) => {
             label='Bio'
             value={store.bio}
             isValid={store.isValidBio}
-            feedback={t('shopDetailValid.bioValid')}
+            feedback={t('storeDetailValid.bioValid')}
             validator='bio'
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
@@ -201,7 +201,7 @@ const CreateStoreForm = (props) => {
             size='avatar'
             value={store.avatar}
             isValid={store.isValidAvatar}
-            feedback={t('shopDetailValid.avatarValid')}
+            feedback={t('storeDetailValid.avatarValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('avatar', 'isValidAvatar', value)}
             onValidate={(flag) => handleValidate('isValidAvatar', flag)}
@@ -215,7 +215,7 @@ const CreateStoreForm = (props) => {
             value={store.cover}
             isValid={store.isValidCover}
             f
-            feedback={t('shopDetailValid.coverValid')}
+            feedback={t('storeDetailValid.coverValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('cover', 'isValidCover', value)}
             onValidate={(flag) => handleValidate('isValidCover', flag)}
@@ -236,7 +236,7 @@ const CreateStoreForm = (props) => {
               value={store.commissionId}
               setValue={handleSelect}
               size='large'
-              label={t('shopDetail.commissions')}
+              label={t('storeDetail.commissions')}
             />
           )}
         </div>
@@ -249,12 +249,12 @@ const CreateStoreForm = (props) => {
 
         <div className='col-12 px-4 mt-2'>
           <small className='text-center d-block mx-2'>
-            <span className='text-muted'>{t('shopDetail.getPaid')}</span>{' '}
+            <span className='text-muted'>{t('storeDetail.getPaid')}</span>{' '}
             <Link to='/legal/sellOnZenMetic' target='_blank'>
-              {t('shopDetail.sellOn')}
+              {t('storeDetail.sellOn')}
             </Link>
             <br className='res-hide' />
-            <span className='text-muted'>{t('shopDetail.agreeBy')} </span>
+            <span className='text-muted'>{t('storeDetail.agreeBy')} </span>
             <Link to='/legal/privacy' target='_blank'>
               {t('footer.policy')}
             </Link>
@@ -266,7 +266,7 @@ const CreateStoreForm = (props) => {
             to='/account/storeManager'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('shopDetail.backToShop')}
+            <i className='fas fa-angle-left'></i> {t('storeDetail.backToStore')}
           </Link>
           <button
             type='submit'

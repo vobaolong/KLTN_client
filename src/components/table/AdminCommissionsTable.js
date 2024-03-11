@@ -20,7 +20,7 @@ import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 
-const AdminCommissionTable = ({ heading = 'Commission' }) => {
+const AdminCommissionTable = ({ heading = 'Commissions' }) => {
   const { t } = useTranslation()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -42,7 +42,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
     search: '',
     sortBy: 'name',
     order: 'asc',
-    limit: 6,
+    limit: 10,
     page: 1
   })
 
@@ -168,13 +168,13 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete commission'
-          message={
-            <span>
-              Are you sure you want to delete{' '}
-              <StoreCommissionLabel commission={deletedCommission} />
-            </span>
-          }
+          title={t('commissDetail.del')}
+          // message={
+          //   <span>
+          //     Are you sure you want to delete{' '}
+          //     <StoreCommissionLabel commission={deletedCommission} />
+          //   </span>
+          // }
           color='danger'
           onSubmit={onSubmitDelete}
           onClose={() => setIsConfirming(false)}
@@ -183,12 +183,12 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
       {isConfirming1 && (
         <ConfirmDialog
           title='Restore commission'
-          message={
-            <span>
-              Are you sure you want to restore{' '}
-              <StoreCommissionLabel commission={restoredCommission} />
-            </span>
-          }
+          // message={
+          //   <span>
+          //     Are you sure you want to restore{' '}
+          //     <StoreCommissionLabel commission={restoredCommission} />
+          //   </span>
+          // }
           onSubmit={onSubmitRestore}
           onClose={() => setIsConfirming1(false)}
         />
@@ -230,7 +230,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Cost'
+                  title={t('commissDetail.cost')}
                   sortBy='cost'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -238,16 +238,16 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
               <th scope='col'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
-                  Description
+                  {t('commissDetail.description')}
                 </span>
               </th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('storeDetail.status')}
                   sortBy='isDeleted'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -312,7 +312,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
                     onClick={() => handleEditCommission(commission)}
                   >
                     <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>Edit</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 
                   {!commission.isDeleted ? (
@@ -333,7 +333,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
                       onClick={() => handleRestoreCommission(commission)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Khôi Phục</span>
+                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
                     </button>
                   )}
                 </td>
@@ -346,7 +346,7 @@ const AdminCommissionTable = ({ heading = 'Commission' }) => {
       <Modal
         id='edit-commission-form'
         hasCloseBtn={false}
-        title='Edit commission'
+        title={t('commissDetail.edit')}
       >
         <AdminEditCommissionForm
           oldCommission={editedCommission}

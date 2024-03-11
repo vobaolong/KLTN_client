@@ -67,10 +67,10 @@ const UserInit = ({ user, actions }) => {
   ) : (
     <div
       type='button'
-      className='your-shop-card btn btn-outline-light cus-outline ripple'
+      className='your-store-card btn btn-outline-light cus-outline ripple'
     >
-      <img src={`${IMG + user.avatar}`} className='your-shop-img' />
-      <span className='your-shop-name unselect'>
+      <img src={`${IMG + user.avatar}`} className='your-store-img' />
+      <span className='your-store-name unselect'>
         {user.firstName + ' ' + user.lastName}
         {error && <Error msg={error} />}
       </span>

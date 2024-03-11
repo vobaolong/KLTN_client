@@ -13,9 +13,7 @@ const AdminSideBar = ({ user = {} }) => {
             alt={user.firstName + ' ' + user.lastName}
           />
         </div>
-
         <hr className='res-hide-xl d-none' />
-
         <li className='nav-item'>
           <Link
             to={`/admin/dashboard`}
@@ -28,7 +26,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Dashboard</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/user`}
@@ -40,7 +37,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Users</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/store`}
@@ -52,7 +48,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Stores</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to='/admin/order'
@@ -64,7 +59,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Orders</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to='/admin/transaction'
@@ -78,7 +72,6 @@ const AdminSideBar = ({ user = {} }) => {
             {/* <span className="ms-3 d-none res-dis-lg res-hide-xl">Trans</span> */}
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/category`}
@@ -90,7 +83,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Category</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/style`}
@@ -102,7 +94,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Style</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/product`}
@@ -114,7 +105,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Products</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/level`}
@@ -126,7 +116,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Level</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/commission`}
@@ -139,7 +128,6 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-xl'>Commission</span>
           </Link>
         </li>
-
         <li className='nav-item'>
           <Link
             to={`/admin/delivery`}
@@ -149,6 +137,17 @@ const AdminSideBar = ({ user = {} }) => {
           >
             <i className='fas fa-truck'></i>
             <span className='ms-3 res-hide-xl'>Delivery</span>
+          </Link>
+        </li>
+        <li className='nav-item'>
+          <Link
+            to={`/admin/setting`}
+            className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
+              path === 'setting' ? 'active' : ''
+            }`}
+          >
+            <i class='fa-solid fa-gear'></i>
+            <span className='ms-3 res-hide-xl'>Setting</span>
           </Link>
         </li>
       </ul>

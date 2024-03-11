@@ -1,13 +1,18 @@
 {
+  "order": "Đơn hàng",
   "home": "Trang chủ",
   "categories": "Danh Mục",
   "bestSeller": "Bán Chạy",
   "newProduct": "Sản Phẩm Mới",
-  "hotShop": "Shop Nổi Bật",
+  "hotStore": "Store Nổi Bật",
   "cart": "Giỏ hàng",
   "favProduct": "Sản Phẩm Yêu Thích",
-  "favShop": "Shop Yêu Thích",
+  "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
+  "settingDetail": {
+    "setting": "Cài đặt",
+    "language": "Ngôn ngữ"
+  },
   "productDetail": {
     "sold": "Đã bán",
     "sale": "Giảm",
@@ -30,12 +35,14 @@
     "hightToLow": "Giá: Cao tới thấp",
     "up": "trở lên"
   },
+  "transactions": "Giao dịch trong hệ thống",
+
   "cartDetail": {
     "remove": "Xoá sản phẩm khỏi giỏ hàng"
   },
 
-  "shop": "Shop",
-  "searchHolder": "Tìm sản phẩm và tên shop",
+  "store": "Store",
+  "searchHolder": "Tìm sản phẩm và tên store",
   "userDetail": {
     "followers": "Số người theo dõi",
     "myAccount": "Tài khoản của tôi",
@@ -51,7 +58,10 @@
     "newPw": "Mật khẩu mới",
     "pwValid": "Vui lòng cung cấp mật khẩu hợp lệ!",
     "wallet": "Ví của tôi",
-    "transaction": "Giao dịch",
+    "transaction": "Mã giao dịch",
+    "by": "Người thực hiện",
+    "in": "Nạp",
+    "out": "Rút",
     "date": "Ngày đặt",
     "total": "Tổng",
     "firstName": "Họ và tên đệm",
@@ -66,20 +76,27 @@
   },
   "draw": "Rút tiền",
   "empty": "Ví rỗng",
-  "manageShop": "Quản lý shop",
-  "myShop": "Shop của tôi",
-  "createShop": "Tạo shop",
-  "shopDetail": {
-    "shopName": "Tên Shop",
+  "manageStore": "Quản lý store",
+  "myStore": "Store của tôi",
+  "createStore": "Tạo store",
+  "commissDetail": {
+    "description": "Mô tả",
+    "cost": "Phí",
+    "add": "Thêm Commission",
+    "del": "Xoá Commission",
+    "edit": "Sửa Commission"
+  },
+  "storeDetail": {
+    "storeName": "Tên Store",
     "name": "Tên",
     "role": "Quyền",
     "licensed": "Cấp phép",
     "status": "Trạng thái",
-    "commissions": "Hoa Hồng",
+    "commissions": "Hoa hồng",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên ZenMetic",
     "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ZenMetic",
-    "backToShop": "Quay lại trang quản lý",
+    "backToStore": "Quay lại trang quản lý",
     "follow": "Theo dõi",
     "following": "Đang theo dõi",
     "open": "Mở",
@@ -88,8 +105,8 @@
     "rating": "Đánh giá",
     "about": "Thông tin"
   },
-  "shopDetailValid": {
-    "nameValid": "Vui lòng cung cấp tên shop phù hợp!",
+  "storeDetailValid": {
+    "nameValid": "Vui lòng cung cấp tên store phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",
     "coverValid": "Vui lòng cung cấp ảnh bìa hợp!"
@@ -132,7 +149,7 @@
     "id": "Mã đơn hàng",
     "date": "Ngày đặt hàng",
     "price": "Tổng",
-    "shop": "Shop",
+    "store": "Store",
     "deliveryUnit": "Vận chuyển",
     "payment": "Thanh toán",
     "paymentMethod": "Phương thức Thanh toán",

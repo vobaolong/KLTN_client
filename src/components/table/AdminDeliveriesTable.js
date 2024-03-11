@@ -324,7 +324,7 @@ const AdminDeliveriesTable = ({ heading = 'Delivery unit' }) => {
                       onClick={() => handleRestoreCommission(delivery)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Khôi Phục</span>
+                      {/* <span className='ms-2 res-hide'>Khôi Phục</span> */}
                     </button>
                   )}
                 </td>

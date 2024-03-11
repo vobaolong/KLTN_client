@@ -18,7 +18,7 @@ const HomePage = () => {
       </div>
 
       <div className='mb-4'>
-        <ListHotStores heading={t('hotShop')} />
+        <ListHotStores heading={t('hotStore')} />
       </div>
     </MainLayout>
   )

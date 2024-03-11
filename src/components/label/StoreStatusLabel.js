@@ -12,12 +12,12 @@ const StoreStatusLabel = ({ isOpen = true, detail = true }) => {
         {isOpen ? (
           <span className='px-1'>
             <i className='fas fa-door-open'></i>
-            {detail && <span className='ms-1'>{t('shopDetail.open')}</span>}
+            {detail && <span className='ms-1'>{t('storeDetail.open')}</span>}
           </span>
         ) : (
           <span className='px-1'>
             <i className='fas fa-door-closed'></i>
-            {detail && <span className='ms-1'>{t('shopDetail.close')}</span>}
+            {detail && <span className='ms-1'>{t('storeDetail.close')}</span>}
           </span>
         )}
       </span>

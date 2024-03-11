@@ -37,7 +37,7 @@ const FollowingPage = (props) => {
             <i className='fas fa-store'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>{t('favShop')}</small>
+          <small className='cus-tooltip-msg'>{t('favStore')}</small>
         </div>
       </div>
 

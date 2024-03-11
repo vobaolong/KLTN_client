@@ -92,27 +92,27 @@ const VendorInit = ({ store, actions }) => {
           <Loading size='small' />
         </div>
       ) : (
-        <div className='your-shop-wrap'>
-          <div className='your-shop'>
+        <div className='your-store-wrap'>
+          <div className='your-store'>
             <div
               type='button'
-              className='your-shop-card btn btn-outline-light cus-outline ripple'
+              className='your-store-card btn btn-outline-light cus-outline ripple'
             >
               <img
                 src={`${IMG + store.avatar}`}
-                className='your-shop-img'
+                className='your-store-img'
                 alt=''
               />
 
-              <span className='your-shop-name unselect res-hide-xl'>
+              <span className='your-store-name unselect res-hide-xl'>
                 {!error && store.name}
                 {error && <Error msg={error} />}
               </span>
             </div>
 
-            <ul className='list-group your-shop-options'>
+            <ul className='list-group your-store-options'>
               <Link
-                className='list-group-item your-shop-options-item ripple'
+                className='list-group-item your-store-options-item ripple'
                 to={`/vendor/profile/${storeId}`}
               >
                 <i className='fas fa-store me-1'></i>
@@ -120,7 +120,7 @@ const VendorInit = ({ store, actions }) => {
               </Link>
 
               <Link
-                className='list-group-item your-shop-options-item ripple'
+                className='list-group-item your-store-options-item ripple'
                 to={`/vendor/orders/${storeId}`}
               >
                 <i className='fas fa-clipboard me-1'></i>
@@ -128,7 +128,7 @@ const VendorInit = ({ store, actions }) => {
               </Link>
 
               <Link
-                className='list-group-item your-shop-options-item ripple'
+                className='list-group-item your-store-options-item ripple'
                 to='/account/storeManager'
               >
                 <i className='fas fa-angle-left me-1'></i>

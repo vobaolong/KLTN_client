@@ -37,7 +37,7 @@ const StoreNav = ({ store = {} }) => {
                 }`}
                 to={`/store/collection/${store._id}`}
               >
-                {t('shopDetail.allProduct')}
+                {t('storeDetail.allProduct')}
               </Link>
             </li>
             <li className='nav-item'>
@@ -47,7 +47,7 @@ const StoreNav = ({ store = {} }) => {
                 }`}
                 to={`/store/review&rating/${store._id}`}
               >
-                <span className='res-hide-lg'>{t('shopDetail.rating')}</span>
+                <span className='res-hide-lg'>{t('storeDetail.rating')}</span>
                 <span className='d-none res-dis-lg'>Review</span>
               </Link>
             </li>
@@ -58,7 +58,7 @@ const StoreNav = ({ store = {} }) => {
                 }`}
                 to={`/store/about/${store._id}`}
               >
-                {t('shopDetail.about')}
+                {t('storeDetail.about')}
               </Link>
             </li>
           </ul>

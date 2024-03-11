@@ -59,7 +59,7 @@ const OpenCloseStoreButton = ({
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title={openFlag ? 'Close this shop' : 'Open this shop'}
+          title={openFlag ? 'Close this store' : 'Open this store'}
           color={openFlag ? 'danger' : 'primary'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}

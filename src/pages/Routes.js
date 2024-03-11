@@ -60,6 +60,7 @@ import StoreReviewAndRatingPage from './store/ReviewAndRatingPage'
 import ProductDetailPage from './product/DetailPage'
 import ScrollToTops from '../hooks/ScrollToTops'
 import PageNotFound from '../components/ui/PageNotFound'
+import AdminSettingPage from './admin/SettingPage'
 
 const Routes = () => {
   return (
@@ -125,6 +126,7 @@ const Routes = () => {
           exact
           component={AdminDeliveryPage}
         />
+        <AdminRoute path='/admin/setting' exact component={AdminSettingPage} />
         <AdminRoute path='/admin/order' exact component={AdminOrderPage} />
         <AdminRoute
           path='/admin/order/detail/:orderId'

@@ -66,7 +66,7 @@ const FollowingStoresCollection = (props) => {
       {error && <Error msg={error} />}
 
       <div className='d-flex justify-content-between align-items-end'>
-        <h4>{t('favShop')}</h4>
+        <h4>{t('favStore')}</h4>
         <span className='me-2 text-nowrap res-hide'>
           {pagination.size || 0} {t('result')}
         </span>

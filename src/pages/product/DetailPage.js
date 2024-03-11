@@ -152,7 +152,7 @@ const DetailPage = () => {
                   {!getToken() && (
                     <SigninButton
                       className='w-100 btn-lg'
-                      title='Sign in to shop!'
+                      title='Sign in to store!'
                     />
                   )}
                   {product.storeId?.isOpen &&

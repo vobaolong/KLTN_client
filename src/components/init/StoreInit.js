@@ -85,14 +85,14 @@ const StoreInit = ({ store, actions }) => {
   ) : (
     <div
       type='button'
-      className='your-shop-card btn btn-outline-light cus-outline ripple'
+      className='your-store-card btn btn-outline-light cus-outline ripple'
     >
       <img
         src={`${IMG + store.avatar}`}
-        className='your-shop-img'
-        alt='Shop avatar'
+        className='your-store-img'
+        alt='Store avatar'
       />
-      <span className='your-shop-name unselect'>
+      <span className='your-store-name unselect'>
         {store.name}
         {error && <Error msg={error} />}
       </span>

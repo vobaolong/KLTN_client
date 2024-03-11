@@ -84,8 +84,8 @@ const UserStoresTable = () => {
 
   return (
     <div className='position-relative'>
-      {t('myShop') && (
-        <h4 className='text-center text-uppercase'>{t('myShop')}</h4>
+      {t('myStore') && (
+        <h4 className='text-center text-uppercase'>{t('myStore')}</h4>
       )}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
@@ -99,7 +99,7 @@ const UserStoresTable = () => {
               to='/account/storeManager/createNewStore'
             >
               <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>{t('createShop')}</span>
+              <span className='ms-2 res-hide'>{t('createStore')}</span>
             </Link>
           </div>
         </div>
@@ -130,7 +130,7 @@ const UserStoresTable = () => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.name')}
+                  title={t('storeDetail.name')}
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -138,7 +138,7 @@ const UserStoresTable = () => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.role')}
+                  title={t('storeDetail.role')}
                   sortBy='ownerId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -146,7 +146,7 @@ const UserStoresTable = () => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.licensed')}
+                  title={t('storeDetail.licensed')}
                   sortBy='isActive'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -154,7 +154,7 @@ const UserStoresTable = () => {
               <th scope='col'>
                 <SortByButton
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.status')}
+                  title={t('storeDetail.status')}
                   sortBy='isOpen'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

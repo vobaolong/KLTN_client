@@ -90,12 +90,12 @@ const FollowStoreButton = ({
       ) : followingFlag ? (
         <span>
           <i className='fas fa-heart'></i>
-          <span className='ms-2 res-hide-md'>{t('shopDetail.following')}</span>
+          <span className='ms-2 res-hide-md'>{t('storeDetail.following')}</span>
         </span>
       ) : (
         <span>
           <i className='far fa-heart'></i>
-          <span className='ms-2 res-hide-md'>{t('shopDetail.follow')}</span>
+          <span className='ms-2 res-hide-md'>{t('storeDetail.follow')}</span>
         </span>
       )}
     </button>

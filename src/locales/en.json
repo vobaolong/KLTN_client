@@ -1,13 +1,18 @@
 {
+  "order": "Order",
   "home": "Home",
   "categories": "Categories",
   "bestSeller": "Top Sales",
   "newProduct": "New Product",
-  "hotShop": "Hot Shop",
+  "hotStore": "Hot Store",
   "cart": "Cart",
   "favProduct": "Favorite Product",
-  "favShop": "Favorite Shop",
+  "favStore": "Favorite Store",
   "product": "Product",
+  "settingDetail": {
+    "setting": "Setting",
+    "language": "Language"
+  },
   "productDetail": {
     "sold": "Sold",
     "sale": "OFF",
@@ -30,11 +35,12 @@
     "hightToLow": "Price: Hight to Low",
     "up": "up"
   },
+  "transactions": "Transactions in the system",
   "cartDetail": {
     "remove": "Remove Product From Cart"
   },
-  "shop": "Shop",
-  "searchHolder": "Search for products and shops",
+  "store": "Store",
+  "searchHolder": "Search for products and stores",
   "userDetail": {
     "followers": "Followers",
     "myAccount": "My account",
@@ -50,8 +56,11 @@
     "newPw": "New Password",
     "pwValid": "Please provide a valid password!",
     "wallet": "My E-Wallet",
-    "transaction": "Transaction",
-    "date": "Created at",
+    "transaction": "Transaction ID",
+    "by": "Implementer",
+    "in": "In",
+    "out": "Out",
+    "date": "Created At",
     "total": "Total",
     "firstName": "First Name",
     "lastName": "Last Name",
@@ -65,11 +74,18 @@
   },
   "draw": "Drawing",
   "empty": "Your e-wallet is empty",
-  "manageShop": "Shop manager",
-  "myShop": "My Shops",
-  "createShop": "Create shop",
-  "shopDetail": {
-    "shopName": "Shop Name",
+  "manageStore": "Store manager",
+  "myStore": "My Stores",
+  "createStore": "Create store",
+  "commissDetail": {
+    "description": "Description",
+    "cost": "Cost",
+    "add": "Add Commission",
+    "del": "Delete Commission",
+    "edit": "Edit Commission"
+  },
+  "storeDetail": {
+    "storeName": "Store Name",
     "name": "Name",
     "role": "Role",
     "licensed": "Licensed",
@@ -78,7 +94,7 @@
     "getPaid": "How you'll get paid?",
     "sellOn": "Sell on ZenMetic",
     "agreeBy": "By Creating store, you agree to ZenMetic's",
-    "backToShop": "Back to shop manager",
+    "backToStore": "Back to store manager",
     "follow": "Follow",
     "following": "Following",
     "open": "Opening",
@@ -87,7 +103,7 @@
     "rating": "Rating",
     "about": "About"
   },
-  "shopDetailValid": {
+  "storeDetailValid": {
     "nameValid": "Please provide a valid store name!",
     "bioValid": "Please provide a valid store bio!",
     "avatarValid": "Please provide a valid store avatar!",
@@ -131,7 +147,7 @@
     "id": "Order ID",
     "date": "Order placed",
     "price": "Total",
-    "shop": "Shop",
+    "store": "Store",
     "deliveryUnit": "Delivery",
     "payment": "Payment",
     "paymentMethod": "Payment Method",
@@ -183,7 +199,7 @@
     "policy": "Policy",
     "title": "ZenMetic - Fast, Quality, Affordable",
     "p1": "ZenMetic has it all",
-    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, ZenMetic brings you an online shopping experience that starts with trust.",
+    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, ZenMetic brings you an online storeping experience that starts with trust.",
     "p2": "Overflowing with promotions and offers",
     "small2": "Do you want to hunt for hot deals? ZenMetic has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because ZenMetic has millions of products in the Freeship+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
   }

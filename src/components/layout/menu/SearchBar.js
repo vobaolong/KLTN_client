@@ -13,7 +13,7 @@ const SearchBar = (props) => {
     },
     {
       value: 'stores',
-      label: t('shop'),
+      label: t('store'),
       icon: <i className='fas fa-store'></i>
     }
   ]

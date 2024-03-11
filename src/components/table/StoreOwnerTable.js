@@ -3,7 +3,7 @@ import UserSmallCard from '../card/UserSmallCard'
 const StoreOwnerTable = ({ ownerId = {} }) => {
   return (
     <div className='position-relative'>
-      <h4 className='text-center text-uppercase'>Shop's owner</h4>
+      <h4 className='text-center text-uppercase'>Store's owner</h4>
 
       <div className='table-scroll my-2'>
         <table className='table align-middle table-hover table-sm text-center'>

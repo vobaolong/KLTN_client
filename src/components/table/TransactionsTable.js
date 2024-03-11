@@ -38,7 +38,7 @@ const TransactionsTable = ({
   const [filter, setFilter] = useState({
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 6,
+    limit: 10,
     page: 1
   })
 
@@ -127,7 +127,7 @@ const TransactionsTable = ({
       {t('userDetail.wallet') && by !== 'admin' ? (
         <h4 className='text-center text-uppercase'>{t('userDetail.wallet')}</h4>
       ) : (
-        <h4 className='text-center text-uppercase'>Giao Dịch Trong Hệ Thống</h4>
+        <h4 className='text-center text-uppercase'>{t('transactions')}</h4>
       )}
 
       {isLoading && <Loading />}
@@ -201,11 +201,11 @@ const TransactionsTable = ({
                 />
               </th>
               {by === 'admin' && (
-                <th scope='col' className='text-center'>
+                <th scope='col' className='text-start'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='By'
+                    title={t('userDetail.by')}
                     sortBy='storeId'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -215,7 +215,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('shopDetail.status')}
+                  title={t('storeDetail.status')}
                   sortBy='isUp'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

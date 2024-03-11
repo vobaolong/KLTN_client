@@ -8,8 +8,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -104,7 +106,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit commission'
+          title={t('commissDetail.edit')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />

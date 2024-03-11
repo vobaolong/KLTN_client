@@ -147,7 +147,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('orderDetail.shop')}
+                  title={t('orderDetail.store')}
                   sortBy='orderId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
