@@ -74,12 +74,11 @@ const FollowingProductsCollection = (props) => {
 
       <div className='container-fluid p-0 mt-3'>
         <div className='row'>
-          {listProducts &&
-            listProducts.map((product, index) => (
-              <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
-                <ProductCard product={product} onRun={() => setRun(!run)} />
-              </div>
-            ))}
+          {listProducts?.map((product, index) => (
+            <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
+              <ProductCard product={product} onRun={() => setRun(!run)} />
+            </div>
+          ))}
         </div>
       </div>
 

@@ -34,7 +34,7 @@ const ProfilePage = (props) => {
           </div>
         </div>
 
-        <div className='d-flex justify-content-end m-2 mb-3'>
+        {/* <div className='d-flex justify-content-end mt-2 mb-3'>
           <Link
             className='btn btn-outline-primary ripple btn-sm'
             to={`/user/${user._id}`}
@@ -43,7 +43,7 @@ const ProfilePage = (props) => {
             <span className='me-2 res-hide'>{t('visitMyPage')}</span>
             <i className='fas fa-external-link-alt'></i>
           </Link>
-        </div>
+        </div> */}
 
         <div className='mt-1 d-none res-dis'>
           <UserLevelInfo user={user} border={false} />

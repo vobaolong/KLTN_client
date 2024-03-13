@@ -20,19 +20,16 @@ import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const AdminCateroriesTable = ({ heading = 'Category' }) => {
+const AdminCategoriesTable = ({ heading = 'Category' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirming1, setIsConfirming1] = useState(false)
   const [run, setRun] = useState(false)
-
   const [deletedCategory, setDeletedCategory] = useState({})
   const [restoredCategory, setRestoredCategory] = useState({})
-
   const [categories, setCategories] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -42,7 +39,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
     categoryId: '',
     sortBy: 'categoryId',
     order: 'asc',
-    limit: 6,
+    limit: 7,
     page: 1
   })
 
@@ -281,8 +278,8 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
                     style={{
                       position: 'relative',
                       margin: 'auto',
-                      paddingBottom: '70px',
-                      width: '70px',
+                      paddingBottom: '50px',
+                      width: '50px',
                       height: '0'
                     }}
                   >
@@ -348,7 +345,7 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
                       onClick={() => handleRestoreCategory(category)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Hoàn lại</span>
+                      <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
                 </td>
@@ -365,4 +362,4 @@ const AdminCateroriesTable = ({ heading = 'Category' }) => {
   )
 }
 
-export default AdminCateroriesTable
+export default AdminCategoriesTable

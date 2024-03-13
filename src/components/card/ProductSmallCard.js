@@ -25,7 +25,7 @@ const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
       title={product.name}
       style={style}
     >
-      <span className='fs-6'>{product.name}</span>
+      <span style={{ fontSize: '0.9rem' }}>{product.name}</span>
     </Link>
   </span>
 )

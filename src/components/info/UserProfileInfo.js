@@ -23,7 +23,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
       <div className='row py-2 border rounded-1'>
         <div className='col-12'>
           <Paragraph
-            label={t('userDetail.name')}
+            label={
+              <span>
+                <i class='fa-solid fa-user	 me-2 text-secondary'></i>
+                {t('userDetail.name')}
+              </span>
+            }
             colon
             value={`${user.firstName} ${user.lastName}`}
           />
@@ -32,7 +37,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
         {!isEditable ? (
           <div className='col-sm-12'>
             <Paragraph
-              label='Email'
+              label={
+                <span>
+                  <i class='fa-solid fa-envelope	 me-2 text-secondary'></i>
+                  Email
+                </span>
+              }
               value={hideLastDigits(user.email, 3, 1) || '-'}
             />
           </div>
@@ -40,7 +50,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           <>
             <div className='col-sm-12 d-flex'>
               <Paragraph
-                label='Email'
+                label={
+                  <span>
+                    <i class='fa-solid fa-envelope	 me-2 text-secondary'></i>
+                    Email
+                  </span>
+                }
                 colon
                 value={hideLastDigits(user.email, 3, 1) || '-'}
               />
@@ -57,7 +72,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
         {!isEditable ? (
           <div className='col-sm-6'>
             <Paragraph
-              label={t('userDetail.phone')}
+              label={
+                <span>
+                  <i class='fa-solid fa-phone	 me-2 text-secondary'></i>
+                  {t('userDetail.phone')}
+                </span>
+              }
               colon
               value={user.phone || '-'}
             />
@@ -66,7 +86,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           <>
             <div className='col-sm-6'>
               <Paragraph
-                label={t('userDetail.phone')}
+                label={
+                  <span>
+                    <i class='fa-solid fa-phone	 me-2 text-secondary'></i>
+                    {t('userDetail.phone')}
+                  </span>
+                }
                 colon
                 value={hideLastDigits(user.phone, 8, 0) || '-'}
               />
@@ -83,7 +108,12 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 
         <div className='col-sm-6'>
           <Paragraph
-            label='ID Card'
+            label={
+              <span>
+                <i class='fa-regular fa-credit-card	 me-2 text-secondary'></i>
+                ID Card
+              </span>
+            }
             colon
             value={hideLastDigits(user.id_card, 8, 0) || '-'}
           />

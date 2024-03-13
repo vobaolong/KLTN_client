@@ -114,7 +114,7 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'GDCoins' ? 'active' : ''
               }`}
             >
-              <i className='fas fa-coins'></i>
+              <i class='fa-solid fa-wallet'></i>
               <span className='ms-3 res-hide-lg'>{t('wallet')}</span>
             </Link>
           </li>

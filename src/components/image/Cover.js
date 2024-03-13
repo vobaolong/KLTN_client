@@ -13,7 +13,7 @@ const Cover = ({
     <div className='cus-cover'>
       <img
         src={`${IMG + cover}`}
-        className='cus-cover-img rounded-1'
+        className='cus-cover-img rounded-1 opacity-50'
         alt={alt}
       />
       {isEditable === 'user' && <UserCoverUpload />}

@@ -12,12 +12,12 @@
       "bar": "Bar"
     },
     "users": "Users",
-    "stores": "Shops",
+    "stores": "Stores",
     "orders": "Orders",
     "transactions": "Transactions",
     "categories": "Categories",
     "variants": "Variants",
-    "products": "products",
+    "products": "Products",
     "levels": "Levels",
     "commissions": "Commissions",
     "deliveries": "Deliveries",
@@ -167,7 +167,7 @@
     "coverValid": "Please provide a valid store cover!"
   },
   "favorite": "Favorite",
-  "wallet": "Wallet",
+  "wallet": "E-Wallet",
   "confirmDialog": "Are you sure about that?",
   "button": {
     "cancel": "Cancel",

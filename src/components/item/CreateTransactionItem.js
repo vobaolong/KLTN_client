@@ -11,11 +11,11 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => {
         <button
           type='button'
           disabled={eWallet <= 0 ? true : false}
-          className='btn btn-primary ripple text-nowrap rounded-1'
+          className='btn btn-outline-primary ripple text-nowrap rounded-1'
           data-bs-toggle='modal'
           data-bs-target='#create-transaction-form'
         >
-          <i className='fas fa-comment-dollar'></i>
+          <i class='fa-solid fa-money-bill-transfer'></i>
           <span className='ms-2 res-hide'>{t('draw')}</span>
         </button>
 

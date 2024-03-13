@@ -48,9 +48,7 @@ const ReviewItem = ({
               data-bs-target='#review-form'
             >
               <i className='fas fa-comment-dots'></i>
-              {detail && (
-                <span className='ms-2 res-hide-lg'>Review & rate</span>
-              )}
+              {detail && <span className='ms-2 res-hide-lg'>Rating</span>}
             </button>
 
             {!isReviewed && (
@@ -71,7 +69,7 @@ const ReviewItem = ({
 
           {isReviewed && (
             <small className='cus-tooltip-msg'>
-              The product has been reviewed & rated
+              The product has been rated
             </small>
           )}
         </>

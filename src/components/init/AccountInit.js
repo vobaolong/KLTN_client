@@ -124,7 +124,13 @@ const AccountInit = ({ user, actions }) => {
             <i className='fas fa-user-circle'></i>
             {t('userDetail.myAccount')}
           </Link>
-
+          <Link
+            className='list-group-item your-account-options-item ripple text-capitalize'
+            to='/account/storeManager'
+          >
+            <i className='fa-solid fa-store' q></i>
+            {t('manageStore')}
+          </Link>
           {role === 'user' && (
             <Link
               className='list-group-item your-account-options-item ripple text-capitalize'

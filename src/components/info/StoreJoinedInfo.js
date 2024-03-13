@@ -16,7 +16,12 @@ const StoreJoinedInfo = ({ store = {} }) => {
 
         <div className='col-12'>
           <Paragraph
-            label={t('joined')}
+            label={
+              <span>
+                <i class='fa-solid fa-user-check me-1 text-secondary'></i>
+                {t('joined')}
+              </span>
+            }
             time={humanReadableDate(store.createdAt)}
           />
         </div>

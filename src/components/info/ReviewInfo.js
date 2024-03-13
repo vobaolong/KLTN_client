@@ -17,7 +17,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-
+  console.log(review.userId)
   const handleRemove = () => {
     setIsConfirming(true)
   }

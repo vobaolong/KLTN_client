@@ -29,7 +29,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
     sortBy: 'createdAt',
     order: 'desc',
     status,
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -97,7 +97,9 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         (status === '' ? (
           <h4 className='text-center text-uppercase'>All Orders In System</h4>
         ) : (
-          <h4 className='text-center text-uppercase'>Delivery Service</h4>
+          <h4 className='text-center text-uppercase'>
+            Processing Orders In System
+          </h4>
         ))}
 
       {isLoading && <Loading />}
@@ -234,14 +236,14 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 </td>
                 <td className='text-start'>
                   <small className='text-nowrap'>
-                    <strong>For Seller: </strong>
+                    <i className='text-primary'>For Seller: </i>
                     {order.amountToStore &&
                       formatPrice(order.amountToStore.$numberDecimal)}{' '}
                     ₫
                   </small>
                   <br />
                   <small className='text-nowrap'>
-                    <strong>For ZenMetic: </strong>
+                    <i className='text-success'>For ZenMetic: </i>
                     {order.amountToGD &&
                       formatPrice(order.amountToGD.$numberDecimal)}{' '}
                     ₫
@@ -250,21 +252,21 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <td className='text-end'>
                   {order.deliveryId && (
                     <small>
-                      <strong>{order.deliveryId.name}</strong>
+                      <i>{order.deliveryId.name}</i>
                       <br />
                       {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
                     </small>
                   )}
                 </td>
                 <td className='text-center'>
-                  <small>
+                  <span>
                     <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
-                  </small>
+                  </span>
                 </td>
                 <td className='text-center'>
-                  <small>
+                  <span>
                     <OrderStatusLabel status={order.status} />
-                  </small>
+                  </span>
                 </td>
                 <td className='text-center'>
                   <div className='position-relative d-inline-block'>

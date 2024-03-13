@@ -29,7 +29,6 @@ const DetailPage = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
   const [product, setProduct] = useState({})
   const { productId } = useParams()
 

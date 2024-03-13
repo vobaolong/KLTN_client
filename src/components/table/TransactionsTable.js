@@ -18,6 +18,7 @@ import CreateTransactionItemForUser from '../item/CreateTransactionItemForUser'
 import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
 import { useTranslation } from 'react-i18next'
+import SuccessLabel from '../label/SuccessLabel'
 
 const TransactionsTable = ({
   storeId = '',
@@ -133,7 +134,7 @@ const TransactionsTable = ({
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
 
-      <div className='d-flex justify-content-between align-items-end'>
+      <div className='d-flex justify-content-between align-items-end mb-2'>
         <div className='d-flex align-items-center'>
           {by === 'store' && (
             <>
@@ -168,12 +169,12 @@ const TransactionsTable = ({
         </span>
       </div>
 
-      <div className='table-scroll my-2'>
+      <div className='table-scroll'>
         <table className='table table-sm table-hover align-middle text-end'>
           <thead>
             <tr>
               <th scope='col'></th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
@@ -215,6 +216,15 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
+                  title='Type'
+                  sortBy='isUp'
+                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                />
+              </th>
+              <th scope='col' className='text-center'>
+                <SortByButton
+                  currentOrder={filter.order}
+                  currentSortBy={filter.sortBy}
                   title={t('storeDetail.status')}
                   sortBy='isUp'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
@@ -228,13 +238,13 @@ const TransactionsTable = ({
                 <th scope='row' className='text-center'>
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td className='pe-3'>
+                <td className='ps-1 text-start'>
                   <small>{transaction._id}</small>
                 </td>
-                <td className='pe-3'>
+                <td className='pe-1'>
                   <small>{humanReadableDate(transaction.createdAt)}</small>
                 </td>
-                <td className='pe-3'>
+                <td className='pe-1'>
                   <small className='text-nowrap'>
                     {transaction.amount &&
                       formatPrice(transaction.amount.$numberDecimal)}{' '}
@@ -242,7 +252,7 @@ const TransactionsTable = ({
                   </small>
                 </td>
                 {by === 'admin' && (
-                  <td className='text-start ps-4'>
+                  <td className='text-start ps-2'>
                     {transaction && transaction.storeId ? (
                       <StoreSmallCard store={transaction.storeId} />
                     ) : (
@@ -250,10 +260,15 @@ const TransactionsTable = ({
                     )}
                   </td>
                 )}
-                <td className='text-center ps-4'>
-                  <small>
+                <td className='text-center'>
+                  <span>
                     <TransactionStatusLabel isUp={transaction.isUp} />
-                  </small>
+                  </span>
+                </td>
+                <td className='text-center py-1'>
+                  <span>
+                    <SuccessLabel />
+                  </span>
                 </td>
               </tr>
             ))}

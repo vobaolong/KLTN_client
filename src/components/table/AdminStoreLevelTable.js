@@ -244,14 +244,14 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col' className='text-end pe-2'>
+              {/* <th scope='col' className='text-end pe-2'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Color
                 </span>
-              </th>
+              </th> */}
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
@@ -291,9 +291,9 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                     {level.discount && level.discount.$numberDecimal}%
                   </small>
                 </td>
-                <td className='text-end'>
+                {/* <td className='text-end'>
                   <small>{level.color}</small>
-                </td>
+                </td> */}
                 <td>
                   {level.isDeleted ? (
                     <span>

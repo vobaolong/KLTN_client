@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 const StoreLevelInfo = ({ store = {}, border = true }) => {
   const { t } = useTranslation()
+  console.log(store)
   return (
     <div className='container-fluid'>
       <div
@@ -15,6 +16,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
         <div className='col-sm-6'>
           <Paragraph
             label='Point'
+            colon
             value={
               <span className='d-flex justify-content-right align-items-center'>
                 {store.point}
@@ -28,43 +30,43 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 
         <div className='col-sm-6'>
           <Paragraph
-            label='Rating'
+            label={
+              <span>
+                <i class='fa-regular fa-star me-1 text-secondary'></i>
+                Rating
+              </span>
+            }
+            colon
+            time={store.numberOfReviews}
             value={
-              <StarRating
-                stars={
-                  store.rating === 0 && store.numberOfReviews === 0
-                    ? 3
-                    : store.rating
-                }
-              />
+              store.rating === 0 && store.numberOfReviews === 0
+                ? '3'
+                : store.rating
             }
           />
         </div>
 
         <div className='col-sm-6'>
           <Paragraph
-            label={t('success/failure')}
-            value={
+            label={
               <span>
-                <i className='far fa-check-circle me-1 text-success'></i>
-                {store.numberOfSuccessfulOrders}/
-                <i className='far fa-times-circle me-1 text-danger'></i>
-                {store.numberOfFailedOrders}
+                <i class='fa-solid fa-user-group me-1 text-secondary'></i>
+                {t('userDetail.followers')}
               </span>
             }
+            colon
+            value={<span>{store.numberOfFollowers}</span>}
           />
         </div>
-
         <div className='col-sm-6'>
-          <Paragraph
-            label={t('userDetail.followers')}
-            value={
-              <span>
-                <i className='fas fa-heart me-1 link-pink'></i>
-                {store.numberOfFollowers}
-              </span>
-            }
-          />
+          <small>{t('success/failure')}</small>
+          <br />
+          <small>
+            <i className='far fa-check-circle me-1 text-success'></i>
+            {store.numberOfSuccessfulOrders}/
+            <i className='far fa-times-circle me-1 text-danger'></i>
+            {store.numberOfFailedOrders}
+          </small>
         </div>
       </div>
     </div>

@@ -132,7 +132,7 @@ const StoreNav = ({ store = {} }) => {
                   to={`/store/collection/${store._id}`}
                 >
                   <i className='fas fa-box me-2'></i>
-                  Collection
+                  All Product
                 </Link>
               </li>
               <li className='nav-item'>
@@ -143,7 +143,7 @@ const StoreNav = ({ store = {} }) => {
                   to={`/store/review&rating/${store._id}`}
                 >
                   <i className='fas fa-comment-dots me-2'></i>
-                  Review & Rating
+                  Rating
                 </Link>
               </li>
               <li className='nav-item'>

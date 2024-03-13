@@ -34,7 +34,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
     sortBy: 'name',
     isActive,
     order: 'asc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -155,7 +155,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-bordered table-sm text-center'>
+        <table className='table align-middle table-hover table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -223,7 +223,13 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                 <th scope='row'>
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td className='text-start' style={{ whiteSpace: 'normal' }}>
+                <td
+                  className='text-start py-1'
+                  style={{
+                    whiteSpace: 'normal',
+                    maxWidth: '500px'
+                  }}
+                >
                   <ProductSmallCard product={product} />
                 </td>
                 <td className='text-start'>

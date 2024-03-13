@@ -244,14 +244,14 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col' className='text-end'>
+              {/* <th scope='col' className='text-end'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Color
                 </span>
-              </th>
+              </th> */}
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
@@ -263,12 +263,12 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
               </th>
 
               <th scope='col'>
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Action
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -291,9 +291,9 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                     {level.discount && level.discount.$numberDecimal}%
                   </small>
                 </td>
-                <td className='text-end'>
+                {/* <td className='text-end'>
                   <small>{level.color}</small>
-                </td>
+                </td> */}
                 <td>
                   {level.isDeleted ? (
                     <span>
@@ -337,7 +337,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                       onClick={() => handleRestoreLevel(level)}
                     >
                       <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Hoàn lại</span>
+                      <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
                 </td>

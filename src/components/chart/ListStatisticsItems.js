@@ -410,18 +410,18 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             </div>
           </div>
 
-          <div className='col-xl-4 col-lg-6'>
+          <div className='col-xl-4 col-lg-6 px-0'>
             <h4 className='text-center my-4'>Top 5 {options.flag}s</h4>
             <div className='table-scroll my-2'>
               <table className='table align-middle table-hover table-sm text-center'>
                 <thead>
                   <tr>
                     <th scope='col'></th>
-                    <th scope='col'>
+                    <th scope='col' className='text-start'>
                       {options.flag[0].toUpperCase() +
                         options.flag.substring(1)}
                     </th>
-                    <th scope='col'>
+                    <th scope='col' className='text-end'>
                       {options.flag === 'user' && 'Point'}
                       {options.flag === 'store' && 'Point'}
                       {options.flag === 'product' && 'Sold'}

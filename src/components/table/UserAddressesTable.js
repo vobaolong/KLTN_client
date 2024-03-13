@@ -94,61 +94,67 @@ const UserAddressesTable = ({ addresses = [] }) => {
           {(addresses && addresses.length) || 0} {t('result')}
         </span>
       </div>
-
-      <div className='table-scroll my-2'>
-        <table className='table table-sm table-hover align-middle text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <span
-                  style={{ fontWeight: '500', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  {t('userDetail.address')}
-                </span>
-              </th>
-              <th scope='col'>
-                <span
-                  style={{ fontWeight: '500', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  Action
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {addresses?.map((address, index) => (
-              <tr key={index}>
-                <th scope='row'>{index + 1}</th>
-                <td className='text-start px-2'>{address}</td>
-                <td>
-                  <button
-                    type='button'
-                    className='btn btn-dark ripple me-2 my-1'
-                    data-bs-toggle='modal'
-                    data-bs-target='#edit-address-form'
-                    onClick={() => handleEditAddress(address, index)}
+      {!isLoading && addresses.length === 0 ? (
+        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <h5>No address yet!</h5>
+        </div>
+      ) : (
+        <div className='table-scroll my-2'>
+          <table className='table table-sm table-hover align-middle text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col'>
+                  <span
+                    style={{ fontWeight: '500', fontSize: '.875rem' }}
+                    className='text-black'
                   >
-                    <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
-                  </button>
-                  <button
-                    type='button'
-                    className='btn btn-outline-primary ripple my-1'
-                    onClick={() => handleDeleteAddress(address, index)}
+                    {t('userDetail.address')}
+                  </span>
+                </th>
+                <th scope='col'>
+                  <span
+                    style={{ fontWeight: '500', fontSize: '.875rem' }}
+                    className='text-black'
                   >
-                    <i className='fas fa-trash-alt'></i>
-                    <span className='ms-2 res-hide'>{t('button.delete')}</span>
-                  </button>
-                </td>
+                    Action
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
+            </thead>
+            <tbody>
+              {addresses?.map((address, index) => (
+                <tr key={index}>
+                  <th scope='row'>{index + 1}</th>
+                  <td className='text-start px-2'>{address}</td>
+                  <td>
+                    <button
+                      type='button'
+                      className='btn btn-dark ripple me-2 my-1'
+                      data-bs-toggle='modal'
+                      data-bs-target='#edit-address-form'
+                      onClick={() => handleEditAddress(address, index)}
+                    >
+                      <i className='fas fa-pen'></i>
+                      <span className='ms-2 res-hide'>{t('button.edit')}</span>
+                    </button>
+                    <button
+                      type='button'
+                      className='btn btn-outline-primary ripple my-1'
+                      onClick={() => handleDeleteAddress(address, index)}
+                    >
+                      <i className='fas fa-trash-alt'></i>
+                      <span className='ms-2 res-hide'>
+                        {t('button.delete')}
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <Modal
         id='edit-address-form'
         hasCloseBtn={false}

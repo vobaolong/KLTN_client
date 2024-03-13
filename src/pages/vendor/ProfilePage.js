@@ -16,7 +16,6 @@ const ProfilePage = (props) => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
   const [updateDispatch] = useUpdateDispatch()
-
   const onHandleRun = (newStore) => {
     updateDispatch('vendor', newStore)
   }
@@ -54,7 +53,7 @@ const ProfilePage = (props) => {
           </div>
         </div>
 
-        {store.featured_images && store.featured_images.length > 0 && (
+        {store.featured_images?.length > 0 && (
           <div className='m-2'>
             <Carousel
               listImages={store.featured_images}
@@ -65,7 +64,7 @@ const ProfilePage = (props) => {
           </div>
         )}
 
-        <div className='d-flex justify-content-between align-items-center m-2 mb-4'>
+        <div className='d-flex justify-content-between align-items-center my-2'>
           <div className='d-flex justify-content-between align-items-start'>
             <div className='position-relative me-2'>
               <div className='cus-tooltip'>
@@ -82,7 +81,7 @@ const ProfilePage = (props) => {
             </div>
 
             <StoreAddFeaturedImageItem
-              count={store.featured_images && store.featured_images.length}
+              count={store.featured_images?.length}
               storeId={store._id}
             />
           </div>
@@ -92,7 +91,7 @@ const ProfilePage = (props) => {
             to={`/store/${store._id}`}
             target='_blank'
           >
-            <span className='me-2 res-hide'>Visit Your Store</span>
+            <span className='me-2 res-hide'>Visit My Store</span>
             <i className='fas fa-external-link-alt'></i>
           </Link>
         </div>

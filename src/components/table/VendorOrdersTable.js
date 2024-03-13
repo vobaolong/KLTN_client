@@ -33,7 +33,7 @@ const StoreOrdersTable = ({
     status,
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -218,7 +218,7 @@ const StoreOrdersTable = ({
                 </td>
                 <td>
                   <small className='text-nowrap'>
-                    <strong className=''>For Store: </strong>
+                    <i className='text-success'>For Store: </i>
                     {order.amountToStore &&
                       formatPrice(order.amountToStore.$numberDecimal)}{' '}
                     ₫
@@ -226,7 +226,7 @@ const StoreOrdersTable = ({
                   <br />
 
                   <small className='text-nowrap'>
-                    <strong>For ZenMetic: </strong>
+                    <i className='text-primary'>For ZenMetic: </i>
                     {order.amountToGD &&
                       formatPrice(order.amountToGD.$numberDecimal)}{' '}
                     ₫
@@ -235,7 +235,7 @@ const StoreOrdersTable = ({
                 <td>
                   {order.deliveryId && (
                     <small>
-                      {order.deliveryId.name}
+                      <i>{order.deliveryId.name}</i>
                       <br />
                       {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
                     </small>
@@ -254,11 +254,10 @@ const StoreOrdersTable = ({
                 <td className='text-center'>
                   <Link
                     type='button'
-                    className='btn btn-golden ripple cus-tooltip'
+                    className='btn btn-secondary ripple cus-tooltip'
                     to={`/vendor/orders/detail/${order._id}/${storeId}`}
                   >
                     <i className='fas fa-info-circle'></i>
-                    <span className='ms-2 res-hide'>Detail</span>
                   </Link>
                 </td>
               </tr>

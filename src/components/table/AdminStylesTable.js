@@ -36,7 +36,7 @@ const AdminStylesTable = ({ heading = '' }) => {
     sortBy: 'name',
     categoryId: '',
     order: 'asc',
-    limit: 6,
+    limit: 10,
     page: 1
   })
 
@@ -188,7 +188,7 @@ const AdminStylesTable = ({ heading = '' }) => {
               to='/admin/style/createNewStyle'
             >
               <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>{t('variantDetail.add')}</span>
+              <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
             </Link>
           </div>
         </div>
@@ -230,12 +230,12 @@ const AdminStylesTable = ({ heading = '' }) => {
                 />
               </th>
               <th scope='col'>
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Action
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -276,7 +276,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                   )}
                 </td>
 
-                <td className='text-nowrap'>
+                <td className='text-nowrap py-1'>
                   <Link
                     type='button'
                     className='btn btn-secondary ripple me-2'
@@ -291,7 +291,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                     to={`/admin/style/editStyle/${style._id}`}
                   >
                     <i className='fas fa-pen'></i>
-                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
+                    <span className='ms-1 res-hide'>{t('button.edit')}</span>
                   </Link>
 
                   {!style.isDeleted ? (
@@ -302,7 +302,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                       onClick={() => handleDelete(style)}
                     >
                       <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>
+                      <span className='ms-1 res-hide'>
                         {t('button.delete')}
                       </span>
                     </button>
@@ -310,12 +310,13 @@ const AdminStylesTable = ({ heading = '' }) => {
                     <>
                       <button
                         type='button'
-                        className='btn btn-outline-success ripple cus-tooltip'
+                        className='btn btn-outline-success'
                         onClick={() => handleRestore(style)}
                       >
                         <i className='fas fa-trash-restore-alt'></i>
+                        <span className='ms-1 res-hide'>Restore</span>
                       </button>
-                      <small className='cus-tooltip-msg'>Hoàn lại</small>
+                      {/* <small className='cus-tooltip-msg'>Hoàn lại</small> */}
                     </>
                   )}
                 </td>

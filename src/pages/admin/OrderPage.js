@@ -35,7 +35,7 @@ const OrderPage = (props) => {
             <i className='fas fa-truck'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Delivery Service</small>
+          <small className='cus-tooltip-msg'>PROCESSING ORDERS IN SYSTEM</small>
         </div>
       </div>
 

@@ -28,7 +28,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
     status,
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -110,144 +110,148 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
           {pagination.size || 0} {t('result')}
         </span>
       </div>
-
-      <div className='table-scroll my-2'>
-        <table className='table table-sm table-hover align-middle text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.id')}
-                  sortBy='_id'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.date')}
-                  sortBy='createdAt'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.price')}
-                  sortBy='amountFromUser'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.store')}
-                  sortBy='orderId'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.deliveryUnit')}
-                  sortBy='deliveryId'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.payment')}
-                  sortBy='isPaidBefore'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('orderDetail.status')}
-                  sortBy='status'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                {/* <span
+      {!isLoading && orders.length === 0 ? (
+        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <h5>You haven't placed an order yet!</h5>
+        </div>
+      ) : (
+        <div className='table-scroll my-2'>
+          <table className='table table-sm table-hover align-middle text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.id')}
+                    sortBy='_id'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.date')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.price')}
+                    sortBy='amountFromUser'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.store')}
+                    sortBy='orderId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.deliveryUnit')}
+                    sortBy='deliveryId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.payment')}
+                    sortBy='isPaidBefore'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.status')}
+                    sortBy='status'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Xem
                 </span> */}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders?.map((order, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td className='text-end'>
-                  <small>{order._id}</small>
-                </td>
-                <td className='text-end' style={{ whiteSpace: 'normal' }}>
-                  <small>{humanReadableDate(order.createdAt)}</small>
-                </td>
-                <td className='text-end'>
-                  <small className='text-nowrap'>
-                    {order.amountFromUser &&
-                      formatPrice(order.amountFromUser.$numberDecimal)}{' '}
-                    ₫
-                  </small>
-                </td>
-                <td
-                  className='text-start hidden-avatar'
-                  style={{ maxWidth: '300px' }}
-                >
-                  <StoreSmallCard store={order.storeId} />
-                </td>
-                <td className='text-end'>
-                  {order.deliveryId && (
-                    <small>
-                      {order.deliveryId.name}
-                      <br />
-                      {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
-                    </small>
-                  )}
-                </td>
-                <td>
-                  <small>
-                    <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
-                  </small>
-                </td>
-                <td>
-                  <small>
-                    <OrderStatusLabel status={order.status} />
-                  </small>
-                </td>
-                <td className='text-nowrap text-start'>
-                  <Link
-                    type='button'
-                    className='btn btn-secondary opacity-75 ripple rounded-1'
-                    to={`/account/purchase/detail/${order._id}`}
-                  >
-                    <i className='fas fa-info-circle'></i>
-                  </Link>
-                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
+            </thead>
+            <tbody>
+              {orders?.map((order, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='text-end'>
+                    <small>{order._id}</small>
+                  </td>
+                  <td className='text-end' style={{ whiteSpace: 'normal' }}>
+                    <small>{humanReadableDate(order.createdAt)}</small>
+                  </td>
+                  <td className='text-end'>
+                    <small className='text-nowrap'>
+                      {order.amountFromUser &&
+                        formatPrice(order.amountFromUser.$numberDecimal)}{' '}
+                      ₫
+                    </small>
+                  </td>
+                  <td
+                    className='text-start hidden-avatar'
+                    style={{ maxWidth: '300px' }}
+                  >
+                    <StoreSmallCard store={order.storeId} />
+                  </td>
+                  <td className='text-end'>
+                    {order.deliveryId && (
+                      <small>
+                        {order.deliveryId.name}
+                        <br />
+                        {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
+                      </small>
+                    )}
+                  </td>
+                  <td>
+                    <small>
+                      <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
+                    </small>
+                  </td>
+                  <td>
+                    <small>
+                      <OrderStatusLabel status={order.status} />
+                    </small>
+                  </td>
+                  <td className='text-nowrap text-start'>
+                    <Link
+                      type='button'
+                      className='btn btn-secondary opacity-75 ripple rounded-1'
+                      to={`/account/purchase/detail/${order._id}`}
+                    >
+                      <i className='fas fa-info-circle'></i>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       {pagination.size !== 0 && (
         <Pagination pagination={pagination} onChangePage={handleChangePage} />
       )}

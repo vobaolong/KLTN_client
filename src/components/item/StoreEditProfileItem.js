@@ -5,7 +5,7 @@ const StoreEditProfileItem = ({ store = {} }) => (
   <div className='position-relative d-inline-block'>
     <button
       type='button'
-      className='btn btn-primary ripple cus-tooltip'
+      className='btn btn-outline-primary ripple cus-tooltip'
       data-bs-toggle='modal'
       data-bs-target='#store-profile-edit-form'
     >

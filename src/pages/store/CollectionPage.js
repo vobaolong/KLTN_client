@@ -57,7 +57,6 @@ const CollectionPage = (props) => {
         setIsLoading(false)
       })
   }
-
   useEffect(() => {
     init()
   }, [filter, store])

@@ -121,8 +121,9 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
               path === 'GDCoins' ? 'active' : ''
             }`}
           >
-            <i className='fas fa-coins'></i>
-            <span className='ms-3 res-hide-xl'>GD coin</span>
+            <i class='fa-solid fa-wallet'></i>
+
+            <span className='ms-3 res-hide-xl'>E-Wallet</span>
           </Link>
         </li>
       </ul>

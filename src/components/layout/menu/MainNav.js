@@ -34,7 +34,7 @@ const MainNav = ({ navFor = 'user' }) => {
   }
 
   return (
-    <header className='d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
+    <header className='d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary border-bottom'>
       {isConfirming && (
         <ConfirmDialog
           title='Đăng Xuất'
