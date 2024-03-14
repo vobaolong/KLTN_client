@@ -9,7 +9,7 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
       <div className='cus-tooltip'>
         <button
           type='button'
-          disabled={count >= 6 ? true : false}
+          disabled={count >= 10 ? true : false}
           className='btn btn-primary ripple text-nowrap rounded-1'
           data-bs-toggle='modal'
           data-bs-target='#add-address-form'
@@ -20,7 +20,7 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
           )}
         </button>
 
-        {count < 6 && (
+        {count < 10 && (
           <Modal
             id='add-address-form'
             hasCloseBtn={false}
@@ -30,9 +30,9 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
           </Modal>
         )}
       </div>
-      {count >= 6 && (
+      {count >= 10 && (
         <small className='cus-tooltip-msg'>
-          {t('userDetail.limit6Addresses')}
+          {t('userDetail.limit10Addresses')}
         </small>
       )}
     </div>

@@ -109,9 +109,9 @@ const AccountSideBar = ({ user = {} }) => {
         {user.role === 'user' && (
           <li className='nav-item'>
             <Link
-              to='/account/GDCoins'
+              to='/account/wallet'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path === 'GDCoins' ? 'active' : ''
+                path === 'wallet' ? 'active' : ''
               }`}
             >
               <i class='fa-solid fa-wallet'></i>

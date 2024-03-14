@@ -31,7 +31,7 @@ import AccountProfilePage from './account/ProfilePage'
 import AccountAddressesPage from './account/AddressesPage'
 import AccountPurchasePage from './account/PurchasePage'
 import AccountFollowingPage from './account/FollowingPage'
-import AccountGDCoinsPage from './account/GDCoinsPage'
+import AccountWalletsPage from './account/WalletPage'
 import AccountStoreManagerPage from './account/StoreManagerPage'
 import AccountCreateStorePage from './account/CreateStorePage'
 import AccountVerifyEmailPage from './account/VerifyEmailPage'
@@ -45,11 +45,10 @@ import VendorProductsPage from './vendor/ProductsPage'
 import VendorOrdersPage from './vendor/OrdersPage'
 import VendorOrderDetailPage from './vendor/OrderDetailPage'
 import VendorStaffsPage from './vendor/StaffsPage'
-import VendorGDCoinsPage from './vendor/GDCoinsPage'
+import VendorWalletPage from './vendor/WalletPage'
 import VendorCreateProductPage from './vendor/CreateProductPage'
 import VendorEditProductPage from './vendor/EditProductPage'
 //user
-import UserHomePage from './user/UserHomePage'
 import UserAboutPage from './user/UserAboutPage'
 //store
 import StoreHomePage from './store/HomePage'
@@ -166,9 +165,9 @@ const Routes = () => {
           component={AccountFollowingPage}
         />
         <PrivateRoute
-          path='/account/GDCoins'
+          path='/account/wallet'
           exact
-          component={AccountGDCoinsPage}
+          component={AccountWalletsPage}
         />
         <PrivateRoute
           path='/account/storeManager'
@@ -234,13 +233,12 @@ const Routes = () => {
           component={VendorStaffsPage}
         />
         <PrivateRoute
-          path='/vendor/GDCoins/:storeId'
+          path='/vendor/Wallet/:storeId'
           exact
-          component={VendorGDCoinsPage}
+          component={VendorWalletPage}
         />
 
         {/* user */}
-        <Route path='/user/:userId' exact component={UserHomePage} />
         <Route path='/user/about/:userId' exact component={UserAboutPage} />
 
         {/* store */}

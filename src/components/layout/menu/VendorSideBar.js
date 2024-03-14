@@ -116,9 +116,9 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/GDCoins/${store._id}`}
+            to={`/vendor/wallet/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
-              path === 'GDCoins' ? 'active' : ''
+              path === 'wallet' ? 'active' : ''
             }`}
           >
             <i class='fa-solid fa-wallet'></i>

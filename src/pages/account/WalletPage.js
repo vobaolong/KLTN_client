@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import AccountLayout from '../../components/layout/AccountLayout'
 import TransactionsTable from '../../components/table/TransactionsTable'
 
-const GDCoinsPage = (props) => {
+const WalletPage = (props) => {
   const user = useSelector((state) => state.account.user)
   return (
     <AccountLayout user={user}>
@@ -14,4 +14,4 @@ const GDCoinsPage = (props) => {
   )
 }
 
-export default GDCoinsPage
+export default WalletPage

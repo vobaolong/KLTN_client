@@ -24,6 +24,7 @@ import Input from '../../ui/Input'
 import DropDownMenu from '../../ui/DropDownMenu'
 import UserLevelLabel from '../../label/UserLevelLabel'
 import { PayPalButton } from 'react-paypal-button-v2'
+import { useTranslation } from 'react-i18next'
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 const CheckoutForm = ({
@@ -32,6 +33,7 @@ const CheckoutForm = ({
   userId = '',
   items = {}
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -358,16 +360,13 @@ const CheckoutForm = ({
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <DropDownMenu
-                  listItem={
-                    addresses &&
-                    addresses.map((a, i) => {
-                      const newA = {
-                        value: a,
-                        label: a
-                      }
-                      return newA
-                    })
-                  }
+                  listItem={addresses?.map((a, i) => {
+                    const newA = {
+                      value: a,
+                      label: a
+                    }
+                    return newA
+                  })}
                   value={order.address}
                   setValue={(address) =>
                     setOrder({
@@ -379,7 +378,7 @@ const CheckoutForm = ({
                   label='Address'
                 />
 
-                {addresses && addresses.length <= 0 && (
+                {addresses?.length <= 0 && (
                   <small
                     style={{
                       marginTop: '-20px',
@@ -393,27 +392,24 @@ const CheckoutForm = ({
               <div className='mb-2 ms-4 position-relative'>
                 <div className='d-inline-block cus-tooltip'>
                   <UserAddAddressItem
-                    count={addresses && addresses.length}
+                    count={addresses?.length}
                     detail={false}
                   />
                 </div>
-                <small className='cus-tooltip-msg'>Add your address</small>
+                {/* <small className='cus-tooltip-msg'>Add your address</small> */}
               </div>
             </div>
 
             <div className='col-12 mt-4'>
-              {deliveries && deliveries.length > 0 && (
+              {deliveries?.length > 0 && (
                 <DropDownMenu
-                  listItem={
-                    deliveries &&
-                    deliveries.map((d, i) => {
-                      const newD = {
-                        value: d,
-                        label: d.name + ' (' + d.price.$numberDecimal + ' ₫)'
-                      }
-                      return newD
-                    })
-                  }
+                  listItem={deliveries?.map((d, i) => {
+                    const newD = {
+                      value: d,
+                      label: d.name + ' (' + d.price.$numberDecimal + ' ₫)'
+                    }
+                    return newD
+                  })}
                   value={order.delivery}
                   setValue={(delivery) => {
                     const { deliveryPrice, amountFromUser2 } = totalDelivery(
@@ -515,7 +511,7 @@ const CheckoutForm = ({
                 className='btn btn-primary btn-lg ripple w-100 mb-1'
                 onClick={handleSubmit}
               >
-                Thanh Toán Khi Nhận Hàng
+                {t('orderDetail.cod')}
               </button>
 
               <div style={{ position: 'relative', zIndex: '1' }}>

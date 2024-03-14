@@ -104,7 +104,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
             <thead>
               <tr>
                 <th scope='col'></th>
-                <th scope='col'>
+                <th scope='col' className='text-start'>
                   <span
                     style={{ fontWeight: '500', fontSize: '.875rem' }}
                     className='text-black'

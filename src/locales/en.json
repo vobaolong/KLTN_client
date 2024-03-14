@@ -73,7 +73,7 @@
     "address": "Address",
     "addAddress": "Add Address",
     "delAddress": "Delete Address",
-    "limit6Addresses": "Maximum 6 addresses",
+    "limit10Addresses": "Maximum 10 addresses",
     "changePassword": "Change Password",
     "currentPw": "Current Password",
     "newPw": "New Password",
