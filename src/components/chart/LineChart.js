@@ -10,7 +10,8 @@ const LineChart = ({
   role = 'admin',
   groupBy = groupByDate,
   title = 'Sales statistics',
-  sliceEnd = 6
+  sliceEnd = 6,
+  value = ''
 }) => {
   const [data, setData] = useState({
     labels: [],
@@ -49,19 +50,21 @@ const LineChart = ({
     <div
       style={{
         boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
-        borderRadius: '0.3rem',
+        borderRadius: '0.25rem',
         backgroundColor: '#fff',
-        width: '99%'
+        width: '99%',
+        padding: '5px'
       }}
     >
       <h6
         style={{
           textAlign: 'start',
           padding: '10px 0 10px 10px',
-          borderBottom: '1px solid #ccc'
+          borderBottom: '1px solid #ccc',
+          textTransform: 'capitalize'
         }}
       >
-        Order Overview
+        {value}s overview
       </h6>
       <Line
         data={data}
@@ -76,7 +79,7 @@ const LineChart = ({
           },
           scales: {
             x: {
-              display: false // Hide x-axis labels
+              display: false
             },
             y: {
               beginAtZero: true

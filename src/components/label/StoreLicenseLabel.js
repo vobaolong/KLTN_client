@@ -13,11 +13,11 @@ const StoreLicenseLabel = ({ isActive = false, detail = true }) => (
     )}
     {/* {isActive ? (
       <small className='cus-tooltip-msg'>
-        This store is licensed by ZenMetic!
+        This store is licensed by Zenpii!
       </small>
     ) : (
       <small className='cus-tooltip-msg'>
-        This store is banned by ZenMetic, contact us for more information!
+        This store is banned by Zenpii, contact us for more information!
       </small>
     )} */}
   </span>

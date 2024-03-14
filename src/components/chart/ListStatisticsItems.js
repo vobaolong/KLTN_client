@@ -236,6 +236,24 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             <button
               type='button'
               className={`btn ${
+                options.flag === 'order' ? 'btn-dark' : 'btn-outline-dark'
+              } btn-lg ripple w-100 py-4 mb-2`}
+              onClick={() =>
+                setOptions({
+                  ...options,
+                  flag: 'order'
+                })
+              }
+            >
+              <i className='fas fa-clipboard'></i>
+              <span className='ms-3 res-hide'>{sizes.order}</span>
+              <span className='ms-1 res-hide-lg'>{t('admin.orders')}</span>
+            </button>
+          </div>
+          <div className='col-md-3 col-6'>
+            <button
+              type='button'
+              className={`btn ${
                 options.flag === 'product'
                   ? 'btn-success'
                   : 'btn-outline-success'
@@ -250,25 +268,6 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
               <i className='fas fa-box'></i>
               <span className='ms-3 res-hide'>{sizes.product}</span>
               <span className='ms-1 res-hide-lg'>{t('admin.products')}</span>
-            </button>
-          </div>
-
-          <div className='col-md-3 col-6'>
-            <button
-              type='button'
-              className={`btn ${
-                options.flag === 'order' ? 'btn-dark' : 'btn-outline-dark'
-              } btn-lg ripple w-100 py-4 mb-2`}
-              onClick={() =>
-                setOptions({
-                  ...options,
-                  flag: 'order'
-                })
-              }
-            >
-              <i className='fas fa-clipboard'></i>
-              <span className='ms-3 res-hide'>{sizes.order}</span>
-              <span className='ms-1 res-hide-lg'>{t('admin.orders')}</span>
             </button>
           </div>
         </div>
@@ -387,6 +386,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   groupBy={groupByFunc[options.flag]}
                   title={titles[options.flag]}
                   sliceEnd={options.sliceEnd}
+                  value={options.flag}
                 />
               )}
               {options.type === 'bar' && (
@@ -396,6 +396,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   groupBy={groupByFunc[options.flag]}
                   title={titles[options.flag]}
                   sliceEnd={options.sliceEnd}
+                  value={options.flag}
                 />
               )}
               {/* {options.type === 'doughnut' && (

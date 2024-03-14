@@ -11,7 +11,8 @@ const BarChart = ({
   role = 'admin',
   groupBy = groupByDate,
   title = 'Sales statistics',
-  sliceEnd = 6
+  sliceEnd = 6,
+  value = ''
 }) => {
   const [data, setData] = useState({
     labels: [],
@@ -55,10 +56,11 @@ const BarChart = ({
         style={{
           textAlign: 'start',
           padding: '10px 0 10px 10px',
-          borderBottom: '1px solid #ccc'
+          borderBottom: '1px solid #ccc',
+          textTransform: 'capitalize'
         }}
       >
-        Order Overview
+        {value}s overview
       </h6>
       <Bar
         data={data}

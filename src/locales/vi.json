@@ -151,8 +151,8 @@
     "status": "Trạng thái",
     "commissions": "Hoa hồng",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
-    "sellOn": "Bán trên ZenMetic",
-    "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ZenMetic",
+    "sellOn": "Bán trên Zenpii",
+    "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với Zenpii",
     "backToStore": "Quay lại trang quản lý",
     "follow": "Theo dõi",
     "following": "Đang theo dõi",
@@ -255,12 +255,12 @@
   },
   "footer": {
     "quickLink": "truy cập nhanh",
-    "about": "Về ZenMetic",
+    "about": "Về Zenpii",
     "policy": "Chính sách bảo mật",
-    "title": "ZenMetic - Thật nhanh, thật chất lượng, thật rẻ",
-    "p1": "ZenMetic có tất cả",
-    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, cửa hàng uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,ZenMetic mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
+    "title": "Zenpii - Thật nhanh, thật chất lượng, thật rẻ",
+    "p1": "Zenpii có tất cả",
+    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, cửa hàng uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,Zenpii mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
     "p2": "Khuyến mãi, ưu đãi tràn ngập",
-    "small2": "Bạn muốn săn giá sốc, ZenMetic có giá sốc mỗi ngày cho bạn! Bạn là tín đồ của các thương hiệu, các cửa hàng Official chính hãng đang chờ đón bạn. Không cần săn mã freeship, vì ZenMetic đã có hàng triệu sản phẩm trong chương trình Freeship+, không giới hạn lượt đặt, tiết kiệm thời gian vàng bạc của bạn. Gói ZenNOW (Áp dụng đơn hàng trên 200k) tiết kiệm để nhận 100% free ship 2h & trong ngày, áp dụng cho 100% sản phẩm, 100% tỉnh thành Việt Nam."
+    "small2": "Bạn muốn săn giá sốc, Zenpii có giá sốc mỗi ngày cho bạn! Bạn là tín đồ của các thương hiệu, các cửa hàng Official chính hãng đang chờ đón bạn. Không cần săn mã freeship, vì Zenpii đã có hàng triệu sản phẩm trong chương trình Freeship+, không giới hạn lượt đặt, tiết kiệm thời gian vàng bạc của bạn. Gói ZenNOW (Áp dụng đơn hàng trên 200k) tiết kiệm để nhận 100% free ship 2h & trong ngày, áp dụng cho 100% sản phẩm, 100% tỉnh thành Việt Nam."
   }
 }

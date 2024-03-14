@@ -20,18 +20,18 @@ const Language = () => {
   return (
     <div className='text-white ms-2'>
       <div className='your-account'>
-        <div className='d-flex align-items-center justify-content-center rounded-1 p-2 text-black bg-muted'>
+        <div className='d-flex align-items-center justify-content-center rounded-1 p-2 text-white lang'>
           <img
             style={{ maxWidth: '30px', width: '100%' }}
             src={currentLanguage === 'English' ? english : vietnam}
             alt=''
           />
-          <small
+          {/* <small
             className='lang'
             style={{ minWidth: 'fit-content', marginLeft: '3px' }}
           >
             {currentLanguage}
-          </small>
+          </small> */}
           <i style={{ fontSize: '10px' }} class='fas fa-angle-down ms-1'></i>
         </div>
         <ul className='list-group your-account-options z-10'>

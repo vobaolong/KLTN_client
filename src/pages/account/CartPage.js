@@ -73,7 +73,7 @@ const CartPage = (props) => {
                 >
                   <div className='accordion-body px-2'>
                     {cart.storeId && !cart.storeId.isActive && (
-                      <Error msg='This store is banned by ZenMetic!' />
+                      <Error msg='This store is banned by Zenpii!' />
                     )}
 
                     {cart.storeId &&

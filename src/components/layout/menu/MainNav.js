@@ -34,7 +34,13 @@ const MainNav = ({ navFor = 'user' }) => {
   }
 
   return (
-    <header className='d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary border-bottom'>
+    <header
+      className={`d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark ${
+        navFor !== 'user' && getToken().role === 'admin'
+          ? 'text-primary'
+          : 'bg-primary border-bottom'
+      } `}
+    >
       {isConfirming && (
         <ConfirmDialog
           title='Đăng Xuất'
@@ -45,10 +51,7 @@ const MainNav = ({ navFor = 'user' }) => {
       )}
 
       <div className='container-md'>
-        <Link
-          className='navbar-brand cus-navbar-brand me-4 ripple res-hide-md'
-          to='/'
-        >
+        <Link className='me-4 res-hide-md' to='/'>
           <Logo />
         </Link>
         {navFor === 'user' && <SearchBar />}
@@ -57,7 +60,6 @@ const MainNav = ({ navFor = 'user' }) => {
             {navFor} <span className='res-hide'>dashboard</span>
           </h1>
         )}
-        {navFor === 'user' && getToken().role === 'user' && <Language />}
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -67,7 +69,9 @@ const MainNav = ({ navFor = 'user' }) => {
         ) : (
           <>
             <ul className='nav cus-sub-nav ms-4 d-flex justify-content-end res-hide-md'>
-              <li className='nav-item'>
+              {navFor === 'user' && getToken().role === 'user' && <Language />}
+
+              <li className='nav-item ms-2'>
                 <AccountInit />
               </li>
 

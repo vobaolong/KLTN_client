@@ -110,8 +110,12 @@ const AccountInit = ({ user, actions }) => {
             alt=''
           />
 
-          <span className='your-account-name unselect res-hide-xl'>
-            {(firstName || lastName) && firstName + ' ' + lastName}
+          <span
+            className={`your-account-name unselect res-hide-xl ${
+              firstName && lastName ? '' : 'mx-0'
+            }`}
+          >
+            {firstName && lastName && firstName + ' ' + lastName}
             {error && <Error msg={error} />}
           </span>
         </div>

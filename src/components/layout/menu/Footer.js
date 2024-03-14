@@ -34,9 +34,6 @@ const Footer = (props) => {
         <div className='row'>
           <div className='col-sm-12 col-md-6'>
             <div className='mb-4'>
-              <div className='mb-2 d-block'>
-                <Logo />
-              </div>
               <p style={{ textAlign: 'justify' }}>
                 <b>{t('footer.title')}</b>
                 <p className='text-muted'>
@@ -96,7 +93,7 @@ const Footer = (props) => {
             <p className='copyright-text text-center'>
               Copyright &copy; {new Date().getFullYear()} All Rights Reserved by{' '}
               <Link className='link-hover text-reset' to='#'>
-                ZenMetic
+                Zenpii
               </Link>
               .
             </p>

@@ -79,7 +79,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
             <div className='d-inline-block position-relative ms-1'>
               <button
                 type='button'
-                className='btn btn-outline-danger btn-sm ripple cus-tooltip'
+                className='btn btn-outline-danger rounded-1 btn-sm ripple cus-tooltip'
                 onClick={handleRemove}
               >
                 <i className='fas fa-trash-alt'></i>

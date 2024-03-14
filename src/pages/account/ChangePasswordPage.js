@@ -103,7 +103,7 @@ const ChangePasswordPage = (props) => {
           </div>
         ) : (
           <form
-            className='border border-primary rounded-3 row mb-2'
+            className='border border-primary rounded-1 row mb-2'
             onSubmit={handleSubmit}
           >
             <div className='col-12 bg-primary p-3'>

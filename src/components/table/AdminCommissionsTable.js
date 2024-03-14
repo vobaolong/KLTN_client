@@ -254,13 +254,12 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
               </th>
 
               <th scope='col'>
-                {' '}
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Action
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -271,26 +270,19 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
                 <td>
-                  <small>
-                    <StoreCommissionLabel commission={commission} />
-                  </small>
+                  <StoreCommissionLabel commission={commission} />
                 </td>
                 <td>
-                  <small>
-                    {commission.cost && commission.cost.$numberDecimal}%
-                  </small>
+                  <small>{commission.cost?.$numberDecimal}%</small>
                 </td>
-                <td>
-                  <div
-                    style={{
-                      width: '300px',
-                      maxHeight: '200px',
-                      overflow: 'auto'
-                    }}
-                    className='text-end'
-                  >
-                    <small>{commission.description}</small>
-                  </div>
+                <td
+                  style={{
+                    width: '300px',
+                    overflow: 'auto'
+                  }}
+                  className='text-start'
+                >
+                  <small>{commission.description}</small>
                 </td>
                 <td>
                   {commission.isDeleted ? (
@@ -303,10 +295,10 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                     </span>
                   )}
                 </td>
-                <td>
+                <td className='py-1'>
                   <button
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-commission-form'
                     onClick={() => handleEditCommission(commission)}
@@ -318,7 +310,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   {!commission.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple'
+                      className='btn btn-outline-danger ripple rounded-1'
                       onClick={() => handleDeleteCommission(commission)}
                     >
                       <i className='fas fa-trash-alt'></i>
@@ -332,8 +324,8 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                       className='btn btn-outline-success ripple'
                       onClick={() => handleRestoreCommission(commission)}
                     >
-                      <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Hoàn lại</span>
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
+                      <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
                 </td>

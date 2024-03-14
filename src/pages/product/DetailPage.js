@@ -43,7 +43,7 @@ const DetailPage = () => {
           data.product.storeId &&
           !data.product.storeId.isActive
         )
-          setError('This store is banned by ZenMetic!')
+          setError('This store is banned by Zenpii!')
         else {
           const newProduct = data.product
           //get count followers
@@ -131,11 +131,12 @@ const DetailPage = () => {
                   </span>
                 </div>
                 <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
-                  <p className='text-decoration-line-through text-muted mt-1'>
-                    {formatPrice(product.price?.$numberDecimal)} ₫
-                  </p>
+                  <del className=' text-muted mt-1'>
+                    {formatPrice(product.price?.$numberDecimal)} <sup> ₫</sup>
+                  </del>
                   <h2 className='text-primary fs-3 m-0 ms-3'>
-                    {formatPrice(product.salePrice?.$numberDecimal)} ₫
+                    {formatPrice(product.salePrice?.$numberDecimal)}
+                    <sup> ₫</sup>
                   </h2>
                   <SalePercentLabel salePercent={salePercent} />
 

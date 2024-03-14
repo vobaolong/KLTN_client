@@ -14,7 +14,7 @@ const Policy = () => {
             <Logo />
           </Link>
           <h5 className='font-weight-light m-0 ms-2 border-start px-3'>
-            Trung tâm trợ giúp ZenMetic
+            Trung tâm trợ giúp Zenpii
           </h5>
         </div>
       </header>

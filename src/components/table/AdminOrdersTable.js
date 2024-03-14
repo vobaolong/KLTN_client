@@ -243,7 +243,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   </small>
                   <br />
                   <small className='text-nowrap'>
-                    <i className='text-success'>For ZenMetic: </i>
+                    <i className='text-success'>For Zenpii: </i>
                     {order.amountToGD &&
                       formatPrice(order.amountToGD.$numberDecimal)}{' '}
                     ₫

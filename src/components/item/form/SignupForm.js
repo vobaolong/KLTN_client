@@ -117,7 +117,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
               <Link to='/legal/privacy' target='_blank'>
                 Chính sách bảo mật
               </Link>{' '}
-              của ZenMetic .
+              của Zenpii .
             </small>
           }
           onSubmit={onSignupSubmit}
@@ -202,7 +202,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple fw-bold'
+            className='btn btn-primary ripple fw-bold rounded-1'
             onClick={handleSubmit}
           >
             {t('button.signUp')}

@@ -308,7 +308,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                 <td className='text-center'>
                   <button
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-level-form'
                     onClick={() => handleEditLevel(level)}
@@ -320,7 +320,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                   {!level.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple cus-tooltip'
+                      className='btn btn-outline-danger ripple cus-tooltip rounded-1'
                       style={{ width: '95px' }}
                       onClick={() => handleDeleteLevel(level)}
                     >
@@ -336,7 +336,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                       style={{ width: '95px' }}
                       onClick={() => handleRestoreLevel(level)}
                     >
-                      <i className='fas fa-trash-restore-alt'></i>
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
                       <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}

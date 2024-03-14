@@ -23,7 +23,7 @@ const Modal = ({
                   {title}
                 </h5>
               ) : (
-                <Logo noBackground={true} />
+                <h3 className='text-primary'>Zenpii</h3>
               )}
 
               {subTitle && <p className='modal-title fw-light'>{subTitle}</p>}

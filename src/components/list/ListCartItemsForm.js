@@ -225,7 +225,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
               </div>
 
               {item.productId && !item.productId.isActive && (
-                <Error msg='The product is banned by ZenMetic!' />
+                <Error msg='The product is banned by Zenpii!' />
               )}
 
               {item.productId &&
@@ -283,7 +283,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
 
               <button
                 type='button'
-                className='btn btn-outline-danger ripple'
+                className='btn btn-outline-danger ripple rounded-1'
                 onClick={() => handleDelete(item)}
               >
                 <i className='fas fa-trash-alt'></i>

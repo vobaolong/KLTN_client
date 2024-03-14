@@ -130,7 +130,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                   <td>
                     <button
                       type='button'
-                      className='btn btn-dark ripple me-2 my-1'
+                      className='btn btn-dark ripple me-2 my-1 rounded-1'
                       data-bs-toggle='modal'
                       data-bs-target='#edit-address-form'
                       onClick={() => handleEditAddress(address, index)}
@@ -140,7 +140,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                     </button>
                     <button
                       type='button'
-                      className='btn btn-outline-primary ripple my-1'
+                      className='btn btn-outline-danger ripple my-1 rounded-1'
                       onClick={() => handleDeleteAddress(address, index)}
                     >
                       <i className='fas fa-trash-alt'></i>

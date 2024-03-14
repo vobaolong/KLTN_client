@@ -13,11 +13,11 @@ const ProductLicenseLabel = ({ isActive = false, detail = true }) => (
     )}
     {isActive ? (
       <small className='cus-tooltip-msg'>
-        This product is licensed by ZenMetic!
+        This product is licensed by Zenpii!
       </small>
     ) : (
       <small className='cus-tooltip-msg'>
-        This product is banned by ZenMetic, contact us for more information!
+        This product is banned by Zenpii, contact us for more information!
       </small>
     )}
   </span>

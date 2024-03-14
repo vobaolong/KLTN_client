@@ -41,7 +41,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
     search: '',
     sortBy: 'name',
     order: 'asc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -241,12 +241,12 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
               </th>
 
               <th scope='col'>
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Action
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -271,7 +271,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                   <div
                     style={{
                       width: '100%',
-                      height: '70px',
+                      height: '60px',
                       overflow: 'auto',
                       textAlign: 'justify'
                     }}
@@ -293,7 +293,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                 <td>
                   <button
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-delivery-form'
                     onClick={() => handleEditCommission(delivery)}
@@ -305,8 +305,8 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                   {!delivery.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger'
-                      style={{ width: '95px' }}
+                      className='btn btn-outline-danger rounded-1'
+                      style={{ maxWidth: '95px' }}
                       onClick={() => handleDeleteCommission(delivery)}
                     >
                       <i className='fas fa-trash-alt'></i>
@@ -320,8 +320,8 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                       className='btn btn-outline-success ripple'
                       onClick={() => handleRestoreCommission(delivery)}
                     >
-                      <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Hoàn lại</span>
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
+                      <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
                 </td>

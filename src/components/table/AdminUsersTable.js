@@ -25,7 +25,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
     sortBy: 'firstName',
     role: 'customer',
     order: 'asc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 

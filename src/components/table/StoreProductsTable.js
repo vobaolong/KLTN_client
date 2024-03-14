@@ -41,7 +41,7 @@ const StoreProductsTable = ({
     sortBy: 'name',
     isSelling,
     order: 'asc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -421,9 +421,9 @@ const StoreProductsTable = ({
                     whiteSpace: 'normal'
                   }}
                 >
-                  <div className='hidden-avatar' style={{ width: '120px' }}>
+                  <small className='hidden-avatar'>
                     <CategorySmallCard category={product.categoryId} />
-                  </div>
+                  </small>
                 </td>
 
                 <td style={{ whiteSpace: 'normal' }}>
@@ -436,10 +436,12 @@ const StoreProductsTable = ({
                     }}
                   >
                     {product.styleValueIds?.length > 0 ? (
-                      <StyleValueSelector
-                        listValues={product.styleValueIds}
-                        isEditable={false}
-                      />
+                      <small>
+                        <StyleValueSelector
+                          listValues={product.styleValueIds}
+                          isEditable={false}
+                        />
+                      </small>
                     ) : (
                       <small className='mx-auto'>No styles</small>
                     )}
@@ -450,14 +452,14 @@ const StoreProductsTable = ({
                     <ProductLicenseLabel isActive={product.isActive} />
                   </small>
                 </td>
-                <td style={{ whiteSpace: 'normal' }} className='text-start'>
+                <td className='text-end'>
                   <small>{humanReadableDate(product.createdAt)}</small>
                 </td>
                 <td>
                   <div className='d-flex justify-content-center align-items-center'>
                     <button
                       type='button'
-                      className={`btn btn-outline-${
+                      className={`btn rounded-1 btn-outline-${
                         !product.isSelling ? 'success' : 'secondary'
                       } ripple me-2`}
                       onClick={() => handleSellingProduct(product)}
@@ -477,7 +479,7 @@ const StoreProductsTable = ({
 
                     <Link
                       type='button'
-                      className='btn btn-dark ripple'
+                      className='btn btn-dark ripple rounded-1'
                       to={`/vendor/products/editProduct/${product._id}/${storeId}`}
                     >
                       <i className='fas fa-pen'></i>

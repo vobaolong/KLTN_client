@@ -226,7 +226,7 @@ const StoreOrdersTable = ({
                   <br />
 
                   <small className='text-nowrap'>
-                    <i className='text-primary'>For ZenMetic: </i>
+                    <i className='text-primary'>For Zenpii: </i>
                     {order.amountToGD &&
                       formatPrice(order.amountToGD.$numberDecimal)}{' '}
                     ₫

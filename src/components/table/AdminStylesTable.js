@@ -287,7 +287,7 @@ const AdminStylesTable = ({ heading = '' }) => {
 
                   <Link
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     to={`/admin/style/editStyle/${style._id}`}
                   >
                     <i className='fas fa-pen'></i>
@@ -297,7 +297,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                   {!style.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple'
+                      className='btn btn-outline-danger ripple rounded-1'
                       style={{ width: '95px' }}
                       onClick={() => handleDelete(style)}
                     >
@@ -313,10 +313,10 @@ const AdminStylesTable = ({ heading = '' }) => {
                         className='btn btn-outline-success'
                         onClick={() => handleRestore(style)}
                       >
-                        <i className='fas fa-trash-restore-alt'></i>
+                        <i class='fa-solid fa-trash-can-arrow-up'></i>
                         <span className='ms-1 res-hide'>Restore</span>
                       </button>
-                      {/* <small className='cus-tooltip-msg'>Hoàn lại</small> */}
+                      {/* <small className='cus-tooltip-msg'>Restore</small> */}
                     </>
                   )}
                 </td>

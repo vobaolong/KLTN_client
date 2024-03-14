@@ -215,23 +215,27 @@ const StyleValuesTable = ({
                     <td className='text-nowrap'>
                       <button
                         type='button'
-                        className='btn btn-dark ripple me-2'
+                        className='btn btn-dark ripple me-2 rounded-1'
                         data-bs-toggle='modal'
                         data-bs-target='#edit-style-value-form'
                         onClick={() => setEditedStyleValue(value)}
                       >
                         <i className='fas fa-pen'></i>
-                        <span className='ms-2 res-hide'>Edit</span>
+                        <span className='ms-2 res-hide'>
+                          {t('button.edit')}
+                        </span>
                       </button>
 
                       {!value.isDeleted ? (
                         <button
                           type='button'
-                          className='btn btn-outline-danger ripple'
+                          className='btn btn-outline-danger ripple rounded-1'
                           onClick={() => handleDelete(value)}
                         >
                           <i className='fas fa-trash-alt'></i>
-                          <span className='ms-2 res-hide'>Delete</span>
+                          <span className='ms-2 res-hide'>
+                            {t('button.delete')}
+                          </span>
                         </button>
                       ) : (
                         <button
@@ -239,7 +243,7 @@ const StyleValuesTable = ({
                           className='btn btn-outline-success ripple'
                           onClick={() => handleRestore(value)}
                         >
-                          <i className='fas fa-trash-restore-alt'></i>
+                          <i class='fa-solid fa-trash-can-arrow-up'></i>
                           <span className='ms-2 res-hide'>Restore</span>
                         </button>
                       )}

@@ -141,7 +141,7 @@ const CreateStoreForm = (props) => {
           title='Create store'
           message={
             <small>
-              By Creating your store, you agree to ZenMetic's{' '}
+              By Creating your store, you agree to Zenpii's{' '}
               <Link to='/legal/termsOfUse' target='_blank'>
                 Terms of Use
               </Link>{' '}
@@ -150,8 +150,8 @@ const CreateStoreForm = (props) => {
                 Privacy Policy
               </Link>
               . How you'll get paid? Set up billing?{' '}
-              <Link to='/legal/sellOnZenMetic' target='_blank'>
-                Sell on ZenMetic
+              <Link to='/legal/sellOnZenpii' target='_blank'>
+                Sell on Zenpii
               </Link>
               .
             </small>
@@ -162,7 +162,7 @@ const CreateStoreForm = (props) => {
       )}
 
       <form
-        className='border border-primary rounded-3 row mb-2'
+        className='border border-primary rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
@@ -250,7 +250,7 @@ const CreateStoreForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <small className='text-center d-block mx-2'>
             <span className='text-muted'>{t('storeDetail.getPaid')}</span>{' '}
-            <Link to='/legal/sellOnZenMetic' target='_blank'>
+            <Link to='/legal/sellOnZenpii' target='_blank'>
               {t('storeDetail.sellOn')}
             </Link>
             <br className='res-hide' />
@@ -270,7 +270,7 @@ const CreateStoreForm = (props) => {
           </Link>
           <button
             type='submit'
-            className='btn btn-primary ripple res-w-100-md'
+            className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
             style={{ width: '200px', maxWidth: '100%' }}
           >

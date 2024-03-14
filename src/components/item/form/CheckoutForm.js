@@ -308,10 +308,10 @@ const CheckoutForm = ({
       )}
 
       <form
-        className='border border-primary rounded-3 row mb-2'
+        className='border border-primary rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
+        <div className='col-12 bg-primary rounded-top-1 p-3'>
           <Logo />
           <p className='text-white fw-light'>Proceed to checkout</p>
         </div>

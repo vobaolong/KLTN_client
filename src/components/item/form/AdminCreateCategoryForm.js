@@ -104,7 +104,7 @@ const AdminCreateCategoryForm = (props) => {
       )}
 
       <form
-        className='border border-primary rounded-3 row mb-2'
+        className='border border-primary rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
@@ -173,7 +173,7 @@ const AdminCreateCategoryForm = (props) => {
           </Link>
           <button
             type='submit'
-            className='btn btn-primary ripple res-w-100-md'
+            className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >

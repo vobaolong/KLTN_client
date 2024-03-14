@@ -34,7 +34,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
     sortMoreBy: 'point',
     isActive,
     order: 'asc',
-    limit: 6,
+    limit: 8,
     page: 1
   })
 
@@ -153,123 +153,130 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
           {pagination.size || 0} {t('result')}
         </span>
       </div>
+      {!isLoading && stores.length === 0 ? (
+        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <h5>No stores yet!</h5>
+        </div>
+      ) : (
+        <div className='table-scroll my-2'>
+          <table className='table align-middle table-hover table-sm text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col'>
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-dark'
+                  >
+                    Store Name
+                  </span>
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Rating'
+                    sortBy='rating'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Status'
+                    sortBy='isOpen'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Commission'
+                    sortBy='commissionId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-end'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Joined'
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
 
-      <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-dark'
-                >
-                  Store Name
-                </span>
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Rating'
-                  sortBy='rating'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Status'
-                  sortBy='isOpen'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Commission'
-                  sortBy='commissionId'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col' className='text-end'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Joined'
-                  sortBy='createdAt'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col'>
-                {/* <span
+                <th scope='col'>
+                  {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Action
                 </span> */}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {stores.map((store, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  <span className='text-center align-items-center'>
-                    {index + 1 + (filter.page - 1) * filter.limit}
-                  </span>
                 </th>
-                <td className=' text-start ps-2' style={{ maxWidth: '300px' }}>
-                  <StoreSmallCard store={store} />
-                </td>
-                <td>
-                  <small>
-                    <StarRating stars={store.rating} />
-                  </small>
-                </td>
-                <td>
-                  <StoreStatusLabel isOpen={store.isOpen} />
-                </td>
-                <td>
-                  <StoreCommissionLabel commission={store.commissionId} />
-                </td>
-                <td className='text-end'>
-                  <small className='me-2'>
-                    {humanReadableDate(store.createdAt)}
-                  </small>
-                </td>
-                <td>
-                  <button
-                    type='button'
-                    className={`btn ${
-                      !store.isActive
-                        ? 'btn-outline-success'
-                        : 'btn-outline-danger'
-                    } ripple cus-tooltip`}
-                    onClick={() => handleActiveStore(store)}
-                  >
-                    {!store.isActive ? (
-                      <>
-                        <i className='far fa-check-circle'></i>
-                        <span className='ms-2 res-hide'>License</span>
-                      </>
-                    ) : (
-                      <>
-                        <i className='fas fa-ban'></i>
-                        <span className='ms-2 res-hide'>Ban</span>
-                      </>
-                    )}
-                  </button>
-                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
+            </thead>
+            <tbody>
+              {stores.map((store, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    <span className='text-center align-items-center'>
+                      {index + 1 + (filter.page - 1) * filter.limit}
+                    </span>
+                  </th>
+                  <td
+                    className=' text-start ps-2'
+                    style={{ maxWidth: '300px' }}
+                  >
+                    <StoreSmallCard store={store} />
+                  </td>
+                  <td>
+                    <small>
+                      <StarRating stars={store.rating} />
+                    </small>
+                  </td>
+                  <td>
+                    <StoreStatusLabel isOpen={store.isOpen} />
+                  </td>
+                  <td>
+                    <StoreCommissionLabel commission={store.commissionId} />
+                  </td>
+                  <td className='text-end'>
+                    <small className='me-2'>
+                      {humanReadableDate(store.createdAt)}
+                    </small>
+                  </td>
+                  <td className='py-1'>
+                    <button
+                      type='button'
+                      className={`btn rounded-1 ${
+                        !store.isActive
+                          ? 'btn-outline-success'
+                          : 'btn-outline-danger'
+                      } ripple cus-tooltip`}
+                      onClick={() => handleActiveStore(store)}
+                    >
+                      {!store.isActive ? (
+                        <>
+                          <i className='far fa-check-circle'></i>
+                          <span className='ms-2 res-hide'>License</span>
+                        </>
+                      ) : (
+                        <>
+                          <i className='fas fa-ban'></i>
+                          <span className='ms-2 res-hide'>Ban</span>
+                        </>
+                      )}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       {pagination.size !== 0 && (
         <Pagination pagination={pagination} onChangePage={handleChangePage} />
       )}

@@ -163,7 +163,7 @@ const StoreStaffsTable = ({
         <div className='d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
           <div className='ms-2'>
-            {ownerId && userId == ownerId._id ? (
+            {ownerId && userId === ownerId._id ? (
               <StoreAddStaffItem
                 storeId={storeId}
                 owner={ownerId}
@@ -220,7 +220,7 @@ const StoreStaffsTable = ({
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              {ownerId && userId == ownerId._id && <th scope='col'></th>}
+              {ownerId && userId === ownerId._id && <th scope='col'></th>}
             </tr>
           </thead>
           <tbody>
@@ -241,11 +241,11 @@ const StoreStaffsTable = ({
                 <td>
                   <small>{staff.phone || '-'}</small>
                 </td>
-                {ownerId && userId == ownerId._id && (
+                {ownerId && userId === ownerId._id && (
                   <td className='text-center'>
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple cus-tooltip'
+                      className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
                       onClick={() => handleDeleteStaff(staff)}
                     >
                       <i className='fas fa-trash-alt'></i>
@@ -280,7 +280,7 @@ const compareFunc = (sortBy, order) => {
     if (typeof valueA === 'undefined') valueA = ''
     if (typeof valueB === 'undefined') valueB = ''
 
-    if (order == 'asc')
+    if (order === 'asc')
       if (valueA < valueB) return -1
       else if (valueA > valueB) return 1
       else return 0

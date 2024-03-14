@@ -63,7 +63,7 @@ const UserCancelOrderButton = ({
       <div className='d-inline-block cus-tooltip'>
         <button
           type='button'
-          className='btn btn-outline-danger ripple'
+          className='btn btn-outline-danger ripple rounded-1'
           disabled={status !== 'Not processed' || calcTime(createdAt) >= 1}
           onClick={handleCancelOrder}
         >

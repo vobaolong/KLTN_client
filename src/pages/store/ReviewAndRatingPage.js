@@ -8,7 +8,7 @@ const ReviewAndRatingPage = (props) => {
   const store = useSelector((state) => state.store.store)
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
-      <Error msg='This store is banned by ZenMetic!' />
+      <Error msg='This store is banned by Zenpii!' />
     </MainLayout>
   ) : (
     <StoreLayout store={store}>

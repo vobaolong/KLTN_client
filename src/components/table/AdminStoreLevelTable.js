@@ -308,7 +308,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                 <td>
                   <button
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-level-form'
                     onClick={() => handleEditLevel(level)}
@@ -320,7 +320,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                   {!level.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple'
+                      className='btn btn-outline-danger ripple rounded-1'
                       style={{ width: '95px' }}
                       onClick={() => handleDeleteLevel(level)}
                     >
@@ -336,8 +336,8 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                       style={{ width: '95px' }}
                       onClick={() => handleRestoreLevel(level)}
                     >
-                      <i className='fas fa-trash-restore-alt'></i>
-                      <span className='ms-2 res-hide'>Hoàn lại</span>
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
+                      <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
                 </td>

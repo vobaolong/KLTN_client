@@ -320,7 +320,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
                 <td>
                   <Link
                     type='button'
-                    className='btn btn-dark ripple me-2'
+                    className='btn btn-dark ripple me-2 rounded-1'
                     to={`/admin/category/editCategory/${category._id}`}
                   >
                     <i className='fas fa-pen'></i>
@@ -330,7 +330,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
                   {!category.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple cus-tooltip'
+                      className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
                       onClick={() => handleDeleteCategory(category)}
                     >
                       <i className='fas fa-trash-alt'></i>
@@ -344,7 +344,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
                       className='btn btn-outline-success ripple cus-tooltip'
                       onClick={() => handleRestoreCategory(category)}
                     >
-                      <i className='fas fa-trash-restore-alt'></i>
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
                       <span className='ms-2 res-hide'>Restore</span>
                     </button>
                   )}
