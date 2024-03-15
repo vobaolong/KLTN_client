@@ -150,7 +150,14 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 
@@ -163,7 +170,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Product'
+                  title='Product Name'
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -233,11 +240,14 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                   <ProductSmallCard product={product} />
                 </td>
                 <td className='text-start'>
-                  <StoreSmallCard store={product.storeId} />
+                  <small>
+                    <StoreSmallCard store={product.storeId} />
+                  </small>
                 </td>
                 <td>
                   <small>
-                    <StarRating stars={product.rating} />
+                    <i class='fa-solid fa-star text-warning me-1'></i>
+                    {product.rating}
                   </small>
                 </td>
                 <td>

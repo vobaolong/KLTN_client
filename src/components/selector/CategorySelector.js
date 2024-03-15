@@ -158,20 +158,19 @@ const CategorySelector = ({
               overflowY: 'auto'
             }}
           >
-            {lv1Categories &&
-              lv1Categories.map((category, index) => (
-                <button
-                  key={index}
-                  type='button'
-                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center ${
-                    category._id === lv2Filter.categoryId ? 'active' : ''
-                  }`}
-                  onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
-                >
-                  <span className='res-smaller-md'>{category.name}</span>
-                  <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
-                </button>
-              ))}
+            {lv1Categories?.map((category, index) => (
+              <button
+                key={index}
+                type='button'
+                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
+                  category._id === lv2Filter.categoryId ? 'active' : ''
+                }`}
+                onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
+              >
+                <span className='res-smaller-md'>{category.name}</span>
+                <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
+              </button>
+            ))}
           </div>
 
           <div
@@ -181,20 +180,19 @@ const CategorySelector = ({
               overflowY: 'auto'
             }}
           >
-            {lv2Categories &&
-              lv2Categories.map((category, index) => (
-                <button
-                  key={index}
-                  type='button'
-                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
-                    category._id === lv3Filter.categoryId && 'active'
-                  }`}
-                  onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
-                >
-                  <span className='res-smaller-md'>{category.name}</span>
-                  <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
-                </button>
-              ))}
+            {lv2Categories?.map((category, index) => (
+              <button
+                key={index}
+                type='button'
+                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
+                  category._id === lv3Filter.categoryId && 'active'
+                }`}
+                onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
+              >
+                <span className='res-smaller-md'>{category.name}</span>
+                <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
+              </button>
+            ))}
           </div>
 
           <div
@@ -204,21 +202,20 @@ const CategorySelector = ({
               overflowY: 'auto'
             }}
           >
-            {lv3Categories &&
-              lv3Categories.map((category, index) => (
-                <button
-                  key={index}
-                  type='button'
-                  className={`list-group-item ripple list-group-item-action ${
-                    selectedCategory && category._id === selectedCategory._id
-                      ? 'active'
-                      : ''
-                  }`}
-                  onClick={() => handleClick(null, null, category)}
-                >
-                  <span className='res-smaller-md'>{category.name}</span>
-                </button>
-              ))}
+            {lv3Categories?.map((category, index) => (
+              <button
+                key={index}
+                type='button'
+                className={`list-group-item ripple list-group-item-action ${
+                  selectedCategory && category._id === selectedCategory._id
+                    ? 'active'
+                    : ''
+                }`}
+                onClick={() => handleClick(null, null, category)}
+              >
+                <span className='res-smaller-md'>{category.name}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>

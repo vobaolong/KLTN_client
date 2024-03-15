@@ -36,7 +36,6 @@ const StoreInit = ({ store, actions }) => {
           } catch {
             newStore.level = {}
           }
-
           //get count followers
           try {
             const res = await getNumberOfFollowers(storeId)
@@ -44,7 +43,6 @@ const StoreInit = ({ store, actions }) => {
           } catch {
             newStore.numberOfFollowers = 0
           }
-
           //check follow
           try {
             const res = await checkFollowingStore(_id, accessToken, storeId)
@@ -52,7 +50,6 @@ const StoreInit = ({ store, actions }) => {
           } catch {
             newStore.isFollowing = false
           }
-
           //get count orders
           try {
             const res1 = await countOrder('Delivered', '', storeId)

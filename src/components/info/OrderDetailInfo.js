@@ -72,7 +72,7 @@ const OrderDetailInfo = ({
     init()
   }, [orderId, storeId, by, run])
 
-  console.log(order)
+  console.log(order.storeId)
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -165,25 +165,26 @@ const OrderDetailInfo = ({
 
       <div className='container-fluid mb-3'>
         <div className='row py-2 border rounded-1'>
-          <div className='border-bottom pb-2'>
-            <p style={{ fontWeight: '500' }}>{t('orderDetail.userReceiver')}</p>
+          <div className='col-sm-6 border-end'>
+            <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
+              Địa Chỉ Người Gửi
+            </p>
+            <div>
+              <Paragraph value={order.storeId?.name} />
+              <Paragraph value={order.storeId?.address} />
+            </div>
           </div>
-          <div>
-            <Paragraph
-              label={t('userDetail.name')}
-              colon
-              value={`${order.userId?.firstName} ${order.userId?.lastName}`}
-            />
-            <Paragraph
-              label={t('userDetail.phone')}
-              colon
-              value={order.phone}
-            />
-            <Paragraph
-              label={t('userDetail.address')}
-              colon
-              value={order.address}
-            />
+          <div className='col-sm-6'>
+            <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
+              {t('orderDetail.userReceiver')}
+            </p>
+            <div>
+              <Paragraph
+                value={`${order.userId?.firstName} ${order.userId?.lastName}`}
+              />
+              <Paragraph value={order.phone} />
+              <Paragraph value={order.address} />
+            </div>
           </div>
         </div>
       </div>

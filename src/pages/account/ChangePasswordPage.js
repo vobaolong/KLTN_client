@@ -135,7 +135,7 @@ const ChangePasswordPage = (props) => {
             <div className='col-12 d-grid mt-4 mb-2'>
               <button
                 type='submit'
-                className='btn btn-primary ripple'
+                className='btn btn-primary ripple rounded-1'
                 onClick={handleSubmit}
               >
                 Save

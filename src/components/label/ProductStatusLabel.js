@@ -1,7 +1,9 @@
 const ProductStatusLabel = ({ isSelling = true, detail = true }) => (
   <span className='d-inline-block position-relative'>
     <span
-      className={`badge ${isSelling ? 'bg-success' : 'bg-danger'} cus-tooltip`}
+      className={`badge rounded-1 ${
+        isSelling ? 'bg-success' : 'bg-danger'
+      } cus-tooltip`}
     >
       {isSelling ? (
         <span>

@@ -25,62 +25,67 @@ export const removeToken = () => {
   }
 }
 
-export const refreshTokenApi = (refreshToken, userId, role) => {
-  return fetch(`${API}/refresh/token`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ refreshToken })
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.error) {
-        signout(refreshToken, () => {})
-      } else {
-        console.log('setToken')
-        setToken(
-          {
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
-            _id: userId,
-            role
-          },
-          () => {}
-        )
-      }
+export const refreshTokenApi = async (refreshToken, userId, role) => {
+  try {
+    const res = await fetch(`${API}/refresh/token`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ refreshToken })
     })
-    .catch((error) => {
+    const data = await res.json()
+    if (data.error) {
       signout(refreshToken, () => {})
-    })
+    } else {
+      console.log('setToken')
+      setToken(
+        {
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+          _id: userId,
+          role
+        },
+        () => {}
+      )
+    }
+  } catch (error) {
+    signout(refreshToken, () => {})
+  }
 }
 
 //auth apis
-export const signup = (user) => {
-  return fetch(`${API}/signup`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+export const signup = async (user) => {
+  try {
+    const res = await fetch(`${API}/signup`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
-export const signin = (user) => {
-  return fetch(`${API}/signin`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
-    .then((res) => res.json())
-    .catch((error) => console.error(error))
+export const signin = async (user) => {
+  try {
+    const res = await fetch(`${API}/signin`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.error(error)
+  }
 }
 
 export const signout = (refreshToken, next) => {
@@ -97,68 +102,83 @@ export const signout = (refreshToken, next) => {
   next()
 }
 
-export const authSocial = (user) => {
-  return fetch(`${API}/auth/social`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  })
-    .then((res) => res.json())
-    .catch((error) => console.error(error))
+export const authSocial = async (user) => {
+  try {
+    const res = await fetch(`${API}/auth/social`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.error(error)
+  }
 }
 
 //confirm email
-export const sendConfirmationEmail = (userId, token) => {
-  return fetch(`${API}/confirm/email/${userId}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+export const sendConfirmationEmail = async (userId, token) => {
+  try {
+    const res = await fetch(`${API}/confirm/email/${userId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
-export const verifyEmail = (emailCode) => {
-  return fetch(`${API}/verify/email/${emailCode}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+export const verifyEmail = async (emailCode) => {
+  try {
+    const res = await fetch(`${API}/verify/email/${emailCode}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
 //forgot password
-export const forgotPassword = (username) => {
-  return fetch(`${API}/forgot/password`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(username)
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+export const forgotPassword = async (username) => {
+  try {
+    const res = await fetch(`${API}/forgot/password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(username)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
 }
 
-export const changePassword = (passwordCode, newPassword) => {
-  return fetch(`${API}/change/password/${passwordCode}`, {
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newPassword)
-  })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+export const changePassword = async (passwordCode, newPassword) => {
+  try {
+    const res = await fetch(`${API}/change/password/${passwordCode}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newPassword)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
 }

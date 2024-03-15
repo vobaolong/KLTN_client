@@ -18,7 +18,7 @@ const CategorySmallCard = ({ category = {}, style = {}, parent = true }) => (
       className='text-reset text-decoration-none mt-2 ms-2 cus-link-hover'
       to={`/category/${category._id}`}
     >
-      <span className='fs-6'>
+      <span>
         {parent &&
           category.categoryId &&
           category.categoryId.categoryId &&

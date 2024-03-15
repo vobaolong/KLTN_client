@@ -135,7 +135,12 @@ const ListReviews = ({
           {renderFilterRating()}
         </div>
         <span className='me-2 text-nowrap'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          {Math.min(
+            filter.limit,
+            pagination.size - filter.limit * (pagination.pageCurrent - 1)
+          )}{' '}
+          of {pagination.size} {t('result')}
         </span>
       </div>
 

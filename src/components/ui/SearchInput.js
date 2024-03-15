@@ -20,7 +20,7 @@ const SearchInput = ({ onChange = () => {} }) => {
 
   return (
     <input
-      className='form-control'
+      className='form-control rounded-1'
       type='search'
       placeholder={t('search')}
       style={{ maxWidth: '206px' }}

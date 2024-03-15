@@ -5,7 +5,7 @@ const OrderPaymentLabel = ({ isPaidBefore = false, detail = true }) => {
   return (
     <span className='position-relative d-inline-block'>
       {isPaidBefore ? (
-        <span className='badge rounded-1 bg-dark cus-tooltip'>
+        <span className='badge rounded-1 bg-danger cus-tooltip'>
           {detail && <span>{t('orderDetail.onlinePayment')}</span>}
         </span>
       ) : (

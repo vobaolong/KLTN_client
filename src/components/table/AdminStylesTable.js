@@ -193,7 +193,14 @@ const AdminStylesTable = ({ heading = '' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 
@@ -307,17 +314,14 @@ const AdminStylesTable = ({ heading = '' }) => {
                       </span>
                     </button>
                   ) : (
-                    <>
-                      <button
-                        type='button'
-                        className='btn btn-outline-success'
-                        onClick={() => handleRestore(style)}
-                      >
-                        <i class='fa-solid fa-trash-can-arrow-up'></i>
-                        <span className='ms-1 res-hide'>Restore</span>
-                      </button>
-                      {/* <small className='cus-tooltip-msg'>Restore</small> */}
-                    </>
+                    <button
+                      type='button'
+                      className='btn btn-outline-success'
+                      onClick={() => handleRestore(style)}
+                    >
+                      <i class='fa-solid fa-trash-can-arrow-up'></i>
+                      <span className='ms-1 res-hide'>Restore</span>
+                    </button>
                   )}
                 </td>
               </tr>

@@ -27,16 +27,16 @@ const SortByButton = ({
 
   return (
     <span
-      className='btn btn-sm text-nowrap text-dark	 pointer'
+      className='btn btn-sm text-nowrap text-secondary pointer'
       onClick={handleClick}
     >
       {title}
       {!flag ? (
-        <i className='fas fa-sort ms-2'></i>
+        <i class='fa-solid fa-sort ms-2'></i>
       ) : flag === 'asc' ? (
-        <i className='fas fa-sort-alpha-down ms-2'></i>
+        <i class='fa-solid fa-arrow-down-wide-short ms-2'></i>
       ) : (
-        <i className='fas fa-sort-alpha-up-alt ms-2'></i>
+        <i class='fa-solid fa-arrow-up-wide-short ms-2'></i>
       )}
     </span>
   )

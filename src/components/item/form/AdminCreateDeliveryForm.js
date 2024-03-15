@@ -119,6 +119,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
             isValid={delivery.isValidName}
             feedback='Please provide a valid delivery name.'
             validator='name'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -132,6 +133,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
             isValid={delivery.isValidDescription}
             feedback='Please provide a valid delivery description.'
             validator='bio'
+            required={true}
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
             }
@@ -147,6 +149,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
             isValid={delivery.isValidPrice}
             feedback='Please provide a valid price (>=0).'
             validator='greaterThanOrEqualTo'
+            required={true}
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}
           />
@@ -167,7 +170,7 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             {t('button.submit')}

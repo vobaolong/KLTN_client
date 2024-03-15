@@ -6,7 +6,7 @@ const StylePage = (props) => {
   const user = useSelector((state) => state.account.user)
   return (
     <AdminLayout user={user}>
-      <AdminStylesTable />
+      <AdminStylesTable heading='Product Variants' />
     </AdminLayout>
   )
 }

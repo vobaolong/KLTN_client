@@ -169,7 +169,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             {t('button.submit')}

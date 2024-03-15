@@ -208,7 +208,14 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 

@@ -91,7 +91,8 @@ const CollectionPage = (props) => {
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
           <span className='me-3'>
-            {pagination.size || 0} {t('result')}
+            Showing {Math.min(pagination.size || 0, filter.limit)} of{' '}
+            {filter.limit} {t('result')}
           </span>
         </div>
 

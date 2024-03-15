@@ -9,14 +9,17 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 
-const StoreEditProfileForm = ({ name = '', bio = '', storeId = '' }) => {
+const StoreEditProfileForm = ({
+  name = '',
+  bio = '',
+  address = '',
+  storeId = ''
+}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-
   const [profile, setProfile] = useState({})
-
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
 
@@ -24,10 +27,12 @@ const StoreEditProfileForm = ({ name = '', bio = '', storeId = '' }) => {
     setProfile({
       name: name,
       bio: bio,
+      address: address,
       isValidName: true,
-      isValidBio: true
+      isValidBio: true,
+      isValidAddress: true
     })
-  }, [name, bio, storeId])
+  }, [name, bio, address, storeId])
 
   const handleChange = (name, isValidName, value) => {
     setProfile({
@@ -46,12 +51,17 @@ const StoreEditProfileForm = ({ name = '', bio = '', storeId = '' }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!profile.isValidName || !profile.isValidBio) return
+    if (!profile.isValidName || !profile.isValidBio || !profile.isValidAddress)
+      return
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    let store = { name: profile.name, bio: profile.bio }
+    let store = {
+      name: profile.name,
+      bio: profile.bio,
+      address: profile.address
+    }
     setError('')
     setSuccess('')
     setIsLoading(true)
@@ -116,6 +126,21 @@ const StoreEditProfileForm = ({ name = '', bio = '', storeId = '' }) => {
           />
         </div>
 
+        <div className='col-12'>
+          <Input
+            type='text'
+            label='Store address'
+            value={profile.address}
+            isValid={profile.isValidAddress}
+            feedback='Please provide a valid store address.'
+            validator='address'
+            onChange={(value) =>
+              handleChange('address', 'isValidAddress', value)
+            }
+            onValidate={(flag) => handleValidate('isValidAddress', flag)}
+          />
+        </div>
+
         {error && (
           <div className='col-12'>
             <Error msg={error} />
@@ -131,7 +156,7 @@ const StoreEditProfileForm = ({ name = '', bio = '', storeId = '' }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             Save

@@ -18,7 +18,7 @@ const Policy = () => {
           </h5>
         </div>
       </header>
-      <div className='body container-md'>
+      <div className='body container-fluid'>
         <h3 className='text-uppercase text-center'>Chính sách bảo mật</h3>
 
         <div className='text-justify mt-3'>

@@ -119,6 +119,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
             isValid={commission.isValidName}
             feedback='Please provide a valid commission name.'
             validator='level'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -147,6 +148,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
             isValid={commission.isValidCost}
             feedback='Please provide a valid cost (>=0).'
             validator='zeroTo100'
+            required={true}
             onChange={(value) => handleChange('cost', 'isValidCost', value)}
             onValidate={(flag) => handleValidate('isValidCost', flag)}
           />
@@ -167,7 +169,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             {t('button.submit')}

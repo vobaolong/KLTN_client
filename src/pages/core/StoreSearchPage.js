@@ -78,7 +78,8 @@ const StoreSearchPage = (props) => {
 
         <div className='d-flex justify-content-end'>
           <span className='me-3'>
-            {pagination.size || 0} {t('result')}
+            Showing {Math.min(pagination.size || 0, filter.limit)} of{' '}
+            {filter.limit} {t('result')}
           </span>
         </div>
 

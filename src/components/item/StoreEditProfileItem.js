@@ -21,6 +21,7 @@ const StoreEditProfileItem = ({ store = {} }) => (
         storeId={store._id}
         name={store.name}
         bio={store.bio}
+        address={store.address}
       />
     </Modal>
 

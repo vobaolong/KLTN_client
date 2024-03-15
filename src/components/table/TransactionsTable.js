@@ -96,6 +96,7 @@ const TransactionsTable = ({
               pageCount: data.filter.pageCount
             })
           }
+
           setIsLoading(false)
         })
         .catch((error) => {
@@ -103,6 +104,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
   }
+  console.log(pagination.pageCurrent)
 
   useEffect(() => {
     init()
@@ -165,7 +167,14 @@ const TransactionsTable = ({
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 
@@ -241,10 +250,10 @@ const TransactionsTable = ({
                 <td className='ps-1 text-start'>
                   <small>{transaction._id}</small>
                 </td>
-                <td className='pe-1'>
+                <td>
                   <small>{humanReadableDate(transaction.createdAt)}</small>
                 </td>
-                <td className='pe-1'>
+                <td>
                   <small className='text-nowrap'>
                     {transaction.amount &&
                       formatPrice(transaction.amount.$numberDecimal)}{' '}

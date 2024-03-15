@@ -117,6 +117,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
             isValid={level.isValidName}
             feedback='Please provide a valid level name.'
             validator='level'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -130,6 +131,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
             isValid={level.isValidMinPoint}
             feedback='Please provide a valid floor point (>=0).'
             validator='positive|zero'
+            required={true}
             onChange={(value) =>
               handleChange('minPoint', 'isValidMinPoint', value)
             }
@@ -145,6 +147,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
             isValid={level.isValidDiscount}
             feedback='Please provide a valid floor point (0% - 100%).'
             validator='zeroTo100'
+            required={true}
             onChange={(value) =>
               handleChange('discount', 'isValidDiscount', value)
             }
@@ -160,6 +163,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
             isValid={level.isValidColor}
             feedback='Please provide a valid color.'
             validator='anything'
+            required={true}
             onChange={(value) => handleChange('color', 'isValidColor', value)}
             onValidate={(flag) => handleValidate('isValidDiscount', flag)}
           />
@@ -180,7 +184,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             Save

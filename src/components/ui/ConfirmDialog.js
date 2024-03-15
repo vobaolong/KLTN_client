@@ -41,7 +41,7 @@ const ConfirmDialog = ({
               </button>
               <button
                 type='button'
-                className='btn btn-primary ripple'
+                className='btn btn-primary ripple rounded-1'
                 onClick={onConfirm}
               >
                 {t('button.confirm')}

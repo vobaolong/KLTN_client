@@ -7,13 +7,14 @@ const Input = ({
   onValidate = () => {},
   type = 'text',
   value = '',
-  label = 'Enter something',
+  label = '',
   validator = 'anything',
   isValid = true,
   isDisabled = false,
   accept = '*/*',
   feedback = 'Please provide a valid value',
-  min = 0
+  min = 0,
+  required = false
 }) => {
   const [tempValue, setTempValue] = useState('')
   const [showPasswordFlag, togglePasswordFlag] = useToggle(true)
@@ -52,7 +53,7 @@ const Input = ({
           type === 'password' ? (showPasswordFlag ? 'password' : 'text') : type
         }
         min={type === 'number' ? min : undefined}
-        required
+        required={required}
         disabled={isDisabled}
         accept={accept}
         className={`cus-input-group-input form-control
@@ -68,7 +69,7 @@ const Input = ({
           type === 'file' ? 'cus-input-group-label--file' : ''
         }`}
       >
-        {label}
+        {label} {required && <span style={{ color: 'red' }}>*</span>}
       </label>
       <span className='cus-input-group-bar'></span>
       <small className='invalid-feedback'>{feedback}</small>

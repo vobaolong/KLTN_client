@@ -25,11 +25,13 @@ const CreateStoreForm = (props) => {
   const [store, setStore] = useState({
     name: '',
     bio: '',
+    address: '',
     commissionId: '',
     avatar: '',
     cover: '',
     isValidName: true,
     isValidBio: true,
+    isValidAddress: true,
     isValidAvatar: true,
     isValidCover: true
   })
@@ -80,11 +82,18 @@ const CreateStoreForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!store.name || !store.bio || !store.avatar || !store.cover) {
+    if (
+      !store.name ||
+      !store.bio ||
+      !store.address ||
+      !store.avatar ||
+      !store.cover
+    ) {
       setStore({
         ...store,
         isValidName: regexTest('name', store.name),
         isValidBio: regexTest('bio', store.bio),
+        isValidAddress: regexTest('address', store.address),
         isValidAvatar: !!store.avatar,
         isValidCover: !!store.cover
       })
@@ -94,6 +103,7 @@ const CreateStoreForm = (props) => {
     if (
       !store.isValidName ||
       !store.isValidBio ||
+      !store.isValidAddress ||
       !store.avatar ||
       !store.cover
     )
@@ -106,6 +116,7 @@ const CreateStoreForm = (props) => {
     const formData = new FormData()
     formData.set('name', store.name)
     formData.set('bio', store.bio)
+    formData.set('address', store.address)
     formData.set('commissionId', store.commissionId)
     formData.set('avatar', store.avatar)
     formData.set('cover', store.cover)
@@ -195,6 +206,20 @@ const CreateStoreForm = (props) => {
           />
         </div>
 
+        <div className='col-12 px-4'>
+          <Input
+            type='text'
+            label='Address'
+            value={store.address}
+            isValid={store.isValidAddress}
+            feedback={t('storeDetailValid.addressValid')}
+            validator='address'
+            onChange={(value) =>
+              handleChange('address', 'isValidAddress', value)
+            }
+            onValidate={(flag) => handleValidate('isValidAddress', flag)}
+          />
+        </div>
         <div className='col-12 px-4'>
           <InputFile
             label='Ảnh Nền'

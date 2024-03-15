@@ -31,7 +31,9 @@ const UserSmallCard = ({
       to={link}
       style={style}
     >
-      <span className='fs-6'>{user.firstName + ' ' + user.lastName}</span>
+      <span style={{ fontSize: '0.9rem' }}>
+        {user.firstName + ' ' + user.lastName}
+      </span>
     </Link>
   </span>
 )

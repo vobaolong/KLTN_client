@@ -40,7 +40,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'name',
+    sortBy: 'point',
     order: 'asc',
     limit: 6,
     page: 1
@@ -208,7 +208,14 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
           </div>
         </div>
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 
@@ -244,14 +251,6 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              {/* <th scope='col' className='text-end'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
-                >
-                  Color
-                </span>
-              </th> */}
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
@@ -261,7 +260,6 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-
               <th scope='col'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}

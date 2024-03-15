@@ -52,8 +52,7 @@ const LineChart = ({
         boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
         borderRadius: '0.25rem',
         backgroundColor: '#fff',
-        width: '99%',
-        padding: '5px'
+        width: '99%'
       }}
     >
       <h6

@@ -19,7 +19,7 @@ const StoreSmallCard = ({
       />
     </Link>
     <Link className='text-reset link-hover m-auto ms-2' to={link}>
-      <span className='fs-6'>{store.name}</span>
+      <span style={{ fontSize: '0.9rem' }}>{store.name}</span>
     </Link>
   </span>
 )

@@ -83,7 +83,8 @@ const ProductSearchPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <span className='me-3 text-nowrap'>
-            {pagination.size || 0} {t('result')}
+            Showing {Math.min(pagination.size || 0, filter.limit)} of{' '}
+            {filter.limit} {t('result')}
           </span>
         </div>
 

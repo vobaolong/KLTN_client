@@ -134,6 +134,7 @@ const AdminCreateCategoryForm = (props) => {
             isValid={newCategory.isValidName}
             feedback='Vui lòng cung cấp tên danh mục hợp lệ!'
             validator='anything'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />

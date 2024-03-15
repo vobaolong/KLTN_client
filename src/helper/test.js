@@ -8,7 +8,7 @@ export const regexTest = (name, value) => {
     password:
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
     id_card: /(^\d{9}$|^\d{12}$)/,
-    address: /^[^,]+$/,
+    address: /^[^]+$/,
     bio: /.+/,
     level: /^(?=.*[a-zA-Z])[A-Za-z\d\s_'-]*$/
   }

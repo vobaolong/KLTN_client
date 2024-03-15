@@ -153,6 +153,7 @@ const UserEditProfileForm = ({
             isValid={profile.isValidFirstName}
             feedback={t('userDetail.firstNameValid')}
             validator='name'
+            required={true}
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
             }
@@ -168,6 +169,7 @@ const UserEditProfileForm = ({
             isValid={profile.isValidLastName}
             feedback={t('userDetail.lastNameValid')}
             validator='name'
+            required={true}
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
             }
@@ -184,6 +186,7 @@ const UserEditProfileForm = ({
               isValid={profile.isValidEmail}
               feedback={t('userDetail.emailValid')}
               validator='email'
+              required={true}
               onChange={(value) => handleChange('email', 'isValidEmail', value)}
               onValidate={(flag) => handleValidate('isValidEmail', flag)}
             />
@@ -198,6 +201,7 @@ const UserEditProfileForm = ({
             isValid={profile.isValidPhone}
             feedback={t('userDetail.phoneValid')}
             validator='phone'
+            required={true}
             onChange={(value) => handleChange('phone', 'isValidPhone', value)}
             onValidate={(flag) => handleValidate('isValidPhone', flag)}
           />
@@ -211,6 +215,7 @@ const UserEditProfileForm = ({
             isValid={profile.isValidIdCard}
             feedback={t('userDetail.idCardValid')}
             validator='id_card'
+            required={true}
             onChange={(value) =>
               handleChange('id_card', 'isValidIdCard', value)
             }
@@ -233,7 +238,7 @@ const UserEditProfileForm = ({
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple'
+            className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
             {t('button.save')}

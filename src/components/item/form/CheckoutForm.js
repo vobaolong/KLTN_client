@@ -337,7 +337,7 @@ const CheckoutForm = ({
               <div className='d-inline-block position-relative ms-4'>
                 <div className='d-inline-block cus-tooltip'>
                   <button
-                    className='btn btn-primary ripple'
+                    className='btn btn-primary ripple rounded-1'
                     type='button'
                     disabled={!!!phone}
                     onClick={() =>

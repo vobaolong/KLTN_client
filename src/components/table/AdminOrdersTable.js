@@ -111,7 +111,14 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         </div>
 
         <span className='me-2 text-nowrap res-hide'>
-          {pagination.size || 0} {t('result')}
+          Showing{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          of {pagination.size} {t('result')}
         </span>
       </div>
 
@@ -211,7 +218,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <th scope='row'>
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td>
+                <td className='text-start'>
                   <small>{order._id}</small>
                 </td>
                 <td style={{ whiteSpace: 'normal' }} className='text-end'>
@@ -224,17 +231,17 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     ₫
                   </small>
                 </td>
-                <td className='text-start' style={{ maxWidth: '300px' }}>
-                  <small className='hidden-avatar px-2'>
+                <td className='text-start'>
+                  <small className='hidden-avatar'>
                     <UserSmallCard user={order.userId} />
                   </small>
                 </td>
-                <td className='text-start' style={{ maxWidth: '300px' }}>
+                <td className='text-start'>
                   <small className='hidden-avatar'>
                     <StoreSmallCard store={order.storeId} />
                   </small>
                 </td>
-                <td className='text-start'>
+                <td className='text-end'>
                   <small className='text-nowrap'>
                     <i className='text-primary'>For Seller: </i>
                     {order.amountToStore &&
