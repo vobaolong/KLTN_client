@@ -164,7 +164,7 @@ const CategorySelector = ({
                   key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center ${
-                    category._id == lv2Filter.categoryId ? 'active' : ''
+                    category._id === lv2Filter.categoryId ? 'active' : ''
                   }`}
                   onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
                 >
@@ -187,7 +187,7 @@ const CategorySelector = ({
                   key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
-                    category._id == lv3Filter.categoryId && 'active'
+                    category._id === lv3Filter.categoryId && 'active'
                   }`}
                   onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
                 >
@@ -210,7 +210,7 @@ const CategorySelector = ({
                   key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action ${
-                    selectedCategory && category._id == selectedCategory._id
+                    selectedCategory && category._id === selectedCategory._id
                       ? 'active'
                       : ''
                   }`}

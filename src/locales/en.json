@@ -43,7 +43,8 @@
     "addToCart": "Add To Cart",
     "error": "The product is out of business, please remove it from your cart, you can continue with others",
     "warning": "Please update the quantity. Product only",
-    "productReview": "Product Review"
+    "productReview": "Product Review",
+    "newProduct": "New Product"
   },
   "filters": {
     "filter": "Filters",

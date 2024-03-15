@@ -178,7 +178,7 @@ body::-webkit-scrollbar-track {
 }
 
 .add-to-cart-btn {
-	background-color: rgba(208, 1, 27, .08);
+	/* background-color: rgba(208, 1, 27, .08); */
 	border-color: var(--primary-color);
 	color: var(--primary-color);
 }

@@ -11,7 +11,7 @@ const StoreLicenseLabel = ({ isActive = false, detail = true }) => (
         {detail && <span className='ms-2'>Unlicensed</span>}
       </span>
     )}
-    {/* {isActive ? (
+    {isActive ? (
       <small className='cus-tooltip-msg'>
         This store is licensed by Zenpii!
       </small>
@@ -19,7 +19,7 @@ const StoreLicenseLabel = ({ isActive = false, detail = true }) => (
       <small className='cus-tooltip-msg'>
         This store is banned by Zenpii, contact us for more information!
       </small>
-    )} */}
+    )}
   </span>
 )
 

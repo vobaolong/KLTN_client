@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^1.6.7",
     "chart.js": "^3.6.0",
     "faker": "^5.5.3",
     "i18next": "^23.10.0",

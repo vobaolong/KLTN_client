@@ -4,9 +4,12 @@ import Carousel from '../../components/image/Carousel'
 import ListProductsByStore from '../../components/list/ListProductsByStore'
 import Error from '../../components/ui/Error'
 import MainLayout from '../../components/layout/MainLayout'
+import { useTranslation } from 'react-i18next'
 
 const HomePage = (props) => {
+  const { t } = useTranslation()
   const store = useSelector((state) => state.store.store)
+
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
       <Error msg='This store is banned by Zenpii!' />
@@ -19,12 +22,15 @@ const HomePage = (props) => {
         </div>
 
         <div className='mb-4'>
-          <ListProductsByStore storeId={store._id} />
+          <ListProductsByStore
+            heading={t('filters.topSale')}
+            storeId={store._id}
+          />
         </div>
 
         <div className='mb-4'>
           <ListProductsByStore
-            heading='New products'
+            heading={t('productDetail.newProduct')}
             storeId={store._id}
             sortBy='createdAt'
           />

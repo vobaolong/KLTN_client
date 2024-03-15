@@ -291,12 +291,12 @@ const StoreProductsTable = ({
 
               <th scope='col'>
                 {' '}
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
+                  className='text-black'
                 >
                   Action
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -437,10 +437,13 @@ const StoreProductsTable = ({
                   >
                     {product.styleValueIds?.length > 0 ? (
                       <small>
-                        <StyleValueSelector
+                        {/* <StyleValueSelector
                           listValues={product.styleValueIds}
                           isEditable={false}
-                        />
+                        /> */}
+                        {product.styleValueIds
+                          ?.map((value) => value.name)
+                          .join(', ')}
                       </small>
                     ) : (
                       <small className='mx-auto'>No styles</small>

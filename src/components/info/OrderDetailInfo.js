@@ -76,7 +76,6 @@ const OrderDetailInfo = ({
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       <div className='d-flex flex-wrap justify-content-start align-items-center pb-2'>
         <h5 className='mx-1 orderID text-uppercase pe-3 border-end'>
           {t('orderDetail.id')} #{order._id}

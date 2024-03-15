@@ -37,7 +37,7 @@ const MainNav = ({ navFor = 'user' }) => {
     <header
       className={`d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark ${
         navFor !== 'user' && getToken().role === 'admin'
-          ? 'text-primary'
+          ? 'text-primary bg-primary'
           : 'bg-primary border-bottom'
       } `}
     >
@@ -56,9 +56,9 @@ const MainNav = ({ navFor = 'user' }) => {
         </Link>
         {navFor === 'user' && <SearchBar />}
         {navFor !== 'user' && (
-          <h1 className='logo text-white m-0'>
+          <h3 className='text-uppercase text-white m-0'>
             {navFor} <span className='res-hide'>dashboard</span>
-          </h1>
+          </h3>
         )}
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>

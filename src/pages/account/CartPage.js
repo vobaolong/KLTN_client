@@ -7,8 +7,13 @@ import Error from '../../components/ui/Error'
 import Success from '../../components/ui/Success'
 import StoreSmallCard from '../../components/card/StoreSmallCard'
 import ListCartItemsForm from '../../components/list/ListCartItemsForm'
+import { Link } from 'react-router-dom'
+import cartEmpty from '../../assets/cartEmpty.png'
+import { useTranslation } from 'react-i18next'
+import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 
 const CartPage = (props) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -25,7 +30,8 @@ const CartPage = (props) => {
     listCarts(_id, accessToken, { limit: '1000', page: '1' })
       .then((data) => {
         if (data.error) setError(data.error)
-        else if (data.carts.length <= 0) setSuccess('Bạn Chưa Chọn Sản Phẩm')
+        else if (data.carts.length <= 0)
+          setSuccess('Giỏ hàng của bạn đang trống')
         else setCarts(data.carts)
         setIsLoading(false)
       })
@@ -46,7 +52,28 @@ const CartPage = (props) => {
         {error ? (
           <Error msg={error} />
         ) : success ? (
-          <Success msg={success} />
+          <div className=''>
+            <h5>{t('cart')}</h5>
+            <div className='bg-white pb-3 rounded-3 align-items-center justify-content-center d-flex flex-column gap-2'>
+              <img src={cartEmpty} style={{ width: '300px' }} alt='' />
+              <span>
+                <Success msg={success} />
+              </span>
+              {/* <Link
+                to='/'
+                className='btn btn-outline-primary ripple rounded-1 mt-2'
+              >
+                Quay lại trang chủ
+              </Link> */}
+              <span class>
+                Bạn tham khảo thêm các sản phẩm được Zenpii gợi ý phía dưới nhé!
+              </span>
+            </div>
+            <h6 className='mt-2'>
+              {t('product')} {t('bestSeller')}
+            </h6>
+            <ListBestSellerProducts />
+          </div>
         ) : (
           <div className='accordion' id='accordionPanelsStayOpen'>
             {carts.map((cart, index) => (

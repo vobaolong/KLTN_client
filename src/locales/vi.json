@@ -43,7 +43,8 @@
     "addToCart": "Thêm vào giỏ hàng",
     "error": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa nó khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác",
     "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn",
-    "productReview": "Đánh giá sản phẩm"
+    "productReview": "Đánh giá sản phẩm",
+    "newProduct": "Sản Phẩm Mới"
   },
   "filters": {
     "filter": "Bộ lọc",

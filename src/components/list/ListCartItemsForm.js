@@ -330,7 +330,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           )}
 
           <button
-            className={`btn ${
+            className={`btn rounded-1 ${
               showCheckoutFlag ? 'btn-primary' : 'btn-outline-primary'
             } ripple`}
             type='button'

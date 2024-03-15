@@ -2,9 +2,11 @@ import { useState, useRef } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
 import { useTranslation } from 'react-i18next'
+import Loading from '../ui/Loading'
 
 const ProductFilter = ({ filter, setFilter }) => {
   const { t } = useTranslation()
+
   const [price, setPrice] = useState({
     min: 0,
     max: ''

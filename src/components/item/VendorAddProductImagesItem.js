@@ -2,7 +2,7 @@ import Modal from '../ui/Modal'
 import VendorAddProductImageForm from './form/VendorAddProductImageForm'
 
 const VendorAddProductImagesItem = ({
-  count = 7,
+  count = 8,
   productId = '',
   storeId = '',
   onRun
@@ -20,7 +20,7 @@ const VendorAddProductImagesItem = ({
         <span className='res-hide ms-2'>Add image</span>
       </button>
 
-      {count < 7 && (
+      {count < 8 && (
         <Modal
           id='add-product-image-form'
           hasCloseBtn={false}

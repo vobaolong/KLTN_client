@@ -200,7 +200,7 @@ const UserStoresTable = () => {
                       type='button'
                       className='btn btn-primary ripple rounded-1'
                       to={`/vendor/${store._id}`}
-                      title='Quản lý'
+                      title={t('admin.adDashboard.dashboard')}
                     >
                       <i className='fas fa-user-tie'></i>
                     </Link>

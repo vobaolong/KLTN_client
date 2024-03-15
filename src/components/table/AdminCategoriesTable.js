@@ -39,7 +39,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
     categoryId: '',
     sortBy: 'categoryId',
     order: 'asc',
-    limit: 7,
+    limit: 8,
     page: 1
   })
 
