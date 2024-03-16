@@ -78,7 +78,7 @@ const FollowProductButton = ({
     <div className='col-1 d-grid'>
       <span
         className={`d-flex align-items-center mt-3 justify-content-center ${
-          followingFlag ? 'text-primary' : 'text-secondary'
+          followingFlag ? 'text-danger' : 'text-secondary'
         } ${className}`}
         onClick={handleFollowProduct}
       >

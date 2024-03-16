@@ -12,7 +12,7 @@ const SigninButton = (className = '') => {
     <div className='sign-in-item-wrap position-relative'>
       <button
         type='button'
-        className={`sign-in-item btn btn-outline-light cus-outline cus-tooltip ripple ${className}`}
+        className={`sign-in-item btn rounded-1 btn-outline-light cus-outline cus-tooltip ripple ${className}`}
         data-bs-toggle='modal'
         data-bs-target='#signin-signup-form'
         onClick={() => toggleSigninFlag(true)}

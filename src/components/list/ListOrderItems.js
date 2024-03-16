@@ -68,6 +68,7 @@ const ListOrderItems = ({
   useEffect(() => {
     if (orderId) init()
   }, [orderId, storeId, by])
+  console.log(items.map((item) => item?.updatedAt))
 
   return (
     <div className='list-order-items position-relative'>
@@ -170,6 +171,7 @@ const ListOrderItems = ({
                     orderId={item.orderId}
                     storeId={item.productId.storeId._id}
                     productId={item.productId._id}
+                    date={item?.updatedAt}
                   />
                 </div>
               )}

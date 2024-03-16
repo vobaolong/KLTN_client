@@ -207,7 +207,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
+        <table className='table align-middle table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -305,7 +305,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                     data-bs-target='#edit-delivery-form'
                     onClick={() => handleEditCommission(delivery)}
                   >
-                    <i className='fas fa-pen'></i>
+                    <i class='fa-solid fa-pen'></i>
                     <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 

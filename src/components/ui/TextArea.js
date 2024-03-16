@@ -8,7 +8,8 @@ const TextArea = ({
   validator = 'anything',
   isValid = true,
   isDisabled = false,
-  feedback = 'Please provide a valid value'
+  feedback = 'Please provide a valid value',
+  required = false
 }) => {
   const onHandleChange = (e) => {
     onChange(e.target.value)
@@ -25,7 +26,7 @@ const TextArea = ({
   return (
     <div className='cus-input-group'>
       <textarea
-        required
+        required={required}
         disabled={isDisabled}
         className={`cus-input-group-input form-control ${
           isValid ? '' : 'is-invalid'
@@ -35,7 +36,9 @@ const TextArea = ({
         rows='10'
         value={value}
       ></textarea>
-      <label className='cus-input-group-label'>{label}</label>
+      <label className='cus-input-group-label'>
+        {label} {required && <span style={{ color: 'red' }}>*</span>}
+      </label>
       <span className='cus-input-group-bar'></span>
       <small className='invalid-feedback'>{feedback}</small>
     </div>

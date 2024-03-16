@@ -1,18 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { checkReview } from '../../apis/review'
 import Loading from '../ui/Loading'
 import Modal from '../ui/Modal'
 import ReviewForm from './form/ReviewForm'
+import { humanReadableDate } from '../../helper/humanReadable'
+import { calcTime } from '../../helper/calcTime'
 
 const ReviewItem = ({
   orderId = '',
   storeId = '',
   productId = '',
-  detail = true
+  detail = true,
+  date = ''
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
+  const [deliveredDate, setDeliveredDate] = useState(date)
+
+  useEffect(() => {
+    const newDate = new Date(date)
+    newDate.setDate(newDate.getDate() + 7)
+    setDeliveredDate(newDate)
+  }, [date])
 
   const init = () => {
     const { _id, accessToken } = getToken()
@@ -28,7 +39,6 @@ const ReviewItem = ({
         setIsLoading(false)
       })
   }
-
   useEffect(() => {
     init()
   }, [orderId, storeId, productId])
@@ -39,18 +49,18 @@ const ReviewItem = ({
         <Loading />
       ) : (
         <>
-          <div className='cus-tooltip'>
+          <div className='cus-tooltip d-flex justify-content-end'>
+            {calcTime(deliveredDate) > 0}
             <button
               type='button'
-              disabled={isReviewed}
+              disabled={isReviewed || calcTime(deliveredDate) > 0}
               className='btn btn-primary ripple text-nowrap rounded-1'
               data-bs-toggle='modal'
               data-bs-target='#review-form'
             >
               <i className='fas fa-comment-dots'></i>
-              {detail && <span className='ms-2 res-hide-lg'>Rating</span>}
+              {detail && <span className='ms-2 res-hide-lg'>Đánh giá</span>}
             </button>
-
             {!isReviewed && (
               <Modal
                 id='review-form'
@@ -66,11 +76,22 @@ const ReviewItem = ({
               </Modal>
             )}
           </div>
-
+          {!isReviewed && (
+            <div className=''>
+              <small>
+                Đánh giá trước{' '}
+                <u className='cus-tooltip'>
+                  {humanReadableDate(deliveredDate)}
+                </u>
+                <small className='cus-tooltip-msg'>
+                  Bạn sẽ không thể đánh giá đơn hàng sau{' '}
+                  {humanReadableDate(deliveredDate)}.
+                </small>
+              </small>
+            </div>
+          )}
           {isReviewed && (
-            <small className='cus-tooltip-msg'>
-              The product has been rated
-            </small>
+            <small className='cus-tooltip-msg'>Sản phẩm đã được đánh giá</small>
           )}
         </>
       )}

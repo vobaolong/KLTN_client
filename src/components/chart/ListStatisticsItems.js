@@ -414,7 +414,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
           <div className='col-xl-4 col-lg-6 px-0'>
             <h4 className='text-center my-4'>Top 5 {options.flag}s</h4>
             <div className='table-scroll my-2'>
-              <table className='table align-middle table-hover table-sm text-center'>
+              <table className='table align-middle table-hover table-striped table-sm text-center'>
                 <thead>
                   <tr>
                     <th scope='col'></th>

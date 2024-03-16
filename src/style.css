@@ -9,6 +9,7 @@
 	--border-color: #e5e7eb;
 	/* --primary-color: #d0011b; */
 	--primary-color: #2266CC;
+	--primary-color-dis: #4f82ceda;
 	--muted-color: #3b3d3f;
 	--ccc-color: #949494;
 	--high-muted-color: #eaeaea;
@@ -179,24 +180,24 @@ body::-webkit-scrollbar-track {
 
 .add-to-cart-btn {
 	/* background-color: rgba(208, 1, 27, .08); */
-	border-color: var(--primary-color);
-	color: var(--primary-color);
+	border-color: var(--primary-color-dis);
+	color: var(--primary-color-dis);
 }
 
 .add-to-cart-btn:hover {
-	background-color: var(--primary-color);
-	border-color: var(--primary-color);
+	background-color: var(--primary-color-dis);
+	border-color: var(--primary-color-dis);
 	color: #fff;
 }
 
 .add-to-cart-btn:disabled {
-	background-color: rgba(235, 102, 102, 0.877);
-	border-color: rgba(235, 102, 102, 0.877);
+	background-color: var(--primary-color-dis);
+	border-color: var(--primary-color-dis);
 }
 
 .btn-primary:disabled {
-	background-color: rgba(235, 102, 102, 0.877);
-	border-color: rgba(235, 102, 102, 0.877);
+	background-color: var(--primary-color-dis);
+	border-color: var(--primary-color-dis);
 }
 
 
@@ -966,7 +967,7 @@ header {
 }
 
 .cus-outline.btn-outline-light:hover {
-	background-color: rgba(219, 209, 203, 0.33);
+	background-color: rgba(12, 138, 211, 0.76);
 }
 
 .cus-tooltip-msg {
@@ -1634,7 +1635,10 @@ textarea {
 	border-radius: 0.5rem;
 	overflow: hidden;
 	border: 1px solid #e9e9e9;
+}
 
+.table:hover {
+	color: #000 !important;
 }
 
 .table-scroll th,
@@ -1644,6 +1648,7 @@ textarea {
 	z-index: 1;
 	vertical-align: middle;
 	border-right: 1px solid #e9e9e9;
+	color: #646464;
 }
 
 .table-scroll thead th {

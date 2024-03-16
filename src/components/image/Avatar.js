@@ -15,7 +15,8 @@ const Avatar = ({
   isEditable = false,
   size = '',
   noRadius = false,
-  onRun
+  onRun,
+  hide = false
 }) => (
   <div className='cus-avatar-wrap'>
     <div className={`cus-avatar-box ${size && 'cus-avatar-box--small'}`}>
@@ -39,7 +40,7 @@ const Avatar = ({
       </div>
     </div>
 
-    {size !== 'small' && (
+    {(size !== 'small' || !hide) && (
       <h1
         className={`cus-avatar-name m-0 p-1 rounded-1 d-inline-block fs-5 ${
           borderName && 'bg-body shadow'

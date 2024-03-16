@@ -123,7 +123,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
+        <table className='table align-middle table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>

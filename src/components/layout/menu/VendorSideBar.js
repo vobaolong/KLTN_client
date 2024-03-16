@@ -33,6 +33,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
               </span>
             }
             alt={store.name}
+            hide={true}
           />
 
           <div className='manager-avatar-absolute'>

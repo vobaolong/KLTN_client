@@ -121,7 +121,7 @@ const StoreOrdersTable = ({
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-end'>
+        <table className='table align-middle table-hover table-striped table-sm text-end'>
           <thead>
             <tr>
               <th scope='col'></th>

@@ -205,7 +205,7 @@ const AdminStylesTable = ({ heading = '' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
+        <table className='table align-middle table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -297,7 +297,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                     className='btn btn-dark ripple me-2 rounded-1'
                     to={`/admin/style/editStyle/${style._id}`}
                   >
-                    <i className='fas fa-pen'></i>
+                    <i class='fa-solid fa-pen'></i>
                     <span className='ms-1 res-hide'>{t('button.edit')}</span>
                   </Link>
 

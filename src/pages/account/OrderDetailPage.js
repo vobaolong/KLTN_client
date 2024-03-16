@@ -13,7 +13,6 @@ const OrderDetailPage = (props) => {
     <AccountLayout user={user}>
       <div className='res-mx--12-md bg-white rounded-1 box-shadow p-4'>
         <OrderDetailInfo orderId={orderId} />
-
         <div>
           <Link
             to='/account/purchase'

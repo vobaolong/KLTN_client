@@ -130,7 +130,7 @@ const ListReviews = ({
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
 
-      <div className='d-flex justify-content-between align-items-end p-2 rounded-sm rounded border'>
+      <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border'>
         <div className='d-flex flex-wrap justify-content-start align-items-center'>
           {renderFilterRating()}
         </div>
@@ -144,9 +144,9 @@ const ListReviews = ({
         </span>
       </div>
 
-      <div className='row mt-2 px-2'>
+      <div className='p-2'>
         {reviews?.map((review, index) => (
-          <div className='col-12 mb-2' key={index}>
+          <div className='col-12' key={index}>
             <ReviewInfo
               review={review}
               about={!!storeId}

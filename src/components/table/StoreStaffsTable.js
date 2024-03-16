@@ -187,7 +187,7 @@ const StoreStaffsTable = ({
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='store-staffs-table table align-middle align-items-center table-hover table-sm text-center'>
+        <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>

@@ -123,7 +123,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         </div>
       ) : (
         <div className='table-scroll my-2'>
-          <table className='table table-sm table-hover align-middle text-center'>
+          <table className='table table-striped table-sm table-striped table-hover align-middle text-center'>
             <thead>
               <tr>
                 <th scope='col'></th>

@@ -220,7 +220,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
+        <table className='table align-middle table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -311,7 +311,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                     data-bs-target='#edit-level-form'
                     onClick={() => handleEditLevel(level)}
                   >
-                    <i className='fas fa-pen'></i>
+                    <i class='fa-solid fa-pen'></i>
                     <span className='ms-2 res-hide'>Edit</span>
                   </button>
 

@@ -86,13 +86,19 @@ const CollectionPage = (props) => {
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
 
-        <div className='d-flex justify-content-between align-items-end'>
+        <div className='d-flex justify-content-between align-items-center'>
           <div className=''>
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
-          <span className='me-3'>
-            Showing {Math.min(pagination.size || 0, filter.limit)} of{' '}
-            {filter.limit} {t('result')}
+          <span>
+            Showing{' '}
+            <b>
+              {Math.min(
+                filter.limit,
+                pagination.size - filter.limit * (pagination.pageCurrent - 1)
+              )}{' '}
+            </b>
+            of {pagination.size} {t('result')}
           </span>
         </div>
 

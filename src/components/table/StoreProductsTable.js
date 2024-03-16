@@ -186,7 +186,7 @@ const StoreProductsTable = ({
         </div>
       ) : (
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-center'>
+          <table className='table align-middle table-hover table-striped table-sm text-center'>
             <thead>
               <tr>
                 <th scope='col'></th>
@@ -518,7 +518,7 @@ const StoreProductsTable = ({
                         className='btn btn-dark ripple rounded-1'
                         to={`/vendor/products/editProduct/${product._id}/${storeId}`}
                       >
-                        <i className='fas fa-pen'></i>
+                        <i class='fa-solid fa-pen'></i>
                         <span className='ms-2 res-hide'>Edit</span>
                       </Link>
                     </div>

@@ -179,7 +179,7 @@ const TransactionsTable = ({
       </div>
 
       <div className='table-scroll'>
-        <table className='table table-sm table-hover align-middle text-end'>
+        <table className='table table-striped table-sm table-hover align-middle text-end'>
           <thead>
             <tr>
               <th scope='col'></th>

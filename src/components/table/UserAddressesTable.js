@@ -100,7 +100,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
         </div>
       ) : (
         <div className='table-scroll my-2'>
-          <table className='table table-sm table-hover align-middle text-center'>
+          <table className='table table-striped table-sm table-hover align-middle text-center'>
             <thead>
               <tr>
                 <th scope='col'></th>
@@ -135,7 +135,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                       data-bs-target='#edit-address-form'
                       onClick={() => handleEditAddress(address, index)}
                     >
-                      <i className='fas fa-pen'></i>
+                      <i class='fa-solid fa-pen'></i>
                       <span className='ms-2 res-hide'>{t('button.edit')}</span>
                     </button>
                     <button

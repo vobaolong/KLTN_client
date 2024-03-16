@@ -6,7 +6,6 @@ import {
   getNumberOfFollowersForProduct,
   checkFollowingProduct
 } from '../../apis/follow'
-import FollowLabel from '../label/StoreFollowLabel'
 import StarRating from '../label/StarRating'
 import FollowProductButton from '../button/FollowProductButton'
 import { useTranslation } from 'react-i18next'
@@ -25,15 +24,12 @@ const ProductCard = ({ product = {}, onRun }) => {
   )
   const init = async () => {
     let newProduct = product
-    //get count followers
     try {
       const res = await getNumberOfFollowersForProduct(product._id)
       newProduct.numberOfFollowers = res.count
     } catch {
       newProduct.numberOfFollowers = 0
     }
-
-    //check follow
     try {
       const { _id, accessToken } = getToken()
       const res = await checkFollowingProduct(_id, accessToken, product._id)
@@ -79,16 +75,29 @@ const ProductCard = ({ product = {}, onRun }) => {
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className='card-img-top cus-card-img-top'
+          className='card-img-top cus-card-img-top position-relative'
+          style={{ position: 'relative' }}
         >
           <img
-            src={
-              isHovered
-                ? productValue.listImages && IMG + productValue.listImages[1]
-                : productValue.listImages && IMG + productValue.listImages[0]
-            }
+            src={productValue.listImages && IMG + productValue.listImages[0]}
             className='cus-card-img'
             alt={productValue.name}
+            style={{
+              opacity: isHovered ? 0 : 1,
+              transition: 'opacity 0.5s ease'
+            }}
+          />
+          <img
+            src={productValue.listImages && IMG + productValue.listImages[1]}
+            className='cus-card-img'
+            alt={productValue.name}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              opacity: isHovered ? 1 : 0,
+              transition: 'opacity 0.5s ease'
+            }}
           />
         </div>
         <div class='mall-tag'>
@@ -103,15 +112,6 @@ const ProductCard = ({ product = {}, onRun }) => {
 
       <div className='card-body border-top'>
         <small className='card-subtitle'>
-          <div className='d-flex justify-content-between align-items-center'>
-            {/* <div className='d-flex align-items-center'>
-              <span className=''>
-                <FollowLabel
-                  numberOfFollowers={productValue.numberOfFollowers}
-                />
-              </span>
-            </div> */}
-          </div>
           <StarRating stars={productValue.rating} />{' '}
           <small>
             {productValue.sold} {t('productDetail.sold')}
@@ -150,14 +150,15 @@ const ProductCard = ({ product = {}, onRun }) => {
             ₫
           </b>
         </small>
-        {/* {getToken() && (
-          <FollowProductButton
-            productId={productValue._id}
-            isFollowing={productValue.isFollowing}
-            className='w-100 mt-1'
-            onRun={(product) => onHandleRun(product)}
-          />
-        )} */}
+        <div className='d-flex justify-content-end'>
+          {getToken() && (
+            <FollowProductButton
+              productId={productValue._id}
+              isFollowing={productValue.isFollowing}
+              onRun={(product) => onHandleRun(product)}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

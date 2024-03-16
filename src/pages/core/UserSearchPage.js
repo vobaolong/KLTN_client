@@ -80,8 +80,14 @@ const UserSearchPage = (props) => {
 
         <div className='d-flex justify-content-end'>
           <span className='me-3'>
-            Showing {Math.min(pagination.size || 0, filter.limit)} of{' '}
-            {filter.limit} {t('result')}
+            Showing{' '}
+            <b>
+              {Math.min(
+                filter.limit,
+                pagination.size - filter.limit * (pagination.pageCurrent - 1)
+              )}{' '}
+            </b>
+            of {pagination.size} {t('result')}
           </span>
         </div>
 

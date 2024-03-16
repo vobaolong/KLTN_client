@@ -188,6 +188,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             isValid={newProduct.isValidName}
             feedback='Please provide a valid product name.'
             validator='anything'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -301,6 +302,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             label='Description'
             value={newProduct.description}
             isValid={newProduct.isValidDescription}
+            required={true}
             feedback='Please provide a valid product description.'
             validator='bio'
             onChange={(value) =>
@@ -317,6 +319,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             value={newProduct.quantity}
             isValid={newProduct.isValidQuantity}
             feedback='Please provide a valid product quantity.'
+            required={true}
             validator='positive|zero'
             onChange={(value) =>
               handleChange('quantity', 'isValidQuantity', value)
@@ -333,6 +336,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             isValid={newProduct.isValidPrice}
             feedback='Please provide a valid product price.'
             validator='positive|zero'
+            required={true}
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}
           />
@@ -346,6 +350,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             isValid={newProduct.isValidSalePrice}
             feedback='Please provide a valid product sale price.'
             validator='positive|zero'
+            required={true}
             onChange={(value) =>
               handleChange('salePrice', 'isValidSalePrice', value)
             }

@@ -98,7 +98,7 @@ const DetailPage = () => {
               <CategorySmallCard category={product.categoryId} parent={true} />
             </div>
             <div
-              className='row bg-white rounded box-shadow'
+              className='row bg-white rounded-1 box-shadow'
               style={{ paddingTop: '12px', paddingBottom: '12px' }}
             >
               <div className='col-lg-5 col-md-6 '>
@@ -192,8 +192,8 @@ const DetailPage = () => {
                 </div>
               </div>
             </div>
-            <div className='row mt-3 rounded box-shadow py-3 bg-white'>
-              <div className='col-12'>
+            <div className='row mt-2 py-3 '>
+              <div className='col-lg-9 col-md-12 rounded-1 box-shadow bg-white'>
                 <div className='container-fluid p-0'>
                   <div className='row res-flex-reverse-md'>
                     <div class='container'>

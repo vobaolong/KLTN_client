@@ -1,5 +1,3 @@
-import Logo from '../layout/menu/Logo'
-
 const Modal = ({
   id,
   title = '',

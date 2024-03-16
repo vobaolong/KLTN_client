@@ -181,7 +181,7 @@ const StyleValuesTable = ({
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
+        <table className='table align-middle table-hover table-striped table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -220,7 +220,7 @@ const StyleValuesTable = ({
                         data-bs-target='#edit-style-value-form'
                         onClick={() => setEditedStyleValue(value)}
                       >
-                        <i className='fas fa-pen'></i>
+                        <i class='fa-solid fa-pen'></i>
                         <span className='ms-2 res-hide'>
                           {t('button.edit')}
                         </span>

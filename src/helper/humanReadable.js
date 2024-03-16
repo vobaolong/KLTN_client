@@ -12,7 +12,6 @@ const months = [
   '11',
   '12'
 ]
-// const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export const humanReadableDate = (date) => {
   date = new Date(date)
@@ -65,7 +64,5 @@ export const formatTime = (date) => {
     months[date.getMonth()] +
     '/' +
     date.getFullYear()
-    // days[date.getDay()] +
-    // ' ' +
   )
 }

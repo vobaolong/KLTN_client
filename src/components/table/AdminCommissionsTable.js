@@ -220,7 +220,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table table-hover table-sm align-middle text-center'>
+        <table className='table table-hover table-striped table-sm align-middle text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -310,7 +310,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                     data-bs-target='#edit-commission-form'
                     onClick={() => handleEditCommission(commission)}
                   >
-                    <i className='fas fa-pen'></i>
+                    <i class='fa-solid fa-pen'></i>
                     <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 

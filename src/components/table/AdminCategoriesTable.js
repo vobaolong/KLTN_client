@@ -220,7 +220,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table table-hover table-sm align-middle text-center'>
+        <table className='table table-hover table-striped table-sm align-middle text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -330,7 +330,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
                     className='btn btn-dark ripple me-2 rounded-1'
                     to={`/admin/category/editCategory/${category._id}`}
                   >
-                    <i className='fas fa-pen'></i>
+                    <i class='fa-solid fa-pen'></i>
                     <span className='ms-2 res-hide'>Edit</span>
                   </Link>
 
