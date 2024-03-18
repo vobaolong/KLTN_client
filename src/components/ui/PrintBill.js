@@ -141,7 +141,7 @@ const PrintBill = ({
 
           <div className='col-12 mt-2 d-flex justify-content-end'>
             <Paragraph
-              label='Final total (include discounts)'
+              label={`${t('orderDetail.finalTotal')}`}
               value={
                 <span className='text-primary fw-bold fs-5'>
                   {formatPrice(order.amountFromUser?.$numberDecimal)} ₫

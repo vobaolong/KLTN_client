@@ -130,7 +130,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
     <div className='position-relative'>
       {heading && (
         <h4 className='text-center text-uppercase'>
-          {isActive ? 'Licensed products' : 'Unlicensed products'}
+          {isActive ? 'Active products' : 'Banned products'}
         </h4>
       )}
 
@@ -138,7 +138,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title={!activeProduct.isActive ? 'License product' : 'Ban product'}
+          title={!activeProduct.isActive ? 'Active product' : 'Ban product'}
           color={!activeProduct.isActive ? 'primary' : 'danger'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
@@ -149,7 +149,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -219,7 +219,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  Action
+                  {t('action')}
                 </span> */}
               </th>
             </tr>
@@ -269,12 +269,16 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                     {!product.isActive ? (
                       <>
                         <i className='far fa-check-circle'></i>
-                        <span className='ms-2 res-hide'>License</span>
+                        <span className='ms-2 res-hide'>
+                          {t('status.active')}
+                        </span>
                       </>
                     ) : (
                       <>
                         <i className='fas fa-ban'></i>
-                        <span className='ms-2 res-hide'>Ban</span>
+                        <span className='ms-2 res-hide'>
+                          {t('status.banned')}
+                        </span>
                       </>
                     )}
                   </button>

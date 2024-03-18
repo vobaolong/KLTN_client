@@ -3,6 +3,7 @@ import { listActiveStyleValues } from '../../apis/style'
 import Error from '../ui/Error'
 import Loading from '../ui/Loading'
 import AddValueStyleItem from '../item/AddValueStyleItem'
+import { useTranslation } from 'react-i18next'
 
 const MultiStyleValueSelector = ({
   defaultValue = '',
@@ -14,9 +15,9 @@ const MultiStyleValueSelector = ({
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState('')
-
   const [values, setValues] = useState([])
   const [selectedValues, setSelectedValues] = useState([])
+  const { t } = useTranslation()
 
   const init = () => {
     setError('')
@@ -114,7 +115,9 @@ const MultiStyleValueSelector = ({
               </span>
             ))
           ) : (
-            <span className='text-danger'>No values chosen</span>
+            <span className='text-danger'>
+              {t('productDetail.noValuesSelected')}
+            </span>
           )}
 
           <div

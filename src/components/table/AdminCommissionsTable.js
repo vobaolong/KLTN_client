@@ -207,7 +207,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
             <AdminCreateCommissionItem onRun={() => setRun(!run)} />
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -243,10 +243,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 />
               </th>
               <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
-                >
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
                   {t('commisDetail.description')}
                 </span>
               </th>
@@ -254,18 +251,15 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('storeDetail.status')}
+                  title={t('status.status')}
                   sortBy='isDeleted'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
 
               <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
-                >
-                  Action
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                  {t('action')}
                 </span>
               </th>
             </tr>

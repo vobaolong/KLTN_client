@@ -15,7 +15,7 @@ import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
 
 const StoreStaffsTable = ({
-  heading = `Store's staffs`,
+  heading = '',
   staffIds = [],
   ownerId = {},
   storeId = ''
@@ -141,7 +141,7 @@ const StoreStaffsTable = ({
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete staff'
+          title={t('staffDetail.delete')}
           color='danger'
           message={
             <span className='mt-2 d-block'>
@@ -174,99 +174,106 @@ const StoreStaffsTable = ({
             )}
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        {staffIds.length > 0 && (
+          <small className='text-nowrap res-hide'>
+            {t('showing')}{' '}
+            <b>
+              {Math.min(
+                filter.limit,
+                pagination.size - filter.limit * (pagination.pageCurrent - 1)
+              ) || 0}{' '}
+            </b>
+            {t('of')} {pagination.size} {t('result')}
+          </small>
+        )}
       </div>
-
-      <div className='table-scroll my-2'>
-        <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Staff'
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Id card'
-                  sortBy='id_card'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Email'
-                  sortBy='email'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Phone'
-                  sortBy='phone'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              {ownerId && userId === ownerId._id && <th scope='col'></th>}
-            </tr>
-          </thead>
-          <tbody>
-            {listStaffs?.map((staff, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+      {!isLoading && staffIds.length === 0 ? (
+        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <h5>{t('staffDetail.noStaff')}</h5>
+        </div>
+      ) : (
+        <div className='table-scroll my-2'>
+          <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col' className='text-start'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('staffDetail.name')}
+                    sortBy='name'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
-                <td className='text-center ps-2' style={{ maxWidth: '300px' }}>
-                  <UserSmallCard user={staff} />
-                </td>
-                <td>
-                  <small>{staff.id_card || '-'}</small>
-                </td>
-                <td>
-                  <small>{staff.email || '-'}</small>
-                </td>
-                <td>
-                  <small>{staff.phone || '-'}</small>
-                </td>
-                {ownerId && userId === ownerId._id && (
-                  <td className='text-center'>
-                    <button
-                      type='button'
-                      className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
-                      onClick={() => handleDeleteStaff(staff)}
-                    >
-                      <i className='fas fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.delete')}
-                      </span>
-                    </button>
-                  </td>
-                )}
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='ID Card'
+                    sortBy='id_card'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Email'
+                    sortBy='email'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('userDetail.phone')}
+                    sortBy='phone'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                {ownerId && userId === ownerId._id && <th scope='col'></th>}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {listStaffs?.map((staff, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
+                    <UserSmallCard user={staff} />
+                  </td>
+                  <td>
+                    <small>{staff.id_card || '-'}</small>
+                  </td>
+                  <td>
+                    <small>{staff.email || '-'}</small>
+                  </td>
+                  <td>
+                    <small>{staff.phone || '-'}</small>
+                  </td>
+                  {ownerId && userId === ownerId._id && (
+                    <td className='text-center'>
+                      <button
+                        type='button'
+                        className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
+                        onClick={() => handleDeleteStaff(staff)}
+                      >
+                        <i className='fas fa-trash-alt'></i>
+                        <span className='ms-2 res-hide'>
+                          {t('button.delete')}
+                        </span>
+                      </button>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {pagination.size !== 0 && (
         <Pagination pagination={pagination} onChangePage={handleChangePage} />

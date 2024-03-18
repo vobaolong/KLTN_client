@@ -110,7 +110,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
 
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(

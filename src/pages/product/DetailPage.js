@@ -1,35 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
+import { useParams } from 'react-router-dom'
 import { getProduct } from '../../apis/product'
 import {
   getNumberOfFollowersForProduct,
   checkFollowingProduct
 } from '../../apis/follow'
-import { formatPrice } from '../../helper/formatPrice'
-import MainLayout from '../../components/layout/MainLayout'
-import Loading from '../../components/ui/Loading'
 import Error from '../../components/ui/Error'
-import Carousel from '../../components/image/Carousel'
-import StarRating from '../../components/label/StarRating'
-import FollowProductButton from '../../components/button/FollowProductButton'
-import AddToCartForm from '../../components/item/form/AddToCartForm'
-import CategorySmallCard from '../../components/card/CategorySmallCard'
-import StoreSmallCard from '../../components/card/StoreSmallCard'
-import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
-import ListProductsByStore from '../../components/list/ListProductsByStore'
-import SigninButton from '../../components/item/SigninItem'
-import ListReviews from '../../components/list/ListReviews'
-import SalePercentLabel from '../../components/label/SalePercentLabel'
 import { useTranslation } from 'react-i18next'
+import Loading from '../../components/ui/Loading'
 import { FacebookShareButton } from 'react-share'
+import Carousel from '../../components/image/Carousel'
+import { formatPrice } from '../../helper/formatPrice'
+import StarRating from '../../components/label/StarRating'
+import MainLayout from '../../components/layout/MainLayout'
+import ListReviews from '../../components/list/ListReviews'
+import SigninButton from '../../components/item/SigninItem'
+import StoreSmallCard from '../../components/card/StoreSmallCard'
+import AddToCartForm from '../../components/item/form/AddToCartForm'
+import SalePercentLabel from '../../components/label/SalePercentLabel'
+import CategorySmallCard from '../../components/card/CategorySmallCard'
+import ListProductsByStore from '../../components/list/ListProductsByStore'
+import FollowProductButton from '../../components/button/FollowProductButton'
+import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 
 const DetailPage = () => {
   const { t } = useTranslation()
-  const [isLoading, setIsLoading] = useState(false)
+  const { productId } = useParams()
   const [error, setError] = useState('')
   const [product, setProduct] = useState({})
-  const { productId } = useParams()
+  const [isLoading, setIsLoading] = useState(false)
 
   const init = () => {
     setError('')
@@ -77,6 +78,8 @@ const DetailPage = () => {
   useEffect(() => {
     init()
   }, [productId])
+
+  console.log(product.numberOfFollowers)
   const salePercent = Math.round(
     ((product?.price?.$numberDecimal - product?.salePrice?.$numberDecimal) /
       product?.price?.$numberDecimal) *
@@ -107,7 +110,7 @@ const DetailPage = () => {
                   }}
                 />
               </div>
-              <div className='col-lg-7 col-md-6'>
+              <div className='col-lg-7 col-md-6 ps-4'>
                 <strong className='text-primary text-lg-right'>
                   <StoreSmallCard store={product.storeId} />
                 </strong>
@@ -161,22 +164,31 @@ const DetailPage = () => {
                     getToken().role === 'user' && (
                       <AddToCartForm product={product} />
                     )}
-                  {getToken() && (
-                    <FollowProductButton
-                      productId={product._id}
-                      isFollowing={product.isFollowing}
-                      onRun={() =>
-                        setProduct({
-                          ...product,
-                          isFollowing: !product.isFollowing
-                        })
-                      }
-                      className='mt-2 btn-lg'
-                    />
-                  )}
+                  <div className='d-flex align-items-center mt-4'>
+                    {getToken() && (
+                      <FollowProductButton
+                        productId={product._id}
+                        isFollowing={product.isFollowing}
+                        onRun={() =>
+                          setProduct({
+                            ...product,
+                            numberOfFollowers: product.isFollowing
+                              ? product.numberOfFollowers - 1
+                              : product.numberOfFollowers + 1,
+                            isFollowing: !product.isFollowing
+                          })
+                        }
+                        className='btn-lg'
+                      />
+                    )}
+                    {product?.numberOfFollowers > 0 && (
+                      <small>{product?.numberOfFollowers} đã thích</small>
+                    )}
+                  </div>
+
                   <div>
                     <FacebookShareButton
-                      className='mt-2 cus-tooltip ripple'
+                      className='mt-2'
                       url={
                         window.location.href
                           ? 'https://hasaki.vn/san-pham/gel-rua-mat-la-roche-posay-cho-da-dau-nhay-cam-400ml-68810.html?gad_source=1&gclid=CjwKCAjw17qvBhBrEiwA1rU9wwx0pGlaJp9LXom7lUNIZFUsUSDTAe2iT_w7EfZcGZdnsMMcaIJROxoCL-oQAvD_BwE'
@@ -186,7 +198,6 @@ const DetailPage = () => {
                     >
                       <i className='fa-solid fa-share-from-square text-secondary'></i>
                     </FacebookShareButton>
-                    <small className='cus-tooltip-msg'>hello</small>
                   </div>
                 </div>
               </div>

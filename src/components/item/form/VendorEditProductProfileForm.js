@@ -154,7 +154,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='text'
-            label='Product name'
+            label={t('productDetail.name')}
             value={newProduct.name}
             isValid={newProduct.isValidName}
             feedback='Please provide a valid product name.'
@@ -168,7 +168,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         <div className='col-12 px-4'>
           <TextArea
             type='text'
-            label='Description'
+            label={t('productDetail.description')}
             value={newProduct.description}
             isValid={newProduct.isValidDescription}
             feedback='Please provide a valid product description.'
@@ -184,7 +184,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Quantity'
+            label={t('productDetail.quantity')}
             value={newProduct.quantity}
             isValid={newProduct.isValidQuantity}
             feedback='Please provide a valid product quantity.'
@@ -200,7 +200,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Price (₫)'
+            label={`${t('productDetail.price')} (₫)`}
             value={newProduct.price}
             isValid={newProduct.isValidPrice}
             feedback='Please provide a valid product price.'
@@ -214,7 +214,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Sale price (₫)'
+            label={`${t('productDetail.salePrice')} (₫)`}
             value={newProduct.salePrice}
             isValid={newProduct.isValidSalePrice}
             feedback='Please provide a valid product sale price.'
@@ -228,9 +228,9 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         </div>
 
         <div className='col-12 mt-5 px-4'>
-          <p className=''>Choose category</p>
+          <p className=''>{t('productDetail.chooseCategory')}</p>
           <CategorySelector
-            label='Chosen category'
+            label={t('productDetail.selectedCategory')}
             defaultValue={newProduct.defaultCategory}
             isActive={true}
             isRequired={true}
@@ -245,9 +245,9 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
 
         <div className='col-12 mt-5 px-4'>
           <p className='px-2'>
-            Choose styles{' '}
+            {t('productDetail.chooseStyles')}{' '}
             <small className='text-muted'>
-              *need to choose category before
+              {t('productDetail.chooseCateFirst')}
             </small>
           </p>
           <StyleSelector
@@ -281,7 +281,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             onClick={handleSubmit}
             style={{ width: '40%' }}
           >
-            Edit
+            {t('button.save')}
           </button>
         </div>
       </form>

@@ -252,9 +252,6 @@ const CheckoutForm = ({
 
   const handlePayPalApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
-      // Show a success message to your buyer
-      // alert("Transaction completed by " + details.payer.name.given_name);
-      // OPTIONAL: Call your server to save the transaction
       const { _id, accessToken } = getToken()
 
       const {
@@ -306,7 +303,7 @@ const CheckoutForm = ({
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Thanh Toán Khi Nhận Hàng'
+          title={t('orderDetail.cod')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -447,7 +444,7 @@ const CheckoutForm = ({
             <hr />
 
             <dl className='row'>
-              <dt className='col-sm-3 col-6'>Product's total</dt>
+              <dt className='col-sm-3 col-6'>Tạm tính</dt>
               <dd className='col-sm-9 col-6'>
                 <dl className='row'>
                   <dd className='col-sm-6 res-hide'>
@@ -495,7 +492,7 @@ const CheckoutForm = ({
                 </dl>
               </dd>
 
-              <dt className='col-sm-3 col-6'>Final total</dt>
+              <dt className='col-sm-3 col-6'>{t('orderDetail.finalTotal')}</dt>
               <dd className='col-sm-9 col-6'>
                 <h4 className='text-primary fs-5'>
                   {formatPrice(order.amountFromUser)} ₫

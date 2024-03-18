@@ -8,6 +8,7 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const StoreEditProfileForm = ({
   name = '',
@@ -86,14 +87,14 @@ const StoreEditProfileForm = ({
         }, 3000)
       })
   }
-
+  const { t } = useTranslation()
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit store profile'
+          title={t('storeDetail.editProfile')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -103,11 +104,12 @@ const StoreEditProfileForm = ({
         <div className='col-12'>
           <Input
             type='text'
-            label='Store name'
+            label={t('storeDetail.storeName')}
             value={profile.name}
             isValid={profile.isValidName}
             feedback='Please provide a valid store name.'
             validator='name'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -116,7 +118,7 @@ const StoreEditProfileForm = ({
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Store bio'
+            label={t('storeDetail.bio')}
             value={profile.bio}
             isValid={profile.isValidBio}
             feedback='Please provide a valid store bio.'
@@ -129,10 +131,11 @@ const StoreEditProfileForm = ({
         <div className='col-12'>
           <Input
             type='text'
-            label='Store address'
+            label={t('storeDetail.pickupAddress')}
             value={profile.address}
             isValid={profile.isValidAddress}
             feedback='Please provide a valid store address.'
+            required={true}
             validator='address'
             onChange={(value) =>
               handleChange('address', 'isValidAddress', value)
@@ -159,7 +162,7 @@ const StoreEditProfileForm = ({
             className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
-            Save
+            {t('button.save')}
           </button>
         </div>
       </form>

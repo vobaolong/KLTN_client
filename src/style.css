@@ -95,10 +95,11 @@ body::-webkit-scrollbar-track {
 	z-index: 10 !important;
 }
 
-.list-item-container {
+.list-item-container:not(:last-child) {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
+	border-bottom: 1px dotted var(--ccc-color) !important;
 }
 
 .lang:hover {
@@ -252,7 +253,7 @@ header {
 	position: relative;
 }
 
-.mall-tag {
+.sale-tag {
 	position: absolute;
 	display: inline-block;
 	padding: 2px 5px;
@@ -267,7 +268,7 @@ header {
 	max-width: fit-content;
 }
 
-.mall-tag::after {
+.sale-tag::after {
 	content: "";
 	position: absolute;
 	bottom: -4px;
@@ -1630,9 +1631,9 @@ textarea {
 	margin: auto;
 	border-collapse: separate;
 	border-spacing: 0;
-	border-radius: 0.5rem;
+	border-radius: 0.25rem;
 	overflow: hidden;
-	border: 1px solid #e9e9e9;
+	border: 1px solid #c3c3c3;
 }
 
 .table:hover {

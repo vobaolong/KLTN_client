@@ -91,7 +91,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
       <div className='d-flex justify-content-between align-items-end'>
         <UserAddAddressItem count={addresses?.length || 0} />
         <span className='text-nowrap'>
-          <small className='me-2 text-nowrap res-hide'>
+          <small className='text-nowrap res-hide'>
             {t('showing')} {addresses?.length || 0} {t('result')}
           </small>
         </span>
@@ -107,19 +107,13 @@ const UserAddressesTable = ({ addresses = [] }) => {
               <tr>
                 <th scope='col'></th>
                 <th scope='col' className='text-start'>
-                  <span
-                    style={{ fontWeight: '500', fontSize: '.875rem' }}
-                    className='text-black'
-                  >
+                  <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
                     {t('userDetail.address')}
                   </span>
                 </th>
                 <th scope='col'>
-                  <span
-                    style={{ fontWeight: '500', fontSize: '.875rem' }}
-                    className='text-black'
-                  >
-                    Action
+                  <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
+                    {t('action')}
                   </span>
                 </th>
               </tr>

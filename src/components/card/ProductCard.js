@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -9,10 +10,12 @@ import {
 import StarRating from '../label/StarRating'
 import FollowProductButton from '../button/FollowProductButton'
 import { useTranslation } from 'react-i18next'
+import ProductCardPlaceholder from '../placeHoder.js/ProductCardPlaceholder'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ProductCard = ({ product = {}, onRun }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [productValue, setProductValue] = useState({})
   const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
@@ -100,12 +103,12 @@ const ProductCard = ({ product = {}, onRun }) => {
             }}
           />
         </div>
-        {salePercent > 5 && (
-          <div class='mall-tag'>
+        {salePercent > 0 && (
+          <div class='sale-tag'>
             {-salePercent}% {t('productDetail.sale')}
           </div>
         )}
-        {productValue.numberOfFollowers > 1 ? (
+        {productValue.numberOfFollowers > 2 ? (
           <div class='fav-tag'>{t('favorite')}</div>
         ) : (
           ''
@@ -128,7 +131,6 @@ const ProductCard = ({ product = {}, onRun }) => {
           <h6
             className='card-title'
             style={{
-              // height: '38px',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',

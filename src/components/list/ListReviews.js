@@ -129,37 +129,47 @@ const ListReviews = ({
 
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-
-      <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border'>
-        <div className='d-flex flex-wrap justify-content-start align-items-center'>
-          {renderFilterRating()}
-        </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
-      </div>
-
-      <div className='p-2'>
-        {reviews?.map((review, index) => (
-          <div className='col-12' key={index}>
-            <ReviewInfo
-              review={review}
-              about={!!storeId}
-              onRun={() => setRun(!run)}
-            />
+      {reviews.length > 0 ? (
+        <div>
+          <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border'>
+            <div className='d-flex flex-wrap justify-content-start align-items-center'>
+              {renderFilterRating()}
+            </div>
+            <small className='text-nowrap res-hide'>
+              {t('showing')}{' '}
+              <b>
+                {Math.min(
+                  filter.limit,
+                  pagination.size - filter.limit * (pagination.pageCurrent - 1)
+                )}{' '}
+              </b>
+              {t('of')} {pagination.size} {t('result')}
+            </small>
           </div>
-        ))}
-      </div>
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
+          <div className='p-2'>
+            {reviews?.map((review, index) => (
+              <div className='col-12' key={index}>
+                <ReviewInfo
+                  review={review}
+                  about={!!storeId}
+                  onRun={() => setRun(!run)}
+                />
+              </div>
+            ))}
+          </div>
+
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
+      ) : (
+        <h6 className='text-center text-danger'>
+          {t('reviewDetail.noReview')}
+        </h6>
       )}
     </div>
   )

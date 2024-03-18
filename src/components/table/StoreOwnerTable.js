@@ -1,9 +1,9 @@
 import UserSmallCard from '../card/UserSmallCard'
 
-const StoreOwnerTable = ({ ownerId = {} }) => {
+const StoreOwnerTable = ({ heading = '', ownerId = {} }) => {
   return (
     <div className='position-relative'>
-      <h4 className='text-center text-uppercase'>Store's owner</h4>
+      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
 
       <div className='table-scroll my-2'>
         <table className='table align-middle table-hover table-striped table-sm text-center'>

@@ -207,7 +207,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
             <AdminCreateStoreLevelItem onRun={() => setRun(!run)} />
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -254,7 +254,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
               {/* <th scope='col' className='text-end pe-2'>
                 <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
+
                 >
                   Color
                 </span>
@@ -274,7 +274,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  Action
+                  {t('action')}
                 </span> */}
               </th>
             </tr>

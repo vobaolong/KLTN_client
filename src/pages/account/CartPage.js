@@ -7,7 +7,6 @@ import Error from '../../components/ui/Error'
 import Success from '../../components/ui/Success'
 import StoreSmallCard from '../../components/card/StoreSmallCard'
 import ListCartItemsForm from '../../components/list/ListCartItemsForm'
-import { Link } from 'react-router-dom'
 import cartEmpty from '../../assets/cartEmpty.png'
 import { useTranslation } from 'react-i18next'
 import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
@@ -103,22 +102,18 @@ const CartPage = (props) => {
                       <Error msg='This store is banned by Zenpii!' />
                     )}
 
-                    {cart.storeId &&
-                      cart.storeId.isActive &&
-                      !cart.storeId.isOpen && (
-                        <Error msg="This store is closed, can't order in this time!" />
-                      )}
+                    {cart.storeId?.isActive && !cart.storeId?.isOpen && (
+                      <Error msg="This store is closed, can't order in this time!" />
+                    )}
 
-                    {cart.storeId &&
-                      cart.storeId.isActive &&
-                      cart.storeId.isOpen && (
-                        <ListCartItemsForm
-                          cartId={cart._id}
-                          storeId={cart.storeId._id}
-                          userId={cart.userId._id}
-                          onRun={() => setRun(!run)}
-                        />
-                      )}
+                    {cart.storeId?.isActive && cart.storeId?.isOpen && (
+                      <ListCartItemsForm
+                        cartId={cart._id}
+                        storeId={cart.storeId._id}
+                        userId={cart.userId._id}
+                        onRun={() => setRun(!run)}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

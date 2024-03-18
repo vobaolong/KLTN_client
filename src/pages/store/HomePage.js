@@ -17,7 +17,7 @@ const HomePage = (props) => {
   ) : (
     <StoreLayout store={store}>
       <div className='store-home-page'>
-        {store.featured_images.length >= 1 && (
+        {store.featured_images?.length >= 1 && (
           <div className='mb-4'>
             <Carousel listImages={store.featured_images} alt={store.name} />
           </div>

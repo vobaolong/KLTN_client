@@ -1,4 +1,5 @@
 {
+  "action": "Action",
   "showing": "Showing",
   "of": "of",
   "admin": {
@@ -37,6 +38,23 @@
   "favStore": "Favorite Store",
   "product": "Product",
   "productDetail": {
+    "date": "Created at",
+    "values": "Values",
+    "category": "Category",
+    "name": "Product name",
+    "quantity": "Quantity",
+    "stock": "Stock",
+    "price": "Price",
+    "salePrice": "Sale Price",
+    "chooseCategory": "Choose category",
+    "selectedCategory": "The selected category",
+    "chooseStyles": "Choose styles",
+    "noValuesSelected": "No values selected",
+    "chooseCateFirst": "*need to choose category before",
+    "noProduct": "There is no product",
+    "createProduct": "Create Product",
+    "selling": "Selling Products",
+    "stored": "Stored Products",
     "editProInfo": "Edit product information",
     "editProImg": "Edit product images",
     "thumbImg": "Product thumbnail",
@@ -52,7 +70,9 @@
     "productReview": "Product Review",
     "newProduct": "New Product",
     "purchased": "Purchased",
-    "limitImg": "Limit is 7 images!"
+    "limitImg": "Limit is 7 images!",
+    "storeProduct": "Store the product",
+    "sellProduct": "Sell the product"
   },
   "filters": {
     "filter": "Filters",
@@ -129,6 +149,11 @@
     "bioValid": "Please provide a valid delivery unit  description!",
     "costValid": "Please provide a valid cost (>0₫)"
   },
+  "status": {
+    "status": "Status",
+    "active": "Active",
+    "banned": "Banned"
+  },
   "variantDetail": {
     "variants": "Variants",
     "categories": "Categories",
@@ -137,7 +162,6 @@
     "del": "Delete Variant",
     "res": "Restore Variant",
     "name": "Variant name",
-    "status": "Status",
     "nameValid": "Please provide a valid style name!",
     "selectCategory": "Select category",
     "required": "No categories selected",
@@ -150,13 +174,26 @@
       "valueOf": "Value of"
     }
   },
+  "staffDetail": {
+    "staffList": "Staff List",
+    "owner": "Store Owner",
+    "name": "Staff Name",
+    "delete": "Delete Staff",
+    "add": "Add Staff",
+    "leave": "Leave store",
+    "noStaff": "No Staff!"
+  },
 
   "storeDetail": {
+    "bio": "Bio",
+    "editProfile": "Edit Store Profile",
+    "products": "Products",
     "storeName": "Store Name",
     "name": "Name",
+    "profile": "Profile",
+    "staffs": "Staffs",
+    "orders": "Orders",
     "role": "Role",
-    "licensed": "Licensed",
-    "status": "Status",
     "commissions": "Commissions",
     "getPaid": "How you'll get paid?",
     "sellOn": "Sell on Zenpii",
@@ -185,6 +222,7 @@
   "wallet": "E-Wallet",
   "confirmDialog": "Are you sure about that?",
   "button": {
+    "store": "Store",
     "cancel": "Cancel",
     "confirm": "Confirm",
     "edit": "Edit",
@@ -198,7 +236,9 @@
     "sendEmail": "Send Email",
     "save": "Save",
     "back": "Back",
-    "addImg": "Add Image"
+    "addImg": "Add Image",
+    "more": "More",
+    "sell": "Sell"
   },
   "signInForm": {
     "comeBack": "Welcome back!",
@@ -218,14 +258,17 @@
   "point": "Point",
   "success/failure": "Success/Failure Orders",
   "orderDetail": {
+    "finalTotal": "Final Total",
+    "noOrder": "You have no orders!",
+    "commission": "Commission",
+    "buyer": "Buyer",
     "id": "Order ID",
     "date": "Order placed",
-    "price": "Total",
+    "total": "Total",
     "store": "Store",
-    "deliveryUnit": "Delivery",
+    "deliveryUnit": "Delivery Unit",
     "payment": "Payment",
     "paymentMethod": "Payment Method",
-    "status": "Status",
     "lastUpdateTime": "Last Update Time",
     "cancel": "Cancel Order",
     "cod": "Cash on Delivery",
@@ -240,7 +283,8 @@
     "delete": "Delete Rating",
     "edit": "Edit Rating",
     "content": "Content",
-    "isValid": "Please provide a valid content!"
+    "isValid": "Please provide a valid content!",
+    "noReview": "The product has not been rated!"
   },
   "verified": "Verified",
   "verifyNow": "Verify now",

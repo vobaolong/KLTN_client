@@ -108,7 +108,7 @@ const StoreOrdersTable = ({
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
 
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -125,11 +125,11 @@ const StoreOrdersTable = ({
           <thead>
             <tr>
               <th scope='col'></th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Order'
+                  title={t('orderDetail.id')}
                   sortBy='_id'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -138,7 +138,7 @@ const StoreOrdersTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Created at'
+                  title={t('orderDetail.date')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -147,25 +147,25 @@ const StoreOrdersTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Total'
+                  title={t('orderDetail.total')}
                   sortBy='amountFromUser'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Buyer'
+                  title={t('orderDetail.buyer')}
                   sortBy='userId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              <th scope='col'>
+              <th scope='col' className='text-start'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Commission'
+                  title={t('orderDetail.commission')}
                   sortBy='amountToGD'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -174,7 +174,7 @@ const StoreOrdersTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Delivery'
+                  title={t('orderDetail.deliveryUnit')}
                   sortBy='deliveryId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -183,7 +183,7 @@ const StoreOrdersTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Payment'
+                  title={t('orderDetail.paymentMethod')}
                   sortBy='isPaidBefore'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -192,7 +192,7 @@ const StoreOrdersTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('status.status')}
                   sortBy='status'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

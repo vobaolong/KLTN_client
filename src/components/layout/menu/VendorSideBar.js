@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import Avatar from '../../image/Avatar'
 import ManagerRoleLabel from '../../label/ManagerRoleLabel'
-import StoreLicenseLabel from '../../label/StoreLicenseLabel'
+import StoreActiveLabel from '../../label/StoreActiveLabel'
 import { useTranslation } from 'react-i18next'
 
 const VendorSideBar = ({ user = {}, store = {} }) => {
@@ -28,7 +28,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
                   />
                 </small>
                 <small className='ms-1'>
-                  <StoreLicenseLabel isActive={store.isActive} detail={false} />
+                  <StoreActiveLabel isActive={store.isActive} detail={false} />
                 </small> */}
               </span>
             }
@@ -75,7 +75,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             }`}
           >
             <i className='fas fa-store'></i>
-            <span className='ms-3 res-hide-xl'>Profile</span>
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.profile')}</span>
           </Link>
         </li>
 
@@ -87,7 +87,9 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             }`}
           >
             <i className='fas fa-box'></i>
-            <span className='ms-3 res-hide-xl'>Products</span>
+            <span className='ms-3 res-hide-xl'>
+              {t('storeDetail.products')}
+            </span>
           </Link>
         </li>
 
@@ -99,7 +101,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             }`}
           >
             <i className='fas fa-user-friends'></i>
-            <span className='ms-3 res-hide-xl'>Staffs</span>
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.staffs')}</span>
           </Link>
         </li>
 
@@ -111,7 +113,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
             }`}
           >
             <i className='fas fa-clipboard'></i>
-            <span className='ms-3 res-hide-xl'>Orders</span>
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.orders')}</span>
           </Link>
         </li>
 
@@ -124,7 +126,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
           >
             <i class='fa-solid fa-wallet'></i>
 
-            <span className='ms-3 res-hide-xl'>E-Wallet</span>
+            <span className='ms-3 res-hide-xl'>{t('wallet')}</span>
           </Link>
         </li>
       </ul>

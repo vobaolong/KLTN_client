@@ -88,7 +88,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(

@@ -130,7 +130,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
     <div className='position-relative'>
       {heading && (
         <h4 className='text-center text-uppercase'>
-          {isActive ? 'Licensed stores' : 'Unlicensed stores'}
+          {isActive ? t('status.active') : t('status.banned')}
         </h4>
       )}
 
@@ -149,7 +149,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -217,7 +217,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  Action
+                  {t('action')}
                 </span> */}
                 </th>
               </tr>

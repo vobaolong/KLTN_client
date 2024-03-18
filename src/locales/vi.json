@@ -1,4 +1,5 @@
 {
+  "action": "Hành động",
   "showing": "Hiển thị",
   "of": "trên",
   "admin": {
@@ -37,6 +38,23 @@
   "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
   "productDetail": {
+    "date": "Ngày tạo",
+    "values": "Giá trị",
+    "category": "Thể loại",
+    "name": "Tên sản phẩm",
+    "stock": "Số lượng",
+    "quantity": "Số lượng",
+    "price": "Giá gốc",
+    "salePrice": "Giá khuyến mãi",
+    "chooseCategory": "Chọn thể loại",
+    "selectedCategory": "Thể loại đã chọn",
+    "chooseStyles": "Chọn giá trị",
+    "noValuesSelected": "Không giá trị nào được chọn",
+    "chooseCateFirst": "*vui lòng chọn thể loại trước",
+    "noProduct": "Không có sản phẩm",
+    "createProduct": "Tạo sản phẩm",
+    "selling": "Sản phẩm đang bán",
+    "stored": "Sản phẩm trong kho",
     "editProInfo": "Chỉnh sửa thông tin sản phẩm",
     "editProImg": "Chỉnh sửa ảnh sản phẩm",
     "thumbImg": "Ảnh đại diện sản phẩm",
@@ -52,7 +70,9 @@
     "productReview": "Đánh giá sản phẩm",
     "newProduct": "Sản Phẩm Mới",
     "purchased": "Đã mua hàng",
-    "limitImg": "Tối đa 7 ảnh cho sản phẩm!"
+    "limitImg": "Tối đa 7 ảnh cho sản phẩm!",
+    "storeProduct": "Lưu sản phẩm vào kho",
+    "sellProduct": "Bày bán sản phẩm"
   },
   "filters": {
     "filter": "Bộ lọc",
@@ -131,6 +151,11 @@
     "bioValid": "Vui lòng cung cấp mô tả phù hợp!",
     "costValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
+  "status": {
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "banned": "Bị cấm"
+  },
   "variantDetail": {
     "variants": "Biến thể",
     "categories": "Danh mục",
@@ -139,7 +164,6 @@
     "del": "Xoá Biến thể",
     "res": "Khôi phục biến thể",
     "name": "Tên Biến thể",
-    "status": "Trạng thái",
     "nameValid": "Vui lòng cung cấp tên biến thể phù hợp!",
     "selectCategory": "Chọn danh mục",
     "required": "Không danh mục nào được chọn",
@@ -152,13 +176,25 @@
       "valueOf": "Giá trị của"
     }
   },
-
+  "staffDetail": {
+    "staffList": "Danh sách nhân viên",
+    "owner": "Chủ cửa hàng",
+    "name": "Tên nhân viên",
+    "delete": "Xoá nhân viên",
+    "add": "Thêm nhân viên",
+    "leavea": "Rời cửa hàng",
+    "noStaff": "Không có nhân viên!"
+  },
   "storeDetail": {
-    "storeName": "Tên Store",
+    "bio": "Giới thiệu",
+    "editProfile": "Chỉnh sửa thông tin cửa hàng",
+    "products": "Sản phẩm",
+    "storeName": "Tên cửa hàng",
     "name": "Tên",
+    "profile": "Thông tin cửa hàng",
+    "staffs": "Nhân viên",
+    "orders": "Đơn hàng",
     "role": "Quyền",
-    "licensed": "Cấp phép",
-    "status": "Trạng thái",
     "commissions": "Hoa hồng",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên Zenpii",
@@ -186,6 +222,7 @@
   "wallet": "Ví",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
+    "store": "Kho",
     "cancel": "Huỷ",
     "confirm": "Xác nhận",
     "edit": "Sửa",
@@ -199,7 +236,9 @@
     "sendEmail": "Gửi Email",
     "save": "Lưu",
     "back": "Trở lại",
-    "addImg": "Thêm ảnh"
+    "addImg": "Thêm ảnh",
+    "more": "Hiển thị thêm",
+    "sell": "Bán"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",
@@ -219,14 +258,17 @@
   "point": "Điểm",
   "success/failure": "Đơn Hoàn Thành/Huỷ",
   "orderDetail": {
+    "finalTotal": "Tổng tiền",
+    "noOrder": "Không có đơn hàng nào!",
+    "commission": "Hoa hồng",
+    "buyer": "Người mua",
     "id": "Mã đơn hàng",
     "date": "Ngày đặt hàng",
-    "price": "Tổng",
-    "store": "Store",
-    "deliveryUnit": "Vận chuyển",
+    "total": "Tổng",
+    "store": "Cửa hàng",
+    "deliveryUnit": "Đơn vị vận chuyển",
     "payment": "Thanh toán",
     "paymentMethod": "Phương thức Thanh toán",
-    "status": "Trạng thái",
     "lastUpdateTime": "Cập nhật lần cuối",
     "cancel": "Huỷ Đơn Hàng",
     "cod": "Thanh toán khi nhận hàng",
@@ -241,7 +283,8 @@
     "delete": "Xoá Đánh Giá",
     "edit": "Chỉnh Sửa Đánh Giá",
     "content": "Nội dung",
-    "isValid": "Vui lòng đánh giá phù hợp!"
+    "isValid": "Vui lòng đánh giá phù hợp!",
+    "noReview": "Sản phẩm chưa được đánh giá!"
   },
   "verified": "Đã xác thực",
   "verifyNow": "Xác thực ngay",

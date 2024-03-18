@@ -7,6 +7,7 @@ import Modal from '../ui/Modal'
 import ReviewForm from './form/ReviewForm'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { calcTime } from '../../helper/calcTime'
+import { useTranslation } from 'react-i18next'
 
 const ReviewItem = ({
   orderId = '',
@@ -15,6 +16,7 @@ const ReviewItem = ({
   detail = true,
   date = ''
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isReviewed, setIsReviewed] = useState(false)
   const [deliveredDate, setDeliveredDate] = useState(date)
@@ -59,7 +61,9 @@ const ReviewItem = ({
               data-bs-target='#review-form'
             >
               <i className='fas fa-comment-dots'></i>
-              {detail && <span className='ms-2 res-hide-lg'>Đánh giá</span>}
+              {detail && (
+                <span className='ms-2 res-hide-lg'>{t('filters.rating')}</span>
+              )}
             </button>
             {!isReviewed && (
               <Modal
@@ -80,7 +84,7 @@ const ReviewItem = ({
             <div className=''>
               <small>
                 Đánh giá trước{' '}
-                <u className='cus-tooltip'>
+                <u className='cus-tooltip' style={{ cursor: 'help' }}>
                   {humanReadableDate(deliveredDate)}
                 </u>
                 <small className='cus-tooltip-msg'>

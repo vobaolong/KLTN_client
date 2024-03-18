@@ -192,7 +192,7 @@ const AdminStylesTable = ({ heading = '' }) => {
             </Link>
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -231,17 +231,14 @@ const AdminStylesTable = ({ heading = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('variantDetail.status')}
+                  title={t('status.status')}
                   sortBy='isDeleted'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
               <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
-                >
-                  Action
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                  {t('action')}
                 </span>
               </th>
             </tr>

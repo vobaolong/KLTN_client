@@ -166,7 +166,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Create product'
+          title={t('productDetail.createProduct')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />

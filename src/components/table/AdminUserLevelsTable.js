@@ -207,7 +207,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
             <AdminCreateUserLevelItem onRun={() => setRun(!run)} />
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -261,11 +261,8 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                 />
               </th>
               <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-black'
-                >
-                  Action
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                  {t('action')}
                 </span>
               </th>
             </tr>

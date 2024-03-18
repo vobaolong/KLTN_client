@@ -9,6 +9,7 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
   const [error, setError] = useState('')
@@ -23,7 +24,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
   const [listRight, setListRight] = useState([])
 
   const [updateDispatch] = useUpdateDispatch()
-
+  const { t } = useTranslation()
   const { _id, accessToken } = getToken()
 
   const init = () => {
@@ -67,9 +68,9 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
     setListLeft(
       listUsers.filter(
         (u) =>
-          u._id != owner._id &&
-          listCurrentStaffs.indexOf(u._id) == -1 &&
-          listCurrentRight.indexOf(u._id) == -1
+          u._id !== owner._id &&
+          listCurrentStaffs.indexOf(u._id) === -1 &&
+          listCurrentRight.indexOf(u._id) === -1
       )
     )
   }, [listUsers])
@@ -91,12 +92,12 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
 
   const handleAddBtn = (user) => {
     setListRight([...listRight, user])
-    setListLeft(listLeft.filter((u) => u._id != user._id))
+    setListLeft(listLeft.filter((u) => u._id !== user._id))
   }
 
   const handleRemoveBtn = (user) => {
     setListLeft([...listLeft, user])
-    setListRight(listRight.filter((u) => u._id != user._id))
+    setListRight(listRight.filter((u) => u._id !== user._id))
   }
 
   const handleSubmit = () => {
@@ -138,16 +139,15 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
       {success && <Success msg={success} />}
       {isConfirming && (
         <ConfirmDialog
-          title='Add staffs'
+          title={t('staffDetail.add')}
           message={
             <span>
               Are you sure you want to add to this store: <br />
-              {listRight &&
-                listRight.map((user, index) => (
-                  <span className='mt-2 d-block' key={index}>
-                    <UserSmallCard user={user} />
-                  </span>
-                ))}
+              {listRight?.map((user, index) => (
+                <span className='mt-2 d-block' key={index}>
+                  <UserSmallCard user={user} />
+                </span>
+              ))}
             </span>
           }
           onSubmit={onSubmit}
@@ -157,7 +157,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
 
       <div className='row'>
         <div className='col'>
-          <div className='border rounded p-2 cus-group bg-light d-flex flex-column justify-content-between'>
+          <div className='border rounded-1 p-2 cus-group bg-light d-flex flex-column justify-content-between'>
             <div className='mb-2'>
               <SearchInput onChange={handleChangeKeyword} />
             </div>
@@ -174,10 +174,10 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
                     </div>
                     <button
                       type='button'
-                      className='btn btn-primary btn-sm ripple'
+                      className='btn btn-primary btn-sm ripple rounded-1'
                       onClick={() => handleAddBtn(user)}
                     >
-                      <i className='fas fa-arrow-alt-circle-right'></i>
+                      <i class='fa-solid fa-user-plus'></i>
                     </button>
                   </div>
                 ))}
@@ -190,16 +190,16 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
                   ? false
                   : true
               }
-              className='btn btn-primary ripple w-100 mt-4'
+              className='btn btn-primary ripple w-100 mt-4 rounded-1'
               onClick={handleLoadMore}
             >
-              <i className='fas fa-arrow-alt-circle-down me-1'></i> More
+              <i class='fa-solid fa-caret-down'></i> {t('button.more')}
             </button>
           </div>
         </div>
 
         <div className='col'>
-          <div className='border rounded p-2 cus-group bg-light  d-flex flex-column justify-content-between align-items-center'>
+          <div className='border rounded-1 p-2 cus-group bg-light  d-flex flex-column justify-content-between align-items-center'>
             <div className='flex-grow-1 w-100'>
               {listRight &&
                 listRight.map((user, index) => (
@@ -212,7 +212,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
                     </div>
                     <button
                       type='button'
-                      className='btn btn-outline-danger btn-sm ripple'
+                      className='btn btn-outline-danger btn-sm rounded-1 ripple'
                       onClick={() => handleRemoveBtn(user)}
                     >
                       <i className='fas fa-times-circle'></i>
@@ -223,10 +223,10 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
 
             <button
               type='button'
-              className='btn btn-primary ripple w-100 mt-4'
+              className='btn rounded-1 btn-primary ripple w-100 mt-4'
               onClick={handleSubmit}
             >
-              Submit
+              {t('button.submit')}
             </button>
           </div>
         </div>

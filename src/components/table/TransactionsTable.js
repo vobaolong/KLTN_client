@@ -163,7 +163,7 @@ const TransactionsTable = ({
           )}
         </div>
 
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -231,7 +231,7 @@ const TransactionsTable = ({
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('storeDetail.status')}
+                  title={t('status.status')}
                   sortBy='isUp'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

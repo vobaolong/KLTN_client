@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
+import Error from '../ui/Error'
+import Loading from '../ui/Loading'
 import { getToken } from '../../apis/auth'
 import { followProduct, unfollowProduct } from '../../apis/follow'
-import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 
 const FollowProductButton = ({
   productId = '',
@@ -13,7 +13,6 @@ const FollowProductButton = ({
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [followingFlag, setFollowingFlag] = useState(isFollowing)
-
   const { _id, accessToken } = getToken()
 
   useEffect(() => {
@@ -77,7 +76,7 @@ const FollowProductButton = ({
   return (
     <div className='col-1 d-grid'>
       <span
-        className={`d-flex align-items-center mt-3 justify-content-center ${
+        className={`d-flex align-items-center justify-content-center ${
           followingFlag ? 'text-danger' : 'text-secondary'
         } ${className}`}
         onClick={handleFollowProduct}

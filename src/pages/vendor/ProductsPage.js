@@ -2,8 +2,10 @@ import { useSelector } from 'react-redux'
 import useToggle from '../../hooks/useToggle'
 import VendorLayout from '../../components/layout/VendorLayout'
 import StoreProductsTable from '../../components/table/StoreProductsTable'
+import { useTranslation } from 'react-i18next'
 
 const ProductsPage = (props) => {
+  const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
   const [flag, toggleFlag] = useToggle(true)
@@ -22,7 +24,9 @@ const ProductsPage = (props) => {
             <i className='fas fa-box'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Selling products</small>
+          <small className='cus-tooltip-msg'>
+            {t('productDetail.selling')}
+          </small>
         </div>
 
         <div className='position-relative d-inline-block'>
@@ -36,7 +40,7 @@ const ProductsPage = (props) => {
             <i className='fas fa-archive'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Stored products</small>
+          <small className='cus-tooltip-msg'>{t('productDetail.stored')}</small>
         </div>
       </div>
 

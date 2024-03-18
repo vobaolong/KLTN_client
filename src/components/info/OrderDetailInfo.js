@@ -3,7 +3,8 @@ import { getToken } from '../../apis/auth'
 import {
   getOrderByUser,
   getOrderByStore,
-  getOrderForAdmin
+  getOrderForAdmin,
+  listItemsByOrder
 } from '../../apis/order'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
@@ -17,6 +18,8 @@ import AdminUpdateOrderStatus from '../button/AdminUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { totalDelivery, totalProducts } from '../../helper/total'
+import { useSelector } from 'react-redux'
 
 const OrderDetailInfo = ({
   orderId = '',
@@ -30,6 +33,9 @@ const OrderDetailInfo = ({
   const [error, setError] = useState('')
   const [order, setOrder] = useState({})
   const { _id, accessToken } = getToken()
+  const [items, setItems] = useState([])
+  const { level: userLevel } = useSelector((state) => state.account.user)
+
   const init = () => {
     setError('')
     setIsLoading(true)
@@ -55,23 +61,51 @@ const OrderDetailInfo = ({
           setError('Server Error')
           setIsLoading(false)
         })
-    else
+    else {
       getOrderByUser(_id, accessToken, orderId)
         .then((data) => {
           if (data.error) setError(data.error)
-          else setOrder(data.order)
+          else {
+            setOrder(data.order)
+          }
           setIsLoading(false)
         })
         .catch((error) => {
           setError('Server Error')
           setIsLoading(false)
         })
+      listItemsByOrder(_id, accessToken, orderId)
+        .then((data) => {
+          if (data.error) setError(data.error)
+          else setItems(data.items)
+          setIsLoading(false)
+        })
+        .catch((error) => {
+          setError('Server Error')
+          setIsLoading(false)
+        })
+    }
   }
 
   useEffect(() => {
     init()
-  }, [orderId, storeId, by, run])
+  }, [orderId, storeId, by, run, userLevel])
 
+  console.log(order.deliveryId)
+  console.log(items)
+  const totalOrderSalePrice = items.reduce((total, item) => {
+    if (item.productId && item.productId.salePrice) {
+      return total + item.productId.salePrice.$numberDecimal * item.count
+    }
+    return total
+  }, 0)
+  const saleFromSystem =
+    totalOrderSalePrice - totalProducts(items, userLevel).amountFromUser1
+
+  const saleFromShipping =
+    order.deliveryId?.price?.$numberDecimal -
+    totalDelivery(order.deliveryId, userLevel).amountFromUser2
+  console.log(saleFromShipping)
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -89,7 +123,10 @@ const OrderDetailInfo = ({
           <span className='fs-6 mb-2 ms-3 status'>
             <OrderStatusLabel status={order.status} />
             <span className='d-inline-block position-relative'>
-              <i className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'></i>
+              <i
+                style={{ cursor: 'help' }}
+                className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
+              ></i>
               <small className='cus-tooltip-msg'>
                 {t('orderDetail.lastUpdateTime')}{' '}
                 {humanReadableDate(order.updatedAt)}
@@ -226,16 +263,95 @@ const OrderDetailInfo = ({
             by={by}
             status={order.status}
           />
-
-          <div className='col-12 mt-2 d-flex justify-content-end'>
-            <Paragraph
-              label='Final total (include discounts)'
-              value={
-                <span className='text-primary fw-bold fs-5'>
-                  {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
-                </span>
-              }
-            />
+          <div className='d-flex justify-content-end'>
+            <table className='col-4 text-start justify-content-end'>
+              <tbody>
+                <tr className='border-bottom'>
+                  <th
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      backgroundColor: 'transparent'
+                    }}
+                    scope='col'
+                  >
+                    Tổng tiền hàng
+                  </th>
+                  <td className='text-end'>
+                    <span style={{ fontSize: '0.9rem' }}>
+                      {formatPrice(totalOrderSalePrice)} <sup>₫</sup>
+                    </span>
+                  </td>
+                </tr>
+                <tr className='border-bottom'>
+                  <th
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      backgroundColor: 'transparent'
+                    }}
+                    scope='col'
+                  >
+                    Giảm giá từ Zenpii
+                  </th>
+                  <td className='text-end'>
+                    <span style={{ fontSize: '0.9rem' }}>
+                      -{formatPrice(saleFromSystem)} <sup>₫</sup>
+                    </span>
+                  </td>
+                </tr>
+                <tr className='border-bottom'>
+                  <th
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      backgroundColor: 'transparent'
+                    }}
+                    scope='col'
+                  >
+                    Phí vận chuyển
+                  </th>
+                  <td className='text-end'>
+                    <span style={{ fontSize: '0.9rem' }}>
+                      {formatPrice(order.deliveryId?.price?.$numberDecimal)}{' '}
+                      <sup>₫</sup>
+                    </span>
+                  </td>
+                </tr>
+                <tr className='border-bottom'>
+                  <th
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      backgroundColor: 'transparent'
+                    }}
+                    scope='col'
+                  >
+                    Giảm giá vận chuyển
+                  </th>
+                  <td className='text-end'>
+                    <span style={{ fontSize: '0.9rem' }}>
+                      -{formatPrice(saleFromShipping)} <sup>₫</sup>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <th
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      backgroundColor: 'transparent'
+                    }}
+                    scope='col'
+                  >
+                    Thành tiền
+                  </th>
+                  <td className='text-primary fw-bold fs-5 text-end'>
+                    {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

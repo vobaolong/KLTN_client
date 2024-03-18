@@ -207,7 +207,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
             </Link>
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -268,7 +268,7 @@ const AdminCategoriesTable = ({ heading = 'Category' }) => {
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
-                  Action
+                  {t('action')}
                 </span> */}
               </th>
             </tr>

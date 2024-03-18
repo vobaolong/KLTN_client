@@ -63,7 +63,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
             <span className='text-primary fw-medium'>
               {review?.userId?.firstName} {review?.userId?.lastName}
             </span>
-            <span className='text-secondary'>{review?.productId?.name}</span>
+            {/* <span className='text-secondary'>{review?.productId?.name}</span> */}
             <span className='text-success rounded-1 px-1 bg-value'>
               <i class='fa-solid fa-circle-check'></i>{' '}
               {t('productDetail.purchased')}

@@ -4,7 +4,7 @@ import { getToken } from '../../apis/auth'
 import { listStoresByUser } from '../../apis/store'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ManagerRoleLabel from '../label/ManagerRoleLabel'
-import StoreLicenseLabel from '../label/StoreLicenseLabel'
+import StoreActiveLabel from '../label/StoreActiveLabel'
 import StoreStatusLabel from '../label/StoreStatusLabel'
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
@@ -103,7 +103,7 @@ const UserStoresTable = () => {
             </Link>
           </div>
         </div>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(
@@ -158,7 +158,7 @@ const UserStoresTable = () => {
                 <th scope='col'>
                   <SortByButton
                     currentSortBy={filter.sortBy}
-                    title={t('storeDetail.licensed')}
+                    title={t('status.active')}
                     sortBy='isActive'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -166,7 +166,7 @@ const UserStoresTable = () => {
                 <th scope='col'>
                   <SortByButton
                     currentSortBy={filter.sortBy}
-                    title={t('storeDetail.status')}
+                    title={t('status.status')}
                     sortBy='isOpen'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -197,7 +197,7 @@ const UserStoresTable = () => {
                     />
                   </td>
                   <td className='text-center'>
-                    <StoreLicenseLabel isActive={store.isActive} />
+                    <StoreActiveLabel isActive={store.isActive} />
                   </td>
                   <td className='text-center'>
                     <StoreStatusLabel isOpen={store.isOpen} />

@@ -4,7 +4,7 @@ import Paragraph from '../ui/Paragraph'
 
 const UserLevelInfo = ({ user = {}, border = true }) => {
   const { t } = useTranslation()
-
+  console.log(user)
   return (
     <div className='container-fluid'>
       <div

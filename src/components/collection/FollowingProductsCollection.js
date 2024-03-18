@@ -67,7 +67,7 @@ const FollowingProductsCollection = (props) => {
 
       <div className='d-flex justify-content-between align-items-end'>
         <h4>{t('favProduct')}</h4>
-        <small className='me-2 text-nowrap res-hide'>
+        <small className='text-nowrap res-hide'>
           {t('showing')}{' '}
           <b>
             {Math.min(

@@ -64,23 +64,21 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
   }
-
   useEffect(() => {
     if (orderId) init()
   }, [orderId, storeId, by])
-  console.log(items.map((item) => item?.updatedAt))
 
   return (
     <div className='list-order-items position-relative'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      <small className='text-muted d-inline-block mb-2'>
+      <small className='text-muted d-inline-block'>
         {t('orderDetail.note')}
       </small>
-      <div className='flex-column d-flex gap-2 justify-content-between'>
+      <div className='flex-column d-flex  justify-content-between'>
         {items.map((item, index) => (
           <div key={index} className='list-item-container'>
-            <div className='d-flex align-items-center mb-2 res-flex-column'>
+            <div className='d-flex align-items-center res-flex-column'>
               <div
                 className='border rounded-1'
                 style={{
@@ -107,8 +105,8 @@ const ListOrderItems = ({
               </div>
 
               <div
-                className='flex-grow-1 mx-3 align-items-start'
-                style={{ flexDirection: 'column-reverse' }}
+                className='flex-grow-1 ms-3 align-items-start'
+                style={{ flexDirection: 'column-reverse', width: '60%' }}
               >
                 <Link
                   className='text-reset text-decoration-none link-hover d-block mt-1'
@@ -134,12 +132,12 @@ const ListOrderItems = ({
                   <p className='text-decoration-line-through text-muted'>
                     {item.productId?.price &&
                       formatPrice(item.productId?.price.$numberDecimal)}{' '}
-                    ₫
+                    <sup>₫</sup>
                   </p>
 
                   <h4 className='text-primary fs-5'>
-                    {formatPrice(item.productId?.salePrice?.$numberDecimal)} ₫ x{' '}
-                    {item.count}
+                    {formatPrice(item.productId?.salePrice?.$numberDecimal)}{' '}
+                    <sup>₫</sup> x {item.count}
                   </h4>
                 </div>
 
