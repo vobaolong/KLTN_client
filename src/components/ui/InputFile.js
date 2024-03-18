@@ -12,7 +12,8 @@ const InputFile = ({
   accept = '*/*',
   feedback = 'Please provide a valid file',
   defaultSrc = '',
-  noRadius = false
+  noRadius = false,
+  required = false
 }) => {
   const [src, setSrc] = useState('')
 
@@ -46,7 +47,7 @@ const InputFile = ({
       }`}
     >
       <label className='cus-input-group-label cus-input-group-label--file text-muted'>
-        {label}
+        {label} {required && <span style={{ color: 'red' }}>*</span>}
       </label>
       <div
         className={`${size === 'avatar' ? 'cus-avatar-box' : 'cus-cover-box '}`}
@@ -89,6 +90,7 @@ const InputFile = ({
                 disabled={isDisabled}
                 accept={accept}
                 onChange={onHandleChange}
+                required={required}
               />
             </label>
           )}

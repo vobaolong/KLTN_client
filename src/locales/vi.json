@@ -1,4 +1,6 @@
 {
+  "showing": "Hiển thị",
+  "of": "trên",
   "admin": {
     "adDashboard": {
       "dashboard": "Quản lý",
@@ -35,6 +37,10 @@
   "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
   "productDetail": {
+    "editProInfo": "Chỉnh sửa thông tin sản phẩm",
+    "editProImg": "Chỉnh sửa ảnh sản phẩm",
+    "thumbImg": "Ảnh đại diện sản phẩm",
+    "otherImg": "Ảnh khác",
     "sold": "Đã bán",
     "sale": "Giảm",
     "description": "Thông tin sản phẩm",
@@ -44,7 +50,9 @@
     "error": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa nó khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác",
     "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn",
     "productReview": "Đánh giá sản phẩm",
-    "newProduct": "Sản Phẩm Mới"
+    "newProduct": "Sản Phẩm Mới",
+    "purchased": "Đã mua hàng",
+    "limitImg": "Tối đa 7 ảnh cho sản phẩm!"
   },
   "filters": {
     "filter": "Bộ lọc",
@@ -76,6 +84,7 @@
     "address": "Địa chỉ",
     "addAddress": "Thêm địa chỉ",
     "delAddress": "Xoá địa chỉ",
+    "editAddress": "Sửa địa chỉ",
     "limit10Addresses": "Tối đa 10 địa chỉ",
     "changePassword": "Thay đổi mật khẩu",
     "currentPw": "Mật khẩu hiện tại",
@@ -161,7 +170,11 @@
     "close": "Đóng",
     "allProduct": "Tất cả sản phẩm",
     "rating": "Đánh giá",
-    "about": "Thông tin"
+    "about": "Thông tin",
+    "noStores": "Không có cửa hàng!",
+    "createStore": "Tạo một cửa hàng trực tuyến miễn phí",
+    "pickupAddress": "Địa chỉ lấy hàng",
+    "avatar": "Ảnh đại diện"
   },
   "storeDetailValid": {
     "nameValid": "Vui lòng cung cấp tên store phù hợp!",
@@ -185,7 +198,8 @@
     "forgotPW": "Quên mật khẩu",
     "sendEmail": "Gửi Email",
     "save": "Lưu",
-    "back": "Trở lại"
+    "back": "Trở lại",
+    "addImg": "Thêm ảnh"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",

@@ -10,6 +10,7 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import StyleSelector from '../../selector/StyleSelector'
+import { t } from 'i18next'
 
 const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -137,18 +138,17 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Edit product information'
+          title={t('productDetail.editProInfo')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
       )}
 
-      <form
-        className='border border-primary rounded-1 row mb-2'
-        onSubmit={handleSubmit}
-      >
-        <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Edit product information</h1>
+      <form className='border rounded-1 row mb-2' onSubmit={handleSubmit}>
+        <div className='col-12 bg-primary rounded-top-1 p-3'>
+          <h1 className='text-white fs-5 m-0'>
+            {t('productDetail.editProInfo')}
+          </h1>
         </div>
 
         <div className='col-12 px-4'>
@@ -158,6 +158,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             value={newProduct.name}
             isValid={newProduct.isValidName}
             feedback='Please provide a valid product name.'
+            required={true}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -171,6 +172,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             value={newProduct.description}
             isValid={newProduct.isValidDescription}
             feedback='Please provide a valid product description.'
+            required={true}
             validator='bio'
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
@@ -186,6 +188,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             value={newProduct.quantity}
             isValid={newProduct.isValidQuantity}
             feedback='Please provide a valid product quantity.'
+            required={true}
             validator='positive|zero'
             onChange={(value) =>
               handleChange('quantity', 'isValidQuantity', value)
@@ -201,6 +204,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             value={newProduct.price}
             isValid={newProduct.isValidPrice}
             feedback='Please provide a valid product price.'
+            required={true}
             validator='positive|zero'
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}
@@ -214,6 +218,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             value={newProduct.salePrice}
             isValid={newProduct.isValidSalePrice}
             feedback='Please provide a valid product sale price.'
+            required={true}
             validator='positive|zero'
             onChange={(value) =>
               handleChange('salePrice', 'isValidSalePrice', value)

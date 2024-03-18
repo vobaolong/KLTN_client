@@ -27,11 +27,9 @@ const TransactionsTable = ({
   eWallet = 0
 }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(false)
-
   const [transactions, setTransactions] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -44,7 +42,6 @@ const TransactionsTable = ({
   })
 
   const { _id: userId, accessToken } = getToken()
-
   const init = () => {
     setError('')
     setIsLoading(true)
@@ -166,16 +163,16 @@ const TransactionsTable = ({
           )}
         </div>
 
-        <span className='me-2 text-nowrap res-hide'>
-          Showing{' '}
+        <small className='me-2 text-nowrap res-hide'>
+          {t('showing')}{' '}
           <b>
             {Math.min(
               filter.limit,
               pagination.size - filter.limit * (pagination.pageCurrent - 1)
             )}{' '}
           </b>
-          of {pagination.size} {t('result')}
-        </span>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
 
       <div className='table-scroll'>

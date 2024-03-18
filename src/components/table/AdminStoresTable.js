@@ -149,20 +149,20 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
         </div>
-        <span className='me-2 text-nowrap res-hide'>
-          Showing{' '}
+        <small className='me-2 text-nowrap res-hide'>
+          {t('showing')}{' '}
           <b>
             {Math.min(
               filter.limit,
               pagination.size - filter.limit * (pagination.pageCurrent - 1)
             )}{' '}
           </b>
-          of {pagination.size} {t('result')}
-        </span>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
       {!isLoading && stores.length === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>No stores yet!</h5>
+          <h5>Không có shop nào</h5>
         </div>
       ) : (
         <div className='table-scroll my-2'>
@@ -171,10 +171,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
               <tr>
                 <th scope='col'></th>
                 <th scope='col'>
-                  <span
-                    style={{ fontWeight: '400', fontSize: '.875rem' }}
-                    className='text-dark'
-                  >
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
                     Store Name
                   </span>
                 </th>

@@ -100,9 +100,11 @@ const ProductCard = ({ product = {}, onRun }) => {
             }}
           />
         </div>
-        <div class='mall-tag'>
-          {-salePercent}% {t('productDetail.sale')}
-        </div>
+        {salePercent > 5 && (
+          <div class='mall-tag'>
+            {-salePercent}% {t('productDetail.sale')}
+          </div>
+        )}
         {productValue.numberOfFollowers > 1 ? (
           <div class='fav-tag'>{t('favorite')}</div>
         ) : (
@@ -126,12 +128,13 @@ const ProductCard = ({ product = {}, onRun }) => {
           <h6
             className='card-title'
             style={{
-              height: '38px',
+              // height: '38px',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
               WebkitLineClamp: '2',
-              WebkitBoxOrient: 'vertical'
+              WebkitBoxOrient: 'vertical',
+              paddingBottom: '2px'
             }}
           >
             {productValue.name}
@@ -143,12 +146,13 @@ const ProductCard = ({ product = {}, onRun }) => {
               formatPrice(productValue.salePrice.$numberDecimal)}{' '}
             ₫
           </h5>
-
-          <b className='text-decoration-line-through text-muted font-weight-normal text-md'>
-            {productValue.price &&
-              formatPrice(productValue.price.$numberDecimal)}{' '}
-            ₫
-          </b>
+          {salePercent !== 0 && (
+            <del className='text-muted font-weight-normal text-md'>
+              {productValue.price &&
+                formatPrice(productValue.price.$numberDecimal)}{' '}
+              ₫
+            </del>
+          )}
         </small>
         <div className='d-flex justify-content-end'>
           {getToken() && (

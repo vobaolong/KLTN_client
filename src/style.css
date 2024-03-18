@@ -178,17 +178,16 @@ body::-webkit-scrollbar-track {
 	background-color: var(--primary-color);
 }
 
-.add-to-cart-btn {
-	/* background-color: rgba(208, 1, 27, .08); */
-	border-color: var(--primary-color-dis);
-	color: var(--primary-color-dis);
+/* .add-to-cart-btn {
+	border-color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .add-to-cart-btn:hover {
 	background-color: var(--primary-color-dis);
 	border-color: var(--primary-color-dis);
 	color: #fff;
-}
+} */
 
 .add-to-cart-btn:disabled {
 	background-color: var(--primary-color-dis);
@@ -266,7 +265,6 @@ header {
 	top: 0px;
 	left: -5px;
 	max-width: fit-content;
-	width: 70px;
 }
 
 .mall-tag::after {

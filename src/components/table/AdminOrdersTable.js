@@ -110,16 +110,16 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
 
-        <span className='me-2 text-nowrap res-hide'>
-          Showing{' '}
+        <small className='me-2 text-nowrap res-hide'>
+          {t('showing')}{' '}
           <b>
             {Math.min(
               filter.limit,
               pagination.size - filter.limit * (pagination.pageCurrent - 1)
             )}{' '}
           </b>
-          of {pagination.size} {t('result')}
-        </span>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
 
       <div className='table-scroll my-2'>

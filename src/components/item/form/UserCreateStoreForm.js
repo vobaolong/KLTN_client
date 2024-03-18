@@ -176,8 +176,11 @@ const CreateStoreForm = (props) => {
         className='border border-primary rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
+        <div className='col-12 bg-primary p-3 d-flex align-items-center'>
           <Logo />
+          <h4 className='text-white border-start px-3'>
+            {t('storeDetail.createStore')}
+          </h4>
         </div>
 
         <div className='col-12 px-4 mt-2'>
@@ -188,6 +191,7 @@ const CreateStoreForm = (props) => {
             isValid={store.isValidName}
             feedback={t('storeDetailValid.nameValid')}
             validator='name'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -201,6 +205,7 @@ const CreateStoreForm = (props) => {
             isValid={store.isValidBio}
             feedback={t('storeDetailValid.bioValid')}
             validator='bio'
+            required={true}
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
           />
@@ -209,11 +214,12 @@ const CreateStoreForm = (props) => {
         <div className='col-12 px-4'>
           <Input
             type='text'
-            label='Address'
+            label={t('storeDetail.pickupAddress')}
             value={store.address}
             isValid={store.isValidAddress}
             feedback={t('storeDetailValid.addressValid')}
             validator='address'
+            required={true}
             onChange={(value) =>
               handleChange('address', 'isValidAddress', value)
             }
@@ -222,11 +228,12 @@ const CreateStoreForm = (props) => {
         </div>
         <div className='col-12 px-4'>
           <InputFile
-            label='Ảnh Nền'
+            label={t('storeDetail.avatar')}
             size='avatar'
             value={store.avatar}
             isValid={store.isValidAvatar}
             feedback={t('storeDetailValid.avatarValid')}
+            required={true}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('avatar', 'isValidAvatar', value)}
             onValidate={(flag) => handleValidate('isValidAvatar', flag)}
@@ -235,11 +242,11 @@ const CreateStoreForm = (props) => {
 
         <div className='col-12 px-4'>
           <InputFile
-            label='Ảnh Bìa'
+            label={t('storeDetail.cover')}
             size='cover'
             value={store.cover}
             isValid={store.isValidCover}
-            f
+            required={true}
             feedback={t('storeDetailValid.coverValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('cover', 'isValidCover', value)}

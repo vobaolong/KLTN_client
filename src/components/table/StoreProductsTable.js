@@ -169,16 +169,16 @@ const StoreProductsTable = ({
             </Link>
           )}
         </div>
-        <span className='me-2 text-nowrap res-hide'>
-          Showing{' '}
+        <small className='me-2 text-nowrap res-hide'>
+          {t('showing')}{' '}
           <b>
             {Math.min(
               filter.limit,
               pagination.size - filter.limit * (pagination.pageCurrent - 1)
             )}{' '}
           </b>
-          of {pagination.size} {t('result')}
-        </span>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
       {!isLoading && products.length === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
@@ -516,7 +516,7 @@ const StoreProductsTable = ({
                       <Link
                         type='button'
                         className='btn btn-dark ripple rounded-1'
-                        to={`/vendor/products/editProduct/${product._id}/${storeId}`}
+                        to={`/vendor/products/editproduct/${product._id}/${storeId}`}
                       >
                         <i class='fa-solid fa-pen'></i>
                         <span className='ms-2 res-hide'>Edit</span>

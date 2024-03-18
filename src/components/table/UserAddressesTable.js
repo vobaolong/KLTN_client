@@ -89,9 +89,11 @@ const UserAddressesTable = ({ addresses = [] }) => {
       {success && <Success msg={success} />}
 
       <div className='d-flex justify-content-between align-items-end'>
-        <UserAddAddressItem count={(addresses && addresses.length) || 0} />
-        <span className='me-2 text-nowrap'>
-          {(addresses && addresses.length) || 0} {t('result')}
+        <UserAddAddressItem count={addresses?.length || 0} />
+        <span className='text-nowrap'>
+          <small className='me-2 text-nowrap res-hide'>
+            {t('showing')} {addresses?.length || 0} {t('result')}
+          </small>
         </span>
       </div>
       {!isLoading && addresses.length === 0 ? (
@@ -126,7 +128,9 @@ const UserAddressesTable = ({ addresses = [] }) => {
               {addresses?.map((address, index) => (
                 <tr key={index}>
                   <th scope='row'>{index + 1}</th>
-                  <td className='text-start px-2'>{address}</td>
+                  <td className='text-start px-2'>
+                    <small>{address}</small>
+                  </td>
                   <td>
                     <button
                       type='button'
@@ -158,7 +162,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
       <Modal
         id='edit-address-form'
         hasCloseBtn={false}
-        title='Chỉnh Sửa Địa Chỉ'
+        title={t('userDetail.editAddress')}
       >
         <UserEditAddressForm
           oldAddress={editAddress.address}

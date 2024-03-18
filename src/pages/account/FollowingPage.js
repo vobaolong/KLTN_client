@@ -15,7 +15,7 @@ const FollowingPage = (props) => {
         <div className='position-relative d-inline-block me-2'>
           <button
             type='button'
-            className={`btn ${
+            className={`btn rounded-1 ${
               flag ? 'btn-pink' : 'btn-outline-pink'
             } btn-lg ripple cus-tooltip`}
             onClick={() => toggleFlag(true)}
@@ -29,7 +29,7 @@ const FollowingPage = (props) => {
         <div className='position-relative d-inline-block'>
           <button
             type='button'
-            className={`btn ${
+            className={`btn rounded-1 ${
               !flag ? 'btn-pink' : 'btn-outline-pink'
             } btn-lg ripple cus-tooltip`}
             onClick={() => toggleFlag(false)}

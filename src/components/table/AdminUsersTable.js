@@ -9,28 +9,26 @@ import UserSmallCard from '../card/UserSmallCard'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import { useTranslation } from 'react-i18next'
+import EmailActiveButton from '../button/EmailActiveButton'
+import VerifyLabel from '../label/VerifyLabel'
 
 const AdminUsersTable = ({ heading = 'Users in the system' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
   const [users, setUsers] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'firstName',
+    sortBy: 'createdAt',
     role: 'customer',
     order: 'asc',
     limit: 8,
     page: 1
   })
-
   const { _id, accessToken } = getToken()
-
   const init = () => {
     setError('')
     setIsLoading(true)
@@ -58,7 +56,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
   useEffect(() => {
     init()
   }, [filter])
-
+  console.log(users.map((user) => user.isEmailActive))
   const handleChangeKeyword = (keyword) => {
     setFilter({
       ...filter,
@@ -90,16 +88,16 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
-        <span className='me-2 text-nowrap res-hide'>
-          Showing{' '}
+        <small className='me-2 text-nowrap res-hide'>
+          {t('showing')}{' '}
           <b>
             {Math.min(
               filter.limit,
               pagination.size - filter.limit * (pagination.pageCurrent - 1)
             )}{' '}
           </b>
-          of {pagination.size} {t('result')}
-        </span>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
 
       <div className='table-scroll my-2'>
@@ -108,10 +106,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
             <tr>
               <th scope='col'></th>
               <th scope='col' className='text-start'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-dark'
-                >
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
                   User Name
                 </span>
               </th>
@@ -142,21 +137,16 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
+              <th scope='col' className='text-center'>
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                  Email Verify
+                </span>
+              </th>
 
               <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-dark'
-                >
+                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
                   Phone
                 </span>
-                {/* <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('userDetail.phone')}
-                  sortBy=''
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                /> */}
               </th>
 
               <th scope='col'>
@@ -187,6 +177,11 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
                 </td>
                 <td className='text-end'>
                   <small>{user.email || '-'}</small>
+                </td>
+                <td className='text-center'>
+                  <small>
+                    <VerifyLabel verify={user.isEmailActive} />
+                  </small>
                 </td>
                 <td className='text-end'>
                   <small>{user.phone || '-'}</small>

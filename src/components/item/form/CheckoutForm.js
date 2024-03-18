@@ -96,6 +96,11 @@ const CheckoutForm = ({
   useEffect(() => {
     init()
   }, [cartId, userId, storeId, items, addresses, phone, userLevel])
+  const [paypalDisabled, setPaypalDisabled] = useState(true)
+
+  useEffect(() => {
+    setPaypalDisabled(!order.address || !order.phone)
+  }, [order.address, order.phone])
 
   const handleChange = (name, isValidName, value) => {
     setOrder({
@@ -396,7 +401,6 @@ const CheckoutForm = ({
                     detail={false}
                   />
                 </div>
-                {/* <small className='cus-tooltip-msg'>Add your address</small> */}
               </div>
             </div>
 
@@ -510,6 +514,7 @@ const CheckoutForm = ({
                 type='submit'
                 className='btn btn-primary btn-lg ripple w-100 mb-1'
                 onClick={handleSubmit}
+                disabled={!order.address || !order.phone}
               >
                 {t('orderDetail.cod')}
               </button>
@@ -531,6 +536,7 @@ const CheckoutForm = ({
                   }
                   onError={(err) => setError(String(err).slice(0, 300))}
                   onCancel={() => setIsLoading(false)}
+                  disabled={paypalDisabled}
                 />
               </div>
             </div>

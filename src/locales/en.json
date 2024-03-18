@@ -1,4 +1,6 @@
 {
+  "showing": "Showing",
+  "of": "of",
   "admin": {
     "adDashboard": {
       "dashboard": "Dashboard",
@@ -35,6 +37,10 @@
   "favStore": "Favorite Store",
   "product": "Product",
   "productDetail": {
+    "editProInfo": "Edit product information",
+    "editProImg": "Edit product images",
+    "thumbImg": "Product thumbnail",
+    "otherImg": "Other images",
     "sold": "Sold",
     "sale": "OFF",
     "description": "Description",
@@ -44,7 +50,9 @@
     "error": "The product is out of business, please remove it from your cart, you can continue with others",
     "warning": "Please update the quantity. Product only",
     "productReview": "Product Review",
-    "newProduct": "New Product"
+    "newProduct": "New Product",
+    "purchased": "Purchased",
+    "limitImg": "Limit is 7 images!"
   },
   "filters": {
     "filter": "Filters",
@@ -74,6 +82,7 @@
     "address": "Address",
     "addAddress": "Add Address",
     "delAddress": "Delete Address",
+    "editAddress": "Edit Address",
     "limit10Addresses": "Maximum 10 addresses",
     "changePassword": "Change Password",
     "currentPw": "Current Password",
@@ -159,7 +168,12 @@
     "close": "Closed",
     "allProduct": "All Products",
     "rating": "Rating",
-    "about": "About"
+    "about": "About",
+    "noStores": "There are no stores!",
+    "createStore": "Create an online store for free",
+    "pickupAddress": "Pickup Address",
+    "avatar": "Avatar Image",
+    "cover": "Background Image"
   },
   "storeDetailValid": {
     "nameValid": "Please provide a valid store name!",
@@ -183,7 +197,8 @@
     "forgotPW": "Forgot Password",
     "sendEmail": "Send Email",
     "save": "Save",
-    "back": "Back"
+    "back": "Back",
+    "addImg": "Add Image"
   },
   "signInForm": {
     "comeBack": "Welcome back!",

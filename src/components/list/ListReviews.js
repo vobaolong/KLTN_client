@@ -134,14 +134,16 @@ const ListReviews = ({
         <div className='d-flex flex-wrap justify-content-start align-items-center'>
           {renderFilterRating()}
         </div>
-        <span className='me-2 text-nowrap'>
-          Showing{' '}
-          {Math.min(
-            filter.limit,
-            pagination.size - filter.limit * (pagination.pageCurrent - 1)
-          )}{' '}
-          of {pagination.size} {t('result')}
-        </span>
+        <small className='text-nowrap res-hide'>
+          {t('showing')}{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
 
       <div className='p-2'>

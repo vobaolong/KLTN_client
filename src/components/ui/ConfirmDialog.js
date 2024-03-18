@@ -34,7 +34,7 @@ const ConfirmDialog = ({
             <div className='modal-footer'>
               <button
                 type='button'
-                className='btn btn-outline-danger'
+                className='btn btn-outline-danger rounded-1'
                 onClick={onClose}
               >
                 {t('button.cancel')}

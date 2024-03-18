@@ -133,6 +133,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             value={account.firstName}
             isValid={account.isValidFirstName}
             feedback={t('userDetail.firstNameValid')}
+            required={true}
             validator='name'
             onChange={(value) =>
               handleChange('firstName', 'isValidFirstName', value)
@@ -149,6 +150,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             isValid={account.isValidLastName}
             feedback={t('userDetail.lastNameValid')}
             validator='name'
+            required={true}
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
             }
@@ -164,6 +166,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             isValid={account.isValidUsername}
             feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
+            required={true}
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
             }
@@ -180,6 +183,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             isValid={account.isValidPassword}
             feedback={t('signUpForm.passwordFeedback')}
             validator='password'
+            required={true}
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
             }

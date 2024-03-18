@@ -69,7 +69,7 @@ const MainNav = ({ navFor = 'user' }) => {
         ) : (
           <>
             <ul className='nav cus-sub-nav ms-4 d-flex justify-content-end res-hide-md'>
-              {navFor === 'user' && getToken().role === 'user' && <Language />}
+              {getToken().role !== 'admin' && <Language />}
 
               <li className='nav-item ms-2'>
                 <AccountInit />

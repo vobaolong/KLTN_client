@@ -8,8 +8,10 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -139,7 +141,7 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Chỉnh sửa địa chỉ'
+          title={t('userDetail.editAddress')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -149,10 +151,11 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Số nhà/tên đường'
+            label={t('addressForm.street')}
+            required={true}
             value={address.street}
             isValid={address.isValidStreet}
-            feedback='Vui lòng cung cấp số nhà/tên đường phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.streetValid')}
             validator='address'
             onChange={(value) => handleChange('street', 'isValidStreet', value)}
             onValidate={(flag) => handleValidate('isValidStreet', flag)}
@@ -161,10 +164,11 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Phường/Xã'
+            label={t('addressForm.ward')}
+            required={true}
             value={address.ward}
             isValid={address.isValidWard}
-            feedback='Vui lòng cung cấp phường/xã phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.wardValid')}
             validator='address'
             onChange={(value) => handleChange('ward', 'isValidWard', value)}
             onValidate={(flag) => handleValidate('isValidWard', flag)}
@@ -173,10 +177,11 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Quận/Huyện'
+            label={t('addressForm.district')}
+            required={true}
             value={address.district_city}
             isValid={address.isValidDistrict}
-            feedback='Vui lòng cung cấp quận/huyện phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.districtValid')}
             validator='address'
             onChange={(value) =>
               handleChange('district_city', 'isValidDistrict', value)
@@ -188,10 +193,11 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Thành Phố/Tỉnh'
+            label={t('addressForm.provinceCity')}
+            required={true}
             value={address.city_province}
             isValid={address.isValidProvince}
-            feedback='Vui lòng cung cấp thành phố/tỉnh phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.provinceCityValid')}
             validator='address'
             onChange={(value) =>
               handleChange('city_province', 'isValidProvince', value)
@@ -203,10 +209,11 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Tên Quốc Gia'
+            label={t('addressForm.country')}
+            required={true}
             value={address.country}
             isValid={address.isValidCountry}
-            feedback='Vui lòng cung cấp quốc gia phù hợp ("," không được chấp nhận)'
+            feedback={t('addressFormValid.countryValid')}
             validator='address'
             onChange={(value) =>
               handleChange('country', 'isValidCountry', value)
@@ -233,7 +240,7 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
             className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
-            Save
+            {t('button.save')}
           </button>
         </div>
       </form>

@@ -14,7 +14,6 @@ import Carousel from '../../components/image/Carousel'
 import StarRating from '../../components/label/StarRating'
 import FollowProductButton from '../../components/button/FollowProductButton'
 import AddToCartForm from '../../components/item/form/AddToCartForm'
-import Paragraph from '../../components/ui/Paragraph'
 import CategorySmallCard from '../../components/card/CategorySmallCard'
 import StoreSmallCard from '../../components/card/StoreSmallCard'
 import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
@@ -46,7 +45,6 @@ const DetailPage = () => {
           setError('This store is banned by Zenpii!')
         else {
           const newProduct = data.product
-          //get count followers
           try {
             const res = await getNumberOfFollowersForProduct(newProduct._id)
             newProduct.numberOfFollowers = res.count
@@ -54,7 +52,6 @@ const DetailPage = () => {
             newProduct.numberOfFollowers = 0
           }
 
-          //check follow
           try {
             const { _id, accessToken } = getToken()
             const res = await checkFollowingProduct(
@@ -138,7 +135,9 @@ const DetailPage = () => {
                     {formatPrice(product.salePrice?.$numberDecimal)}
                     <sup> ₫</sup>
                   </h2>
-                  <SalePercentLabel salePercent={salePercent} />
+                  {salePercent > 5 && (
+                    <SalePercentLabel salePercent={salePercent} />
+                  )}
 
                   <small className='ms-2'> {t('productDetail.vat')}</small>
                 </div>
@@ -182,8 +181,8 @@ const DetailPage = () => {
                         window.location.href
                           ? 'https://hasaki.vn/san-pham/gel-rua-mat-la-roche-posay-cho-da-dau-nhay-cam-400ml-68810.html?gad_source=1&gclid=CjwKCAjw17qvBhBrEiwA1rU9wwx0pGlaJp9LXom7lUNIZFUsUSDTAe2iT_w7EfZcGZdnsMMcaIJROxoCL-oQAvD_BwE'
                           : ''
-                      } // Set the URL to the current page
-                      quote={product.name} // Set the quote to the product name
+                      }
+                      quote={product.name}
                     >
                       <i className='fa-solid fa-share-from-square text-secondary'></i>
                     </FacebookShareButton>
@@ -232,12 +231,16 @@ const DetailPage = () => {
                           role='tabpanel'
                           aria-labelledby='details-tab'
                         >
-                          <div className=' mb-5'>
-                            <Paragraph
-                              label='Description'
-                              des={product.description}
-                              multiLine={true}
-                            />
+                          <div className='mb-5 py-2'>
+                            <span
+                              style={{
+                                whiteSpace: 'pre-line',
+                                textAlign: 'justify',
+                                fontSize: '0.9rem'
+                              }}
+                            >
+                              {product.description}
+                            </span>
                           </div>
                         </div>
                         <div

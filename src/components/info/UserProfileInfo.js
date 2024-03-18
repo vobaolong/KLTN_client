@@ -52,7 +52,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
               <Paragraph
                 label={
                   <span>
-                    <i class='fa-solid fa-envelope	 me-2 text-secondary'></i>
+                    <i class='fa-solid fa-envelope me-2 text-secondary'></i>
                     Email
                   </span>
                 }

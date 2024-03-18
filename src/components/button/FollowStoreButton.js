@@ -79,7 +79,7 @@ const FollowStoreButton = ({
   return (
     <button
       type='button'
-      className={`btn ${
+      className={`btn rounded-1 ${
         followingFlag ? 'btn-pink' : 'btn-outline-pink'
       } ripple ${className}`}
       onClick={handleFollowStore}

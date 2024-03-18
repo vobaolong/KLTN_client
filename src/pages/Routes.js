@@ -60,6 +60,7 @@ import ProductDetailPage from './product/DetailPage'
 import ScrollToTops from '../hooks/ScrollToTops'
 import PageNotFound from '../components/ui/PageNotFound'
 import AdminSettingPage from './admin/SettingPage'
+import UserHomePage from './user/UserHomePage'
 
 const Routes = () => {
   return (
@@ -213,7 +214,7 @@ const Routes = () => {
           component={VendorCreateProductPage}
         />
         <PrivateRoute
-          path='/vendor/products/editProduct/:productId/:storeId'
+          path='/vendor/products/editproduct/:productId/:storeId'
           exact
           component={VendorEditProductPage}
         />
@@ -239,6 +240,7 @@ const Routes = () => {
         />
 
         {/* user */}
+        <Route path='/user/:userId' exact component={UserHomePage} />
         <Route path='/user/about/:userId' exact component={UserAboutPage} />
 
         {/* store */}
