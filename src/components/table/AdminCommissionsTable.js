@@ -19,6 +19,7 @@ import Error from '../ui/Error'
 import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../ui/ShowResult'
 
 const AdminCommissionTable = ({ heading = 'Commissions' }) => {
   const { t } = useTranslation()
@@ -207,16 +208,11 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
             <AdminCreateCommissionItem onRun={() => setRun(!run)} />
           </div>
         </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        <ShowResult
+          limit={filter.limit}
+          size={pagination.size}
+          pageCurrent={pagination.pageCurrent}
+        />
       </div>
 
       <div className='table-scroll my-2'>

@@ -191,7 +191,7 @@ const OrderDetailInfo = ({
                   title=''
                   to={`/store/${order.storeId?._id}`}
                 >
-                  <label>{order.storeId?.name}</label>
+                  {order.storeId?.name}
                 </Link>
               }
             />
@@ -263,95 +263,99 @@ const OrderDetailInfo = ({
             by={by}
             status={order.status}
           />
-          <div className='d-flex justify-content-end'>
-            <table className='col-4 text-start justify-content-end'>
-              <tbody>
-                <tr className='border-bottom'>
-                  <th
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      backgroundColor: 'transparent'
-                    }}
-                    scope='col'
-                  >
-                    Tổng tiền hàng
-                  </th>
-                  <td className='text-end'>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      {formatPrice(totalOrderSalePrice)} <sup>₫</sup>
-                    </span>
-                  </td>
-                </tr>
-                <tr className='border-bottom'>
-                  <th
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      backgroundColor: 'transparent'
-                    }}
-                    scope='col'
-                  >
-                    Giảm giá từ Zenpii
-                  </th>
-                  <td className='text-end'>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      -{formatPrice(saleFromSystem)} <sup>₫</sup>
-                    </span>
-                  </td>
-                </tr>
-                <tr className='border-bottom'>
-                  <th
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      backgroundColor: 'transparent'
-                    }}
-                    scope='col'
-                  >
-                    Phí vận chuyển
-                  </th>
-                  <td className='text-end'>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      {formatPrice(order.deliveryId?.price?.$numberDecimal)}{' '}
-                      <sup>₫</sup>
-                    </span>
-                  </td>
-                </tr>
-                <tr className='border-bottom'>
-                  <th
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      backgroundColor: 'transparent'
-                    }}
-                    scope='col'
-                  >
-                    Giảm giá vận chuyển
-                  </th>
-                  <td className='text-end'>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      -{formatPrice(saleFromShipping)} <sup>₫</sup>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      backgroundColor: 'transparent'
-                    }}
-                    scope='col'
-                  >
-                    Thành tiền
-                  </th>
-                  <td className='text-primary fw-bold fs-5 text-end'>
-                    {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className='d-flex justify-content-end border-top flex-column align-items-end'>
+            {by === 'user' && getToken().role === 'user' && (
+              <table className='col-lg-3 col-md-4 text-start justify-content-end d-flex'>
+                <tbody>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      Tổng tiền hàng
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        {formatPrice(totalOrderSalePrice)} <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      Giảm giá từ Zenpii
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        -{formatPrice(saleFromSystem)} <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      Phí vận chuyển
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        {formatPrice(order.deliveryId?.price?.$numberDecimal)}{' '}
+                        <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      Giảm giá vận chuyển
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        -{formatPrice(saleFromShipping)} <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
+            <span className='col-lg-3 col-md-4 justify-content-between align-items-center d-flex'>
+              <b className='text-muted'>Thành tiền:</b>
+              <span className='text-primary fw-bold fs-5'>
+                {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
+              </span>
+              {by !== 'user' && (
+                <span className='d-inline-block position-relative'>
+                  <i
+                    style={{ fontSize: '15px', cursor: 'help' }}
+                    className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
+                  ></i>
+                  <small className='cus-tooltip-msg'>
+                    {t('orderDetail.includedDiscount')}
+                  </small>
+                </span>
+              )}
+            </span>
           </div>
         </div>
       </div>

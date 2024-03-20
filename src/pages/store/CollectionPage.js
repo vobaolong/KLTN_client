@@ -90,16 +90,16 @@ const CollectionPage = (props) => {
           <div className=''>
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
-          <span>
-            Showing{' '}
+          <small className='text-nowrap res-hide'>
+            {t('showing')}{' '}
             <b>
               {Math.min(
                 filter.limit,
                 pagination.size - filter.limit * (pagination.pageCurrent - 1)
               )}{' '}
             </b>
-            of {pagination.size} {t('result')}
-          </span>
+            {t('of')} {pagination.size} {t('result')}
+          </small>
         </div>
 
         <div className='row mt-3'>
@@ -112,6 +112,11 @@ const CollectionPage = (props) => {
             </div>
           ))}
         </div>
+        {!isLoading && pagination.size === 0 && (
+          <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+            <h5>{t('productDetail.noProduct')}</h5>
+          </div>
+        )}
 
         {pagination.size !== 0 && (
           <Pagination pagination={pagination} onChangePage={handleChangePage} />

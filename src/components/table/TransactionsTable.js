@@ -19,6 +19,7 @@ import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
 import { useTranslation } from 'react-i18next'
 import SuccessLabel from '../label/SuccessLabel'
+import ShowResult from '../ui/ShowResult'
 
 const TransactionsTable = ({
   storeId = '',
@@ -163,125 +164,124 @@ const TransactionsTable = ({
           )}
         </div>
 
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        <ShowResult
+          limit={filter.limit}
+          size={pagination.size}
+          pageCurrent={pagination.pageCurrent}
+        />
       </div>
-
-      <div className='table-scroll'>
-        <table className='table table-striped table-sm table-hover align-middle text-end'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col' className='text-start'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('userDetail.transaction')}
-                  sortBy='_id'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('userDetail.date')}
-                  sortBy='createdAt'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('userDetail.total')}
-                  sortBy='amount'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              {by === 'admin' && (
+      {!isLoading && pagination.size === 0 ? (
+        <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+          <h5>{t('noTransaction')}</h5>
+        </div>
+      ) : (
+        <div className='table-scroll'>
+          <table className='table table-striped table-sm table-hover align-middle text-end'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
                 <th scope='col' className='text-start'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title={t('userDetail.by')}
-                    sortBy='storeId'
+                    title={t('userDetail.transaction')}
+                    sortBy='_id'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-              )}
-              <th scope='col' className='text-center'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Type'
-                  sortBy='isUp'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col' className='text-center'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('status.status')}
-                  sortBy='isUp'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((transaction, index) => (
-              <tr key={index}>
-                <th scope='row' className='text-center'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('userDetail.date')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
-                <td className='ps-1 text-start'>
-                  <small>{transaction._id}</small>
-                </td>
-                <td>
-                  <small>{humanReadableDate(transaction.createdAt)}</small>
-                </td>
-                <td>
-                  <small className='text-nowrap'>
-                    {transaction.amount &&
-                      formatPrice(transaction.amount.$numberDecimal)}{' '}
-                    ₫
-                  </small>
-                </td>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('userDetail.total')}
+                    sortBy='amount'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
                 {by === 'admin' && (
-                  <td className='text-start ps-2'>
-                    {transaction && transaction.storeId ? (
-                      <StoreSmallCard store={transaction.storeId} />
-                    ) : (
-                      <UserSmallCard user={transaction.userId} />
-                    )}
-                  </td>
+                  <th scope='col' className='text-start'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('userDetail.by')}
+                      sortBy='storeId'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
                 )}
-                <td className='text-center'>
-                  <span>
-                    <TransactionStatusLabel isUp={transaction.isUp} />
-                  </span>
-                </td>
-                <td className='text-center py-1'>
-                  <span>
-                    <SuccessLabel />
-                  </span>
-                </td>
+                <th scope='col' className='text-center'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Type'
+                    sortBy='isUp'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-center'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='isUp'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
+            </thead>
+            <tbody>
+              {transactions.map((transaction, index) => (
+                <tr key={index}>
+                  <th scope='row' className='text-center'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='ps-1 text-start'>
+                    <small>{transaction._id}</small>
+                  </td>
+                  <td>
+                    <small>{humanReadableDate(transaction.createdAt)}</small>
+                  </td>
+                  <td>
+                    <small className='text-nowrap'>
+                      {transaction.amount &&
+                        formatPrice(transaction.amount.$numberDecimal)}{' '}
+                      ₫
+                    </small>
+                  </td>
+                  {by === 'admin' && (
+                    <td className='text-start ps-2'>
+                      {transaction && transaction.storeId ? (
+                        <StoreSmallCard store={transaction.storeId} />
+                      ) : (
+                        <UserSmallCard user={transaction.userId} />
+                      )}
+                    </td>
+                  )}
+                  <td className='text-center'>
+                    <span>
+                      <TransactionStatusLabel isUp={transaction.isUp} />
+                    </span>
+                  </td>
+                  <td className='text-center py-1'>
+                    <span>
+                      <SuccessLabel />
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       {pagination.size !== 0 && (
         <Pagination pagination={pagination} onChangePage={handleChangePage} />
       )}

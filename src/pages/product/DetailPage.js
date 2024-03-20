@@ -24,6 +24,7 @@ import CategorySmallCard from '../../components/card/CategorySmallCard'
 import ListProductsByStore from '../../components/list/ListProductsByStore'
 import FollowProductButton from '../../components/button/FollowProductButton'
 import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
+import { calcPercent } from '../../helper/calcPercent'
 
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -79,12 +80,7 @@ const DetailPage = () => {
     init()
   }, [productId])
 
-  console.log(product.numberOfFollowers)
-  const salePercent = Math.round(
-    ((product?.price?.$numberDecimal - product?.salePrice?.$numberDecimal) /
-      product?.price?.$numberDecimal) *
-      100
-  )
+  const salePercent = calcPercent(product.price, product.salePrice)
 
   return (
     <MainLayout>
@@ -111,9 +107,9 @@ const DetailPage = () => {
                 />
               </div>
               <div className='col-lg-7 col-md-6 ps-4'>
-                <strong className='text-primary text-lg-right'>
+                <small className='text-primary'>
                   <StoreSmallCard store={product.storeId} />
-                </strong>
+                </small>
                 <h5 className=''>{product.name}</h5>
                 <div className='d-flex'>
                   <a
@@ -131,13 +127,17 @@ const DetailPage = () => {
                   </span>
                 </div>
                 <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
-                  <del className=' text-muted mt-1'>
-                    {formatPrice(product.price?.$numberDecimal)} <sup> ₫</sup>
-                  </del>
+                  {product.salePrice?.$numberDecimal !==
+                    product.price.$numberDecimal && (
+                    <del className=' text-muted mt-1'>
+                      {formatPrice(product.price?.$numberDecimal)} <sup> ₫</sup>
+                    </del>
+                  )}
                   <h2 className='text-primary fs-3 m-0 ms-3'>
                     {formatPrice(product.salePrice?.$numberDecimal)}
                     <sup> ₫</sup>
                   </h2>
+
                   {salePercent > 5 && (
                     <SalePercentLabel salePercent={salePercent} />
                   )}
@@ -182,7 +182,9 @@ const DetailPage = () => {
                       />
                     )}
                     {product?.numberOfFollowers > 0 && (
-                      <small>{product?.numberOfFollowers} đã thích</small>
+                      <span className='ms-2'>
+                        {product?.numberOfFollowers} đã thích
+                      </span>
                     )}
                   </div>
 

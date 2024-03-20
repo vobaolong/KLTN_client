@@ -5,15 +5,13 @@ import { useTranslation } from 'react-i18next'
 
 const StoreLevelInfo = ({ store = {}, border = true }) => {
   const { t } = useTranslation()
-  console.log(store)
   return (
     <div className='container-fluid'>
       <div
-        className={
-          border ? 'row bg-body shadow rounded-1' : 'row py-2 border rounded-1'
-        }
+        className={`row rounded-1
+          ${border ? 'bg-body shadow' : 'py-2 border'}`}
       >
-        <div className='col-sm-6'>
+        {/* <div className='col-sm-6'>
           <Paragraph
             label='Point'
             colon
@@ -26,14 +24,14 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
               </span>
             }
           />
-        </div>
+        </div> */}
 
-        <div className='col-sm-6'>
+        <div className='col-sm-12'>
           <Paragraph
             label={
               <span>
                 <i class='fa-regular fa-star me-1 text-secondary'></i>
-                Rating
+                {t('storeDetail.rating')}
               </span>
             }
             colon

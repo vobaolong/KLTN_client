@@ -121,7 +121,7 @@ const StoreNav = ({ store = {} }) => {
                   className={`nav-link ${path === store._id ? 'active' : ''}`}
                   to={`/store/${store._id}`}
                 >
-                  <i className='fas fa-store me-2'></i>Store
+                  Store
                 </Link>
               </li>
               <li className='nav-item'>
@@ -131,7 +131,6 @@ const StoreNav = ({ store = {} }) => {
                   }`}
                   to={`/store/collection/${store._id}`}
                 >
-                  <i className='fas fa-box me-2'></i>
                   All Product
                 </Link>
               </li>
@@ -142,7 +141,6 @@ const StoreNav = ({ store = {} }) => {
                   }`}
                   to={`/store/review&rating/${store._id}`}
                 >
-                  <i className='fas fa-comment-dots me-2'></i>
                   Rating
                 </Link>
               </li>
@@ -151,7 +149,6 @@ const StoreNav = ({ store = {} }) => {
                   className={`nav-link ${path === 'about' ? 'active' : ''}`}
                   to={`/store/about/${store._id}`}
                 >
-                  <i className='fas fa-info-circle me-2'></i>
                   About
                 </Link>
               </li>

@@ -11,6 +11,7 @@ import Error from '../ui/Error'
 import { useTranslation } from 'react-i18next'
 import EmailActiveButton from '../button/EmailActiveButton'
 import VerifyLabel from '../label/VerifyLabel'
+import ShowResult from '../ui/ShowResult'
 
 const AdminUsersTable = ({ heading = 'Users in the system' }) => {
   const { t } = useTranslation()
@@ -88,16 +89,11 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        <ShowResult
+          limit={filter.limit}
+          size={pagination.size}
+          pageCurrent={pagination.pageCurrent}
+        />
       </div>
 
       <div className='table-scroll my-2'>

@@ -26,7 +26,7 @@ const StoreSearchBar = ({ storeId = '' }) => {
       onSubmit={handleFormSubmit}
     >
       <input
-        className='form-control'
+        className='form-control rounded-1'
         type='search'
         placeholder={t('search')}
         aria-label='Search'
@@ -34,7 +34,7 @@ const StoreSearchBar = ({ storeId = '' }) => {
         onChange={handleChange}
       />
       <button
-        className='btn btn-outline-light border border-primary cus-outline text-white ripple'
+        className='btn btn-outline-light border border-primary cus-outline text-white ripple rounded-end-1'
         type='submit'
         onClick={handleFormSubmit}
       >

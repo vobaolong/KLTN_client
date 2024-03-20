@@ -2,10 +2,12 @@ import { useSelector } from 'react-redux'
 import AdminLayout from '../../components/layout/AdminLayout'
 import AdminOrdersTable from '../../components/table/AdminOrdersTable'
 import useToggle from '../../hooks/useToggle'
+import { useTranslation } from 'react-i18next'
 
 const OrderPage = (props) => {
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(false)
+  const { t } = useTranslation()
 
   return (
     <AdminLayout user={user}>
@@ -21,7 +23,7 @@ const OrderPage = (props) => {
             <i className='fas fa-clipboard'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>All Orders in System</small>
+          <small className='cus-tooltip-msg'>{t('title.listOrders')}</small>
         </div>
 
         <div className='position-relative d-inline-block'>
@@ -35,7 +37,10 @@ const OrderPage = (props) => {
             <i className='fas fa-truck'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>PROCESSING ORDERS IN SYSTEM</small>
+          <small className='cus-tooltip-msg'>
+            {' '}
+            {t('title.listProcessingOrders')}
+          </small>
         </div>
       </div>
 

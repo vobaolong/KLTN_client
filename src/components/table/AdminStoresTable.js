@@ -16,6 +16,7 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../ui/ShowResult'
 
 const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
@@ -130,7 +131,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
     <div className='position-relative'>
       {heading && (
         <h4 className='text-center text-uppercase'>
-          {isActive ? t('status.active') : t('status.banned')}
+          {isActive ? t('title.listActiveStores') : t('title.listBannedStores')}
         </h4>
       )}
 
@@ -138,7 +139,11 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title={!activeStore.isActive ? 'License store' : 'Ban store'}
+          title={
+            !activeStore.isActive
+              ? t('dialog.activeStore')
+              : t('dialog.banStore')
+          }
           color={!activeStore.isActive ? 'primary' : 'danger'}
           onClose={() => setIsConfirming(false)}
           onSubmit={onSubmit}
@@ -149,18 +154,13 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
         </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        <ShowResult
+          limit={filter.limit}
+          size={pagination.size}
+          pageCurrent={pagination.pageCurrent}
+        />
       </div>
-      {!isLoading && stores.length === 0 ? (
+      {!isLoading && pagination.size === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
           <h5>Không có shop nào</h5>
         </div>
@@ -265,12 +265,16 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                       {!store.isActive ? (
                         <>
                           <i className='far fa-check-circle'></i>
-                          <span className='ms-2 res-hide'>License</span>
+                          <span className='ms-2 res-hide'>
+                            {t('button.active')}
+                          </span>
                         </>
                       ) : (
                         <>
                           <i className='fas fa-ban'></i>
-                          <span className='ms-2 res-hide'>Ban</span>
+                          <span className='ms-2 res-hide'>
+                            {t('button.ban')}
+                          </span>
                         </>
                       )}
                     </button>

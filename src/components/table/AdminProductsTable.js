@@ -11,15 +11,14 @@ import SortByButton from './sub/SortByButton'
 import ProductSmallCard from '../card/ProductSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductStatusLabel from '../label/ProductStatusLabel'
-import StarRating from '../label/StarRating'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../ui/ShowResult'
 
 const AdminProductsTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
@@ -130,7 +129,9 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
     <div className='position-relative'>
       {heading && (
         <h4 className='text-center text-uppercase'>
-          {isActive ? 'Active products' : 'Banned products'}
+          {isActive
+            ? t('title.listActiveProducts')
+            : t('title.listBannedProducts')}
         </h4>
       )}
 
@@ -138,159 +139,168 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
       {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title={!activeProduct.isActive ? 'Active product' : 'Ban product'}
+          title={
+            !activeProduct.isActive
+              ? t('dialog.activeProduct')
+              : t('dialog.banProduct')
+          }
           color={!activeProduct.isActive ? 'primary' : 'danger'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
       )}
-
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='option-wrap d-flex align-items-center'>
-          <SearchInput onChange={handleChangeKeyword} />
+      {!isLoading && pagination.size === 0 ? (
+        <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+          <h5>{t('productDetail.noProduct')}</h5>
         </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
-      </div>
+      ) : (
+        <div>
+          <div className='d-flex justify-content-between align-items-end'>
+            <div className='option-wrap d-flex align-items-center'>
+              <SearchInput onChange={handleChangeKeyword} />
+            </div>
+            <ShowResult
+              limit={filter.limit}
+              size={pagination.size}
+              pageCurrent={pagination.pageCurrent}
+            />
+          </div>
 
-      <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-striped table-sm text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Product Name'
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Store'
-                  sortBy='storeId'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Rating'
-                  sortBy='rating'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Status'
-                  sortBy='isSelling'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
+          <div className='table-scroll my-2'>
+            <table className='table align-middle table-hover table-striped table-sm text-center'>
+              <thead>
+                <tr>
+                  <th scope='col'></th>
+                  <th scope='col' className='text-start'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('productDetail.name')}
+                      sortBy='name'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col' className='text-start'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('store')}
+                      sortBy='storeId'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('productDetail.rating')}
+                      sortBy='rating'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('status.status')}
+                      sortBy='isSelling'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
 
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Created at'
-                  sortBy='createdAt'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('productDetail.date')}
+                      sortBy='createdAt'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
 
-              <th scope='col'>
-                {' '}
-                {/* <span
+                  <th scope='col'>
+                    {' '}
+                    {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   {t('action')}
                 </span> */}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
-                </th>
-                <td
-                  className='text-start py-1'
-                  style={{
-                    whiteSpace: 'normal',
-                    maxWidth: '500px'
-                  }}
-                >
-                  <ProductSmallCard product={product} />
-                </td>
-                <td className='text-start'>
-                  <small>
-                    <StoreSmallCard store={product.storeId} />
-                  </small>
-                </td>
-                <td>
-                  <small>
-                    <i class='fa-solid fa-star text-warning me-1'></i>
-                    {product.rating}
-                  </small>
-                </td>
-                <td>
-                  <ProductStatusLabel isSelling={product.isSelling} />
-                </td>
-                <td className='text-end'>
-                  <small>{humanReadableDate(product.createdAt)}</small>
-                </td>
-                <td>
-                  <button
-                    type='button'
-                    className={`btn ${
-                      !product.isActive
-                        ? 'btn-outline-success'
-                        : 'btn-outline-danger'
-                    } ripple cus-tooltip`}
-                    onClick={() => handleActiveProduct(product)}
-                  >
-                    {!product.isActive ? (
-                      <>
-                        <i className='far fa-check-circle'></i>
-                        <span className='ms-2 res-hide'>
-                          {t('status.active')}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <i className='fas fa-ban'></i>
-                        <span className='ms-2 res-hide'>
-                          {t('status.banned')}
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product, index) => (
+                  <tr key={index}>
+                    <th scope='row'>
+                      {index + 1 + (filter.page - 1) * filter.limit}
+                    </th>
+                    <td
+                      className='text-start py-1'
+                      style={{
+                        whiteSpace: 'normal',
+                        minWidth: '500px'
+                      }}
+                    >
+                      <ProductSmallCard product={product} />
+                    </td>
+                    <td className='text-start'>
+                      <small>
+                        <StoreSmallCard store={product.storeId} />
+                      </small>
+                    </td>
+                    <td>
+                      <small>
+                        <i class='fa-solid fa-star text-warning me-1'></i>
+                        {product.rating}
+                      </small>
+                    </td>
+                    <td>
+                      <ProductStatusLabel isSelling={product.isSelling} />
+                    </td>
+                    <td className='text-end'>
+                      <small>{humanReadableDate(product.createdAt)}</small>
+                    </td>
+                    <td>
+                      <button
+                        type='button'
+                        className={`btn rounded-1 ripple cus-tooltip ${
+                          !product.isActive
+                            ? 'btn-outline-success'
+                            : 'btn-outline-danger'
+                        }`}
+                        onClick={() => handleActiveProduct(product)}
+                      >
+                        {!product.isActive ? (
+                          <>
+                            <i className='far fa-check-circle'></i>
+                            <span className='ms-2 res-hide'>
+                              {t('button.active')}
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <i className='fas fa-ban'></i>
+                            <span className='ms-2 res-hide'>
+                              {t('button.ban')}
+                            </span>
+                          </>
+                        )}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
       )}
     </div>
   )

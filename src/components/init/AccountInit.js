@@ -102,7 +102,7 @@ const AccountInit = ({ user, actions }) => {
       <div className='your-account'>
         <div
           type='button'
-          className='your-account-card btn btn-outline-light cus-outline ripple'
+          className='your-account-card btn btn-outline-light cus-outline ripple rounded-1'
         >
           <img
             src={avatar ? `${IMG + avatar}` : ''}

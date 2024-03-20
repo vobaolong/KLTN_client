@@ -100,171 +100,168 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
 
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      {!isLoading && orders.length === 0 ? (
+
+      <div className='d-flex justify-content-between align-items-end'>
+        <div className='d-flex align-items-center'>
+          <SearchInput onChange={handleChangeKeyword} />
+        </div>
+
+        <small className='text-nowrap res-hide'>
+          {t('showing')}{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            )}{' '}
+          </b>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
+      </div>
+      {!isLoading && pagination.size === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
           <h5>{t('orderDetail.noOrder')}</h5>
         </div>
       ) : (
-        <>
-          <div className='d-flex justify-content-between align-items-end'>
-            <div className='d-flex align-items-center'>
-              <SearchInput onChange={handleChangeKeyword} />
-            </div>
-
-            <small className='text-nowrap res-hide'>
-              {t('showing')}{' '}
-              <b>
-                {Math.min(
-                  filter.limit,
-                  pagination.size - filter.limit * (pagination.pageCurrent - 1)
-                )}{' '}
-              </b>
-              {t('of')} {pagination.size} {t('result')}
-            </small>
-          </div>
-          <div className='table-scroll my-2'>
-            <table className='table table-striped table-sm table-striped table-hover align-middle text-center'>
-              <thead>
-                <tr>
-                  <th scope='col' style={{ width: '20px' }}></th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.id')}
-                      sortBy='_id'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.date')}
-                      sortBy='createdAt'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.total')}
-                      sortBy='amountFromUser'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.store')}
-                      sortBy='orderId'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.deliveryUnit')}
-                      sortBy='deliveryId'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.paymentMethod')}
-                      sortBy='isPaidBefore'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('status.status')}
-                      sortBy='status'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    {/* <span
+        <div className='table-scroll my-2'>
+          <table className='table table-striped table-sm table-striped table-hover align-middle text-start'>
+            <thead>
+              <tr>
+                <th scope='col' style={{ width: '20px' }}></th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.id')}
+                    sortBy='_id'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-end'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.date')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.total')}
+                    sortBy='amountFromUser'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.store')}
+                    sortBy='orderId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-end'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.deliveryUnit')}
+                    sortBy='deliveryId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-center'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('orderDetail.paymentMethod')}
+                    sortBy='isPaidBefore'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='status'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  {/* <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   Xem
                 </span> */}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders?.map((order, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders?.map((order, index) => (
-                  <tr key={index}>
-                    <th scope='row'>
-                      {index + 1 + (filter.page - 1) * filter.limit}
-                    </th>
-                    <td className='text-end'>
-                      <small>{order._id}</small>
-                    </td>
-                    <td className='text-end' style={{ whiteSpace: 'normal' }}>
-                      <small>{humanReadableDate(order.createdAt)}</small>
-                    </td>
-                    <td className='text-end'>
-                      <small className='text-nowrap'>
-                        {order.amountFromUser &&
-                          formatPrice(order.amountFromUser.$numberDecimal)}{' '}
-                        ₫
+                  <td className='text-end'>
+                    <small>{order._id}</small>
+                  </td>
+                  <td className='text-end' style={{ whiteSpace: 'normal' }}>
+                    <small>{humanReadableDate(order.createdAt)}</small>
+                  </td>
+                  <td className='text-end'>
+                    <small className='text-nowrap'>
+                      {order.amountFromUser &&
+                        formatPrice(order.amountFromUser.$numberDecimal)}{' '}
+                      ₫
+                    </small>
+                  </td>
+                  <td
+                    className='text-start hidden-avatar'
+                    style={{ maxWidth: '300px' }}
+                  >
+                    <StoreSmallCard store={order.storeId} />
+                  </td>
+                  <td className='text-end'>
+                    {order.deliveryId && (
+                      <small>
+                        {order.deliveryId.name}
+                        <br />
+                        {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
                       </small>
-                    </td>
-                    <td
-                      className='text-start hidden-avatar'
-                      style={{ maxWidth: '300px' }}
+                    )}
+                  </td>
+                  <td className='text-center'>
+                    <small>
+                      <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
+                    </small>
+                  </td>
+                  <td>
+                    <small>
+                      <OrderStatusLabel status={order.status} />
+                    </small>
+                  </td>
+                  <td className='text-nowrap text-start'>
+                    <Link
+                      type='button'
+                      className='btn btn-secondary opacity-75 ripple rounded-1'
+                      to={`/account/purchase/detail/${order._id}`}
                     >
-                      <StoreSmallCard store={order.storeId} />
-                    </td>
-                    <td className='text-end'>
-                      {order.deliveryId && (
-                        <small>
-                          {order.deliveryId.name}
-                          <br />
-                          {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
-                        </small>
-                      )}
-                    </td>
-                    <td>
-                      <small>
-                        <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
-                      </small>
-                    </td>
-                    <td>
-                      <small>
-                        <OrderStatusLabel status={order.status} />
-                      </small>
-                    </td>
-                    <td className='text-nowrap text-start'>
-                      <Link
-                        type='button'
-                        className='btn btn-secondary opacity-75 ripple rounded-1'
-                        to={`/account/purchase/detail/${order._id}`}
-                      >
-                        <i className='fas fa-info-circle'></i>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
-        </>
+                      <i className='fas fa-info-circle'></i>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {pagination.size !== 0 && (
+        <Pagination pagination={pagination} onChangePage={handleChangePage} />
       )}
     </div>
   )

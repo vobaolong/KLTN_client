@@ -1,4 +1,18 @@
 {
+  "title": {
+    "listBannedStores": "Danh sách cửa hàng bị khoá",
+    "listActiveStores": "Danh sách cửa hàng đang hoạt động",
+    "listBannedProducts": "Danh sách sản phẩm bị khoá",
+    "listActiveProducts": "Danh sách sản phẩm đang bán",
+    "listProcessingOrders": "Danh sách đơn hàng đang thực hiện",
+    "listOrders": "Danh sách đơn hàng"
+  },
+  "dialog": {
+    "banStore": "Khoá Cửa Hàng",
+    "activeStore": "Kích Hoạt Cửa Hàng",
+    "activeProduct": "Kích Hoạt Sản Phẩm",
+    "banProduct": "Khoá Sản Phẩm"
+  },
   "action": "Hành động",
   "showing": "Hiển thị",
   "of": "trên",
@@ -38,6 +52,7 @@
   "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
   "productDetail": {
+    "rating": "Đánh giá",
     "date": "Ngày tạo",
     "values": "Giá trị",
     "category": "Thể loại",
@@ -93,10 +108,10 @@
     "remove": "Xoá sản phẩm khỏi giỏ hàng"
   },
 
-  "store": "Store",
+  "store": "Cửa hàng",
   "searchHolder": "Tìm sản phẩm và tên store",
   "userDetail": {
-    "followers": "Số người theo dõi",
+    "followers": "Người theo dõi",
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
     "profile": "Thông tin cá nhân",
@@ -127,9 +142,10 @@
     "phoneValid": "Vui lòng cung cấp số điện thoại hợp lệ!",
     "idCardValid": "Vui lòng cung cấp số thẻ hợp lệ!"
   },
+  "noTransaction": "Không có giao dịch nào",
   "draw": "Rút tiền",
   "empty": "Ví rỗng",
-  "manageStore": "Quản lý store",
+  "manageStore": "Quản lý cửa hàng",
   "myStore": "Store của tôi",
   "createStore": "Tạo store",
   "commisDetail": {
@@ -140,7 +156,7 @@
     "edit": "Sửa Commission"
   },
   "deliveryDetail": {
-    "deliveryUnit": "Đơn vị vận chuyển",
+    "deliveryUnit": "Vận chuyển",
     "name": "Tên ĐVVC",
     "description": "Mô tả",
     "cost": "Phí",
@@ -154,7 +170,10 @@
   "status": {
     "status": "Trạng thái",
     "active": "Hoạt động",
-    "banned": "Bị cấm"
+    "banned": "Bị cấm",
+    "selling": "Đang bán",
+    "stored": "Lưu trữ",
+    "cantCancelOrder": "Không thể huỷ đơn hàng"
   },
   "variantDetail": {
     "variants": "Biến thể",
@@ -238,7 +257,9 @@
     "back": "Trở lại",
     "addImg": "Thêm ảnh",
     "more": "Hiển thị thêm",
-    "sell": "Bán"
+    "sell": "Bán",
+    "ban": "Khoá",
+    "active": "Kích hoạt"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",
@@ -266,10 +287,11 @@
     "date": "Ngày đặt hàng",
     "total": "Tổng",
     "store": "Cửa hàng",
-    "deliveryUnit": "Đơn vị vận chuyển",
+    "deliveryUnit": "Vận chuyển",
     "payment": "Thanh toán",
-    "paymentMethod": "Phương thức Thanh toán",
+    "paymentMethod": "Thanh toán",
     "lastUpdateTime": "Cập nhật lần cuối",
+    "includedDiscount": "Đã bao gồm giảm giá",
     "cancel": "Huỷ Đơn Hàng",
     "cod": "Thanh toán khi nhận hàng",
     "onlinePayment": "Thanh toán trực tuyến",
@@ -284,7 +306,7 @@
     "edit": "Chỉnh Sửa Đánh Giá",
     "content": "Nội dung",
     "isValid": "Vui lòng đánh giá phù hợp!",
-    "noReview": "Sản phẩm chưa được đánh giá!"
+    "noReview": "Không có đánh giá!"
   },
   "verified": "Đã xác thực",
   "verifyNow": "Xác thực ngay",

@@ -8,6 +8,7 @@ const FollowProductButton = ({
   productId = '',
   isFollowing = false,
   className = '',
+  style = {},
   onRun
 }) => {
   const [error, setError] = useState('')
@@ -74,20 +75,25 @@ const FollowProductButton = ({
   }
 
   return (
-    <div className='col-1 d-grid'>
+    <div className='d-grid' style={style}>
       <span
-        className={`d-flex align-items-center justify-content-center ${
+        className={`d-flex align-items-center rounded-circle justify-content-center ${
           followingFlag ? 'text-danger' : 'text-secondary'
         } ${className}`}
         onClick={handleFollowProduct}
       >
-        {isLoading && <Loading size='large' />}
+        {isLoading && <Loading size='small' />}
         {error ? (
           <Error msg={error} />
-        ) : followingFlag ? (
-          <i style={{ fontSize: '20px' }} className='pointer fas fa-heart'></i>
         ) : (
-          <i style={{ fontSize: '20px' }} className='pointer far fa-heart'></i>
+          <i
+            style={{ fontSize: '17px' }}
+            className={`pointer fa-heart p-2 rounded-circle shadow ${
+              followingFlag
+                ? 'bg-danger text-white fa-solid'
+                : 'bg-white fa-regular'
+            }`}
+          ></i>
         )}
       </span>
     </div>

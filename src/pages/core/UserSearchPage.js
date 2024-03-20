@@ -79,16 +79,16 @@ const UserSearchPage = (props) => {
         {error && <Error msg={error} />}
 
         <div className='d-flex justify-content-end'>
-          <span className='me-3'>
-            Showing{' '}
+          <small className='text-nowrap res-hide'>
+            {t('showing')}{' '}
             <b>
               {Math.min(
                 filter.limit,
                 pagination.size - filter.limit * (pagination.pageCurrent - 1)
               )}{' '}
             </b>
-            of {pagination.size} {t('result')}
-          </span>
+            {t('of')} {pagination.size} {t('result')}
+          </small>
         </div>
 
         <div className='row mt-3'>

@@ -5,6 +5,7 @@ import { calcTime } from '../../helper/calcTime'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const UserCancelOrderButton = ({
   orderId = '',
@@ -13,6 +14,7 @@ const UserCancelOrderButton = ({
   createdAt = '',
   onRun
 }) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -68,12 +70,12 @@ const UserCancelOrderButton = ({
           onClick={handleCancelOrder}
         >
           <i className='fas fa-ban'></i>
-          {detail && <span className='ms-2'>Cancel</span>}
+          {detail && <span className='ms-2'>{t('button.cancel')}</span>}
         </button>
       </div>
 
       {(!status === 'Not processed' || calcTime(createdAt) >= 1) && (
-        <small className='cus-tooltip-msg'>Can't cancel order</small>
+        <small className='cus-tooltip-msg'>{t('status.cantCancelOrder')}</small>
       )}
     </div>
   )

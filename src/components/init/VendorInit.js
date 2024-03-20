@@ -9,6 +9,7 @@ import { getNumberOfFollowers } from '../../apis/follow'
 import { countOrder } from '../../apis/order'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -19,7 +20,7 @@ const VendorInit = ({ store, actions }) => {
 
   const { _id, accessToken } = getToken()
   const { storeId } = useParams()
-
+  const { t } = useTranslation()
   const init = () => {
     setIsLoading(true)
     setError('')
@@ -116,7 +117,7 @@ const VendorInit = ({ store, actions }) => {
                 to={`/vendor/profile/${storeId}`}
               >
                 <i className='fas fa-store me-1'></i>
-                Store profile
+                {t('storeDetail.profile')}
               </Link>
 
               <Link
@@ -124,7 +125,7 @@ const VendorInit = ({ store, actions }) => {
                 to={`/vendor/orders/${storeId}`}
               >
                 <i className='fas fa-clipboard me-1'></i>
-                Orders
+                {t('storeDetail.orders')}
               </Link>
 
               <Link
@@ -132,7 +133,7 @@ const VendorInit = ({ store, actions }) => {
                 to='/account/storeManager'
               >
                 <i className='fas fa-angle-left me-1'></i>
-                Back
+                {t('button.back')}
               </Link>
             </ul>
           </div>

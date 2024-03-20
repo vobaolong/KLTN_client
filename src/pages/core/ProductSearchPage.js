@@ -29,7 +29,7 @@ const ProductSearchPage = (props) => {
     sortBy: 'sold',
     order: 'desc',
     categoryId: '',
-    limit: 10,
+    limit: 20,
     page: 1
   })
 
@@ -83,14 +83,14 @@ const ProductSearchPage = (props) => {
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
           <small className='text-nowrap res-hide'>
-            Showing{' '}
+            {t('showing')}{' '}
             <b>
               {Math.min(
                 filter.limit,
                 pagination.size - filter.limit * (pagination.pageCurrent - 1)
               )}{' '}
             </b>
-            of {pagination.size} {t('result')}
+            {t('of')} {pagination.size} {t('result')}
           </small>
         </div>
 

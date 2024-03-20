@@ -7,7 +7,7 @@ import StoreLevelInfo from '../info/StoreLevelInfo'
 
 const StoreLayout = ({ store = {}, children = null }) => (
   <MainLayout>
-    <div className='store-layout' style={{ margin: '0 auto' }}>
+    <div className='store-layout'>
       <div className='position-relative shadow'>
         <Cover cover={store.cover} alt={store.name} />
         <div className='avatar-absolute avatar-absolute--store'>

@@ -1,28 +1,26 @@
-const ProductStatusLabel = ({ isSelling = true, detail = true }) => (
-  <span className='d-inline-block position-relative'>
-    <span
-      className={`badge rounded-1 ${
-        isSelling ? 'bg-success' : 'bg-danger'
-      } cus-tooltip`}
-    >
-      {isSelling ? (
-        <span>
-          <i className='fas fa-box'></i>
-          {detail && <span className='ms-2'>Selling</span>}
-        </span>
-      ) : (
-        <span>
-          <i className='fas fa-archive'></i>
-          {detail && <span className='ms-2'>Stored</span>}
-        </span>
-      )}
-    </span>
-    {/* <small className='cus-tooltip-msg'>
-      {isSelling
-        ? 'This product is selling, can order in this time.'
-        : "This product is stored, can't order in this time"}
-    </small> */}
-  </span>
-)
+import { useTranslation } from 'react-i18next'
 
+const ProductStatusLabel = ({ isSelling = true, detail = true }) => {
+  const { t } = useTranslation()
+  return (
+    <span className='d-inline-block position-relative'>
+      <span
+        className={`badge rounded-1 ${
+          isSelling ? 'bg-success' : 'bg-secondary'
+        } cus-tooltip`}
+      >
+        {isSelling ? (
+          <span>{detail && <span>{t('status.selling')}</span>}</span>
+        ) : (
+          <span>{detail && <span>{t('status.stored')}</span>}</span>
+        )}
+      </span>
+      {/* <small className='cus-tooltip-msg'>
+        {isSelling
+          ? 'This product is selling, can order in this time.'
+          : "This product is stored, can't order in this time"}
+      </small> */}
+    </span>
+  )
+}
 export default ProductStatusLabel

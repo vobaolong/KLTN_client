@@ -69,22 +69,20 @@ const MainNav = ({ navFor = 'user' }) => {
         ) : (
           <>
             <ul className='nav cus-sub-nav ms-4 d-flex justify-content-end res-hide-md'>
-              {getToken().role !== 'admin' && <Language />}
-
+              {/* {getToken().role !== 'admin' && <Language />} */}
+              <Language />
               <li className='nav-item ms-2'>
                 <AccountInit />
               </li>
-
               {navFor === 'vendor' && (
                 <li className='nav-item'>
                   <VendorInit />
                 </li>
               )}
-
               {navFor === 'user' && (
                 <li className='nav-item position-relative'>
                   <Link
-                    className='btn btn-outline-light cus-outline ripple cus-tooltip'
+                    className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
                     to='/account/following'
                   >
                     <i className='fas fa-heart'></i>
@@ -106,12 +104,11 @@ const MainNav = ({ navFor = 'user' }) => {
                   </small>
                 </li>
               )} */}
-
               {navFor === 'user' && getToken().role === 'user' && (
                 <li className='nav-item'>
                   <div className='cart-item-wrap position-relative'>
                     <Link
-                      className='btn btn-outline-light cus-outline ripple cus-tooltip'
+                      className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
                       to='/cart'
                     >
                       <i className='fas fa-bag-shopping'></i>
@@ -126,11 +123,10 @@ const MainNav = ({ navFor = 'user' }) => {
                   </div>
                 </li>
               )}
-
               {navFor === 'user' && getToken().role === 'admin' && (
                 <li className='nav-item position-relative'>
                   <Link
-                    className='btn btn-outline-light cus-outline ripple cus-tooltip'
+                    className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
                     to='/admin/dashboard'
                   >
                     <i className='fas fa-user-tie'></i>
@@ -140,7 +136,6 @@ const MainNav = ({ navFor = 'user' }) => {
                   </small>
                 </li>
               )}
-
               {/* {navFor !== 'user' && (
                 <li className='nav-item position-relative'>
                   <Link
@@ -155,7 +150,7 @@ const MainNav = ({ navFor = 'user' }) => {
             </ul>
 
             <button
-              className='btn btn-outline-light cus-outline ripple mx-2 d-none res-dis-md'
+              className='btn btn-outline-light cus-outline ripple mx-2 d-none res-dis-md rounded-1'
               type='button'
               data-bs-toggle='offcanvas'
               data-bs-target='#offcanvasNavbarMainNav'

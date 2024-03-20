@@ -19,9 +19,7 @@
 	--dark-color: #2962FF;
 }
 
-.not-allowed {
-	cursor: not-allowed !important;
-}
+
 
 .bg-muted {
 	background-color: #615c5c24;
@@ -229,6 +227,10 @@ header {
 	padding: 8px;
 }
 
+.transparent {
+	background-color: transparent !important;
+}
+
 .hover {
 	border: 1px solid transparent;
 }
@@ -261,9 +263,9 @@ header {
 	color: white;
 	font-size: 12px;
 	font-weight: 500;
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-	top: 0px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	top: 10px;
 	left: -5px;
 	max-width: fit-content;
 }

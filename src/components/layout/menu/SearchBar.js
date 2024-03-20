@@ -44,7 +44,7 @@ const SearchBar = (props) => {
 
   return (
     <form
-      className='search-bar m-0 input-group border-1 border rounded-2'
+      className='search-bar m-0 input-group border-1 border rounded-1'
       onSubmit={handleFormSubmit}
     >
       <DropDownMenu
@@ -62,7 +62,7 @@ const SearchBar = (props) => {
       />
 
       <button
-        className='btn btn-outline-light cus-outline text-white ripple'
+        className='btn cus-outline text-white ripple rounded-end-1'
         type='submit'
         onClick={handleFormSubmit}
       >

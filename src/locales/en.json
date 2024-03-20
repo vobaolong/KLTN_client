@@ -1,4 +1,18 @@
 {
+  "title": {
+    "listBannedStores": "List of Banned Stores",
+    "listActiveStores": "List of Active Stores",
+    "listBannedProducts": "List of Banned Products",
+    "listActiveProducts": "List of Active Products",
+    "listProcessingOrders": "List of processing orders",
+    "listOrders": "List of orders"
+  },
+  "dialog": {
+    "banStore": "Ban Store",
+    "activeStore": "Active Store",
+    "activeProduct": "Active Product",
+    "banProduct": "Ban Product"
+  },
   "action": "Action",
   "showing": "Showing",
   "of": "of",
@@ -38,6 +52,7 @@
   "favStore": "Favorite Store",
   "product": "Product",
   "productDetail": {
+    "rating": "Rating",
     "date": "Created at",
     "values": "Values",
     "category": "Category",
@@ -125,6 +140,8 @@
     "phoneValid": "Please provide a valid Phone!",
     "idCardValid": "Please provide a valid ID Card!"
   },
+  "noTransaction": "No transactions",
+
   "draw": "Drawing",
   "empty": "Your e-wallet is empty",
   "manageStore": "Store manager",
@@ -152,7 +169,10 @@
   "status": {
     "status": "Status",
     "active": "Active",
-    "banned": "Banned"
+    "banned": "Banned",
+    "selling": "Selling",
+    "stored": "Stored",
+    "cantCancelOrder": "Can't can order"
   },
   "variantDetail": {
     "variants": "Variants",
@@ -238,7 +258,9 @@
     "back": "Back",
     "addImg": "Add Image",
     "more": "More",
-    "sell": "Sell"
+    "sell": "Sell",
+    "ban": "Ban",
+    "active": "Active"
   },
   "signInForm": {
     "comeBack": "Welcome back!",
@@ -270,6 +292,7 @@
     "payment": "Payment",
     "paymentMethod": "Payment Method",
     "lastUpdateTime": "Last Update Time",
+    "includedDiscount": "Included Discounts",
     "cancel": "Cancel Order",
     "cod": "Cash on Delivery",
     "onlinePayment": "Online Payment",

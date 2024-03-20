@@ -14,10 +14,10 @@ import StoreSmallCard from '../card/StoreSmallCard'
 import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../ui/ShowResult'
 
 const AdminOrdersTable = ({ heading = true, status = '' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [orders, setOrders] = useState([])
@@ -95,10 +95,12 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
     <div className='position-relative'>
       {heading &&
         (status === '' ? (
-          <h4 className='text-center text-uppercase'>All Orders In System</h4>
+          <h4 className='text-center text-uppercase'>
+            {t('title.listOrders')}
+          </h4>
         ) : (
           <h4 className='text-center text-uppercase'>
-            Processing Orders In System
+            {t('title.listProcessingOrders')}
           </h4>
         ))}
 
@@ -110,16 +112,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
 
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
+        <ShowResult
+          limit={filter.limit}
+          size={pagination.size}
+          pageCurrent={pagination.pageCurrent}
+        />
       </div>
 
       <div className='table-scroll my-2'>
@@ -131,7 +128,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Order'
+                  title={t('orderDetail.id')}
                   sortBy='_id'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -140,7 +137,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Order Placed'
+                  title={t('orderDetail.date')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -149,7 +146,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Total'
+                  title={t('orderDetail.total')}
                   sortBy='amountFromUser'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -158,7 +155,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Buyer'
+                  title={t('orderDetail.buyer')}
                   sortBy='userId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -167,7 +164,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Store'
+                  title={t('orderDetail.store')}
                   sortBy='storeId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -176,7 +173,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Commission'
+                  title={t('orderDetail.commission')}
                   sortBy='amountToGD'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -185,7 +182,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Delivery Unit'
+                  title={t('orderDetail.deliveryUnit')}
                   sortBy='deliveryId'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -194,7 +191,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Payment Method'
+                  title={t('orderDetail.payment')}
                   sortBy='isPaidBefore'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -203,7 +200,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Status'
+                  title={t('status.status')}
                   sortBy='status'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -279,12 +276,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   <div className='position-relative d-inline-block'>
                     <Link
                       type='button'
-                      className='btn btn-secondary rounded-1 ripple cus-tooltip'
+                      className='btn btn-secondary rounded-1 ripple'
                       to={`/admin/order/detail/${order._id}`}
                     >
                       <i className='fas fa-info-circle'></i>
                     </Link>
-                    <small className='cus-tooltip-msg'>View order detail</small>
                   </div>
                 </td>
               </tr>

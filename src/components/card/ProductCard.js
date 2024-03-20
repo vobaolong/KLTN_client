@@ -10,21 +10,16 @@ import {
 import StarRating from '../label/StarRating'
 import FollowProductButton from '../button/FollowProductButton'
 import { useTranslation } from 'react-i18next'
-import ProductCardPlaceholder from '../placeHoder.js/ProductCardPlaceholder'
-
+import { calcPercent } from '../../helper/calcPercent'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ProductCard = ({ product = {}, onRun }) => {
-  const [isLoading, setIsLoading] = useState(true)
   const [productValue, setProductValue] = useState({})
   const [isHovered, setIsHovered] = useState(false)
   const { t } = useTranslation()
-  const salePercent = Math.round(
-    ((productValue?.price?.$numberDecimal -
-      productValue?.salePrice?.$numberDecimal) /
-      productValue?.price?.$numberDecimal) *
-      100
-  )
+
+  const salePercent = calcPercent(productValue.price, productValue.salePrice)
+
   const init = async () => {
     let newProduct = product
     try {
@@ -69,7 +64,7 @@ const ProductCard = ({ product = {}, onRun }) => {
   }
 
   return (
-    <div className='card border-0'>
+    <div className='card border-0 position-relative'>
       <Link
         className='text-reset text-decoration-none product-card'
         to={`/product/${productValue._id}`}
@@ -162,6 +157,10 @@ const ProductCard = ({ product = {}, onRun }) => {
               productId={productValue._id}
               isFollowing={productValue.isFollowing}
               onRun={(product) => onHandleRun(product)}
+              style={{
+                top: '7px',
+                position: 'absolute'
+              }}
             />
           )}
         </div>

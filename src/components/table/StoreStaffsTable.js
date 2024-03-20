@@ -13,6 +13,7 @@ import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../ui/ShowResult'
 
 const StoreStaffsTable = ({
   heading = '',
@@ -135,7 +136,6 @@ const StoreStaffsTable = ({
         }, 3000)
       })
   }
-
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -174,20 +174,18 @@ const StoreStaffsTable = ({
             )}
           </div>
         </div>
-        {staffIds.length > 0 && (
-          <small className='text-nowrap res-hide'>
-            {t('showing')}{' '}
-            <b>
-              {Math.min(
-                filter.limit,
-                pagination.size - filter.limit * (pagination.pageCurrent - 1)
-              ) || 0}{' '}
-            </b>
-            {t('of')} {pagination.size} {t('result')}
-          </small>
-        )}
+        <small className='text-nowrap res-hide'>
+          {t('showing')}{' '}
+          <b>
+            {Math.min(
+              filter.limit,
+              pagination.size - filter.limit * (pagination.pageCurrent - 1)
+            ) || 0}{' '}
+          </b>
+          {t('of')} {pagination.size} {t('result')}
+        </small>
       </div>
-      {!isLoading && staffIds.length === 0 ? (
+      {!isLoading && pagination.size === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
           <h5>{t('staffDetail.noStaff')}</h5>
         </div>
