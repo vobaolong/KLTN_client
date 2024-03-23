@@ -4,8 +4,12 @@
     "listActiveStores": "List of Active Stores",
     "listBannedProducts": "List of Banned Products",
     "listActiveProducts": "List of Active Products",
-    "listProcessingOrders": "List of processing orders",
-    "listOrders": "List of orders"
+    "allOrders": "All Orders",
+    "notProcessedOrders": "Not Processed Orders",
+    "processingOrders": "Processing Orders",
+    "shippedOrders": "Shipped Orders",
+    "deliveredOrders": "Delivered Orders",
+    "cancelledOrders": "Cancelled Orders"
   },
   "dialog": {
     "banStore": "Ban Store",
@@ -173,7 +177,13 @@
     "banned": "Banned",
     "selling": "Selling",
     "stored": "Stored",
-    "cantCancelOrder": "Can't can order"
+    "cantCancelOrder": "Can't can order",
+    "all": "All",
+    "notProcessed": "Not processed",
+    "processing": "Processing",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
   },
   "variantDetail": {
     "variants": "Variants",
@@ -282,7 +292,7 @@
   "success/failure": "Order Completion Rate",
   "orderDetail": {
     "finalTotal": "Final Total",
-    "noOrder": "You have no orders!",
+    "noOrder": "No orders yet!",
     "commission": "Commission",
     "buyer": "Buyer",
     "id": "Order ID",

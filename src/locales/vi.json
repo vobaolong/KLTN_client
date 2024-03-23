@@ -4,8 +4,12 @@
     "listActiveStores": "Danh sách cửa hàng đang hoạt động",
     "listBannedProducts": "Danh sách sản phẩm bị khoá",
     "listActiveProducts": "Danh sách sản phẩm đang bán",
-    "listProcessingOrders": "Danh sách đơn hàng đang thực hiện",
-    "listOrders": "Danh sách đơn hàng"
+    "allOrders": "Tất cả đơn hàng",
+    "notProcessedOrders": "Đơn hàng chưa xử lý",
+    "processingOrders": "Đơn hàng đang xử lý",
+    "shippedOrders": "Đơn hàng chờ giao",
+    "deliveredOrders": "Đơn hàng hoàn thành",
+    "cancelledOrders": "Đơn hàng đã huỷ"
   },
   "dialog": {
     "banStore": "Khoá Cửa Hàng",
@@ -174,7 +178,13 @@
     "banned": "Bị cấm",
     "selling": "Đang bán",
     "stored": "Lưu trữ",
-    "cantCancelOrder": "Không thể huỷ đơn hàng"
+    "cantCancelOrder": "Không thể huỷ đơn hàng",
+    "all": "Tất cả",
+    "notProcessed": "Chưa xử lý",
+    "processing": "Đang xử lý",
+    "shipped": "Chờ giao",
+    "delivered": "Hoàn thành",
+    "cancelled": "Đã huỷ"
   },
   "variantDetail": {
     "variants": "Biến thể",
@@ -281,7 +291,7 @@
   "success/failure": "Tỷ lệ hoàn thành",
   "orderDetail": {
     "finalTotal": "Tổng tiền",
-    "noOrder": "Không có đơn hàng nào!",
+    "noOrder": "Chưa có đơn hàng",
     "commission": "Hoa hồng",
     "buyer": "Người mua",
     "id": "Mã đơn hàng",

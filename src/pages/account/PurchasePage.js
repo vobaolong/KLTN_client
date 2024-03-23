@@ -1,52 +1,52 @@
-import { useSelector } from 'react-redux'
-import AccountLayout from '../../components/layout/AccountLayout'
-import UserOrdersTable from '../../components/table/UserOrdersTable'
-import useToggle from '../../hooks/useToggle'
-import { useTranslation } from 'react-i18next'
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import AccountLayout from '../../components/layout/AccountLayout';
+import UserOrdersTable from '../../components/table/UserOrdersTable';
+import { useTranslation } from 'react-i18next';
 
-const PurchasePage = (props) => {
-	const user = useSelector((state) => state.account.user)
-	const [flag, toggleFlag] = useToggle(true)
-	const { t } = useTranslation()
+const PurchasePage = () => {
+	const user = useSelector((state) => state.account.user);
+	const { t } = useTranslation();
+
+	const [selectedStatus, setSelectedStatus] = useState('Not processed|Processing|Shipped|Delivered|Cancelled');
+
+	const orderStatus = [
+		{ label: t('status.all'), value: 'Not processed|Processing|Shipped|Delivered|Cancelled', className: 'secondary' },
+		{ label: t('status.notProcessed'), value: 'Not processed', className: 'golden' },
+		{ label: t('status.processing'), value: 'Processing', className: 'primary' },
+		{ label: t('status.shipped'), value: 'Shipped', className: 'primary' },
+		{ label: t('status.delivered'), value: 'Delivered', className: 'success' },
+		{ label: t('status.cancelled'), value: 'Cancelled', className: 'danger' }
+	];
+
+
+	const handleStatusChange = (status) => {
+		setSelectedStatus(status);
+	};
 
 	return (
 		<AccountLayout user={user}>
-			<div className='d-flex align-items-center mb-2'>
-				<div className='position-relative d-inline-block me-2'>
+			<div className='d-flex align-items-center mb-4 justify-content-between'>
+				{orderStatus.map((status) => (
 					<button
+						style={{ flex: 1 }}
+						key={status.value}
 						type='button'
-						className={`btn ${flag ? 'btn-primary' : 'btn-outline-primary'
-							} btn-lg ripple cus-tooltip`}
-						onClick={() => toggleFlag(true)}
+						className={`btn ${selectedStatus === status.value ? `btn-${status.className}` : `btn-outline-${status.className}`
+							} btn-sm ripple cus-tooltip me-2`}
+						onClick={() => handleStatusChange(status.value)}
 					>
-						<i className='fas fa-clipboard'></i>
+						{status.label}
 					</button>
-
-					<small className='cus-tooltip-msg'>{t('processingOrders')}</small>
-				</div>
-
-				<div className='position-relative d-inline-block'>
-					<button
-						type='button'
-						className={`btn ${!flag ? 'btn-success' : 'btn-outline-success'
-							} btn-lg ripple cus-tooltip`}
-						onClick={() => toggleFlag(false)}
-					>
-						<i className='fas fa-clipboard-check'></i>
-					</button>
-
-					<small className='cus-tooltip-msg'>{t('processedOrders')}</small>
-				</div>
+				))}
 			</div>
 
 			<UserOrdersTable
 				heading={true}
-				status={
-					flag ? 'Not processed|Processing|Shipped' : 'Delivered|Cancelled'
-				}
+				status={selectedStatus}
 			/>
 		</AccountLayout>
-	)
-}
+	);
+};
 
-export default PurchasePage
+export default PurchasePage;

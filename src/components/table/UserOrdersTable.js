@@ -91,12 +91,18 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
 
 	return (
 		<div className='position-relative'>
-			{heading && status === 'Not processed|Processing|Shipped' ? (
-				<h4 className='text-center text-uppercase'>{t('processingOrders')}</h4>
-			) : (
-				<h4 className='text-center text-uppercase'>{t('processedOrders')}</h4>
-			)}
-
+			{heading &&
+				(
+					<>
+						{status === 'Not processed|Processing|Shipped|Delivered|Cancelled' && <h4 className='text-center text-uppercase'>{t('title.allOrders')}</h4>}
+						{status === 'Not processed' && <h4 className='text-center text-uppercase'>{t('title.notProcessedOrders')}</h4>}
+						{status === 'Processing' && <h4 className='text-center text-uppercase'>{t('title.processingOrders')}</h4>}
+						{status === 'Shipped' && <h4 className='text-center text-uppercase'>{t('title.shippedOrders')}</h4>}
+						{status === 'Delivered' && <h4 className='text-center text-uppercase'>{t('title.deliveredOrders')}</h4>}
+						{status === 'Cancelled' && <h4 className='text-center text-uppercase'>{t('title.cancelledOrders')}</h4>}
+					</>
+				)
+			}
 			{isLoading && <Loading />}
 			{error && <Error msg={error} />}
 

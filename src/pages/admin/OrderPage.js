@@ -1,56 +1,52 @@
 import { useSelector } from 'react-redux'
 import AdminLayout from '../../components/layout/AdminLayout'
 import AdminOrdersTable from '../../components/table/AdminOrdersTable'
-import useToggle from '../../hooks/useToggle'
 import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 
 const OrderPage = (props) => {
-  const user = useSelector((state) => state.account.user)
-  const [flag, toggleFlag] = useToggle(false)
-  const { t } = useTranslation()
+	const user = useSelector((state) => state.account.user)
+	const { t } = useTranslation()
+	const [selectedStatus, setSelectedStatus] = useState('Shipped');
 
-  return (
-    <AdminLayout user={user}>
-      <div className='d-flex align-items-center mb-2'>
-        <div className='position-relative d-inline-block me-2'>
-          <button
-            type='button'
-            className={`btn ${
-              !flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(false)}
-          >
-            <i className='fas fa-clipboard'></i>
-          </button>
+	const orderStatus = [
+		{ label: t('status.all'), value: 'Not processed|Processing|Shipped|Delivered|Cancelled', className: 'secondary' },
+		{ label: t('status.notProcessed'), value: 'Not processed', className: 'golden' },
+		{ label: t('status.processing'), value: 'Processing', className: 'primary' },
+		{ label: t('status.shipped'), value: 'Shipped', className: 'primary' },
+		{ label: t('status.delivered'), value: 'Delivered', className: 'success' },
+		{ label: t('status.cancelled'), value: 'Cancelled', className: 'danger' }
+	];
 
-          <small className='cus-tooltip-msg'>{t('title.listOrders')}</small>
-        </div>
 
-        <div className='position-relative d-inline-block'>
-          <button
-            type='button'
-            className={`btn ${
-              flag ? 'btn-dark' : 'btn-outline-dark'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(true)}
-          >
-            <i className='fas fa-truck'></i>
-          </button>
+	const handleStatusChange = (status) => {
+		setSelectedStatus(status);
+	};
+	return (
+		<AdminLayout user={user}>
+			<div className='d-flex align-items-center mb-4 justify-content-between'>
 
-          <small className='cus-tooltip-msg'>
-            {' '}
-            {t('title.listProcessingOrders')}
-          </small>
-        </div>
-      </div>
+				{orderStatus.map((status) => (
+					<button
+						style={{ flex: 1 }}
+						key={status.value}
+						type='button'
+						className={`btn ${selectedStatus === status.value ? `btn-${status.className}` : `btn-outline-${status.className}`
+							} btn-sm ripple cus-tooltip me-2`}
+						onClick={() => handleStatusChange(status.value)}
+					>
+						{status.label}
+					</button>
+				))}
+			</div>
 
-      <AdminOrdersTable
-        heading={true}
-        isEditable={flag}
-        status={flag ? 'Not processed|Processing|Shipped' : ''}
-      />
-    </AdminLayout>
-  )
+			<AdminOrdersTable
+				heading={true}
+				isEditable={selectedStatus === 'Not processed' || selectedStatus === 'Processing' || selectedStatus === 'Shipped'}
+				status={selectedStatus}
+			/>
+		</AdminLayout >
+	)
 }
 
 export default OrderPage

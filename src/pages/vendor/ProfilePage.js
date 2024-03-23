@@ -13,99 +13,99 @@ import StoreJoinedInfo from '../../components/info/StoreJoinedInfo'
 import StoreProfileInfo from '../../components/info/StoreProfileInfo'
 
 const ProfilePage = (props) => {
-  const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
-  const [updateDispatch] = useUpdateDispatch()
-  const onHandleRun = (newStore) => {
-    updateDispatch('vendor', newStore)
-  }
-  return (
-    <VendorLayout user={user} store={store}>
-      <div className='res-mx--12-md'>
-        <div className='position-relative bg-white p-2 rounded-2 shadow'>
-          <Cover
-            cover={store.cover}
-            alt={store.name}
-            isEditable='store'
-            storeId={store._id}
-          />
+	const user = useSelector((state) => state.account.user)
+	const store = useSelector((state) => state.vendor.store)
+	const [updateDispatch] = useUpdateDispatch()
+	const onHandleRun = (newStore) => {
+		updateDispatch('vendor', newStore)
+	}
+	return (
+		<VendorLayout user={user} store={store}>
+			<div className='res-mx--12-md'>
+				<div className='position-relative bg-white p-2 rounded-2 shadow'>
+					<Cover
+						cover={store.cover}
+						alt={store.name}
+						isEditable='store'
+						storeId={store._id}
+					/>
 
-          <div className='avatar-absolute avatar-absolute--store'>
-            <Avatar
-              avatar={store.avatar}
-              alt={store.name}
-              name={
-                <span className='d-inline-flex justify-content-center align-items-center'>
-                  {store.name}
-                  <small className='ms-2'>
-                    <StoreStatusLabel isOpen={store.isOpen} />
-                  </small>
-                </span>
-              }
-              borderName={true}
-              isEditable='store'
-              storeId={store._id}
-            />
-          </div>
+					<div className='avatar-absolute avatar-absolute--store'>
+						<Avatar
+							avatar={store.avatar}
+							alt={store.name}
+							name={
+								<span className='d-inline-flex justify-content-center align-items-center'>
+									{store.name}
+									<small className='ms-2'>
+										<StoreStatusLabel isOpen={store.isOpen} />
+									</small>
+								</span>
+							}
+							borderName={true}
+							isEditable='store'
+							storeId={store._id}
+						/>
+					</div>
 
-          <div className='level-group-absolute res-hide bg-white w-50 h-100'>
-            <StoreLevelInfo store={store} />
-          </div>
-        </div>
+					<div className='level-group-absolute res-hide bg-white w-50 h-100'>
+						<StoreLevelInfo store={store} />
+					</div>
+				</div>
 
-        {store.featured_images?.length > 0 && (
-          <div className='my-2'>
-            <Carousel
-              listImages={store.featured_images}
-              alt={store.name}
-              isEditable='store'
-              storeId={store._id}
-            />
-          </div>
-        )}
+				{store.featured_images?.length > 0 && (
+					<div className='my-2'>
+						<Carousel
+							listImages={store.featured_images}
+							alt={store.name}
+							isEditable='store'
+							storeId={store._id}
+						/>
+					</div>
+				)}
 
-        <div className='d-flex justify-content-between align-items-center my-2'>
-          <div className='d-flex justify-content-between align-items-start'>
-            <div className='position-relative me-2'>
-              <div className='cus-tooltip'>
-                <OpenCloseStoreButton
-                  storeId={store._id}
-                  isOpen={store.isOpen}
-                  className='btn-sm px-4'
-                  onRun={(store) => onHandleRun(store)}
-                />
-              </div>
-              <small className='cus-tooltip-msg'>
-                {store.isOpen ? 'Click to close store' : 'Click to open store'}
-              </small>
-            </div>
+				<div className='d-flex justify-content-between align-items-center my-2'>
+					<div className='d-flex justify-content-between align-items-start'>
+						<div className='position-relative me-2'>
+							<div className='cus-tooltip'>
+								<OpenCloseStoreButton
+									storeId={store._id}
+									isOpen={store.isOpen}
+									className='btn-sm px-4'
+									onRun={(store) => onHandleRun(store)}
+								/>
+							</div>
+							<small className='cus-tooltip-msg'>
+								{store.isOpen ? 'Click to close store' : 'Click to open store'}
+							</small>
+						</div>
 
-            <StoreAddFeaturedImageItem
-              count={store.featured_images?.length}
-              storeId={store._id}
-            />
-          </div>
+						<StoreAddFeaturedImageItem
+							count={store.featured_images?.length}
+							storeId={store._id}
+						/>
+					</div>
 
-          <Link
-            className='btn btn-outline-primary ripple btn-sm'
-            to={`/store/${store._id}`}
-            target='_blank'
-          >
-            <span className='me-2 res-hide'>Visit My Store</span>
-            <i className='fas fa-external-link-alt'></i>
-          </Link>
-        </div>
+					<Link
+						className='btn btn-outline-primary ripple btn-sm'
+						to={`/store/${store._id}`}
+						target='_blank'
+					>
+						<span className='me-2 res-hide'>Visit My Store</span>
+						<i className='fas fa-external-link-alt'></i>
+					</Link>
+				</div>
 
-        <div className='mt-2 d-none res-dis'>
-          <StoreLevelInfo store={store} border={false} />
-        </div>
+				<div className='mt-2 d-none res-dis'>
+					<StoreLevelInfo store={store} border={false} />
+				</div>
 
-        <div className='mt-2'>
-          <StoreProfileInfo store={store} isEditable={true} />
-        </div>
-      </div>
-    </VendorLayout>
-  )
+				<div className='mt-3'>
+					<StoreProfileInfo store={store} isEditable={true} />
+				</div>
+			</div>
+		</VendorLayout>
+	)
 }
 
 export default ProfilePage
