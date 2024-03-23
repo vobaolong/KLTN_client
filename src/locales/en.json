@@ -145,10 +145,15 @@
     "phoneValid": "Please provide a valid Phone!",
     "idCardValid": "Please provide a valid ID Card!"
   },
-  "noTransaction": "No transactions",
-
-  "draw": "Drawing",
-  "empty": "Your e-wallet is empty",
+  "transactionDetail": {
+    "noTransaction": "No transactions",
+    "draw": "Drawing",
+    "empty": "Your e-wallet is empty",
+    "amount": "Amount",
+    "amountValid": "Please provide a valid amount!",
+    "currentPw": "Current password",
+    "currentPwValid": "Please provide a valid password!"
+  },
   "manageStore": "Stores",
   "myStore": "My Stores",
   "createStore": "Create store",
@@ -184,6 +189,9 @@
     "shipped": "Shipped",
     "delivered": "Delivered",
     "cancelled": "Cancelled"
+  },
+  "categoryDetail": {
+    "tree": "Category tree"
   },
   "variantDetail": {
     "variants": "Variants",

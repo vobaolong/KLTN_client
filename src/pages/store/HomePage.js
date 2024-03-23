@@ -7,39 +7,39 @@ import MainLayout from '../../components/layout/MainLayout'
 import { useTranslation } from 'react-i18next'
 
 const HomePage = (props) => {
-  const { t } = useTranslation()
-  const store = useSelector((state) => state.store.store)
+	const { t } = useTranslation()
+	const store = useSelector((state) => state.store.store)
 
-  return typeof store.isActive === 'boolean' && !store.isActive ? (
-    <MainLayout>
-      <Error msg='This store is banned by Zenpii!' />
-    </MainLayout>
-  ) : (
-    <StoreLayout store={store}>
-      <div className='store-home-page'>
-        {store.featured_images?.length >= 1 && (
-          <div className='mb-4'>
-            <Carousel listImages={store.featured_images} alt={store.name} />
-          </div>
-        )}
+	return typeof store.isActive === 'boolean' && !store.isActive ? (
+		<MainLayout>
+			<Error msg='This store is banned by Zenpii!' />
+		</MainLayout>
+	) : (
+		<StoreLayout store={store}>
+			<div className='store-home-page'>
+				{store.featured_images?.length >= 1 && (
+					<div className='mb-4'>
+						<Carousel listImages={store.featured_images} alt={store.name} />
+					</div>
+				)}
 
-        <div className='mb-4'>
-          <ListProductsByStore
-            heading={t('filters.topSale')}
-            storeId={store._id}
-          />
-        </div>
+				<div className='mb-4'>
+					<ListProductsByStore
+						heading={t('filters.topSale')}
+						storeId={store._id}
+					/>
+				</div>
 
-        <div className='mb-4'>
-          <ListProductsByStore
-            heading={t('productDetail.newProduct')}
-            storeId={store._id}
-            sortBy='createdAt'
-          />
-        </div>
-      </div>
-    </StoreLayout>
-  )
+				<div className='mb-4'>
+					<ListProductsByStore
+						heading={t('productDetail.newProduct')}
+						storeId={store._id}
+						sortBy='createdAt'
+					/>
+				</div>
+			</div>
+		</StoreLayout>
+	)
 }
 
 export default HomePage

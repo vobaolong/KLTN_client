@@ -147,9 +147,15 @@
     "phoneValid": "Vui lòng cung cấp số điện thoại hợp lệ!",
     "idCardValid": "Vui lòng cung cấp số thẻ hợp lệ!"
   },
-  "noTransaction": "Không có giao dịch nào",
-  "draw": "Rút tiền",
-  "empty": "Ví rỗng",
+  "transactionDetail": {
+    "noTransaction": "Không có giao dịch nào",
+    "draw": "Rút tiền",
+    "empty": "Ví rỗng",
+    "amount": "Số tiền",
+    "amountValid": "Vui lòng nhập số tiền phù hợp!",
+    "currentPw": "Mật khẩu hiện tại",
+    "currentPwValid": "Vui lòng cung cấp mật khẩu đúng!"
+  },
   "manageStore": "Cửa hàng",
   "myStore": "Store của tôi",
   "createStore": "Tạo store",
@@ -185,6 +191,9 @@
     "shipped": "Chờ giao",
     "delivered": "Hoàn thành",
     "cancelled": "Đã huỷ"
+  },
+  "categoryDetail": {
+    "tree": "Danh mục kiểu cây"
   },
   "variantDetail": {
     "variants": "Biến thể",
