@@ -14,15 +14,14 @@ const ListReviews = ({
   heading = ''
 }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [run, setRun] = useState(true)
-
   const [reviews, setReviews] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
+
   const [filter, setFilter] = useState({
     productId,
     storeId,

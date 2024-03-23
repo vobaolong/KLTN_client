@@ -2,17 +2,17 @@ import MainLayout from './MainLayout'
 import AccountSideBar from './menu/AccountSideBar'
 
 const AccountLayout = ({ user = {}, children = null }) => (
-  <MainLayout>
-    <div className='container-fluid p-0'>
-      <div className='row'>
-        <div className='col-lg-3 col-md-3 res-sticky-top-md mb-4'>
-          <AccountSideBar user={user} />
-        </div>
+	<MainLayout>
+		<div className='container-fluid p-0'>
+			<div className='row'>
+				<div className='col-lg-3 col-md-2 res-sticky-top-md'>
+					<AccountSideBar user={user} />
+				</div>
 
-        <div className='col-lg-9 col-md-9'>{children}</div>
-      </div>
-    </div>
-  </MainLayout>
+				<div className='col-lg-9 col-md-10'>{children}</div>
+			</div>
+		</div>
+	</MainLayout>
 )
 
 export default AccountLayout

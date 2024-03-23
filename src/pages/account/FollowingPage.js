@@ -6,8 +6,8 @@ import FollowingStoresCollection from '../../components/collection/FollowingStor
 import { useTranslation } from 'react-i18next'
 
 const FollowingPage = (props) => {
-  const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
+  const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
   return (
     <AccountLayout user={user}>

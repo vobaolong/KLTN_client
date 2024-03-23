@@ -58,7 +58,8 @@ const CancelStaffsButton = ({ storeId = '' }) => {
 
       <button
         type='button'
-        className='btn btn-outline-primary rounded-1 ripple'
+        className='btn btn-outline-danger rounded-1 ripple'
+        style={{ width: 'max-content' }}
         onClick={handleCancelStaff}
       >
         <i className='fas fa-ban'></i>

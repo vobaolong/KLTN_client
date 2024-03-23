@@ -8,7 +8,7 @@ const UserEditProfileItem = ({ user = {} }) => {
     <div className='position-relative d-inline-block'>
       <button
         type='button'
-        className='btn btn-primary ripple cus-tooltip'
+        className='btn btn-outline-primary rounded-1 ripple cus-tooltip'
         data-bs-toggle='modal'
         data-bs-target='#profile-edit-form'
       >

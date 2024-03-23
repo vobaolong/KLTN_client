@@ -15,9 +15,6 @@ const UserAboutPage = (props) => {
         <div className='mb-1'>
           <UserProfileInfo user={user} />
         </div>
-        <div className=''>
-          <UserJoinedInfo user={user} />
-        </div>
       </div>
     </UserLayout>
   )

@@ -265,7 +265,7 @@ const OrderDetailInfo = ({
           />
           <div className='d-flex justify-content-end border-top flex-column align-items-end'>
             {by === 'user' && getToken().role === 'user' && (
-              <table className='col-lg-3 col-md-4 text-start justify-content-end d-flex'>
+              <table className='col-lg-4 text-start'>
                 <tbody>
                   <tr className='border-bottom'>
                     <th
@@ -339,7 +339,7 @@ const OrderDetailInfo = ({
                 </tbody>
               </table>
             )}
-            <span className='col-lg-3 col-md-4 justify-content-between align-items-center d-flex'>
+            <span className='col-lg-4 justify-content-between align-items-center d-flex'>
               <b className='text-muted'>Thành tiền:</b>
               <span className='text-primary fw-bold fs-5'>
                 {formatPrice(order.amountFromUser?.$numberDecimal)} ₫

@@ -43,7 +43,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
       })
   }
   const hoursDifference = calcTime(review?.orderId?.updatedAt)
-  const isReviewAllowed = hoursDifference < 168 //7days
+  const isReviewAllowed = hoursDifference < 720 //30days
   return (
     <div className='row py-2 border-bottom position-relative'>
       {isLoading && <Loading />}
@@ -71,7 +71,10 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
             {about && (
               <>
                 <i className='fas fa-comment-dots text-primary mx-4'></i>
-                <ProductSmallCard product={review.productId} />
+                <ProductSmallCard
+                  borderName={true}
+                  product={review.productId}
+                />
               </>
             )}
           </small>

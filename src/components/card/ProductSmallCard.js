@@ -4,7 +4,7 @@ const IMG = process.env.REACT_APP_STATIC_URL
 const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
   <span
     className={`d-inline-flex align-items-center ${
-      borderName && 'bg-body shadow'
+      borderName && 'bg-value rounded-1 px-1'
     }`}
   >
     <Link

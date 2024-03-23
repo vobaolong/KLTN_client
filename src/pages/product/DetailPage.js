@@ -128,7 +128,7 @@ const DetailPage = () => {
                 </div>
                 <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
                   {product.salePrice?.$numberDecimal !==
-                    product.price.$numberDecimal && (
+                    product.price?.$numberDecimal && (
                     <del className=' text-muted mt-1'>
                       {formatPrice(product.price?.$numberDecimal)} <sup> ₫</sup>
                     </del>

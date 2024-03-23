@@ -22,7 +22,7 @@ const ProfilePage = (props) => {
   return (
     <VendorLayout user={user} store={store}>
       <div className='res-mx--12-md'>
-        <div className='position-relative'>
+        <div className='position-relative bg-white p-2 rounded-2 shadow'>
           <Cover
             cover={store.cover}
             alt={store.name}
@@ -48,13 +48,13 @@ const ProfilePage = (props) => {
             />
           </div>
 
-          <div className='level-group-absolute res-hide'>
+          <div className='level-group-absolute res-hide bg-white w-50 h-100'>
             <StoreLevelInfo store={store} />
           </div>
         </div>
 
         {store.featured_images?.length > 0 && (
-          <div className='m-2'>
+          <div className='my-2'>
             <Carousel
               listImages={store.featured_images}
               alt={store.name}
@@ -96,16 +96,12 @@ const ProfilePage = (props) => {
           </Link>
         </div>
 
-        <div className='mt-1 d-none res-dis'>
+        <div className='mt-2 d-none res-dis'>
           <StoreLevelInfo store={store} border={false} />
         </div>
 
-        <div className='mt-1'>
+        <div className='mt-2'>
           <StoreProfileInfo store={store} isEditable={true} />
-        </div>
-
-        <div className='mt-1'>
-          <StoreJoinedInfo store={store} />
         </div>
       </div>
     </VendorLayout>

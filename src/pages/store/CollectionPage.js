@@ -11,6 +11,7 @@ import ProductFilter from '../../components/filter/ProductFilter'
 import StoreLayout from '../../components/layout/StoreLayout'
 import MainLayout from '../../components/layout/MainLayout'
 import { useTranslation } from 'react-i18next'
+import ShowResult from '../../components/ui/ShowResult.js'
 
 const CollectionPage = (props) => {
   const store = useSelector((state) => state.store.store)
@@ -90,16 +91,11 @@ const CollectionPage = (props) => {
           <div className=''>
             <ProductFilter filter={filter} setFilter={setFilter} />
           </div>
-          <small className='text-nowrap res-hide'>
-            {t('showing')}{' '}
-            <b>
-              {Math.min(
-                filter.limit,
-                pagination.size - filter.limit * (pagination.pageCurrent - 1)
-              )}{' '}
-            </b>
-            {t('of')} {pagination.size} {t('result')}
-          </small>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
         </div>
 
         <div className='row mt-3'>

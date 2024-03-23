@@ -315,6 +315,10 @@ header {
 	box-shadow: 0 0 20px -4px rgba(0, 0, 0, .15);
 }
 
+.shadow-sticky {
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
 /* bootstrap */
 .card {
 	max-width: 240px !important;
@@ -1102,7 +1106,7 @@ header {
 
 /* cover */
 .cus-cover-wrap {
-	max-width: 100%;
+	max-width: 50%;
 }
 
 .text-lg-right>span>a>span {
@@ -1150,7 +1154,7 @@ header {
 	position: relative;
 	padding-bottom: 38.04%;
 	height: 100%;
-	min-height: 482px;
+	/* min-height: 482px; */
 }
 
 .label-style {
@@ -1186,24 +1190,25 @@ header {
 
 .cus-carousel-icon-wrap {
 	position: absolute;
-	bottom: 12%;
-	right: 16%;
+	bottom: 10%;
+	right: 5%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .cus-carousel-icon {
-	background-color: var(--white-color);
-	padding: 4px 16px;
+	background-color: #dfdfdf;
+	padding: 4px 10px;
 	border-radius: 4px;
 	font-weight: 500;
 	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);
 	cursor: pointer;
+	color: #707070;
 }
 
 .cus-carousel-icon:hover {
-	background-color: var(--primary-color);
+	background-color: #5e5e5e;
 	color: var(--white-color);
 }
 
@@ -1241,8 +1246,8 @@ header {
 	top: 0;
 	left: 0;
 	object-fit: cover;
-	border-top-left-radius: 1px;
-	border-top-right-radius: 1px;
+	filter: blur(2px);
+	border-radius: 5px !important;
 }
 
 .cus-cover-img.cus-cover-img--input-file {
@@ -1258,12 +1263,13 @@ header {
 	position: absolute;
 	bottom: 6%;
 	right: 4%;
-	background-color: var(--white-color);
-	padding: 4px 16px;
+	background-color: #dfdfdf;
+	padding: 4px 10px;
 	border-radius: 4px;
 	font-weight: 500;
 	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	cursor: pointer;
+	color: #707070;
 }
 
 .cus-cover-icon.cus-cover-icon--rm {
@@ -1295,7 +1301,7 @@ header {
 }
 
 .cus-cover-icon:hover {
-	background-color: var(--primary-color);
+	background-color: #5e5e5e;
 	color: var(--white-color);
 }
 
@@ -1310,16 +1316,26 @@ header {
 	position: relative;
 }
 
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 0.375rem;
+}
+
 .cus-avatar-name {
 	white-space: nowrap;
 	position: absolute;
-	bottom: -27%;
-	left: 50%;
-	transform: translateX(-50%);
+	bottom: 33%;
+	left: 105%;
+	color: #ffffff;
 }
 
 .cus-avatar-box {
-	width: 152px;
+	width: 100px;
 	max-width: 100%;
 	margin: 0 auto;
 }
@@ -1375,18 +1391,19 @@ header {
 
 .cus-avatar-icon {
 	position: absolute;
-	bottom: 6%;
-	right: 10%;
+	bottom: 0%;
+	right: 5%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background-color: var(--white-color);
+	background-color: #dfdfdf;
 	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.15);
 	cursor: pointer;
 	z-index: 1;
+	color: #707070;
 }
 
 .cus-avatar-icon.cus-avatar-icon--rm {
@@ -1403,7 +1420,7 @@ header {
 
 .cus-avatar-icon:hover {
 	color: var(--white-color);
-	background-color: var(--primary-color);
+	background-color: #5e5e5e;
 }
 
 .cus-avatar-icon.cus-avatar-icon--rm:hover {
@@ -1428,11 +1445,10 @@ header {
 
 .level-group-absolute {
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 4%;
-	width: 346px;
-	max-width: 56%;
+	top: 0;
+	right: 0;
+	border-top-right-radius: 0.375rem;
+	border-bottom-right-radius: 0.375rem;
 }
 
 .level-group-absolute.level-group-absolute--small {
@@ -1442,9 +1458,9 @@ header {
 }
 
 .avatar-absolute.avatar-absolute--store {
-	bottom: 56%;
+	bottom: 50%;
 	transform: translateY(50%);
-	left: 6%;
+	left: 5%;
 }
 
 .cus-row-profile {

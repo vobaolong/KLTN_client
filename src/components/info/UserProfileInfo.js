@@ -20,8 +20,14 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
   }
   return (
     <div className='container-fluid'>
-      <div className='row py-2 border rounded-1'>
-        <div className='col-12'>
+      <div className='row py-2 border rounded-2 bg-body'>
+        <div
+          style={{ fontSize: '1.1rem', fontWeight: '500' }}
+          className='col-12 border-bottom pb-2'
+        >
+          {t('userDetail.profile')}
+        </div>
+        <div className='col-12 mt-2'>
           <Paragraph
             label={
               <span>

@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import StoreLayout from '../../components/layout/StoreLayout'
 import StoreProfileInfo from '../../components/info/StoreProfileInfo'
-import StoreJoinedInfo from '../../components/info/StoreJoinedInfo'
 import StoreLevelInfo from '../../components/info/StoreLevelInfo'
 import MainLayout from '../../components/layout/MainLayout'
 import Error from '../../components/ui/Error'
@@ -20,10 +19,6 @@ const AboutPage = (props) => {
         </div>
         <div className='mb-1'>
           <StoreProfileInfo store={store} />
-        </div>
-
-        <div className='mb-1'>
-          <StoreJoinedInfo store={store} />
         </div>
       </div>
     </StoreLayout>

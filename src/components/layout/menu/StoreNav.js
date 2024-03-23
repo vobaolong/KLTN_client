@@ -20,7 +20,7 @@ const StoreNav = ({ store = {} }) => {
 
   return (
     <nav
-      className='store-nav navbar sticky-top-nav navbar-expand-md navbar-light bg-body shadow rounded-bottom'
+      className='store-nav navbar sticky-top-nav navbar-expand-md navbar-light bg-body shadow-sticky rounded-bottom'
       style={{ margin: '0 auto' }}
     >
       <div className='container-fluid res-d-flex-end-lg'>

@@ -81,34 +81,16 @@ const StoreCard = ({ store = {}, onRun }) => {
         </div>
       </Link>
 
-      <div className='card-body border-top border-secondary'>
+      <div className='card-body border-top border-value'>
         <small className='card-subtitle'>
           <div className='d-flex justify-content-between align-items-center'>
-            <div className='d-flex align-items-center'>
-              <span className='me-1'>
-                <StoreCommissionLabel
-                  commission={storeValue.commissionId}
-                  detail={false}
-                />
-              </span>
-
-              <span className='me-1'>
-                <StoreLevelLabel level={storeValue.level} detail={false} />
-              </span>
-
-              <span className=''>
-                <StoreFollowLabel
-                  numberOfFollowers={storeValue.numberOfFollowers}
-                />
-              </span>
-            </div>
-
+            <StarRating stars={store.rating} />
             <span className=''>
-              <StoreStatusLabel isOpen={storeValue.isOpen} detail={false} />
+              <StoreFollowLabel
+                numberOfFollowers={storeValue.numberOfFollowers}
+              />
             </span>
           </div>
-
-          <StarRating stars={store.rating} />
         </small>
 
         <Link

@@ -97,7 +97,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               className='cus-carousel-icon me-2'
             >
               <i className='fas fa-camera'></i>
-              <span className='ms-2 res-hide-md'>Edit</span>
+              <span className='ms-2 res-hide-md'>{t('button.edit')}</span>
               <input
                 id={`uploadFeaturedImage-${index}`}
                 className='visually-hidden'

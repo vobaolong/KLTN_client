@@ -164,7 +164,7 @@ const MainNav = ({ navFor = 'user' }) => {
               tabIndex='-1'
               id='offcanvasNavbarMainNav'
               aria-labelledby='offcanvasNavbarMainNavLabel'
-              style={{ flexGrow: 'unset', width: '40%' }}
+              style={{ flexGrow: 'unset', width: 'unset' }}
             >
               <div className='offcanvas-header bg-primary'>
                 <h5

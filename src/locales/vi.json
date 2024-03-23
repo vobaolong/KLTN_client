@@ -111,6 +111,7 @@
   "store": "Cửa hàng",
   "searchHolder": "Tìm sản phẩm và tên store",
   "userDetail": {
+    "level": "Hạng mức",
     "followers": "Người theo dõi",
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
@@ -145,7 +146,7 @@
   "noTransaction": "Không có giao dịch nào",
   "draw": "Rút tiền",
   "empty": "Ví rỗng",
-  "manageStore": "Quản lý cửa hàng",
+  "manageStore": "Cửa hàng",
   "myStore": "Store của tôi",
   "createStore": "Tạo store",
   "commisDetail": {
@@ -201,16 +202,16 @@
     "name": "Tên nhân viên",
     "delete": "Xoá nhân viên",
     "add": "Thêm nhân viên",
-    "leavea": "Rời cửa hàng",
+    "leave": "Rời cửa hàng",
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
     "bio": "Giới thiệu",
-    "editProfile": "Chỉnh sửa thông tin cửa hàng",
+    "editProfile": "Chỉnh sửa thông tin",
     "products": "Sản phẩm",
     "storeName": "Tên cửa hàng",
     "name": "Tên",
-    "profile": "Thông tin cửa hàng",
+    "profile": "Thông tin",
     "staffs": "Nhân viên",
     "orders": "Đơn hàng",
     "role": "Quyền",
@@ -277,7 +278,7 @@
     "passwordFeedback": "Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!"
   },
   "point": "Điểm",
-  "success/failure": "Đơn Hoàn Thành/Huỷ",
+  "success/failure": "Tỷ lệ hoàn thành",
   "orderDetail": {
     "finalTotal": "Tổng tiền",
     "noOrder": "Không có đơn hàng nào!",

@@ -43,7 +43,7 @@ const InputFile = ({
   return (
     <div
       className={`cus-input-group cus-input-group--file ${
-        size === 'avatar' ? 'cus-avatar-wrap' : 'cus-cover-wrap'
+        size === 'avatar' ? 'cus-avatar-wrap' : ''
       }`}
     >
       <label className='cus-input-group-label cus-input-group-label--file text-muted'>

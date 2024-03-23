@@ -23,7 +23,7 @@ const ReviewItem = ({
 
   useEffect(() => {
     const newDate = new Date(date)
-    newDate.setDate(newDate.getDate() + 7)
+    newDate.setDate(newDate.getDate() + 30)
     setDeliveredDate(newDate)
   }, [date])
 

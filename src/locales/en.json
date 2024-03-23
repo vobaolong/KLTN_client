@@ -109,6 +109,7 @@
   "store": "Store",
   "searchHolder": "Search for products and stores",
   "userDetail": {
+    "level": "Level",
     "followers": "Followers",
     "myAccount": "My account",
     "myPurchase": "My purchase",
@@ -144,7 +145,7 @@
 
   "draw": "Drawing",
   "empty": "Your e-wallet is empty",
-  "manageStore": "Store manager",
+  "manageStore": "Stores",
   "myStore": "My Stores",
   "createStore": "Create store",
   "commisDetail": {
@@ -278,7 +279,7 @@
     "passwordFeedback": "Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &."
   },
   "point": "Point",
-  "success/failure": "Success/Failure Orders",
+  "success/failure": "Order Completion Rate",
   "orderDetail": {
     "finalTotal": "Final Total",
     "noOrder": "You have no orders!",

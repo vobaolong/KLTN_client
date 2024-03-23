@@ -9,15 +9,15 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
   const path = useLocation().pathname.split('/')[2]
 
   return (
-    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-3 shadow bg-body rounded-1 res-account-sidebar'>
+    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 shadow bg-body rounded-1 res-account-sidebar'>
       <ul className='nav nav-pills flex-column mb-auto'>
-        <div className='position-relative mx-auto mb-4 res-hide-xl'>
+        {/* <div className='position-relative mx-auto mb-4 res-hide-xl'>
           <Avatar
             avatar={store.avatar}
             name={
               <span className='d-inline-flex align-items-center'>
                 {store.name}
-                {/* <small className='ms-2'>
+                <small className='ms-2'>
                   <ManagerRoleLabel
                     role={
                       store.ownerId && user._id === store.ownerId._id
@@ -29,7 +29,7 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
                 </small>
                 <small className='ms-1'>
                   <StoreActiveLabel isActive={store.isActive} detail={false} />
-                </small> */}
+                </small>
               </span>
             }
             alt={store.name}
@@ -48,9 +48,9 @@ const VendorSideBar = ({ user = {}, store = {} }) => {
               Manager: {user.firstName + ' ' + user.lastName}
             </small>
           </div>
-        </div>
+        </div> */}
 
-        <hr className='res-hide-xl' />
+        {/* <hr className='res-hide-xl' /> */}
 
         <li className='nav-item'>
           <Link

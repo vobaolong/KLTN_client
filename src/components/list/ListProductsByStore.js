@@ -56,12 +56,11 @@ const ListProductsByStore = ({
       {error && <Error msg={error} />}
 
       <div className='products-list row mt-3'>
-        {products &&
-          products.map((product, index) => (
-            <div className={`${col} mb-4`} key={index}>
-              <ProductCard product={product} />
-            </div>
-          ))}
+        {products?.map((product, index) => (
+          <div className={`${col} mb-4`} key={index}>
+            <ProductCard product={product} />
+          </div>
+        ))}
       </div>
     </div>
   )

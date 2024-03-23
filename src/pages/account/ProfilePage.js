@@ -14,7 +14,7 @@ const ProfilePage = (props) => {
   return (
     <AccountLayout user={user}>
       <div className='res-mx--12-md'>
-        <div className='position-relative'>
+        <div className='position-relative bg-body rounded-2 p-2 box-shadow'>
           <Cover
             cover={user.cover}
             alt={user.firstName + ' ' + user.lastName}
@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
               isEditable='user'
             />
           </div>
-          <div className='level-group-absolute level-group-absolute--small res-hide'>
+          <div className='level-group-absolute res-hide bg-white w-50 h-100'>
             <UserLevelInfo user={user} />
           </div>
         </div>
@@ -45,16 +45,12 @@ const ProfilePage = (props) => {
           </Link>
         </div> */}
 
-        <div className='mt-1 d-none res-dis'>
+        <div className='mt-2 d-none res-dis'>
           <UserLevelInfo user={user} border={false} />
         </div>
 
         <div className='mt-1'>
           <UserProfileInfo user={user} isEditable={true} />
-        </div>
-
-        <div className='mt-1'>
-          <UserJoinedInfo user={user} />
         </div>
       </div>
     </AccountLayout>

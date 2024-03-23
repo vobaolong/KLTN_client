@@ -25,7 +25,7 @@ const Carousel = ({
       ))}
     </div>
 
-    <div className='carousel-inner rounded-3'>
+    <div className='carousel-inner rounded-2'>
       {listImages?.map((image, index) => (
         <div
           key={index}

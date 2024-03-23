@@ -37,17 +37,16 @@ export const calculateDaysDifference = (date) => {
 }
 
 export const formatDate = (date) => {
-  return (
-    new Date(date).getDate() +
-    '/' +
-    new Date(date).getMonth() +
-    '/' +
-    new Date(date).getFullYear()
-  )
+  date = new Date(date)
+  const day = ('0' + date.getDate()).slice(-2)
+  const month = ('0' + (date.getMonth() + 1)).slice(-2)
+  return day + '/' + month + '/' + new Date(date).getFullYear()
 }
 
 export const formatMonth = (date) => {
-  return new Date(date).getMonth() + '/' + new Date(date).getFullYear()
+  date = new Date(date)
+  const month = ('0' + (date.getMonth() + 1)).slice(-2)
+  return month + '/' + new Date(date).getFullYear()
 }
 
 export const formatYear = (date) => {
