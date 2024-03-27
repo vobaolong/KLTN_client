@@ -69,7 +69,8 @@ const UserInit = ({ user, actions }) => {
 			type='button'
 			className='your-store-card btn btn-outline-light cus-outline ripple'
 		>
-			<img src={`${IMG + user.avatar}`} className='your-store-img' />
+			<img loading='lazy'
+				src={`${IMG + user.avatar}`} className='your-store-img' />
 			<span className='your-store-name unselect'>
 				{user.firstName + ' ' + user.lastName}
 				{error && <Error msg={error} />}

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import {
-  listProductsForManager,
-  sellingProduct as sellOrStore
+	listProductsForManager,
+	sellingProduct as sellOrStore
 } from '../../apis/product'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
@@ -21,187 +21,187 @@ import ProductSmallCard from '../card/ProductSmallCard'
 import StarRating from '../label/StarRating'
 
 const StoreProductsTable = ({
-  heading = true,
-  isSelling = true,
-  storeId = ''
+	heading = true,
+	isSelling = true,
+	storeId = ''
 }) => {
-  const { t } = useTranslation()
+	const { t } = useTranslation()
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [run, setRun] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
+	const [isConfirming, setIsConfirming] = useState(false)
+	const [error, setError] = useState('')
+	const [run, setRun] = useState('')
 
-  const [products, setProducts] = useState([])
-  const [pagination, setPagination] = useState({
-    size: 0
-  })
-  const [filter, setFilter] = useState({
-    search: '',
-    sortBy: 'name',
-    isSelling,
-    order: 'asc',
-    limit: 8,
-    page: 1
-  })
+	const [products, setProducts] = useState([])
+	const [pagination, setPagination] = useState({
+		size: 0
+	})
+	const [filter, setFilter] = useState({
+		search: '',
+		sortBy: 'name',
+		isSelling,
+		order: 'asc',
+		limit: 8,
+		page: 1
+	})
 
-  const [sellingProduct, setSellingProduct] = useState({})
-  const { _id, accessToken } = getToken()
+	const [sellingProduct, setSellingProduct] = useState({})
+	const { _id, accessToken } = getToken()
 
-  const init = () => {
-    setIsLoading(true)
-    setError('')
-    listProductsForManager(_id, accessToken, filter, storeId)
-      .then((data) => {
-        if (data.error) setError(data.error)
-        else {
-          setProducts(data.products)
-          setPagination({
-            size: data.size,
-            pageCurrent: data.filter.pageCurrent,
-            pageCount: data.filter.pageCount
-          })
-        }
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        setIsLoading(false)
-        setError('Server Error')
-      })
-  }
+	const init = () => {
+		setIsLoading(true)
+		setError('')
+		listProductsForManager(_id, accessToken, filter, storeId)
+			.then((data) => {
+				if (data.error) setError(data.error)
+				else {
+					setProducts(data.products)
+					setPagination({
+						size: data.size,
+						pageCurrent: data.filter.pageCurrent,
+						pageCount: data.filter.pageCount
+					})
+				}
+				setIsLoading(false)
+			})
+			.catch((error) => {
+				setIsLoading(false)
+				setError('Server Error')
+			})
+	}
 
-  useEffect(() => {
-    init()
-  }, [filter, storeId, run])
+	useEffect(() => {
+		init()
+	}, [filter, storeId, run])
 
-  useEffect(() => {
-    setFilter({
-      ...filter,
-      isSelling
-    })
-  }, [isSelling])
+	useEffect(() => {
+		setFilter({
+			...filter,
+			isSelling
+		})
+	}, [isSelling])
 
-  const handleChangeKeyword = (keyword) => {
-    setFilter({
-      ...filter,
-      search: keyword,
-      page: 1
-    })
-  }
+	const handleChangeKeyword = (keyword) => {
+		setFilter({
+			...filter,
+			search: keyword,
+			page: 1
+		})
+	}
 
-  const handleChangePage = (newPage) => {
-    setFilter({
-      ...filter,
-      page: newPage
-    })
-  }
+	const handleChangePage = (newPage) => {
+		setFilter({
+			...filter,
+			page: newPage
+		})
+	}
 
-  const handleSetSortBy = (order, sortBy) => {
-    setFilter({
-      ...filter,
-      sortBy,
-      order
-    })
-  }
+	const handleSetSortBy = (order, sortBy) => {
+		setFilter({
+			...filter,
+			sortBy,
+			order
+		})
+	}
 
-  const handleSellingProduct = (product) => {
-    setSellingProduct(product)
-    setIsConfirming(true)
-  }
+	const handleSellingProduct = (product) => {
+		setSellingProduct(product)
+		setIsConfirming(true)
+	}
 
-  const onSubmit = () => {
-    setError('')
-    setIsLoading(true)
-    const value = { isSelling: !sellingProduct.isSelling }
-    sellOrStore(_id, accessToken, value, storeId, sellingProduct._id)
-      .then((data) => {
-        if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else setRun(!run)
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        setError('Server Error')
-        setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
-      })
-  }
+	const onSubmit = () => {
+		setError('')
+		setIsLoading(true)
+		const value = { isSelling: !sellingProduct.isSelling }
+		sellOrStore(_id, accessToken, value, storeId, sellingProduct._id)
+			.then((data) => {
+				if (data.error) {
+					setError(data.error)
+					setTimeout(() => {
+						setError('')
+					}, 3000)
+				} else setRun(!run)
+				setIsLoading(false)
+			})
+			.catch((error) => {
+				setError('Server Error')
+				setIsLoading(false)
+				setTimeout(() => {
+					setError('')
+				}, 3000)
+			})
+	}
 
-  return (
-    <div className='position-relative'>
-      {heading && (
-        <h4 className='text-center text-uppercase mb-3'>
-          {isSelling ? t('productDetail.selling') : t('productDetail.stored')}
-        </h4>
-      )}
-      {isLoading && <Loading />}
-      {error && <Error msg={error} />}
-      {isConfirming && (
-        <ConfirmDialog
-          title={
-            sellingProduct.isSelling
-              ? t('productDetail.storeProduct')
-              : t('productDetail.sellProduct')
-          }
-          onSubmit={onSubmit}
-          onClose={() => setIsConfirming(false)}
-        />
-      )}
+	return (
+		<div className='position-relative'>
+			{heading && (
+				<h4 className='text-center text-uppercase mb-3'>
+					{isSelling ? t('productDetail.selling') : t('productDetail.stored')}
+				</h4>
+			)}
+			{isLoading && <Loading />}
+			{error && <Error msg={error} />}
+			{isConfirming && (
+				<ConfirmDialog
+					title={
+						sellingProduct.isSelling
+							? t('productDetail.storeProduct')
+							: t('productDetail.sellProduct')
+					}
+					onSubmit={onSubmit}
+					onClose={() => setIsConfirming(false)}
+				/>
+			)}
 
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='d-flex align-items-center'>
-          <SearchInput onChange={handleChangeKeyword} />
+			<div className='d-flex justify-content-between align-items-end'>
+				<div className='d-flex align-items-center'>
+					<SearchInput onChange={handleChangeKeyword} />
 
-          {isSelling && (
-            <Link
-              type='button'
-              className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
-              to={`/vendor/products/createNewProduct/${storeId}`}
-            >
-              <i className='fas fa-plus-circle'></i>
-              <span className='ms-2 res-hide'>
-                {t('productDetail.createProduct')}
-              </span>
-            </Link>
-          )}
-        </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            )}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
-      </div>
-      {!isLoading && pagination.size === 0 ? (
-        <div className='d-flex justify-content-center mt-5 text-primary text-center'>
-          <h5>{t('productDetail.noProduct')}</h5>
-        </div>
-      ) : (
-        <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-striped table-sm text-center'>
-            <thead>
-              <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.name')}
-                    sortBy='name'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
+					{isSelling && (
+						<Link
+							type='button'
+							className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
+							to={`/vendor/products/createNewProduct/${storeId}`}
+						>
+							<i className='fas fa-plus-circle'></i>
+							<span className='ms-2 res-hide'>
+								{t('productDetail.createProduct')}
+							</span>
+						</Link>
+					)}
+				</div>
+				<small className='text-nowrap res-hide'>
+					{t('showing')}{' '}
+					<b>
+						{Math.min(
+							filter.limit,
+							pagination.size - filter.limit * (pagination.pageCurrent - 1)
+						)}{' '}
+					</b>
+					{t('of')} {pagination.size} {t('result')}
+				</small>
+			</div>
+			{!isLoading && pagination.size === 0 ? (
+				<div className='d-flex justify-content-center mt-5 text-primary text-center'>
+					<h5>{t('productDetail.noProduct')}</h5>
+				</div>
+			) : (
+				<div className='table-scroll my-2'>
+					<table className='table align-middle table-hover table-striped table-sm text-center'>
+						<thead>
+							<tr>
+								<th scope='col'></th>
+								<th scope='col' className='text-start'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.name')}
+										sortBy='name'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
 
-                {/* <th scope='col'>
+								{/* <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -231,114 +231,114 @@ const StoreProductsTable = ({
                     />
                   </th> */}
 
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.price')}
-                    sortBy='price'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.salePrice')}
-                    sortBy='salePrice'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.stock')}
-                    sortBy='quantity'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.sold')}
-                    sortBy='sold'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.category')}
-                    sortBy='categoryId'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.values')}
-                    sortBy='styleValueIds'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('filters.rating')}
-                    sortBy='rating'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('status.status')}
-                    sortBy='isActive'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('productDetail.date')}
-                    sortBy='createdAt'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.price')}
+										sortBy='price'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.salePrice')}
+										sortBy='salePrice'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.stock')}
+										sortBy='quantity'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.sold')}
+										sortBy='sold'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.category')}
+										sortBy='categoryId'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.values')}
+										sortBy='styleValueIds'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('filters.rating')}
+										sortBy='rating'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('status.status')}
+										sortBy='isActive'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
+								<th scope='col'>
+									<SortByButton
+										currentOrder={filter.order}
+										currentSortBy={filter.sortBy}
+										title={t('productDetail.date')}
+										sortBy='createdAt'
+										onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+									/>
+								</th>
 
-                <th scope='col'>
-                  {' '}
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('action')}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product, index) => (
-                <tr key={index}>
-                  <th scope='row'>
-                    {index + 1 + (filter.page - 1) * filter.limit}
-                  </th>
-                  <td
-                    className='text-start py-1'
-                    style={{
-                      whiteSpace: 'normal',
-                      minWidth: '400px',
-                      width: 'fit-content'
-                    }}
-                  >
-                    <ProductSmallCard product={product} />
-                    {/* <small>{product.name}</small> */}
-                  </td>
-                  {/* <td>
+								<th scope='col'>
+									{' '}
+									<span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+										{t('action')}
+									</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{products.map((product, index) => (
+								<tr key={index}>
+									<th scope='row'>
+										{index + 1 + (filter.page - 1) * filter.limit}
+									</th>
+									<td
+										className='text-start py-1'
+										style={{
+											whiteSpace: 'normal',
+											minWidth: '400px',
+											width: 'fit-content'
+										}}
+									>
+										<ProductSmallCard product={product} />
+										{/* <small>{product.name}</small> */}
+									</td>
+									{/* <td>
                   <div
                     className='align-items-center d-flex mx-auto my-1'
                     style={{
@@ -347,7 +347,8 @@ const StoreProductsTable = ({
                       height: '80px'
                     }}
                   >
-                    <img
+                    <img loading='lazy'
+
                       src={IMG + product.listImages[0]}
                       alt={product.name}
                       style={{
@@ -387,7 +388,8 @@ const StoreProductsTable = ({
                               height: '0'
                             }}
                           >
-                            <img
+                            <img loading='lazy'
+
                               className='position-absolute'
                               src={IMG + image}
                               alt='Images'
@@ -424,122 +426,121 @@ const StoreProductsTable = ({
                   </div>
                 </td> */}
 
-                  <td>
-                    <small>{formatPrice(product.price?.$numberDecimal)}₫</small>
-                  </td>
-                  <td>
-                    <small>
-                      {formatPrice(product.salePrice?.$numberDecimal)}₫
-                    </small>
-                  </td>
-                  <td>
-                    <small>{product.quantity}</small>
-                  </td>
-                  <td>
-                    <small>{product.sold}</small>
-                  </td>
-                  <td
-                    style={{
-                      whiteSpace: 'normal'
-                    }}
-                  >
-                    <small className='hidden-avatar'>
-                      <CategorySmallCard
-                        parent={false}
-                        category={product.categoryId}
-                      />
-                    </small>
-                  </td>
+									<td>
+										<small>{formatPrice(product.price?.$numberDecimal)}₫</small>
+									</td>
+									<td>
+										<small>
+											{formatPrice(product.salePrice?.$numberDecimal)}₫
+										</small>
+									</td>
+									<td>
+										<small>{product.quantity}</small>
+									</td>
+									<td>
+										<small>{product.sold}</small>
+									</td>
+									<td
+										style={{
+											whiteSpace: 'normal'
+										}}
+									>
+										<small className='hidden-avatar'>
+											<CategorySmallCard
+												parent={false}
+												category={product.categoryId}
+											/>
+										</small>
+									</td>
 
-                  <td style={{ whiteSpace: 'normal' }}>
-                    <div
-                      className='d-flex justify-content-start align-items-center text-start mx-1'
-                      style={{
-                        maxWidth: '150px'
-                        // height: '120px',
-                        // overflow: 'auto'
-                      }}
-                    >
-                      {product.styleValueIds?.length > 0 ? (
-                        <small>
-                          {/* <StyleValueSelector
+									<td style={{ whiteSpace: 'normal' }}>
+										<div
+											className='d-flex justify-content-start align-items-center text-start mx-1'
+											style={{
+												maxWidth: '150px'
+												// height: '120px',
+												// overflow: 'auto'
+											}}
+										>
+											{product.styleValueIds?.length > 0 ? (
+												<small>
+													{/* <StyleValueSelector
                           listValues={product.styleValueIds}
                           isEditable={false}
                         /> */}
-                          {product.styleValueIds
-                            ?.map((value) => value.name)
-                            .join(', ')}
-                        </small>
-                      ) : (
-                        <small className='mx-auto'>-</small>
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    <small>
-                      <i className='fa-solid fa-star text-warning me-1'></i>
-                      {product.rating}
-                    </small>
-                  </td>
-                  <td>
-                    <small>
-                      <ProductActiveLabel isActive={product.isActive} />
-                    </small>
-                  </td>
-                  <td className='text-end'>
-                    <small>{humanReadableDate(product.createdAt)}</small>
-                  </td>
-                  <td>
-                    <div className='d-flex justify-content-center align-items-center'>
-                      <button
-                        type='button'
-                        className={`btn rounded-1 btn-outline-${
-                          !product.isSelling ? 'success' : 'secondary'
-                        } ripple me-2`}
-                        onClick={() => handleSellingProduct(product)}
-                      >
-                        {!product.isSelling ? (
-                          <>
-                            <i className='fas fa-box'></i>
-                            <span className='ms-1 res-hide'>
-                              {' '}
-                              {t('button.sell')}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <i className='fas fa-archive'></i>
-                            <span className='ms-1 res-hide'>
-                              {t('button.store')}
-                            </span>
-                          </>
-                        )}
-                      </button>
+													{product.styleValueIds
+														?.map((value) => value.name)
+														.join(', ')}
+												</small>
+											) : (
+												<small className='mx-auto'>-</small>
+											)}
+										</div>
+									</td>
+									<td>
+										<small>
+											<i className='fa-solid fa-star text-warning me-1'></i>
+											{product.rating}
+										</small>
+									</td>
+									<td>
+										<small>
+											<ProductActiveLabel isActive={product.isActive} />
+										</small>
+									</td>
+									<td className='text-end'>
+										<small>{humanReadableDate(product.createdAt)}</small>
+									</td>
+									<td>
+										<div className='d-flex justify-content-center align-items-center'>
+											<button
+												type='button'
+												className={`btn rounded-1 btn-outline-${!product.isSelling ? 'success' : 'secondary'
+													} ripple me-2`}
+												onClick={() => handleSellingProduct(product)}
+											>
+												{!product.isSelling ? (
+													<>
+														<i className='fas fa-box'></i>
+														<span className='ms-1 res-hide'>
+															{' '}
+															{t('button.sell')}
+														</span>
+													</>
+												) : (
+													<>
+														<i className='fas fa-archive'></i>
+														<span className='ms-1 res-hide'>
+															{t('button.store')}
+														</span>
+													</>
+												)}
+											</button>
 
-                      <Link
-                        type='button'
-                        className='btn btn-dark ripple rounded-1'
-                        to={`/vendor/products/editproduct/${product._id}/${storeId}`}
-                      >
-                        <i class='fa-solid fa-pen'></i>
-                        <span className='ms-1 res-hide'>
-                          {t('button.edit')}
-                        </span>
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+											<Link
+												type='button'
+												className='btn btn-dark ripple rounded-1'
+												to={`/vendor/products/editproduct/${product._id}/${storeId}`}
+											>
+												<i className='fa-solid fa-pen'></i>
+												<span className='ms-1 res-hide'>
+													{t('button.edit')}
+												</span>
+											</Link>
+										</div>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			)}
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
-    </div>
-  )
+			{pagination.size !== 0 && (
+				<Pagination pagination={pagination} onChangePage={handleChangePage} />
+			)}
+		</div>
+	)
 }
 
 export default StoreProductsTable

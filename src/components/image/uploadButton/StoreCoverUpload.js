@@ -41,7 +41,7 @@ const StoreCoverUpload = ({ storeId = '' }) => {
 		<>
 			{isLoading && <Loading />}
 			<label className='cus-cover-icon'>
-				<i class='fa-solid fa-camera'></i>
+				<i className='fa-solid fa-camera'></i>
 				{error && <Error msg={error} />}
 				<input
 					className='visually-hidden'

@@ -1,7 +1,7 @@
 const Error = ({ msg = 'Something is wrong!' }) => (
-  <p className='text-danger' role='alert'>
-    {msg}
-  </p>
+	<small className='text-danger' role='alert'>
+		{msg}
+	</small>
 )
 
 export default Error

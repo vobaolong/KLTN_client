@@ -15,7 +15,8 @@
     "banStore": "Ban Store",
     "activeStore": "Active Store",
     "activeProduct": "Active Product",
-    "banProduct": "Ban Product"
+    "banProduct": "Ban Product",
+    "removeProductFromCart": "Remove product from cart"
   },
   "action": "Action",
   "showing": "Showing",
@@ -55,7 +56,13 @@
   "favProduct": "Favorite Product",
   "favStore": "Favorite Store",
   "product": "Product",
+  "similarProducts": "Similar Products",
+  "sameShop": "From the same shop",
   "productDetail": {
+    "only": "Only",
+    "productLeft": "products left",
+    "hotSale": "Hot Sale",
+    "mall": "Mall",
     "rating": "Rating",
     "date": "Created at",
     "values": "Values",
@@ -107,9 +114,18 @@
     "up": "up"
   },
   "transactions": "Transactions in the system",
+
   "cartDetail": {
-    "remove": "Remove Product From Cart"
+    "remove": "Remove product from cart",
+    "all": "All",
+    "products": "products",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "empty": "Your shopping cart is empty",
+    "emptyRefer": "Please refer to the products suggested by Zenpii below!"
   },
+
   "store": "Store",
   "searchHolder": "Search for products and stores",
   "userDetail": {
@@ -124,6 +140,7 @@
     "delAddress": "Delete Address",
     "editAddress": "Edit Address",
     "limit10Addresses": "Maximum 10 addresses",
+    "noAddress": "No address yet!",
     "changePassword": "Change Password",
     "currentPw": "Current Password",
     "newPw": "New Password",
@@ -188,7 +205,9 @@
     "processing": "Processing",
     "shipped": "Shipped",
     "delivered": "Delivered",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "verified": "Verified",
+    "notVerified": "Not Verified"
   },
   "categoryDetail": {
     "tree": "Category tree"

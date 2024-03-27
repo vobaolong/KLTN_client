@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { listActiveCategories } from '../../apis/category'
+import i18n from '../../i18n/i18n'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -30,7 +32,7 @@ const CategoryCard = ({ category = {} }) => {
 
 	useEffect(() => {
 		init()
-	}, [category])
+	}, [category, i18n.language])
 
 	return (
 		<div className='card shadow border-0'>
@@ -40,7 +42,8 @@ const CategoryCard = ({ category = {} }) => {
 				title={categoryValue.name}
 			>
 				<div className='card-img-top cus-card-img-top'>
-					<img
+					<img loading='lazy'
+
 						src={IMG + categoryValue.image}
 						className='cus-card-img'
 						alt={categoryValue.name}

@@ -286,7 +286,8 @@ const AdminCategoriesTable = ({ heading = '' }) => {
 											height: '0'
 										}}
 									>
-										<img
+										<img loading='lazy'
+
 											src={IMG + category.image}
 											alt={category.name}
 											style={{
@@ -326,7 +327,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
 										className='btn btn-dark ripple me-2 rounded-1'
 										to={`/admin/category/editCategory/${category._id}`}
 									>
-										<i class='fa-solid fa-pen'></i>
+										<i className='fa-solid fa-pen'></i>
 										<span className='ms-2 res-hide'>Edit</span>
 									</Link>
 
@@ -347,7 +348,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
 											className='btn btn-outline-success ripple cus-tooltip'
 											onClick={() => handleRestoreCategory(category)}
 										>
-											<i class='fa-solid fa-trash-can-arrow-up'></i>
+											<i className='fa-solid fa-trash-can-arrow-up'></i>
 											<span className='ms-2 res-hide'>Restore</span>
 										</button>
 									)}

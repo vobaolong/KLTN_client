@@ -73,7 +73,8 @@ const StoreCard = ({ store = {}, onRun }) => {
 				title={storeValue.name}
 			>
 				<div className='card-img-top cus-card-img-top'>
-					<img
+					<img loading='lazy'
+
 						src={IMG + storeValue.avatar}
 						className='cus-card-img'
 						alt={storeValue.name}

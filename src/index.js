@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Routes from './pages/Routes'
 import { Provider } from 'react-redux'
@@ -7,10 +7,24 @@ import './style.css'
 import './responsive.css'
 import ScrollToTop from 'react-scroll-to-top'
 import './i18n/i18n'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
+      <ToastContainer
+        position='top-right'
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
       <ScrollToTop
         title='Go to top'
         smooth
@@ -22,7 +36,15 @@ ReactDOM.render(
           zIndex: 1000
         }}
       />
-      <Routes />
+      <Suspense
+        fallback={
+          <div class='loading-container'>
+            <div class='loader'></div>
+          </div>
+        }
+      >
+        <Routes />
+      </Suspense>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

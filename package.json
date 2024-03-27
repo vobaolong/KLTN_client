@@ -28,6 +28,8 @@
     "react-scripts": "4.0.3",
     "react-scroll-to-top": "^3.0.0",
     "react-share": "^5.1.0",
+    "react-slick": "^0.30.2",
+    "react-toastify": "^9.0.0",
     "redux": "^4.1.1",
     "web-vitals": "^1.1.2",
     "zustand": "^3.5.12"
@@ -36,8 +38,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prettier": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,css}"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

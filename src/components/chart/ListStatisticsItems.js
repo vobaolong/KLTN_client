@@ -20,6 +20,7 @@ import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { useTranslation } from 'react-i18next'
+import i18n from '../../i18n/i18n'
 
 const groupByFunc = {
 	order: groupByDate,
@@ -178,7 +179,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 	useEffect(() => {
 		if (by === 'admin') adminInit()
 		else vendorInit()
-	}, [by, storeId])
+	}, [by, storeId, i18n.language])
 
 	return (
 		<div className='position-relative'>
@@ -192,8 +193,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 								<button
 									type='button'
 									className={`btn ${options.flag === 'user'
-											? 'btn-primary'
-											: 'btn-outline-primary'
+										? 'btn-primary'
+										: 'btn-outline-primary'
 										} btn-lg ripple w-100 py-4 mb-2`}
 									onClick={() =>
 										setOptions({
@@ -212,8 +213,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 								<button
 									type='button'
 									className={`btn ${options.flag === 'store'
-											? 'btn-golden'
-											: 'btn-outline-golden'
+										? 'btn-golden'
+										: 'btn-outline-golden'
 										} btn-lg ripple w-100 py-4 mb-2`}
 									onClick={() =>
 										setOptions({
@@ -251,8 +252,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 						<button
 							type='button'
 							className={`btn ${options.flag === 'product'
-									? 'btn-success'
-									: 'btn-outline-success'
+								? 'btn-success'
+								: 'btn-outline-success'
 								} btn-lg ripple w-100 py-4 mb-2`}
 							onClick={() =>
 								setOptions({

@@ -105,6 +105,7 @@ const AccountInit = ({ user, actions }) => {
 					className='your-account-card btn btn-outline-light cus-outline ripple rounded-1'
 				>
 					<img
+						loading='lazy'
 						src={avatar ? `${IMG + avatar}` : ''}
 						className='your-account-img'
 						alt=''
@@ -141,7 +142,7 @@ const AccountInit = ({ user, actions }) => {
 							className='list-group-item your-account-options-item ripple text-capitalize'
 							to='/account/purchase'
 						>
-							<i class='fa-solid fa-bag-shopping'></i>
+							<i className='fa-solid fa-bag-shopping'></i>
 							{t('userDetail.myPurchase')}
 						</Link>
 					)}

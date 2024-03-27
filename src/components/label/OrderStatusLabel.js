@@ -9,7 +9,7 @@ const icons = {
 const colors = {
 	'Not processed': 'warning',
 	Processing: 'orange',
-	Shipped: 'dark',
+	Shipped: 'primary',
 	Delivered: 'success',
 	Cancelled: 'danger'
 }

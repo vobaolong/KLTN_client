@@ -11,6 +11,7 @@ import StarRating from '../label/StarRating'
 import FollowProductButton from '../button/FollowProductButton'
 import { useTranslation } from 'react-i18next'
 import { calcPercent } from '../../helper/calcPercent'
+import MallLabel from '../label/MallLabel'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ProductCard = ({ product = {}, onRun }) => {
@@ -45,7 +46,6 @@ const ProductCard = ({ product = {}, onRun }) => {
 
 	const onHandleRun = async (newProduct) => {
 		if (onRun) onRun(newProduct)
-
 		let numberOfFollowers
 		try {
 			const data = await getNumberOfFollowersForProduct(newProduct._id)
@@ -77,6 +77,7 @@ const ProductCard = ({ product = {}, onRun }) => {
 					style={{ position: 'relative' }}
 				>
 					<img
+						loading='lazy'
 						src={productValue.listImages && IMG + productValue.listImages[0]}
 						className='cus-card-img'
 						alt={productValue.name}
@@ -86,6 +87,7 @@ const ProductCard = ({ product = {}, onRun }) => {
 						}}
 					/>
 					<img
+						loading='lazy'
 						src={productValue.listImages && IMG + productValue.listImages[1]}
 						className='cus-card-img'
 						alt={productValue.name}
@@ -99,19 +101,20 @@ const ProductCard = ({ product = {}, onRun }) => {
 					/>
 				</div>
 				{salePercent > 0 && (
-					<div class='sale-tag'>
+					<div className='sale-tag'>
 						{-salePercent}% {t('productDetail.sale')}
 					</div>
 				)}
 				{productValue.numberOfFollowers > 2 ? (
-					<div class='fav-tag'>{t('favorite')}</div>
+					<div className='fav-tag'>{t('favorite')}</div>
 				) : (
 					''
 				)}
 			</Link>
 
-			<div className='card-body border-top'>
-				<small className='card-subtitle'>
+			<div className='card-body'>
+				<MallLabel className='mb-2' />
+				<small classN ame='card-subtitle'>
 					<StarRating stars={productValue.rating} />{' '}
 					<small>
 						{productValue.sold} {t('productDetail.sold')}

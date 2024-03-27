@@ -21,7 +21,8 @@ const Avatar = ({
 	<div className='cus-avatar-wrap'>
 		<div className={`cus-avatar-box ${size && 'cus-avatar-box--small'}`}>
 			<div className='cus-avatar'>
-				<img
+				<img loading='lazy'
+
 					src={`${IMG + avatar}`}
 					className='cus-avatar-img'
 					style={{ borderRadius: `${noRadius && '5px'}` }}

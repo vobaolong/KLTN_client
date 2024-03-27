@@ -1,17 +1,22 @@
-const VerifyLabel = ({ verify }) => (
-	<span>
-		{verify ? (
-			<span className='badge bg-success rounded-1' style={{ width: '80px' }}>
-				<i class='fa-solid fa-circle-check me-1'></i>
-				<span>Verified</span>
-			</span>
-		) : (
-			<span className='badge bg-danger rounded-1' style={{ width: '80px' }}>
-				<i class='fa-solid fa-circle-xmark me-1'></i>
-				<span>Not Verified</span>
-			</span>
-		)}
-	</span>
-)
+import { useTranslation } from 'react-i18next'
+
+const VerifyLabel = ({ verify }) => {
+	const { t } = useTranslation()
+	return (
+		<span>
+			{verify ? (
+				<span className='badge rounded-1 text-success' style={{ width: '80px', backgroundColor: '#c7f6d3' }}>
+					<i className='fa-solid fa-circle-check me-1'></i>
+					<span>{t('status.verified')}</span>
+				</span>
+			) : (
+				<span className='badge rounded-1 text-danger' style={{ width: '80px', backgroundColor: '#ff99a0' }}>
+					<i className='fa-solid fa-circle-xmark me-1'></i>
+					<span>{t('status.notVerified')}</span>
+				</span>
+			)}
+		</span>
+	)
+}
 
 export default VerifyLabel

@@ -11,8 +11,9 @@ const Cover = ({
 }) => (
 	<div className='cus-cover-wrap'>
 		<div className='cus-cover'>
-			<img src={`${IMG + cover}`} className='cus-cover-img' alt={alt} />
-			<div class='position-absolute overlay'></div>
+			<img loading='lazy'
+				src={`${IMG + cover}`} className='cus-cover-img' alt={alt} />
+			<div className='position-absolute overlay'></div>
 			{isEditable === 'user' && <UserCoverUpload />}
 			{isEditable === 'store' && <StoreCoverUpload storeId={storeId} />}
 		</div>

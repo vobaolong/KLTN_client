@@ -5,18 +5,14 @@ import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [address, setAddress] = useState({
     street: oldAddress.split(', ')[0],
     ward: oldAddress.split(', ')[1],
@@ -109,29 +105,21 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
       address.city_province +
       ', ' +
       address.country
-
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateAddress(_id, accessToken, index, { address: addressString })
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
+        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error(error)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        setTimeout(() => {}, 3000)
       })
   }
 
@@ -221,19 +209,6 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
             onValidate={(flag) => handleValidate('isValidCountry', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

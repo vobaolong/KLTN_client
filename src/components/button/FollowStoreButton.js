@@ -88,12 +88,12 @@ const FollowStoreButton = ({
 				<Error msg={error} />
 			) : followingFlag ? (
 				<span>
-					<i class='fa-solid fa-check'></i>
+					<i className='fa-solid fa-check'></i>
 					<span className='ms-2 res-hide-md'>{t('storeDetail.following')}</span>
 				</span>
 			) : (
 				<span>
-					<i class='fa-solid fa-plus'></i>
+					<i className='fa-solid fa-plus'></i>
 					<span className='ms-2 res-hide-md'>{t('storeDetail.follow')}</span>
 				</span>
 			)}

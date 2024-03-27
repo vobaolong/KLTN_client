@@ -66,8 +66,8 @@ const FollowingStoresCollection = (props) => {
 			{isLoading && <Loading />}
 			{error && <Error msg={error} />}
 
-			<div className='d-flex justify-content-between align-items-end'>
-				<h4>{t('favStore')}</h4>
+			<h4 className='text-center'>{t('favStore')}</h4>
+			<div className='d-flex justify-content-end align-items-end'>
 				<ShowResult
 					limit={filter.limit}
 					size={pagination.size}

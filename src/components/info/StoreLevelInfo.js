@@ -18,7 +18,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-star me-2 text-secondary'></i>
+									<i className='fa-solid fa-star me-2 text-secondary'></i>
 									{t('storeDetail.rating')}
 								</span>
 							}
@@ -29,7 +29,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 									{store.rating === 0 && store.numberOfReviews === 0
 										? '4'
 										: store.rating}{' '}
-									/ 5 <i class='fa-solid fa-star text-warning'></i>
+									/ 5 <i className='fa-solid fa-star text-warning'></i>
 								</span>
 							}
 						/>
@@ -38,7 +38,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-user-check me-2 text-secondary'></i>
+									<i className='fa-solid fa-user-check me-2 text-secondary'></i>
 									{t('joined')}
 								</span>
 							}
@@ -50,7 +50,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-user-group me-2 text-secondary'></i>
+									<i className='fa-solid fa-user-group me-2 text-secondary'></i>
 									{t('userDetail.followers')}
 								</span>
 							}
@@ -62,7 +62,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-square-check me-2 text-secondary'></i>
+									<i className='fa-solid fa-square-check me-2 text-secondary'></i>
 									{t('success/failure')}
 								</span>
 							}

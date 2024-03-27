@@ -31,7 +31,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 					<Paragraph
 						label={
 							<span>
-								<i class='fa-solid fa-user	 me-2 text-secondary'></i>
+								<i className='fa-solid fa-user	 me-2 text-secondary'></i>
 								{t('userDetail.name')}
 							</span>
 						}
@@ -45,7 +45,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-envelope	 me-2 text-secondary'></i>
+									<i className='fa-solid fa-envelope	 me-2 text-secondary'></i>
 									Email
 								</span>
 							}
@@ -58,7 +58,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 							<Paragraph
 								label={
 									<span>
-										<i class='fa-solid fa-envelope me-2 text-secondary'></i>
+										<i className='fa-solid fa-envelope me-2 text-secondary'></i>
 										Email
 									</span>
 								}
@@ -80,7 +80,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 						<Paragraph
 							label={
 								<span>
-									<i class='fa-solid fa-phone	 me-2 text-secondary'></i>
+									<i className='fa-solid fa-phone	 me-2 text-secondary'></i>
 									{t('userDetail.phone')}
 								</span>
 							}
@@ -94,7 +94,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 							<Paragraph
 								label={
 									<span>
-										<i class='fa-solid fa-phone	 me-2 text-secondary'></i>
+										<i className='fa-solid fa-phone	 me-2 text-secondary'></i>
 										{t('userDetail.phone')}
 									</span>
 								}
@@ -116,7 +116,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
 					<Paragraph
 						label={
 							<span>
-								<i class='fa-regular fa-credit-card	 me-2 text-secondary'></i>
+								<i className='fa-regular fa-credit-card	 me-2 text-secondary'></i>
 								ID Card
 							</span>
 						}

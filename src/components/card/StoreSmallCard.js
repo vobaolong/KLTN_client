@@ -11,7 +11,8 @@ const StoreSmallCard = ({
 			}`}
 	>
 		<Link className='text-reset text-decoration-none' to={link}>
-			<img
+			<img loading='lazy'
+
 				src={`${IMG + store.avatar}`}
 				className='small-card-img'
 				alt={store.name}

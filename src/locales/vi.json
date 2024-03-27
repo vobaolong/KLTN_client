@@ -15,7 +15,8 @@
     "banStore": "Khoá Cửa Hàng",
     "activeStore": "Kích Hoạt Cửa Hàng",
     "activeProduct": "Kích Hoạt Sản Phẩm",
-    "banProduct": "Khoá Sản Phẩm"
+    "banProduct": "Khoá Sản Phẩm",
+    "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng"
   },
   "action": "Hành động",
   "showing": "Hiển thị",
@@ -55,7 +56,13 @@
   "favProduct": "Sản Phẩm Yêu Thích",
   "favStore": "Store Yêu Thích",
   "product": "Sản Phẩm",
+  "similarProducts": "Sản Phẩm Tương Tự",
+  "sameShop": "Các Sản Phẩm Khác Của Shop",
   "productDetail": {
+    "only": "Còn",
+    "productLeft": "sản phẩm",
+    "hotSale": "Giảm sốc",
+    "mall": "Chính hãng",
     "rating": "Đánh giá",
     "date": "Ngày tạo",
     "values": "Giá trị",
@@ -109,7 +116,14 @@
   "transactions": "Giao dịch trong hệ thống",
 
   "cartDetail": {
-    "remove": "Xoá sản phẩm khỏi giỏ hàng"
+    "remove": "Xoá sản phẩm khỏi giỏ hàng",
+    "all": "Tất cả",
+    "products": "sản phẩm",
+    "unitPrice": "Đơn giá",
+    "quantity": "Số lượng",
+    "total": "Thành tiền",
+    "empty": "Giỏ hàng của bạn đang trống",
+    "emptyRefer": "Bạn tham khảo thêm các sản phẩm được Zenpii gợi ý phía dưới nhé!"
   },
 
   "store": "Cửa hàng",
@@ -126,6 +140,7 @@
     "delAddress": "Xoá địa chỉ",
     "editAddress": "Sửa địa chỉ",
     "limit10Addresses": "Tối đa 10 địa chỉ",
+    "noAddress": "Không có địa chỉ!",
     "changePassword": "Thay đổi mật khẩu",
     "currentPw": "Mật khẩu hiện tại",
     "newPw": "Mật khẩu mới",
@@ -190,7 +205,9 @@
     "processing": "Đang xử lý",
     "shipped": "Chờ giao",
     "delivered": "Hoàn thành",
-    "cancelled": "Đã huỷ"
+    "cancelled": "Đã huỷ",
+    "verified": "Đã xác thực",
+    "notVerified": "Chưa xác thực"
   },
   "categoryDetail": {
     "tree": "Danh mục kiểu cây"

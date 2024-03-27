@@ -46,7 +46,7 @@ const EmailActiveButton = ({
 		<div className='d-inline-flex flex-column'>
 			{email && isEmailActive && (
 				<div className='position-relative d-inline-block'>
-					<span className='badge bg-success cus-tooltip rounded-1'>
+					<span style={{ backgroundColor: '#c7f6d3' }} className='badge text-success cus-tooltip rounded-1'>
 						<i className='fas fa-check-circle me-2'></i>
 						{t('verified')}
 					</span>
@@ -58,14 +58,16 @@ const EmailActiveButton = ({
 				<div className='position-relative d-inline-block'>
 					<span className='badge bg-primary d-inline-flex align-items-end cus-tooltip'>
 						{googleId && (
-							<img
+							<img loading='lazy'
+
 								className='social-img rounded-circle me-1 social-img--small'
 								src='https://img.icons8.com/color/48/000000/google-logo.png'
 								alt=''
 							/>
 						)}
 						{facebookId && (
-							<img
+							<img loading='lazy'
+
 								className='social-img rounded-circle me-1 social-img--small'
 								src='https://img.icons8.com/color/48/000000/facebook-new.png'
 								alt=''

@@ -20,7 +20,7 @@ const CategoryPage = (props) => {
 							} btn-lg ripple cus-tooltip`}
 						onClick={() => toggleFlag()}
 					>
-						<i class="fa-solid fa-folder-tree"></i>
+						<i className="fa-solid fa-folder-tree"></i>
 					</button>
 
 					<small className='cus-tooltip-msg'>{t('categoryDetail.tree')}</small>

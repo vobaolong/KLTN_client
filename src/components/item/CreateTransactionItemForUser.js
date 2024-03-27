@@ -14,7 +14,7 @@ const CreateTransactionItemForUser = ({ eWallet = 0, onRun }) => {
 					data-bs-toggle='modal'
 					data-bs-target='#create-transaction-form-for-user'
 				>
-					<i class='fa-solid fa-money-bill-transfer'></i>
+					<i className='fa-solid fa-money-bill-transfer'></i>
 					<span className='ms-2 res-hide'>{t('transactionDetail.draw')}</span>
 				</button>
 

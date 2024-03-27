@@ -83,6 +83,10 @@
 		display: none !important;
 	}
 
+	.cus-carousel {
+		min-height: 100%;
+	}
+
 	.cus-cover-wrap {
 		max-width: 100%;
 	}
@@ -147,8 +151,8 @@
 	}
 
 	.res-mx--12-md {
-		margin-left: -12px !important;
-		margin-right: -12px !important;
+		margin-left: 3px !important;
+		margin-right: 3px !important;
 	}
 
 	.res-smaller-md {
@@ -213,6 +217,10 @@
 
 	.lang {
 		display: none;
+	}
+
+	.cus-carousel {
+		min-height: 100%;
 	}
 
 	.social-icons {

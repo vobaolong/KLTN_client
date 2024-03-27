@@ -12,7 +12,7 @@ const UserEditProfileItem = ({ user = {} }) => {
 				data-bs-toggle='modal'
 				data-bs-target='#profile-edit-form'
 			>
-				<i class='fa-solid fa-pen'></i>
+				<i className='fa-solid fa-pen'></i>
 			</button>
 
 			<Modal

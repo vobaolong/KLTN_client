@@ -8,6 +8,7 @@ const CategorySmallCard = ({ category = {}, style = {}, parent = true }) => (
 			to={`/category/${category._id}`}
 		>
 			<img
+				loading='lazy'
 				src={`${IMG + category.image}`}
 				className='small-product-img'
 				alt={category.name}

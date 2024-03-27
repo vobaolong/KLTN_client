@@ -99,7 +99,8 @@ const VendorInit = ({ store, actions }) => {
 							type='button'
 							className='your-store-card btn btn-outline-light cus-outline ripple'
 						>
-							<img
+							<img loading='lazy'
+
 								src={`${IMG + store.avatar}`}
 								className='your-store-img'
 								alt=''

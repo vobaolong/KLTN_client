@@ -11,7 +11,8 @@ const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
 			title={product.name}
 			to={`/product/${product._id}`}
 		>
-			<img
+			<img loading='lazy'
+
 				src={`${IMG + product.listImages[0]}`}
 				className='small-product-img'
 				alt={product.name}

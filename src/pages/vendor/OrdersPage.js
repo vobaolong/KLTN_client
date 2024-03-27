@@ -11,35 +11,34 @@ const OrdersPage = (props) => {
 	const [selectedStatus, setSelectedStatus] = useState('Not processed');
 
 	const orderStatus = [
-		{ label: t('status.all'), value: 'Not processed|Processing|Shipped|Delivered|Cancelled', className: 'secondary' },
-		{ label: t('status.notProcessed'), value: 'Not processed', className: 'golden' },
-		{ label: t('status.processing'), value: 'Processing', className: 'primary' },
-		{ label: t('status.shipped'), value: 'Shipped', className: 'primary' },
-		{ label: t('status.delivered'), value: 'Delivered', className: 'success' },
-		{ label: t('status.cancelled'), value: 'Cancelled', className: 'danger' }
+		{ label: t('status.all'), value: 'Not processed|Processing|Shipped|Delivered|Cancelled' },
+		{ label: t('status.notProcessed'), value: 'Not processed' },
+		{ label: t('status.processing'), value: 'Processing' },
+		{ label: t('status.shipped'), value: 'Shipped' },
+		{ label: t('status.delivered'), value: 'Delivered' },
+		{ label: t('status.cancelled'), value: 'Cancelled' }
 	];
 
 	const handleStatusChange = (status) => {
-		setSelectedStatus(status);
-	};
+		setSelectedStatus(status)
+	}
 
 	return (
 		<VendorLayout user={user} store={store}>
-			<div className='d-flex align-items-center mb-4 justify-content-between'>
-
+			<div className="nav d nav-tabs bg-body rounded-2 p-2 box-shadow w-100 mb-4">
 				{orderStatus.map((status) => (
-					<button
-						style={{ flex: 1 }}
-						key={status.value}
-						type='button'
-						className={`btn ${selectedStatus === status.value ? `btn-${status.className}` : `btn-outline-${status.className}`
-							} btn-sm ripple cus-tooltip me-2`}
-						onClick={() => handleStatusChange(status.value)}
-					>
-						{status.label}
-					</button>
+					<li className="nav-item col-2 text-center pointer" key={status.value}>
+						<span
+							className={`nav-link ${selectedStatus === status.value ? `active` : ``
+								}`}
+							onClick={() => handleStatusChange(status.value)}
+						>
+							{status.label}
+						</span>
+					</li>
 				))}
 			</div>
+
 			<VendorOrdersTable
 				heading={true}
 				storeId={store._id}

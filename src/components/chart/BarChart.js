@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { groupByDate } from '../../helper/groupBy'
 import { randomColorsArray } from '../../helper/color'

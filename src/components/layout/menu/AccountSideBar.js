@@ -41,7 +41,7 @@ const AccountSideBar = ({ user = {} }) => {
 							className={`nav-link cus-sidebar-item ripple link-dark ${path === 'purchase' ? 'active' : ''
 								}`}
 						>
-							<i class='fa-solid fa-bag-shopping'></i>
+							<i className='fa-solid fa-bag-shopping'></i>
 							<span className='ms-3 res-hide-xl text-capitalize'>
 								{t('userDetail.myPurchase')}
 							</span>
@@ -108,7 +108,7 @@ const AccountSideBar = ({ user = {} }) => {
 							className={`nav-link cus-sidebar-item ripple link-dark ${path === 'wallet' ? 'active' : ''
 								}`}
 						>
-							<i class='fa-solid fa-wallet'></i>
+							<i className='fa-solid fa-wallet'></i>
 							<span className='ms-3 res-hide-lg'>{t('wallet')}</span>
 						</Link>
 					</li>

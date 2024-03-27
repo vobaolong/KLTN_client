@@ -17,7 +17,8 @@ const UserSmallCard = ({
 			title={user.firstName + ' ' + user.lastName}
 			to={link}
 		>
-			<img
+			<img loading='lazy'
+
 				src={`${IMG + user.avatar}`}
 				className='small-card-img'
 				alt={user.firstName + ' ' + user.lastName}

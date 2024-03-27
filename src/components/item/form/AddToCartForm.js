@@ -2,45 +2,38 @@ import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { addToCart } from '../../../apis/cart'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import StyleValueSelector from '../../selector/StyleValueSelector'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AddToCartForm = ({ product = {} }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [updateDispatch] = useUpdateDispatch()
-
   const [cartItem, setCartItem] = useState({})
 
   useEffect(() => {
     let defaultList = []
+    product.styleValueIds?.forEach((value) => {
+      let flag = true
+      defaultList.forEach((list) => {
+        if (value.styleId._id === list[0].styleId._id) {
+          list.push(value)
+          flag = false
+        }
 
-    product.styleValueIds &&
-      product.styleValueIds.forEach((value) => {
-        let flag = true
-        defaultList.forEach((list) => {
-          if (value.styleId._id === list[0].styleId._id) {
-            list.push(value)
-            flag = false
-          }
-
-          list.sort((a, b) => {
-            const nameA = a.name.toUpperCase()
-            const nameB = b.name.toUpperCase()
-            if (nameA < nameB) return -1
-            if (nameA > nameB) return 1
-            return 0
-          })
+        list.sort((a, b) => {
+          const nameA = a.name.toUpperCase()
+          const nameB = b.name.toUpperCase()
+          if (nameA < nameB) return -1
+          if (nameA > nameB) return 1
+          return 0
         })
-
-        if (flag) defaultList.push([value])
       })
+
+      if (flag) defaultList.push([value])
+    })
 
     const defaultStyleValues = defaultList.map((list) => list[0])
     const defaultStyleValueIds = defaultStyleValues
@@ -69,28 +62,22 @@ const AddToCartForm = ({ product = {} }) => {
   }
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
-
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     addToCart(_id, accessToken, cartItem)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else {
-          setSuccess(data.success)
+        if (data.error) {
+          toast.error(data.error)
+        } else {
           updateDispatch('account', data.user)
+          toast.success(data.success)
         }
         setTimeout(() => {
-          setError('')
-          setSuccess('')
+          setCartItem({})
         }, 3000)
         setIsLoading(false)
       })
-      .catch((error) => {
-        setError('Server Error')
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+      .catch(() => {
+        toast.error('Server Error')
         setIsLoading(false)
       })
   }
@@ -107,19 +94,6 @@ const AddToCartForm = ({ product = {} }) => {
             onSet={(values) => handleSet(values)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div
           className='col-md-12 d-grid mt-4'
           style={{ maxWidth: 'fit-content' }}

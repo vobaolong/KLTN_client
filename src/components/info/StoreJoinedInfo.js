@@ -18,7 +18,7 @@ const StoreJoinedInfo = ({ store = {} }) => {
 					<Paragraph
 						label={
 							<span>
-								<i class='fa-solid fa-user-check me-1 text-secondary'></i>
+								<i className='fa-solid fa-user-check me-1 text-secondary'></i>
 								{t('joined')}
 							</span>
 						}

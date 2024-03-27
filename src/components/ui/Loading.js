@@ -14,7 +14,7 @@ const Loading = ({ size = 'medium' }) => (
       style={{
         width: '100%',
         height: '100%',
-        animation: 'show 0.6s ease'
+        animation: 'show 0.3s ease'
       }}
     >
       <div

@@ -6,22 +6,16 @@ import UserEditAddressForm from '../item/form/UserEditAddressForm'
 import UserAddAddressItem from '../item/UserAddAddressItem'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
-import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const UserAddressesTable = ({ addresses = [] }) => {
   const { t } = useTranslation()
-
+  const [isLoading, setIsLoading] = useState(false)
   const [editAddress, setEditAddress] = useState({})
   const [deleteAddress, setDeleteAddress] = useState({})
-
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
 
@@ -41,28 +35,21 @@ const UserAddressesTable = ({ addresses = [] }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     deleteAddresses(_id, accessToken, deleteAddress.index)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
+        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error(error)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        setTimeout(() => {}, 3000)
       })
   }
 
@@ -85,9 +72,6 @@ const UserAddressesTable = ({ addresses = [] }) => {
         </h4>
       )}
 
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <UserAddAddressItem count={addresses?.length || 0} />
         <span className='text-nowrap'>
@@ -98,7 +82,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
       </div>
       {!isLoading && addresses.length === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>No address yet!</h5>
+          <h5>{t('userDetail.noAddress')}</h5>
         </div>
       ) : (
         <div className='table-scroll my-2'>
@@ -133,7 +117,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                       data-bs-target='#edit-address-form'
                       onClick={() => handleEditAddress(address, index)}
                     >
-                      <i class='fa-solid fa-pen'></i>
+                      <i className='fa-solid fa-pen'></i>
                       <span className='ms-2 res-hide'>{t('button.edit')}</span>
                     </button>
                     <button

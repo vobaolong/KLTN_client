@@ -33,7 +33,8 @@ const Carousel = ({
 					data-bs-interval='3000'
 				>
 					<div className='cus-carousel' style={style}>
-						<img
+						<img loading='lazy'
+
 							src={`${IMG + image}`}
 							className='d-block cus-carousel-img'
 							alt={alt}
