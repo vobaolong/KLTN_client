@@ -116,7 +116,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           }, 3000)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setTimeout(() => setError(''), 3000)
           setIsLoading(false)
         })

@@ -93,7 +93,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
         }, 3000)
       })
       .catch((error) => {
-        setError('Server Error')
+        setError(error)
         setIsLoading(false)
         setTimeout(() => {
           setError('')

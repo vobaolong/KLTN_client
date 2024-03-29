@@ -1,4 +1,23 @@
 {
+  "toastSuccess": {
+    "product": {
+      "create": "Create Product Successfully"
+    },
+    "store": {
+      "ban": "Ban Store Successfully",
+      "active": "Active Store Successfully"
+    },
+    "order": {
+      "update": "Update Order successfully"
+    },
+    "category": {
+      "create": "Create Category Successfully",
+      "update": "Update Category successfully",
+      "delete": "Delete Category successfully",
+      "restore": "Restore Category successfully"
+    }
+  },
+  "toastError": {},
   "title": {
     "listBannedStores": "List of Banned Stores",
     "listActiveStores": "List of Active Stores",
@@ -9,14 +28,17 @@
     "processingOrders": "Processing Orders",
     "shippedOrders": "Shipped Orders",
     "deliveredOrders": "Delivered Orders",
-    "cancelledOrders": "Cancelled Orders"
+    "cancelledOrders": "Cancelled Orders",
+    "userInSystem": "Users in the system"
   },
   "dialog": {
-    "banStore": "Ban Store",
-    "activeStore": "Active Store",
-    "activeProduct": "Active Product",
-    "banProduct": "Ban Product",
-    "removeProductFromCart": "Remove product from cart"
+    "banStore": "Ban store",
+    "activeStore": "Active store",
+    "activeProduct": "Active product",
+    "banProduct": "Ban product",
+    "removeProductFromCart": "Remove product from cart",
+    "updateOrder": "Update order status",
+    "updateCategory": "Update category"
   },
   "action": "Action",
   "showing": "Showing",
@@ -83,7 +105,7 @@
     "stored": "Stored Products",
     "editProInfo": "Edit product information",
     "editProImg": "Edit product images",
-    "thumbImg": "Product thumbnail",
+    "thumbImg": "Thumbnail",
     "otherImg": "Other images",
     "sold": "Sold",
     "sale": "OFF",
@@ -98,8 +120,19 @@
     "purchased": "Purchased",
     "limitImg": "Limit is 7 images!",
     "storeProduct": "Store the product",
-    "sellProduct": "Sell the product"
+    "sellProduct": "Sell the product",
+    "addImg": "Add Product Image"
   },
+  "productValid": {
+    "nameValid": "Please provide a valid product name!",
+    "avatarValid": "Please provide a valid product avatar!",
+    "otherValid": "Please provide a valid other images!",
+    "descriptionValid": "Please provide a valid product description!",
+    "quantityValid": "Please provide a valid product quantity!",
+    "priceValid": "Please provide a valid product price!",
+    "salePriceValid": "Please provide a valid product sale price!"
+  },
+
   "filters": {
     "filter": "Filters",
     "rating": "Rating",
@@ -129,6 +162,7 @@
   "store": "Store",
   "searchHolder": "Search for products and stores",
   "userDetail": {
+    "KYC": "KYC",
     "level": "Level",
     "followers": "Followers",
     "myAccount": "My account",
@@ -210,7 +244,19 @@
     "notVerified": "Not Verified"
   },
   "categoryDetail": {
-    "tree": "Category tree"
+    "tree": "Categories tree",
+    "add": "Add category",
+    "name": "Category name",
+    "parent": "Parent category",
+    "selectLargeCategory": "Select parent category",
+    "noCategorySelected": "No category selected",
+    "img": "Category image",
+    "delete": "Delete category",
+    "edit": "Edit category"
+  },
+  "categoryValid": {
+    "nameValid": "Please provide category name valid!",
+    "imgValid": "Please provide category image valid!"
   },
   "variantDetail": {
     "variants": "Variants",
@@ -243,6 +289,8 @@
   },
 
   "storeDetail": {
+    "addFeaturedImg": "Add Featured Image",
+    "limitFeatured": "The limit is 6 featured images",
     "bio": "Bio",
     "editProfile": "Edit Store Profile",
     "products": "Products",
@@ -274,12 +322,14 @@
     "nameValid": "Please provide a valid store name!",
     "bioValid": "Please provide a valid store bio!",
     "avatarValid": "Please provide a valid store avatar!",
-    "coverValid": "Please provide a valid store cover!"
+    "coverValid": "Please provide a valid store cover!",
+    "featuredValid": "Please provide a valid store featured image!"
   },
   "favorite": "Favorite",
   "wallet": "E-Wallet",
   "confirmDialog": "Are you sure about that?",
   "button": {
+    "restore": "Restore",
     "store": "Store",
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -298,7 +348,10 @@
     "more": "More",
     "sell": "Sell",
     "ban": "Ban",
-    "active": "Active"
+    "active": "Active",
+    "clickToClose": "Click to close store",
+    "clickToOpen": "Click to open store",
+    "addFeaturedImg": "Add Featured Image"
   },
   "signInForm": {
     "comeBack": "Welcome back!",

@@ -6,19 +6,15 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import InputFile from '../../ui/InputFile'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
-const AdminCreateCategoryForm = (props) => {
+const AdminCreateCategoryForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newCategory, setNewCategory] = useState({
     name: '',
     image: '',
@@ -47,48 +43,36 @@ const AdminCreateCategoryForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, image } = newCategory
-    if (!name || !image) {
+    const { name } = newCategory
+    if (!name) {
       setNewCategory({
         ...newCategory,
-        isValidName: regexTest('anything', name),
-        isValidImage: !!image
+        isValidName: regexTest('anything', name)
       })
       return
     }
 
-    const { isValidName, isValidImage } = newCategory
-    if (!isValidName || !isValidImage) return
-
+    const { isValidName } = newCategory
+    if (!isValidName) return
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
     const formData = new FormData()
     formData.set('name', newCategory.name)
-    formData.set('image', newCategory.image)
     if (newCategory.categoryId)
       formData.set('categoryId', newCategory.categoryId)
-
-    setError('')
-    setSuccess('')
+    if (newCategory.image) formData.set('image', newCategory.image)
     setIsLoading(true)
     createCategory(_id, accessToken, formData)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(t('toastSuccess.category.create'))
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -97,7 +81,7 @@ const AdminCreateCategoryForm = (props) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Tạo Danh Mục'
+          title={t('categoryDetail.add')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -108,13 +92,13 @@ const AdminCreateCategoryForm = (props) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Tạo Danh Mục Mới</h1>
+          <h1 className='text-white fs-5 m-0'>{t('categoryDetail.add')}</h1>
         </div>
 
         <div className='col-12 mt-4 px-4'>
-          <p className=''>Chọn Danh Mục Lớn</p>
+          <p className=''>{t('categoryDetail.selectLargeCategory')}</p>
           <CategorySelector
-            label='Chọn Danh Mục Lớn'
+            label={t('categoryDetail.selectLargeCategory')}
             selected='parent'
             isActive={false}
             onSet={(category) =>
@@ -129,10 +113,10 @@ const AdminCreateCategoryForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Tên Danh Mục'
+            label={t('categoryDetail.name')}
             value={newCategory.name}
             isValid={newCategory.isValidName}
-            feedback='Vui lòng cung cấp tên danh mục hợp lệ!'
+            feedback={t('categoryValid.nameValid')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -142,29 +126,18 @@ const AdminCreateCategoryForm = (props) => {
 
         <div className='col-12 px-4 mt-2'>
           <InputFile
-            label='Ảnh Danh Mục'
+            label={t('categoryDetail.img')}
             size='avatar'
             noRadius={true}
             value={newCategory.image}
             isValid={newCategory.isValidImage}
-            feedback='Vui lòng cung cấp ảnh danh mục hợp lệ!'
+            feedback={t('categoryValid.imgValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />
         </div>
 
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
             to='/admin/category'
@@ -178,7 +151,7 @@ const AdminCreateCategoryForm = (props) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            Nộp
+            {t('button.submit')}
           </button>
         </div>
       </form>

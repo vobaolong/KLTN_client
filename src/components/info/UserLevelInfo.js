@@ -7,7 +7,6 @@ import UserRoleLabel from '../label/UserRoleLabel'
 const UserLevelInfo = ({ user = {}, border = true }) => {
   const { t } = useTranslation()
 
-  console.log(user)
   return (
     <div className=''>
       <div className={border ? 'p-4' : 'border p-3 bg-body rounded-2'}>

@@ -114,12 +114,10 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
           toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        toast.error(error)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
   }
 

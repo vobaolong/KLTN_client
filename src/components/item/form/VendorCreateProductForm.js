@@ -7,19 +7,15 @@ import Input from '../../ui/Input'
 import InputFile from '../../ui/InputFile'
 import TextArea from '../../ui/TextArea'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import StyleSelector from '../../selector/StyleSelector'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const VendorCreateProductForm = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newProduct, setNewProduct] = useState({
     name: '',
     categoryId: '',
@@ -49,9 +45,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     isValidSalePrice: true
   })
   const { t } = useTranslation()
-
   const { _id, accessToken } = getToken()
-
   const handleChange = (name, isValidName, value) => {
     setNewProduct({
       ...newProduct,
@@ -139,25 +133,16 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     if (newProduct.image5) formData.set('image5', newProduct.image5)
     if (newProduct.image6) formData.set('image6', newProduct.image6)
 
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createProduct(_id, accessToken, formData, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(data.success)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -177,16 +162,18 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Create new product</h1>
+          <h1 className='text-white fs-5 m-0'>
+            {t('productDetail.createProduct')}
+          </h1>
         </div>
 
         <div className='col-12 px-4'>
           <Input
             type='text'
-            label='Product name'
+            label={t('productDetail.name')}
             value={newProduct.name}
             isValid={newProduct.isValidName}
-            feedback='Please provide a valid product name.'
+            feedback={t('productValid.nameValid')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -194,29 +181,28 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 mt-2 px-4'>
-          <InputFile
-            label='Product thumbnail'
-            size='avatar'
-            noRadius={true}
-            value={newProduct.image0}
-            isValid={newProduct.isValidImage0}
-            feedback='Please provide a valid product avatar.'
-            accept='image/jpg, image/jpeg, image/png, image/gif'
-            onChange={(value) => handleChange('image0', 'isValidImage0', value)}
-            onValidate={(flag) => handleValidate('isValidImage0', flag)}
-          />
-        </div>
-
         <div className='col-12 px-4'>
           <div className='d-flex flex-wrap justify-content-between align-items-center'>
             <InputFile
-              label='Product other images'
+              label={t('productDetail.thumbImg')}
               size='avatar'
-              noRadius={true}
+              noRadius={false}
+              value={newProduct.image0}
+              isValid={newProduct.isValidImage0}
+              feedback={t('productValid.avatarValid')}
+              accept='image/jpg, image/jpeg, image/png, image/gif'
+              onChange={(value) =>
+                handleChange('image0', 'isValidImage0', value)
+              }
+              onValidate={(flag) => handleValidate('isValidImage0', flag)}
+            />
+            <InputFile
+              label={t('productDetail.otherImg')}
+              size='avatar'
+              noRadius={false}
               value={newProduct.image1}
               isValid={newProduct.isValidImage1}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image1', 'isValidImage1', value)
@@ -227,10 +213,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             <InputFile
               label=''
               size='avatar'
-              noRadius={true}
+              noRadius={false}
               value={newProduct.image2}
               isValid={newProduct.isValidImage2}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image2', 'isValidImage2', value)
@@ -241,10 +227,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             <InputFile
               label=''
               size='avatar'
-              noRadius={true}
+              noRadius={false}
               value={newProduct.image3}
               isValid={newProduct.isValidImage3}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image3', 'isValidImage3', value)
@@ -255,10 +241,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             <InputFile
               label=''
               size='avatar'
-              noRadius={true}
+              noRadius={false}
               value={newProduct.image4}
               isValid={newProduct.isValidImage4}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image4', 'isValidImage4', value)
@@ -269,10 +255,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             <InputFile
               label=''
               size='avatar'
-              noRadius={true}
+              noRadius={false}
               value={newProduct.image5}
               isValid={newProduct.isValidImage5}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image5', 'isValidImage5', value)
@@ -283,10 +269,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             <InputFile
               label=''
               size='avatar'
-              noRadius={true}
+              noRadius={false}
               value={newProduct.image6}
               isValid={newProduct.isValidImage6}
-              feedback='Please provide a valid other images.'
+              feedback={t('productValid.otherValid')}
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={(value) =>
                 handleChange('image6', 'isValidImage6', value)
@@ -299,11 +285,11 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         <div className='col-12 px-4'>
           <TextArea
             type='text'
-            label='Description'
+            label={t('productDetail.description')}
             value={newProduct.description}
             isValid={newProduct.isValidDescription}
             required={true}
-            feedback='Please provide a valid product description.'
+            feedback={t('productValid.descriptionValid')}
             validator='bio'
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
@@ -315,10 +301,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Quantity'
+            label={t('productDetail.quantity')}
             value={newProduct.quantity}
             isValid={newProduct.isValidQuantity}
-            feedback='Please provide a valid product quantity.'
+            feedback={t('productValid.quantityValid')}
             required={true}
             validator='positive|zero'
             onChange={(value) =>
@@ -331,10 +317,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Price (₫)'
+            label={`${t('productDetail.price')} (₫)`}
             value={newProduct.price}
             isValid={newProduct.isValidPrice}
-            feedback='Please provide a valid product price.'
+            feedback={t('productValid.priceValid')}
             validator='positive|zero'
             required={true}
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
@@ -345,10 +331,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         <div className='col-12 px-4'>
           <Input
             type='number'
-            label='Sale price (₫)'
+            label={`${t('productDetail.salePrice')} (₫)`}
             value={newProduct.salePrice}
             isValid={newProduct.isValidSalePrice}
-            feedback='Please provide a valid product sale price.'
+            feedback={t('productValid.salePriceValid')}
             validator='positive|zero'
             required={true}
             onChange={(value) =>
@@ -359,9 +345,9 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         </div>
 
         <div className='col-12 mt-5 px-4'>
-          <p className=''>Choose category</p>
+          <p className=''>{t('productDetail.chooseCategory')}</p>
           <CategorySelector
-            label='Chosen category'
+            label={t('productDetail.selectedCategory')}
             isActive={true}
             isRequired={true}
             onSet={(category) =>
@@ -375,9 +361,9 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
 
         <div className='col-12 mt-5 px-4'>
           <p className='px-2'>
-            Choose styles{' '}
+            {t('productDetail.chooseStyles')}{' '}
             <small className='text-muted'>
-              *need to choose category before
+              {t('productDetail.chooseCateFirst')}
             </small>
           </p>
           <StyleSelector
@@ -392,17 +378,6 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
             to={`/vendor/products/${storeId}`}
@@ -416,7 +391,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            {t('button.submit')}
+            {t('button.save')}
           </button>
         </div>
       </form>

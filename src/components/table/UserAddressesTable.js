@@ -44,12 +44,10 @@ const UserAddressesTable = ({ addresses = [] }) => {
           toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        toast.error(error)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
   }
 
@@ -112,7 +110,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                   <td>
                     <button
                       type='button'
-                      className='btn btn-dark ripple me-2 my-1 rounded-1'
+                      className='btn btn-primary ripple me-2 my-1 rounded-1'
                       data-bs-toggle='modal'
                       data-bs-target='#edit-address-form'
                       onClick={() => handleEditAddress(address, index)}

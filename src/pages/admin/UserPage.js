@@ -1,14 +1,17 @@
-import { useSelector } from 'react-redux';
-import AdminLayout from '../../components/layout/AdminLayout';
-import AdminUsersTable from '../../components/table/AdminUsersTable';
+import { useSelector } from 'react-redux'
+import AdminLayout from '../../components/layout/AdminLayout'
+import AdminUsersTable from '../../components/table/AdminUsersTable'
+import { useTranslation } from 'react-i18next'
 
-const UserPage = (props) => {
-    const user = useSelector((state) => state.account.user);
-    return (
-        <AdminLayout user={user}>
-            <AdminUsersTable />
-        </AdminLayout>
-    );
-};
+const UserPage = () => {
+  const user = useSelector((state) => state.account.user)
+  const { t } = useTranslation()
 
-export default UserPage;
+  return (
+    <AdminLayout user={user}>
+      <AdminUsersTable heading={t('title.userInSystem')} />
+    </AdminLayout>
+  )
+}
+
+export default UserPage

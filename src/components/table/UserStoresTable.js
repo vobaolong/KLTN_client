@@ -51,7 +51,7 @@ const UserStoresTable = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        setError(error)
         setIsLoading(false)
       })
   }
@@ -82,7 +82,6 @@ const UserStoresTable = () => {
       order
     })
   }
-  console.log(stores)
 
   return (
     <div className='position-relative'>

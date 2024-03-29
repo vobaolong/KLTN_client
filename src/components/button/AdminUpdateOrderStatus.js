@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { adminUpdateStatusOrder } from '../../apis/order'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import DropDownMenu from '../ui/DropDownMenu'
+import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const AdminUpdateOrderStatusButton = ({ orderId = '', status = '', onRun }) => {
-  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [statusValue, setStatusValue] = useState(status)
-
   const { _id, accessToken } = getToken()
+  const { t } = useTranslation()
 
   useEffect(() => {
     setStatusValue(status)
@@ -24,35 +24,30 @@ const AdminUpdateOrderStatusButton = ({ orderId = '', status = '', onRun }) => {
   }
 
   const onSubmit = () => {
-    setError('')
     setIsLoading(true)
     const value = { status: statusValue }
     adminUpdateStatusOrder(_id, accessToken, value, orderId)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else if (onRun) onRun()
+          toast.error(data.error)
+        } else {
+          toast.success(t('toastSuccess.order.update'))
+        }
+        if (onRun) onRun()
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
-          title='Update Order Status'
+          title={t('dialog.updateOrder')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -60,9 +55,9 @@ const AdminUpdateOrderStatusButton = ({ orderId = '', status = '', onRun }) => {
 
       <DropDownMenu
         listItem={[
-          { label: 'Processing', value: 'Processing' },
-          { label: 'Shipped', value: 'Shipped' },
-          { label: 'Delivered', value: 'Delivered' }
+          { label: t('status.processing'), value: 'Processing' },
+          { label: t('status.shipped'), value: 'Shipped' },
+          { label: t('status.delivered'), value: 'Delivered' }
         ]}
         size='small'
         value={statusValue}

@@ -1,23 +1,55 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { listSellingProductsByStore } from '../../apis/product'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ProductCard from '../card/ProductCard'
+import { toast } from 'react-toastify'
+import Slider from 'react-slick'
 
 const ListProductsByStore = ({
   heading = '',
-  col = 'col-xl-2-5 col-md-3 col-sm-4 col-6',
   storeId = '',
-  sortBy = 'sold',
-  limit = '5'
+  sortBy = 'sold'
 }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-
   const [products, setProducts] = useState([])
 
+  const settings = {
+    className: 'center',
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
+
   const init = () => {
-    setError('')
     setIsLoading(true)
     listSellingProductsByStore(
       {
@@ -28,18 +60,18 @@ const ListProductsByStore = ({
         maxPrice: '',
         sortBy,
         order: 'desc',
-        limit,
+        limit: 10,
         page: 1
       },
       storeId
     )
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else setProducts(data.products)
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -49,18 +81,17 @@ const ListProductsByStore = ({
   }, [storeId, sortBy])
 
   return (
-    <div className='products-list-wrap position-relative'>
+    <div className='position-relative bg-body box-shadow rounded-3 p-3'>
       {heading && <h4>{heading}</h4>}
-
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
-
-      <div className='products-list row mt-3'>
-        {products?.map((product, index) => (
-          <div className={`${col} mb-4`} key={index}>
-            <ProductCard product={product} />
-          </div>
-        ))}
+      <div className='slider-container'>
+        <Slider {...settings}>
+          {products?.map((product, index) => (
+            <div className='my-2' key={index}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   )

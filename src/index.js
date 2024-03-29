@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import Routes from './pages/Routes'
 import { Provider } from 'react-redux'
@@ -9,12 +9,14 @@ import ScrollToTop from 'react-scroll-to-top'
 import './i18n/i18n'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <ToastContainer
-        position='top-right'
+        position='bottom-left'
         autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}

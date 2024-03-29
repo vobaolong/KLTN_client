@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { listCategories, listActiveCategories } from '../../apis/category'
 import SearchInput from '../ui/SearchInput'
 import CategorySmallCard from '../card/CategorySmallCard'
-import Error from '../ui/Error'
 import Loading from '../ui/Loading'
+import { toast } from 'react-toastify'
 
 const CategorySelector = ({
   defaultValue = '',
@@ -16,7 +17,6 @@ const CategorySelector = ({
   isRequired = false
 }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const [lv1Categories, setLv1Categories] = useState([])
   const [lv2Categories, setLv2Categories] = useState([])
@@ -50,29 +50,28 @@ const CategorySelector = ({
   const [selectedCategory, setSelectedCategory] = useState(defaultValue)
 
   const loadCategories = (filter, setCategories) => {
-    setError('')
     setIsLoading(true)
     if (isActive) {
       listActiveCategories(filter)
         .then((data) => {
-          if (data.error) setError(data.error)
+          if (data.error) toast.error(data.error)
           else setCategories(data.categories)
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          toast.error(error)
           setIsLoading(false)
         })
     } else {
       const { _id, accessToken } = getToken()
       listCategories(_id, accessToken, filter)
         .then((data) => {
-          if (data.error) setError(data.error)
+          if (data.error) toast.error(data.error)
           else setCategories(data.categories)
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          toast.error(error)
           setIsLoading(false)
         })
     }
@@ -148,7 +147,6 @@ const CategorySelector = ({
 
       <div className='col-12 position-relative'>
         {isLoading && <Loading />}
-        {error && <Error msg={error} />}
 
         <div className='d-flex border p-1 mt-2'>
           <div

@@ -3,17 +3,13 @@ import { getToken } from '../../../apis/auth'
 import { addListImages } from '../../../apis/product'
 import InputFile from '../../ui/InputFile'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const VendorAddProductImageForm = ({ productId = '', storeId = '', onRun }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
 
   const [newImage, setNewImages] = useState({
@@ -56,75 +52,52 @@ const VendorAddProductImageForm = ({ productId = '', storeId = '', onRun }) => {
   const onSubmit = () => {
     const formData = new FormData()
     formData.set('photo', newImage.image)
-
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     addListImages(_id, accessToken, formData, productId, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setNewImages({
             image: '',
             isValidImage: true
           })
-          setSuccess(data.success)
+          toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
-          title='Add new product image'
+          title={t('productDetail.addImg')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
       )}
 
       <form className='row mb-2' onSubmit={handleSubmit}>
-        <div className='col-12'>
+        <div className='col-12 text-center'>
           <InputFile
-            label='Product other image'
+            label={t('productDetail.otherImg')}
             size='avatar'
-            noRadius={true}
+            noRadius={false}
             value={newImage.image}
             defaultSrc={newImage.image}
             isValid={newImage.isValidImage}
-            feedback='Please provide a valid product image.'
+            feedback={t('productValid.otherValid')}
             accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

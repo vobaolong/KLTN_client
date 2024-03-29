@@ -125,7 +125,7 @@ const UserEditProfileForm = ({
       })
       .catch((error) => {
         setIsLoading(false)
-        setError('Server error')
+        setError(error)
         setTimeout(() => {
           setError('')
         }, 3000)

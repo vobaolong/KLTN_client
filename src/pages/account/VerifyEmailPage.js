@@ -21,7 +21,7 @@ const VerifyEmailPage = (props) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server error')
+        setError(error)
         setIsLoading(false)
       })
   }

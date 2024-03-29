@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { deleteStaff } from '../../apis/store'
@@ -8,12 +9,10 @@ import CancelStaffButton from '../button/CancelStaffButton'
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
-import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
-import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
 const StoreStaffsTable = ({
   heading = '',
@@ -22,12 +21,8 @@ const StoreStaffsTable = ({
   storeId = ''
 }) => {
   const { t } = useTranslation()
-
   const [deletedStaff, setDeletedStaff] = useState({})
-
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
 
   const { _id: userId, accessToken } = getToken()
@@ -112,28 +107,19 @@ const StoreStaffsTable = ({
 
   const onDeleteSubmitStaff = () => {
     const staff = deletedStaff._id
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     deleteStaff(userId, accessToken, staff, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           updateDispatch('vendor', data.store)
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
   return (
@@ -155,10 +141,6 @@ const StoreStaffsTable = ({
       )}
 
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <div className='d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />

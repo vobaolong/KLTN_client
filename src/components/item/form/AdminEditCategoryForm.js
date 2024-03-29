@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
@@ -6,20 +7,15 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import InputFile from '../../ui/InputFile'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditCategoryForm = ({ categoryId = '' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newCategory, setNewCategory] = useState({
     name: '',
     image: '',
@@ -33,11 +29,10 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     getCategoryById(categoryId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else
           setNewCategory({
             name: data.category.name,
@@ -55,7 +50,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -103,26 +98,16 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
     if (newCategory.image) formData.set('image', newCategory.image)
     if (newCategory.categoryId)
       formData.set('categoryId', newCategory.categoryId)
-
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateCategory(_id, accessToken, categoryId, formData)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(t('toastSuccess.category.update'))
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -131,7 +116,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Update category'
+          title={t('dialog.updateCategory')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -142,7 +127,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Edit category</h1>
+          <h1 className='text-white fs-5 m-0'>{t('categoryDetail.edit')}</h1>
         </div>
 
         <div className='col-12 mt-4 px-4'>
@@ -187,19 +172,6 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
             to='/admin/category'
@@ -213,7 +185,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             onClick={handleSubmit}
             style={{ width: '324px', maxWidth: '100%' }}
           >
-            Edit
+            {t('button.save')}
           </button>
         </div>
       </form>

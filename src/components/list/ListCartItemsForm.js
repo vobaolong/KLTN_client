@@ -63,7 +63,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error(error)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -90,11 +90,9 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        toast.error(error)
-        setTimeout(() => {}, 3000)
+        toast.error('Some thing went wrong')
       })
   }
 
@@ -110,11 +108,9 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {}, 3000)
       })
       .catch((error) => {
-        toast.error(error)
-        setTimeout(() => {}, 3000)
+        toast.error('Some thing went wrong')
       })
   }
 
@@ -174,7 +170,8 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   top: '0',
                   left: '0',
                   objectFit: 'contain',
-                  borderRadius: '0.25rem'
+                  borderRadius: '0.25rem',
+                  border: '1px solid rgba(204,204,204,0.6)'
                 }}
               />
             </div>

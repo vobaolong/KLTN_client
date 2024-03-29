@@ -99,7 +99,7 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         }, 3000)
       })
       .catch((error) => {
-        setError('Server error')
+        setError(error)
         setIsLoading(false)
         setTimeout(() => {
           setError('')

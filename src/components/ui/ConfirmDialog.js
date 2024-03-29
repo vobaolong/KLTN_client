@@ -8,9 +8,7 @@ const ConfirmDialog = ({
   onClose = () => {}
 }) => {
   const { t } = useTranslation()
-
   const message = t(messageKey)
-
   const onConfirm = () => {
     onSubmit()
     onClose()

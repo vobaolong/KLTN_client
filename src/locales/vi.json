@@ -1,4 +1,24 @@
 {
+  "toastSuccess": {
+    "product": {
+      "create": "Tạo sản phẩm thành công"
+    },
+    "store": {
+      "ban": "Khoá cửa hàng thành công",
+      "active": "Kích hoạt cửa hàng thành công"
+    },
+    "order": {
+      "update": "Cập nhật đơn hàng thành công"
+    },
+    "category": {
+      "create": "Tạo danh mục thành công",
+      "update": "Cập nhật danh mục thành công",
+      "delete": "Xoá danh mục thành công",
+      "restore": "Khôi phục danh mục thành công"
+    }
+  },
+  "toastError": {},
+
   "title": {
     "listBannedStores": "Danh sách cửa hàng bị khoá",
     "listActiveStores": "Danh sách cửa hàng đang hoạt động",
@@ -9,14 +29,17 @@
     "processingOrders": "Đơn hàng đang xử lý",
     "shippedOrders": "Đơn hàng chờ giao",
     "deliveredOrders": "Đơn hàng hoàn thành",
-    "cancelledOrders": "Đơn hàng đã huỷ"
+    "cancelledOrders": "Đơn hàng đã huỷ",
+    "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
     "banStore": "Khoá Cửa Hàng",
     "activeStore": "Kích Hoạt Cửa Hàng",
     "activeProduct": "Kích Hoạt Sản Phẩm",
     "banProduct": "Khoá Sản Phẩm",
-    "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng"
+    "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng",
+    "updateOrder": "Cập nhật trạng thái đơn hàng",
+    "updateCategory": "Cập nhật danh mục"
   },
   "action": "Hành động",
   "showing": "Hiển thị",
@@ -98,7 +121,17 @@
     "purchased": "Đã mua hàng",
     "limitImg": "Tối đa 7 ảnh cho sản phẩm!",
     "storeProduct": "Lưu sản phẩm vào kho",
-    "sellProduct": "Bày bán sản phẩm"
+    "sellProduct": "Bày bán sản phẩm",
+    "addImg": "Thêm ảnh"
+  },
+  "productValid": {
+    "nameValid": "Vui lòng cung cấp tên sản phẩm phù hợp!",
+    "avatarValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
+    "otherValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
+    "descriptionValid": "Vui lòng cung cấp mô tả sản phẩm phù hợp!",
+    "quantityValid": "Vui lòng cung cấp số lượng sản phẩm phù hợp!",
+    "priceValid": "Vui lòng cung cấp giá sản phẩm phù hợp!",
+    "salePriceValid": "Vui lòng cung cấp giá giảm sản phẩm phù hợp!"
   },
   "filters": {
     "filter": "Bộ lọc",
@@ -129,6 +162,7 @@
   "store": "Cửa hàng",
   "searchHolder": "Tìm sản phẩm và tên store",
   "userDetail": {
+    "KYC": "Xác thực",
     "level": "Hạng mức",
     "followers": "Người theo dõi",
     "myAccount": "Tài khoản của tôi",
@@ -210,7 +244,19 @@
     "notVerified": "Chưa xác thực"
   },
   "categoryDetail": {
-    "tree": "Danh mục kiểu cây"
+    "tree": "Danh mục kiểu cây",
+    "add": "Thêm danh mục",
+    "name": "Tên danh mục",
+    "parent": "Danh mục lớn",
+    "selectLargeCategory": "Chọn danh mục lớn",
+    "noCategorySelected": "Không danh mục nào được chọn",
+    "img": "Ảnh danh mục",
+    "delete": "Xoá danh mục",
+    "edit": "Chỉnh sửa danh mục"
+  },
+  "categoryValid": {
+    "nameValid": "Vui lòng cung cấp tên danh mục hợp lệ!",
+    "imgValid": "Vui lòng cung cấp ảnh danh mục hợp lệ!"
   },
   "variantDetail": {
     "variants": "Biến thể",
@@ -242,6 +288,8 @@
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
+    "addFeaturedImg": "Thêm hình ảnh nổi bật",
+    "limitFeatured": "Tối đa 6 hình ảnh nổi bật",
     "bio": "Giới thiệu",
     "editProfile": "Chỉnh sửa thông tin",
     "products": "Sản phẩm",
@@ -272,12 +320,14 @@
     "nameValid": "Vui lòng cung cấp tên store phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",
-    "coverValid": "Vui lòng cung cấp ảnh bìa hợp!"
+    "coverValid": "Vui lòng cung cấp ảnh bìa phù hợp!",
+    "featuredValid": "Vui lòng cung cấp ảnh nổi bật phù hợp!"
   },
   "favorite": "Yêu thích",
   "wallet": "Ví",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
+    "restore": "Khôi phục",
     "store": "Kho",
     "cancel": "Huỷ",
     "confirm": "Xác nhận",
@@ -296,7 +346,10 @@
     "more": "Hiển thị thêm",
     "sell": "Bán",
     "ban": "Khoá",
-    "active": "Kích hoạt"
+    "active": "Kích hoạt",
+    "clickToClose": "Nhấn để đóng store",
+    "clickToOpen": "Nhấn để mở store",
+    "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",

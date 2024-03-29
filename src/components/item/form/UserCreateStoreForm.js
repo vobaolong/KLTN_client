@@ -51,7 +51,7 @@ const CreateStoreForm = (props) => {
           })
         }
       })
-      .catch((error) => setError1('Server Error'))
+      .catch((error) => setError1(error))
   }
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const CreateStoreForm = (props) => {
         }
       })
       .catch((error) => {
-        setError('Server Error')
+        setError(error)
         setIsLoading(false)
         setTimeout(() => {
           setError('')

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -13,16 +14,15 @@ import StarRating from '../label/StarRating'
 import StoreStatusLabel from '../label/StoreStatusLabel'
 import StoreCommissionLabel from '../label/StoreCommissionLabel'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
 const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
   const [run, setRun] = useState('')
 
   const [stores, setStores] = useState([])
@@ -44,11 +44,10 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listStoresForAdmin(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setStores(data.stores)
           setPagination({
@@ -60,7 +59,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -105,25 +104,24 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
   }
 
   const onSubmit = () => {
-    setError('')
     setIsLoading(true)
     const value = { isActive: !activeStore.isActive }
+    const active = activeStore.isActive
+      ? t('toastSuccess.store.ban')
+      : t('toastSuccess.store.active')
     activeOrInactive(_id, accessToken, value, activeStore._id)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else setRun(!run)
+          toast.error(data.error)
+        } else {
+          toast.success(active)
+          setRun(!run)
+        }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -136,7 +134,6 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
       )}
 
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={
@@ -162,7 +159,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
       </div>
       {!isLoading && pagination.size === 0 ? (
         <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>Không có shop nào</h5>
+          <h5>{t('storeDetail.noStores')}</h5>
         </div>
       ) : (
         <div className='table-scroll my-2'>
@@ -172,14 +169,14 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <th scope='col'></th>
                 <th scope='col'>
                   <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    Store Name
+                    {t('storeDetail.name')}
                   </span>
                 </th>
                 <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Rating'
+                    title={t('storeDetail.rating')}
                     sortBy='rating'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -188,7 +185,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Status'
+                    title={t('status.status')}
                     sortBy='isOpen'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -197,7 +194,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Commission'
+                    title={t('storeDetail.commissions')}
                     sortBy='commissionId'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -206,19 +203,19 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Joined'
+                    title={t('joined')}
                     sortBy='createdAt'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
 
                 <th scope='col'>
-                  {/* <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  {t('action')}
-                </span> */}
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
+                  >
+                    {t('action')}
+                  </span>
                 </th>
               </tr>
             </thead>

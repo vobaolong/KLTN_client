@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -25,6 +26,7 @@ import DropDownMenu from '../../ui/DropDownMenu'
 import UserLevelLabel from '../../label/UserLevelLabel'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 const CheckoutForm = ({
@@ -89,7 +91,7 @@ const CheckoutForm = ({
         amountToGD: amountFromUser1 + amountFromUser2 - amountToStore
       })
     } catch (e) {
-      setError('Server Error')
+      toast.error(e)
     }
   }
 
@@ -149,15 +151,12 @@ const CheckoutForm = ({
       })
       return
     }
-
     if (!order.isValidPhone) return
-
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
-
     const {
       phone,
       address,
@@ -181,22 +180,19 @@ const CheckoutForm = ({
       isPaidBefore: false
     }
 
-    setError('')
     setIsLoading(true)
     createOrder(_id, accessToken, cartId, orderBody)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
           history.push('/account/purchase')
+          toast.success('Order Successfully!')
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -289,7 +285,7 @@ const CheckoutForm = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setTimeout(() => {
             setError('')
           }, 3000)

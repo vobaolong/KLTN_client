@@ -35,7 +35,7 @@ const CategoryCard = ({ category = {} }) => {
 
   return (
     <div className='card-sm py-3'>
-      <div className='bg-body-secondary rounded-circle m-auto w-75'>
+      <div className='bg-light rounded-circle m-auto w-75'>
         <Link
           className='text-reset text-decoration-none'
           to={`/category/${categoryValue._id}`}

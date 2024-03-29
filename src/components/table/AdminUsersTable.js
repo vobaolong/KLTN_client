@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { listUserForAdmin } from '../../apis/user'
@@ -7,16 +8,14 @@ import SearchInput from '../ui/SearchInput'
 import SortByButton from './sub/SortByButton'
 import UserSmallCard from '../card/UserSmallCard'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import { useTranslation } from 'react-i18next'
-import EmailActiveButton from '../button/EmailActiveButton'
 import VerifyLabel from '../label/VerifyLabel'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
-const AdminUsersTable = ({ heading = 'Users in the system' }) => {
+const AdminUsersTable = ({ heading = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const [users, setUsers] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -29,14 +28,15 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
     limit: 8,
     page: 1
   })
+
   const { _id, accessToken } = getToken()
+
   const init = () => {
-    setError('')
     setIsLoading(true)
     listUserForAdmin(_id, accessToken, filter)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
+          toast.error(data.error)
           setIsLoading(false)
         } else {
           setUsers(data.users)
@@ -49,7 +49,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
         }
       })
       .catch((error) => {
-        setError('Server Error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -57,7 +57,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
   useEffect(() => {
     init()
   }, [filter])
-  console.log(users.map((user) => user.isEmailActive))
+
   const handleChangeKeyword = (keyword) => {
     setFilter({
       ...filter,
@@ -85,7 +85,6 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
     <div className='position-relative'>
       {isLoading && <Loading />}
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-      {error && <Error msg={error} />}
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />
@@ -103,14 +102,14 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
               <th scope='col'></th>
               <th scope='col' className='text-start'>
                 <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  User Name
+                  {t('userDetail.name')}
                 </span>
               </th>
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Point'
+                  title={t('point')}
                   sortBy='point'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -134,14 +133,18 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
                 />
               </th>
               <th scope='col' className='text-center'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  Email Verify
-                </span>
+                <SortByButton
+                  currentOrder={filter.order}
+                  currentSortBy={filter.sortBy}
+                  title={t('userDetail.KYC')}
+                  sortBy='email'
+                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                />
               </th>
 
-              <th scope='col'>
+              <th scope='col' className='text-secondary'>
                 <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  Phone
+                  {t('userDetail.phone')}
                 </span>
               </th>
 
@@ -149,7 +152,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Joined'
+                  title={t('joined')}
                   sortBy='createdAt'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -175,9 +178,7 @@ const AdminUsersTable = ({ heading = 'Users in the system' }) => {
                   <small>{user.email || '-'}</small>
                 </td>
                 <td className='text-center'>
-                  <small>
-                    <VerifyLabel verify={user.isEmailActive} />
-                  </small>
+                  <VerifyLabel verify={user.isEmailActive} />
                 </td>
                 <td className='text-end'>
                   <small>{user.phone || '-'}</small>

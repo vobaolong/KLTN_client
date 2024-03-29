@@ -39,7 +39,7 @@ const PrintBill = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setIsLoading(false)
         })
   }

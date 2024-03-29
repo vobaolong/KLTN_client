@@ -4,22 +4,17 @@ import { updateProduct } from '../../../apis/product'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import TextArea from '../../ui/TextArea'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import StyleSelector from '../../selector/StyleSelector'
 import { t } from 'i18next'
+import { toast } from 'react-toastify'
 
 const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newProduct, setNewProduct] = useState({})
-
   const { _id, accessToken } = getToken()
 
   useEffect(() => {
@@ -27,12 +22,11 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       name: product.name,
       description: product.description,
       quantity: product.quantity,
-      price: product.price && product.price.$numberDecimal,
-      salePrice: product.salePrice && product.salePrice.$numberDecimal,
-      categoryId: product.categoryId && product.categoryId._id,
+      price: product.price?.$numberDecimal,
+      salePrice: product.salePrice?.$numberDecimal,
+      categoryId: product.categoryId?._id,
       defaultCategory: product.categoryId,
-      styleValueIds:
-        product.styleValueIds && product.styleValueIds.map((v) => v._id),
+      styleValueIds: product.styleValueIds?.map((v) => v._id),
       defaultStyleValues: product.styleValueIds,
       isValidName: true,
       isValidDescription: true,
@@ -110,26 +104,16 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     formData.set('categoryId', newProduct.categoryId)
     if (newProduct.styleValueIds && newProduct.styleValueIds.length > 0)
       formData.set('styleValueIds', newProduct.styleValueIds.join('|'))
-
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateProduct(_id, accessToken, formData, product._id, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(data.success)
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Some thing went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -157,7 +141,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             label={t('productDetail.name')}
             value={newProduct.name}
             isValid={newProduct.isValidName}
-            feedback='Please provide a valid product name.'
+            feedback={t('productValid.nameValid')}
             required={true}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -262,18 +246,6 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             }}
           />
         </div>
-
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
         <div className='col-12 px-4 pb-3 d-flex justify-content-end align-items-center mt-4'>
           <button
             type='submit'

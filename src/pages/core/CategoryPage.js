@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getCategoryById } from '../../apis/category'
@@ -11,161 +12,156 @@ import ProductFilter from '../../components/filter/ProductFilter'
 import ListCategories from '../../components/list/ListCategories'
 import { useTranslation } from 'react-i18next'
 
-const CategoryPage = (props) => {
-	const { t } = useTranslation()
+const CategoryPage = () => {
+  const { t } = useTranslation()
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const { categoryId } = useParams()
+  const [category, setCategory] = useState({})
+  const [listProducts, setListProducts] = useState([])
+  const [pagination, setPagination] = useState({
+    size: 0
+  })
+  const [filter, setFilter] = useState({
+    search: '',
+    rating: '',
+    categoryId,
+    minPrice: '',
+    maxPrice: '',
+    sortBy: 'sold',
+    order: 'desc',
+    limit: 10,
+    page: 1
+  })
 
-	const [error, setError] = useState('')
-	const [isLoading, setIsLoading] = useState(false)
+  const getCategory = () => {
+    getCategoryById(categoryId)
+      .then((data) => {
+        if (data.success) setCategory(data.category)
+        else return
+      })
+      .catch((error) => {
+        return
+      })
+  }
 
-	const { categoryId } = useParams()
+  const init = () => {
+    setError('')
+    setIsLoading(true)
+    listActiveProducts(filter)
+      .then((data) => {
+        if (data.error) setError(data.error)
+        else {
+          setPagination({
+            size: data.size,
+            pageCurrent: data.filter.pageCurrent,
+            pageCount: data.filter.pageCount
+          })
+          setListProducts(data.products)
+        }
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setError(error)
+        setIsLoading(false)
+      })
+  }
 
-	const [category, setCategory] = useState({})
+  useEffect(() => {
+    init()
+  }, [filter])
 
-	const [listProducts, setListProducts] = useState([])
-	const [pagination, setPagination] = useState({
-		size: 0
-	})
-	const [filter, setFilter] = useState({
-		search: '',
-		rating: '',
-		categoryId,
-		minPrice: '',
-		maxPrice: '',
-		sortBy: 'sold',
-		order: 'desc',
-		limit: 10,
-		page: 1
-	})
+  useEffect(() => {
+    getCategory()
+    setFilter({
+      ...filter,
+      categoryId
+    })
+  }, [categoryId])
 
-	const getCategory = () => {
-		getCategoryById(categoryId)
-			.then((data) => {
-				if (data.success) setCategory(data.category)
-				else return
-			})
-			.catch((error) => {
-				return
-			})
-	}
+  const handleChangePage = (newPage) => {
+    setFilter({
+      ...filter,
+      page: newPage
+    })
+  }
 
-	const init = () => {
-		setError('')
-		setIsLoading(true)
-		listActiveProducts(filter)
-			.then((data) => {
-				if (data.error) setError(data.error)
-				else {
-					setPagination({
-						size: data.size,
-						pageCurrent: data.filter.pageCurrent,
-						pageCount: data.filter.pageCount
-					})
-					setListProducts(data.products)
-				}
-				setIsLoading(false)
-			})
-			.catch((error) => {
-				setError('Server Error')
-				setIsLoading(false)
-			})
-	}
+  return (
+    <MainLayout>
+      <div className='position-relative'>
+        {isLoading && <Loading />}
+        {error && <Error msg={error} />}
 
-	useEffect(() => {
-		init()
-	}, [filter])
+        <nav aria-label='breadcrumb'>
+          <ol className='breadcrumb'>
+            {category.categoryId && category.categoryId.categoryId && (
+              <Link
+                to={`/category/${category.categoryId.categoryId._id}`}
+                className='breadcrumb-item text-decoration-none'
+              >
+                {category.categoryId.categoryId.name}
+              </Link>
+            )}
 
-	useEffect(() => {
-		getCategory()
-		setFilter({
-			...filter,
-			categoryId
-		})
-	}, [categoryId])
+            {category.categoryId && (
+              <Link
+                to={`/category/${category.categoryId._id}`}
+                className='breadcrumb-item text-decoration-none'
+              >
+                {category.categoryId.name}
+              </Link>
+            )}
 
-	const handleChangePage = (newPage) => {
-		setFilter({
-			...filter,
-			page: newPage
-		})
-	}
+            {category && (
+              <Link
+                to={`/category/${category._id}`}
+                className='breadcrumb-item active'
+              >
+                {category.name}
+              </Link>
+            )}
+          </ol>
+        </nav>
 
-	return (
-		<MainLayout>
-			<div className='position-relative'>
-				{isLoading && <Loading />}
-				{error && <Error msg={error} />}
+        <div className='mb-4'>
+          <ListCategories
+            hasBreadcrumb={true}
+            categoryId={categoryId}
+            heading={false}
+          />
+        </div>
 
-				<nav aria-label='breadcrumb'>
-					<ol className='breadcrumb'>
-						{category.categoryId && category.categoryId.categoryId && (
-							<Link
-								to={`/category/${category.categoryId.categoryId._id}`}
-								className='breadcrumb-item text-decoration-none'
-							>
-								{category.categoryId.categoryId.name}
-							</Link>
-						)}
+        <div className='d-flex justify-content-between align-items-end'>
+          <ProductFilter filter={filter} setFilter={setFilter} />
+          <small className='text-nowrap res-hide'>
+            {t('showing')}{' '}
+            <b>
+              {Math.min(
+                filter.limit,
+                pagination.size - filter.limit * (pagination.pageCurrent - 1)
+              )}{' '}
+            </b>
+            {t('of')} {pagination.size} {t('result')}
+          </small>
+        </div>
 
-						{category.categoryId && (
-							<Link
-								to={`/category/${category.categoryId._id}`}
-								className='breadcrumb-item text-decoration-none'
-							>
-								{category.categoryId.name}
-							</Link>
-						)}
+        <div className='product-search-list row mt-3'>
+          {listProducts?.map((product, index) => (
+            <div
+              className='col-xl-2-5 col-md-3 col-sm-4 col-6 mb-4'
+              key={index}
+            >
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
 
-						{category && (
-							<Link
-								to={`/category/${category._id}`}
-								className='breadcrumb-item active'
-							>
-								{category.name}
-							</Link>
-						)}
-					</ol>
-				</nav>
-
-				<div className='mb-4'>
-					<ListCategories
-						hasBreadcrumb={true}
-						categoryId={categoryId}
-						heading={false}
-					/>
-				</div>
-
-				<div className='d-flex justify-content-between align-items-end'>
-					<ProductFilter filter={filter} setFilter={setFilter} />
-					<small className='text-nowrap res-hide'>
-						{t('showing')}{' '}
-						<b>
-							{Math.min(
-								filter.limit,
-								pagination.size - filter.limit * (pagination.pageCurrent - 1)
-							)}{' '}
-						</b>
-						{t('of')} {pagination.size} {t('result')}
-					</small>
-				</div>
-
-				<div className='product-search-list row mt-3'>
-					{listProducts &&
-						listProducts.map((product, index) => (
-							<div
-								className='col-xl-2-5 col-md-3 col-sm-4 col-6 mb-4'
-								key={index}
-							>
-								<ProductCard product={product} />
-							</div>
-						))}
-				</div>
-
-				{pagination.size !== 0 && (
-					<Pagination pagination={pagination} onChangePage={handleChangePage} />
-				)}
-			</div>
-		</MainLayout>
-	)
+        {pagination.size !== 0 && (
+          <Pagination pagination={pagination} onChangePage={handleChangePage} />
+        )}
+      </div>
+    </MainLayout>
+  )
 }
 
 export default CategoryPage

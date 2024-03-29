@@ -44,7 +44,6 @@ const TransactionsTable = ({
 
   const { _id: userId, accessToken } = getToken()
   const init = () => {
-    setError('')
     setIsLoading(true)
     if (by === 'user')
       listTransactionsByUser(userId, accessToken, filter)
@@ -61,7 +60,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setIsLoading(false)
         })
     else if (by === 'store')
@@ -79,7 +78,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setIsLoading(false)
         })
     else
@@ -98,11 +97,10 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Server Error')
+          setError(error)
           setIsLoading(false)
         })
   }
-  console.log(pagination.pageCurrent)
 
   useEffect(() => {
     init()

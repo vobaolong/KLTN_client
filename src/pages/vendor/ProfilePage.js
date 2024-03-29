@@ -10,14 +10,17 @@ import StoreAddFeaturedImageItem from '../../components/item/StoreAddFeaturedIma
 import StoreStatusLabel from '../../components/label/StoreStatusLabel'
 import StoreLevelInfo from '../../components/info/StoreLevelInfo'
 import StoreProfileInfo from '../../components/info/StoreProfileInfo'
+import { useTranslation } from 'react-i18next'
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
+  const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
   const [updateDispatch] = useUpdateDispatch()
   const onHandleRun = (newStore) => {
     updateDispatch('vendor', newStore)
   }
+
   return (
     <VendorLayout user={user} store={store}>
       <div className='res-mx--12-md'>
@@ -59,6 +62,7 @@ const ProfilePage = (props) => {
               alt={store.name}
               isEditable='store'
               storeId={store._id}
+              style={{ minHeight: 'auto' }}
             />
           </div>
         )}
@@ -75,7 +79,9 @@ const ProfilePage = (props) => {
                 />
               </div>
               <small className='cus-tooltip-msg'>
-                {store.isOpen ? 'Click to close store' : 'Click to open store'}
+                {store.isOpen
+                  ? t('button.clickToClose')
+                  : t('button.clickToOpen')}
               </small>
             </div>
 

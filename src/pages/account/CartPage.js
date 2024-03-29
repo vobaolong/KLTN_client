@@ -31,7 +31,7 @@ const CartPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error(error)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }

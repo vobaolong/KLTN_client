@@ -76,8 +76,8 @@ const AddToCartForm = ({ product = {} }) => {
         }, 3000)
         setIsLoading(false)
       })
-      .catch(() => {
-        toast.error('Server Error')
+      .catch((error) => {
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }

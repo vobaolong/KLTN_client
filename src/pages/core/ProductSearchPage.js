@@ -50,7 +50,7 @@ const ProductSearchPage = (props) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server Error')
+        setError(error)
         setIsLoading(false)
       })
   }
