@@ -5,20 +5,15 @@ import { createStyle } from '../../../apis/style'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminCreateStyleForm = (props) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newStyle, setNewStyle] = useState({
     name: '',
     categoryIds: '',
@@ -56,30 +51,19 @@ const AdminCreateStyleForm = (props) => {
 
     const { isValidName } = newStyle
     if (!isValidName) return
-
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createStyle(_id, accessToken, newStyle)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(data.success)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever Error')
-        setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        toast.error('Something went wrong')
       })
   }
 
@@ -88,7 +72,7 @@ const AdminCreateStyleForm = (props) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Create category'
+          title={t('variantDetail.add')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -99,13 +83,13 @@ const AdminCreateStyleForm = (props) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Create new style</h1>
+          <h1 className='text-white fs-5 m-0'>{t('variantDetail.add')}</h1>
         </div>
 
         <div className='col-12 mt-4 px-4'>
-          <p className=''>Choose category</p>
+          <p className=''>{t('productDetail.chooseCategory')}</p>
           <MultiCategorySelector
-            label='Chosen categories'
+            label={t('chosenCategory')}
             isActive={false}
             isRequired={true}
             onSet={(categories) =>
@@ -122,27 +106,17 @@ const AdminCreateStyleForm = (props) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Style name'
+            label={t('variantDetail.name')}
             value={newStyle.name}
             isValid={newStyle.isValidName}
-            feedback='Please provide a valid style name.'
+            feedback={t('variantDetail.nameValid')}
+            required={true}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
         </div>
 
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
             to='/admin/style'
@@ -154,7 +128,7 @@ const AdminCreateStyleForm = (props) => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '300px', maxWidth: '100%' }}
           >
             {t('button.submit')}
           </button>

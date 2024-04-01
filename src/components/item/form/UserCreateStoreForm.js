@@ -234,7 +234,7 @@ const CreateStoreForm = (props) => {
             isValid={store.isValidAvatar}
             feedback={t('storeDetailValid.avatarValid')}
             required={true}
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('avatar', 'isValidAvatar', value)}
             onValidate={(flag) => handleValidate('isValidAvatar', flag)}
           />
@@ -248,7 +248,7 @@ const CreateStoreForm = (props) => {
             isValid={store.isValidCover}
             required={true}
             feedback={t('storeDetailValid.coverValid')}
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('cover', 'isValidCover', value)}
             onValidate={(flag) => handleValidate('isValidCover', flag)}
           />

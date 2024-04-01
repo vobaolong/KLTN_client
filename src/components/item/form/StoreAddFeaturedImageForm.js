@@ -93,7 +93,7 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
             defaultSrc={featuredImage.image}
             isValid={featuredImage.isValidImage}
             feedback={t('storeDetailValid.featuredValid')}
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />

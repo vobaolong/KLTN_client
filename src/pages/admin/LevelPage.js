@@ -3,10 +3,13 @@ import useToggle from '../../hooks/useToggle'
 import AdminLayout from '../../components/layout/AdminLayout'
 import AdminUserLevelsTable from '../../components/table/AdminUserLevelsTable'
 import AdminStoreLevelTable from '../../components/table/AdminStoreLevelTable'
+import { useTranslation } from 'react-i18next'
 
-const LevelPage = (props) => {
+const LevelPage = () => {
+  const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
+
   return (
     <AdminLayout user={user}>
       <div className='d-flex align-items-center mb-2'>
@@ -21,7 +24,9 @@ const LevelPage = (props) => {
             <i className='fas fa-user-friends'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>User levels</small>
+          <small className='cus-tooltip-msg'>
+            {t('levelDetail.userLevel.userLevel')}
+          </small>
         </div>
 
         <div className='position-relative d-inline-block'>
@@ -35,11 +40,19 @@ const LevelPage = (props) => {
             <i className='fas fa-store'></i>
           </button>
 
-          <small className='cus-tooltip-msg'>Store levels</small>
+          <small className='cus-tooltip-msg'>
+            {t('levelDetail.storeLevel.storeLevel')}
+          </small>
         </div>
       </div>
 
-      {flag ? <AdminUserLevelsTable /> : <AdminStoreLevelTable />}
+      {flag ? (
+        <AdminUserLevelsTable heading={t('levelDetail.userLevel.userLevel')} />
+      ) : (
+        <AdminStoreLevelTable
+          heading={t('levelDetail.storeLevel.storeLevel')}
+        />
+      )}
     </AdminLayout>
   )
 }

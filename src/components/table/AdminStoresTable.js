@@ -24,7 +24,6 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [run, setRun] = useState('')
-
   const [stores, setStores] = useState([])
   const [pagination, setPagination] = useState({
     size: 0

@@ -164,7 +164,7 @@ const MultiCategorySelector = ({
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
 
-        <div className='d-flex border p-1 mt-2'>
+        <div className='d-flex border p-1 mt-2 rounded-2 bg-body-secondary'>
           <div
             className='list-group m-1'
             style={{
@@ -257,7 +257,7 @@ const MultiCategorySelector = ({
                       className='btn btn-outline-danger btn-sm ripple ms-2'
                       onClick={() => handleRemove(index)}
                     >
-                      <i className='fas fa-times-circle'></i>
+                      <i className='fa-solid fa-xmark'></i>
                     </button>
                   </span>
                 ))

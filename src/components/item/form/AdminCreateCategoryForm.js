@@ -132,7 +132,7 @@ const AdminCreateCategoryForm = () => {
             value={newCategory.image}
             isValid={newCategory.isValidImage}
             feedback={t('categoryValid.imgValid')}
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />
@@ -149,7 +149,7 @@ const AdminCreateCategoryForm = () => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '300px', maxWidth: '100%' }}
           >
             {t('button.submit')}
           </button>

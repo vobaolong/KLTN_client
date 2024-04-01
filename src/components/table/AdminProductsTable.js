@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -12,16 +13,15 @@ import ProductSmallCard from '../card/ProductSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductStatusLabel from '../label/ProductStatusLabel'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
 const AdminProductsTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
   const [run, setRun] = useState('')
 
   const [products, setProducts] = useState([])
@@ -38,15 +38,13 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
   })
 
   const [activeProduct, setActiveProduct] = useState({})
-
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listProductsForAdmin(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setProducts(data.products)
           setPagination({
@@ -58,7 +56,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -103,25 +101,25 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
   }
 
   const onSubmit = () => {
-    setError('')
     setIsLoading(true)
     const value = { isActive: !activeProduct.isActive }
+    const isActive = activeProduct.isActive
+      ? t('toastSuccess.product.ban')
+      : t('toastSuccess.product.active')
+
     activeOrInactive(_id, accessToken, value, activeProduct._id)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else setRun(!run)
+          toast.error(data.error)
+        } else {
+          toast.success(isActive)
+          setRun(!run)
+        }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -136,7 +134,6 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
       )}
 
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={

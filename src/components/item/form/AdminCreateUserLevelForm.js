@@ -4,18 +4,15 @@ import { createUserLevel } from '../../../apis/level'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
   const { t } = useTranslation()
 
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [level, setLevel] = useState({
     name: '',
@@ -70,14 +67,12 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createUserLevel(_id, accessToken, level)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(data.success)
           setLevel({
             name: '',
             minPoint: 0,
@@ -89,27 +84,19 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
-          title='Create user level'
+          title={t('dialog.createUserLevel')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -119,7 +106,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Level name'
+            label={t('levelDetail.name')}
             value={level.name}
             isValid={level.isValidName}
             feedback='Please provide a valid level name.'
@@ -133,7 +120,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Floor point'
+            label={t('levelDetail.floorPoint')}
             value={level.minPoint}
             isValid={level.isValidMinPoint}
             feedback='Please provide a valid floor point (>=0).'
@@ -149,7 +136,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Discount (%)'
+            label={`${t('levelDetail.discount')} (%)`}
             value={level.discount}
             isValid={level.isValidDiscount}
             feedback='Please provide a valid floor point (0% - 100%).'
@@ -165,7 +152,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Color'
+            label={t('levelDetail.color')}
             value={level.color}
             isValid={level.isValidColor}
             feedback='Please provide a valid color.'
@@ -175,19 +162,6 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             onValidate={(flag) => handleValidate('isValidColor', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

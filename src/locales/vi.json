@@ -1,7 +1,24 @@
 {
   "toastSuccess": {
+    "level": {
+      "create": "Tạo hạng mức thành công",
+      "edit": "Sửa hạng mức thành công",
+      "delete": "Xoá hạng mức thành công",
+      "restore": "Khôi phục hạng mức thành công"
+    },
+    "commission": {
+      "create": "Tạo hoa hồng thành công",
+      "delete": "Xoá hoa hồng thành công",
+      "edit": "Sửa hoa hồng thành công",
+      "restore": "Khôi phục hoa hồng thành công"
+    },
+
     "product": {
-      "create": "Tạo sản phẩm thành công"
+      "create": "Tạo sản phẩm thành công",
+      "delete": "Xoá sản phẩm thành công",
+      "edit": "Sửa sản phẩm thành công",
+      "ban": "Khoá sản phẩm thành công",
+      "active": "Kích hoạt sản phẩm thành công"
     },
     "store": {
       "ban": "Khoá cửa hàng thành công",
@@ -20,6 +37,7 @@
   "toastError": {},
 
   "title": {
+    "productVariants": "Biến thể sản phẩm",
     "listBannedStores": "Danh sách cửa hàng bị khoá",
     "listActiveStores": "Danh sách cửa hàng đang hoạt động",
     "listBannedProducts": "Danh sách sản phẩm bị khoá",
@@ -33,13 +51,32 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
-    "banStore": "Khoá Cửa Hàng",
-    "activeStore": "Kích Hoạt Cửa Hàng",
-    "activeProduct": "Kích Hoạt Sản Phẩm",
-    "banProduct": "Khoá Sản Phẩm",
+    "createUserLevel": "Tạo hạng mức người dùng",
+    "createStoreLevel": "Tạo hạng mức store",
+    "createCommission": "Tạo commission",
+    "banStore": "Khoá cửa hàng",
+    "activeStore": "Kích hoạt cửa hàng",
+    "activeProduct": "Kích hoạt sản phẩm",
+    "banProduct": "Khoá sản phẩm",
     "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng",
     "updateOrder": "Cập nhật trạng thái đơn hàng",
-    "updateCategory": "Cập nhật danh mục"
+    "updateCategory": "Cập nhật danh mục",
+    "restoreCommission": "Khôi phục mức hoa hồng"
+  },
+  "levelDetail": {
+    "userLevel": {
+      "userLevel": "Hạng mức người dùng"
+    },
+    "storeLevel": {
+      "storeLevel": "Hạng mức store"
+    },
+    "edit": "Sửa hạng mức",
+    "delete": "Xoá hạng mức",
+    "create": "Tạo hạng mức",
+    "color": "Màu hạng mức",
+    "discount": "Giảm giá",
+    "name": "Tên hạng mức",
+    "floorPoint": "Điểm sàn"
   },
   "action": "Hành động",
   "showing": "Hiển thị",
@@ -124,6 +161,7 @@
     "sellProduct": "Bày bán sản phẩm",
     "addImg": "Thêm ảnh"
   },
+  "chosenCategory": "Danh mục đã chọn",
   "productValid": {
     "nameValid": "Vui lòng cung cấp tên sản phẩm phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
@@ -213,7 +251,8 @@
     "cost": "Phí",
     "add": "Thêm Commission",
     "del": "Xoá Commission",
-    "edit": "Sửa Commission"
+    "edit": "Sửa Commission",
+    "name": "Tên Commission"
   },
   "deliveryDetail": {
     "deliveryUnit": "Vận chuyển",
@@ -252,20 +291,23 @@
     "noCategorySelected": "Không danh mục nào được chọn",
     "img": "Ảnh danh mục",
     "delete": "Xoá danh mục",
-    "edit": "Chỉnh sửa danh mục"
+    "edit": "Chỉnh sửa danh mục",
+    "restore": "Khôi phục danh mục",
+    "chosenParentCategory": "Danh mục đã chọn"
   },
   "categoryValid": {
     "nameValid": "Vui lòng cung cấp tên danh mục hợp lệ!",
-    "imgValid": "Vui lòng cung cấp ảnh danh mục hợp lệ!"
+    "imgValid": "Vui lòng cung cấp ảnh danh mục hợp lệ!",
+    "variantValid": "Vui lòng cung cấp biến thể hợp lệ!"
   },
   "variantDetail": {
     "variants": "Biến thể",
     "categories": "Danh mục",
-    "add": "Thêm Biến thể",
-    "edit": "Sửa Biến thể",
-    "del": "Xoá Biến thể",
+    "add": "Thêm biến thể",
+    "edit": "Sửa biến thể",
+    "del": "Xoá biến thể",
     "res": "Khôi phục biến thể",
-    "name": "Tên Biến thể",
+    "name": "Tên biến thể",
     "nameValid": "Vui lòng cung cấp tên biến thể phù hợp!",
     "selectCategory": "Chọn danh mục",
     "required": "Không danh mục nào được chọn",
@@ -288,6 +330,8 @@
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
+    "activeStores": "Cửa hàng đang hoạt động",
+    "bannedStores": "Cửa hàng bị khoá",
     "addFeaturedImg": "Thêm hình ảnh nổi bật",
     "limitFeatured": "Tối đa 6 hình ảnh nổi bật",
     "bio": "Giới thiệu",
@@ -349,7 +393,8 @@
     "active": "Kích hoạt",
     "clickToClose": "Nhấn để đóng store",
     "clickToOpen": "Nhấn để mở store",
-    "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)"
+    "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)",
+    "addLevel": "Thêm hạng mức"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",

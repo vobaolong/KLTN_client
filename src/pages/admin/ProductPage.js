@@ -32,7 +32,7 @@ const ProductPage = (props) => {
             } btn-lg ripple cus-tooltip`}
             onClick={() => toggleFlag(false)}
           >
-            <i className='fas fa-times-circle'></i>
+            <i className='fa-solid fa-xmark'></i>
           </button>
 
           <small className='cus-tooltip-msg'>Banned products</small>

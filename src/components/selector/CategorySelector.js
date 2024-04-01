@@ -59,7 +59,7 @@ const CategorySelector = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          toast.error(error)
+          toast.error('Something went wrong')
           setIsLoading(false)
         })
     } else {
@@ -71,7 +71,7 @@ const CategorySelector = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          toast.error(error)
+          toast.error('Something went wrong')
           setIsLoading(false)
         })
     }
@@ -144,11 +144,10 @@ const CategorySelector = ({
       <div className='col'>
         <SearchInput onChange={handleChangeKeyword} />
       </div>
-
       <div className='col-12 position-relative'>
         {isLoading && <Loading />}
 
-        <div className='d-flex border p-1 mt-2'>
+        <div className='d-flex border p-1 mt-2 rounded-2 bg-body-secondary'>
           <div
             className='list-group m-1'
             style={{
@@ -249,7 +248,7 @@ const CategorySelector = ({
                     }}
                     onClick={() => handleDelete()}
                   >
-                    <i className='fas fa-times-circle'></i>
+                    <i className='fa-solid fa-xmark'></i>
                   </button>
                 </div>
               ) : (

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -14,27 +15,21 @@ import AdminCreateUserLevelItem from '../item/AdminCreateUserLevelItem'
 import AdminEditUserLevelForm from '../item/form/AdminEditUserLevelForm'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
-import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
-const AdminUserLevelsTable = ({ heading = 'User level' }) => {
+const AdminUserLevelsTable = ({ heading = '' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
-
   const [editedLevel, setEditedLevel] = useState({})
   const [deletedLevel, setDeletedLevel] = useState({})
   const [restoredLevel, setRestoredLevel] = useState({})
-
   const [levels, setLevels] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -50,11 +45,10 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listUserLevels(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setLevels(data.levels)
           setPagination({
@@ -66,7 +60,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -109,58 +103,40 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
 
   const handleRestoreLevel = (level) => {
     setRestoredLevel(level)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     deleteUserLevel(_id, accessToken, deletedLevel._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.level.delete'))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     restoreUserLevel(_id, accessToken, restoredLevel._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.level.restore'))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -169,7 +145,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete level'
+          title={t('levelDetail.delete')}
           message={
             <span>
               Are you sure you want to delete{' '}
@@ -181,7 +157,7 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
           title='Restore level'
           message={
@@ -191,16 +167,12 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
             </span>
           }
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
@@ -305,14 +277,13 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                     onClick={() => handleEditLevel(level)}
                   >
                     <i className='fa-solid fa-pen'></i>
-                    <span className='ms-2 res-hide'>Edit</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 
                   {!level.isDeleted ? (
                     <button
                       type='button'
                       className='btn btn-outline-danger ripple cus-tooltip rounded-1'
-                      style={{ width: '95px' }}
                       onClick={() => handleDeleteLevel(level)}
                     >
                       <i className='fas fa-trash-alt'></i>
@@ -324,7 +295,6 @@ const AdminUserLevelsTable = ({ heading = 'User level' }) => {
                     <button
                       type='button'
                       className='btn btn-outline-success ripple cus-tooltip'
-                      style={{ width: '95px' }}
                       onClick={() => handleRestoreLevel(level)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>

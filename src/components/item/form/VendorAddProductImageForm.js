@@ -93,7 +93,7 @@ const VendorAddProductImageForm = ({ productId = '', storeId = '', onRun }) => {
             defaultSrc={newImage.image}
             isValid={newImage.isValidImage}
             feedback={t('productValid.otherValid')}
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />

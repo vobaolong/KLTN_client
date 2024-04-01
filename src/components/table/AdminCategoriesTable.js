@@ -25,7 +25,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
   const [deletedCategory, setDeletedCategory] = useState({})
   const [restoredCategory, setRestoredCategory] = useState({})
@@ -99,7 +99,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
 
   const handleRestoreCategory = (category) => {
     setRestoredCategory(category)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
@@ -154,9 +154,9 @@ const AdminCategoriesTable = ({ heading = '' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
-          title='Restore category'
+          title={t('categoryDetail.restore')}
           message={
             <span>
               Are you sure you want to restore
@@ -164,7 +164,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
             </span>
           }
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 

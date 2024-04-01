@@ -27,7 +27,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
 
   const [editedDelivery, setEditedDelivery] = useState({})
@@ -108,7 +108,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
 
   const handleRestoreCommission = (delivery) => {
     setRestoredDelivery(delivery)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
@@ -174,11 +174,11 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
           title='Restore delivery'
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 

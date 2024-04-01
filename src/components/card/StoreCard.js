@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -66,7 +67,7 @@ const StoreCard = ({ store = {}, onRun }) => {
   }
 
   return (
-    <div className='card border-0'>
+    <div className='card border-0 m-auto'>
       <Link
         className='text-reset text-decoration-none'
         to={`/store/${storeValue._id}`}

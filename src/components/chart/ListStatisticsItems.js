@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -12,15 +13,13 @@ import { groupByDate, groupByJoined, groupBySold } from '../../helper/groupBy'
 import { humanReadableDate } from '../../helper/humanReadable'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
-import DoughnutChart from './DoughnutChart'
 import DropDownMenu from '../ui/DropDownMenu'
-import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { useTranslation } from 'react-i18next'
-import i18n from '../../i18n/i18n'
+import { toast } from 'react-toastify'
+import Loading from '../ui/Loading'
 
 const groupByFunc = {
   order: groupByDate,
@@ -39,7 +38,6 @@ const titles = {
 const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const [items, setItems] = useState({
     order: [],
@@ -63,7 +61,6 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   const { _id, accessToken } = getToken()
 
   const adminInit = async () => {
-    setError('')
     setIsLoading(true)
     try {
       const orderData = await listOrdersForAdmin(_id, accessToken, {
@@ -119,14 +116,12 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         store: storeData.size
       })
     } catch (e) {
-      setError(error)
+      toast.error('Something went wrong')
     }
-
     setIsLoading(false)
   }
 
   const vendorInit = async () => {
-    setError('')
     setIsLoading(true)
 
     try {
@@ -170,7 +165,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         product: productData.size
       })
     } catch (e) {
-      setError(error)
+      toast.error('Something went wrong')
     }
 
     setIsLoading(false)
@@ -179,12 +174,12 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   useEffect(() => {
     if (by === 'admin') adminInit()
     else vendorInit()
-  }, [by, storeId, i18n.language])
+  }, [by, storeId])
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
+
       <div className='container-fluid px-2'>
         <div className='row'>
           {by === 'admin' && (
@@ -414,8 +409,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 
           <div className='col-xl-4 col-lg-6 px-0'>
             <h4 className='text-center my-4'>Top 5 {options.flag}s</h4>
-            <div className='table-scroll my-2'>
-              <table className='table align-middle table-hover table-striped table-sm text-center'>
+            <div className='table-scroll my-2  box-shadow'>
+              <table className='table align-middle table-hover table-sm text-center'>
                 <thead>
                   <tr>
                     <th scope='col'></th>

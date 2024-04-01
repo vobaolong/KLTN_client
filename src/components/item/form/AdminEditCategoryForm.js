@@ -132,7 +132,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
 
         <div className='col-12 mt-4 px-4'>
           <CategorySelector
-            label='Chosen parent category'
+            label={t('categoryDetail.chosenParentCategory')}
             selected='parent'
             isActive={false}
             defaultValue={newCategory.defaultParentCategory}
@@ -148,11 +148,12 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Category name'
+            label={t('categoryDetail.name')}
             value={newCategory.name}
             isValid={newCategory.isValidName}
             feedback='Please provide a valid category name.'
             validator='anything'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -160,14 +161,14 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
 
         <div className='col-12 px-4 mt-2'>
           <InputFile
-            label='Category image'
+            label={t('categoryDetail.img')}
             size='avatar'
             noRadius={true}
             defaultSrc={newCategory.defaultSrc}
             value={newCategory.image}
             isValid={newCategory.isValidImage}
             feedback='Please provide a valid category avatar.'
-            accept='image/jpg, image/jpeg, image/png, image/gif'
+            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}
           />
@@ -183,7 +184,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '300px', maxWidth: '100%' }}
           >
             {t('button.save')}
           </button>

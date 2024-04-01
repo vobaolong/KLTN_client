@@ -137,7 +137,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     createProduct(_id, accessToken, formData, storeId)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        else {
+          toast.success(data.success)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
         setIsLoading(false)
       })
       .catch((error) => {
@@ -190,7 +193,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image0}
               isValid={newProduct.isValidImage0}
               feedback={t('productValid.avatarValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image0', 'isValidImage0', value)
               }
@@ -203,7 +206,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image1}
               isValid={newProduct.isValidImage1}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image1', 'isValidImage1', value)
               }
@@ -217,7 +220,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image2}
               isValid={newProduct.isValidImage2}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image2', 'isValidImage2', value)
               }
@@ -231,7 +234,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image3}
               isValid={newProduct.isValidImage3}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image3', 'isValidImage3', value)
               }
@@ -245,7 +248,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image4}
               isValid={newProduct.isValidImage4}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image4', 'isValidImage4', value)
               }
@@ -259,7 +262,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image5}
               isValid={newProduct.isValidImage5}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image5', 'isValidImage5', value)
               }
@@ -273,7 +276,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               value={newProduct.image6}
               isValid={newProduct.isValidImage6}
               feedback={t('productValid.otherValid')}
-              accept='image/jpg, image/jpeg, image/png, image/gif'
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
               onChange={(value) =>
                 handleChange('image6', 'isValidImage6', value)
               }
@@ -360,12 +363,12 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         </div>
 
         <div className='col-12 mt-5 px-4'>
-          <p className='px-2'>
+          <span className='px-2'>
             {t('productDetail.chooseStyles')}{' '}
             <small className='text-muted'>
               {t('productDetail.chooseCateFirst')}
             </small>
-          </p>
+          </span>
           <StyleSelector
             label='Chosen styles'
             categoryId={newProduct.categoryId}
@@ -389,7 +392,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '300px', maxWidth: '100%' }}
           >
             {t('button.save')}
           </button>

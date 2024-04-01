@@ -1,7 +1,23 @@
 {
   "toastSuccess": {
+    "level": {
+      "create": "Create Level Successfully",
+      "edit": "Edit Level Successfully",
+      "delete": "Delete Level Successfully",
+      "restore": "Restore Level Successfully"
+    },
+    "commission": {
+      "create": "Create Commission Successfully",
+      "delete": "Delete Commission Successfully",
+      "edit": "Edit Commission Successfully",
+      "restore": "Restore Commission Successfully"
+    },
     "product": {
-      "create": "Create Product Successfully"
+      "create": "Create Product Successfully",
+      "delete": "Delete Product Successfully",
+      "edit": "Edit Product Successfully",
+      "ban": "Ban Product Successfully",
+      "active": "Active Product Successfully"
     },
     "store": {
       "ban": "Ban Store Successfully",
@@ -19,6 +35,7 @@
   },
   "toastError": {},
   "title": {
+    "productVariants": "Product Variants",
     "listBannedStores": "List of Banned Stores",
     "listActiveStores": "List of Active Stores",
     "listBannedProducts": "List of Banned Products",
@@ -32,13 +49,32 @@
     "userInSystem": "Users in the system"
   },
   "dialog": {
+    "createUserLevel": "Create User Level",
+    "createStoreLevel": "Create User Store",
+    "createCommission": "Create commission",
     "banStore": "Ban store",
     "activeStore": "Active store",
     "activeProduct": "Active product",
     "banProduct": "Ban product",
     "removeProductFromCart": "Remove product from cart",
     "updateOrder": "Update order status",
-    "updateCategory": "Update category"
+    "updateCategory": "Update category",
+    "restoreCommission": "Restore commission"
+  },
+  "levelDetail": {
+    "userLevel": {
+      "userLevel": "User levels"
+    },
+    "storeLevel": {
+      "storeLevel": "Store levels"
+    },
+    "edit": "Edit Level",
+    "delete": "Delete Level",
+    "create": "Create Level",
+    "color": "Level color",
+    "discount": "Level discount",
+    "name": "Level name",
+    "floorPoint": "Floor point"
   },
   "action": "Action",
   "showing": "Showing",
@@ -99,7 +135,7 @@
     "chooseStyles": "Choose styles",
     "noValuesSelected": "No values selected",
     "chooseCateFirst": "*need to choose category before",
-    "noProduct": "There is no product",
+    "noProduct": "No product yet",
     "createProduct": "Create Product",
     "selling": "Selling Products",
     "stored": "Stored Products",
@@ -123,6 +159,7 @@
     "sellProduct": "Sell the product",
     "addImg": "Add Product Image"
   },
+  "chosenCategory": "Chosen Category",
   "productValid": {
     "nameValid": "Please provide a valid product name!",
     "avatarValid": "Please provide a valid product avatar!",
@@ -213,7 +250,8 @@
     "cost": "Cost",
     "add": "Add Commission",
     "del": "Delete Commission",
-    "edit": "Edit Commission"
+    "edit": "Edit Commission",
+    "name": "Commission name"
   },
   "deliveryDetail": {
     "deliveryUnit": "Delivery Unit",
@@ -252,11 +290,14 @@
     "noCategorySelected": "No category selected",
     "img": "Category image",
     "delete": "Delete category",
-    "edit": "Edit category"
+    "edit": "Edit category",
+    "restore": "Restore category",
+    "chosenParentCategory": "Chosen parent category"
   },
   "categoryValid": {
     "nameValid": "Please provide category name valid!",
-    "imgValid": "Please provide category image valid!"
+    "imgValid": "Please provide category image valid!",
+    "variantValid": "Please provide category image valid!"
   },
   "variantDetail": {
     "variants": "Variants",
@@ -289,6 +330,8 @@
   },
 
   "storeDetail": {
+    "activeStores": "Active Stores",
+    "bannedStores": "Banned Stores",
     "addFeaturedImg": "Add Featured Image",
     "limitFeatured": "The limit is 6 featured images",
     "bio": "Bio",
@@ -351,7 +394,8 @@
     "active": "Active",
     "clickToClose": "Click to close store",
     "clickToOpen": "Click to open store",
-    "addFeaturedImg": "Add Featured Image"
+    "addFeaturedImg": "Add Featured Image",
+    "addLevel": "Add Level"
   },
   "signInForm": {
     "comeBack": "Welcome back!",

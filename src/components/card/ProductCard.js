@@ -66,7 +66,7 @@ const ProductCard = ({ product = {}, onRun }) => {
   }
 
   return (
-    <div className='card border-0 position-relative'>
+    <div className='card border-0 m-auto'>
       <Link
         className='text-reset text-decoration-none product-card'
         to={`/product/${productValue._id}`}
@@ -124,7 +124,7 @@ const ProductCard = ({ product = {}, onRun }) => {
 
       <div className='card-body'>
         <MallLabel className='mb-2' />
-        <small classN ame='card-subtitle'>
+        <small className='card-subtitle'>
           <StarRating stars={productValue.rating} />{' '}
           <small>
             {productValue.sold} {t('productDetail.sold')}

@@ -201,7 +201,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
                       className='btn btn-outline-danger btn-sm rounded-1 ripple'
                       onClick={() => handleRemoveBtn(user)}
                     >
-                      <i className='fas fa-times-circle'></i>
+                      <i className='fa-solid fa-xmark'></i>
                     </button>
                   </div>
                 ))}

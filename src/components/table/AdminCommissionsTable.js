@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -15,20 +16,17 @@ import AdminCreateCommissionItem from '../item/AdminCreateCommissionItem'
 import AdminEditCommissionForm from '../item/form/AdminEditCommissionForm'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
-import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
 const AdminCommissionTable = ({ heading = 'Commissions' }) => {
   const { t } = useTranslation()
 
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
 
   const [editedCommission, setEditedCommission] = useState({})
@@ -50,11 +48,10 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listCommissions(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setCommissions(data.commissions)
           setPagination({
@@ -66,7 +63,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -109,58 +106,40 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
 
   const handleRestoreCommission = (commission) => {
     setRestoredCommission(commission)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     deleteCommission(_id, accessToken, deletedCommission._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.commission.delete'))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     restoreCommission(_id, accessToken, restoredCommission._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.commission.restore'))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -181,9 +160,9 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
-          title='Restore commission'
+          title={t('dialog.restoreCommission')}
           // message={
           //   <span>
           //     Are you sure you want to restore{' '}
@@ -191,15 +170,13 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
           //   </span>
           // }
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
 
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
 
       <div className='d-flex justify-content-between align-items-end'>
         <div className='option-wrap d-flex align-items-center'>

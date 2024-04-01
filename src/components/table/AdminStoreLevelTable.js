@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -14,21 +15,17 @@ import AdminCreateStoreLevelItem from '../item/AdminCreateStoreLevelItem'
 import AdminEditStoreLevelForm from '../item/form/AdminEditStoreLevelForm'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
-import Success from '../ui/Success'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
-const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
+const AdminStoreLevelsTable = ({ heading = '' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
 
   const [editedLevel, setEditedLevel] = useState({})
@@ -50,11 +47,10 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listStoreLevels(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setLevels(data.levels)
           setPagination({
@@ -66,7 +62,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error(error)
         setIsLoading(false)
       })
   }
@@ -109,57 +105,39 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
 
   const handleRestoreLevel = (level) => {
     setRestoredLevel(level)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     deleteStoreLevel(_id, accessToken, deletedLevel._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.level.delete'))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     restoreStoreLevel(_id, accessToken, restoredLevel._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(toast.success(t('toastSuccess.level.restore')))
           setRun(!run)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -181,7 +159,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
           title='Restore level'
           message={
@@ -191,16 +169,12 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
             </span>
           }
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
@@ -317,7 +291,7 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
                     onClick={() => handleEditLevel(level)}
                   >
                     <i className='fa-solid fa-pen'></i>
-                    <span className='ms-2 res-hide'>Edit</span>
+                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
                   </button>
 
                   {!level.isDeleted ? (
@@ -352,7 +326,11 @@ const AdminStoreLevelsTable = ({ heading = 'Store level' }) => {
         </table>
       </div>
 
-      <Modal id='edit-level-form' hasCloseBtn={false} title='Edit Level'>
+      <Modal
+        id='edit-level-form'
+        hasCloseBtn={false}
+        title={t('levelDetail.edit')}
+      >
         <AdminEditStoreLevelForm
           oldLevel={editedLevel}
           onRun={() => setRun(!run)}

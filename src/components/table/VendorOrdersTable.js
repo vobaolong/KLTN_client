@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -6,7 +7,6 @@ import { humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
 import Pagination from '../ui/Pagination'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import SortByButton from './sub/SortByButton'
 import OrderStatusLabel from '../label/OrderStatusLabel'
 import OrderPaymentLabel from '../label/OrderPaymentLabel'
@@ -14,6 +14,7 @@ import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { toast } from 'react-toastify'
 
 const StoreOrdersTable = ({
   heading = true,
@@ -23,7 +24,6 @@ const StoreOrdersTable = ({
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const [orders, setOrders] = useState([])
   const [pagination, setPagination] = useState({
@@ -41,11 +41,10 @@ const StoreOrdersTable = ({
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listOrdersByStore(_id, accessToken, filter, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setOrders(data.orders)
           setPagination({
@@ -57,7 +56,7 @@ const StoreOrdersTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -134,7 +133,6 @@ const StoreOrdersTable = ({
         </>
       )}
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />

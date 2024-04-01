@@ -94,7 +94,11 @@ const CategoryPage = () => {
 
         <nav aria-label='breadcrumb'>
           <ol className='breadcrumb'>
-            {category.categoryId && category.categoryId.categoryId && (
+            <Link to='/' className='breadcrumb-item text-decoration-none'>
+              {t('home')}
+            </Link>
+
+            {category.categoryId?.categoryId && (
               <Link
                 to={`/category/${category.categoryId.categoryId._id}`}
                 className='breadcrumb-item text-decoration-none'

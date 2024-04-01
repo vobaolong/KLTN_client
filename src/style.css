@@ -187,17 +187,6 @@ body::-webkit-scrollbar-track {
 	background-color: var(--primary-color);
 }
 
-/* .add-to-cart-btn {
-	border-color: var(--primary-color);
-	color: var(--primary-color);
-}
-
-.add-to-cart-btn:hover {
-	background-color: var(--primary-color-dis);
-	border-color: var(--primary-color-dis);
-	color: #fff;
-} */
-
 .add-to-cart-btn:disabled {
 	background-color: var(--primary-color-dis);
 	border-color: var(--primary-color-dis);
@@ -1549,36 +1538,6 @@ textarea {
 	line-height: 24px;
 }
 
-.limit_text {}
-
-/*
-.cus-paragraph-group {
-	position: relative;
-	margin-top: 24px;
-}
-
-.cus-paragraph-group-paragraph {
-	border: 0;
-	background: transparent;
-	font-size: 0.9rem;
-}
-
-.cus-paragraph-group-label {
-	position: absolute;
-	color: var(--black-color);
-	font-size: 0.9rem;
-	left: 10px;
-	top: -16px;
-}
-
-.cus-paragraph-group-time {
-	position: absolute;
-	color: var(--muted-color);
-	font-size: 0.9rem;
-	left: calc(100% + 10px);
-	top: -16px;
-} */
-
 .cus-paragraph-group {
 	display: flex;
 	align-items: center;
@@ -1917,12 +1876,6 @@ input[type="checkbox"] {
 
 .slick-next {
 	right: -35px !important;
-}
-
-.slick-list {
-	padding: 0px 8px !important;
-	background: inherit !important;
-	border-radius: 0.375rem;
 }
 
 .slick-next.slick-disabled:before,

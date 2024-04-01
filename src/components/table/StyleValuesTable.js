@@ -26,7 +26,7 @@ const StyleValuesTable = ({
 
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
   const [deletedStyleValue, setDeletedStyleValue] = useState({})
   const [restoredStyleValue, setRestoredStyleValue] = useState({})
@@ -79,7 +79,7 @@ const StyleValuesTable = ({
 
   const handleRestore = (styleValue) => {
     setRestoredStyleValue(styleValue)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
@@ -127,11 +127,11 @@ const StyleValuesTable = ({
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
           title='Restore style value'
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 

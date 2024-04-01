@@ -209,12 +209,11 @@ const DetailPage = () => {
               <div className='col-lg-9 col-md-12 rounded-1 box-shadow bg-white'>
                 <div className='row res-flex-reverse-md'>
                   <div className='container'>
-                    <ul
-                      className='nav nav-tabs justify-content-center'
-                      id='myTab'
-                      role='tablist'
-                    >
-                      <li className='nav-item' role='presentation'>
+                    <ul className='nav nav-tabs' id='myTab' role='tablist'>
+                      <li
+                        className='nav-item col-6 text-center'
+                        role='presentation'
+                      >
                         <a
                           className='nav-link active'
                           id='details-tab'
@@ -227,7 +226,10 @@ const DetailPage = () => {
                           {t('productDetail.description')}
                         </a>
                       </li>
-                      <li className='nav-item' role='presentation'>
+                      <li
+                        className='nav-item col-6 text-center'
+                        role='presentation'
+                      >
                         <a
                           className='nav-link'
                           id='reviews-tab'
@@ -248,7 +250,7 @@ const DetailPage = () => {
                         role='tabpanel'
                         aria-labelledby='details-tab'
                       >
-                        <div className='mb-5 py-2'>
+                        <div className='py-2'>
                           <span
                             style={{
                               whiteSpace: 'pre-line',

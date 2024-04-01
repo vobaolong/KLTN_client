@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
@@ -5,18 +6,15 @@ import { updateStyle, getStyleById } from '../../../apis/style'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditStyleForm = ({ styleId = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [newStyle, setNewStyle] = useState({
     name: '',
@@ -28,12 +26,11 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     getStyleById(_id, accessToken, styleId)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
+          toast.error(data.error)
         } else {
           setNewStyle({
             name: data.style.name,
@@ -45,7 +42,7 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -88,25 +85,16 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateStyle(_id, accessToken, styleId, newStyle)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setSuccess(data.success)
+        if (data.error) toast.error(data.error)
+        else toast.success(data.success)
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever Error')
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -115,7 +103,7 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Update category'
+          title={t('categoryDetail.edit')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -126,12 +114,12 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>Edit style</h1>
+          <h1 className='text-white fs-5 m-0'>{t('variantDetail.edit')}</h1>
         </div>
 
         <div className='col-12 mt-4 px-4'>
           <MultiCategorySelector
-            label='Chosen categories'
+            label={t('categoryDetail.chosenParentCategory')}
             isActive={false}
             isRequired={true}
             defaultValue={newStyle.defaultParentCategories}
@@ -149,27 +137,16 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
-            label='Style name'
+            label={t('variantDetail.name')}
             value={newStyle.name}
             isValid={newStyle.isValidName}
-            feedback='Please provide a valid style name.'
+            feedback={t('categoryValid.variantValid')}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
         </div>
 
-        {error && (
-          <div className='col-12 px-4'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12 px-4'>
-            <Success msg={success} />
-          </div>
-        )}
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
             to='/admin/style'
@@ -181,9 +158,9 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '324px', maxWidth: '100%' }}
+            style={{ width: '300px', maxWidth: '100%' }}
           >
-            Edit
+            {t('button.save')}
           </button>
         </div>
       </form>

@@ -6,42 +6,41 @@ import FollowingStoresCollection from '../../components/collection/FollowingStor
 import { useTranslation } from 'react-i18next'
 
 const FollowingPage = (props) => {
-	const { t } = useTranslation()
-	const user = useSelector((state) => state.account.user)
-	const [flag, toggleFlag] = useToggle(true)
-	return (
-		<AccountLayout user={user}>
-			<div className='d-flex align-items-center mb-2'>
-				<div className='position-relative d-inline-block me-2'>
-					<button
-						type='button'
-						className={`btn rounded-1 ${flag ? 'btn-pink' : 'btn-outline-pink'
-							} btn-lg ripple cus-tooltip`}
-						onClick={() => toggleFlag(true)}
-					>
-						<i className='fas fa-box'></i>
-					</button>
+  const { t } = useTranslation()
+  const user = useSelector((state) => state.account.user)
+  const [flag, toggleFlag] = useToggle(true)
+  return (
+    <AccountLayout user={user}>
+      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+        <ul className='nav nav-tabs'>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(true)}
+            >
+              <span className='btn btn-md btn-primary me-2'>
+                <i className='fas fa-box'></i>
+              </span>
+              <span className='res-hide'>{t('favProduct')}</span>
+            </span>
+          </li>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${!flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(false)}
+            >
+              <span className='btn btn-md btn-danger me-2'>
+                <i className='fas fa-store'></i>
+              </span>
+              <span className='res-hide'>{t('favStore')}</span>
+            </span>
+          </li>
+        </ul>
+      </div>
 
-					<small className='cus-tooltip-msg'>{t('favProduct')}</small>
-				</div>
-
-				<div className='position-relative d-inline-block'>
-					<button
-						type='button'
-						className={`btn rounded-1 ${!flag ? 'btn-pink' : 'btn-outline-pink'
-							} btn-lg ripple cus-tooltip`}
-						onClick={() => toggleFlag(false)}
-					>
-						<i className='fas fa-store'></i>
-					</button>
-
-					<small className='cus-tooltip-msg'>{t('favStore')}</small>
-				</div>
-			</div>
-
-			{flag ? <FollowingProductsCollection /> : <FollowingStoresCollection />}
-		</AccountLayout>
-	)
+      {flag ? <FollowingProductsCollection /> : <FollowingStoresCollection />}
+    </AccountLayout>
+  )
 }
 
 export default FollowingPage

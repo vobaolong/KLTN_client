@@ -110,7 +110,7 @@ const MultiStyleValueSelector = ({
                   className='btn btn-outline-danger btn-sm ripple me-4'
                   onClick={() => handleRemove(index)}
                 >
-                  <i className='fas fa-times-circle'></i>
+                  <i className='fa-solid fa-xmark'></i>
                 </button>
               </span>
             ))

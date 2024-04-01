@@ -26,6 +26,14 @@
 
 /* lg */
 @media (max-width: 991px) {
+	.cus-avatar-box {
+		width: 90px !important;
+	}
+
+	.cus-avatar-name {
+		font-size: 15px !important;
+	}
+
 	.res-hide-lg {
 		display: none !important;
 	}

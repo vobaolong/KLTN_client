@@ -5,18 +5,14 @@ import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import TextArea from '../../ui/TextArea'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [commission, setCommission] = useState({
     name: oldCommission.name,
     description: oldCommission.description,
@@ -75,35 +71,25 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateCommission(_id, accessToken, oldCommission._id, commission)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.commission.edit'))
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
           title={t('commisDetail.edit')}
@@ -116,7 +102,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Commission name'
+            label={t('commisDetail.name')}
             value={commission.name}
             isValid={commission.isValidName}
             feedback='Please provide a valid commission name.'
@@ -129,7 +115,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Description'
+            label={t('commisDetail.description')}
             value={commission.description}
             isValid={commission.isValidDescription}
             feedback='Please provide a valid commission description.'
@@ -144,7 +130,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Cost (%)'
+            label={`${t('commisDetail.name')} (%)`}
             value={commission.cost}
             isValid={commission.isValidCost}
             feedback='Please provide a valid cost (>=0).'
@@ -154,25 +140,13 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
           />
         </div>
 
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
             className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
-            Save
+            {t('button.save')}
           </button>
         </div>
       </form>

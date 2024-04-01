@@ -19,7 +19,7 @@ const AdminStylesTable = ({ heading = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirming1, setIsConfirming1] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
   const [deletedStyle, setDeletedStyle] = useState({})
   const [restoredStyle, setRestoredStyle] = useState({})
@@ -93,7 +93,7 @@ const AdminStylesTable = ({ heading = '' }) => {
 
   const handleRestore = (style) => {
     setRestoredStyle(style)
-    setIsConfirming1(true)
+    setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
@@ -141,11 +141,11 @@ const AdminStylesTable = ({ heading = '' }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-      {isConfirming1 && (
+      {isConfirmingRestore && (
         <ConfirmDialog
           title={t('variantDetail.res')}
           onSubmit={onSubmitRestore}
-          onClose={() => setIsConfirming1(false)}
+          onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 
