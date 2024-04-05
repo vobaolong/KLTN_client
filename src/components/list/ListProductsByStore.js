@@ -20,7 +20,7 @@ const ListProductsByStore = ({
     speed: 600,
     slidesToShow: 5,
     slidesToScroll: 4,
-    initialSlide: 0,
+    initialSlide: 1,
     swipeToSlide: true,
     responsive: [
       {
@@ -77,7 +77,7 @@ const ListProductsByStore = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        // toast.error('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -87,8 +87,8 @@ const ListProductsByStore = ({
   }, [storeId, sortBy])
 
   return (
-    <div className='position-relative bg-body box-shadow rounded-3 p-3'>
-      {heading && <h4>{heading}</h4>}
+    <div className='position-relative bg-body box-shadow rounded-2 p-3'>
+      {heading && <h5 style={{ color: 'var(--muted-color)' }}>{heading}</h5>}
       {isLoading && <Loading />}
       <div className='slider-container'>
         <Slider {...settings}>

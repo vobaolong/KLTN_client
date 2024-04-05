@@ -83,7 +83,7 @@ const StoreNav = ({ store = {} }) => {
           data-bs-target='#offcanvasNavbarStoreNav'
           aria-controls='offcanvasNavbarStoreNav'
         >
-          <i className='fas fa-bars'></i>
+          <i className='fa-solid fa-bars'></i>
         </button>
 
         <div

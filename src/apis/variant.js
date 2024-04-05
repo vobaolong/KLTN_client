@@ -1,8 +1,8 @@
 const API = process.env.REACT_APP_API_URL
 
-export const getStyleById = async (userId, token, styleId) => {
+export const getVariantById = async (userId, token, variantId) => {
   try {
-    const res = await fetch(`${API}/style/by/id/${styleId}/${userId}?`, {
+    const res = await fetch(`${API}/variant/by/id/${variantId}/${userId}?`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -16,11 +16,11 @@ export const getStyleById = async (userId, token, styleId) => {
   }
 }
 
-export const listStyles = async (userId, token, filter) => {
+export const listVariants = async (userId, token, filter) => {
   const { search, sortBy, order, limit, page, categoryId } = filter
   try {
     const res = await fetch(
-      `${API}/styles/${userId}?search=${search}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
+      `${API}/variants/${userId}?search=${search}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
         method: 'GET',
         headers: {
@@ -36,10 +36,10 @@ export const listStyles = async (userId, token, filter) => {
   }
 }
 
-export const listStyleByCategory = async (categoryId) => {
+export const listVariantByCategory = async (categoryId) => {
   try {
     const res = await fetch(
-      `${API}/active/styles?categoryId=${categoryId}&limit=100`,
+      `${API}/active/variants?categoryId=${categoryId}&limit=100`,
       {
         method: 'GET',
         headers: {
@@ -54,9 +54,9 @@ export const listStyleByCategory = async (categoryId) => {
   }
 }
 
-export const createStyle = async (userId, token, style) => {
+export const createVariant = async (userId, token, variant) => {
   try {
-    const res = await fetch(`${API}/style/create/${userId}`, {
+    const res = await fetch(`${API}/variant/create/${userId}`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -64,7 +64,7 @@ export const createStyle = async (userId, token, style) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(style)
+      body: JSON.stringify(variant)
     })
     return await res.json()
   } catch (error) {
@@ -72,9 +72,9 @@ export const createStyle = async (userId, token, style) => {
   }
 }
 
-export const updateStyle = async (userId, token, styleId, style) => {
+export const updateVariant = async (userId, token, variantId, variant) => {
   try {
-    const res = await fetch(`${API}/style/${styleId}/${userId}`, {
+    const res = await fetch(`${API}/variant/${variantId}/${userId}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -82,7 +82,7 @@ export const updateStyle = async (userId, token, styleId, style) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(style)
+      body: JSON.stringify(variant)
     })
     return await res.json()
   } catch (error) {
@@ -90,9 +90,9 @@ export const updateStyle = async (userId, token, styleId, style) => {
   }
 }
 
-export const deleteStyle = async (userId, token, styleId) => {
+export const deleteVariant = async (userId, token, variantId) => {
   try {
-    const res = await fetch(`${API}/style/${styleId}/${userId}`, {
+    const res = await fetch(`${API}/variant/${variantId}/${userId}`, {
       method: 'DELETE',
       mode: 'cors',
       headers: {
@@ -107,9 +107,9 @@ export const deleteStyle = async (userId, token, styleId) => {
   }
 }
 
-export const restoreStyle = async (userId, token, styleId) => {
+export const restoreVariant = async (userId, token, variantId) => {
   try {
-    const res = await fetch(`${API}/style/restore/${styleId}/${userId}`, {
+    const res = await fetch(`${API}/variant/restore/${variantId}/${userId}`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -124,26 +124,29 @@ export const restoreStyle = async (userId, token, styleId) => {
   }
 }
 
-//style value
-export const listActiveStyleValues = async (styleId) => {
+//variant value
+export const listActiveVariantValues = async (variantId) => {
   try {
-    const res = await fetch(`${API}/active/style/values/by/style/${styleId}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
+    const res = await fetch(
+      `${API}/active/variant/values/by/variant/${variantId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
     return await res.json()
   } catch (error) {
     return console.log(error)
   }
 }
 
-export const listStyleValues = async (userId, token, styleId) => {
+export const listVariantValues = async (userId, token, variantId) => {
   try {
     const res = await fetch(
-      `${API}/style/values/by/style/${styleId}/${userId}`,
+      `${API}/variant/values/by/variant/${variantId}/${userId}`,
       {
         method: 'GET',
         headers: {
@@ -159,9 +162,9 @@ export const listStyleValues = async (userId, token, styleId) => {
   }
 }
 
-export const createStyleValue = async (userId, token, styleValue) => {
+export const createVariantValue = async (userId, token, variantValue) => {
   try {
-    const res = await fetch(`${API}/style/value/create/${userId}`, {
+    const res = await fetch(`${API}/variant/value/create/${userId}`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -169,7 +172,7 @@ export const createStyleValue = async (userId, token, styleValue) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(styleValue)
+      body: JSON.stringify(variantValue)
     })
     return await res.json()
   } catch (error) {
@@ -177,9 +180,14 @@ export const createStyleValue = async (userId, token, styleValue) => {
   }
 }
 
-export const updateStyleValue = async (userId, token, valueId, styleValue) => {
+export const updateVariantValue = async (
+  userId,
+  token,
+  valueId,
+  variantValue
+) => {
   try {
-    const res = await fetch(`${API}/style/value/${valueId}/${userId}`, {
+    const res = await fetch(`${API}/variant/value/${valueId}/${userId}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -187,7 +195,7 @@ export const updateStyleValue = async (userId, token, valueId, styleValue) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(styleValue)
+      body: JSON.stringify(variantValue)
     })
     return await res.json()
   } catch (error) {
@@ -195,27 +203,30 @@ export const updateStyleValue = async (userId, token, valueId, styleValue) => {
   }
 }
 
-export const deleteStyleValue = async (userId, token, styleValueId) => {
-  try {
-    const res = await fetch(`${API}/style/value/${styleValueId}/${userId}`, {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      }
-    })
-    return await res.json()
-  } catch (error) {
-    return console.log(error)
-  }
-}
-
-export const restoreStyleValue = async (userId, token, styleValueId) => {
+export const deleteVariantValue = async (userId, token, variantValueId) => {
   try {
     const res = await fetch(
-      `${API}/style/value/restore/${styleValueId}/${userId}`,
+      `${API}/variant/value/${variantValueId}/${userId}`,
+      {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
+export const restoreVariantValue = async (userId, token, variantValueId) => {
+  try {
+    const res = await fetch(
+      `${API}/variant/value/restore/${variantValueId}/${userId}`,
       {
         method: 'GET',
         mode: 'cors',

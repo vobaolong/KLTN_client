@@ -55,7 +55,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
           to={`/vendor/products/${storeId}`}
           className='text-decoration-none cus-link-hover'
         >
-          <i className='fas fa-angle-left'></i> {t('button.back')}
+          <i className='fa-solid fa-angle-left'></i> {t('button.back')}
         </Link>
       </div>
     </div>

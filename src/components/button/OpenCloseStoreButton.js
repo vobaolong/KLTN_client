@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { openStore } from '../../apis/store'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
@@ -40,7 +39,9 @@ const OpenCloseStoreButton = ({
           if (onRun) onRun(data.store)
           toast.success(
             ` ${
-              openFlag ? 'Close store successfully' : 'Open store successfully'
+              openFlag
+                ? t('toastSuccess.lockStore')
+                : t('toastSuccess.unlockStore')
             }`
           )
         }
@@ -61,6 +62,7 @@ const OpenCloseStoreButton = ({
           color={openFlag ? 'danger' : 'primary'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
       <button
@@ -72,14 +74,14 @@ const OpenCloseStoreButton = ({
       >
         {openFlag ? (
           <span>
-            <i className='fas fa-door-open'></i>
+            <i className='fa-solid fa-lock-open'></i>
             {detail && (
               <span className='ms-2 res-hide'>{t('storeDetail.open')}</span>
             )}
           </span>
         ) : (
           <span>
-            <i className='fas fa-door-closed'></i>
+            <i className='fa-solid fa-lock'></i>
             {detail && (
               <span className='ms-2 res-hide'>{t('storeDetail.close')}</span>
             )}

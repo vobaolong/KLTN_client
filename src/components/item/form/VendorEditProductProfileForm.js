@@ -7,7 +7,7 @@ import TextArea from '../../ui/TextArea'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
-import StyleSelector from '../../selector/StyleSelector'
+import VariantSelector from '../../selector/VariantSelector'
 import { t } from 'i18next'
 import { toast } from 'react-toastify'
 
@@ -26,8 +26,8 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       salePrice: product.salePrice?.$numberDecimal,
       categoryId: product.categoryId?._id,
       defaultCategory: product.categoryId,
-      styleValueIds: product.styleValueIds?.map((v) => v._id),
-      defaultStyleValues: product.styleValueIds,
+      variantValueIds: product.variantValueIds?.map((v) => v._id),
+      defaultVariantValues: product.variantValueIds,
       isValidName: true,
       isValidDescription: true,
       isValidQuantity: true,
@@ -102,8 +102,8 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     formData.set('price', newProduct.price)
     formData.set('salePrice', newProduct.salePrice)
     formData.set('categoryId', newProduct.categoryId)
-    if (newProduct.styleValueIds && newProduct.styleValueIds.length > 0)
-      formData.set('styleValueIds', newProduct.styleValueIds.join('|'))
+    if (newProduct.variantValueIds && newProduct.variantValueIds.length > 0)
+      formData.set('variantValueIds', newProduct.variantValueIds.join('|'))
     setIsLoading(true)
     updateProduct(_id, accessToken, formData, product._id, storeId)
       .then((data) => {
@@ -234,14 +234,14 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
               {t('productDetail.chooseCateFirst')}
             </small>
           </p>
-          <StyleSelector
-            label='Chosen styles'
-            defaultValue={newProduct.defaultStyleValues}
+          <VariantSelector
+            label='Chosen variants'
+            defaultValue={newProduct.defaultVariantValues}
             categoryId={newProduct.categoryId}
-            onSet={(styleValues) => {
+            onSet={(variantValues) => {
               setNewProduct({
                 ...newProduct,
-                styleValueIds: styleValues.map((value) => value._id)
+                variantValueIds: variantValues.map((value) => value._id)
               })
             }}
           />

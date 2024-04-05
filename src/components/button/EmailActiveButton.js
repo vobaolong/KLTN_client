@@ -38,7 +38,7 @@ const EmailActiveButton = ({
             style={{ backgroundColor: '#c7f6d3' }}
             className='badge text-success cus-tooltip rounded-1'
           >
-            <i className='fas fa-check-circle me-2'></i>
+            <i className='fa-solid fa-circle-check me-2'></i>
             {t('verified')}
           </span>
           <small className='cus-tooltip-msg'>Email {t('verified')}</small>
@@ -79,7 +79,7 @@ const EmailActiveButton = ({
             className='btn btn-warning btn-sm text-white cus-tooltip ripple'
             onClick={handleSendEmail}
           >
-            <i className='fas fa-paper-plane me-2'></i>
+            <i className='fa-regular fa-paper-plane me-2'></i>
             {t('verifyNow')}!
           </button>
           <small className='cus-tooltip-msg'>{t('confirmEmail')}</small>

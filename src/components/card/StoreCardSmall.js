@@ -1,15 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
 import { getStoreLevel } from '../../apis/level'
-import StoreCommissionLabel from '../label/StoreCommissionLabel'
-import StoreLevelLabel from '../label/StoreLevelLabel'
-import StoreFollowLabel from '../label/StoreFollowLabel'
-import StoreStatusLabel from '../label/StoreStatusLabel'
-import StarRating from '../label/StarRating'
 import FollowStoreButton from '../button/FollowStoreButton'
-
+import defaultImage from '../../assets/default.png'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const StoreCardSmall = ({ store = {}, onRun }) => {
@@ -72,7 +68,7 @@ const StoreCardSmall = ({ store = {}, onRun }) => {
         <div className='card-img-top cus-card-img-top-small'>
           <img
             loading='lazy'
-            src={IMG + storeValue.avatar}
+            src={storeValue.avatar ? IMG + storeValue.avatar : defaultImage}
             className='cus-card-img-small'
             alt={storeValue.name}
           />

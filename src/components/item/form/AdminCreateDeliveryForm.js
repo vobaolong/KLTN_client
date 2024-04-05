@@ -104,9 +104,10 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Create delivery'
+          title={t('dialog.addDelivery')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 

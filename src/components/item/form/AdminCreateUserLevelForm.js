@@ -98,6 +98,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         <ConfirmDialog
           title={t('dialog.createUserLevel')}
           onSubmit={onSubmit}
+          message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
         />
       )}

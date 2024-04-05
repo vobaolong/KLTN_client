@@ -12,38 +12,28 @@ const StaffsPage = (props) => {
   const { t } = useTranslation()
   return (
     <VendorLayout user={user} store={store}>
-      <div className='d-flex align-items-center mb-2'>
-        <div className='position-relative d-inline-block me-2'>
-          <button
-            type='button'
-            className={`btn ${
-              flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(true)}
-          >
-            <i className='fas fa-user-friends'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>
-            {t('staffDetail.staffList')}
-          </small>
-        </div>
-
-        <div className='position-relative d-inline-block'>
-          <button
-            type='button'
-            className={`btn ${
-              !flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(false)}
-          >
-            <i className='fas fa-user-shield'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>{t('staffDetail.owner')}</small>
-        </div>
+      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+        <ul className='nav nav-tabs'>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(true)}
+            >
+              <i className='fa-solid fa-user-group me-2'></i>
+              <span className='res-hide'>{t('staffDetail.staffList')}</span>
+            </span>
+          </li>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${!flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(false)}
+            >
+              <i className='fa-solid fa-user-shield me-2'></i>
+              <span className='res-hide'>{t('staffDetail.owner')}</span>
+            </span>
+          </li>
+        </ul>
       </div>
-
       {flag ? (
         <StoreStaffsTable
           heading={t('staffDetail.staffList')}

@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import ValueSelectorItem from './ValueSelectorItem'
 
-const StyleValueSelector = ({
+const VariantValueSelector = ({
   listValues = [],
   isEditable = true,
   onSet,
@@ -15,7 +16,7 @@ const StyleValueSelector = ({
     listValues.forEach((value) => {
       let flag = true
       defaultList.forEach((list) => {
-        if (value.styleId._id === list[0].styleId._id) {
+        if (value.variantId._id === list[0].variantId._id) {
           list.push(value)
           flag = false
         }
@@ -72,4 +73,4 @@ const StyleValueSelector = ({
   )
 }
 
-export default StyleValueSelector
+export default VariantValueSelector

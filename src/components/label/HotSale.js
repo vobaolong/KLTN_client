@@ -9,7 +9,7 @@ const HotSaleLabel = ({ className = '' }) => {
         color: '#E36403',
         maxWidth: 'max-content'
       }}
-      className={`badge rounded-3 ${className}`}
+      className={`badge rounded-2 ${className}`}
     >
       <i className='fa-solid fa-bolt-lightning me-1'></i>
       <span

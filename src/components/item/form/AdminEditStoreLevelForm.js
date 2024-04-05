@@ -7,13 +7,13 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-
   const [level, setLevel] = useState({
     name: oldLevel.name,
     minPoint: oldLevel.minPoint,
@@ -24,7 +24,7 @@ const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
     isValidDiscount: true,
     isValidColor: true
   })
-
+  const { t } = useTranslation()
   const { _id, accessToken } = getToken()
 
   useEffect(() => {
@@ -111,8 +111,9 @@ const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit level'
+          title={t('dialog.editLevel')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}

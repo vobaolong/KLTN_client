@@ -1,25 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
-import { updateStyleValue } from '../../../apis/style'
+import { createVariantValue } from '../../../apis/variant'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
-const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
+const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [newValue, setNewValue] = useState({
-    _id: oldStyleValue._id,
-    name: oldStyleValue.name,
-    styleId: oldStyleValue.styleId,
+    name: '',
+    variantId,
+    variantName,
     isValidName: true
   })
 
@@ -27,12 +25,11 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
 
   useEffect(() => {
     setNewValue({
-      _id: oldStyleValue._id,
-      name: oldStyleValue.name,
-      styleId: oldStyleValue.styleId,
-      isValidName: true
+      ...newValue,
+      variantId,
+      variantName
     })
-  }, [oldStyleValue])
+  }, [variantId])
 
   const handleChange = (name, isValidName, value) => {
     setNewValue({
@@ -52,8 +49,8 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, styleId } = newValue
-    if (!name || !styleId) {
+    const { name, variantId } = newValue
+    if (!name || !variantId) {
       setNewValue({
         ...newValue,
         isValidName: regexTest('anything', name)
@@ -68,27 +65,22 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
-    updateStyleValue(_id, accessToken, newValue._id, newValue)
+    createVariantValue(_id, accessToken, newValue)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
+          setNewValue({
+            ...newValue,
+            name: ''
+          })
           if (onRun) onRun()
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.addValueVariant.addValue'))
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -99,9 +91,10 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit this value'
+          title={`Add new value for '${variantName}'`}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
@@ -119,18 +112,6 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
           />
         </div>
 
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
@@ -145,4 +126,4 @@ const AdminEditValueStyleForm = ({ oldStyleValue = {}, onRun }) => {
   )
 }
 
-export default AdminEditValueStyleForm
+export default AddValueVariantForm

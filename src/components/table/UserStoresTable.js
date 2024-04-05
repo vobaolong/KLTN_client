@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -98,7 +99,7 @@ const UserStoresTable = () => {
               className='btn btn-primary ripple text-nowrap rounded-1'
               to='/account/storeManager/createNewStore'
             >
-              <i className='fas fa-plus-circle'></i>
+              <i className='fa-solid fa-plus-circle'></i>
               <span className='ms-2 res-hide'>{t('createStore')}</span>
             </Link>
           </div>
@@ -204,7 +205,7 @@ const UserStoresTable = () => {
                       to={`/vendor/${store._id}`}
                       title={t('admin.adDashboard.dashboard')}
                     >
-                      <i className='fas fa-user-tie'></i>
+                      <i className='fa-solid fa-user-tie'></i>
                     </Link>
                   </td>
                 </tr>

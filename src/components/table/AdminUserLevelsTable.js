@@ -148,7 +148,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
           title={t('levelDetail.delete')}
           message={
             <span>
-              Are you sure you want to delete{' '}
+              {t('message.deleteLevel')}
               <UserLevelLabel level={deletedLevel} />
             </span>
           }
@@ -162,7 +162,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
           title='Restore level'
           message={
             <span>
-              Are you sure you want to restore{' '}
+              {t('message.restoreLevel')}
               <UserLevelLabel level={restoredLevel} />
             </span>
           }
@@ -254,9 +254,6 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                     {level.discount && level.discount.$numberDecimal}%
                   </small>
                 </td>
-                {/* <td className='text-end'>
-                  <small>{level.color}</small>
-                </td> */}
                 <td>
                   {level.isDeleted ? (
                     <span>
@@ -271,7 +268,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                 <td className='text-center'>
                   <button
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-level-form'
                     onClick={() => handleEditLevel(level)}
@@ -283,10 +280,10 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                   {!level.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple cus-tooltip rounded-1'
+                      className='btn btn-sm btn-outline-danger ripple cus-tooltip rounded-1'
                       onClick={() => handleDeleteLevel(level)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>

@@ -136,30 +136,18 @@ const ProductCard = ({ product = {}, onRun }) => {
           to={`/product/${productValue._id}`}
           title={productValue.name}
         >
-          <h6
-            className='card-title'
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: '2',
-              WebkitBoxOrient: 'vertical',
-              paddingBottom: '2px'
-            }}
-          >
-            {productValue.name}
-          </h6>
+          <h6 className='card-title productName'>{productValue.name}</h6>
         </Link>
         <small className='card-subtitle d-flex justify-content-between align-items-center'>
           <h5 className='text-danger me-2 mb-0'>
             {productValue.salePrice &&
-              formatPrice(productValue.salePrice.$numberDecimal)}{' '}
+              formatPrice(productValue.salePrice.$numberDecimal)}
             ₫
           </h5>
           {salePercent !== 0 && (
             <del className='text-muted font-weight-normal text-md'>
               {productValue.price &&
-                formatPrice(productValue.price.$numberDecimal)}{' '}
+                formatPrice(productValue.price.$numberDecimal)}
               ₫
             </del>
           )}

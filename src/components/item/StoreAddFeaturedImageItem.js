@@ -14,7 +14,7 @@ const StoreAddFeaturedImageItem = ({ count = 6, storeId = '' }) => {
           data-bs-toggle='modal'
           data-bs-target='#add-featured-image-form'
         >
-          <i className='fas fa-plus-circle'></i>
+          <i className='fa-solid fa-plus-circle'></i>
           <span className='ms-2 res-hide'>{t('button.addFeaturedImg')}</span>
         </button>
 

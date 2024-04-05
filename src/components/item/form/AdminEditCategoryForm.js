@@ -118,6 +118,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         <ConfirmDialog
           title={t('dialog.updateCategory')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -178,7 +179,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             to='/admin/category'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('button.back')}
+            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

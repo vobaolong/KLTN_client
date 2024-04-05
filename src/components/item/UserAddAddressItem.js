@@ -15,7 +15,7 @@ const UserAddAddressItem = ({ count = 0, detail = true }) => {
           data-bs-toggle='modal'
           data-bs-target='#add-address-form'
         >
-          <i className='fas fa-plus-circle'></i>
+          <i className='fa-solid fa-plus-circle'></i>
           {detail && (
             <span className='ms-2 res-hide'>{t('userDetail.addAddress')}</span>
           )}

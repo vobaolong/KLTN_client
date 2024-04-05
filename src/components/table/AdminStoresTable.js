@@ -251,7 +251,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                   <td className='py-1'>
                     <button
                       type='button'
-                      className={`btn rounded-1 ${
+                      className={`btn btn-sm rounded-1 ${
                         !store.isActive
                           ? 'btn-outline-success'
                           : 'btn-outline-danger'
@@ -260,14 +260,14 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                     >
                       {!store.isActive ? (
                         <>
-                          <i className='far fa-check-circle'></i>
+                          <i class='fa-solid fa-circle-check'></i>
                           <span className='ms-2 res-hide'>
                             {t('button.active')}
                           </span>
                         </>
                       ) : (
                         <>
-                          <i className='fas fa-ban'></i>
+                          <i className='fa-solid fa-ban'></i>
                           <span className='ms-2 res-hide'>
                             {t('button.ban')}
                           </span>

@@ -117,7 +117,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/profile/${storeId}`}
               >
-                <i className='fas fa-store me-1'></i>
+                <i className='fa-solid fa-store me-1'></i>
                 {t('storeDetail.profile')}
               </Link>
 
@@ -125,7 +125,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/orders/${storeId}`}
               >
-                <i className='fas fa-clipboard me-1'></i>
+                <i className='fa-solid fa-clipboard me-1'></i>
                 {t('storeDetail.orders')}
               </Link>
 
@@ -133,7 +133,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to='/account/storeManager'
               >
-                <i className='fas fa-angle-left me-1'></i>
+                <i className='fa-solid fa-angle-left me-1'></i>
                 {t('button.back')}
               </Link>
             </ul>

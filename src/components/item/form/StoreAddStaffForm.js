@@ -110,7 +110,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
         else {
           setListRight([])
           updateDispatch('vendor', data.store)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.staff.addStaff'))
         }
         setIsLoading(false)
       })
@@ -126,16 +126,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
       {isConfirming && (
         <ConfirmDialog
           title={t('staffDetail.add')}
-          message={
-            <span>
-              Are you sure you want to add to this store: <br />
-              {listRight?.map((user, index) => (
-                <span className='mt-2 d-block' key={index}>
-                  <UserSmallCard user={user} />
-                </span>
-              ))}
-            </span>
-          }
+          message={t('message.addStaff')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />

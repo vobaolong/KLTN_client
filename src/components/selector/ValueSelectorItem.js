@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 
 const ValueSelectorItem = ({
@@ -21,7 +22,7 @@ const ValueSelectorItem = ({
     if (defaultValue)
       setSelectedValue(() => {
         const temp = listValues.map((value) => value._id)
-        return defaultValue.find((value) => temp.indexOf(value._id) != -1)
+        return defaultValue.find((value) => temp.indexOf(value._id) !== -1)
       })
   }, [defaultValue])
 
@@ -37,7 +38,7 @@ const ValueSelectorItem = ({
       className='position-relative mt-3 mb-1 d-flex align-items-center'
       style={{ marginTop: '3px', marginBottom: '1px' }}
     >
-      <label className='label-style'>{values[0].styleId.name}</label>
+      <label className='label-variant'>{values[0].variantId.name}</label>
       <div className='button-container'>
         {values.map((value, index) => (
           <button

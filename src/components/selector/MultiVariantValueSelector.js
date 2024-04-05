@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { listActiveStyleValues } from '../../apis/style'
+import { listActiveVariantValues } from '../../apis/variant'
 import Error from '../ui/Error'
 import Loading from '../ui/Loading'
-import AddValueStyleItem from '../item/AddValueStyleItem'
+import AddValueVariantItem from '../item/AddValueVariantItem'
 import { useTranslation } from 'react-i18next'
 
-const MultiStyleValueSelector = ({
+const MultiVariantValueSelector = ({
   defaultValue = '',
   categoryId = '',
-  styleId = '',
-  styleName = '',
+  variantId = '',
+  variantName = '',
   onSet
 }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -22,11 +23,11 @@ const MultiStyleValueSelector = ({
   const init = () => {
     setError('')
     setIsLoading(true)
-    listActiveStyleValues(styleId)
+    listActiveVariantValues(variantId)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
-          setValues(data.styleValues)
+          setValues(data.variantValues)
         }
         setIsLoading(false)
       })
@@ -44,7 +45,7 @@ const MultiStyleValueSelector = ({
 
     setSelectedValues(newArray)
     if (onSet) onSet(oldArray, newArray)
-  }, [styleId, categoryId])
+  }, [variantId, categoryId])
 
   useEffect(() => {
     init()
@@ -53,7 +54,7 @@ const MultiStyleValueSelector = ({
   useEffect(() => {
     if (defaultValue) {
       const oldArray = selectedValues
-      const newArray = defaultValue.filter((v) => v.styleId._id === styleId)
+      const newArray = defaultValue.filter((v) => v.variantId._id === variantId)
 
       setSelectedValues(newArray)
       if (onSet) onSet(oldArray, newArray)
@@ -89,10 +90,10 @@ const MultiStyleValueSelector = ({
           className='position-absolute text-muted mb-2'
           style={{
             fontSize: '0.8rem',
-            top: '-16px'
+            top: '-18px'
           }}
         >
-          {styleName}
+          {variantName}
         </label>
 
         <div className=''>
@@ -102,16 +103,16 @@ const MultiStyleValueSelector = ({
                 key={index}
                 className='mb-1 d-inline-flex align-items-center'
               >
-                <span className='border p-1 rounded bg-value'>
+                <span className='align-items-center bg-body border border-dark-subtle me-3 p-1 rounded-1'>
                   {value.name}
+                  <button
+                    type='button'
+                    className='btn btn-outline-danger btn-sm ripple rounded-1 ms-2'
+                    onClick={() => handleRemove(index)}
+                  >
+                    <i className='fa-solid fa-xmark'></i>
+                  </button>
                 </span>
-                <button
-                  type='button'
-                  className='btn btn-outline-danger btn-sm ripple me-4'
-                  onClick={() => handleRemove(index)}
-                >
-                  <i className='fa-solid fa-xmark'></i>
-                </button>
               </span>
             ))
           ) : (
@@ -145,9 +146,9 @@ const MultiStyleValueSelector = ({
               ))}
 
               <span className='list-group-item'>
-                <AddValueStyleItem
-                  styleId={styleId}
-                  styleName={styleName}
+                <AddValueVariantItem
+                  variantId={variantId}
+                  variantName={variantName}
                   onRun={() => setRun(!run)}
                   isFullWidth={true}
                 />
@@ -160,4 +161,4 @@ const MultiStyleValueSelector = ({
   )
 }
 
-export default MultiStyleValueSelector
+export default MultiVariantValueSelector

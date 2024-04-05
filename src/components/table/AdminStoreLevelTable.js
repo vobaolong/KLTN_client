@@ -38,7 +38,7 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'name',
+    sortBy: 'point',
     order: 'asc',
     limit: 6,
     page: 1
@@ -147,10 +147,10 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete level'
+          title={t('dialog.deleteLevel')}
           message={
             <span>
-              Are you sure you want to delete{' '}
+              {t('message.deleteLevel')}
               <StoreLevelLabel level={deletedLevel} />
             </span>
           }
@@ -161,10 +161,10 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
       )}
       {isConfirmingRestore && (
         <ConfirmDialog
-          title='Restore level'
+          title={t('dialog.restoreLevel')}
           message={
             <span>
-              Are you sure you want to restore{' '}
+              {t('message.restoreLevel')}
               <StoreLevelLabel level={restoredLevel} />
             </span>
           }
@@ -221,14 +221,6 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
-              {/* <th scope='col' className='text-end pe-2'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-
-                >
-                  Color
-                </span>
-              </th> */}
               <th scope='col'>
                 <SortByButton
                   currentOrder={filter.order}
@@ -240,12 +232,12 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
               </th>
 
               <th scope='col'>
-                {/* <span
+                <span
                   style={{ fontWeight: '400', fontSize: '.875rem' }}
                   className='text-secondary'
                 >
                   {t('action')}
-                </span> */}
+                </span>
               </th>
             </tr>
           </thead>
@@ -268,9 +260,6 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
                     {level.discount && level.discount.$numberDecimal}%
                   </small>
                 </td>
-                {/* <td className='text-end'>
-                  <small>{level.color}</small>
-                </td> */}
                 <td>
                   {level.isDeleted ? (
                     <span>
@@ -285,7 +274,7 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
                 <td>
                   <button
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-level-form'
                     onClick={() => handleEditLevel(level)}
@@ -297,11 +286,10 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
                   {!level.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple rounded-1'
-                      style={{ width: '95px' }}
+                      className='btn btn-sm btn-outline-danger ripple rounded-1'
                       onClick={() => handleDeleteLevel(level)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>
@@ -309,8 +297,7 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-success ripple'
-                      style={{ width: '95px' }}
+                      className='btn btn-sm btn-outline-success ripple'
                       onClick={() => handleRestoreLevel(level)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>

@@ -36,7 +36,7 @@ const RatingInput = ({
 
           <label htmlFor='str5'>
             <i
-              className={`fas fa-star me-1 ${
+              className={`fa-solid fa-star me-1 ${
                 value >= 5 ? 'link-golden' : 'text-muted'
               }`}
             ></i>
@@ -56,7 +56,7 @@ const RatingInput = ({
 
           <label htmlFor='str4'>
             <i
-              className={`fas fa-star me-1 ${
+              className={`fa-solid fa-star me-1 ${
                 value >= 4 ? 'link-golden' : 'text-muted'
               }`}
             ></i>
@@ -75,7 +75,7 @@ const RatingInput = ({
           />
           <label htmlFor='str3'>
             <i
-              className={`fas fa-star me-1 ${
+              className={`fa-solid fa-star me-1 ${
                 value >= 3 ? 'link-golden' : 'text-muted'
               }`}
             ></i>
@@ -94,7 +94,7 @@ const RatingInput = ({
           />
           <label htmlFor='str2'>
             <i
-              className={`fas fa-star me-1 ${
+              className={`fa-solid fa-star me-1 ${
                 value >= 2 ? 'link-golden' : 'text-muted'
               }`}
             ></i>
@@ -113,7 +113,7 @@ const RatingInput = ({
           />
           <label htmlFor='str1'>
             <i
-              className={`fas fa-star me-1 ${
+              className={`fa-solid fa-star me-1 ${
                 value >= 1 ? 'link-golden' : 'text-muted'
               }`}
             ></i>

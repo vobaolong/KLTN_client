@@ -19,7 +19,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
 
   const [transaction, setTransaction] = useState({
     isUp: 'false',
-    amount: 50000,
+    amount: 100000,
     currentPassword: '',
     isValidAmount: true,
     isValidCurrentPassword: true
@@ -76,7 +76,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
         else {
           setTransaction({
             ...transaction,
-            amount: 50000,
+            amount: 100000,
             currentPassword: '',
             isValidAmount: true,
             isValidCurrentPassword: true
@@ -101,6 +101,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
         <ConfirmDialog
           title='Create transaction'
           onSubmit={onSubmit}
+          message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
         />
       )}

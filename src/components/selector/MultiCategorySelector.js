@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { listCategories, listActiveCategories } from '../../apis/category'
@@ -181,7 +182,7 @@ const MultiCategorySelector = ({
                 onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
               >
                 <span className='res-smaller-md'>{category.name}</span>
-                <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
+                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
               </button>
             ))}
           </div>
@@ -202,7 +203,7 @@ const MultiCategorySelector = ({
                 onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
               >
                 <span className='res-smaller-md'>{category.name}</span>
-                <i className='fas fa-angle-right res-smaller-lg res-hide'></i>
+                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
               </button>
             ))}
           </div>

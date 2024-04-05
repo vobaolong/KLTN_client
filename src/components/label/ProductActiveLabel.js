@@ -6,7 +6,7 @@ const ProductActiveLabel = ({ isActive = false, detail = true }) => {
     <span className='position-relative d-inline-block'>
       {isActive ? (
         <span className='badge bg-success cus-tooltip rounded-1'>
-          <i className='fas fa-check-circle'></i>
+          <i className='fa-solid fa-circle-check'></i>
           {detail && <span className='ms-2'>{t('status.active')}</span>}
         </span>
       ) : (

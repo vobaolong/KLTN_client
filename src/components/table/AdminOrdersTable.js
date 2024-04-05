@@ -53,7 +53,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -254,7 +254,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                   <td className='text-end'>
                     <small className='text-nowrap'>
                       {order.amountFromUser &&
-                        formatPrice(order.amountFromUser.$numberDecimal)}{' '}
+                        formatPrice(order.amountFromUser.$numberDecimal)}
                       ₫
                     </small>
                   </td>
@@ -272,14 +272,14 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     <small className='text-nowrap'>
                       <i className='text-primary'>For Seller: </i>
                       {order.amountToStore &&
-                        formatPrice(order.amountToStore.$numberDecimal)}{' '}
+                        formatPrice(order.amountToStore.$numberDecimal)}
                       ₫
                     </small>
                     <br />
                     <small className='text-nowrap'>
                       <i className='text-success'>For Zenpii: </i>
                       {order.amountToGD &&
-                        formatPrice(order.amountToGD.$numberDecimal)}{' '}
+                        formatPrice(order.amountToGD.$numberDecimal)}
                       ₫
                     </small>
                   </td>
@@ -309,7 +309,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                         className='btn btn-secondary rounded-1 ripple'
                         to={`/admin/order/detail/${order._id}`}
                       >
-                        <i className='fas fa-info-circle'></i>
+                        <i className='fa-solid fa-info-circle'></i>
                       </Link>
                     </div>
                   </td>

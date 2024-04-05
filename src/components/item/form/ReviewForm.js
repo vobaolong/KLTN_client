@@ -108,6 +108,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
         <ConfirmDialog
           title='Review & rate'
           onSubmit={onSubmit}
+          message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
         />
       )}

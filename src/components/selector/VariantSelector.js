@@ -1,22 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { listStyleByCategory } from '../../apis/style'
+import { listVariantByCategory } from '../../apis/variant'
 import Loading from '../ui/Loading'
-import MultiStyleValueSelector from '../selector/MultiStyleValueSelector'
+import MultiVariantValueSelector from '../selector/MultiVariantValueSelector'
 import { toast } from 'react-toastify'
 
-const StyleSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
+const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [styles, setStyles] = useState([])
-  const [selectedStyleValues, setSelectedStyleValues] = useState([])
+  const [variants, setVariants] = useState([])
+  const [selectedVariantValues, setSelectedVariantValues] = useState([])
 
   const init = () => {
     setIsLoading(true)
-    listStyleByCategory(categoryId)
+    listVariantByCategory(categoryId)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          setStyles(data.styles)
+          setVariants(data.variants)
         }
         setIsLoading(false)
       })
@@ -28,21 +28,21 @@ const StyleSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
 
   useEffect(() => {
     if (categoryId) init()
-    else setStyles([])
+    else setVariants([])
 
-    setSelectedStyleValues([])
+    setSelectedVariantValues([])
     if (onSet) onSet([])
   }, [categoryId])
 
   useEffect(() => {
     if (defaultValue) {
-      setSelectedStyleValues(defaultValue)
+      setSelectedVariantValues(defaultValue)
       if (onSet) onSet(defaultValue)
     }
   }, [defaultValue])
 
   const handleSet = (olds, news) => {
-    let newArray = selectedStyleValues
+    let newArray = selectedVariantValues
     let newValues = []
     let flag = true
 
@@ -72,20 +72,20 @@ const StyleSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
       })
     }
 
-    setSelectedStyleValues(newArray)
+    setSelectedVariantValues(newArray)
     if (onSet) onSet(newArray)
   }
 
   return (
     <div className='row position-relative'>
       {isLoading && <Loading />}
-      {styles.map((style, index) => (
+      {variants.map((variant, index) => (
         <div className='col mt-2 mx-3' key={index}>
-          <MultiStyleValueSelector
+          <MultiVariantValueSelector
             defaultValue={defaultValue}
             categoryId={categoryId}
-            styleId={style._id}
-            styleName={style.name}
+            variantId={variant._id}
+            variantName={variant.name}
             onSet={(olds, news) => handleSet(olds, news)}
           />
         </div>
@@ -94,4 +94,4 @@ const StyleSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
   )
 }
 
-export default StyleSelector
+export default VariantSelector

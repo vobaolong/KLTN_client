@@ -148,13 +148,13 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title={t('commisDetail.del')}
-          // message={
-          //   <span>
-          //     Are you sure you want to delete{' '}
-          //     <StoreCommissionLabel commission={deletedCommission} />
-          //   </span>
-          // }
+          title={t('dialog.deleteCommission')}
+          message={
+            <span>
+              {t('message.delete')}
+              <StoreCommissionLabel commission={deletedCommission} />
+            </span>
+          }
           color='danger'
           onSubmit={onSubmitDelete}
           onClose={() => setIsConfirming(false)}
@@ -163,21 +163,19 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       {isConfirmingRestore && (
         <ConfirmDialog
           title={t('dialog.restoreCommission')}
-          // message={
-          //   <span>
-          //     Are you sure you want to restore{' '}
-          //     <StoreCommissionLabel commission={restoredCommission} />
-          //   </span>
-          // }
+          message={
+            <span>
+              {t('message.restore')}
+              <StoreCommissionLabel commission={restoredCommission} />
+            </span>
+          }
           onSubmit={onSubmitRestore}
           onClose={() => setIsConfirmingRestore(false)}
         />
       )}
 
       {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
       {isLoading && <Loading />}
-
       <div className='d-flex justify-content-between align-items-end'>
         <div className='option-wrap d-flex align-items-center'>
           <SearchInput onChange={handleChangeKeyword} />
@@ -210,14 +208,14 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('commisDetail.cost')}
+                  title={t('commissionDetail.cost')}
                   sortBy='cost'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
               </th>
               <th scope='col'>
                 <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('commisDetail.description')}
+                  {t('commissionDetail.description')}
                 </span>
               </th>
               <th scope='col'>
@@ -272,7 +270,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <td className='py-1'>
                   <button
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-commission-form'
                     onClick={() => handleEditCommission(commission)}
@@ -284,10 +282,10 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   {!commission.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple rounded-1'
+                      className='btn btn-sm btn-outline-danger ripple rounded-1'
                       onClick={() => handleDeleteCommission(commission)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>
@@ -295,7 +293,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-success ripple'
+                      className='btn btn-sm btn-outline-success ripple'
                       onClick={() => handleRestoreCommission(commission)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>
@@ -314,7 +312,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
       <Modal
         id='edit-commission-form'
         hasCloseBtn={false}
-        title={t('commisDetail.edit')}
+        title={t('commissionDetail.edit')}
       >
         <AdminEditCommissionForm
           oldCommission={editedCommission}

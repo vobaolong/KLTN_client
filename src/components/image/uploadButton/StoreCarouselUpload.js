@@ -62,6 +62,8 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
         <ConfirmDialog
           title='Remove featured photo'
           onSubmit={onRemoveSubmit}
+          message={t('message.delete')}
+          color='danger'
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -73,7 +75,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               htmlFor={`uploadFeaturedImage-${index}`}
               className='cus-carousel-icon me-2'
             >
-              <i className='fas fa-camera'></i>
+              <i className='fa-solid fa-camera'></i>
               <span className='ms-2 res-hide-md'>{t('button.edit')}</span>
               <input
                 id={`uploadFeaturedImage-${index}`}
@@ -88,7 +90,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               className='cus-carousel-icon cus-carousel-icon--rm'
               onClick={() => handleRemove(index)}
             >
-              <i className='fas fa-trash-alt'></i>
+              <i className='fa-solid fa-trash-alt'></i>
               <span className='ms-2 res-hide-md'>{t('button.delete')}</span>
             </label>
           </div>

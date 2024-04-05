@@ -261,7 +261,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                     <td>
                       <button
                         type='button'
-                        className={`btn rounded-1 ripple cus-tooltip ${
+                        className={`btn btn-sm rounded-1 ripple cus-tooltip ${
                           !product.isActive
                             ? 'btn-outline-success'
                             : 'btn-outline-danger'
@@ -270,14 +270,17 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                       >
                         {!product.isActive ? (
                           <>
-                            <i className='far fa-check-circle'></i>
+                            <i class='fa-solid fa-circle-check'></i>
                             <span className='ms-2 res-hide'>
                               {t('button.active')}
                             </span>
                           </>
                         ) : (
                           <>
-                            <i className='fas fa-ban'></i>
+                            <i
+                              className='fa-solid fa-ban
+'
+                            ></i>
                             <span className='ms-2 res-hide'>
                               {t('button.ban')}
                             </span>

@@ -81,6 +81,7 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
           title={t('storeDetail.addFeaturedImg')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 

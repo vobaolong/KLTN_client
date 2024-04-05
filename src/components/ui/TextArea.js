@@ -26,14 +26,14 @@ const TextArea = ({
   return (
     <div className='cus-input-group'>
       <textarea
+        rows='8'
         required={required}
         disabled={isDisabled}
         className={`cus-input-group-input form-control ${
-          isValid ? '' : 'is-invalid'
+          !isValid ? 'is-invalid' : ''
         }`}
         onChange={onHandleChange}
         onBlur={onHandleBlur}
-        rows='10'
         value={value}
       ></textarea>
       <label className='cus-input-group-label'>

@@ -17,7 +17,7 @@ const DropDownMenu = ({
       : { value: value, label: value }
   )
   const [showDropDownFlag, toggleShowDropDownFlag] = useToggle(false)
-  const [iconClass, setIconClass] = useState('fas fa-angle-down')
+  const [iconClass, setIconClass] = useState('fa-solid fa-angle-down')
 
   const handleSelect = (item) => {
     setValue(item.value)
@@ -26,7 +26,9 @@ const DropDownMenu = ({
 
   const toggleDropDown = () => {
     toggleShowDropDownFlag()
-    setIconClass(showDropDownFlag ? 'fas fa-angle-down' : 'fas fa-angle-up')
+    setIconClass(
+      showDropDownFlag ? 'fa-solid fa-angle-down' : 'fa-solid fa-angle-up'
+    )
   }
 
   useUpdateEffect(() => {
@@ -73,7 +75,7 @@ const DropDownMenu = ({
         onClick={toggleDropDown}
         onBlur={() => {
           toggleShowDropDownFlag(false)
-          setIconClass('fas fa-angle-down')
+          setIconClass('fa-solid fa-angle-down')
         }}
       >
         <span

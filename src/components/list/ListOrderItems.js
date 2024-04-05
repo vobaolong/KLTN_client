@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
@@ -118,13 +119,13 @@ const ListOrderItems = ({
                 </Link>
 
                 <div className='mt-1'>
-                  {item.styleValueIds?.map((value, index) => (
+                  {item.variantValueIds?.map((value, index) => (
                     <p
                       className='text-muted'
                       style={{ fontSize: '0.9rem' }}
                       key={index}
                     >
-                      {value.styleId?.name}: {value.name}
+                      {value.variantId?.name}: {value.name}
                     </p>
                   ))}
                 </div>

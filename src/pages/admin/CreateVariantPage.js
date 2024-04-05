@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux'
 import AdminLayout from '../../components/layout/AdminLayout'
-import AdminCreateStyleForm from '../../components/item/form/AdminCreateStyleForm'
+import AdminCreateVariantForm from '../../components/item/form/AdminCreateVariantForm'
 
-const CreateStylePage = (props) => {
+const CreateVariantPage = () => {
   const user = useSelector((state) => state.account.user)
   return (
     <AdminLayout user={user}>
-      <AdminCreateStyleForm />
+      <AdminCreateVariantForm />
     </AdminLayout>
   )
 }
 
-export default CreateStylePage
+export default CreateVariantPage

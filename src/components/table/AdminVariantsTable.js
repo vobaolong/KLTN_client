@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
-import { listStyles, deleteStyle, restoreStyle } from '../../apis/style'
+import { listVariants, deleteVariant, restoreVariant } from '../../apis/variant'
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
 import SortByButton from './sub/SortByButton'
@@ -15,15 +15,15 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminStylesTable = ({ heading = '' }) => {
+const AdminVariantsTable = ({ heading = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
-  const [deletedStyle, setDeletedStyle] = useState({})
-  const [restoredStyle, setRestoredStyle] = useState({})
-  const [styles, setStyles] = useState([])
+  const [deletedVariant, setDeletedVariant] = useState({})
+  const [restoredVariant, setRestoredVariant] = useState({})
+  const [variants, setVariants] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
@@ -40,11 +40,11 @@ const AdminStylesTable = ({ heading = '' }) => {
 
   const init = () => {
     setIsLoading(true)
-    listStyles(_id, accessToken, filter)
+    listVariants(_id, accessToken, filter)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          setStyles(data.styles)
+          setVariants(data.variants)
           setPagination({
             size: data.size,
             pageCurrent: data.filter.pageCurrent,
@@ -86,19 +86,19 @@ const AdminStylesTable = ({ heading = '' }) => {
     })
   }
 
-  const handleDelete = (style) => {
-    setDeletedStyle(style)
+  const handleDelete = (variant) => {
+    setDeletedVariant(variant)
     setIsConfirming(true)
   }
 
-  const handleRestore = (style) => {
-    setRestoredStyle(style)
+  const handleRestore = (variant) => {
+    setRestoredVariant(variant)
     setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
     setIsLoading(true)
-    deleteStyle(_id, accessToken, deletedStyle._id)
+    deleteVariant(_id, accessToken, deletedVariant._id)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
@@ -115,7 +115,7 @@ const AdminStylesTable = ({ heading = '' }) => {
 
   const onSubmitRestore = () => {
     setIsLoading(true)
-    restoreStyle(_id, accessToken, restoredStyle._id)
+    restoreVariant(_id, accessToken, restoredVariant._id)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
@@ -160,9 +160,9 @@ const AdminStylesTable = ({ heading = '' }) => {
             <Link
               type='button'
               className='btn btn-primary ripple text-nowrap rounded-1'
-              to='/admin/style/createNewStyle'
+              to='/admin/variant/createNewStyle'
             >
-              <i className='fas fa-plus-circle'></i>
+              <i className='fa-solid fa-plus-circle'></i>
               <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
             </Link>
           </div>
@@ -215,12 +215,12 @@ const AdminStylesTable = ({ heading = '' }) => {
           </thead>
 
           <tbody>
-            {styles.map((style, index) => (
+            {variants.map((variant, index) => (
               <tr key={index}>
                 <th scope='row'>
                   {index + 1 + (filter.page - 1) * filter.limit}
                 </th>
-                <td className='text-start'>{style.name}</td>
+                <td className='text-start'>{variant.name}</td>
 
                 <td className='text-start ps-2' style={{ maxWidth: '1000px' }}>
                   <div
@@ -230,7 +230,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                       overflow: 'auto'
                     }}
                   >
-                    {style.categoryIds.map((category, index) => (
+                    {variant.categoryIds.map((category, index) => (
                       <div className='hidden-avatar' key={index}>
                         <CategorySmallCard category={category} />
                       </div>
@@ -239,7 +239,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                 </td>
 
                 <td>
-                  {style.isDeleted ? (
+                  {variant.isDeleted ? (
                     <span>
                       <DeletedLabel />
                     </span>
@@ -253,29 +253,29 @@ const AdminStylesTable = ({ heading = '' }) => {
                 <td className='text-nowrap py-1'>
                   <Link
                     type='button'
-                    className='btn btn-secondary ripple me-2'
-                    to={`/admin/style/values/${style._id}`}
+                    className='btn btn-sm btn-secondary ripple me-2'
+                    to={`/admin/variant/values/${variant._id}`}
                   >
-                    <i className='fas fa-info-circle'></i>
+                    <i className='fa-solid fa-info-circle'></i>
+                    <span className='ms-1 res-hide'>{t('button.detail')}</span>
                   </Link>
 
                   <Link
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
-                    to={`/admin/style/editStyle/${style._id}`}
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                    to={`/admin/variant/editStyle/${variant._id}`}
                   >
                     <i className='fa-solid fa-pen'></i>
                     <span className='ms-1 res-hide'>{t('button.edit')}</span>
                   </Link>
 
-                  {!style.isDeleted ? (
+                  {!variant.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger ripple rounded-1'
-                      style={{ width: '95px' }}
-                      onClick={() => handleDelete(style)}
+                      className='btn btn-sm btn-outline-danger ripple rounded-1'
+                      onClick={() => handleDelete(variant)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-1 res-hide'>
                         {t('button.delete')}
                       </span>
@@ -284,7 +284,7 @@ const AdminStylesTable = ({ heading = '' }) => {
                     <button
                       type='button'
                       className='btn btn-outline-success'
-                      onClick={() => handleRestore(style)}
+                      onClick={() => handleRestore(variant)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>
                       <span className='ms-1 res-hide'>
@@ -306,4 +306,4 @@ const AdminStylesTable = ({ heading = '' }) => {
   )
 }
 
-export default AdminStylesTable
+export default AdminVariantsTable

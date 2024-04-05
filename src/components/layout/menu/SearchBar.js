@@ -9,12 +9,12 @@ const SearchBar = (props) => {
     {
       value: 'products',
       label: t('product'),
-      icon: <i className='fas fa-box'></i>
+      icon: <i className='fa-solid fa-box'></i>
     },
     {
       value: 'stores',
       label: t('store'),
-      icon: <i className='fas fa-store'></i>
+      icon: <i className='fa-solid fa-store'></i>
     }
   ]
   const location = useLocation()
@@ -66,7 +66,7 @@ const SearchBar = (props) => {
         type='submit'
         onClick={handleFormSubmit}
       >
-        <i className='fas fa-search'></i>
+        <i className='fa-solid fa-search'></i>
       </button>
     </form>
   )

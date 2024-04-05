@@ -84,7 +84,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.cart.delete'))
           updateDispatch('account', data.user)
           setRun(!run)
           if (onRun) onRun()
@@ -100,12 +100,15 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
     setIsLoading(true)
     updateCartItem(_id, accessToken, { count: value }, item._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
-        else {
-          toast.success(data.success)
+        if (data.error) {
+          toast.error(data.error)
+        } else {
+          toast.success(t('toastSuccess.cart.update'))
           updateDispatch('account', data.user)
           setRun(!run)
-          if (onRun) onRun()
+          if (onRun) {
+            onRun()
+          }
         }
         setIsLoading(false)
       })
@@ -123,32 +126,18 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           color='danger'
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
       {items.map((item, index) => (
         <div
           key={index}
-          className={`d-flex py-2 align-items-center gap-2 res-flex-column item${
+          className={`d-flex py-2 align-items-center gap-2 item${
             index === items.length - 1 ? ' last-item' : ''
           }`}
         >
-          <div style={{ width: '2%' }} className='custom-checkbox text-center'>
-            <input
-              className=''
-              type='checkbox'
-              id={`productCheckbox${index}`}
-            />
-            <label
-              style={{ fontSize: '0.9rem' }}
-              for={`productCheckbox${index}`}
-              className='checkmark'
-            ></label>
-          </div>
-          <div
-            style={{ width: '40%' }}
-            className='d-flex py-1 justify-content-around align-items-center'
-          >
+          <div className='d-flex py-1 justify-content-around align-items-start w-auto'>
             <div
               style={{
                 position: 'relative',
@@ -175,124 +164,125 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 }}
               />
             </div>
-            <div className='w-75 d-grid'>
+          </div>
+          <div className='d-flex res-flex-column w-100 justify-content-between gap-1'>
+            <div className='res-product-name'>
               <div className='d-flex gap-2'>
                 <MallLabel />
                 {calcPercent(item.productId?.price, item.productId?.salePrice) >
                   20 && <HotSaleLabel />}
               </div>
               <Link
-                className='text-reset text-decoration-none link-hover'
+                className='text-reset productName text-decoration-none link-hover'
                 to={`/product/${item.productId?._id}`}
                 title={item.productId?.name}
               >
                 {item.productId?.name}
               </Link>
               <div>
-                {item.styleValueIds?.map((value, index) => (
+                {item.variantValueIds?.map((value, index) => (
                   <small className='text-muted' key={index}>
-                    {value.styleId?.name}: {value.name}
+                    {value.variantId?.name}: {value.name}
                   </small>
                 ))}
               </div>
             </div>
-          </div>
 
-          <div
-            style={{ width: '23%' }}
-            className='d-inline-flex gap-3 justify-content-center'
-          >
-            <del className='text-secondary'>
-              {item.productId?.price &&
-                formatPrice(item.productId?.price.$numberDecimal)}
-              <sup>₫</sup>
-            </del>
-            <span style={{ fontWeight: '500' }} className='text-black'>
-              {item.productId.salePrice &&
-                formatPrice(item.productId.salePrice.$numberDecimal)}
-              <sup>₫</sup>
-            </span>
-          </div>
+            <div className='d-inline-flex flex-lg-row flex-md-column flex-sm-row gap-2 justify-content-center align-items-center res-price'>
+              <del className='text-secondary text-end'>
+                {item.productId?.price &&
+                  formatPrice(item.productId?.price.$numberDecimal)}
+                <sup>₫</sup>
+              </del>
+              <span
+                style={{ fontWeight: '500' }}
+                className='text-black text-start'
+              >
+                {item.productId.salePrice &&
+                  formatPrice(item.productId.salePrice.$numberDecimal)}
+                <sup>₫</sup>
+              </span>
+            </div>
 
-          {!item.productId?.isActive && (
-            <Error msg='The product is banned by Zenpii!' />
-          )}
-
-          {item.productId?.isActive && !item.productId?.isSelling && (
-            <Error msg='The product is out of business, please delete it from your cart, you can continue with others!' />
-          )}
-
-          {item.productId?.isActive &&
-            item.productId?.isSelling &&
-            item.productId?.quantity <= 0 && (
-              <Error msg='The product is sold out, please delete it from your cart, you can continue with others!' />
-            )}
-
-          {item.productId?.isActive &&
-            item.productId?.isSelling &&
-            item.productId?.quantity > 0 &&
-            item.productId?.quantity < item.count && (
-              <Error
-                msg={`Only ${item.productId.quantity} products left, please update the count!`}
-              />
-            )}
-
-          <div
-            style={{ width: '13%' }}
-            className='d-flex flex-column justify-content-center align-items-center my-2'
-          >
-            {item.productId?.isActive &&
-              item.productId?.isSelling &&
-              item.productId?.quantity > 0 && (
-                <div className='me-2'>
-                  <DropDownMenu
-                    listItem={
-                      item.productId?.quantity &&
-                      Array.from(
-                        {
-                          length: item.productId?.quantity
-                        },
-                        (_, i) => {
-                          return {
-                            value: i + 1,
-                            label: i + 1
+            <div className='d-flex flex-lg-column flex-sm-row justify-content-center align-items-center res-quantity'>
+              {item.productId?.isActive &&
+                item.productId?.isSelling &&
+                item.productId?.quantity > 0 && (
+                  <div className='me-2'>
+                    <DropDownMenu
+                      listItem={
+                        item.productId?.quantity &&
+                        Array.from(
+                          {
+                            length: item.productId?.quantity
+                          },
+                          (_, i) => {
+                            return {
+                              value: i + 1,
+                              label: i + 1
+                            }
                           }
-                        }
-                      )
-                    }
-                    resetDefault={false}
-                    value={item.count}
-                    setValue={(value) => handleUpdate(value, item)}
-                    borderBtn={true}
+                        )
+                      }
+                      resetDefault={false}
+                      value={item.count}
+                      setValue={(value) => handleUpdate(value, item)}
+                      borderBtn={true}
+                      size='small'
+                    />
+                  </div>
+                )}
+              {item.productId?.isActive &&
+                item.productId?.isSelling &&
+                item.productId?.quantity <= 6 && (
+                  <Error
+                    msg={`${t('productDetail.only')} ${
+                      item.productId.quantity
+                    } ${t('productDetail.productLeft')}`}
                   />
-                </div>
+                )}
+              {!item.productId?.isActive && (
+                <Error msg='The product is banned by Zenpii!' />
               )}
-            {item.productId?.isActive &&
-              item.productId?.isSelling &&
-              item.productId?.quantity <= 6 && (
-                <Error
-                  msg={`${t('productDetail.only')} ${
-                    item.productId.quantity
-                  } ${t('productDetail.productLeft')}`}
-                />
-              )}
-          </div>
-          <div
-            className='text-center text-danger'
-            style={{ width: '15%', fontWeight: '500' }}
-          >
-            {formatPrice(item.productId?.salePrice.$numberDecimal * item.count)}
-            <sup>₫</sup>
-          </div>
 
-          <button
-            type='button'
-            className='btn btn-outline-danger ripple rounded-1'
-            onClick={() => handleDelete(item)}
-          >
-            <i className='fas fa-trash-alt'></i>
-            {/* <span className='ms-2 res-hide'>{t('button.delete')}</span> */}
-          </button>
+              {item.productId?.isActive && !item.productId?.isSelling && (
+                <Error msg='The product is out of business, please delete it from your cart, you can continue with others!' />
+              )}
+
+              {item.productId?.isActive &&
+                item.productId?.isSelling &&
+                item.productId?.quantity <= 0 && (
+                  <Error msg='The product is sold out, please delete it from your cart, you can continue with others!' />
+                )}
+
+              {item.productId?.isActive &&
+                item.productId?.isSelling &&
+                item.productId?.quantity > 0 &&
+                item.productId?.quantity < item.count && (
+                  <Error
+                    msg={`Only ${item.productId.quantity} products left, please update the count!`}
+                  />
+                )}
+            </div>
+            <div
+              className='d-flex justify-content-between gap-2 text-danger my-auto align-items-center res-total-price'
+              style={{ fontWeight: '500' }}
+            >
+              <span>
+                {formatPrice(
+                  item.productId?.salePrice.$numberDecimal * item.count
+                )}
+                <sup>₫</sup>
+              </span>
+              <button
+                type='button'
+                className='btn btn-sm btn-outline-danger ripple rounded-1'
+                onClick={() => handleDelete(item)}
+              >
+                <i className='fa-solid fa-trash-alt'></i>
+              </button>
+            </div>
+          </div>
         </div>
       ))}
 
@@ -311,11 +301,11 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
             <div className='d-flex justify-content-end align-items-center'>
               <div className='me-4'>
                 <p className='text-decoration-line-through text-muted'>
-                  {formatPrice(totals.totalPrice)} ₫
+                  {formatPrice(totals.totalPrice)}₫
                 </p>
 
                 <h4 className='text-decoration-line-through text-primary fs-5'>
-                  {formatPrice(totals.totalSalePrice)} ₫
+                  {formatPrice(totals.totalSalePrice)}₫
                 </h4>
               </div>
 
@@ -325,7 +315,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 </small>
 
                 <h4 className='text-primary fs-5'>
-                  {formatPrice(totals.amountFromUser1)} ₫
+                  {formatPrice(totals.amountFromUser1)}₫
                 </h4>
               </div>
             </div>

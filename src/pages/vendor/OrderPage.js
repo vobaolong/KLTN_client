@@ -1,13 +1,14 @@
 import { useSelector } from 'react-redux'
-import AdminLayout from '../../components/layout/AdminLayout'
-import AdminOrdersTable from '../../components/table/AdminOrdersTable'
+import VendorLayout from '../../components/layout/VendorLayout'
+import VendorOrdersTable from '../../components/table/VendorOrdersTable'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 const OrderPage = () => {
   const user = useSelector((state) => state.account.user)
+  const store = useSelector((state) => state.vendor.store)
   const { t } = useTranslation()
-  const [selectedStatus, setSelectedStatus] = useState('Shipped')
+  const [selectedStatus, setSelectedStatus] = useState('Not processed')
 
   const orderStatus = [
     {
@@ -24,8 +25,10 @@ const OrderPage = () => {
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
   }
+  console.log(orderStatus.value)
+
   return (
-    <AdminLayout user={user}>
+    <VendorLayout user={user} store={store}>
       <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-4'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
@@ -41,8 +44,9 @@ const OrderPage = () => {
         ))}
       </div>
 
-      <AdminOrdersTable
+      <VendorOrdersTable
         heading={true}
+        storeId={store._id}
         isEditable={
           selectedStatus === 'Not processed' ||
           selectedStatus === 'Processing' ||
@@ -50,7 +54,7 @@ const OrderPage = () => {
         }
         status={selectedStatus}
       />
-    </AdminLayout>
+    </VendorLayout>
   )
 }
 

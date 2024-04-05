@@ -51,8 +51,10 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
       {isConfirming && (
         <ConfirmDialog
           title={t('reviewDetail.delete')}
+          message={t('message.delete')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          color='danger'
         />
       )}
 
@@ -70,7 +72,6 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
             </span>
             {about && (
               <>
-                <i className='fas fa-comment-dots text-primary mx-4'></i>
                 <ProductSmallCard
                   borderName={true}
                   product={review.productId}
@@ -96,7 +97,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               className='btn btn-outline-danger rounded-1 btn-sm ripple cus-tooltip'
               onClick={handleRemove}
             >
-              <i className='fas fa-trash-alt'></i>
+              <i className='fa-solid fa-trash-alt'></i>
             </button>
             <small className='cus-tooltip-msg'>
               {t('reviewDetail.delete')}

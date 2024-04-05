@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { addToCart } from '../../../apis/cart'
 import Loading from '../../ui/Loading'
-import StyleValueSelector from '../../selector/StyleValueSelector'
+import VariantValueSelector from '../../selector/VariantValueSelector'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
@@ -15,10 +15,10 @@ const AddToCartForm = ({ product = {} }) => {
 
   useEffect(() => {
     let defaultList = []
-    product.styleValueIds?.forEach((value) => {
+    product.variantValueIds?.forEach((value) => {
       let flag = true
       defaultList.forEach((list) => {
-        if (value.styleId._id === list[0].styleId._id) {
+        if (value.variantId._id === list[0].variantId._id) {
           list.push(value)
           flag = false
         }
@@ -35,16 +35,16 @@ const AddToCartForm = ({ product = {} }) => {
       if (flag) defaultList.push([value])
     })
 
-    const defaultStyleValues = defaultList.map((list) => list[0])
-    const defaultStyleValueIds = defaultStyleValues
+    const defaultVariantValues = defaultList.map((list) => list[0])
+    const defaultVariantValueIds = defaultVariantValues
       .map((value) => value._id)
       .join('|')
 
     setCartItem({
       storeId: product.storeId && product.storeId._id,
       productId: product._id,
-      styleValueIds: defaultStyleValueIds,
-      defaultStyleValues: defaultStyleValues,
+      variantValueIds: defaultVariantValueIds,
+      defaultVariantValues: defaultVariantValues,
       count: 1
     })
   }, [product])
@@ -52,7 +52,7 @@ const AddToCartForm = ({ product = {} }) => {
   const handleSet = (values) => {
     setCartItem({
       ...cartItem,
-      styleValueIds: values.map((value) => value._id).join('|')
+      variantValueIds: values.map((value) => value._id).join('|')
     })
   }
 
@@ -69,7 +69,7 @@ const AddToCartForm = ({ product = {} }) => {
           toast.error(data.error)
         } else {
           updateDispatch('account', data.user)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.cart.add'))
         }
         setTimeout(() => {
           setCartItem({})
@@ -85,17 +85,17 @@ const AddToCartForm = ({ product = {} }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      <form className='add-to-cart-form row'>
+      <form className='row'>
         <div className='col-12'>
-          <StyleValueSelector
-            listValues={product.styleValueIds}
+          <VariantValueSelector
+            listValues={product.variantValueIds}
             isEditable={true}
-            defaultValue={cartItem.defaultStyleValues}
+            defaultValue={cartItem.defaultVariantValues}
             onSet={(values) => handleSet(values)}
           />
         </div>
         <div
-          className='col-md-12 d-grid mt-4'
+          className='col-md-12 d-grid mt-2'
           style={{ maxWidth: 'fit-content' }}
         >
           <button
@@ -103,7 +103,7 @@ const AddToCartForm = ({ product = {} }) => {
             className='btn add-to-cart-btn btn-outline-primary ripple btn-lg px-3 py-2 d-flex align-items-center justify-content-center add-to-cart'
             onClick={handleSubmit}
           >
-            <i className='fas fa-cart-plus'></i>
+            <i className='fa-solid fa-cart-plus'></i>
             <span className='ms-2 fs-6'>{t('productDetail.addToCart')}</span>
           </button>
         </div>

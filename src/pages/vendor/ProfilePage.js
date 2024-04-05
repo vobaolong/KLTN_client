@@ -97,12 +97,12 @@ const ProfilePage = () => {
             target='_blank'
           >
             <span className='me-2 res-hide'>Visit My Store</span>
-            <i className='fas fa-external-link-alt'></i>
+            <i className='fa-solid fa-external-link-alt'></i>
           </Link>
         </div>
 
-        <div className='mt-2 d-none res-dis'>
-          <StoreLevelInfo store={store} border={false} />
+        <div className='mt-2 d-none res-dis '>
+          <StoreLevelInfo store={store} />
         </div>
 
         <div className='mt-3'>

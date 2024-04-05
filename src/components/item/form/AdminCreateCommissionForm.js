@@ -94,6 +94,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
           title={t('dialog.createCommission')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
@@ -101,7 +102,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('commisDetail.name')}
+            label={t('commissionDetail.name')}
             value={commission.name}
             isValid={commission.isValidName}
             feedback='Please provide a valid commission name.'
@@ -115,7 +116,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label={t('commisDetail.description')}
+            label={t('commissionDetail.description')}
             value={commission.description}
             isValid={commission.isValidDescription}
             feedback='Please provide a valid commission description.'
@@ -130,7 +131,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label={`${t('commisDetail.cost')} (%)`}
+            label={`${t('commissionDetail.cost')} (%)`}
             value={commission.cost}
             isValid={commission.isValidCost}
             feedback='Please provide a valid cost (>=0).'

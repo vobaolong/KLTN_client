@@ -17,7 +17,7 @@ const ListCategories = ({ heading = '', categoryId = null }) => {
     infinite: false,
     speed: 900,
     slidesToShow: Math.min(categories.length, 8),
-    slidesToScroll: Math.min(categories.length, 8),
+    slidesToScroll: Math.min(categories.length, 7),
     centerPadding: '25%',
     responsive: [
       {
@@ -60,7 +60,7 @@ const ListCategories = ({ heading = '', categoryId = null }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }

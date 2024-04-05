@@ -16,14 +16,8 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const [address, setAddress] = useState({
     street: oldAddress.split(', ')[0],
     ward: oldAddress.split(', ')[1],
-    district_city: oldAddress.split(', ')[2],
-    city_province: oldAddress.split(', ')[3],
-    country: oldAddress.split(', ')[4],
-    isValidStreet: true,
-    isValidWard: true,
-    isValidDistrict: true,
-    isValidProvince: true,
-    isValidCountry: true
+    district: oldAddress.split(', ')[2],
+    city: oldAddress.split(', ')[3]
   })
 
   const [updateDispatch] = useUpdateDispatch()
@@ -33,14 +27,12 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
     setAddress({
       street: oldAddress.split(', ')[0],
       ward: oldAddress.split(', ')[1],
-      district_city: oldAddress.split(', ')[2],
-      city_province: oldAddress.split(', ')[3],
-      country: oldAddress.split(', ')[4],
+      district: oldAddress.split(', ')[2],
+      city: oldAddress.split(', ')[3],
       isValidStreet: true,
       isValidWard: true,
       isValidDistrict: true,
-      isValidProvince: true,
-      isValidCountry: true
+      isValidCity: true
     })
   }, [oldAddress, index])
 
@@ -62,56 +54,35 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { street, ward, district_city, city_province, country } = address
-    if (!street || !ward || !district_city || !city_province || !country) {
+    const { street, ward, district, city } = address
+    if (!street || !ward || !district || !city) {
       setAddress({
         ...address,
         isValidStreet: regexTest('address', street),
         isValidWard: regexTest('address', ward),
-        isValidDistrict: regexTest('address', district_city),
-        isValidProvince: regexTest('address', city_province),
-        isValidCountry: regexTest('address', country)
+        isValidDistrict: regexTest('address', district),
+        isValidCity: regexTest('address', city)
       })
       return
     }
 
-    const {
-      isValidStreet,
-      isValidWard,
-      isValidDistrict,
-      isValidProvince,
-      isValidCountry
-    } = address
-    if (
-      !isValidStreet ||
-      !isValidWard ||
-      !isValidDistrict ||
-      !isValidProvince ||
-      !isValidCountry
-    )
+    const { isValidStreet, isValidWard, isValidDistrict, isValidCity } = address
+    if (!isValidStreet || !isValidWard || !isValidDistrict || !isValidCity)
       return
 
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    const addressString =
-      address.street +
-      ', ' +
-      address.ward +
-      ', ' +
-      address.district_city +
-      ', ' +
-      address.city_province +
-      ', ' +
-      address.country
+    const addressString = `${address.street}, ${address.ward}, ${address.district}, ${address.city}`
+
     setIsLoading(true)
     updateAddress(_id, accessToken, index, { address: addressString })
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.address.update'))
         }
         setIsLoading(false)
       })
@@ -165,12 +136,12 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
             type='text'
             label={t('addressForm.district')}
             required={true}
-            value={address.district_city}
+            value={address.district}
             isValid={address.isValidDistrict}
             feedback={t('addressFormValid.districtValid')}
             validator='address'
             onChange={(value) =>
-              handleChange('district_city', 'isValidDistrict', value)
+              handleChange('district', 'isValidDistrict', value)
             }
             onValidate={(flag) => handleValidate('isValidDistrict', flag)}
           />
@@ -179,34 +150,17 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('addressForm.provinceCity')}
+            label={t('addressForm.city')}
             required={true}
-            value={address.city_province}
-            isValid={address.isValidProvince}
-            feedback={t('addressFormValid.provinceCityValid')}
+            value={address.city}
+            isValid={address.isValidCity}
+            feedback={t('addressFormValid.cityValid')}
             validator='address'
-            onChange={(value) =>
-              handleChange('city_province', 'isValidProvince', value)
-            }
-            onValidate={(flag) => handleValidate('isValidProvince', flag)}
+            onChange={(value) => handleChange('city', 'isValidCity', value)}
+            onValidate={(flag) => handleValidate('isValidCity', flag)}
           />
         </div>
 
-        <div className='col-12'>
-          <Input
-            type='text'
-            label={t('addressForm.country')}
-            required={true}
-            value={address.country}
-            isValid={address.isValidCountry}
-            feedback={t('addressFormValid.countryValid')}
-            validator='address'
-            onChange={(value) =>
-              handleChange('country', 'isValidCountry', value)
-            }
-            onValidate={(flag) => handleValidate('isValidCountry', flag)}
-          />
-        </div>
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

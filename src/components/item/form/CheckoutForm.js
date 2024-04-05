@@ -187,7 +187,7 @@ const CheckoutForm = ({
         else {
           updateDispatch('account', data.user)
           history.push('/account/purchase')
-          toast.success('Order Successfully!')
+          toast.success('Order successfully!')
         }
         setIsLoading(false)
       })
@@ -302,6 +302,7 @@ const CheckoutForm = ({
           title={t('orderDetail.cod')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
@@ -346,7 +347,7 @@ const CheckoutForm = ({
                       })
                     }
                   >
-                    <i className='fas fa-phone-square-alt'></i>
+                    <i className='fa-solid fa-phone-square-alt'></i>
                   </button>
                 </div>
                 <small className='cus-tooltip-msg'>
@@ -403,7 +404,7 @@ const CheckoutForm = ({
                   listItem={deliveries?.map((d, i) => {
                     const newD = {
                       value: d,
-                      label: d.name + ' (' + d.price.$numberDecimal + ' ₫)'
+                      label: d.name + ' (' + d.price.$numberDecimal + '₫)'
                     }
                     return newD
                   })}
@@ -445,11 +446,11 @@ const CheckoutForm = ({
                 <dl className='row'>
                   <dd className='col-sm-6 res-hide'>
                     <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.totalPrice)} ₫
+                      {formatPrice(order.totalPrice)}₫
                     </p>
 
                     <h4 className='text-decoration-line-through text-primary fs-5'>
-                      {formatPrice(order.totalSalePrice)} ₫
+                      {formatPrice(order.totalSalePrice)}₫
                     </h4>
                   </dd>
                   <dd className='col-sm-6'>
@@ -458,7 +459,7 @@ const CheckoutForm = ({
                     </small>
 
                     <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser1)} ₫
+                      {formatPrice(order.amountFromUser1)}₫
                     </h4>
                   </dd>
                 </dl>
@@ -469,11 +470,11 @@ const CheckoutForm = ({
                 <dl className='row'>
                   <dd className='col-sm-6 res-hide'>
                     <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.deliveryPrice)} ₫
+                      {formatPrice(order.deliveryPrice)}₫
                     </p>
 
                     <h4 className='text-decoration-line-through text-primary fs-5'>
-                      {formatPrice(order.deliveryPrice)} ₫
+                      {formatPrice(order.deliveryPrice)}₫
                     </h4>
                   </dd>
                   <dd className='col-sm-6'>
@@ -482,7 +483,7 @@ const CheckoutForm = ({
                     </small>
 
                     <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser2)} ₫
+                      {formatPrice(order.amountFromUser2)}₫
                     </h4>
                   </dd>
                 </dl>
@@ -491,7 +492,7 @@ const CheckoutForm = ({
               <dt className='col-sm-3 col-6'>{t('orderDetail.finalTotal')}</dt>
               <dd className='col-sm-9 col-6'>
                 <h4 className='text-primary fs-5'>
-                  {formatPrice(order.amountFromUser)} ₫
+                  {formatPrice(order.amountFromUser)}₫
                 </h4>
               </dd>
             </dl>

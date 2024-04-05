@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import AdminLayout from '../../components/layout/AdminLayout'
-import AdminEditStyleForm from '../../components/item/form/AdminEditStyleForm'
+import AdminEditVariantForm from '../../components/item/form/AdminEditVariantForm'
 
-const EditStylePage = (props) => {
+const EditVariantPage = (props) => {
   const user = useSelector((state) => state.account.user)
-  const { styleId } = useParams()
+  const { variantId } = useParams()
   return (
     <AdminLayout user={user}>
-      <AdminEditStyleForm styleId={styleId} />
+      <AdminEditVariantForm variantId={variantId} />
     </AdminLayout>
   )
 }
 
-export default EditStylePage
+export default EditVariantPage

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
-import { updateStyle, getStyleById } from '../../../apis/style'
+import { updateVariant, getVariantById } from '../../../apis/variant'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
@@ -11,12 +11,12 @@ import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const AdminEditStyleForm = ({ styleId = '' }) => {
+const AdminEditVariantForm = ({ variantId = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
-  const [newStyle, setNewStyle] = useState({
+  const [newVariant, setNewVariant] = useState({
     name: '',
     categoryIds: '',
     defaultParentCategories: '',
@@ -27,15 +27,17 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
 
   const init = () => {
     setIsLoading(true)
-    getStyleById(_id, accessToken, styleId)
+    getVariantById(_id, accessToken, variantId)
       .then((data) => {
         if (data.error) {
           toast.error(data.error)
         } else {
-          setNewStyle({
-            name: data.style.name,
-            defaultParentCategories: data.style.categoryIds,
-            categoryIds: data.style.categoryIds.map((category) => category._id),
+          setNewVariant({
+            name: data.variant.name,
+            defaultParentCategories: data.variant.categoryIds,
+            categoryIds: data.variant.categoryIds.map(
+              (category) => category._id
+            ),
             isValidName: true
           })
         }
@@ -49,19 +51,19 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
 
   useEffect(() => {
     init()
-  }, [styleId])
+  }, [variantId])
 
   const handleChange = (name, isValidName, value) => {
-    setNewStyle({
-      ...newStyle,
+    setNewVariant({
+      ...newVariant,
       [name]: value,
       [isValidName]: true
     })
   }
 
   const handleValidate = (isValidName, flag) => {
-    setNewStyle({
-      ...newStyle,
+    setNewVariant({
+      ...newVariant,
       [isValidName]: flag
     })
   }
@@ -69,16 +71,16 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, categoryIds } = newStyle
+    const { name, categoryIds } = newVariant
     if (!name || !categoryIds || categoryIds.length === 0) {
-      setNewStyle({
-        ...newStyle,
+      setNewVariant({
+        ...newVariant,
         isValidName: regexTest('anything', name)
       })
       return
     }
 
-    const { isValidName } = newStyle
+    const { isValidName } = newVariant
     if (!isValidName) return
 
     setIsConfirming(true)
@@ -86,7 +88,7 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
 
   const onSubmit = () => {
     setIsLoading(true)
-    updateStyle(_id, accessToken, styleId, newStyle)
+    updateVariant(_id, accessToken, variantId, newVariant)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else toast.success(data.success)
@@ -105,6 +107,7 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
         <ConfirmDialog
           title={t('categoryDetail.edit')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -122,10 +125,10 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
             label={t('categoryDetail.chosenParentCategory')}
             isActive={false}
             isRequired={true}
-            defaultValue={newStyle.defaultParentCategories}
+            defaultValue={newVariant.defaultParentCategories}
             onSet={(categories) =>
-              setNewStyle({
-                ...newStyle,
+              setNewVariant({
+                ...newVariant,
                 categoryIds: categories
                   ? categories.map((category) => category._id)
                   : ''
@@ -138,8 +141,8 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
           <Input
             type='text'
             label={t('variantDetail.name')}
-            value={newStyle.name}
-            isValid={newStyle.isValidName}
+            value={newVariant.name}
+            isValid={newVariant.isValidName}
             feedback={t('categoryValid.variantValid')}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -149,10 +152,10 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
 
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
-            to='/admin/style'
+            to='/admin/variant'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('button.back')}
+            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'
@@ -168,4 +171,4 @@ const AdminEditStyleForm = ({ styleId = '' }) => {
   )
 }
 
-export default AdminEditStyleForm
+export default AdminEditVariantForm

@@ -79,7 +79,7 @@ const InputFile = ({
               }`}
               onClick={(e) => handleReset(e)}
             >
-              <i className='fas fa-times'></i>
+              <i className='fa-solid fa-times'></i>
             </label>
           )}
 

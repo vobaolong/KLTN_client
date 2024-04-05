@@ -4,7 +4,7 @@ import VendorLayout from '../../components/layout/VendorLayout'
 import StoreProductsTable from '../../components/table/StoreProductsTable'
 import { useTranslation } from 'react-i18next'
 
-const ProductsPage = (props) => {
+const ProductsPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
@@ -12,38 +12,28 @@ const ProductsPage = (props) => {
 
   return (
     <VendorLayout user={user} store={store}>
-      <div className='d-flex align-items-center mb-2'>
-        <div className='position-relative d-inline-block me-2'>
-          <button
-            type='button'
-            className={`btn ${
-              flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(true)}
-          >
-            <i className='fas fa-box'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>
-            {t('productDetail.selling')}
-          </small>
-        </div>
-
-        <div className='position-relative d-inline-block'>
-          <button
-            type='button'
-            className={`btn ${
-              !flag ? 'btn-secondary' : 'btn-outline-secondary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(false)}
-          >
-            <i className='fas fa-archive'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>{t('productDetail.stored')}</small>
-        </div>
+      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+        <ul className='nav nav-tabs'>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(true)}
+            >
+              <i className='fa-solid fa-box me-2'></i>
+              <span className='res-hide'>{t('productDetail.selling')}</span>
+            </span>
+          </li>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${!flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(false)}
+            >
+              <i className='fa-solid fa-archive me-2'></i>
+              <span className='res-hide'>{t('productDetail.stored')}</span>
+            </span>
+          </li>
+        </ul>
       </div>
-
       <StoreProductsTable storeId={store._id} isSelling={flag} />
     </VendorLayout>
   )

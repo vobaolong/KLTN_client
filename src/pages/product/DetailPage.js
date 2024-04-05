@@ -33,18 +33,14 @@ const DetailPage = () => {
   const [error, setError] = useState('')
   const [product, setProduct] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     getProduct(productId)
       .then(async (data) => {
         if (data.error) setError(data.error)
-        else if (
-          data.product &&
-          data.product.storeId &&
-          !data.product.storeId.isActive
-        )
+        else if (!data.product?.storeId?.isActive)
           setError('This store is banned by Zenpii!')
         else {
           const newProduct = data.product
@@ -72,7 +68,7 @@ const DetailPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -82,6 +78,15 @@ const DetailPage = () => {
   }, [productId])
 
   const salePercent = calcPercent(product.price, product.salePrice)
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded)
+  }
+  const descriptionStyle = {
+    maxHeight: isExpanded ? 'unset' : '400px',
+    overflow: 'hidden',
+    transition: 'max-height 0.5s ease-in-out' // Add transition effect
+  }
 
   return (
     <MainLayout>
@@ -111,14 +116,13 @@ const DetailPage = () => {
                 <small className='text-primary'>
                   <StoreSmallCard store={product.storeId} />
                 </small>
-                <h5 className=''>{product.name}</h5>
+                <h5 style={{ fontSize: '1.25rem' }} className='productName'>
+                  {product.name}
+                </h5>
                 <div className='d-flex'>
-                  <a
-                    href='#review'
-                    className='me-2 border-bottom border-primary text-primary text-decoration-none'
-                  >
+                  <span className='me-2 text-primary text-decoration-none'>
                     {product.rating}
-                  </a>
+                  </span>
                   <StarRating stars={product.rating} />
                   <span className='mx-2 px-2 border-start'>
                     {product.sold}
@@ -131,23 +135,22 @@ const DetailPage = () => {
                   {product.salePrice?.$numberDecimal !==
                     product.price?.$numberDecimal && (
                     <del className=' text-muted mt-1'>
-                      {formatPrice(product.price?.$numberDecimal)} <sup> ₫</sup>
+                      {formatPrice(product.price?.$numberDecimal)}
+                      <sup>₫</sup>
                     </del>
                   )}
-                  <h2 className='text-primary fs-3 m-0 ms-3'>
+                  <h5 className='text-primary m-0 ms-3'>
                     {formatPrice(product.salePrice?.$numberDecimal)}
-                    <sup> ₫</sup>
-                  </h2>
+                    <sup>₫</sup>
+                  </h5>
 
                   {salePercent > 5 && (
                     <SalePercentLabel salePercent={salePercent} />
                   )}
-
-                  <small className='ms-2'> {t('productDetail.vat')}</small>
                 </div>
 
-                <div className='mt-4'>
-                  {product.storeId && !product.storeId.isOpen && (
+                <div className='mt-xl-4 mt-lg-3 mt-md-2 mt-sm-1'>
+                  {!product.storeId?.isOpen && (
                     <Error msg="This store is closed, can' t order in this time!" />
                   )}
                   {product.quantity <= 0 && (
@@ -250,7 +253,13 @@ const DetailPage = () => {
                         role='tabpanel'
                         aria-labelledby='details-tab'
                       >
-                        <div className='py-2'>
+                        <div
+                          style={{
+                            ...descriptionStyle,
+                            position: 'relative',
+                            paddingBottom: '2rem'
+                          }}
+                        >
                           <span
                             style={{
                               whiteSpace: 'pre-line',
@@ -260,6 +269,31 @@ const DetailPage = () => {
                           >
                             {product.description}
                           </span>
+                          <div
+                            className={`position-absolute w-100 text-center align-content-end ${
+                              !isExpanded ? 'gradient' : ''
+                            } pb-3`}
+                            style={{
+                              bottom: 0,
+                              height: '130px'
+                            }}
+                          >
+                            {!isExpanded ? (
+                              <span
+                                className='pointer text-primary text-center text-decoration-none'
+                                onClick={handleToggle}
+                              >
+                                Xem thêm
+                              </span>
+                            ) : (
+                              <span
+                                className='pointer text-primary text-decoration-none'
+                                onClick={handleToggle}
+                              >
+                                Thu gọn
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                       <div
@@ -268,7 +302,7 @@ const DetailPage = () => {
                         role='tabpanel'
                         aria-labelledby='reviews-tab'
                       >
-                        <div id='review'>
+                        <div id='reviews'>
                           <ListReviews
                             heading={t('productDetail.productReview')}
                             productId={product._id}
@@ -279,29 +313,26 @@ const DetailPage = () => {
                   </div>
                 </div>
               </div>
-              <div className='col-lg-3 pe-0 d-lg-block d-md-none'>
+              <div className='res-hide col-lg-3 pe-0 d-lg-block d-md-none'>
                 <div className='box-shadow w-100 mb-2'>
                   <StoreCardSmall store={product.storeId} />
                 </div>
               </div>
             </div>
-            <div className='col-12'>
+            <div className='row mt-3'>
               {product.categoryId && (
-                <div className='mt-4'>
-                  <ListBestSellerProducts
-                    heading={t('similarProducts')}
-                    categoryId={product.categoryId._id}
-                  />
-                </div>
+                <ListBestSellerProducts
+                  heading={t('similarProducts')}
+                  categoryId={product.categoryId._id}
+                />
               )}
-
+            </div>
+            <div className='row mt-3'>
               {product.storeId && (
-                <div className='mt-4'>
-                  <ListProductsByStore
-                    heading={t('sameShop')}
-                    storeId={product.storeId._id}
-                  />
-                </div>
+                <ListProductsByStore
+                  heading={t('sameShop')}
+                  storeId={product.storeId._id}
+                />
               )}
             </div>
           </div>

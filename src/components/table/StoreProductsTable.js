@@ -156,7 +156,7 @@ const StoreProductsTable = ({
               className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
               to={`/vendor/products/createNewProduct/${storeId}`}
             >
-              <i className='fas fa-plus-circle'></i>
+              <i className='fa-solid fa-plus-circle'></i>
               <span className='ms-2 res-hide'>
                 {t('productDetail.createProduct')}
               </span>
@@ -274,7 +274,7 @@ const StoreProductsTable = ({
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
                     title={t('productDetail.values')}
-                    sortBy='styleValueIds'
+                    sortBy='variantValueIds'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
@@ -454,13 +454,13 @@ const StoreProductsTable = ({
                         // overflow: 'auto'
                       }}
                     >
-                      {product.styleValueIds?.length > 0 ? (
+                      {product.variantValueIds?.length > 0 ? (
                         <small>
-                          {/* <StyleValueSelector
-                          listValues={product.styleValueIds}
+                          {/* <VariantValueSelector
+                          listValues={product.variantValueIds}
                           isEditable={false}
                         /> */}
-                          {product.styleValueIds
+                          {product.variantValueIds
                             ?.map((value) => value.name)
                             .join(', ')}
                         </small>
@@ -487,21 +487,21 @@ const StoreProductsTable = ({
                     <div className='d-flex justify-content-center align-items-center'>
                       <button
                         type='button'
-                        className={`btn rounded-1 btn-outline-${
+                        className={`btn btn-sm rounded-1 btn-outline-${
                           !product.isSelling ? 'success' : 'secondary'
                         } ripple me-2`}
                         onClick={() => handleSellingProduct(product)}
                       >
                         {!product.isSelling ? (
                           <>
-                            <i className='fas fa-box'></i>
+                            <i className='fa-solid fa-box'></i>
                             <span className='ms-1 res-hide'>
                               {t('button.sell')}
                             </span>
                           </>
                         ) : (
                           <>
-                            <i className='fas fa-archive'></i>
+                            <i className='fa-solid fa-archive'></i>
                             <span className='ms-1 res-hide'>
                               {t('button.store')}
                             </span>
@@ -511,7 +511,7 @@ const StoreProductsTable = ({
 
                       <Link
                         type='button'
-                        className='btn btn-primary ripple rounded-1'
+                        className='btn btn-sm btn-primary ripple rounded-1'
                         to={`/vendor/products/editproduct/${product._id}/${storeId}`}
                       >
                         <i className='fa-solid fa-pen'></i>

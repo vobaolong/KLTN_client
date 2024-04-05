@@ -4,6 +4,7 @@ import Loading from '../ui/Loading'
 import { getToken } from '../../apis/auth'
 import { followProduct, unfollowProduct } from '../../apis/follow'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const FollowProductButton = ({
   productId = '',
@@ -12,6 +13,7 @@ const FollowProductButton = ({
   style = {},
   onRun
 }) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [followingFlag, setFollowingFlag] = useState(isFollowing)
@@ -33,17 +35,14 @@ const FollowProductButton = ({
             if (onRun) {
               data.product.isFollowing = true
               onRun(data.product)
-              toast.success(data.success)
+              toast.success(t('toastSuccess.followProduct.follow'))
             }
           }
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         })
     } else {
       unfollowProduct(_id, accessToken, productId)
@@ -55,13 +54,13 @@ const FollowProductButton = ({
             if (onRun) {
               data.product.isFollowing = false
               onRun(data.product)
-              toast.success(data.success)
+              toast.success(t('toastSuccess.followProduct.unfollow'))
             }
           }
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     }

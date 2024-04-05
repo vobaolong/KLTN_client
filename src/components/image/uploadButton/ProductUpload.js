@@ -2,15 +2,14 @@ import { useState, Fragment } from 'react'
 import { getToken } from '../../../apis/auth'
 import { updateListImages, removeListImages } from '../../../apis/product'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
-
+  const { t } = useTranslation()
   const { _id, accessToken } = getToken()
 
   const handleChange = (e) => {
@@ -20,19 +19,16 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
     setIsLoading(true)
     updateListImages(_id, accessToken, formData, index, productId, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
         setIsLoading(false)
-        setError(error)
+        toast.error('Something went wrong')
       })
   }
 
@@ -41,22 +37,17 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
   }
 
   const onRemoveSubmit = () => {
-    setError('')
-    toast.success('')
     setIsLoading(true)
     removeListImages(_id, accessToken, index, productId, storeId)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else toast.success(data.success)
         setIsLoading(false)
         if (onRun) onRun()
       })
       .catch((error) => {
-        setError(error)
+        toast.error(error)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -67,6 +58,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
         <div className='text-start'>
           <ConfirmDialog
             title='Remove images'
+            message={t('confirmDialog')}
             color='danger'
             onSubmit={onRemoveSubmit}
             onClose={() => setIsConfirming(false)}
@@ -79,17 +71,12 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
           className='cus-avatar-icon cus-avatar-icon--rm'
           onClick={handleRemove}
         >
-          <i className='fas fa-times'></i>
+          <i className='fa-solid fa-times'></i>
         </label>
       )}
 
       <label className='cus-avatar-icon'>
-        <i className='fas fa-camera'></i>
-        {error && (
-          <span>
-            <Error msg={error} />
-          </span>
-        )}
+        <i className='fa-solid fa-camera'></i>
         <input
           className='visually-hidden'
           type='file'

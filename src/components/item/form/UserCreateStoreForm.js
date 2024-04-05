@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
@@ -13,6 +14,7 @@ import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import Logo from '../../layout/menu/Logo'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const CreateStoreForm = (props) => {
   const { t } = useTranslation()
@@ -121,48 +123,39 @@ const CreateStoreForm = (props) => {
     formData.set('avatar', store.avatar)
     formData.set('cover', store.cover)
 
-    setError('')
     setIsLoading(true)
     createStore(_id, accessToken, formData)
       .then((data) => {
         if (data.error) {
           setError(data.error)
           setIsLoading(false)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         } else {
           history.push(`/vendor/${data.storeId}`)
+          toast.success('Tạo cửa hàng thành công')
         }
       })
       .catch((error) => {
         setError(error)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
-    <div className='position-relative p-1'>
+    <div className='position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Create store'
+          title={t('dialog.createStore')}
           message={
             <small>
-              By Creating your store, you agree to Zenpii's{' '}
-              <Link to='/legal/termsOfUse' target='_blank'>
-                Terms of Use
-              </Link>{' '}
-              and{' '}
+              {t('storeDetail.agreeBy')}{' '}
               <Link to='/legal/privacy' target='_blank'>
-                Privacy Policy
+                {t('footer.policy')}.
+                <br />
               </Link>
-              . How you'll get paid? Set up billing?{' '}
+              {t('storeDetail.getPaid')}{' '}
               <Link to='/legal/sellOnZenpii' target='_blank'>
-                Sell on Zenpii
+                {t('storeDetail.sellOn')}
               </Link>
               .
             </small>
@@ -298,7 +291,8 @@ const CreateStoreForm = (props) => {
             to='/account/storeManager'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('storeDetail.backToStore')}
+            <i className='fa-solid fa-angle-left'></i>{' '}
+            {t('storeDetail.backToStore')}
           </Link>
           <button
             type='submit'

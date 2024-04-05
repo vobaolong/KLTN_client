@@ -144,7 +144,7 @@ const PrintBill = ({
               label={`${t('orderDetail.finalTotal')}`}
               value={
                 <span className='text-primary fw-bold fs-5'>
-                  {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
+                  {formatPrice(order.amountFromUser?.$numberDecimal)}₫
                 </span>
               }
             />

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
-import { createStyle } from '../../../apis/style'
+import { createVariant } from '../../../apis/variant'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
@@ -10,11 +10,11 @@ import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const AdminCreateStyleForm = (props) => {
+const AdminCreateVariantForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [newStyle, setNewStyle] = useState({
+  const [newVariant, setNewVariant] = useState({
     name: '',
     categoryIds: '',
     isValidName: true
@@ -23,16 +23,16 @@ const AdminCreateStyleForm = (props) => {
   const { _id, accessToken } = getToken()
 
   const handleChange = (name, isValidName, value) => {
-    setNewStyle({
-      ...newStyle,
+    setNewVariant({
+      ...newVariant,
       [name]: value,
       [isValidName]: true
     })
   }
 
   const handleValidate = (isValidName, flag) => {
-    setNewStyle({
-      ...newStyle,
+    setNewVariant({
+      ...newVariant,
       [isValidName]: flag
     })
   }
@@ -40,23 +40,23 @@ const AdminCreateStyleForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, categoryIds } = newStyle
+    const { name, categoryIds } = newVariant
     if (!name || !categoryIds || categoryIds.length === 0) {
-      setNewStyle({
-        ...newStyle,
+      setNewVariant({
+        ...newVariant,
         isValidName: regexTest('anything', name)
       })
       return
     }
 
-    const { isValidName } = newStyle
+    const { isValidName } = newVariant
     if (!isValidName) return
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
     setIsLoading(true)
-    createStyle(_id, accessToken, newStyle)
+    createVariant(_id, accessToken, newVariant)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else toast.success(data.success)
@@ -75,6 +75,7 @@ const AdminCreateStyleForm = (props) => {
           title={t('variantDetail.add')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
@@ -93,8 +94,8 @@ const AdminCreateStyleForm = (props) => {
             isActive={false}
             isRequired={true}
             onSet={(categories) =>
-              setNewStyle({
-                ...newStyle,
+              setNewVariant({
+                ...newVariant,
                 categoryIds: categories
                   ? categories.map((category) => category._id)
                   : ''
@@ -107,8 +108,8 @@ const AdminCreateStyleForm = (props) => {
           <Input
             type='text'
             label={t('variantDetail.name')}
-            value={newStyle.name}
-            isValid={newStyle.isValidName}
+            value={newVariant.name}
+            isValid={newVariant.isValidName}
             feedback={t('variantDetail.nameValid')}
             required={true}
             validator='anything'
@@ -119,10 +120,10 @@ const AdminCreateStyleForm = (props) => {
 
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
-            to='/admin/style'
+            to='/admin/variant'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('button.back')}
+            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'
@@ -138,4 +139,4 @@ const AdminCreateStyleForm = (props) => {
   )
 }
 
-export default AdminCreateStyleForm
+export default AdminCreateVariantForm

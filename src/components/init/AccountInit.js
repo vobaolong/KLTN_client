@@ -64,7 +64,7 @@ const AccountInit = ({ user, actions }) => {
         }
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -96,6 +96,7 @@ const AccountInit = ({ user, actions }) => {
           title={t('button.logout')}
           color='danger'
           onSubmit={onSignoutSubmit}
+          message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -126,7 +127,7 @@ const AccountInit = ({ user, actions }) => {
             className='list-group-item your-account-options-item ripple text-capitalize'
             to='/account/profile'
           >
-            <i className='fas fa-user-circle'></i>
+            <i className='fa-solid fa-user-circle'></i>
             {t('userDetail.myAccount')}
           </Link>
           {role === 'user' && (
@@ -152,7 +153,7 @@ const AccountInit = ({ user, actions }) => {
             className='list-group-item your-account-options-item ripple text-capitalize'
             onClick={handleSignout}
           >
-            <i className='fas fa-sign-out-alt'></i>
+            <i className='fa-solid fa-sign-out-alt'></i>
             {t('button.logout')}
           </li>
         </ul>

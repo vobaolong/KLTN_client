@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
-import { createStyleValue } from '../../../apis/style'
+import { updateVariantValue } from '../../../apis/variant'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
@@ -9,7 +9,7 @@ import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 
-const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
+const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -17,9 +17,9 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
   const [success, setSuccess] = useState('')
 
   const [newValue, setNewValue] = useState({
-    name: '',
-    styleId,
-    styleName,
+    _id: oldVariantValue._id,
+    name: oldVariantValue.name,
+    variantId: oldVariantValue.variantId,
     isValidName: true
   })
 
@@ -27,11 +27,12 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
 
   useEffect(() => {
     setNewValue({
-      ...newValue,
-      styleId,
-      styleName
+      _id: oldVariantValue._id,
+      name: oldVariantValue.name,
+      variantId: oldVariantValue.variantId,
+      isValidName: true
     })
-  }, [styleId])
+  }, [oldVariantValue])
 
   const handleChange = (name, isValidName, value) => {
     setNewValue({
@@ -51,8 +52,8 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, styleId } = newValue
-    if (!name || !styleId) {
+    const { name, variantId } = newValue
+    if (!name || !variantId) {
       setNewValue({
         ...newValue,
         isValidName: regexTest('anything', name)
@@ -70,14 +71,10 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
     setError('')
     setSuccess('')
     setIsLoading(true)
-    createStyleValue(_id, accessToken, newValue)
+    updateVariantValue(_id, accessToken, newValue._id, newValue)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
-          setNewValue({
-            ...newValue,
-            name: ''
-          })
           if (onRun) onRun()
           setSuccess(data.success)
         }
@@ -102,8 +99,9 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title={`Add new value for '${styleName}'`}
+          title='Edit this value'
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -148,4 +146,4 @@ const AddValueStyleForm = ({ styleId = '', styleName = '', onRun }) => {
   )
 }
 
-export default AddValueStyleForm
+export default AdminEditValueStyleForm

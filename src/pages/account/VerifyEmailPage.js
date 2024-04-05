@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { verifyEmail } from '../../apis/auth'

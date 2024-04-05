@@ -9,7 +9,7 @@ import TextArea from '../../ui/TextArea'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
-import StyleSelector from '../../selector/StyleSelector'
+import VariantSelector from '../../selector/VariantSelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -30,7 +30,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     quantity: 0,
     price: 0,
     salePrice: 0,
-    styleValueIds: '',
+    variantValueIds: '',
     isValidName: true,
     isValidImage0: true,
     isValidImage1: true,
@@ -124,8 +124,8 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     formData.set('salePrice', newProduct.salePrice)
     formData.set('image0', newProduct.image0)
     formData.set('categoryId', newProduct.categoryId)
-    if (newProduct.styleValueIds && newProduct.styleValueIds.length > 0)
-      formData.set('styleValueIds', newProduct.styleValueIds.join('|'))
+    if (newProduct.variantValueIds && newProduct.variantValueIds.length > 0)
+      formData.set('variantValueIds', newProduct.variantValueIds.join('|'))
     if (newProduct.image1) formData.set('image1', newProduct.image1)
     if (newProduct.image2) formData.set('image2', newProduct.image2)
     if (newProduct.image3) formData.set('image3', newProduct.image3)
@@ -150,7 +150,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
   }
 
   return (
-    <div className='position-relative p-1'>
+    <div className='container-fluid'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -301,23 +301,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 px-4'>
-          <Input
-            type='number'
-            label={t('productDetail.quantity')}
-            value={newProduct.quantity}
-            isValid={newProduct.isValidQuantity}
-            feedback={t('productValid.quantityValid')}
-            required={true}
-            validator='positive|zero'
-            onChange={(value) =>
-              handleChange('quantity', 'isValidQuantity', value)
-            }
-            onValidate={(flag) => handleValidate('isValidQuantity', flag)}
-          />
-        </div>
-
-        <div className='col-12 px-4'>
+        <div className='col-md-6 col-sm-12 px-4'>
           <Input
             type='number'
             label={`${t('productDetail.price')} (₫)`}
@@ -331,7 +315,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 px-4'>
+        <div className='col-md-6 col-sm-12 px-4'>
           <Input
             type='number'
             label={`${t('productDetail.salePrice')} (₫)`}
@@ -344,6 +328,22 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               handleChange('salePrice', 'isValidSalePrice', value)
             }
             onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
+          />
+        </div>
+
+        <div className='col-12 px-4'>
+          <Input
+            type='number'
+            label={t('productDetail.quantity')}
+            value={newProduct.quantity}
+            isValid={newProduct.isValidQuantity}
+            feedback={t('productValid.quantityValid')}
+            required={true}
+            validator='positive|zero'
+            onChange={(value) =>
+              handleChange('quantity', 'isValidQuantity', value)
+            }
+            onValidate={(flag) => handleValidate('isValidQuantity', flag)}
           />
         </div>
 
@@ -369,13 +369,13 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
               {t('productDetail.chooseCateFirst')}
             </small>
           </span>
-          <StyleSelector
-            label='Chosen styles'
+          <VariantSelector
+            label='Chosen variants'
             categoryId={newProduct.categoryId}
-            onSet={(styleValues) => {
+            onSet={(variantValues) => {
               setNewProduct({
                 ...newProduct,
-                styleValueIds: styleValues.map((value) => value._id)
+                variantValueIds: variantValues.map((value) => value._id)
               })
             }}
           />
@@ -386,7 +386,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             to={`/vendor/products/${storeId}`}
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('button.back')}
+            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

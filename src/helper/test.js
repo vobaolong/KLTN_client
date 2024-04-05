@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export const regexTest = (name, value) => {
   const regex = {
     nullable: /./,

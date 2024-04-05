@@ -12,40 +12,32 @@ const LevelPage = () => {
 
   return (
     <AdminLayout user={user}>
-      <div className='d-flex align-items-center mb-2'>
-        <div className='position-relative d-inline-block me-2'>
-          <button
-            type='button'
-            className={`btn ${
-              flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(true)}
-          >
-            <i className='fas fa-user-friends'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>
-            {t('levelDetail.userLevel.userLevel')}
-          </small>
-        </div>
-
-        <div className='position-relative d-inline-block'>
-          <button
-            type='button'
-            className={`btn ${
-              !flag ? 'btn-primary' : 'btn-outline-primary'
-            } btn-lg ripple cus-tooltip`}
-            onClick={() => toggleFlag(false)}
-          >
-            <i className='fas fa-store'></i>
-          </button>
-
-          <small className='cus-tooltip-msg'>
-            {t('levelDetail.storeLevel.storeLevel')}
-          </small>
-        </div>
+      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+        <ul className='nav nav-tabs'>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(true)}
+            >
+              <i class='fa-solid fa-user-group me-2'></i>
+              <span className='res-hide'>
+                {t('levelDetail.userLevel.userLevel')}
+              </span>
+            </span>
+          </li>
+          <li className='nav-item col-6 text-center pointer'>
+            <span
+              className={`nav-link ${!flag ? 'active' : ''}`}
+              onClick={() => toggleFlag(false)}
+            >
+              <i class='fa-solid fa-store me-2'></i>
+              <span className='res-hide'>
+                {t('levelDetail.storeLevel.storeLevel')}
+              </span>
+            </span>
+          </li>
+        </ul>
       </div>
-
       {flag ? (
         <AdminUserLevelsTable heading={t('levelDetail.userLevel.userLevel')} />
       ) : (

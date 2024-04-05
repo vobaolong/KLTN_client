@@ -69,7 +69,10 @@ const UserCancelOrderButton = ({
           disabled={status !== 'Not processed' || calcTime(createdAt) >= 1}
           onClick={handleCancelOrder}
         >
-          <i className='fas fa-ban'></i>
+          <i
+            className='fa-solid fa-ban
+'
+          ></i>
           {detail && <span className='ms-2'>{t('button.cancel')}</span>}
         </button>
       </div>

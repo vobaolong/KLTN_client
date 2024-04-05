@@ -1,39 +1,75 @@
 {
   "toastSuccess": {
+    "lockStore": "Close store successfully",
+    "unlockStore": "Open store successfully",
+    "cart": {
+      "add": "Add to cart successfully",
+      "delete": "Delete item successfully",
+      "update": "Update cart successfully"
+    },
+    "addValueVariant": {
+      "addValue": "Add value successfully",
+      "deleteValue": "Delete value successfully",
+      "editValue": "Edit value successfully"
+    },
+    "followStore": {
+      "follow": "Follow store successfully",
+      "unfollow": "UnFollow store successfully"
+    },
+    "followProduct": {
+      "follow": "Add to wishlist successfully",
+      "unfollow": "Remove from wishlist successfully"
+    },
+    "staff": {
+      "addStaff": "Add Staff successfully",
+      "removeStaff": "Remove Staff successfully"
+    },
+    "address": {
+      "add": "Add Address successfully",
+      "update": "Update Address successfully",
+      "delete": "Delete Address successfully"
+    },
     "level": {
-      "create": "Create Level Successfully",
-      "edit": "Edit Level Successfully",
-      "delete": "Delete Level Successfully",
-      "restore": "Restore Level Successfully"
+      "create": "Create Level successfully",
+      "edit": "Edit Level successfully",
+      "delete": "Delete Level successfully",
+      "restore": "Restore Level successfully"
     },
     "commission": {
-      "create": "Create Commission Successfully",
-      "delete": "Delete Commission Successfully",
-      "edit": "Edit Commission Successfully",
-      "restore": "Restore Commission Successfully"
+      "create": "Create Commission successfully",
+      "delete": "Delete Commission successfully",
+      "edit": "Edit Commission successfully",
+      "restore": "Restore Commission successfully"
     },
     "product": {
-      "create": "Create Product Successfully",
-      "delete": "Delete Product Successfully",
-      "edit": "Edit Product Successfully",
-      "ban": "Ban Product Successfully",
-      "active": "Active Product Successfully"
+      "create": "Create Product successfully",
+      "delete": "Delete Product successfully",
+      "edit": "Edit Product successfully",
+      "ban": "Ban Product successfully",
+      "active": "Active Product successfully"
     },
     "store": {
-      "ban": "Ban Store Successfully",
-      "active": "Active Store Successfully"
+      "ban": "Ban Store successfully",
+      "active": "Active Store successfully"
     },
     "order": {
       "update": "Update Order successfully"
     },
     "category": {
-      "create": "Create Category Successfully",
+      "create": "Create Category successfully",
       "update": "Update Category successfully",
       "delete": "Delete Category successfully",
       "restore": "Restore Category successfully"
     }
   },
   "toastError": {},
+  "message": {
+    "addStaff": "Are you sure to add this employee?",
+    "removeStaff": "Are you sure to remove this employee?",
+    "delete": "Are you sure to delete ",
+    "restore": "Are you sure to restore ",
+    "edit": "Are you sure to edit "
+  },
   "title": {
     "productVariants": "Product Variants",
     "listBannedStores": "List of Banned Stores",
@@ -49,6 +85,22 @@
     "userInSystem": "Users in the system"
   },
   "dialog": {
+    "closeStore": "Close store",
+    "openStore": "Open store",
+    "addCommission": "Add commission",
+    "deleteCommission": "Delete commission",
+    "editCommission": "Edit commission",
+    "restoreCommission": "Restore commission",
+    "deleteDelivery": "Delete delivery unit",
+    "addDelivery": "Add delivery unit",
+    "restoreDelivery": "Restore delivery unit",
+    "restoreLevel": "Restore level",
+    "deleteLevel": "Delete level",
+    "createLevel": "Create level",
+    "editLevel": "Edit level",
+    "restoreValue": "Restore variant value",
+    "deleteValue": "Delete variant value",
+    "signUp": "SignUp",
     "createUserLevel": "Create User Level",
     "createStoreLevel": "Create User Store",
     "createCommission": "Create commission",
@@ -58,8 +110,7 @@
     "banProduct": "Ban product",
     "removeProductFromCart": "Remove product from cart",
     "updateOrder": "Update order status",
-    "updateCategory": "Update category",
-    "restoreCommission": "Restore commission"
+    "updateCategory": "Update category"
   },
   "levelDetail": {
     "userLevel": {
@@ -74,7 +125,11 @@
     "color": "Level color",
     "discount": "Level discount",
     "name": "Level name",
-    "floorPoint": "Floor point"
+    "floorPoint": "Floor point",
+    "validColor": "Please provide a valid color!",
+    "validDiscount": "Please provide a valid floor point (0% - 100%)!",
+    "validFloorPoint": "Please provide a valid floor point (>=0)!",
+    "nameValid": "Please provide a valid level name!"
   },
   "action": "Action",
   "showing": "Showing",
@@ -132,7 +187,7 @@
     "salePrice": "Sale Price",
     "chooseCategory": "Choose category",
     "selectedCategory": "The selected category",
-    "chooseStyles": "Choose styles",
+    "chooseStyles": "Choose variants",
     "noValuesSelected": "No values selected",
     "chooseCateFirst": "*need to choose category before",
     "noProduct": "No product yet",
@@ -199,6 +254,8 @@
   "store": "Store",
   "searchHolder": "Search for products and stores",
   "userDetail": {
+    "idCard": "ID Card",
+    "email": "Email",
     "KYC": "KYC",
     "level": "Level",
     "followers": "Followers",
@@ -245,11 +302,11 @@
   "manageStore": "Stores",
   "myStore": "My Stores",
   "createStore": "Create store",
-  "commisDetail": {
+  "commissionDetail": {
     "description": "Description",
     "cost": "Cost",
     "add": "Add Commission",
-    "del": "Delete Commission",
+    "delete": "Delete Commission",
     "edit": "Edit Commission",
     "name": "Commission name"
   },
@@ -307,7 +364,7 @@
     "del": "Delete Variant",
     "res": "Restore Variant",
     "name": "Variant name",
-    "nameValid": "Please provide a valid style name!",
+    "nameValid": "Please provide a valid variant name!",
     "selectCategory": "Select category",
     "required": "No categories selected",
     "value": {
@@ -346,7 +403,7 @@
     "commissions": "Commissions",
     "getPaid": "How you'll get paid?",
     "sellOn": "Sell on Zenpii",
-    "agreeBy": "By Creating store, you agree to Zenpii's",
+    "agreeBy": "By Creating store, you agree to ",
     "backToStore": "Back to store manager",
     "follow": "Follow",
     "following": "Following",
@@ -355,7 +412,7 @@
     "allProduct": "All Products",
     "rating": "Rating",
     "about": "About",
-    "noStores": "There are no stores!",
+    "noStores": "No store yet!",
     "createStore": "Create an online store for free",
     "pickupAddress": "Pickup Address",
     "avatar": "Avatar Image",
@@ -372,6 +429,7 @@
   "wallet": "E-Wallet",
   "confirmDialog": "Are you sure about that?",
   "button": {
+    "detail": "Detail",
     "restore": "Restore",
     "store": "Store",
     "cancel": "Cancel",
@@ -399,7 +457,7 @@
   },
   "signInForm": {
     "comeBack": "Welcome back!",
-    "signUp": "Signing up is easy",
+    "signUp": "SignUp is easy",
     "emailLabel": "Email address or phone number",
     "emailFeedback": "Please provide a valid email address or phone number!",
     "passwordLabel": "Password",
@@ -459,15 +517,13 @@
     "street": "Street",
     "ward": "Ward",
     "district": "District",
-    "provinceCity": "Province/City",
-    "country": "Country"
+    "city": "Province/City"
   },
   "addressFormValid": {
     "streetValid": "Please provide a valid street address (',' is not allowed)!",
     "wardValid": "Please provide a valid ward (','' is not allowed)!",
     "districtValid": "Please provide a valid city/district (',' is not allowed)!",
-    "provinceCityValid": "Please provide a valid province/city (',' is not allowed)!",
-    "countryValid": "Please provide a valid country (',' is not allowed)!"
+    "cityValid": "Please provide a valid province/city (',' is not allowed)!"
   },
   "footer": {
     "quickLink": "Quick Link",

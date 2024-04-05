@@ -108,6 +108,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <ConfirmDialog
           title={t('deliveryDetail.edit')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}

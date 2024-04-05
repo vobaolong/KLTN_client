@@ -98,6 +98,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
         <ConfirmDialog
           title={t('reviewDetail.edit')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}

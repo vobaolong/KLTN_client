@@ -2,13 +2,12 @@ import { useTranslation } from 'react-i18next'
 
 const ConfirmDialog = ({
   title = 'Confirm the action',
-  messageKey = 'confirmDialog',
+  message = 'Bạn có chắc chắn về điều này không?',
   color = 'primary',
   onSubmit = () => {},
   onClose = () => {}
 }) => {
   const { t } = useTranslation()
-  const message = t(messageKey)
   const onConfirm = () => {
     onSubmit()
     onClose()
@@ -28,7 +27,9 @@ const ConfirmDialog = ({
                 onClick={onClose}
               ></button>
             </div>
-            <div className='modal-body'>{message}</div>
+            <div className='modal-body'>
+              <span style={{ fontSize: '0.9rem' }}>{message}</span>
+            </div>
             <div className='modal-footer'>
               <button
                 type='button'

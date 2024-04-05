@@ -2,24 +2,24 @@
 import { useState, useEffect, Fragment } from 'react'
 import { getToken } from '../../apis/auth'
 import {
-  listStyleValues,
-  listActiveStyleValues,
-  deleteStyleValue,
-  restoreStyleValue
-} from '../../apis/style'
+  listVariantValues,
+  listActiveVariantValues,
+  deleteVariantValue,
+  restoreVariantValue
+} from '../../apis/variant'
 import DeletedLabel from '../label/DeletedLabel'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import Modal from '../ui/Modal'
-import AddValueStyleItem from '../item/AddValueStyleItem'
-import AdminEditStyleValueForm from '../item/form/AdminEditStyleValueForm'
+import AddValueVariantItem from '../item/AddValueVariantItem'
+import AdminEditVariantValueForm from '../item/form/AdminEditVariantValueForm'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const StyleValuesTable = ({
+const VariantValuesTable = ({
   heading = true,
-  styleId = '',
+  variantId = '',
   isActive = false
 }) => {
   const { t } = useTranslation()
@@ -28,22 +28,22 @@ const StyleValuesTable = ({
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
-  const [deletedStyleValue, setDeletedStyleValue] = useState({})
-  const [restoredStyleValue, setRestoredStyleValue] = useState({})
-  const [editedStyleValue, setEditedStyleValue] = useState({})
-  const [styleValues, setStyleValues] = useState([])
-  const [style, setStyle] = useState({})
+  const [deletedVariantValue, setDeletedVariantValue] = useState({})
+  const [restoredVariantValue, setRestoredVariantValue] = useState({})
+  const [editedVariantValue, setEditedVariantValue] = useState({})
+  const [variantValues, setVariantValues] = useState([])
+  const [style, setVariant] = useState({})
   const { _id, accessToken } = getToken()
 
   const init = () => {
     setIsLoading(true)
     if (!isActive) {
-      listStyleValues(_id, accessToken, styleId)
+      listVariantValues(_id, accessToken, variantId)
         .then((data) => {
           if (data.error) toast.error(data.error)
           else {
-            setStyleValues(data.styleValues)
-            setStyle(data.style)
+            setVariantValues(data.variantValues)
+            setVariant(data.style)
           }
           setIsLoading(false)
         })
@@ -52,12 +52,12 @@ const StyleValuesTable = ({
           setIsLoading(false)
         })
     } else {
-      listActiveStyleValues(styleId)
+      listActiveVariantValues(variantId)
         .then((data) => {
           if (data.error) toast.error(data.error)
           else {
-            setStyleValues(data.styleValues)
-            setStyle(data.style)
+            setVariantValues(data.variantValues)
+            setVariant(data.style)
           }
           setIsLoading(false)
         })
@@ -70,21 +70,21 @@ const StyleValuesTable = ({
 
   useEffect(() => {
     init()
-  }, [styleId, run])
+  }, [variantId, run])
 
-  const handleDelete = (styleValue) => {
-    setDeletedStyleValue(styleValue)
+  const handleDelete = (variantValue) => {
+    setDeletedVariantValue(variantValue)
     setIsConfirming(true)
   }
 
-  const handleRestore = (styleValue) => {
-    setRestoredStyleValue(styleValue)
+  const handleRestore = (variantValue) => {
+    setRestoredVariantValue(variantValue)
     setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
     setIsLoading(true)
-    deleteStyleValue(_id, accessToken, deletedStyleValue._id)
+    deleteVariantValue(_id, accessToken, deletedVariantValue._id)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
@@ -101,7 +101,7 @@ const StyleValuesTable = ({
 
   const onSubmitRestore = () => {
     setIsLoading(true)
-    restoreStyleValue(_id, accessToken, restoredStyleValue._id)
+    restoreVariantValue(_id, accessToken, restoredVariantValue._id)
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
@@ -121,7 +121,7 @@ const StyleValuesTable = ({
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete style value'
+          title={t('dialog.deleteValue')}
           color='danger'
           onSubmit={onSubmitDelete}
           onClose={() => setIsConfirming(false)}
@@ -129,7 +129,7 @@ const StyleValuesTable = ({
       )}
       {isConfirmingRestore && (
         <ConfirmDialog
-          title='Restore style value'
+          title={t('dialog.restoreValue')}
           onSubmit={onSubmitRestore}
           onClose={() => setIsConfirmingRestore(false)}
         />
@@ -144,13 +144,13 @@ const StyleValuesTable = ({
       {isLoading && <Loading />}
 
       <div className='d-flex justify-content-between align-items-end'>
-        <AddValueStyleItem
-          styleId={styleId}
-          styleName={style.name}
+        <AddValueVariantItem
+          variantId={variantId}
+          variantName={style.name}
           onRun={() => setRun(!run)}
         />
         <span className='text-nowrap res-hide'>
-          {styleValues.length || 0} {t('result')}
+          {variantValues.length || 0} {t('result')}
         </span>
       </div>
 
@@ -169,7 +169,7 @@ const StyleValuesTable = ({
             </tr>
           </thead>
           <tbody>
-            {styleValues.map((value, index) => (
+            {variantValues.map((value, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>{value.name}</td>
@@ -192,7 +192,7 @@ const StyleValuesTable = ({
                         className='btn btn-primary ripple me-2 rounded-1'
                         data-bs-toggle='modal'
                         data-bs-target='#edit-style-value-form'
-                        onClick={() => setEditedStyleValue(value)}
+                        onClick={() => setEditedVariantValue(value)}
                       >
                         <i className='fa-solid fa-pen'></i>
                         <span className='ms-2 res-hide'>
@@ -206,7 +206,7 @@ const StyleValuesTable = ({
                           className='btn btn-outline-danger ripple rounded-1'
                           onClick={() => handleDelete(value)}
                         >
-                          <i className='fas fa-trash-alt'></i>
+                          <i className='fa-solid fa-trash-alt'></i>
                           <span className='ms-2 res-hide'>
                             {t('button.delete')}
                           </span>
@@ -238,8 +238,8 @@ const StyleValuesTable = ({
           hasCloseBtn={false}
           title='Edit value'
         >
-          <AdminEditStyleValueForm
-            oldStyleValue={editedStyleValue}
+          <AdminEditVariantValueForm
+            oldVariantValue={editedVariantValue}
             onRun={() => setRun(!run)}
           />
         </Modal>
@@ -248,4 +248,4 @@ const StyleValuesTable = ({
   )
 }
 
-export default StyleValuesTable
+export default VariantValuesTable

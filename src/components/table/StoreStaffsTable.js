@@ -113,12 +113,12 @@ const StoreStaffsTable = ({
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('vendor', data.store)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.staff.removeStaff'))
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -129,12 +129,7 @@ const StoreStaffsTable = ({
         <ConfirmDialog
           title={t('staffDetail.delete')}
           color='danger'
-          message={
-            <span className='mt-2 d-block'>
-              Are you sure you want to delete{' '}
-              <UserSmallCard user={deletedStaff} /> ?
-            </span>
-          }
+          message={t('message.removeStaff')}
           onSubmit={onDeleteSubmitStaff}
           onClose={() => setIsConfirming(false)}
         />
@@ -176,7 +171,7 @@ const StoreStaffsTable = ({
           <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
             <thead>
               <tr>
-                <th scope='col'></th>
+                <th scope='col'>#</th>
                 <th scope='col' className='text-start'>
                   <SortByButton
                     currentOrder={filter.order}
@@ -238,10 +233,10 @@ const StoreStaffsTable = ({
                     <td className='text-center'>
                       <button
                         type='button'
-                        className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
+                        className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
                         onClick={() => handleDeleteStaff(staff)}
                       >
-                        <i className='fas fa-trash-alt'></i>
+                        <i className='fa-solid fa-trash-alt'></i>
                         <span className='ms-2 res-hide'>
                           {t('button.delete')}
                         </span>

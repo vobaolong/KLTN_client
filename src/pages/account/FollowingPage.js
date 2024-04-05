@@ -5,10 +5,11 @@ import FollowingProductsCollection from '../../components/collection/FollowingPr
 import FollowingStoresCollection from '../../components/collection/FollowingStoreCollection'
 import { useTranslation } from 'react-i18next'
 
-const FollowingPage = (props) => {
+const FollowingPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
+
   return (
     <AccountLayout user={user}>
       <div className='mb-4 bg-body rounded-top-1 box-shadow'>
@@ -18,9 +19,7 @@ const FollowingPage = (props) => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <span className='btn btn-md btn-primary me-2'>
-                <i className='fas fa-box'></i>
-              </span>
+              <i className='fa-solid fa-box me-2'></i>
               <span className='res-hide'>{t('favProduct')}</span>
             </span>
           </li>
@@ -29,9 +28,7 @@ const FollowingPage = (props) => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <span className='btn btn-md btn-danger me-2'>
-                <i className='fas fa-store'></i>
-              </span>
+              <i className='fa-solid fa-store me-2'></i>
               <span className='res-hide'>{t('favStore')}</span>
             </span>
           </li>

@@ -244,7 +244,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                   <td className='text-end'>
                     <small className='text-nowrap'>
                       {order.amountFromUser &&
-                        formatPrice(order.amountFromUser.$numberDecimal)}{' '}
+                        formatPrice(order.amountFromUser.$numberDecimal)}
                       ₫
                     </small>
                   </td>
@@ -279,7 +279,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       className='btn btn-secondary opacity-75 ripple rounded-1'
                       to={`/account/purchase/detail/${order._id}`}
                     >
-                      <i className='fas fa-info-circle'></i>
+                      <i className='fa-solid fa-info-circle'></i>
                     </Link>
                   </td>
                 </tr>

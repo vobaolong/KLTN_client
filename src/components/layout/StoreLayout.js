@@ -8,7 +8,7 @@ import StoreLevelInfo from '../info/StoreLevelInfo'
 const StoreLayout = ({ store = {}, children = null }) => (
   <MainLayout>
     <div className='store-layout'>
-      <div className='position-relative bg-white p-3 rounded-top-3'>
+      <div className='position-relative bg-white p-3 rounded-top-2'>
         <Cover cover={store.cover} alt={store.name} />
         <div className='avatar-absolute avatar-absolute--store'>
           <Avatar
@@ -38,17 +38,3 @@ const StoreLayout = ({ store = {}, children = null }) => (
 )
 
 export default StoreLayout
-
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import * as actionCreators from '../../actions/store';
-
-// function mapStateToProps(state) {
-//     return { store: state.store.store }
-// }
-
-// function mapDispatchToProps(dispatch) {
-//     return { actions: bindActionCreators({ actionCreators }, dispatch) }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(StoreLayout);

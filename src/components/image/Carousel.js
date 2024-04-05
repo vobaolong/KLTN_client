@@ -1,4 +1,6 @@
 import StoreCarouselUpload from './uploadButton/StoreCarouselUpload'
+import defaultImage from '../../assets/default.png'
+
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const Carousel = ({
@@ -35,7 +37,7 @@ const Carousel = ({
           <div className='cus-carousel' style={style}>
             <img
               loading='lazy'
-              src={`${IMG + image}`}
+              src={image ? IMG + image : defaultImage}
               className='d-block cus-carousel-img'
               alt={alt}
             />

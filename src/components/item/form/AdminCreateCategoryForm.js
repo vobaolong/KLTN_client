@@ -77,13 +77,14 @@ const AdminCreateCategoryForm = () => {
   }
 
   return (
-    <div className='position-relative p-1'>
+    <div className='position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
           title={t('categoryDetail.add')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 
@@ -143,7 +144,7 @@ const AdminCreateCategoryForm = () => {
             to='/admin/category'
             className='text-decoration-none cus-link-hover res-w-100-md my-2'
           >
-            <i className='fas fa-angle-left'></i> {t('button.back')}
+            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
           </Link>
           <button
             type='submit'

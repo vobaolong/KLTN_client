@@ -342,7 +342,7 @@ const OrderDetailInfo = ({
             <span className='col-lg-4 justify-content-between align-items-center d-flex'>
               <b className='text-muted'>Thành tiền:</b>
               <span className='text-primary fw-bold fs-5'>
-                {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
+                {formatPrice(order.amountFromUser?.$numberDecimal)}₫
               </span>
               {by !== 'user' && (
                 <span className='d-inline-block position-relative'>

@@ -43,7 +43,7 @@ const UserAvatarUpload = (props) => {
     <>
       {isLoading && <Loading />}
       <label className='cus-avatar-icon'>
-        <i className='fas fa-camera'></i>
+        <i className='fa-solid fa-camera'></i>
         {error && (
           <span>
             <Error msg={error} />

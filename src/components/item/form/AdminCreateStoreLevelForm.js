@@ -109,9 +109,10 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Create store level'
+          title={t('dialog.createStoreLevel')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 

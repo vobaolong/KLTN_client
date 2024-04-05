@@ -26,18 +26,7 @@ const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
       title={product.name}
       style={style}
     >
-      <span
-        style={{
-          fontSize: '0.9rem',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          display: '-webkit-box',
-          WebkitLineClamp: '2',
-          WebkitBoxOrient: 'vertical'
-        }}
-      >
-        {product.name}
-      </span>
+      <span className='productName'>{product.name}</span>
     </Link>
   </span>
 )

@@ -55,6 +55,7 @@ const VendorUpdateOrderStatusButton = ({
           title={t('dialog.updateOrder')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
+          message={t('confirmDialog')}
         />
       )}
 

@@ -31,7 +31,7 @@ const CartPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -65,7 +65,7 @@ const CartPage = () => {
           <div className='accordion' id='accordionPanelsStayOpen'>
             <div
               style={{ backgroundColor: '#f1f5f9' }}
-              className='container-fluid sticky-top-nav py-3'
+              className='container-fluid sticky-top-nav py-3 res-hide'
             >
               <div className='bg-white rounded-1 row p-1'>
                 <div className='col-5'>

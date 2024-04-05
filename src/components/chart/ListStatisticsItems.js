@@ -165,7 +165,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         product: productData.size
       })
     } catch (e) {
-      toast.error('Something went wrong')
+      // toast.error('Something went wrong')
     }
 
     setIsLoading(false)
@@ -199,7 +199,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     })
                   }
                 >
-                  <i className='fas fa-user-friends'></i>
+                  <i className='fa-solid fa-user-group'></i>
                   <span className='ms-3 res-hide'>{sizes.user}</span>
                   <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
                 </button>
@@ -220,7 +220,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     })
                   }
                 >
-                  <i className='fas fa-store'></i>
+                  <i className='fa-solid fa-store'></i>
                   <span className='ms-3 res-hide'>{sizes.store}</span>
                   <span className='ms-1 res-hide-lg'>{t('admin.stores')}</span>
                 </button>
@@ -241,7 +241,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 })
               }
             >
-              <i className='fas fa-clipboard'></i>
+              <i className='fa-solid fa-clipboard'></i>
               <span className='ms-3 res-hide'>{sizes.order}</span>
               <span className='ms-1 res-hide-lg'>{t('admin.orders')}</span>
             </button>
@@ -261,7 +261,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 })
               }
             >
-              <i className='fas fa-box'></i>
+              <i className='fa-solid fa-box'></i>
               <span className='ms-3 res-hide'>{sizes.product}</span>
               <span className='ms-1 res-hide-lg'>{t('admin.products')}</span>
             </button>
@@ -280,22 +280,22 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                       {
                         label: t('admin.adDashboard.hour'),
                         value: 'hours',
-                        icon: <i className='far fa-clock'></i>
+                        icon: <i className='fa-regular fa-clock'></i>
                       },
                       {
                         label: t('admin.adDashboard.day'),
                         value: 'date',
-                        icon: <i className='fas fa-calendar-day'></i>
+                        icon: <i className='fa-regular fa-calendar-days'></i>
                       },
                       {
                         label: t('admin.adDashboard.month'),
                         value: 'month',
-                        icon: <i className='fas fa-calendar-alt'></i>
+                        icon: <i className='fa-solid fa-calendar-alt'></i>
                       },
                       {
                         label: t('admin.adDashboard.year'),
                         value: 'year',
-                        icon: <i className='fas fa-calendar-minus'></i>
+                        icon: <i className='fa-solid fa-calendar-minus'></i>
                       }
                     ]}
                     value={options.by}
@@ -348,17 +348,17 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     {
                       label: t('admin.adDashboard.line'),
                       value: 'line',
-                      icon: <i className='fas fa-chart-line'></i>
+                      icon: <i className='fa-solid fa-chart-line'></i>
                     },
                     {
                       label: t('admin.adDashboard.bar'),
                       value: 'bar',
-                      icon: <i className='fas fa-chart-bar'></i>
+                      icon: <i className='fa-solid fa-chart-bar'></i>
                     }
                     // {
                     //   label: 'Doughnut',
                     //   value: 'doughnut',
-                    //   icon: <i className='fas fa-chart-pie'></i>
+                    //   icon: <i className='fa-solid fa-chart-pie'></i>
                     // }
                   ]}
                   value={options.type}
@@ -478,7 +478,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 <span className='me-2 res-hide'>
                   Go to {options.flag} manager
                 </span>
-                <i className='fas fa-external-link-alt'></i>
+                <i className='fa-solid fa-external-link-alt'></i>
               </Link>
             </div>
           </div>

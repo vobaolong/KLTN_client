@@ -84,6 +84,7 @@ const StoreEditProfileForm = ({
         <ConfirmDialog
           title={t('storeDetail.editProfile')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}

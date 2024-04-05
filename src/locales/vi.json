@@ -1,5 +1,34 @@
 {
   "toastSuccess": {
+    "lockStore": "Đóng store thành công",
+    "unlockStore": "Mở store thành công",
+    "cart": {
+      "add": "Thêm vào giỏ hàng thành công",
+      "delete": "Xoá giỏ hàng thành công",
+      "update": "Cập nhật giỏ hàng thành công"
+    },
+    "addValueVariant": {
+      "addValue": "Thêm giá trị thành công",
+      "deleteValue": "Xoá giá trị thành công",
+      "editValue": "Sửa giá trị thành công"
+    },
+    "followStore": {
+      "follow": "Theo dõi store thành công",
+      "unfollow": "Bỏ theo dõi store thành công"
+    },
+    "followProduct": {
+      "follow": "Đã thêm sản phẩm vào yêu thích",
+      "unfollow": "Đã bỏ sản phẩm khỏi yêu thích"
+    },
+    "staff": {
+      "addStaff": "Thêm nhân viên thành công",
+      "removeStaff": "Xoá nhân viên thành công"
+    },
+    "address": {
+      "add": "Thêm địa chỉ thành công",
+      "update": "Cập nhật địa chỉ thành công",
+      "delete": "Xoá địa chỉ thành công"
+    },
     "level": {
       "create": "Tạo hạng mức thành công",
       "edit": "Sửa hạng mức thành công",
@@ -35,13 +64,19 @@
     }
   },
   "toastError": {},
-
+  "message": {
+    "addStaff": "Bạn có chắc chắn thêm nhân viên này?",
+    "removeStaff": "Bạn có chắc chắn xoá nhân viên này?",
+    "delete": "Bạn có chắc chắn xoá ",
+    "restore": "Bạn có chắc chắn khôi phục ",
+    "edit": "Bạn có chắc chắn cập nhật "
+  },
   "title": {
     "productVariants": "Biến thể sản phẩm",
-    "listBannedStores": "Danh sách cửa hàng bị khoá",
-    "listActiveStores": "Danh sách cửa hàng đang hoạt động",
-    "listBannedProducts": "Danh sách sản phẩm bị khoá",
-    "listActiveProducts": "Danh sách sản phẩm đang bán",
+    "listBannedStores": "Cửa hàng bị tạm khoá",
+    "listActiveStores": "Cửa hàng đang hoạt động",
+    "listBannedProducts": "Sản phẩm bị tạm khoá",
+    "listActiveProducts": "Sản phẩm đang bán",
     "allOrders": "Tất cả đơn hàng",
     "notProcessedOrders": "Đơn hàng chưa xử lý",
     "processingOrders": "Đơn hàng đang xử lý",
@@ -51,17 +86,33 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
+    "closeStore": "Đóng cửa hàng",
+    "openStore": "Mở cửa hàng",
+    "addCommission": "Thêm mức hoa hồng",
+    "deleteCommission": "Xoá mức hoa hồng",
+    "editCommission": "Sửa mức hoa hồng",
+    "restoreCommission": "Khôi phục mức hoa hồng",
+    "deleteDelivery": "Xoá đơn vị vận chuyển",
+    "addDelivery": "Thêm đơn vị vận chuyển",
+    "restoreDelivery": "Khôi phục đơn vị vận chuyển",
+    "restoreLevel": "Khôi phục hạng mức",
+    "deleteLevel": "Xoá hạng mức",
+    "createLevel": "Thêm hạng mức",
+    "editLevel": "Sửa hạng mức",
+    "restoreValue": "Khôi phục giá trị biến thể",
+    "deleteValue": "Xoá giá trị biến thể",
+    "signUp": "Đăng ký",
     "createUserLevel": "Tạo hạng mức người dùng",
     "createStoreLevel": "Tạo hạng mức store",
     "createCommission": "Tạo commission",
     "banStore": "Khoá cửa hàng",
+    "createStore": "Tạo cửa hàng",
     "activeStore": "Kích hoạt cửa hàng",
     "activeProduct": "Kích hoạt sản phẩm",
     "banProduct": "Khoá sản phẩm",
     "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng",
     "updateOrder": "Cập nhật trạng thái đơn hàng",
-    "updateCategory": "Cập nhật danh mục",
-    "restoreCommission": "Khôi phục mức hoa hồng"
+    "updateCategory": "Cập nhật danh mục"
   },
   "levelDetail": {
     "userLevel": {
@@ -76,7 +127,11 @@
     "color": "Màu hạng mức",
     "discount": "Giảm giá",
     "name": "Tên hạng mức",
-    "floorPoint": "Điểm sàn"
+    "floorPoint": "Điểm sàn",
+    "validColor": "Vui lòng cung cấp màu phù hợp!",
+    "validDiscount": "Vui lòng cung cấp giảm giá phù hợp (0% - 100%)!",
+    "validFloorPoint": "Vui lòng cung cấp điểm sàn phù hợp (>=0)!",
+    "nameValid": "Vui lòng cung cấp tên hạng mức phù hợp!"
   },
   "action": "Hành động",
   "showing": "Hiển thị",
@@ -150,7 +205,7 @@
     "description": "Thông tin sản phẩm",
     "vat": "(Đã bao gồm VAT)",
     "soldOut": "Sản phẩm đã được bán hết!",
-    "addToCart": "Thêm vào giỏ hàng",
+    "addToCart": "Thêm vào giỏ",
     "error": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa nó khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác",
     "warning": "Vui lòng cập nhật số lượng. Sản phẩm chỉ còn",
     "productReview": "Đánh giá sản phẩm",
@@ -200,6 +255,8 @@
   "store": "Cửa hàng",
   "searchHolder": "Tìm sản phẩm và tên store",
   "userDetail": {
+    "idCard": "ID Card",
+    "email": "Email",
     "KYC": "Xác thực",
     "level": "Hạng mức",
     "followers": "Người theo dõi",
@@ -246,11 +303,11 @@
   "manageStore": "Cửa hàng",
   "myStore": "Store của tôi",
   "createStore": "Tạo store",
-  "commisDetail": {
+  "commissionDetail": {
     "description": "Mô tả",
     "cost": "Phí",
     "add": "Thêm Commission",
-    "del": "Xoá Commission",
+    "delete": "Xoá Commission",
     "edit": "Sửa Commission",
     "name": "Tên Commission"
   },
@@ -322,7 +379,7 @@
   },
   "staffDetail": {
     "staffList": "Danh sách nhân viên",
-    "owner": "Chủ cửa hàng",
+    "owner": "Người sở hữu",
     "name": "Tên nhân viên",
     "delete": "Xoá nhân viên",
     "add": "Thêm nhân viên",
@@ -331,7 +388,7 @@
   },
   "storeDetail": {
     "activeStores": "Cửa hàng đang hoạt động",
-    "bannedStores": "Cửa hàng bị khoá",
+    "bannedStores": "Cửa hàng đang tạm khoá",
     "addFeaturedImg": "Thêm hình ảnh nổi bật",
     "limitFeatured": "Tối đa 6 hình ảnh nổi bật",
     "bio": "Giới thiệu",
@@ -342,11 +399,11 @@
     "profile": "Thông tin",
     "staffs": "Nhân viên",
     "orders": "Đơn hàng",
-    "role": "Quyền",
+    "role": "Vai trò",
     "commissions": "Hoa hồng",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên Zenpii",
-    "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với Zenpii",
+    "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ",
     "backToStore": "Quay lại trang quản lý",
     "follow": "Theo dõi",
     "following": "Đang theo dõi",
@@ -369,8 +426,10 @@
   },
   "favorite": "Yêu thích",
   "wallet": "Ví",
+
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
+    "detail": "Chi tiết",
     "restore": "Khôi phục",
     "store": "Kho",
     "cancel": "Huỷ",
@@ -455,18 +514,16 @@
   "result": "Kết quả",
   "search": "Tìm kiếm",
   "addressForm": {
-    "street": "Tên đường/Số nhà",
-    "ward": "Xã/Phường",
+    "street": "Số nhà/Tên đường",
+    "ward": "Phường/Xã",
     "district": "Quận/Huyện",
-    "provinceCity": "Tỉnh/Thành phố",
-    "country": "Quốc gia"
+    "city": "Tỉnh/Thành phố"
   },
   "addressFormValid": {
     "streetValid": "Vui lòng cung cấp số nhà/tên đường phù hợp (',' không được chấp nhận)!",
     "wardValid": "Vui lòng cung cấp phường/xã phù hợp (',' không được chấp nhận)!",
     "districtValid": "Vui lòng cung cấp quận/huyện phù hợp (','không được chấp nhận)!",
-    "provinceCityValid": "Vui lòng cung cấp thành phố/tỉnh phù hợp (','không được chấp nhận)!",
-    "countryValid": "Vui lòng cung cấp quốc gia phù hợp (','không được chấp nhận)!"
+    "cityValid": "Vui lòng cung cấp thành phố/tỉnh phù hợp (','không được chấp nhận)!"
   },
   "footer": {
     "quickLink": "truy cập nhanh",

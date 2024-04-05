@@ -18,7 +18,7 @@ const OrderDetailPage = (props) => {
             to='/account/purchase'
             className='text-decoration-none cus-link-hover'
           >
-            <i className='fas fa-angle-left me-2'></i>
+            <i className='fa-solid fa-angle-left me-2'></i>
             {t('button.back')}
           </Link>
         </div>

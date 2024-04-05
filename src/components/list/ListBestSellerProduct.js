@@ -16,7 +16,7 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
     speed: 600,
     slidesToShow: 5,
     slidesToScroll: 4,
-    initialSlide: 0,
+    initialSlide: 1,
     swipeToSlide: true,
     responsive: [
       {
@@ -37,7 +37,7 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 2
         }
       },
       {
@@ -79,8 +79,8 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
   }, [categoryId])
 
   return (
-    <div className='position-relative bg-body box-shadow rounded-3 p-3'>
-      {heading && <h5>{heading}</h5>}
+    <div className='position-relative bg-body box-shadow rounded-2 p-3'>
+      {heading && <h5 style={{ color: 'var(--muted-color)' }}>{heading}</h5>}
       {isLoading && <Loading />}
       <div className='slider-container'>
         <Slider {...settings}>

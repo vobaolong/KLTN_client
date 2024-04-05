@@ -244,7 +244,7 @@ const StoreOrdersTable = ({
                   <td>
                     <small className='text-nowrap'>
                       {order.amountFromUser &&
-                        formatPrice(order.amountFromUser.$numberDecimal)}{' '}
+                        formatPrice(order.amountFromUser.$numberDecimal)}
                       ₫
                     </small>
                   </td>
@@ -255,7 +255,7 @@ const StoreOrdersTable = ({
                     <small className='text-nowrap'>
                       <i className='text-success'>For Store: </i>
                       {order.amountToStore &&
-                        formatPrice(order.amountToStore.$numberDecimal)}{' '}
+                        formatPrice(order.amountToStore.$numberDecimal)}
                       ₫
                     </small>
                     <br />
@@ -263,7 +263,7 @@ const StoreOrdersTable = ({
                     <small className='text-nowrap'>
                       <i className='text-primary'>For Zenpii: </i>
                       {order.amountToGD &&
-                        formatPrice(order.amountToGD.$numberDecimal)}{' '}
+                        formatPrice(order.amountToGD.$numberDecimal)}
                       ₫
                     </small>
                   </td>
@@ -292,7 +292,7 @@ const StoreOrdersTable = ({
                       className='btn btn-secondary ripple cus-tooltip'
                       to={`/vendor/orders/detail/${order._id}/${storeId}`}
                     >
-                      <i className='fas fa-info-circle'></i>
+                      <i className='fa-solid fa-info-circle'></i>
                     </Link>
                   </td>
                 </tr>

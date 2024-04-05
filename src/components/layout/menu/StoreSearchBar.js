@@ -38,7 +38,7 @@ const StoreSearchBar = ({ storeId = '' }) => {
         type='submit'
         onClick={handleFormSubmit}
       >
-        <i className='fas fa-search'></i>
+        <i className='fa-solid fa-search'></i>
       </button>
     </form>
   )

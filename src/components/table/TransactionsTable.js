@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -78,7 +79,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     else
@@ -251,7 +252,7 @@ const TransactionsTable = ({
                   <td>
                     <small className='text-nowrap'>
                       {transaction.amount &&
-                        formatPrice(transaction.amount.$numberDecimal)}{' '}
+                        formatPrice(transaction.amount.$numberDecimal)}
                       ₫
                     </small>
                   </td>

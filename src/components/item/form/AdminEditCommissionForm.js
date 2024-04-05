@@ -92,8 +92,9 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title={t('commisDetail.edit')}
+          title={t('commissionDetail.edit')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -102,7 +103,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('commisDetail.name')}
+            label={t('commissionDetail.name')}
             value={commission.name}
             isValid={commission.isValidName}
             feedback='Please provide a valid commission name.'
@@ -115,7 +116,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label={t('commisDetail.description')}
+            label={t('commissionDetail.description')}
             value={commission.description}
             isValid={commission.isValidDescription}
             feedback='Please provide a valid commission description.'
@@ -130,7 +131,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label={`${t('commisDetail.name')} (%)`}
+            label={`${t('commissionDetail.name')} (%)`}
             value={commission.cost}
             isValid={commission.isValidCost}
             feedback='Please provide a valid cost (>=0).'

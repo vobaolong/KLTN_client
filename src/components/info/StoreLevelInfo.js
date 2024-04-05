@@ -2,7 +2,7 @@ import Paragraph from '../ui/Paragraph'
 import { useTranslation } from 'react-i18next'
 import { formatDate } from '../../helper/humanReadable'
 
-const StoreLevelInfo = ({ store = {}, border = true }) => {
+const StoreLevelInfo = ({ store = {} }) => {
   const { t } = useTranslation()
   const percent = Math.round(
     (store?.numberOfSuccessfulOrders /
@@ -12,7 +12,7 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
 
   return (
     <div className='container-fluid'>
-      <div className={`p-2 ${border ? '' : 'py-2'}`}>
+      <div className='p-2'>
         <div className='row mb-2 d-flex flex-column justify-content-between gap-2'>
           <div className='col-lg-5 col-md-12'>
             <Paragraph
@@ -69,7 +69,6 @@ const StoreLevelInfo = ({ store = {}, border = true }) => {
               colon
               value={<span>{percent} %</span>}
             />
-            <br />
           </div>
         </div>
       </div>

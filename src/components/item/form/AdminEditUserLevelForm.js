@@ -4,18 +4,16 @@ import { updateUserLevel } from '../../../apis/level'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
+import { useTranslation } from 'react-i18next'
 
 const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-
+  const { t } = useTranslation()
   const [level, setLevel] = useState({})
-
   const { _id, accessToken } = getToken()
 
   useEffect(() => {
@@ -71,8 +69,6 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateUserLevel(_id, accessToken, oldLevel._id, level)
       .then((data) => {
@@ -90,9 +86,6 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
       .catch((error) => {
         setError('Sever error')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -102,8 +95,9 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Edit level'
+          title={t('dialog.editLevel')}
           onSubmit={onSubmit}
+          message={t('message.edit')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -112,10 +106,10 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Level name'
+            label={t('levelDetail.name')}
             value={level.name}
             isValid={level.isValidName}
-            feedback='Please provide a valid level name.'
+            feedback={t('levelDetail.nameValid')}
             validator='level'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -126,10 +120,10 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Floor point'
+            label={t('levelDetail.floorPoint')}
             value={level.minPoint}
             isValid={level.isValidMinPoint}
-            feedback='Please provide a valid floor point (>=0).'
+            feedback={t('levelDetail.validFloorPoint')}
             validator='positive|zero'
             required={true}
             onChange={(value) =>
@@ -142,10 +136,10 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Discount (%)'
+            label={`${t('levelDetail.discount')} (%)`}
             value={level.discount}
             isValid={level.isValidDiscount}
-            feedback='Please provide a valid floor point (0% - 100%).'
+            feedback={t('levelDetail.validDiscount')}
             validator='zeroTo100'
             required={true}
             onChange={(value) =>
@@ -158,10 +152,10 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Color'
+            label={t('levelDetail.color')}
             value={level.color}
             isValid={level.isValidColor}
-            feedback='Please provide a valid color.'
+            feedback={t('levelDetail.validColor')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('color', 'isValidColor', value)}
@@ -169,25 +163,13 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
           />
         </div>
 
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
-
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'
             className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
-            Save
+            {t('button.save')}
           </button>
         </div>
       </form>

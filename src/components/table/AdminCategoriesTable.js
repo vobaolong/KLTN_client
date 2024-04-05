@@ -178,7 +178,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
               className='btn btn-primary ripple text-nowrap rounded-1'
               to='/admin/category/createNewCategory'
             >
-              <i className='fas fa-plus-circle'></i>
+              <i className='fa-solid fa-plus-circle'></i>
               <span className='ms-2 res-hide'>{t('categoryDetail.add')}</span>
             </Link>
           </div>
@@ -304,7 +304,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                 <td>
                   <Link
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
                     to={`/admin/category/editCategory/${category._id}`}
                   >
                     <i className='fa-solid fa-pen'></i>
@@ -314,10 +314,10 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                   {!category.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger rounded-1 ripple cus-tooltip'
+                      className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
                       onClick={() => handleDeleteCategory(category)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>
@@ -325,7 +325,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-success ripple cus-tooltip'
+                      className='btn btn-sm btn-outline-success ripple cus-tooltip'
                       onClick={() => handleRestoreCategory(category)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>

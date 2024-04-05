@@ -11,27 +11,23 @@ const StorePage = () => {
 
   return (
     <AdminLayout user={user}>
-      <div className='mb-4'>
+      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`nav-link ${flag ? 'active' : ''}`}
+              className={`text-success nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <span className='btn btn-md btn-primary me-2'>
-                <i className='fas fa-check-circle'></i>
-              </span>
+              <i className='fa-solid fa-circle-check me-2'></i>
               <span className='res-hide'>{t('storeDetail.activeStores')}</span>
             </span>
           </li>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`nav-link ${!flag ? 'active' : ''}`}
+              className={`text-danger nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <span className='btn btn-md btn-danger me-2'>
-                <i className='fa-solid fa-circle-xmark'></i>
-              </span>
+              <i className='fa-solid fa-circle-xmark  me-2'></i>
               <span className='res-hide'>{t('storeDetail.bannedStores')}</span>
             </span>
           </li>

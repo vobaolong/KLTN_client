@@ -108,16 +108,13 @@ const SignupForm = ({ onSwap = () => {} }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Đăng ký'
+          title={t('dialog.signUp')}
           message={
             <small className=''>
-              <span className='text-muted'>
-                Bằng việc đăng ký hoặc đăng ký với Google, bạn đã đồng ý với{' '}
-              </span>
+              <span className='text-muted'>{t('signInForm.agreeBy')} </span>
               <Link to='/legal/privacy' target='_blank'>
-                Chính sách bảo mật
-              </Link>{' '}
-              của Zenpii .
+                {t('footer.policy')}
+              </Link>
             </small>
           }
           onSubmit={onSignupSubmit}

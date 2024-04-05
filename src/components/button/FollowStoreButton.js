@@ -16,7 +16,6 @@ const FollowStoreButton = ({
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [followingFlag, setFollowingFlag] = useState(isFollowing)
-
   const { _id, accessToken } = getToken()
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const FollowStoreButton = ({
   }, [isFollowing, storeId])
 
   const handleFollowStore = () => {
-    setError('')
     setIsLoading(true)
     if (!followingFlag) {
       followStore(_id, accessToken, storeId)
@@ -36,13 +34,13 @@ const FollowStoreButton = ({
             if (onRun) {
               data.store.isFollowing = true
               onRun(data.store)
+              toast.success(t('toastSuccess.followStore.follow'))
             }
-            toast.success('Following Store Successfully!')
           }
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     } else {
@@ -55,13 +53,13 @@ const FollowStoreButton = ({
             if (onRun) {
               data.store.isFollowing = false
               onRun(data.store)
+              toast.success(t('toastSuccess.followStore.unfollow'))
             }
-            toast.success('Unfollow Store Successfully!')
           }
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     }

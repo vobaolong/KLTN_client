@@ -16,14 +16,12 @@ const UserAddAddressForm = (props) => {
   const [address, setAddress] = useState({
     street: '',
     ward: '',
-    district_city: '',
-    city_province: '',
-    country: 'Việt Nam',
+    district: '',
+    city: '',
     isValidStreet: true,
     isValidWard: true,
     isValidDistrict: true,
-    isValidProvince: true,
-    isValidCountry: true
+    isValidCity: true
   })
 
   const [updateDispatch] = useUpdateDispatch()
@@ -47,49 +45,27 @@ const UserAddAddressForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { street, ward, district_city, city_province, country } = address
-    if (!street || !ward || !district_city || !city_province || !country) {
+    const { street, ward, district, city } = address
+    if (!street || !ward || !district || !city) {
       setAddress({
         ...address,
         isValidStreet: regexTest('address', street),
         isValidWard: regexTest('address', ward),
-        isValidDistrict: regexTest('address', district_city),
-        isValidProvince: regexTest('address', city_province),
-        isValidCountry: regexTest('address', country)
+        isValidDistrict: regexTest('address', district),
+        isValidCity: regexTest('address', city)
       })
       return
     }
 
-    const {
-      isValidStreet,
-      isValidWard,
-      isValidDistrict,
-      isValidProvince,
-      isValidCountry
-    } = address
-    if (
-      !isValidStreet ||
-      !isValidWard ||
-      !isValidDistrict ||
-      !isValidProvince ||
-      !isValidCountry
-    )
+    const { isValidStreet, isValidWard, isValidDistrict, isValidCity } = address
+    if (!isValidStreet || !isValidWard || !isValidDistrict || !isValidCity)
       return
 
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    const addressString =
-      address.street +
-      ', ' +
-      address.ward +
-      ', ' +
-      address.district_city +
-      ', ' +
-      address.city_province +
-      ', ' +
-      address.country
+    const addressString = `${address.street}, ${address.ward}, ${address.district}, ${address.city}`
     setIsLoading(true)
     addAddress(_id, accessToken, { address: addressString })
       .then((data) => {
@@ -99,16 +75,14 @@ const UserAddAddressForm = (props) => {
           setAddress({
             street: '',
             ward: '',
-            district_city: '',
-            city_province: '',
-            country: 'Việt Nam',
+            district: '',
+            city: '',
             isValidStreet: true,
             isValidWard: true,
             isValidDistrict: true,
-            isValidProvince: true,
-            isValidCountry: true
+            isValidCity: true
           })
-          toast.success(data.success)
+          toast.success(t('toastSuccess.address.add'))
         }
         setIsLoading(false)
       })
@@ -125,6 +99,7 @@ const UserAddAddressForm = (props) => {
         <ConfirmDialog
           title={t('userDetail.addAddress')}
           onSubmit={onSubmit}
+          message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
         />
       )}
@@ -158,12 +133,12 @@ const UserAddAddressForm = (props) => {
           <Input
             type='text'
             label={t('addressForm.district')}
-            value={address.district_city}
+            value={address.district}
             isValid={address.isValidDistrict}
             feedback={t('addressFormValid.districtValid')}
             validator='address'
             onChange={(value) =>
-              handleChange('district_city', 'isValidDistrict', value)
+              handleChange('district', 'isValidDistrict', value)
             }
             onValidate={(flag) => handleValidate('isValidDistrict', flag)}
           />
@@ -172,32 +147,16 @@ const UserAddAddressForm = (props) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('addressForm.provinceCity')}
-            value={address.city_province}
-            isValid={address.isValidProvince}
-            feedback={t('addressFormValid.provinceCityValid')}
+            label={t('addressForm.city')}
+            value={address.city}
+            isValid={address.isValidCity}
+            feedback={t('addressFormValid.cityValid')}
             validator='address'
-            onChange={(value) =>
-              handleChange('city_province', 'isValidProvince', value)
-            }
-            onValidate={(flag) => handleValidate('isValidProvince', flag)}
+            onChange={(value) => handleChange('city', 'isValidCity', value)}
+            onValidate={(flag) => handleValidate('isValidCity', flag)}
           />
         </div>
 
-        <div className='col-12'>
-          <Input
-            type='text'
-            label={t('addressForm.country')}
-            value={address.country}
-            isValid={address.isValidCountry}
-            feedback={t('addressFormValid.countryValid')}
-            validator='address'
-            onChange={(value) =>
-              handleChange('country', 'isValidCountry', value)
-            }
-            onValidate={(flag) => handleValidate('isValidCountry', flag)}
-          />
-        </div>
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

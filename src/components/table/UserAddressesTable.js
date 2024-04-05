@@ -41,7 +41,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.address.delete'))
         }
         setIsLoading(false)
       })
@@ -123,7 +123,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                       className='btn btn-outline-danger ripple my-1 rounded-1'
                       onClick={() => handleDeleteAddress(address, index)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>

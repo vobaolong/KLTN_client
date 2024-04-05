@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
@@ -168,7 +169,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Delete delivery'
+          title={t('dialog.addDelivery')}
           color='danger'
           onSubmit={onSubmitDelete}
           onClose={() => setIsConfirming(false)}
@@ -176,7 +177,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
       )}
       {isConfirmingRestore && (
         <ConfirmDialog
-          title='Restore delivery'
+          title={t('dialog.restoreDelivery')}
           onSubmit={onSubmitRestore}
           onClose={() => setIsConfirmingRestore(false)}
         />
@@ -257,7 +258,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                   <small>{delivery.name}</small>
                 </td>
                 <td className='text-end px-2'>
-                  <small>{delivery.price?.$numberDecimal} ₫</small>
+                  <small>{delivery.price?.$numberDecimal}₫</small>
                 </td>
                 <td
                   className='text-start p-2 lh-sm'
@@ -290,7 +291,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                 <td>
                   <button
                     type='button'
-                    className='btn btn-primary ripple me-2 rounded-1'
+                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
                     data-bs-toggle='modal'
                     data-bs-target='#edit-delivery-form'
                     onClick={() => handleEditCommission(delivery)}
@@ -302,11 +303,11 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                   {!delivery.isDeleted ? (
                     <button
                       type='button'
-                      className='btn btn-outline-danger rounded-1'
+                      className='btn btn-sm btn-outline-danger rounded-1'
                       style={{ maxWidth: '95px' }}
                       onClick={() => handleDeleteCommission(delivery)}
                     >
-                      <i className='fas fa-trash-alt'></i>
+                      <i className='fa-solid fa-trash-alt'></i>
                       <span className='ms-2 res-hide'>
                         {t('button.delete')}
                       </span>
@@ -314,7 +315,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                   ) : (
                     <button
                       type='button'
-                      className='btn btn-outline-success ripple'
+                      className='btn btn-sm btn-outline-success ripple'
                       onClick={() => handleRestoreCommission(delivery)}
                     >
                       <i className='fa-solid fa-trash-can-arrow-up'></i>

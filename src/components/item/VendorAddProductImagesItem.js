@@ -19,7 +19,7 @@ const VendorAddProductImagesItem = ({
           data-bs-toggle='modal'
           data-bs-target='#add-product-image-form'
         >
-          <i className='fas fa-plus-circle'></i>
+          <i className='fa-solid fa-plus-circle'></i>
           <span className='res-hide ms-2'>{t('button.addImg')}</span>
         </button>
 
