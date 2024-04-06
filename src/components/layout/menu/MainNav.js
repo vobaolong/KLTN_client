@@ -43,7 +43,7 @@ const MainNav = ({ navFor = 'user' }) => {
     >
       {isConfirming && (
         <ConfirmDialog
-          title='Đăng Xuất'
+          title={t('dialog.logOut')}
           color='danger'
           onSubmit={onSignoutSubmit}
           onClose={() => setIsConfirming(false)}

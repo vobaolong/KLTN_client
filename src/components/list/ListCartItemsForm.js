@@ -181,9 +181,12 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
               </Link>
               <div>
                 {item.variantValueIds?.map((value, index) => (
-                  <small className='text-muted' key={index}>
-                    {value.variantId?.name}: {value.name}
-                  </small>
+                  <span className='text-muted' key={index}>
+                    <small>
+                      {value.variantId?.name}: {value.name}
+                    </small>
+                    {index < item.variantValueIds.length - 1 && ', '}
+                  </span>
                 ))}
               </div>
             </div>

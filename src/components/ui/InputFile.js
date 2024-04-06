@@ -99,7 +99,7 @@ const InputFile = ({
                   <small>
                     Drag 'n' drop some files here, or click to select files
                   </small>
-                  <i className='fa-regular fa-images'></i>
+                  <i className='ms-2 fa-regular fa-images'></i>
                   <small
                     className='invalid-feedback ms-2 mt-0'
                     style={{ width: 'unset' }}

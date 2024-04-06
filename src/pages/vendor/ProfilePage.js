@@ -96,8 +96,8 @@ const ProfilePage = () => {
             to={`/store/${store._id}`}
             target='_blank'
           >
-            <span className='me-2 res-hide'>Visit My Store</span>
-            <i className='fa-solid fa-external-link-alt'></i>
+            <span className='me-2 res-hide'>Xem Shop</span>
+            <i class='fa-solid fa-desktop'></i>
           </Link>
         </div>
 

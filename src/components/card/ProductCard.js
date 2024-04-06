@@ -142,13 +142,13 @@ const ProductCard = ({ product = {}, onRun }) => {
           <h5 className='text-danger me-2 mb-0'>
             {productValue.salePrice &&
               formatPrice(productValue.salePrice.$numberDecimal)}
-            ₫
+            <sup>₫</sup>
           </h5>
           {salePercent !== 0 && (
             <del className='text-muted font-weight-normal text-md'>
               {productValue.price &&
                 formatPrice(productValue.price.$numberDecimal)}
-              ₫
+              <sup>₫</sup>
             </del>
           )}
         </small>

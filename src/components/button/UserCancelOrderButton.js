@@ -3,9 +3,9 @@ import { getToken } from '../../apis/auth'
 import { userCancelOrder } from '../../apis/order'
 import { calcTime } from '../../helper/calcTime'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const UserCancelOrderButton = ({
   orderId = '',
@@ -15,7 +15,6 @@ const UserCancelOrderButton = ({
   onRun
 }) => {
   const { t } = useTranslation()
-  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
@@ -26,34 +25,27 @@ const UserCancelOrderButton = ({
   }
 
   const onSubmit = () => {
-    setError('')
     setIsLoading(true)
     const value = { status: 'Cancelled' }
     userCancelOrder(_id, accessToken, value, orderId)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
+          toast.error(data.error)
         } else {
           if (onRun) onRun()
+          toast.success(t('toastSuccess.order.cancel'))
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title='Cancel Order'
@@ -69,10 +61,7 @@ const UserCancelOrderButton = ({
           disabled={status !== 'Not processed' || calcTime(createdAt) >= 1}
           onClick={handleCancelOrder}
         >
-          <i
-            className='fa-solid fa-ban
-'
-          ></i>
+          <i className='fa-solid fa-ban'></i>
           {detail && <span className='ms-2'>{t('button.cancel')}</span>}
         </button>
       </div>

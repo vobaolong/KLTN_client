@@ -70,7 +70,7 @@ const ListOrderItems = ({
   }, [orderId, storeId, by])
 
   return (
-    <div className='list-order-items position-relative'>
+    <div className='list-order-items position-relative py-1'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       <small className='text-muted d-inline-block'>

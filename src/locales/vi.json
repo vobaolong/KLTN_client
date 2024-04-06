@@ -1,7 +1,7 @@
 {
   "toastSuccess": {
-    "lockStore": "Đóng store thành công",
-    "unlockStore": "Mở store thành công",
+    "lockStore": "Đóng cửa hàng thành công",
+    "unlockStore": "Mở cửa hàng thành công",
     "cart": {
       "add": "Thêm vào giỏ hàng thành công",
       "delete": "Xoá giỏ hàng thành công",
@@ -13,8 +13,8 @@
       "editValue": "Sửa giá trị thành công"
     },
     "followStore": {
-      "follow": "Theo dõi store thành công",
-      "unfollow": "Bỏ theo dõi store thành công"
+      "follow": "Theo dõi cửa hàng thành công",
+      "unfollow": "Bỏ theo dõi cửa hàng thành công"
     },
     "followProduct": {
       "follow": "Đã thêm sản phẩm vào yêu thích",
@@ -36,14 +36,14 @@
       "restore": "Khôi phục hạng mức thành công"
     },
     "commission": {
-      "create": "Tạo hoa hồng thành công",
-      "delete": "Xoá hoa hồng thành công",
-      "edit": "Sửa hoa hồng thành công",
-      "restore": "Khôi phục hoa hồng thành công"
+      "create": "Tạo phí chiết khấu thành công",
+      "delete": "Xoá phí chiết khấu thành công",
+      "edit": "Sửa phí chiết khấu thành công",
+      "restore": "Khôi phục phí chiết khấu thành công"
     },
 
     "product": {
-      "create": "Tạo sản phẩm thành công",
+      "create": "Thêm sản phẩm thành công",
       "delete": "Xoá sản phẩm thành công",
       "edit": "Sửa sản phẩm thành công",
       "ban": "Khoá sản phẩm thành công",
@@ -54,7 +54,8 @@
       "active": "Kích hoạt cửa hàng thành công"
     },
     "order": {
-      "update": "Cập nhật đơn hàng thành công"
+      "update": "Cập nhật đơn hàng thành công",
+      "cancel": "Huỷ đơn thành công"
     },
     "category": {
       "create": "Tạo danh mục thành công",
@@ -86,12 +87,13 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
+    "logOut": "Đăng xuất",
     "closeStore": "Đóng cửa hàng",
     "openStore": "Mở cửa hàng",
-    "addCommission": "Thêm mức hoa hồng",
-    "deleteCommission": "Xoá mức hoa hồng",
-    "editCommission": "Sửa mức hoa hồng",
-    "restoreCommission": "Khôi phục mức hoa hồng",
+    "addCommission": "Thêm mức phí chiết khấu",
+    "deleteCommission": "Xoá mức phí chiết khấu",
+    "editCommission": "Sửa mức phí chiết khấu",
+    "restoreCommission": "Khôi phục mức phí chiết khấu",
     "deleteDelivery": "Xoá đơn vị vận chuyển",
     "addDelivery": "Thêm đơn vị vận chuyển",
     "restoreDelivery": "Khôi phục đơn vị vận chuyển",
@@ -103,8 +105,8 @@
     "deleteValue": "Xoá giá trị biến thể",
     "signUp": "Đăng ký",
     "createUserLevel": "Tạo hạng mức người dùng",
-    "createStoreLevel": "Tạo hạng mức store",
-    "createCommission": "Tạo commission",
+    "createStoreLevel": "Tạo hạng mức cửa hàng",
+    "createCommission": "Thêm chiết khấu",
     "banStore": "Khoá cửa hàng",
     "createStore": "Tạo cửa hàng",
     "activeStore": "Kích hoạt cửa hàng",
@@ -119,7 +121,7 @@
       "userLevel": "Hạng mức người dùng"
     },
     "storeLevel": {
-      "storeLevel": "Hạng mức store"
+      "storeLevel": "Hạng mức cửa hàng"
     },
     "edit": "Sửa hạng mức",
     "delete": "Xoá hạng mức",
@@ -156,7 +158,7 @@
     "variants": "Biến thể",
     "products": "Sản phẩm",
     "levels": "Cấp",
-    "commissions": "Commissions",
+    "commissions": "Chiết khấu",
     "deliveries": "Vận chuyển",
     "setting": "Cài đặt",
     "language": "Ngôn ngữ"
@@ -193,12 +195,12 @@
     "noValuesSelected": "Không giá trị nào được chọn",
     "chooseCateFirst": "*vui lòng chọn thể loại trước",
     "noProduct": "Không có sản phẩm",
-    "createProduct": "Tạo sản phẩm",
+    "createProduct": "Thêm sản phẩm",
     "selling": "Sản phẩm đang bán",
     "stored": "Sản phẩm trong kho",
     "editProInfo": "Chỉnh sửa thông tin sản phẩm",
     "editProImg": "Chỉnh sửa ảnh sản phẩm",
-    "thumbImg": "Ảnh đại diện sản phẩm",
+    "thumbImg": "Ảnh bìa",
     "otherImg": "Ảnh khác",
     "sold": "Đã bán",
     "sale": "Giảm",
@@ -248,12 +250,16 @@
     "unitPrice": "Đơn giá",
     "quantity": "Số lượng",
     "total": "Thành tiền",
+    "subTotal": "Tổng tiền hàng",
+    "shippingFee": "Phí vận chuyển",
+    "discountShippingFee": "Giảm giá phí vận chuyển",
+    "zenpiiVoucherApplied": "Voucher từ Zenpii",
     "empty": "Giỏ hàng của bạn đang trống",
     "emptyRefer": "Bạn tham khảo thêm các sản phẩm được Zenpii gợi ý phía dưới nhé!"
   },
 
   "store": "Cửa hàng",
-  "searchHolder": "Tìm sản phẩm và tên store",
+  "searchHolder": "Tìm sản phẩm và tên cửa hàng",
   "userDetail": {
     "idCard": "ID Card",
     "email": "Email",
@@ -302,26 +308,26 @@
   },
   "manageStore": "Cửa hàng",
   "myStore": "Store của tôi",
-  "createStore": "Tạo store",
+  "createStore": "Tạo cửa hàng",
   "commissionDetail": {
     "description": "Mô tả",
-    "cost": "Phí",
-    "add": "Thêm Commission",
-    "delete": "Xoá Commission",
-    "edit": "Sửa Commission",
-    "name": "Tên Commission"
+    "fee": "Phí chiết khấu",
+    "add": "Thêm chiết khấu",
+    "delete": "Xoá chiết khấu",
+    "edit": "Sửa chiết khấu",
+    "name": "Loại chiết khấu"
   },
   "deliveryDetail": {
     "deliveryUnit": "Vận chuyển",
     "name": "Tên ĐVVC",
     "description": "Mô tả",
-    "cost": "Phí",
+    "fee": "Phí",
     "add": "Thêm Đơn Vị Vận Chuyển",
     "del": "Xoá Đơn Vị Vận Chuyển",
     "edit": "Sửa Đơn Vị Vận Chuyển",
     "nameValid": "Vui lòng cung cấp tên đvvc phù hợp!",
     "bioValid": "Vui lòng cung cấp mô tả phù hợp!",
-    "costValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
+    "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
     "status": "Trạng thái",
@@ -387,6 +393,7 @@
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
+    "staple": "Ngành hàng chủ lực",
     "activeStores": "Cửa hàng đang hoạt động",
     "bannedStores": "Cửa hàng đang tạm khoá",
     "addFeaturedImg": "Thêm hình ảnh nổi bật",
@@ -400,7 +407,7 @@
     "staffs": "Nhân viên",
     "orders": "Đơn hàng",
     "role": "Vai trò",
-    "commissions": "Hoa hồng",
+    "commissions": "Chiết khấu",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên Zenpii",
     "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ",
@@ -418,7 +425,7 @@
     "avatar": "Ảnh đại diện"
   },
   "storeDetailValid": {
-    "nameValid": "Vui lòng cung cấp tên store phù hợp!",
+    "nameValid": "Vui lòng cung cấp tên cửa hàng phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",
     "coverValid": "Vui lòng cung cấp ảnh bìa phù hợp!",
@@ -450,8 +457,8 @@
     "sell": "Bán",
     "ban": "Khoá",
     "active": "Kích hoạt",
-    "clickToClose": "Nhấn để đóng store",
-    "clickToOpen": "Nhấn để mở store",
+    "clickToClose": "Nhấn để đóng cửa hàng",
+    "clickToOpen": "Nhấn để mở cửa hàng",
     "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)",
     "addLevel": "Thêm hạng mức"
   },
@@ -475,7 +482,7 @@
   "orderDetail": {
     "finalTotal": "Tổng tiền",
     "noOrder": "Chưa có đơn hàng",
-    "commission": "Hoa hồng",
+    "commission": "Chiết khấu",
     "buyer": "Người mua",
     "id": "Mã đơn hàng",
     "date": "Ngày đặt hàng",

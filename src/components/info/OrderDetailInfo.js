@@ -276,45 +276,11 @@ const OrderDetailInfo = ({
                       }}
                       scope='col'
                     >
-                      Tổng tiền hàng
+                      {t('cartDetail.subTotal')}
                     </th>
                     <td className='text-end'>
                       <span style={{ fontSize: '0.9rem' }}>
-                        {formatPrice(totalOrderSalePrice)} <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      Giảm giá từ Zenpii
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        -{formatPrice(saleFromSystem)} <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      Phí vận chuyển
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        {formatPrice(order.deliveryId?.price?.$numberDecimal)}{' '}
+                        {formatPrice(totalOrderSalePrice)}
                         <sup>₫</sup>
                       </span>
                     </td>
@@ -328,33 +294,74 @@ const OrderDetailInfo = ({
                       }}
                       scope='col'
                     >
-                      Giảm giá vận chuyển
+                      {t('cartDetail.zenpiiVoucherApplied')}
                     </th>
                     <td className='text-end'>
                       <span style={{ fontSize: '0.9rem' }}>
-                        -{formatPrice(saleFromShipping)} <sup>₫</sup>
+                        -{formatPrice(saleFromSystem)}
+                        <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      {t('cartDetail.shippingFee')}
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        {formatPrice(order.deliveryId?.price?.$numberDecimal)}
+                        <sup>₫</sup>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className='border-bottom'>
+                    <th
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        backgroundColor: 'transparent'
+                      }}
+                      scope='col'
+                    >
+                      {t('cartDetail.discountShippingFee')}
+                    </th>
+                    <td className='text-end'>
+                      <span style={{ fontSize: '0.9rem' }}>
+                        -{formatPrice(saleFromShipping)}
+                        <sup>₫</sup>
                       </span>
                     </td>
                   </tr>
                 </tbody>
               </table>
             )}
-            <span className='col-lg-4 justify-content-between align-items-center d-flex'>
-              <b className='text-muted'>Thành tiền:</b>
-              <span className='text-primary fw-bold fs-5'>
-                {formatPrice(order.amountFromUser?.$numberDecimal)}₫
+            <span className='col-lg-3 col-md-4 justify-content-end gap-3 align-items-center d-flex pt-2'>
+              <b className='text-muted'>{t('cartDetail.total')}:</b>
+              <span
+                style={{ fontSize: '1.4rem' }}
+                className='text-primary fw-bold me-3'
+              >
+                {formatPrice(order.amountFromUser?.$numberDecimal)}
+                <sup>₫</sup>
+                {by !== 'user' && (
+                  <span className='d-inline-block position-relative'>
+                    <i
+                      style={{ fontSize: '15px', cursor: 'help' }}
+                      className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
+                    ></i>
+                    <small className='cus-tooltip-msg'>
+                      {t('orderDetail.includedDiscount')}
+                    </small>
+                  </span>
+                )}
               </span>
-              {by !== 'user' && (
-                <span className='d-inline-block position-relative'>
-                  <i
-                    style={{ fontSize: '15px', cursor: 'help' }}
-                    className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
-                  ></i>
-                  <small className='cus-tooltip-msg'>
-                    {t('orderDetail.includedDiscount')}
-                  </small>
-                </span>
-              )}
             </span>
           </div>
         </div>

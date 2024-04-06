@@ -145,10 +145,10 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label={`${t('deliveryDetail.cost')} (₫)`}
+            label={`${t('deliveryDetail.fee')} (₫)`}
             value={delivery.price}
             isValid={delivery.isValidPrice}
-            feedback={t('deliveryDetail.costValid')}
+            feedback={t('deliveryDetail.feeValid')}
             validator='greaterThanOrEqualTo'
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}

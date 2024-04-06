@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { listActiveCategories } from '../../../apis/category'
 import { useTranslation } from 'react-i18next'
 
-const Footer = (props) => {
+const Footer = () => {
   const { t } = useTranslation()
   const [categories, setCategories] = useState([])
 
@@ -24,7 +24,6 @@ const Footer = (props) => {
         return
       })
   }
-
   useEffect(() => loadCategories(), [])
 
   return (

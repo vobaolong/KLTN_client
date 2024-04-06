@@ -35,7 +35,7 @@ const ValueSelectorItem = ({
 
   return (
     <div
-      className='position-relative mt-3 mb-1 d-flex align-items-center'
+      className='position-relative mt-1 mb-1 d-flex align-items-center'
       style={{ marginTop: '3px', marginBottom: '1px' }}
     >
       <label className='label-variant'>{values[0].variantId.name}</label>
@@ -45,7 +45,7 @@ const ValueSelectorItem = ({
             key={index}
             type='button'
             className={`btn btn-sm ${isEditable && 'ripple'} ${
-              selectedValue._id === value._id
+              selectedValue?._id === value._id
                 ? 'btn-primary'
                 : 'btn-outline-primary'
             } cus-btn-style`}

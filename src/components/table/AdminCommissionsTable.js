@@ -199,7 +199,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title='Commission'
+                  title={t('commissionDetail.name')}
                   sortBy='name'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />
@@ -208,7 +208,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('commissionDetail.cost')}
+                  title={t('commissionDetail.fee')}
                   sortBy='cost'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

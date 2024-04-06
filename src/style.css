@@ -1419,7 +1419,7 @@ header {
 	height: 100%;
 	object-fit: cover;
 	border-radius: 0.375rem;
-	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+	/* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -1427,6 +1427,7 @@ header {
 	font-size: 24px;
 	cursor: pointer;
 	background: #fff;
+	border: 1px dashed var(--ccc-color);
 }
 
 .cus-avatar-label:hover {

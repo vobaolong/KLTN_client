@@ -107,7 +107,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
             value={commission.name}
             isValid={commission.isValidName}
             feedback='Please provide a valid commission name.'
-            validator='level'
+            validator='bio'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -131,7 +131,7 @@ const AdminEditCommissionForm = ({ oldCommission = '', onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label={`${t('commissionDetail.name')} (%)`}
+            label={`${t('commissionDetail.fee')} (%)`}
             value={commission.cost}
             isValid={commission.isValidCost}
             feedback='Please provide a valid cost (>=0).'

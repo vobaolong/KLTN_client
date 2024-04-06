@@ -1,7 +1,7 @@
+import defaultImage from '../../assets/default.png'
+import ProductUpload from './uploadButton/ProductUpload'
 import UserAvatarUpload from './uploadButton/UserAvatarUpload'
 import StoreAvatarUpload from './uploadButton/StoreAvatarUpload'
-import ProductUpload from './uploadButton/ProductUpload'
-import defaultImage from '../../assets/default.png'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const Avatar = ({

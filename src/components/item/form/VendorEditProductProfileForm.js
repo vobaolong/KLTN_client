@@ -165,23 +165,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 px-4'>
-          <Input
-            type='number'
-            label={t('productDetail.quantity')}
-            value={newProduct.quantity}
-            isValid={newProduct.isValidQuantity}
-            feedback='Please provide a valid product quantity.'
-            required={true}
-            validator='positive|zero'
-            onChange={(value) =>
-              handleChange('quantity', 'isValidQuantity', value)
-            }
-            onValidate={(flag) => handleValidate('isValidQuantity', flag)}
-          />
-        </div>
-
-        <div className='col-12 px-4'>
+        <div className='col-md-6 col-sm-12 px-4'>
           <Input
             type='number'
             label={`${t('productDetail.price')} (₫)`}
@@ -195,7 +179,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 px-4'>
+        <div className='col-md-6 col-sm-12 px-4'>
           <Input
             type='number'
             label={`${t('productDetail.salePrice')} (₫)`}
@@ -208,6 +192,22 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
               handleChange('salePrice', 'isValidSalePrice', value)
             }
             onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
+          />
+        </div>
+
+        <div className='col-12 px-4'>
+          <Input
+            type='number'
+            label={t('productDetail.quantity')}
+            value={newProduct.quantity}
+            isValid={newProduct.isValidQuantity}
+            feedback='Please provide a valid product quantity.'
+            required={true}
+            validator='positive|zero'
+            onChange={(value) =>
+              handleChange('quantity', 'isValidQuantity', value)
+            }
+            onValidate={(flag) => handleValidate('isValidQuantity', flag)}
           />
         </div>
 
@@ -251,7 +251,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             type='submit'
             className='btn btn-primary ripple res-w-100-md rounded-1'
             onClick={handleSubmit}
-            style={{ width: '40%' }}
+            style={{ width: '30%' }}
           >
             {t('button.save')}
           </button>

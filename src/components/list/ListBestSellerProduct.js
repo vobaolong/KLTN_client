@@ -11,12 +11,11 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
   const [products, setProducts] = useState([])
 
   const settings = {
-    className: 'center',
     infinite: false,
     speed: 600,
     slidesToShow: 5,
     slidesToScroll: 4,
-    initialSlide: 1,
+    initialSlide: 0,
     swipeToSlide: true,
     responsive: [
       {

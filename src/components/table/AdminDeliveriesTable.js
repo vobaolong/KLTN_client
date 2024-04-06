@@ -221,7 +221,7 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
                 <SortByButton
                   currentOrder={filter.order}
                   currentSortBy={filter.sortBy}
-                  title={t('deliveryDetail.cost')}
+                  title={t('deliveryDetail.fee')}
                   sortBy='price'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 />

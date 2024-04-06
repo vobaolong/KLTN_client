@@ -16,13 +16,12 @@ import Logo from '../../layout/menu/Logo'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const CreateStoreForm = (props) => {
+const CreateStoreForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error1, setError1] = useState('')
   const [error, setError] = useState('')
-
   const [listActiveCommissions, setListActiveCommissions] = useState([])
   const [store, setStore] = useState({
     name: '',
@@ -75,7 +74,7 @@ const CreateStoreForm = (props) => {
     })
   }
 
-  const handleSelect = (value) => {
+  const handleSelectCommission = (value) => {
     setStore({
       ...store,
       commissionId: value
@@ -135,7 +134,7 @@ const CreateStoreForm = (props) => {
         }
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -171,11 +170,36 @@ const CreateStoreForm = (props) => {
       >
         <div className='col-12 bg-primary p-3 d-flex align-items-center'>
           <Logo />
-          <h4 className='text-white border-start px-3'>
+          <h4 className='text-white border-start px-3 mb-0'>
             {t('storeDetail.createStore')}
           </h4>
         </div>
 
+        <div className='col-12 px-4 mt-2'>
+          {error1 && <Error msg={error1} />}
+          {!error1 && (
+            <DropDownMenu
+              listItem={listActiveCommissions?.map((c, i) => {
+                const newC = {
+                  value: c._id,
+                  label:
+                    c.name + ' (' + c.cost.$numberDecimal + `%/${t('order')})`
+                }
+                return newC
+              })}
+              value={store.commissionId}
+              setValue={handleSelectCommission}
+              size='large'
+              label={t('storeDetail.commissions')}
+            />
+          )}
+        </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
@@ -246,31 +270,6 @@ const CreateStoreForm = (props) => {
             onValidate={(flag) => handleValidate('isValidCover', flag)}
           />
         </div>
-
-        <div className='col-12 px-4 mt-2'>
-          {error1 && <Error msg={error1} />}
-          {!error1 && (
-            <DropDownMenu
-              listItem={listActiveCommissions?.map((c, i) => {
-                const newC = {
-                  value: c._id,
-                  label: c.name + ' (' + c.cost.$numberDecimal + '%/order)'
-                }
-                return newC
-              })}
-              value={store.commissionId}
-              setValue={handleSelect}
-              size='large'
-              label={t('storeDetail.commissions')}
-            />
-          )}
-        </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
 
         <div className='col-12 px-4 mt-2'>
           <small className='text-center d-block mx-2'>

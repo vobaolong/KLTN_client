@@ -35,7 +35,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
   }, [productId, storeId, run])
 
   return (
-    <div className='p-1 position-relative'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
 
       <div className='mb-4'>

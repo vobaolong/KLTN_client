@@ -21,45 +21,46 @@
       "unfollow": "Remove from wishlist successfully"
     },
     "staff": {
-      "addStaff": "Add Staff successfully",
-      "removeStaff": "Remove Staff successfully"
+      "addStaff": "Add staff successfully",
+      "removeStaff": "Remove staff successfully"
     },
     "address": {
-      "add": "Add Address successfully",
-      "update": "Update Address successfully",
-      "delete": "Delete Address successfully"
+      "add": "Add address successfully",
+      "update": "Update address successfully",
+      "delete": "Delete address successfully"
     },
     "level": {
-      "create": "Create Level successfully",
-      "edit": "Edit Level successfully",
-      "delete": "Delete Level successfully",
-      "restore": "Restore Level successfully"
+      "create": "Create level successfully",
+      "edit": "Edit level successfully",
+      "delete": "Delete level successfully",
+      "restore": "Restore level successfully"
     },
     "commission": {
-      "create": "Create Commission successfully",
-      "delete": "Delete Commission successfully",
-      "edit": "Edit Commission successfully",
-      "restore": "Restore Commission successfully"
+      "create": "Create commission successfully",
+      "delete": "Delete commission successfully",
+      "edit": "Edit commission successfully",
+      "restore": "Restore commission successfully"
     },
     "product": {
-      "create": "Create Product successfully",
-      "delete": "Delete Product successfully",
-      "edit": "Edit Product successfully",
-      "ban": "Ban Product successfully",
-      "active": "Active Product successfully"
+      "create": "Create product successfully",
+      "delete": "Delete product successfully",
+      "edit": "Edit product successfully",
+      "ban": "Ban product successfully",
+      "active": "Active product successfully"
     },
     "store": {
-      "ban": "Ban Store successfully",
-      "active": "Active Store successfully"
+      "ban": "Ban store successfully",
+      "active": "Active store successfully"
     },
     "order": {
-      "update": "Update Order successfully"
+      "update": "Update order successfully",
+      "cancel": "Cancel order successfully"
     },
     "category": {
-      "create": "Create Category successfully",
-      "update": "Update Category successfully",
-      "delete": "Delete Category successfully",
-      "restore": "Restore Category successfully"
+      "create": "Create category successfully",
+      "update": "Update category successfully",
+      "delete": "Delete category successfully",
+      "restore": "Restore category successfully"
     }
   },
   "toastError": {},
@@ -85,6 +86,7 @@
     "userInSystem": "Users in the system"
   },
   "dialog": {
+    "logOut": "Log Out",
     "closeStore": "Close store",
     "openStore": "Open store",
     "addCommission": "Add commission",
@@ -246,7 +248,11 @@
     "products": "products",
     "unitPrice": "Unit Price",
     "quantity": "Quantity",
-    "total": "Total",
+    "total": "Order Total",
+    "subTotal": "Merchandise Subtotal",
+    "shippingFee": "Shipping Fee",
+    "discountShippingFee": "Shipping Discount Subtotal",
+    "zenpiiVoucherApplied": "Zenpii Voucher Applied",
     "empty": "Your shopping cart is empty",
     "emptyRefer": "Please refer to the products suggested by Zenpii below!"
   },
@@ -304,23 +310,23 @@
   "createStore": "Create store",
   "commissionDetail": {
     "description": "Description",
-    "cost": "Cost",
+    "fee": "Commission Fee",
     "add": "Add Commission",
     "delete": "Delete Commission",
     "edit": "Edit Commission",
-    "name": "Commission name"
+    "name": "Commission Name"
   },
   "deliveryDetail": {
     "deliveryUnit": "Delivery Unit",
     "name": "Delivery unit name",
     "description": "Description",
-    "cost": "Cost",
+    "fee": "Cost",
     "add": "Add Delivery Unit",
     "del": "Delete Delivery Unit",
     "edit": "Edit Delivery Unit",
     "nameValid": "Please provide a valid delivery unit name!",
-    "bioValid": "Please provide a valid delivery unit  description!",
-    "costValid": "Please provide a valid cost (>0₫)"
+    "bioValid": "Please provide a valid delivery unit description!",
+    "feeValid": "Please provide a valid fee (>0₫)"
   },
   "status": {
     "status": "Status",
@@ -387,6 +393,7 @@
   },
 
   "storeDetail": {
+    "staple": "Staple Goods",
     "activeStores": "Active Stores",
     "bannedStores": "Banned Stores",
     "addFeaturedImg": "Add Featured Image",
