@@ -4,6 +4,7 @@ import AccountLayout from '../../components/layout/AccountLayout'
 import FollowingProductsCollection from '../../components/collection/FollowingProductsCollection'
 import FollowingStoresCollection from '../../components/collection/FollowingStoreCollection'
 import { useTranslation } from 'react-i18next'
+import MetaData from '../../components/layout/meta/MetaData'
 
 const FollowingPage = () => {
   const { t } = useTranslation()
@@ -12,6 +13,7 @@ const FollowingPage = () => {
 
   return (
     <AccountLayout user={user}>
+      <MetaData title={`${t('helmet.listFavorites')} | Zenpii Việt Nam`} />
       <div className='mb-4 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>

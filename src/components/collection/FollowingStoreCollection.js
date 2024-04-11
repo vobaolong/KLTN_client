@@ -8,7 +8,7 @@ import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 
-const FollowingStoresCollection = (props) => {
+const FollowingStoresCollection = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')

@@ -4,10 +4,9 @@ import { updateProfile } from '../../../apis/user'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const UserEditProfileForm = ({
   firstName = '',
@@ -21,11 +20,7 @@ const UserEditProfileForm = ({
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [profile, setProfile] = useState({})
-
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
 
@@ -107,35 +102,25 @@ const UserEditProfileForm = ({
     if (profile.phone) user.phone = profile.phone
     if (profile.id_card) user.id_card = profile.id_card
 
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateProfile(_id, accessToken, user)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.userDetail.updateProfile'))
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setError(error)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
           title={t('userDetail.editProfile')}
@@ -222,18 +207,6 @@ const UserEditProfileForm = ({
             onValidate={(flag) => handleValidate('isValidIdCard', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

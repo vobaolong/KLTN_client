@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import AccountLayout from '../../components/layout/AccountLayout'
 import UserOrdersTable from '../../components/table/UserOrdersTable'
 import { useTranslation } from 'react-i18next'
+import MetaData from '../../components/layout/meta/MetaData'
 
 const OrderPage = () => {
   const user = useSelector((state) => state.account.user)
@@ -30,6 +31,7 @@ const OrderPage = () => {
 
   return (
     <AccountLayout user={user}>
+      <MetaData title={`${t('helmet.myPurchase')} | Zenpii Việt Nam`} />
       <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-4'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
 import UserEditPasswordForm from './form/UserEditPasswordForm'
 
-const UserEditPasswordItem = (props) => {
+const UserEditPasswordItem = () => {
   const { t } = useTranslation()
   return (
     <div className='position-relative d-inline-block'>

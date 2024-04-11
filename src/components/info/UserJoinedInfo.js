@@ -1,35 +1,7 @@
 import Paragraph from '../ui/Paragraph'
 import UserRoleLabel from '../label/UserRoleLabel'
 import { useTranslation } from 'react-i18next'
-
-const humanReadableDate = (date) => {
-  const months = [
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12'
-  ]
-  date = new Date(date)
-  return (
-    date.getHours() +
-    ':' +
-    date.getMinutes() +
-    ' ' +
-    date.getDate() +
-    '/' +
-    months[date.getMonth()] +
-    '/' +
-    date.getFullYear()
-  )
-}
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const UserJoinedInfo = ({ user = {} }) => {
   const { t } = useTranslation()

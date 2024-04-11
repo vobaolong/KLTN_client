@@ -4,7 +4,7 @@ import AdminLayout from '../../components/layout/AdminLayout'
 import VariantValuesTable from '../../components/table/VariantValuesTable'
 import { useTranslation } from 'react-i18next'
 
-const VariantValuesPage = (props) => {
+const VariantValuesPage = () => {
   const user = useSelector((state) => state.account.user)
   const { variantId } = useParams()
   const { t } = useTranslation()

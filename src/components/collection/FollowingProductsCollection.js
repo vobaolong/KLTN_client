@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { listFollowingProducts } from '../../apis/follow'
@@ -8,7 +9,7 @@ import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 
-const FollowingProductsCollection = (props) => {
+const FollowingProductsCollection = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -45,7 +46,7 @@ const FollowingProductsCollection = (props) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }

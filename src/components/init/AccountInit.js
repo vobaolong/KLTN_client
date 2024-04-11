@@ -33,23 +33,18 @@ const AccountInit = ({ user, actions }) => {
           setIsLoading(false)
         } else {
           const newUser = data.user
-          //get level
           try {
             const res = await getUserLevel(_id)
             newUser.level = res.level
           } catch {
             newUser.level = {}
           }
-
-          //get count carts
           try {
             const res = await getCartCount(_id, accessToken)
             newUser.cartCount = res.count
           } catch {
             newUser.cartCount = 0
           }
-
-          //get count orders
           try {
             const res1 = await countOrder('Delivered', _id, '')
             const res2 = await countOrder('Cancelled', _id, '')
@@ -59,7 +54,6 @@ const AccountInit = ({ user, actions }) => {
             newUser.numberOfSuccessfulOrders = 0
             newUser.numberOfFailedOrders = 0
           }
-
           actions(newUser)
           setIsLoading(false)
         }
@@ -134,7 +128,7 @@ const AccountInit = ({ user, actions }) => {
           {role === 'user' && (
             <Link
               className='list-group-item your-account-options-item ripple text-capitalize'
-              to='/account/storeManager'
+              to='/account/store'
             >
               <i className='fa-solid fa-store' q></i>
               {t('manageStore')}

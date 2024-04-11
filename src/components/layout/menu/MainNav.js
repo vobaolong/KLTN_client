@@ -109,7 +109,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     </Link>
                     {
                       <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cus-tooltip'>
-                        {cartCount < 100 ? cartCount : '-'}
+                        {cartCount < 100 ? cartCount : '99+'}
                       </span>
                     }
                     <small className='cus-tooltip-msg'>{t('cart')}</small>
@@ -201,7 +201,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     <li className='nav-item p-2'>
                       <Link
                         className='link-hover link-dark d-block'
-                        to='/account/storeManager'
+                        to='/account/store'
                       >
                         <i className='fa-solid fa-store me-2'></i>
                         {t('manageStore')}

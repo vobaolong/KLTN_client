@@ -5,7 +5,7 @@ import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 
-const UserAvatarUpload = (props) => {
+const UserAvatarUpload = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 

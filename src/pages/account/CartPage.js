@@ -13,6 +13,7 @@ import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 import { useSelector } from 'react-redux'
 import i18n from '../../i18n/i18n'
 import { toast } from 'react-toastify'
+import MetaData from '../../components/layout/meta/MetaData'
 
 const CartPage = () => {
   const { _id, accessToken } = getToken()
@@ -21,7 +22,6 @@ const CartPage = () => {
   const [carts, setCarts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { cartCount } = useSelector((state) => state.account.user)
-
   const init = () => {
     setIsLoading(true)
     listCarts(_id, accessToken, { limit: '1000', page: '1' })
@@ -43,6 +43,7 @@ const CartPage = () => {
     <MainLayout>
       <div className='position-relative'>
         {isLoading && <Loading />}
+        <MetaData title={`${t('cart')}`} />
         {cartCount === 0 ? (
           <div className=''>
             <h5>{t('cart')}</h5>
@@ -137,7 +138,7 @@ const CartPage = () => {
                 >
                   <div className='accordion-body px-3'>
                     {!cart.storeId?.isActive && (
-                      <Error msg='This store is banned by Zenpii!' />
+                      <Error msg={t('toastError.storeBanned')} />
                     )}
 
                     {cart.storeId?.isActive && !cart.storeId?.isOpen && (

@@ -66,7 +66,7 @@ const VendorUpdateOrderStatusButton = ({
           { label: t('status.shipped'), value: 'Shipped' },
           { label: t('status.cancelled'), value: 'Cancelled' }
         ]}
-        size='small'
+        size='sm'
         value={statusValue}
         setValue={(value) => handleUpdate(value)}
         borderBtn={true}

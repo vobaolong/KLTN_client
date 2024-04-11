@@ -26,6 +26,7 @@ import FollowProductButton from '../../components/button/FollowProductButton'
 import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 import { calcPercent } from '../../helper/calcPercent'
 import StoreCardSmall from '../../components/card/StoreCardSmall'
+import MetaData from '../../components/layout/meta/MetaData'
 
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ const DetailPage = () => {
       .then(async (data) => {
         if (data.error) setError(data.error)
         else if (!data.product?.storeId?.isActive)
-          setError('This store is banned by Zenpii!')
+          setError(t('toastError.storeBanned'))
         else {
           const newProduct = data.product
           try {
@@ -96,6 +97,7 @@ const DetailPage = () => {
           <Error msg={error} />
         ) : (
           <div className='container-fluid'>
+            <MetaData title={`${product.name} | Zenpii Việt Nam`} />
             <div className='mb-2 hidden-avatar mx-0!important'>
               <CategorySmallCard category={product.categoryId} parent={true} />
             </div>
@@ -246,7 +248,7 @@ const DetailPage = () => {
                         </a>
                       </li>
                     </ul>
-                    <div className='tab-content' id='myTabContent'>
+                    <div className='tab-content py-4' id='myTabContent'>
                       <div
                         className='tab-pane fade show active'
                         id='details'
@@ -272,7 +274,7 @@ const DetailPage = () => {
                           <div
                             className={`position-absolute w-100 text-center align-content-end ${
                               !isExpanded ? 'gradient' : ''
-                            } pb-3`}
+                            } pb-2`}
                             style={{
                               bottom: 0,
                               height: '130px'
@@ -283,14 +285,14 @@ const DetailPage = () => {
                                 className='pointer text-primary text-center text-decoration-none'
                                 onClick={handleToggle}
                               >
-                                Xem thêm
+                                {t('showMore')}
                               </span>
                             ) : (
                               <span
                                 className='pointer text-primary text-decoration-none'
                                 onClick={handleToggle}
                               >
-                                Thu gọn
+                                {t('showLess')}
                               </span>
                             )}
                           </div>

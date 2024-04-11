@@ -189,7 +189,7 @@ const StoreOrdersTable = ({
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col' className='text-start'>
+                <th scope='col' className='text-end'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -235,7 +235,7 @@ const StoreOrdersTable = ({
                   <th scope='row'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td>
+                  <td className='text-start'>
                     <small>{order._id}</small>
                   </td>
                   <td style={{ whiteSpace: 'normal' }}>
@@ -243,9 +243,7 @@ const StoreOrdersTable = ({
                   </td>
                   <td>
                     <small className='text-nowrap'>
-                      {order.amountFromUser &&
-                        formatPrice(order.amountFromUser.$numberDecimal)}
-                      ₫
+                      {formatPrice(order.amountFromUser?.$numberDecimal)}₫
                     </small>
                   </td>
                   <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
@@ -272,27 +270,28 @@ const StoreOrdersTable = ({
                       <small>
                         <i>{order.deliveryId.name}</i>
                         <br />
-                        {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
+                        {formatPrice(order.deliveryId.price.$numberDecimal)}₫
                       </small>
                     )}
                   </td>
                   <td className='text-center'>
-                    <small>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
-                    </small>
+                    </span>
                   </td>
                   <td className='text-center'>
-                    <small>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderStatusLabel status={order.status} />
-                    </small>
+                    </span>
                   </td>
                   <td className='text-center'>
                     <Link
                       type='button'
                       className='btn btn-secondary ripple cus-tooltip'
                       to={`/vendor/orders/detail/${order._id}/${storeId}`}
+                      title={t('button.detail')}
                     >
-                      <i className='fa-solid fa-info-circle'></i>
+                      <i className='fa-solid fa-eye'></i>
                     </Link>
                   </td>
                 </tr>

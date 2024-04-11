@@ -39,13 +39,13 @@ const CheckoutForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-
   const [updateDispatch] = useUpdateDispatch()
   const history = useHistory()
-
   const {
-    addresses,
+    firstName,
+    lastName,
     phone,
+    addresses,
     level: userLevel
   } = useSelector((state) => state.account.user)
   const [deliveries, setDeliveries] = useState([])
@@ -73,8 +73,12 @@ const CheckoutForm = ({
       )
 
       setOrder({
+        firstName,
+        lastName,
         phone,
         address: addresses[0],
+        isValidFirstName: true,
+        isValidLastName: true,
         isValidPhone: true,
         cartId,
         delivery: res.deliveries[0],
@@ -91,18 +95,30 @@ const CheckoutForm = ({
         amountToGD: amountFromUser1 + amountFromUser2 - amountToStore
       })
     } catch (e) {
-      toast.error(e)
+      toast.error('Something went wrong')
     }
   }
 
   useEffect(() => {
     init()
-  }, [cartId, userId, storeId, items, addresses, phone, userLevel])
+  }, [
+    cartId,
+    userId,
+    storeId,
+    items,
+    firstName,
+    lastName,
+    phone,
+    addresses,
+    userLevel
+  ])
   const [paypalDisabled, setPaypalDisabled] = useState(true)
 
   useEffect(() => {
-    setPaypalDisabled(!order.address || !order.phone)
-  }, [order.address, order.phone])
+    setPaypalDisabled(
+      !order.firstName || !order.lastName || !order.phone || !order.address
+    )
+  }, [order.firstName, order.lastName, order.phone, order.address])
 
   const handleChange = (name, isValidName, value) => {
     setOrder({
@@ -124,10 +140,12 @@ const CheckoutForm = ({
 
     const {
       cartId,
+      firstName,
+      lastName,
+      phone,
+      address,
       deliveryId,
       commissionId,
-      address,
-      phone,
       amountFromUser,
       amountFromStore,
       amountToStore,
@@ -138,8 +156,10 @@ const CheckoutForm = ({
       !cartId ||
       !deliveryId ||
       !commissionId ||
-      !address ||
+      !firstName ||
+      !lastName ||
       !phone ||
+      !address ||
       !amountFromUser ||
       !amountFromStore ||
       !amountToStore ||
@@ -147,17 +167,26 @@ const CheckoutForm = ({
     ) {
       setOrder({
         ...order,
+        isValidFirstName: regexTest('name', order.firstName),
+        isValidLastName: regexTest('name', order.lastName),
         isValidPhone: regexTest('phone', order.phone)
       })
       return
     }
-    if (!order.isValidPhone) return
+    if (
+      !order.isValidFirstName ||
+      !order.isValidLastName ||
+      !order.isValidPhone
+    )
+      return
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
     const {
+      firstName,
+      lastName,
       phone,
       address,
       deliveryId,
@@ -169,6 +198,8 @@ const CheckoutForm = ({
     } = order
 
     const orderBody = {
+      firstName,
+      lastName,
       phone,
       address,
       deliveryId,
@@ -202,8 +233,10 @@ const CheckoutForm = ({
       cartId,
       deliveryId,
       commissionId,
-      address,
+      firstName,
+      lastName,
       phone,
+      address,
       amountFromUser,
       amountFromStore,
       amountToStore,
@@ -214,8 +247,10 @@ const CheckoutForm = ({
       !cartId ||
       !deliveryId ||
       !commissionId ||
-      !address ||
+      !firstName ||
+      !lastName ||
       !phone ||
+      !address ||
       !amountFromUser ||
       !amountFromStore ||
       !amountToStore ||
@@ -223,12 +258,19 @@ const CheckoutForm = ({
     ) {
       setOrder({
         ...order,
+        isValidFirstName: regexTest('name', order.firstName),
+        isValidLastName: regexTest('name', order.lastName),
         isValidPhone: regexTest('phone', order.phone)
       })
       return
     }
 
-    if (!order.isValidPhone) return
+    if (
+      !order.isValidFirstName ||
+      !order.isValidLastName ||
+      !order.isValidPhone
+    )
+      return
     else {
       return actions.order.create({
         purchase_units: [
@@ -251,6 +293,8 @@ const CheckoutForm = ({
       const { _id, accessToken } = getToken()
 
       const {
+        firstName,
+        lastName,
         phone,
         address,
         deliveryId,
@@ -262,6 +306,8 @@ const CheckoutForm = ({
       } = order
 
       const orderBody = {
+        firstName,
+        lastName,
         phone,
         address,
         deliveryId,
@@ -285,7 +331,7 @@ const CheckoutForm = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setTimeout(() => {
             setError('')
           }, 3000)
@@ -312,20 +358,85 @@ const CheckoutForm = ({
       >
         <div className='col-12 bg-primary rounded-top-1 p-3'>
           <Logo />
-          <p className='text-white fw-light'>Proceed to checkout</p>
         </div>
 
         <div className='col-xl-8 col-md-6'>
-          <div className='row'>
+          <div className='row my-2 p-2 border rounded ms-0'>
+            <h5 className='col-12 text-primary'>
+              <i className='fa-solid fa-location-dot me-2'></i>
+              {t('orderDetail.userReceiver')}
+            </h5>
+            <hr />
+            <div className='col-6 mt-2 d-flex justify-content-between align-items-end'>
+              <div className='flex-grow-1'>
+                <Input
+                  type='text'
+                  label={t('userDetail.firstName')}
+                  value={order.firstName}
+                  isValid={order.isValidFirstName}
+                  feedback={t('userDetail.firstNameValid')}
+                  validator='name'
+                  required={true}
+                  onChange={(value) =>
+                    handleChange('firstName', 'isValidFirstName', value)
+                  }
+                  onValidate={(flag) =>
+                    handleValidate('isValidFirstName', flag)
+                  }
+                />
+              </div>
+            </div>
+            <div className='col-6 mt-2 d-flex justify-content-between align-items-end'>
+              <div className='flex-grow-1'>
+                <Input
+                  type='text'
+                  label={t('userDetail.lastName')}
+                  value={order.lastName}
+                  isValid={order.isValidLastName}
+                  feedback={t('userDetail.lastNameValid')}
+                  validator='name'
+                  required={true}
+                  onChange={(value) =>
+                    handleChange('lastName', 'isValidLastName', value)
+                  }
+                  onValidate={(flag) => handleValidate('isValidLastName', flag)}
+                />
+              </div>
+
+              <div className='d-inline-block position-relative ms-4'>
+                <div className='d-inline-block cus-tooltip'>
+                  <button
+                    className='btn btn-primary ripple rounded-1'
+                    type='button'
+                    disabled={!!!firstName || !!!lastName}
+                    onClick={() =>
+                      setOrder({
+                        ...order,
+                        firstName: firstName,
+                        lastName: lastName,
+                        isValidFirstName: true,
+                        isValidLastName: true
+                      })
+                    }
+                  >
+                    <i className='fa-solid fa-user'></i>
+                  </button>
+                </div>
+                <small className='cus-tooltip-msg'>
+                  {t('orderDetail.useRegisterLastName')}
+                </small>
+              </div>
+            </div>
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <Input
                   type='text'
-                  label='Phone'
+                  label={t('userDetail.phone')}
                   value={order.phone}
                   isValid={order.isValidPhone}
-                  feedback='Please provide a valid phone number.'
+                  feedback={t('userDetail.phoneValid')}
                   validator='phone'
+                  required={true}
                   onChange={(value) =>
                     handleChange('phone', 'isValidPhone', value)
                   }
@@ -347,11 +458,11 @@ const CheckoutForm = ({
                       })
                     }
                   >
-                    <i className='fa-solid fa-phone-square-alt'></i>
+                    <i className='fa-solid fa-phone'></i>
                   </button>
                 </div>
                 <small className='cus-tooltip-msg'>
-                  Use registered phone number
+                  {t('orderDetail.useRegisterPhone')}
                 </small>
               </div>
             </div>
@@ -359,6 +470,8 @@ const CheckoutForm = ({
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <DropDownMenu
+                  borderBtn={true}
+                  required={true}
                   listItem={addresses?.map((a, i) => {
                     const newA = {
                       value: a,
@@ -373,8 +486,8 @@ const CheckoutForm = ({
                       address: address
                     })
                   }
-                  size='large'
-                  label='Address'
+                  size='lg'
+                  label={t('userDetail.address')}
                 />
 
                 {addresses?.length <= 0 && (
@@ -398,9 +511,10 @@ const CheckoutForm = ({
               </div>
             </div>
 
-            <div className='col-12 mt-4'>
+            <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               {deliveries?.length > 0 && (
                 <DropDownMenu
+                  borderBtn={true}
                   listItem={deliveries?.map((d, i) => {
                     const newD = {
                       value: d,
@@ -408,6 +522,7 @@ const CheckoutForm = ({
                     }
                     return newD
                   })}
+                  required={true}
                   value={order.delivery}
                   setValue={(delivery) => {
                     const { deliveryPrice, amountFromUser2 } = totalDelivery(
@@ -427,30 +542,38 @@ const CheckoutForm = ({
                         order.amountToStore
                     })
                   }}
-                  size='large'
-                  label='Delivery unit'
+                  size='lg'
+                  label={t('deliveryDetail.deliveryUnit')}
                 />
               )}
+              <div className='d-inline-block position-relative ms-4 mb-2'>
+                <div className='d-inline-block'>
+                  <span className='btn btn-md default btn-primary rounded-1'>
+                    <i className='fa-solid fa-truck'></i>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div className='col-xl-4 col-md-6'>
-          <div className='my-2 p-2 border border-primary rounded'>
-            <h4 className='text-center'>Your order</h4>
-            <hr />
-
+          <div className='my-2 p-2 border rounded'>
+            <h5 className='text-primary px-2'>{t('cartDetail.yourOrder')}</h5>
+            <hr className='mt-0' />
             <dl className='row'>
-              <dt className='col-sm-3 col-6'>Tạm tính</dt>
+              <dt className='col-sm-3 col-6'>{t('cartDetail.subTotal')}</dt>
               <dd className='col-sm-9 col-6'>
                 <dl className='row'>
                   <dd className='col-sm-6 res-hide'>
                     <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.totalPrice)}₫
+                      {formatPrice(order.totalPrice)}
+                      <sup>₫</sup>
                     </p>
 
                     <h4 className='text-decoration-line-through text-primary fs-5'>
-                      {formatPrice(order.totalSalePrice)}₫
+                      {formatPrice(order.totalSalePrice)}
+                      <sup>₫</sup>
                     </h4>
                   </dd>
                   <dd className='col-sm-6'>
@@ -459,22 +582,25 @@ const CheckoutForm = ({
                     </small>
 
                     <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser1)}₫
+                      {formatPrice(order.amountFromUser1)}
+                      <sup>₫</sup>
                     </h4>
                   </dd>
                 </dl>
               </dd>
 
-              <dt className='col-sm-3 col-6'>Delivery's total</dt>
+              <dt className='col-sm-3 col-6'>{t('cartDetail.shippingFee')}</dt>
               <dd className='col-sm-9 col-6'>
                 <dl className='row'>
                   <dd className='col-sm-6 res-hide'>
                     <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.deliveryPrice)}₫
+                      {formatPrice(order.deliveryPrice)}
+                      <sup>₫</sup>
                     </p>
 
                     <h4 className='text-decoration-line-through text-primary fs-5'>
-                      {formatPrice(order.deliveryPrice)}₫
+                      {formatPrice(order.deliveryPrice)}
+                      <sup>₫</sup>
                     </h4>
                   </dd>
                   <dd className='col-sm-6'>
@@ -483,16 +609,18 @@ const CheckoutForm = ({
                     </small>
 
                     <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser2)}₫
+                      {formatPrice(order.amountFromUser2)}
+                      <sup>₫</sup>
                     </h4>
                   </dd>
                 </dl>
               </dd>
 
-              <dt className='col-sm-3 col-6'>{t('orderDetail.finalTotal')}</dt>
+              <dt className='col-sm-3 col-6'>{t('cartDetail.total')}</dt>
               <dd className='col-sm-9 col-6'>
                 <h4 className='text-primary fs-5'>
-                  {formatPrice(order.amountFromUser)}₫
+                  {formatPrice(order.amountFromUser)}
+                  <sup>₫</sup>
                 </h4>
               </dd>
             </dl>

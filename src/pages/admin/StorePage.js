@@ -15,7 +15,7 @@ const StorePage = () => {
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`text-success nav-link ${flag ? 'active' : ''}`}
+              className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
               <i className='fa-solid fa-circle-check me-2'></i>
@@ -24,7 +24,7 @@ const StorePage = () => {
           </li>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`text-danger nav-link ${!flag ? 'active' : ''}`}
+              className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
               <i className='fa-solid fa-circle-xmark  me-2'></i>

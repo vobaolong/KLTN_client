@@ -270,7 +270,7 @@ const AdminProductsTable = ({ heading = true, isActive = true }) => {
                       >
                         {!product.isActive ? (
                           <>
-                            <i class='fa-solid fa-circle-check'></i>
+                            <i className='fa-solid fa-circle-check'></i>
                             <span className='ms-2 res-hide'>
                               {t('button.active')}
                             </span>

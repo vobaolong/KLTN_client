@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import AccountLayout from '../../components/layout/AccountLayout'
 import UserCreateStoreForm from '../../components/item/form/UserCreateStoreForm'
 
-const CreateStorePage = (props) => {
+const CreateStorePage = () => {
   const user = useSelector((state) => state.account.user)
   return (
     <AccountLayout user={user}>

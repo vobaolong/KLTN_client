@@ -165,10 +165,10 @@ const CreateStoreForm = () => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border rounded-1 row mb-2 bg-body'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3 d-flex align-items-center'>
+        <div className='col-12 bg-primary rounded-top-1 px-3 py-1 d-flex align-items-center'>
           <Logo />
           <h4 className='text-white border-start px-3 mb-0'>
             {t('storeDetail.createStore')}
@@ -189,8 +189,10 @@ const CreateStoreForm = () => {
               })}
               value={store.commissionId}
               setValue={handleSelectCommission}
-              size='large'
+              size='lg'
               label={t('storeDetail.commissions')}
+              required={true}
+              borderBtn={true}
             />
           )}
         </div>
@@ -287,7 +289,7 @@ const CreateStoreForm = () => {
 
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link
-            to='/account/storeManager'
+            to='/account/store'
             className='text-decoration-none link-hover res-w-100-md my-2'
           >
             <i className='fa-solid fa-angle-left'></i>{' '}

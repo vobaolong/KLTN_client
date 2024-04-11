@@ -97,7 +97,7 @@ const UserStoresTable = () => {
             <Link
               type='button'
               className='btn btn-primary ripple text-nowrap rounded-1'
-              to='/account/storeManager/createNewStore'
+              to='/account/store/create'
             >
               <i className='fa-solid fa-plus-circle'></i>
               <span className='ms-2 res-hide'>{t('createStore')}</span>
@@ -132,16 +132,24 @@ const UserStoresTable = () => {
                     style={{ fontWeight: '400', fontSize: '.875rem' }}
                     className='text-secondary'
                   >
-                    Avatar
+                    {t('storeDetail.avatar')}
                   </span>
                 </th>
-                <th scope='col'>
+                <th scope='col' className='text-start'>
                   <SortByButton
                     currentSortBy={filter.sortBy}
-                    title={t('storeDetail.name')}
+                    title={t('storeDetail.storeName')}
                     sortBy='name'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
+                </th>
+                <th scope='col' className='text-start'>
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
+                  >
+                    {t('storeDetail.address')}
+                  </span>
                 </th>
                 <th scope='col'>
                   <SortByButton
@@ -187,9 +195,16 @@ const UserStoresTable = () => {
                       <StoreSmallCard store={store} />
                     </small>
                   </td>
+                  <th className='text-start fw-normal'>
+                    <small>{store.address}</small>
+                  </th>
                   <td className='text-center'>
                     <ManagerRoleLabel
-                      role={_id === store.ownerId._id ? 'Owner' : 'Staff'}
+                      role={
+                        _id === store.ownerId._id
+                          ? t('userDetail.owner')
+                          : t('userDetail.staff')
+                      }
                     />
                   </td>
                   <td className='text-center'>
@@ -201,11 +216,11 @@ const UserStoresTable = () => {
                   <td>
                     <Link
                       type='button'
-                      className='btn btn-primary ripple rounded-1'
+                      className='btn btn-secondary ripple rounded-1'
                       to={`/vendor/${store._id}`}
                       title={t('admin.adDashboard.dashboard')}
                     >
-                      <i className='fa-solid fa-user-tie'></i>
+                      <i class='fa-solid fa-eye'></i>
                     </Link>
                   </td>
                 </tr>

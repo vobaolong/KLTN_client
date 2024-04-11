@@ -147,7 +147,7 @@ const CategorySelector = ({
       <div className='col-12 position-relative'>
         {isLoading && <Loading />}
 
-        <div className='d-flex border p-1 mt-2 rounded-2 bg-body-secondary'>
+        <div className='d-flex border p-1 mt-2 rounded-2 bg-light-subtle'>
           <div
             className='list-group m-1'
             style={{
@@ -225,13 +225,13 @@ const CategorySelector = ({
               style={{
                 fontSize: '0.8rem',
                 left: '12px',
-                top: '-16px'
+                top: '-18px'
               }}
             >
               {label}
             </label>
 
-            <div className='form-control border-0'>
+            <div className='form-control border bg-light-subtle'>
               {selectedCategory ? (
                 <div className='position-relative'>
                   <div className='me-5'>

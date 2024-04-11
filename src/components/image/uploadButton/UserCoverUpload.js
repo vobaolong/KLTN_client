@@ -4,15 +4,12 @@ import { updateCover } from '../../../apis/user'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import { useTranslation } from 'react-i18next'
 
-const UserCoverUpload = (props) => {
+const UserCoverUpload = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
-  const { t } = useTranslation()
   const handleChange = (e) => {
     if (e.target.files[0] == null) return
     const formData = new FormData()
@@ -23,18 +20,12 @@ const UserCoverUpload = (props) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         } else updateDispatch('account', data.user)
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 

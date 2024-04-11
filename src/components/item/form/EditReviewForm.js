@@ -1,21 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { editReview } from '../../../apis/review'
 import { numberTest, regexTest } from '../../../helper/test'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import TextArea from '../../ui/TextArea'
 import RatingInput from '../../ui/RatingInput'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const EditReviewForm = ({ oldReview = {}, onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [newReview, setNewReview] = useState({
     rating: 1,
@@ -66,28 +64,21 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
   }
 
   const onSubmit = () => {
-    setSuccess('')
-    setError('')
     setIsLoading(true)
     editReview(_id, accessToken, newReview, oldReview._id)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
-          if (onRun) onRun()
+          if (onRun) {
+            onRun()
+            toast.success(data.success)
+          }
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -128,18 +119,6 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
             onValidate={(flag) => handleValidate('isValidContent', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

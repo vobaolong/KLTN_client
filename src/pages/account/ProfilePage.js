@@ -4,11 +4,15 @@ import UserLevelInfo from '../../components/info/UserLevelInfo'
 import UserProfileInfo from '../../components/info/UserProfileInfo'
 import Cover from '../../components/image/Cover'
 import Avatar from '../../components/image/Avatar'
+import MetaData from '../../components/layout/meta/MetaData'
+import { useTranslation } from 'react-i18next'
 
-const ProfilePage = (props) => {
+const ProfilePage = () => {
   const user = useSelector((state) => state.account.user)
+  const { t } = useTranslation()
   return (
     <AccountLayout user={user}>
+      <MetaData title={`${t('userDetail.myAccount')} | Zenpii Việt Nam`} />
       <div className='res-mx--12-md'>
         <div className='position-relative bg-body rounded-2 p-2 box-shadow'>
           <Cover
@@ -31,10 +35,10 @@ const ProfilePage = (props) => {
         </div>
 
         <div className='mt-2 d-none res-dis'>
-          <UserLevelInfo user={user} border={true} />
+          <UserLevelInfo user={user} />
         </div>
 
-        <div className='mt-3'>
+        <div className='mt-2'>
           <UserProfileInfo user={user} isEditable={true} />
         </div>
       </div>

@@ -42,7 +42,6 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
     totalSalePrice: 0,
     amountFromUser1: 0
   })
-
   const init = () => {
     setIsLoading(true)
     listItemsByCart(_id, accessToken, cartId)
@@ -231,7 +230,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                       value={item.count}
                       setValue={(value) => handleUpdate(value, item)}
                       borderBtn={true}
-                      size='small'
+                      size='sm'
                     />
                   </div>
                 )}
@@ -331,7 +330,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
             type='button'
             onClick={toggleShowCheckoutFlag}
           >
-            Proceed to checkout
+            {t('cartDetail.proceedToCheckout')}
           </button>
         </div>
       )}

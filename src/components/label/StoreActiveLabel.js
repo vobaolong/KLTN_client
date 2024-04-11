@@ -5,24 +5,20 @@ const StoreActiveLabel = ({ isActive = false, detail = true }) => {
   return (
     <span className='position-relative d-inline-block'>
       {isActive ? (
-        <span className='badge bg-success cus-tooltip rounded-1'>
+        <span className='badge bg-success cus-tooltip rounded-1 default'>
           <i className='fa-solid fa-circle-check'></i>
           {detail && <span className='ms-2'>{t('status.active')}</span>}
         </span>
       ) : (
-        <span className='badge bg-danger cus-tooltip'>
-          <i className='fa-solid fa-xmark'></i>
+        <span className='badge bg-danger cus-tooltip rounded-1 default'>
+          <i className='fa-solid fa-ban'></i>
           {detail && <span className='ms-2'>{t('status.banned')}</span>}
         </span>
       )}
       {isActive ? (
-        <small className='cus-tooltip-msg'>
-          This store is active by Zenpii!
-        </small>
+        <small className='cus-tooltip-msg'>{t('storeDetail.active')}</small>
       ) : (
-        <small className='cus-tooltip-msg'>
-          This store is banned by Zenpii, contact us for more information!
-        </small>
+        <small className='cus-tooltip-msg'>{t('storeDetail.banned')}</small>
       )}
     </span>
   )

@@ -215,9 +215,7 @@ const OrderDetailInfo = ({
               {t('orderDetail.userReceiver')}
             </p>
             <div>
-              <Paragraph
-                value={`${order.userId?.firstName} ${order.userId?.lastName}`}
-              />
+              <Paragraph value={`${order.firstName} ${order.lastName}`} />
               <Paragraph value={order.phone} />
               <Paragraph value={order.address} />
             </div>
@@ -342,16 +340,16 @@ const OrderDetailInfo = ({
                 </tbody>
               </table>
             )}
-            <span className='col-lg-3 col-md-4 justify-content-end gap-3 align-items-center d-flex pt-2'>
+            <span className='col-4 justify-content-between gap-3 align-items-center d-flex pt-2'>
               <b className='text-muted'>{t('cartDetail.total')}:</b>
               <span
                 style={{ fontSize: '1.4rem' }}
-                className='text-primary fw-bold me-3'
+                className='text-primary fw-bold'
               >
                 {formatPrice(order.amountFromUser?.$numberDecimal)}
                 <sup>₫</sup>
                 {by !== 'user' && (
-                  <span className='d-inline-block position-relative'>
+                  <span className='d-inline-block position-relative ms-3'>
                     <i
                       style={{ fontSize: '15px', cursor: 'help' }}
                       className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'

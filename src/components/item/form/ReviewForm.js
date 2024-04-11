@@ -1,23 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { reviewProduct } from '../../../apis/review'
 import { numberTest, regexTest } from '../../../helper/test'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import TextArea from '../../ui/TextArea'
 import RatingInput from '../../ui/RatingInput'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [review, setReview] = useState({
     storeId,
     orderId,
@@ -76,28 +72,19 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
   }
 
   const onSubmit = () => {
-    setSuccess('')
-    setError('')
     setIsLoading(true)
     reviewProduct(_id, accessToken, review)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -112,9 +99,6 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
           onClose={() => setIsConfirming(false)}
         />
       )}
-
-      {error && <Error msg={error} />}
-      {success && <Success msg={success} />}
 
       <form className='row mb-2' onSubmit={handleSubmit}>
         <div className='col-12'>
@@ -141,18 +125,6 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
             onValidate={(flag) => handleValidate('isValidContent', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

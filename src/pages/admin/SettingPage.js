@@ -3,7 +3,7 @@ import AdminLayout from '../../components/layout/AdminLayout'
 import AdminSetting from '../../components/ui/AdminSetting'
 import { useTranslation } from 'react-i18next'
 
-const SettingPage = (props) => {
+const SettingPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   return (

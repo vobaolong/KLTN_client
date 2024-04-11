@@ -66,7 +66,7 @@ const StoreEditProfileForm = ({
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.store.update'))
           updateDispatch('vendor', data.store)
         }
         setIsLoading(false)

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, Fragment } from 'react'
 import { Link, useParams, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -75,7 +76,7 @@ const VendorInit = ({ store, actions }) => {
   }
 
   useEffect(() => {
-    if (!store || store._id != storeId) init()
+    if (!store || store._id !== storeId) init()
   }, [storeId])
 
   return (
@@ -131,7 +132,7 @@ const VendorInit = ({ store, actions }) => {
 
               <Link
                 className='list-group-item your-store-options-item ripple'
-                to='/account/storeManager'
+                to='/account/store'
               >
                 <i className='fa-solid fa-angle-left me-1'></i>
                 {t('button.back')}

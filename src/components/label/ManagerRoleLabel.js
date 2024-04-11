@@ -9,11 +9,6 @@ const UserRoleLabel = ({ role = '', detail = true }) => (
         {detail && <span>{role}</span>}
       </span>
     )}
-    {/* {!detail ? (
-      <small className='cus-tooltip-msg'>{role}</small>
-    ) : (
-      <small className='cus-tooltip-msg'>Role: {role}</small>
-    )} */}
   </span>
 )
 

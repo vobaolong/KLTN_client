@@ -11,6 +11,7 @@ import StoreStatusLabel from '../../components/label/StoreStatusLabel'
 import StoreLevelInfo from '../../components/info/StoreLevelInfo'
 import StoreProfileInfo from '../../components/info/StoreProfileInfo'
 import { useTranslation } from 'react-i18next'
+import StoreActiveLabel from '../../components/label/StoreActiveLabel'
 
 const ProfilePage = () => {
   const { t } = useTranslation()
@@ -67,9 +68,13 @@ const ProfilePage = () => {
           </div>
         )}
 
-        <div className='d-flex justify-content-between align-items-center my-2'>
+        <div className='align-items-center bg-white border d-flex justify-content-between my-2 p-2 rounded-1'>
           <div className='d-flex justify-content-between align-items-start'>
-            <div className='position-relative me-2'>
+            <StoreAddFeaturedImageItem
+              count={store.featured_images?.length}
+              storeId={store._id}
+            />
+            <div className='position-relative ms-2'>
               <div className='cus-tooltip'>
                 <OpenCloseStoreButton
                   storeId={store._id}
@@ -84,11 +89,9 @@ const ProfilePage = () => {
                   : t('button.clickToOpen')}
               </small>
             </div>
-
-            <StoreAddFeaturedImageItem
-              count={store.featured_images?.length}
-              storeId={store._id}
-            />
+            <div className='cus-tooltip ms-2 m-auto'>
+              <StoreActiveLabel isActive={store.isActive} detail={true} />
+            </div>
           </div>
 
           <Link
@@ -96,16 +99,16 @@ const ProfilePage = () => {
             to={`/store/${store._id}`}
             target='_blank'
           >
-            <span className='me-2 res-hide'>Xem Shop</span>
-            <i class='fa-solid fa-desktop'></i>
+            <span className='me-2'>{t('storeDetail.viewShop')}</span>
+            <i className='fa-solid fa-desktop'></i>
           </Link>
         </div>
 
-        <div className='mt-2 d-none res-dis '>
+        <div className='mt-2 d-none res-dis'>
           <StoreLevelInfo store={store} />
         </div>
 
-        <div className='mt-3'>
+        <div className='mt-2'>
           <StoreProfileInfo store={store} isEditable={true} />
         </div>
       </div>

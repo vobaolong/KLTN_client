@@ -175,12 +175,12 @@ const Routes = () => {
           component={AccountWalletsPage}
         />
         <PrivateRoute
-          path='/account/storeManager'
+          path='/account/store'
           exact
           component={AccountStoreManagerPage}
         />
         <PrivateRoute
-          path='/account/storeManager/createNewStore'
+          path='/account/store/create'
           exact
           component={AccountCreateStorePage}
         />
@@ -218,7 +218,7 @@ const Routes = () => {
           component={VendorCreateProductPage}
         />
         <PrivateRoute
-          path='/vendor/products/editproduct/:productId/:storeId'
+          path='/vendor/products/edit/:productId/:storeId'
           exact
           component={VendorEditProductPage}
         />

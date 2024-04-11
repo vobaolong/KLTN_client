@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import policy from '../../assets/policy'
 import Logo from '../../components/layout/menu/Logo'
+import MetaData from '../../components/layout/meta/MetaData'
+import { useTranslation } from 'react-i18next'
 
 const Policy = () => {
+  const { t } = useTranslation()
+
   return (
     <>
+      <MetaData title={`${t('footer.policy')} | Zenpii Việt Nam`} />
+
       <header className='main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
         <div className='container-md d-flex justify-content-start text-white'>
           <Link

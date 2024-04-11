@@ -242,7 +242,7 @@ const MultiCategorySelector = ({
               style={{
                 fontSize: '0.8rem',
                 left: '12px',
-                top: '-16px'
+                top: '-18px'
               }}
             >
               {label}

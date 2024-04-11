@@ -7,11 +7,9 @@ import defaultImage from '../../assets/default.png'
 const IMG = process.env.REACT_APP_STATIC_URL
 const CategoryCard = ({ category = {} }) => {
   const [categoryValue, setCategoryValue] = useState({})
-  const [children, setChildren] = useState([])
 
   const init = () => {
     setCategoryValue(category)
-
     listActiveCategories({
       search: '',
       categoryId: category._id,
@@ -22,7 +20,6 @@ const CategoryCard = ({ category = {} }) => {
     })
       .then((data) => {
         if (data.error) return
-        else setChildren(data.categories)
       })
       .catch((error) => {
         return

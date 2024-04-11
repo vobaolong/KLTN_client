@@ -14,7 +14,7 @@ import MainLayout from '../../components/layout/MainLayout'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../../components/ui/ShowResult.js'
 
-const CollectionPage = (props) => {
+const CollectionPage = () => {
   const store = useSelector((state) => state.store.store)
   const { t } = useTranslation()
 
@@ -80,7 +80,7 @@ const CollectionPage = (props) => {
 
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
-      <Error msg='This store is banned by Zenpii!' />
+      <Error msg={t('toastError.storeBanned')} />
     </MainLayout>
   ) : (
     <StoreLayout store={store}>

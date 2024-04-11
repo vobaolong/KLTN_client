@@ -9,7 +9,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
   const vendor = useSelector((state) => state.account.user)
 
   return (
-    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 shadow bg-body rounded-1 res-account-sidebar'>
+    <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar'>
       <div className='d-flex justify-content-center align-items-center res-hide-lg border-bottom pb-2'>
         <span className='cus-sidebar-item--db d-flex align-items-end gap-1'>
           <img

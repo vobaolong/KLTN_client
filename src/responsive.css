@@ -242,7 +242,6 @@
 		background-color: #fff;
 		border: 1px solid #e0e0e0;
 		border-radius: 0.25rem;
-
 	}
 
 	.avatar-absolute {
@@ -272,7 +271,7 @@
 	}
 
 	.cus-carousel-icon-wrap {
-		bottom: 50%;
+		bottom: 20%;
 		transform: translateY(50%);
 	}
 

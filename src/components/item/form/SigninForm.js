@@ -8,6 +8,7 @@ import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const SigninForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
@@ -25,7 +26,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
   const history = useHistory()
 
   const handleChange = (name, isValidName, value) => {
-    setError('')
     setAccount({
       ...account,
       [name]: value,
@@ -34,7 +34,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
   }
 
   const handleValidate = (isValidName, flag) => {
-    setError('')
     setAccount({
       ...account,
       [isValidName]: flag
@@ -63,17 +62,17 @@ const SigninForm = ({ onSwap = () => {} }) => {
     regexTest('phone', username) && (user.phone = username)
 
     setIsLoading(true)
-    setError('')
     signin(user)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
+          toast.error(data.error)
           setIsLoading(false)
         } else {
           const { accessToken, refreshToken, _id, role } = data
           setToken({ accessToken, refreshToken, _id, role }, () => {
             if (role === 'admin') history.push('/admin/dashboard')
             else history.go(0)
+            toast.success(t('toastSuccess.signIn'))
           })
         }
       })
@@ -99,10 +98,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
 
     if (regexTest('phone', username)) {
       setError('This feature is not available yet!')
-      setTimeout(() => setError(''), 3000)
     } else {
-      setError('')
-      setSuccess('')
       setIsLoading(true)
 
       forgotPassword({ email: username })
@@ -110,14 +106,9 @@ const SigninForm = ({ onSwap = () => {} }) => {
           if (data.error) setError(data.error)
           else setSuccess(data.success)
           setIsLoading(false)
-          setTimeout(() => {
-            setError('')
-            setSuccess('')
-          }, 3000)
         })
         .catch((error) => {
-          setError(error)
-          setTimeout(() => setError(''), 3000)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     }
@@ -136,6 +127,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
             isValid={account.isValidUsername}
             feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
+            required={true}
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
             }
@@ -150,6 +142,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
             validator='password'
             value={account.password}
             isValid={account.isValidPassword}
+            required={true}
             feedback={t('signInForm.passwordFeedback')}
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)

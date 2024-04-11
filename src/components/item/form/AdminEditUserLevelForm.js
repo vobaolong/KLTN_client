@@ -6,12 +6,11 @@ import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const { t } = useTranslation()
   const [level, setLevel] = useState({})
   const { _id, accessToken } = getToken()
@@ -72,19 +71,15 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
     setIsLoading(true)
     updateUserLevel(_id, accessToken, oldLevel._id, level)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }

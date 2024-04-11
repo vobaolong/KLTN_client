@@ -11,13 +11,13 @@ import SearchInput from '../ui/SearchInput'
 import SortByButton from './sub/SortByButton'
 import StoreSmallCard from '../card/StoreSmallCard'
 import StarRating from '../label/StarRating'
-import StoreStatusLabel from '../label/StoreStatusLabel'
 import StoreCommissionLabel from '../label/StoreCommissionLabel'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import StoreActiveLabel from '../label/StoreActiveLabel'
 
 const AdminStoresTable = ({ heading = true, isActive = true }) => {
   const { t } = useTranslation()
@@ -124,6 +124,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
       })
   }
 
+  console.log(stores)
   return (
     <div className='position-relative'>
       {heading && (
@@ -168,7 +169,12 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                 <th scope='col'></th>
                 <th scope='col'>
                   <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('storeDetail.name')}
+                    {t('storeDetail.avatar')}
+                  </span>
+                </th>
+                <th scope='col' className='text-start'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('storeDetail.storeName')}
                   </span>
                 </th>
                 <th scope='col'>
@@ -180,14 +186,10 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('status.status')}
-                    sortBy='isOpen'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
+                <th scope='col' className='text-start'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('storeDetail.contactPerson')}
+                  </span>
                 </th>
                 <th scope='col'>
                   <SortByButton
@@ -195,6 +197,15 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                     currentSortBy={filter.sortBy}
                     title={t('storeDetail.commissions')}
                     sortBy='commissionId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='isActive'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
@@ -226,8 +237,11 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </span>
                   </th>
+                  <td className='hidden-name' style={{ maxWidth: '300px' }}>
+                    <StoreSmallCard store={store} />
+                  </td>
                   <td
-                    className=' text-start ps-2'
+                    className='text-start hidden-avatar'
                     style={{ maxWidth: '300px' }}
                   >
                     <StoreSmallCard store={store} />
@@ -237,11 +251,31 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                       <StarRating stars={store.rating} />
                     </small>
                   </td>
-                  <td>
-                    <StoreStatusLabel isOpen={store.isOpen} />
+                  <td className='text-start'>
+                    <small className='me-2'>
+                      {t('userDetail.name')}:{' '}
+                      <span className='text-primary'>
+                        {store.ownerId.firstName +
+                          ' ' +
+                          store.ownerId.lastName || '-'}
+                      </span>
+                      <br />
+                      Email:{' '}
+                      <span className='text-primary'>
+                        {store.ownerId.email || '-'}
+                      </span>
+                      <br />
+                      {t('userDetail.phone')}:{' '}
+                      <span className='text-primary'>
+                        {store.ownerId.phone || '-'}
+                      </span>
+                    </small>
                   </td>
                   <td>
                     <StoreCommissionLabel commission={store.commissionId} />
+                  </td>
+                  <td>
+                    <StoreActiveLabel isActive={store.isActive} />
                   </td>
                   <td className='text-end'>
                     <small className='me-2'>
@@ -260,7 +294,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
                     >
                       {!store.isActive ? (
                         <>
-                          <i class='fa-solid fa-circle-check'></i>
+                          <i className='fa-solid fa-circle-check'></i>
                           <span className='ms-2 res-hide'>
                             {t('button.active')}
                           </span>

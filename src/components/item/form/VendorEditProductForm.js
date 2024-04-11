@@ -25,7 +25,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -35,9 +35,11 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
   }, [productId, storeId, run])
 
   return (
-    <div className='container-fluid position-relative'>
+    <div className='bg-white rounded-2 container-fluid position-relative'>
       {isLoading && <Loading />}
-
+      <div className='row bg-primary rounded-top-2 p-3 mb-3'>
+        <h5 className='text-white m-0'>{t('productDetail.edit')}</h5>
+      </div>
       <div className='mb-4'>
         <VendorEditProductImagesForm
           product={product}
@@ -50,7 +52,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
         <VendorEditProductProfileForm product={product} storeId={storeId} />
       </div>
 
-      <div className=''>
+      <div className='pb-2 px-2'>
         <Link
           to={`/vendor/products/${storeId}`}
           className='text-decoration-none cus-link-hover'

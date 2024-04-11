@@ -4,29 +4,20 @@ import ListCategories from '../../components/list/ListCategories'
 import ListBestSellerProduct from '../../components/list/ListBestSellerProduct'
 import ListHotStores from '../../components/list/ListHotStores'
 import { useTranslation } from 'react-i18next'
+import MetaData from '../../components/layout/meta/MetaData'
+import Policy from '../../components/ui/Policy'
 
 const HomePage = () => {
   const { t } = useTranslation()
 
   return (
     <MainLayout container='container-md' navFor='user'>
+      <MetaData title={`Zenpii Việt Nam | Mua và Bán Trên Website`} />
+
       <div className='mb-4'>
         <ListCategories heading={t('categories')} />
       </div>
-      <marquee className='mb-4 text-muted'>
-        <span className='me-5'>
-          <i class='fa-solid fa-repeat me-2 text-primary'></i>
-          Được hoàn tiền 111% nếu là hàng giả.
-        </span>
-        <span className='me-5'>
-          <i class='fa-solid fa-rotate-left me-2 text-primary'></i>
-          Đổi trả miễn phí tại nhà trong 30 ngày nếu sản phẩm lỗi.
-        </span>
-        <span className='me-5'>
-          <i class='fa-solid fa-box-open me-2 text-primary'></i>
-          Được mở hộp kiểm tra khi nhận hàng.
-        </span>
-      </marquee>
+      <Policy />
       <div className='mb-4'>
         <ListBestSellerProduct heading={t('bestSeller')} />
       </div>

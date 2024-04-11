@@ -9,7 +9,7 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const UserAddAddressForm = (props) => {
+const UserAddAddressForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)

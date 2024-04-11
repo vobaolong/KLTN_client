@@ -11,7 +11,7 @@ import Error from '../../components/ui/Error'
 import ProductFilter from '../../components/filter/ProductFilter'
 import { useTranslation } from 'react-i18next'
 
-const ProductSearchPage = (props) => {
+const ProductSearchPage = () => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)

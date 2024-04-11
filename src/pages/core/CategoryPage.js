@@ -11,6 +11,7 @@ import Error from '../../components/ui/Error'
 import ProductFilter from '../../components/filter/ProductFilter'
 import ListCategories from '../../components/list/ListCategories'
 import { useTranslation } from 'react-i18next'
+import MetaData from '../../components/layout/meta/MetaData.js'
 
 const CategoryPage = () => {
   const { t } = useTranslation()
@@ -91,7 +92,7 @@ const CategoryPage = () => {
       <div className='position-relative'>
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
-
+        <MetaData title={`${category.name} | Zenpii Việt Nam`} />
         <nav aria-label='breadcrumb'>
           <ol className='breadcrumb'>
             <Link to='/' className='breadcrumb-item text-decoration-none'>

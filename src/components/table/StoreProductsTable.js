@@ -37,9 +37,9 @@ const StoreProductsTable = ({
 
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'name',
+    sortBy: 'sold',
     isSelling,
-    order: 'asc',
+    order: 'desc',
     limit: 8,
     page: 1
   })
@@ -108,13 +108,13 @@ const StoreProductsTable = ({
     if (!isConfirming) return
     setIsLoading(true)
     const value = { isSelling: !sellingProduct.isSelling }
-    const action = sellingProduct.isSelling ? 'Stored' : 'Selling'
+    const action = sellingProduct.isSelling ? 'hide' : 'show'
     sellOrStore(_id, accessToken, value, storeId, sellingProduct._id)
       .then((data) => {
         if (data.error) {
           toast.error(data.error)
         } else {
-          toast.success(`${action} product successfully`)
+          toast.success(t(`toastSuccess.product.${action}`))
           setRun(!run)
         }
         setIsLoading(false)
@@ -130,7 +130,7 @@ const StoreProductsTable = ({
     <div className='position-relative'>
       {heading && (
         <h4 className='text-center text-uppercase mb-3'>
-          {isSelling ? t('productDetail.selling') : t('productDetail.stored')}
+          {isSelling ? t('productDetail.show') : t('productDetail.hide')}
         </h4>
       )}
       {isLoading && <Loading />}
@@ -138,8 +138,8 @@ const StoreProductsTable = ({
         <ConfirmDialog
           title={
             sellingProduct.isSelling
-              ? t('productDetail.storeProduct')
-              : t('productDetail.sellProduct')
+              ? t('title.hideProduct')
+              : t('title.showProduct')
           }
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
@@ -476,9 +476,9 @@ const StoreProductsTable = ({
                     </small>
                   </td>
                   <td>
-                    <small>
+                    <span style={{ fontSize: '0.9rem' }}>
                       <ProductActiveLabel isActive={product.isActive} />
-                    </small>
+                    </span>
                   </td>
                   <td className='text-end'>
                     <small>{humanReadableDate(product.createdAt)}</small>
@@ -487,37 +487,29 @@ const StoreProductsTable = ({
                     <div className='d-flex justify-content-center align-items-center'>
                       <button
                         type='button'
-                        className={`btn btn-sm rounded-1 btn-outline-${
+                        className={`btn btn-sm rounded-1 ripple me-2 btn-outline-${
                           !product.isSelling ? 'success' : 'secondary'
-                        } ripple me-2`}
+                        }`}
                         onClick={() => handleSellingProduct(product)}
+                        title={
+                          !product.isSelling
+                            ? t('button.show')
+                            : t('button.hide')
+                        }
                       >
-                        {!product.isSelling ? (
-                          <>
-                            <i className='fa-solid fa-box'></i>
-                            <span className='ms-1 res-hide'>
-                              {t('button.sell')}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <i className='fa-solid fa-archive'></i>
-                            <span className='ms-1 res-hide'>
-                              {t('button.store')}
-                            </span>
-                          </>
-                        )}
+                        <i
+                          className={`fa-solid ${
+                            !product.isSelling ? 'fa-box' : 'fa-archive'
+                          }`}
+                        ></i>
                       </button>
-
                       <Link
                         type='button'
                         className='btn btn-sm btn-primary ripple rounded-1'
-                        to={`/vendor/products/editproduct/${product._id}/${storeId}`}
+                        to={`/vendor/products/edit/${product._id}/${storeId}`}
+                        title={t('button.edit')}
                       >
                         <i className='fa-solid fa-pen'></i>
-                        <span className='ms-1 res-hide'>
-                          {t('button.edit')}
-                        </span>
                       </Link>
                     </div>
                   </td>

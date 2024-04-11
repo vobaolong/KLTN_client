@@ -20,7 +20,7 @@ const ProductsPage = () => {
               onClick={() => toggleFlag(true)}
             >
               <i className='fa-solid fa-box me-2'></i>
-              <span className='res-hide'>{t('productDetail.selling')}</span>
+              <span className='res-hide'>{t('productDetail.show')}</span>
             </span>
           </li>
           <li className='nav-item col-6 text-center pointer'>
@@ -29,7 +29,7 @@ const ProductsPage = () => {
               onClick={() => toggleFlag(false)}
             >
               <i className='fa-solid fa-archive me-2'></i>
-              <span className='res-hide'>{t('productDetail.stored')}</span>
+              <span className='res-hide'>{t('productDetail.hide')}</span>
             </span>
           </li>
         </ul>

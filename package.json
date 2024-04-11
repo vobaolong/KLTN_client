@@ -21,6 +21,7 @@
     "react-dropzone": "^14.2.3",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^14.0.5",
     "react-image-magnify": "^2.7.4",
     "react-paypal-button-v2": "^2.6.3",

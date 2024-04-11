@@ -25,7 +25,6 @@ const OrderPage = () => {
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
   }
-  console.log(orderStatus.value)
 
   return (
     <VendorLayout user={user} store={store}>

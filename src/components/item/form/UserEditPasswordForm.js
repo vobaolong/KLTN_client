@@ -9,7 +9,7 @@ import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 
-const UserEditPasswordForm = (props) => {
+const UserEditPasswordForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)

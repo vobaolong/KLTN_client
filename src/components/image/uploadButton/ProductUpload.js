@@ -41,12 +41,12 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
     removeListImages(_id, accessToken, index, productId, storeId)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        else toast.success(t('toastSuccess.product.removeImg'))
         setIsLoading(false)
         if (onRun) onRun()
       })
       .catch((error) => {
-        toast.error(error)
+        toast.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -57,7 +57,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
       {isConfirming && (
         <div className='text-start'>
           <ConfirmDialog
-            title='Remove images'
+            title={t('dialog.removeImg')}
             message={t('confirmDialog')}
             color='danger'
             onSubmit={onRemoveSubmit}

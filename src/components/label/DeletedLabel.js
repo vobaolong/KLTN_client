@@ -1,4 +1,4 @@
-const DeletedLabel = (props) => (
+const DeletedLabel = () => (
   <span className='badge bg-danger rounded-1' style={{ width: '80px' }}>
     <span>InActive</span>
     <i className='ms-2 fa-solid fa-toggle-off'></i>

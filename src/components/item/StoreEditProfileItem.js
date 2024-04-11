@@ -13,6 +13,7 @@ const StoreEditProfileItem = ({ store = {} }) => {
         data-bs-target='#store-profile-edit-form'
       >
         <i className='fa-solid fa-pen'></i>
+        <span className='res-hide ms-2'>{t('button.edit')}</span>
       </button>
 
       <Modal
@@ -27,8 +28,6 @@ const StoreEditProfileItem = ({ store = {} }) => {
           address={store.address}
         />
       </Modal>
-
-      <small className='cus-tooltip-msg'>{t('storeDetail.editProfile')}</small>
     </div>
   )
 }

@@ -97,8 +97,8 @@ const MultiVariantValueSelector = ({
         </label>
 
         <div className=''>
-          {selectedValues && selectedValues.length > 0 ? (
-            selectedValues.map((value, index) => (
+          {selectedValues?.length > 0 ? (
+            selectedValues?.map((value, index) => (
               <span
                 key={index}
                 className='mb-1 d-inline-flex align-items-center'
@@ -134,10 +134,8 @@ const MultiVariantValueSelector = ({
                   key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action ${
-                    selectedValues &&
-                    selectedValues.map((v) => v._id).indexOf(value._id) !==
-                      -1 &&
-                    'active'
+                    selectedValues?.map((v) => v._id).indexOf(value._id) !==
+                      -1 && 'active'
                   }`}
                   onClick={() => handleChoose(value)}
                 >

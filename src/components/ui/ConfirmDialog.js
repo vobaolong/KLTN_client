@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
 const ConfirmDialog = ({
-  title = 'Confirm the action',
+  title = 'Xác nhận hành động',
   message = 'Bạn có chắc chắn về điều này không?',
   color = 'primary',
   onSubmit = () => {},

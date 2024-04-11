@@ -128,11 +128,9 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         />
       )}
 
-      <form className='border rounded-1 row mb-2' onSubmit={handleSubmit}>
-        <div className='col-12 bg-primary rounded-top-1 p-3'>
-          <h1 className='text-white fs-5 m-0'>
-            {t('productDetail.editProInfo')}
-          </h1>
+      <form className='row mb-2' onSubmit={handleSubmit}>
+        <div className='col-12'>
+          <h5 className='fw-bold'>{t('productDetail.editProInfo')}</h5>
         </div>
 
         <div className='col-12 px-4'>
@@ -212,7 +210,10 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         </div>
 
         <div className='col-12 mt-5 px-4'>
-          <p className=''>{t('productDetail.chooseCategory')}</p>
+          <p className=''>
+            {t('productDetail.chooseCategory')}
+            <small className='text-danger'> *</small>
+          </p>
           <CategorySelector
             label={t('productDetail.selectedCategory')}
             defaultValue={newProduct.defaultCategory}

@@ -80,7 +80,7 @@ const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
     <div className='row position-relative'>
       {isLoading && <Loading />}
       {variants.map((variant, index) => (
-        <div className='col mt-2 mx-3' key={index}>
+        <div className='col mt-2' key={index}>
           <MultiVariantValueSelector
             defaultValue={defaultValue}
             categoryId={categoryId}

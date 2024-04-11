@@ -161,10 +161,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border bg-body rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary px-4 py-3'>
+        <div className='col-12 bg-primary rounded-top-1 px-4 py-3'>
           <h1 className='text-white fs-5 m-0'>
             {t('productDetail.createProduct')}
           </h1>
@@ -348,7 +348,10 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         </div>
 
         <div className='col-12 mt-5 px-4'>
-          <p className=''>{t('productDetail.chooseCategory')}</p>
+          <p className=''>
+            {t('productDetail.chooseCategory')}{' '}
+            <span className='text-danger'>*</span>{' '}
+          </p>
           <CategorySelector
             label={t('productDetail.selectedCategory')}
             isActive={true}

@@ -288,17 +288,17 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       <small>
                         <i>{order.deliveryId.name}</i>
                         <br />
-                        {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
+                        {formatPrice(order.deliveryId.price.$numberDecimal)}₫
                       </small>
                     )}
                   </td>
                   <td className='text-center'>
-                    <span>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
                     </span>
                   </td>
                   <td className='text-center'>
-                    <span>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderStatusLabel status={order.status} />
                     </span>
                   </td>

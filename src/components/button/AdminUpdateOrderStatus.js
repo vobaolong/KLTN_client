@@ -59,7 +59,7 @@ const AdminUpdateOrderStatusButton = ({ orderId = '', status = '', onRun }) => {
           { label: t('status.shipped'), value: 'Shipped' },
           { label: t('status.delivered'), value: 'Delivered' }
         ]}
-        size='small'
+        size='sm'
         value={statusValue}
         setValue={(value) => handleUpdate(value)}
         borderBtn={true}

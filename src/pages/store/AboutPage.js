@@ -4,13 +4,15 @@ import StoreProfileInfo from '../../components/info/StoreProfileInfo'
 import StoreLevelInfo from '../../components/info/StoreLevelInfo'
 import MainLayout from '../../components/layout/MainLayout'
 import Error from '../../components/ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const AboutPage = () => {
   const store = useSelector((state) => state.store.store)
+  const { t } = useTranslation()
 
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
-      <Error msg='This store is banned by Zenpii!' />
+      <Error msg={t('toastError.storeBanned')} />
     </MainLayout>
   ) : (
     <StoreLayout store={store}>

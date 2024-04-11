@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -8,16 +9,13 @@ const InputFile = ({
   onValidate = () => {},
   size = 'avatar',
   label = 'File',
-  isValid = false,
-  isDisabled = false,
-  accept = '*/*',
   feedback = 'Please provide a valid file',
   defaultSrc = '',
   noRadius = false,
   required = false
 }) => {
   const [src, setSrc] = useState('')
-
+  const { t } = useTranslation()
   useEffect(() => {
     if (defaultSrc) setSrc(IMG + defaultSrc)
   }, [defaultSrc])
@@ -54,7 +52,7 @@ const InputFile = ({
         {label} {required && <span style={{ color: 'red' }}>*</span>}
       </label>
       <div
-        className={`${size === 'avatar' ? 'cus-avatar-box' : 'cus-cover-box '}`}
+        className={`${size === 'avatar' ? 'cus-avatar-box' : 'cus-cover-box'}`}
         {...getRootProps()}
       >
         <input {...getInputProps()} />
@@ -93,12 +91,10 @@ const InputFile = ({
               style={{ borderRadius: `${noRadius ? '0' : '0.375rem'}` }}
             >
               {isDragActive ? (
-                <small>Drop the files here...</small>
+                <small>{t('dropHere')}</small>
               ) : (
                 <>
-                  <small>
-                    Drag 'n' drop some files here, or click to select files
-                  </small>
+                  <small>{t('dragNDrop')}</small>
                   <i className='ms-2 fa-regular fa-images'></i>
                   <small
                     className='invalid-feedback ms-2 mt-0'

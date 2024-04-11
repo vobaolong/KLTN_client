@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import DropDownMenu from '../../ui/DropDownMenu'
 import { useTranslation } from 'react-i18next'
 
-const SearchBar = (props) => {
+const SearchBar = () => {
   const { t } = useTranslation()
   const listOptions = [
     {

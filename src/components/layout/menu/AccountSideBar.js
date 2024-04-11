@@ -75,9 +75,9 @@ const AccountSideBar = ({ user = {} }) => {
         {user.role === 'user' && (
           <li className='nav-item'>
             <Link
-              to='/account/storeManager'
+              to='/account/store'
               className={`nav-link cus-sidebar-item ripple link-dark ${
-                path === 'storeManager' ? 'active' : ''
+                path === 'store' ? 'active' : ''
               }`}
             >
               <i className='fa-solid fa-store'></i>

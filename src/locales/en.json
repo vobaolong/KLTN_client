@@ -1,5 +1,25 @@
 {
+  "orderStatus": {
+    "Not processed": "Not processed",
+    "Processing": "Processing",
+    "Shipped": "Shipped",
+    "Delivered": "Delivered",
+    "Cancelled": "Cancelled"
+  },
+  "helmet": {
+    "myPurchase": "My Order",
+    "addressBook": "Address Book",
+    "listFavorites": "List Favorites",
+    "myWallet": "My Wallet",
+    "myStore": "My Store"
+  },
+
   "toastSuccess": {
+    "userDetail": {
+      "updateProfile": "Update profile successfully"
+    },
+    "signIn": "Sign in successfully",
+    "signUp": "Sign up successfully",
     "lockStore": "Close store successfully",
     "unlockStore": "Open store successfully",
     "cart": {
@@ -46,11 +66,16 @@
       "delete": "Delete product successfully",
       "edit": "Edit product successfully",
       "ban": "Ban product successfully",
-      "active": "Active product successfully"
+      "active": "Active product successfully",
+      "hide": "Hide product successfully",
+      "show": "Show product successfully",
+      "removeImg": "Remove image successfully",
+      "addImg": "Add image successfully"
     },
     "store": {
       "ban": "Ban store successfully",
-      "active": "Active store successfully"
+      "active": "Active store successfully",
+      "update": "Update store successfully"
     },
     "order": {
       "update": "Update order successfully",
@@ -63,7 +88,9 @@
       "restore": "Restore category successfully"
     }
   },
-  "toastError": {},
+  "toastError": {
+    "storeBanned": "This store is temporarily banned!"
+  },
   "message": {
     "addStaff": "Are you sure to add this employee?",
     "removeStaff": "Are you sure to remove this employee?",
@@ -72,6 +99,8 @@
     "edit": "Are you sure to edit "
   },
   "title": {
+    "openStore": "Open Store",
+    "closeStore": "Close Store",
     "productVariants": "Product Variants",
     "listBannedStores": "List of Banned Stores",
     "listActiveStores": "List of Active Stores",
@@ -86,6 +115,7 @@
     "userInSystem": "Users in the system"
   },
   "dialog": {
+    "removeImg": "Remove Image",
     "logOut": "Log Out",
     "closeStore": "Close store",
     "openStore": "Open store",
@@ -167,7 +197,7 @@
   "bestSeller": "Top Sales",
   "newProduct": "New Product",
   "hotStore": "Hot Store",
-  "cart": "Cart",
+  "cart": "Shopping cart",
   "favProduct": "Favorite Product",
   "favStore": "Favorite Store",
   "product": "Product",
@@ -194,10 +224,11 @@
     "chooseCateFirst": "*need to choose category before",
     "noProduct": "No product yet",
     "createProduct": "Create Product",
-    "selling": "Selling Products",
-    "stored": "Stored Products",
+    "show": "Show products",
+    "hide": "Hide products",
     "editProInfo": "Edit product information",
     "editProImg": "Edit product images",
+    "edit": "Edit product",
     "thumbImg": "Thumbnail",
     "otherImg": "Other images",
     "sold": "Sold",
@@ -212,8 +243,8 @@
     "newProduct": "New Product",
     "purchased": "Purchased",
     "limitImg": "Limit is 7 images!",
-    "storeProduct": "Store the product",
-    "sellProduct": "Sell the product",
+    "hideProduct": "Hide the product",
+    "showProduct": "Show the product",
     "addImg": "Add Product Image"
   },
   "chosenCategory": "Chosen Category",
@@ -243,6 +274,8 @@
   "transactions": "Transactions in the system",
 
   "cartDetail": {
+    "yourOrder": "Your order",
+    "proceedToCheckout": "Proceed To Checkout",
     "remove": "Remove product from cart",
     "all": "All",
     "products": "products",
@@ -260,6 +293,8 @@
   "store": "Store",
   "searchHolder": "Search for products and stores",
   "userDetail": {
+    "owner": "Owner",
+    "staff": "Staff",
     "idCard": "ID Card",
     "email": "Email",
     "KYC": "KYC",
@@ -332,8 +367,8 @@
     "status": "Status",
     "active": "Active",
     "banned": "Banned",
-    "selling": "Selling",
-    "stored": "Stored",
+    "showing": "Showing",
+    "hiding": "Hiding",
     "cantCancelOrder": "Can't can order",
     "all": "All",
     "notProcessed": "Not processed",
@@ -393,6 +428,10 @@
   },
 
   "storeDetail": {
+    "banned": "The store is temporarily locked by Zenpii, contact us for more details",
+    "active": "The store is active",
+    "address": "Address",
+    "viewShop": "View Shop",
     "staple": "Staple Goods",
     "activeStores": "Active Stores",
     "bannedStores": "Banned Stores",
@@ -422,8 +461,9 @@
     "noStores": "No store yet!",
     "createStore": "Create an online store for free",
     "pickupAddress": "Pickup Address",
-    "avatar": "Avatar Image",
-    "cover": "Background Image"
+    "avatar": "Logo",
+    "cover": "Background Image",
+    "contactPerson": "Contact person"
   },
   "storeDetailValid": {
     "nameValid": "Please provide a valid store name!",
@@ -434,11 +474,13 @@
   },
   "favorite": "Favorite",
   "wallet": "E-Wallet",
+  "dropHere": "Drop the files here...",
+  "dragNDrop": "Drag 'n' drop some files here, or click to select files",
   "confirmDialog": "Are you sure about that?",
   "button": {
     "detail": "Detail",
     "restore": "Restore",
-    "store": "Store",
+    "hide": "Hide",
     "cancel": "Cancel",
     "confirm": "Confirm",
     "edit": "Edit",
@@ -454,7 +496,7 @@
     "back": "Back",
     "addImg": "Add Image",
     "more": "More",
-    "sell": "Sell",
+    "show": "Show",
     "ban": "Ban",
     "active": "Active",
     "clickToClose": "Click to close store",
@@ -480,7 +522,9 @@
   "point": "Point",
   "success/failure": "Order Completion Rate",
   "orderDetail": {
-    "finalTotal": "Final Total",
+    "useRegisterFirstName": "se registered first name",
+    "useRegisterLastName": "Use registered last name",
+    "useRegisterPhone": "Use registered phone",
     "noOrder": "No orders yet!",
     "commission": "Commission",
     "buyer": "Buyer",
@@ -541,5 +585,7 @@
     "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, Zenpii brings you an online shopping experience that starts with trust.",
     "p2": "Overflowing with promotions and offers",
     "small2": "Do you want to hunt for hot deals? Zenpii has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because Zenpii has millions of products in the Freeship+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
-  }
+  },
+  "showMore": "Show more",
+  "showLess": "Show less"
 }

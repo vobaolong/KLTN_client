@@ -9,7 +9,7 @@ const UserLevelInfo = ({ user = {}, border = true }) => {
 
   return (
     <div className=''>
-      <div className={border ? 'p-4' : 'border p-3 bg-body rounded-2'}>
+      <div className={border ? 'p-3 ' : 'p-3 border bg-body rounded-2'}>
         <div className='row mb-2 gap-2'>
           <div className='col-12'>
             <Paragraph

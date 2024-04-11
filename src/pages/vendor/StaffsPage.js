@@ -5,7 +5,7 @@ import StoreOwnerTable from '../../components/table/StoreOwnerTable'
 import StoreStaffsTable from '../../components/table/StoreStaffsTable'
 import { useTranslation } from 'react-i18next'
 
-const StaffsPage = (props) => {
+const StaffsPage = () => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
   const [flag, toggleFlag] = useToggle(true)

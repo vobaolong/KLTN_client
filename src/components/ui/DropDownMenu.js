@@ -9,7 +9,8 @@ const DropDownMenu = ({
   size = '',
   label = '',
   borderBtn = false,
-  resetDefault = true
+  resetDefault = true,
+  required = false
 }) => {
   const [selectedItem, setSelectedItem] = useState(() =>
     resetDefault
@@ -41,11 +42,15 @@ const DropDownMenu = ({
 
   return (
     <div
-      className={`cus-dropdown ${size === 'large' && 'w-100'} ${
+      className={`cus-dropdown ${size === 'lg' && 'w-100'} ${
         label && 'cus-dropdown--has-label'
       }`}
     >
-      {label && <label className='cus-dropdown-label'>{label}</label>}
+      {label && (
+        <label className='cus-dropdown-label'>
+          {label} {required && <span className='text-danger'>*</span>}
+        </label>
+      )}
       <ul
         className={`list-group cus-dropdown-menu ${
           showDropDownFlag ? 'show' : ''
@@ -71,7 +76,9 @@ const DropDownMenu = ({
         type='button'
         className={`btn ${
           borderBtn ? 'cus-dropdown-btn--border' : 'cus-dropdown-btn'
-        } ${size === 'large' && 'w-100'} ${size === 'small' && 'btn-sm'}`}
+        }
+				${size === 'lg' && 'w-100'}
+				${size === 'sm' && 'btn-sm'}`}
         onClick={toggleDropDown}
         onBlur={() => {
           toggleShowDropDownFlag(false)
@@ -80,7 +87,7 @@ const DropDownMenu = ({
       >
         <span
           className={`d-inline-flex justify-content-start align-items-center ${
-            size === 'large' ? 'flex-grow-1 text-start' : ''
+            size === 'lg' ? 'flex-grow-1 text-start' : ''
           }`}
         >
           {selectedItem?.icon && (

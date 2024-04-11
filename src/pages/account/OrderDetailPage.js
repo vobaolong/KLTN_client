@@ -4,7 +4,7 @@ import AccountLayout from '../../components/layout/AccountLayout'
 import OrderDetailInfo from '../../components/info/OrderDetailInfo'
 import { useTranslation } from 'react-i18next'
 
-const OrderDetailPage = (props) => {
+const OrderDetailPage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
 

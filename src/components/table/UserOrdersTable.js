@@ -220,12 +220,12 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                   />
                 </th>
                 <th scope='col'>
-                  {/* <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  Xem
-                </span> */}
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
+                  >
+                    {t('action')}
+                  </span>
                 </th>
               </tr>
             </thead>
@@ -259,21 +259,21 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       <small>
                         {order.deliveryId.name}
                         <br />
-                        {formatPrice(order.deliveryId.price.$numberDecimal)} ₫
+                        {formatPrice(order.deliveryId.price.$numberDecimal)}₫
                       </small>
                     )}
                   </td>
                   <td className='text-center'>
-                    <small>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
-                    </small>
+                    </span>
                   </td>
                   <td className='text-center'>
-                    <small>
+                    <span style={{ fontSize: '1rem' }}>
                       <OrderStatusLabel status={order.status} />
-                    </small>
+                    </span>
                   </td>
-                  <td className='text-nowrap text-start'>
+                  <td className='text-nowrap text-center'>
                     <Link
                       type='button'
                       className='btn btn-secondary opacity-75 ripple rounded-1'
