@@ -23,7 +23,7 @@ const SearchInput = ({ onChange = () => {} }) => {
       className='form-control rounded-1'
       type='search'
       placeholder={t('search')}
-      style={{ maxWidth: '210px' }}
+      style={{ maxWidth: '300px' }}
       value={keyword}
       onChange={handleChangeKeyword}
     />

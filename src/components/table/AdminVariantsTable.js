@@ -32,7 +32,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
     sortBy: 'name',
     categoryId: '',
     order: 'asc',
-    limit: 10,
+    limit: 8,
     page: 1
   })
 
@@ -54,7 +54,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -108,7 +108,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -125,7 +125,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -149,159 +149,158 @@ const AdminVariantsTable = ({ heading = '' }) => {
         />
       )}
 
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
       {isLoading && <Loading />}
-
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='option-wrap d-flex align-items-center'>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
-          <div className='ms-2'>
-            <Link
-              type='button'
-              className='btn btn-primary ripple text-nowrap rounded-1'
-              to='/admin/variant/createNewStyle'
-            >
-              <i className='fa-solid fa-plus-circle'></i>
-              <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
-            </Link>
-          </div>
+          <Link
+            type='button'
+            className='btn btn-primary ripple text-nowrap rounded-1'
+            to='/admin/variant/createNewStyle'
+          >
+            <i className='fa-solid fa-plus-circle'></i>
+            <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
+          </Link>
         </div>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
 
-      <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-striped table-sm text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col' className='text-start'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('variantDetail.name')}
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col' className='text-start'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('variantDetail.categories')}
-                  sortBy='categoryIds '
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('status.status')}
-                  sortBy='isDeleted'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('action')}
-                </span>
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {variants.map((variant, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+        <div className='table-scroll my-2'>
+          <table className='table align-middle table-hover table-sm text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col' className='text-start'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('variantDetail.name')}
+                    sortBy='name'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
-                <td className='text-start'>{variant.name}</td>
-
-                <td className='text-start ps-2' style={{ maxWidth: '1000px' }}>
-                  <div
-                    className=''
-                    style={{
-                      maxHeight: '200px',
-                      overflow: 'auto'
-                    }}
-                  >
-                    {variant.categoryIds.map((category, index) => (
-                      <div className='hidden-avatar' key={index}>
-                        <CategorySmallCard category={category} />
-                      </div>
-                    ))}
-                  </div>
-                </td>
-
-                <td>
-                  {variant.isDeleted ? (
-                    <span>
-                      <DeletedLabel />
-                    </span>
-                  ) : (
-                    <span>
-                      <ActiveLabel />
-                    </span>
-                  )}
-                </td>
-
-                <td className='text-nowrap py-1'>
-                  <Link
-                    type='button'
-                    className='btn btn-sm btn-secondary ripple me-2'
-                    to={`/admin/variant/values/${variant._id}`}
-                  >
-                    <i className='fa-solid fa-info-circle'></i>
-                    <span className='ms-1 res-hide'>{t('button.detail')}</span>
-                  </Link>
-
-                  <Link
-                    type='button'
-                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
-                    to={`/admin/variant/editStyle/${variant._id}`}
-                  >
-                    <i className='fa-solid fa-pen'></i>
-                    <span className='ms-1 res-hide'>{t('button.edit')}</span>
-                  </Link>
-
-                  {!variant.isDeleted ? (
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-danger ripple rounded-1'
-                      onClick={() => handleDelete(variant)}
-                    >
-                      <i className='fa-solid fa-trash-alt'></i>
-                      <span className='ms-1 res-hide'>
-                        {t('button.delete')}
-                      </span>
-                    </button>
-                  ) : (
-                    <button
-                      type='button'
-                      className='btn btn-outline-success'
-                      onClick={() => handleRestore(variant)}
-                    >
-                      <i className='fa-solid fa-trash-can-arrow-up'></i>
-                      <span className='ms-1 res-hide'>
-                        {t('button.restore')}
-                      </span>
-                    </button>
-                  )}
-                </td>
+                <th scope='col' className='text-start'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('variantDetail.categories')}
+                    sortBy='categoryIds '
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='isDeleted'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('action')}
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+            <tbody>
+              {variants.map((variant, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='text-start'>{variant.name}</td>
+
+                  <td
+                    className='text-start ps-2'
+                    style={{ maxWidth: '1000px' }}
+                  >
+                    <div
+                      className=''
+                      style={{
+                        maxHeight: '200px',
+                        overflow: 'auto'
+                      }}
+                    >
+                      {variant.categoryIds.map((category, index) => (
+                        <div className='hidden-avatar' key={index}>
+                          <CategorySmallCard category={category} />
+                        </div>
+                      ))}
+                    </div>
+                  </td>
+
+                  <td>
+                    {variant.isDeleted ? (
+                      <span>
+                        <DeletedLabel />
+                      </span>
+                    ) : (
+                      <span>
+                        <ActiveLabel />
+                      </span>
+                    )}
+                  </td>
+
+                  <td className='text-nowrap py-1'>
+                    <Link
+                      type='button'
+                      className='btn btn-sm btn-secondary ripple me-2 my-1'
+                      to={`/admin/variant/values/${variant._id}`}
+                      title={t('button.detail')}
+                    >
+                      <i className='fa-solid fa-info-circle'></i>
+                    </Link>
+
+                    <Link
+                      type='button'
+                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      to={`/admin/variant/editStyle/${variant._id}`}
+                      title={t('button.edit')}
+                    >
+                      <i className='fa-solid fa-pen'></i>
+                    </Link>
+
+                    {!variant.isDeleted ? (
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-danger ripple rounded-1'
+                        onClick={() => handleDelete(variant)}
+                        title={t('button.delete')}
+                      >
+                        <i className='fa-solid fa-trash-alt'></i>
+                      </button>
+                    ) : (
+                      <button
+                        type='button'
+                        className='btn btn-outline-success'
+                        onClick={() => handleRestore(variant)}
+                        title={t('button.restore')}
+                      >
+                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

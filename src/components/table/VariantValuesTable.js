@@ -94,7 +94,7 @@ const VariantValuesTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -111,7 +111,7 @@ const VariantValuesTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -136,9 +136,9 @@ const VariantValuesTable = ({
       )}
 
       {heading && (
-        <h4 className='text-center text-uppercase'>
+        <h5 className='text-center text-uppercase'>
           Values of <span className='text-primary'>{style.name}</span>
-        </h4>
+        </h5>
       )}
 
       {isLoading && <Loading />}

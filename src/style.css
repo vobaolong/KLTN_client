@@ -16,6 +16,8 @@
 	--white-color: #fff;
 	--black-color: #000;
 	--danger-color: #dc3545;
+	--box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+		0 1px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
@@ -80,6 +82,8 @@ body::-webkit-scrollbar-track {
 .scroll-to-top {
 	background-color: var(--primary-color) !important;
 	border-radius: 10% !important;
+	right: 13px !important;
+	bottom: 13px !important;
 }
 
 .scroll-to-top>* {
@@ -169,6 +173,10 @@ body::-webkit-scrollbar-track {
 
 .pointer {
 	cursor: pointer !important;
+}
+
+.bg-value {
+	background-color: #f1f5f9 !important;
 }
 
 .default {
@@ -701,12 +709,16 @@ header {
 	margin-bottom: 6px;
 }
 
+.cus-input-group-input:focus {
+	background-color: #f7f7f7;
+}
+
 .cus-input-group-input {
 	border-top: 0;
 	border-left: 0;
 	border-right: 0;
 	border-radius: 0;
-	background-color: #f7f7f7;
+	background-color: var(--white-color);
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 }
@@ -720,7 +732,7 @@ header {
 	position: absolute;
 	color: var(--muted-color);
 	pointer-events: none;
-	left: 12px;
+	left: 5px;
 	top: 6px;
 	transition: all 0.3s ease;
 	font-size: 1rem;
@@ -911,7 +923,8 @@ header {
 	justify-content: center;
 	align-items: center;
 	background-color: var(--white-color);
-	border-radius: 0;
+	border-radius: 3px;
+	border: 1px dashed var(--border-color) !important;
 }
 
 .cus-dropdown-btn--border {
@@ -920,7 +933,7 @@ header {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #f7f7f7;
+	background-color: var(--white-color);
 	border-radius: 0;
 	border-top-right-radius: 5px !important;
 	border-top-left-radius: 5px !important;
@@ -937,9 +950,8 @@ header {
 
 .cus-dropdown:hover .cus-dropdown-btn--border,
 .cus-dropdown-menu.show~.cus-dropdown-btn--border {
-	color: var(--white-color);
 	border-color: var(--white-color);
-	background-color: var(--primary-color);
+	background-color: var(--high-muted-color);
 }
 
 .cus-dropdown-menu {
@@ -1671,7 +1683,6 @@ textarea {
 	overflow: auto;
 	max-height: 500px;
 	white-space: nowrap;
-	box-shadow: 0px 4px 24px 2px rgba(20, 25, 38, 0.05)
 }
 
 .table-scroll table {
@@ -1681,7 +1692,7 @@ textarea {
 	border-spacing: 0;
 	border-radius: 0.25rem;
 	overflow: hidden;
-	border: 1px solid #c3c3c3;
+	border: 1px solid var(--border-color);
 }
 
 .table:hover {
@@ -1690,17 +1701,17 @@ textarea {
 
 .table-scroll th,
 .table-scroll td {
-	padding: 2px 6px;
-	background: #fff;
+	padding: 3px 8px;
+	background: var(--white-color);
 	z-index: 1;
 	vertical-align: middle;
-	border-right: 1px solid #e9e9e9;
+	border-right: 1px solid var(--border-color);
 	color: #646464;
 }
 
 .table-scroll thead th {
-	background: #FAFAFA;
-	color: #575757;
+	background: #f1f5f9;
+	color: #646464;
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;

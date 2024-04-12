@@ -50,7 +50,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -106,13 +106,13 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
 
   return (
-    <div className='p-1 position-relative'>
+    <div className='container-fluid'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -124,10 +124,10 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border bg-body rounded-2 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
+        <div className='col-12 bg-primary p-3 rounded-top-2'>
           <h1 className='text-white fs-5 m-0'>{t('categoryDetail.edit')}</h1>
         </div>
 

@@ -80,7 +80,7 @@ const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }

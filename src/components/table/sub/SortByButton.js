@@ -28,8 +28,9 @@ const SortByButton = ({
 
   return (
     <span
-      className='btn btn-sm text-nowrap text-secondary pointer'
+      className='btn text-nowrap text-secondary pointer'
       onClick={handleClick}
+      style={{ fontSize: '0.95rem' }}
     >
       {title}
       {!flag ? (

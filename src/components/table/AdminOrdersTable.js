@@ -98,34 +98,34 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         <>
           {status ===
             'Not processed|Processing|Shipped|Delivered|Cancelled' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.allOrders')}
-            </h4>
+            </h5>
           )}
           {status === 'Not processed' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.notProcessedOrders')}
-            </h4>
+            </h5>
           )}
           {status === 'Processing' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.processingOrders')}
-            </h4>
+            </h5>
           )}
           {status === 'Shipped' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.shippedOrders')}
-            </h4>
+            </h5>
           )}
           {status === 'Delivered' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.deliveredOrders')}
-            </h4>
+            </h5>
           )}
           {status === 'Cancelled' && (
-            <h4 className='text-center text-uppercase'>
+            <h5 className='text-center text-uppercase'>
               {t('title.cancelledOrders')}
-            </h4>
+            </h5>
           )}
         </>
       )}

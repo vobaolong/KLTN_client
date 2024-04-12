@@ -53,10 +53,10 @@ const LineChart = ({
         boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
         borderRadius: '0.25rem',
         backgroundColor: '#fff',
-        width: '99%'
+        width: '100%'
       }}
     >
-      <h6
+      <h5
         style={{
           textAlign: 'start',
           padding: '10px 0 10px 10px',
@@ -65,7 +65,7 @@ const LineChart = ({
         }}
       >
         {value}s overview
-      </h6>
+      </h5>
       <Line
         data={data}
         options={{

@@ -116,7 +116,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         store: storeData.size
       })
     } catch (e) {
-      toast.error('Something went wrong')
+      console.log('Something went wrong')
     }
     setIsLoading(false)
   }
@@ -165,7 +165,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         product: productData.size
       })
     } catch (e) {
-      // toast.error('Something went wrong')
+      console.log('Something went wrong')
     }
 
     setIsLoading(false)
@@ -177,7 +177,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   }, [by, storeId])
 
   return (
-    <div className='position-relative'>
+    <div className=''>
       {isLoading && <Loading />}
 
       <div className='container-fluid px-2'>
@@ -269,10 +269,13 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         </div>
       </div>
 
-      <div className='container-fluid px-2'>
+      <div className='container-fluid px-2 mt-2'>
         <div className='row'>
           <div className='col-xl-8 col-lg-6'>
-            <form className='d-flex'>
+            <form
+              style={{ right: '29%', top: '28%' }}
+              className='d-flex justify-content-end me-2 position-absolute'
+            >
               {options.flag !== 'product' ? (
                 <div className='me-2'>
                   <DropDownMenu
@@ -305,8 +308,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         by: value
                       })
                     }
-                    label={t('admin.adDashboard.statisticsBy')}
-                    borderBtn={true}
+                    // label={t('admin.adDashboard.statisticsBy')}
+                    borderBtn={false}
                   />
                 </div>
               ) : (
@@ -337,8 +340,8 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         sliceEnd: value
                       })
                     }
-                    label={t('admin.adDashboard.statisticsBy')}
-                    borderBtn={true}
+                    // label={t('admin.adDashboard.statisticsBy')}
+                    borderBtn={false}
                   />
                 </div>
               )}
@@ -368,13 +371,13 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                       type: value
                     })
                   }
-                  label={t('admin.adDashboard.chartType')}
-                  borderBtn={true}
+                  // label={t('admin.adDashboard.chartType')}
+                  borderBtn={false}
                 />
               </div>
             </form>
 
-            <div className='mt-2'>
+            <div className='mt-2 position-relative'>
               {options.type === 'line' && (
                 <LineChart
                   by={options.by}
@@ -408,7 +411,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
           </div>
 
           <div className='col-xl-4 col-lg-6 px-0'>
-            <h4 className='text-center my-4'>Top 5 {options.flag}s</h4>
+            {/* <h4 className='text-center my-4'>Top 5 {options.flag}s</h4> */}
             <div className='table-scroll my-2  box-shadow'>
               <table className='table align-middle table-hover table-sm text-center'>
                 <thead>

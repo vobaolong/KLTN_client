@@ -13,6 +13,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import ShowResult from '../ui/ShowResult'
 
 const StoreStaffsTable = ({
   heading = '',
@@ -24,10 +25,8 @@ const StoreStaffsTable = ({
   const [deletedStaff, setDeletedStaff] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-
   const { _id: userId, accessToken } = getToken()
   const [updateDispatch] = useUpdateDispatch()
-
   const [listStaffs, setListStaffs] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -118,7 +117,7 @@ const StoreStaffsTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -135,124 +134,127 @@ const StoreStaffsTable = ({
         />
       )}
 
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='d-flex align-items-center'>
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
-          <div className='ms-2'>
-            {ownerId && userId === ownerId._id ? (
-              <StoreAddStaffItem
-                storeId={storeId}
-                owner={ownerId}
-                staffs={staffIds}
-              />
-            ) : (
-              <CancelStaffButton storeId={storeId} />
-            )}
-          </div>
+          {ownerId && userId === ownerId._id ? (
+            <StoreAddStaffItem
+              storeId={storeId}
+              owner={ownerId}
+              staffs={staffIds}
+            />
+          ) : (
+            <CancelStaffButton storeId={storeId} />
+          )}
         </div>
-        <small className='text-nowrap res-hide'>
-          {t('showing')}{' '}
-          <b>
-            {Math.min(
-              filter.limit,
-              pagination.size - filter.limit * (pagination.pageCurrent - 1)
-            ) || 0}{' '}
-          </b>
-          {t('of')} {pagination.size} {t('result')}
-        </small>
-      </div>
-      {!isLoading && pagination.size === 0 ? (
-        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>{t('staffDetail.noStaff')}</h5>
-        </div>
-      ) : (
-        <div className='table-scroll my-2'>
-          <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
-            <thead>
-              <tr>
-                <th scope='col'>#</th>
-                <th scope='col' className='text-start'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('staffDetail.name')}
-                    sortBy='name'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title='ID Card'
-                    sortBy='id_card'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title='Email'
-                    sortBy='email'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('userDetail.phone')}
-                    sortBy='phone'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                {ownerId && userId === ownerId._id && <th scope='col'></th>}
-              </tr>
-            </thead>
-            <tbody>
-              {listStaffs?.map((staff, index) => (
-                <tr key={index}>
-                  <th scope='row'>
-                    {index + 1 + (filter.page - 1) * filter.limit}
-                  </th>
-                  <td className='text-start ps-2' style={{ maxWidth: '300px' }}>
-                    <UserSmallCard user={staff} />
-                  </td>
-                  <td>
-                    <small>{staff.id_card || '-'}</small>
-                  </td>
-                  <td>
-                    <small>{staff.email || '-'}</small>
-                  </td>
-                  <td>
-                    <small>{staff.phone || '-'}</small>
-                  </td>
-                  {ownerId && userId === ownerId._id && (
-                    <td className='text-center'>
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
-                        onClick={() => handleDeleteStaff(staff)}
-                      >
-                        <i className='fa-solid fa-trash-alt'></i>
-                        <span className='ms-2 res-hide'>
-                          {t('button.delete')}
-                        </span>
-                      </button>
-                    </td>
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+        {!isLoading && pagination.size === 0 ? (
+          <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+            <h5>{t('staffDetail.noStaff')}</h5>
+          </div>
+        ) : (
+          <div className='table-scroll my-2'>
+            <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
+              <thead>
+                <tr>
+                  <th scope='col'>#</th>
+                  <th scope='col' className='text-start'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('staffDetail.name')}
+                      sortBy='name'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title='ID Card'
+                      sortBy='id_card'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title='Email'
+                      sortBy='email'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('userDetail.phone')}
+                      sortBy='phone'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  {ownerId && userId === ownerId._id && <th scope='col'></th>}
+                </tr>
+              </thead>
+              <tbody>
+                {listStaffs?.map((staff, index) => (
+                  <tr key={index}>
+                    <th scope='row'>
+                      {index + 1 + (filter.page - 1) * filter.limit}
+                    </th>
+                    <td
+                      className='text-start ps-2'
+                      style={{ maxWidth: '300px' }}
+                    >
+                      <UserSmallCard user={staff} />
+                    </td>
+                    <td>
+                      <small>{staff.id_card || '-'}</small>
+                    </td>
+                    <td>
+                      <small>{staff.email || '-'}</small>
+                    </td>
+                    <td>
+                      <small>{staff.phone || '-'}</small>
+                    </td>
+                    {ownerId && userId === ownerId._id && (
+                      <td className='text-center'>
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
+                          onClick={() => handleDeleteStaff(staff)}
+                        >
+                          <i className='fa-solid fa-trash-alt'></i>
+                          <span className='ms-2 res-hide'>
+                            {t('button.delete')}
+                          </span>
+                        </button>
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          {pagination.size !== 0 && (
+            <ShowResult
+              limit={filter.limit}
+              size={pagination.size}
+              pageCurrent={pagination.pageCurrent}
+            />
+          )}
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

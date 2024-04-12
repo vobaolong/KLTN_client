@@ -12,7 +12,7 @@ const CategoryPage = () => {
 
   return (
     <AdminLayout user={user}>
-      <div className='d-flex align-items-center mb-2'>
+      <div className='align-items-center d-flex justify-content-end'>
         <div className='position-relative d-inline-block me-2'>
           <button
             type='button'

@@ -5,22 +5,16 @@ import { createTransactionByUser } from '../../../apis/transaction'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [updateDispatch] = useUpdateDispatch()
-
   const { _id: userId, accessToken } = getToken()
-
   const [transaction, setTransaction] = useState({
     isUp: 'false',
     amount: 100000,
@@ -69,17 +63,14 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
 
     if (!transaction.isValidAmount || !transaction.isValidCurrentPassword)
       return
-
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createTransactionByUser(userId, accessToken, transaction)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
           setTransaction({
             ...transaction,
@@ -89,21 +80,14 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
             isValidCurrentPassword: true
           })
           updateDispatch('account', data.user)
-          setSuccess('Rút tiền thành công!')
+          toast.success(t('toastSuccess.withDraw'))
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError(error)
+        console.log('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
@@ -124,10 +108,11 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Amount'
+            label={t('transactionDetail.amount')}
             value={transaction.amount}
             isValid={transaction.isValidAmount}
-            feedback='Please provide a valid amount.'
+            feedback={t('transactionDetail.amountValid')}
+            required={true}
             validator='positive'
             onChange={(value) => handleChange('amount', 'isValidAmount', value)}
             onValidate={(flag) => handleValidate('isValidAmount', flag)}
@@ -137,10 +122,11 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         <div className='col-12'>
           <Input
             type='password'
-            label='Current password'
+            label={t('transactionDetail.currentPw')}
             value={transaction.currentPassword}
             isValid={transaction.isValidCurrentPassword}
-            feedback='Please provide a valid password.'
+            feedback={t('transactionDetail.currentPwValid')}
+            required={true}
             validator='password'
             onChange={(value) =>
               handleChange('currentPassword', 'isValidCurrentPassword', value)
@@ -150,18 +136,6 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
             }
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

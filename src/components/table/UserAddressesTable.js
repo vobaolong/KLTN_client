@@ -46,7 +46,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -65,86 +65,88 @@ const UserAddressesTable = ({ addresses = [] }) => {
       )}
 
       {t('address') && (
-        <h4 className='text-center text-uppercase'>
+        <h5 className='text-center text-uppercase'>
           {t('userDetail.address')}
-        </h4>
+        </h5>
       )}
 
-      <div className='d-flex justify-content-between align-items-end'>
-        <UserAddAddressItem count={addresses?.length || 0} />
-        <span className='text-nowrap'>
-          <small className='text-nowrap res-hide'>
-            {t('showing')} {addresses?.length || 0} {t('result')}
-          </small>
-        </span>
-      </div>
-      {!isLoading && addresses.length === 0 ? (
-        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>{t('userDetail.noAddress')}</h5>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='text-end'>
+          <UserAddAddressItem count={addresses?.length || 0} />
         </div>
-      ) : (
-        <div className='table-scroll my-2'>
-          <table className='table table-striped table-sm table-hover align-middle text-center'>
-            <thead>
-              <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
-                  <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
-                    {t('userDetail.address')}
-                  </span>
-                </th>
-                <th scope='col'>
-                  <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
-                    {t('action')}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {addresses?.map((address, index) => (
-                <tr key={index}>
-                  <th scope='row'>{index + 1}</th>
-                  <td className='text-start px-2'>
-                    <span>{address}</span>
-                  </td>
-                  <td>
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-primary ripple me-2 my-1 rounded-1'
-                      data-bs-toggle='modal'
-                      data-bs-target='#edit-address-form'
-                      onClick={() => handleEditAddress(address, index)}
-                    >
-                      <i className='fa-solid fa-pen'></i>
-                      <span className='ms-2 res-hide'>{t('button.edit')}</span>
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-danger ripple my-1 rounded-1'
-                      onClick={() => handleDeleteAddress(address, index)}
-                    >
-                      <i className='fa-solid fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.delete')}
-                      </span>
-                    </button>
-                  </td>
+        {!isLoading && addresses.length === 0 ? (
+          <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+            <h5>{t('userDetail.noAddress')}</h5>
+          </div>
+        ) : (
+          <div className='table-scroll my-2'>
+            <table className='table table-sm table-hover align-middle text-center'>
+              <thead>
+                <tr>
+                  <th scope='col'></th>
+                  <th scope='col' className='text-start'>
+                    <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
+                      {t('userDetail.address')}
+                    </span>
+                  </th>
+                  <th scope='col'>
+                    <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
+                      {t('action')}
+                    </span>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      <Modal
-        id='edit-address-form'
-        hasCloseBtn={false}
-        title={t('userDetail.editAddress')}
-      >
-        <UserEditAddressForm
-          oldAddress={editAddress.address}
-          index={editAddress.index}
-        />
-      </Modal>
+              </thead>
+              <tbody>
+                {addresses?.map((address, index) => (
+                  <tr key={index}>
+                    <th scope='row'>{index + 1}</th>
+                    <td className='text-start px-2'>
+                      <span>{address}</span>
+                    </td>
+                    <td>
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-primary ripple me-2 my-1 rounded-1'
+                        data-bs-toggle='modal'
+                        data-bs-target='#edit-address-form'
+                        onClick={() => handleEditAddress(address, index)}
+                        title={t('button.edit')}
+                      >
+                        <i className='fa-solid fa-pen'></i>
+                      </button>
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-danger ripple my-1 rounded-1'
+                        onClick={() => handleDeleteAddress(address, index)}
+                        title={t('button.delete')}
+                      >
+                        <i className='fa-solid fa-trash-alt'></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <Modal
+          id='edit-address-form'
+          hasCloseBtn={false}
+          title={t('userDetail.editAddress')}
+        >
+          <UserEditAddressForm
+            oldAddress={editAddress.address}
+            index={editAddress.index}
+          />
+        </Modal>
+        {addresses?.length !== 0 && (
+          <span className='text-nowrap'>
+            <small className='text-nowrap res-hide'>
+              {t('showing')} {addresses?.length || 0} {t('result')}
+            </small>
+          </span>
+        )}
+      </div>
     </div>
   )
 }

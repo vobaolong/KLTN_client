@@ -68,7 +68,7 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }

@@ -86,12 +86,11 @@ const UserStoresTable = () => {
 
   return (
     <div className='position-relative'>
-      <h4 className='text-center text-uppercase'>{t('myStore')}</h4>
-
+      <h5 className='text-center text-uppercase'>{t('myStore')}</h5>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='d-flex align-items-center'>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
           <div className='ms-2'>
             <Link
@@ -104,134 +103,140 @@ const UserStoresTable = () => {
             </Link>
           </div>
         </div>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
-      {!isLoading && stores.length === 0 ? (
-        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>{t('storeDetail.noStores')}</h5>
-        </div>
-      ) : (
-        <div className='table-scroll my-2'>
-          <table className='table table-striped table-sm table-hover align-middle text-center'>
-            <thead>
-              <tr>
-                <th scope='col'>
-                  {/* <SortByButton
+
+        {!isLoading && stores.length === 0 ? (
+          <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+            <h5>{t('storeDetail.noStores')}</h5>
+          </div>
+        ) : (
+          <div className='table-scroll my-2'>
+            <table className='table table-striped table-sm table-hover align-middle text-center'>
+              <thead>
+                <tr>
+                  <th scope='col'>
+                    {/* <SortByButton
                   currentSortBy={filter.sortBy}
                   title=''
                   sortBy='point'
                   onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                 /> */}
-                </th>
-                <th scope='col'>
-                  <span
-                    style={{ fontWeight: '400', fontSize: '.875rem' }}
-                    className='text-secondary'
-                  >
-                    {t('storeDetail.avatar')}
-                  </span>
-                </th>
-                <th scope='col' className='text-start'>
-                  <SortByButton
-                    currentSortBy={filter.sortBy}
-                    title={t('storeDetail.storeName')}
-                    sortBy='name'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col' className='text-start'>
-                  <span
-                    style={{ fontWeight: '400', fontSize: '.875rem' }}
-                    className='text-secondary'
-                  >
-                    {t('storeDetail.address')}
-                  </span>
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentSortBy={filter.sortBy}
-                    title={t('storeDetail.role')}
-                    sortBy='ownerId'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentSortBy={filter.sortBy}
-                    title={t('status.active')}
-                    sortBy='isActive'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentSortBy={filter.sortBy}
-                    title={t('status.status')}
-                    sortBy='isOpen'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-
-                <th scope='col'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {stores.map((store, index) => (
-                <tr key={index}>
-                  <th scope='row'>
-                    {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <th scope='text-start'>
-                    <small className='hidden-name'>
-                      <StoreSmallCard store={store} />
-                    </small>
-                  </th>
-                  <td className='text-start'>
-                    <small className='hidden-avatar'>
-                      <StoreSmallCard store={store} />
-                    </small>
-                  </td>
-                  <th className='text-start fw-normal'>
-                    <small>{store.address}</small>
-                  </th>
-                  <td className='text-center'>
-                    <ManagerRoleLabel
-                      role={
-                        _id === store.ownerId._id
-                          ? t('userDetail.owner')
-                          : t('userDetail.staff')
-                      }
-                    />
-                  </td>
-                  <td className='text-center'>
-                    <StoreActiveLabel isActive={store.isActive} />
-                  </td>
-                  <td className='text-center'>
-                    <StoreStatusLabel isOpen={store.isOpen} />
-                  </td>
-                  <td>
-                    <Link
-                      type='button'
-                      className='btn btn-secondary ripple rounded-1'
-                      to={`/vendor/${store._id}`}
-                      title={t('admin.adDashboard.dashboard')}
+                  <th scope='col'>
+                    <span
+                      style={{ fontWeight: '400', fontSize: '.875rem' }}
+                      className='text-secondary'
                     >
-                      <i class='fa-solid fa-eye'></i>
-                    </Link>
-                  </td>
+                      {t('storeDetail.avatar')}
+                    </span>
+                  </th>
+                  <th scope='col' className='text-start'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title={t('storeDetail.storeName')}
+                      sortBy='name'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col' className='text-start'>
+                    <span
+                      style={{ fontWeight: '400', fontSize: '.875rem' }}
+                      className='text-secondary'
+                    >
+                      {t('storeDetail.address')}
+                    </span>
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title={t('storeDetail.role')}
+                      sortBy='ownerId'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title={t('status.active')}
+                      sortBy='isActive'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title={t('status.status')}
+                      sortBy='isOpen'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+
+                  <th scope='col'></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {stores.map((store, index) => (
+                  <tr key={index}>
+                    <th scope='row'>
+                      {index + 1 + (filter.page - 1) * filter.limit}
+                    </th>
+                    <th scope='text-start'>
+                      <small className='hidden-name'>
+                        <StoreSmallCard store={store} />
+                      </small>
+                    </th>
+                    <td className='text-start'>
+                      <small className='hidden-avatar'>
+                        <StoreSmallCard store={store} />
+                      </small>
+                    </td>
+                    <th className='text-start fw-normal'>
+                      <small>{store.address}</small>
+                    </th>
+                    <td className='text-center'>
+                      <ManagerRoleLabel
+                        role={
+                          _id === store.ownerId._id
+                            ? t('userDetail.owner')
+                            : t('userDetail.staff')
+                        }
+                      />
+                    </td>
+                    <td className='text-center'>
+                      <StoreActiveLabel isActive={store.isActive} />
+                    </td>
+                    <td className='text-center'>
+                      <StoreStatusLabel isOpen={store.isOpen} />
+                    </td>
+                    <td>
+                      <Link
+                        type='button'
+                        className='btn btn-secondary ripple rounded-1'
+                        to={`/vendor/${store._id}`}
+                        title={t('admin.adDashboard.dashboard')}
+                      >
+                        <i className='fa-solid fa-eye'></i>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
         </div>
-      )}
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+      </div>
     </div>
   )
 }

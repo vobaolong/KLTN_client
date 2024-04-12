@@ -1,10 +1,28 @@
+import { useTranslation } from 'react-i18next'
 import { formatPrice } from '../../helper/formatPrice'
+import { useState } from 'react'
 
-const EWalletInfo = ({ eWallet = 0 }) => (
-  <div className='d-inline-flex justify-content-start align-items-center link-golden fs-2'>
-    <i className='fa-solid fa-wallet me-2'></i>
-    <span>{formatPrice(eWallet)}₫</span>
-  </div>
-)
-
+const EWalletInfo = ({ eWallet = 0 }) => {
+  const { t } = useTranslation()
+  const [hide, setHide] = useState(false)
+  const handleHide = () => {
+    setHide(!hide)
+  }
+  return (
+    <div className='d-inline-flex justify-content-start align-items-center text-dark-emphasis fs-5'>
+      <span className='fs-6'>{t('myBalance')}: </span>
+      <span className='mx-2'>
+        {hide ? formatPrice(eWallet) : '**********'}
+        <sup>₫</sup>
+      </span>
+      <span onClick={handleHide}>
+        {hide ? (
+          <i className='fa-solid fa-eye'></i>
+        ) : (
+          <i className='fa-solid fa-eye-slash'></i>
+        )}
+      </span>
+    </div>
+  )
+}
 export default EWalletInfo

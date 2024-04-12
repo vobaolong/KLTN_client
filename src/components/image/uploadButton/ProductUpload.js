@@ -28,7 +28,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
       })
       .catch((error) => {
         setIsLoading(false)
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
       })
   }
 
@@ -46,7 +46,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
         if (onRun) onRun()
       })
       .catch((error) => {
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }

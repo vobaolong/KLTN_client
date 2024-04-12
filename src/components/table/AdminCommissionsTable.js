@@ -23,16 +23,13 @@ import { toast } from 'react-toastify'
 
 const AdminCommissionTable = ({ heading = 'Commissions' }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
-
   const [editedCommission, setEditedCommission] = useState({})
   const [deletedCommission, setDeletedCommission] = useState({})
   const [restoredCommission, setRestoredCommission] = useState({})
-
   const [commissions, setCommissions] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -63,7 +60,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -121,7 +118,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -138,7 +135,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Something went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -174,155 +171,153 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         />
       )}
 
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
       {isLoading && <Loading />}
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='option-wrap d-flex align-items-center'>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
-          <div className='ms-2'>
-            <AdminCreateCommissionItem onRun={() => setRun(!run)} />
-          </div>
+          <AdminCreateCommissionItem onRun={() => setRun(!run)} />
         </div>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
 
-      <div className='table-scroll my-2'>
-        <table className='table table-hover table-striped table-sm align-middle text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('commissionDetail.name')}
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('commissionDetail.fee')}
-                  sortBy='cost'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('commissionDetail.description')}
-                </span>
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('status.status')}
-                  sortBy='isDeleted'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('action')}
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {commissions.map((commission, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+        <div className='table-scroll my-2'>
+          <table className='table table-hover table-striped table-sm align-middle text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('commissionDetail.name')}
+                    sortBy='name'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
-                <td>
-                  <StoreCommissionLabel commission={commission} />
-                </td>
-                <td>
-                  <small>{commission.cost?.$numberDecimal}%</small>
-                </td>
-                <td
-                  style={{
-                    width: '300px',
-                    overflow: 'auto'
-                  }}
-                  className='text-start'
-                >
-                  <small>{commission.description}</small>
-                </td>
-                <td>
-                  {commission.isDeleted ? (
-                    <span>
-                      <DeletedLabel />
-                    </span>
-                  ) : (
-                    <span>
-                      <ActiveLabel />
-                    </span>
-                  )}
-                </td>
-                <td className='py-1'>
-                  <button
-                    type='button'
-                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
-                    data-bs-toggle='modal'
-                    data-bs-target='#edit-commission-form'
-                    onClick={() => handleEditCommission(commission)}
-                  >
-                    <i className='fa-solid fa-pen'></i>
-                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
-                  </button>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('commissionDetail.fee')}
+                    sortBy='cost'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('commissionDetail.description')}
+                  </span>
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='isDeleted'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
 
-                  {!commission.isDeleted ? (
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-danger ripple rounded-1'
-                      onClick={() => handleDeleteCommission(commission)}
-                    >
-                      <i className='fa-solid fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.delete')}
-                      </span>
-                    </button>
-                  ) : (
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-success ripple'
-                      onClick={() => handleRestoreCommission(commission)}
-                    >
-                      <i className='fa-solid fa-trash-can-arrow-up'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.restore')}
-                      </span>
-                    </button>
-                  )}
-                </td>
+                <th scope='col'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('action')}
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {commissions.map((commission, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td>
+                    <StoreCommissionLabel commission={commission} />
+                  </td>
+                  <td>
+                    <small>{commission.cost?.$numberDecimal}%</small>
+                  </td>
+                  <td
+                    style={{
+                      width: '300px',
+                      overflow: 'auto'
+                    }}
+                    className='text-start'
+                  >
+                    <small>{commission.description}</small>
+                  </td>
+                  <td>
+                    {commission.isDeleted ? (
+                      <span>
+                        <DeletedLabel />
+                      </span>
+                    ) : (
+                      <span>
+                        <ActiveLabel />
+                      </span>
+                    )}
+                  </td>
+                  <td className='py-1'>
+                    <button
+                      type='button'
+                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      data-bs-toggle='modal'
+                      data-bs-target='#edit-commission-form'
+                      onClick={() => handleEditCommission(commission)}
+                      title={t('button.edit')}
+                    >
+                      <i className='fa-solid fa-pen'></i>
+                    </button>
+
+                    {!commission.isDeleted ? (
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-danger ripple rounded-1'
+                        onClick={() => handleDeleteCommission(commission)}
+                        title={t('button.delete')}
+                      >
+                        <i className='fa-solid fa-trash-alt'></i>
+                      </button>
+                    ) : (
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-success ripple'
+                        onClick={() => handleRestoreCommission(commission)}
+                        title={t('button.restore')}
+                      >
+                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <Modal
+          id='edit-commission-form'
+          hasCloseBtn={false}
+          title={t('commissionDetail.edit')}
+        >
+          <AdminEditCommissionForm
+            oldCommission={editedCommission}
+            onRun={() => setRun(!run)}
+          />
+        </Modal>
+        <div className='d-flex align-items-center justify-content-between px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
       </div>
-
-      <Modal
-        id='edit-commission-form'
-        hasCloseBtn={false}
-        title={t('commissionDetail.edit')}
-      >
-        <AdminEditCommissionForm
-          oldCommission={editedCommission}
-          onRun={() => setRun(!run)}
-        />
-      </Modal>
-
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
     </div>
   )
 }

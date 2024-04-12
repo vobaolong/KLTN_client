@@ -42,8 +42,8 @@ const Pagination = ({
   }
 
   return (
-    <nav className='my-4'>
-      <ul className='pagination justify-content-center mb-0'>
+    <nav className='my-2'>
+      <ul className='pagination justify-content-center m-0'>
         <div
           className='btn-group'
           role='group'
@@ -56,7 +56,7 @@ const Pagination = ({
             style={{ minWidth: '40px' }}
             onClick={() => handleChangePage(pageCurrent - 1)}
           >
-            {'<'}
+            <i class='fa-solid fa-angle-left'></i>
           </button>
 
           {!isSmall && (
@@ -134,7 +134,7 @@ const Pagination = ({
             style={{ minWidth: '40px' }}
             onClick={() => handleChangePage(pageCurrent + 1)}
           >
-            {'>'}
+            <i class='fa-solid fa-angle-right'></i>
           </button>
         </div>
       </ul>

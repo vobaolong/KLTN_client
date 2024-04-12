@@ -15,6 +15,7 @@
   },
 
   "toastSuccess": {
+    "withDraw": "Withdraw successfully",
     "userDetail": {
       "updateProfile": "Update profile successfully"
     },
@@ -43,6 +44,12 @@
     "staff": {
       "addStaff": "Add staff successfully",
       "removeStaff": "Remove staff successfully"
+    },
+    "deliveryUnit": {
+      "create": "Add delivery unit successfully",
+      "delete": "Delete delivery unit successfully",
+      "restore": "Restore delivery unit successfully",
+      "update": "Update delivery unit successfully"
     },
     "address": {
       "add": "Add address successfully",
@@ -153,6 +160,7 @@
     },
     "edit": "Edit Level",
     "delete": "Delete Level",
+    "restore": "Restore Level",
     "create": "Create Level",
     "color": "Level color",
     "discount": "Level discount",
@@ -282,10 +290,12 @@
     "unitPrice": "Unit Price",
     "quantity": "Quantity",
     "total": "Order Total",
-    "subTotal": "Merchandise Subtotal",
+    "subTotal": "Subtotal",
+    "totalPrice": "Total Amount",
     "shippingFee": "Shipping Fee",
-    "discountShippingFee": "Shipping Discount Subtotal",
+    "discountShippingFee": "Shipping Discount",
     "zenpiiVoucherApplied": "Zenpii Voucher Applied",
+    "zenpiiDiscount": "Zenpii Discount",
     "empty": "Your shopping cart is empty",
     "emptyRefer": "Please refer to the products suggested by Zenpii below!"
   },
@@ -336,6 +346,8 @@
     "draw": "Drawing",
     "empty": "Your e-wallet is empty",
     "amount": "Amount",
+    "type": "Type",
+    "createdAt": "Created At",
     "amountValid": "Please provide a valid amount!",
     "currentPw": "Current password",
     "currentPwValid": "Please provide a valid password!"
@@ -355,7 +367,7 @@
     "deliveryUnit": "Delivery Unit",
     "name": "Delivery unit name",
     "description": "Description",
-    "fee": "Cost",
+    "fee": "Fee",
     "add": "Add Delivery Unit",
     "del": "Delete Delivery Unit",
     "edit": "Edit Delivery Unit",
@@ -364,8 +376,10 @@
     "feeValid": "Please provide a valid fee (>0₫)"
   },
   "status": {
+    "success": "Success",
     "status": "Status",
     "active": "Active",
+    "unActive": "UnActive",
     "banned": "Banned",
     "showing": "Showing",
     "hiding": "Hiding",
@@ -386,7 +400,7 @@
     "parent": "Parent category",
     "selectLargeCategory": "Select parent category",
     "noCategorySelected": "No category selected",
-    "img": "Category image",
+    "img": "Image",
     "delete": "Delete category",
     "edit": "Edit category",
     "restore": "Restore category",
@@ -474,6 +488,7 @@
   },
   "favorite": "Favorite",
   "wallet": "E-Wallet",
+  "myBalance": "My Balance",
   "dropHere": "Drop the files here...",
   "dragNDrop": "Drag 'n' drop some files here, or click to select files",
   "confirmDialog": "Are you sure about that?",
@@ -563,7 +578,7 @@
   "processingOrders": "Processing Orders",
   "processedOrders": "Processed Orders",
   "result": "results",
-  "search": "Search",
+  "search": "Search for...",
   "addressForm": {
     "street": "Street",
     "ward": "Ward",

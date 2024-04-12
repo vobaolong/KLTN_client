@@ -19,7 +19,7 @@ const AdminCreateDeliveryItem = ({ onRun = () => {} }) => {
       <Modal
         id='admin-create-delivery-form'
         hasCloseBtn={false}
-        title='Create new delivery unit'
+        title={t('deliveryDetail.add')}
       >
         <AdminCreateDeliveryForm onRun={onRun} />
       </Modal>

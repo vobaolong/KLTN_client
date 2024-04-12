@@ -62,10 +62,11 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
+  console.log(level)
 
   useEffect(() => {
     if (cartId) init()
@@ -91,7 +92,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
       })
   }
 
@@ -112,7 +113,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
       })
   }
 
@@ -300,25 +301,40 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       ) && (
         <div className='d-flex flex-wrap justify-content-end align-items-center mt-1 pt-1 border-top res-flex-justify-between'>
           {!showCheckoutFlag && (
-            <div className='d-flex justify-content-end align-items-center'>
-              <div className='me-4'>
-                <p className='text-decoration-line-through text-muted'>
-                  {formatPrice(totals.totalPrice)}₫
-                </p>
-
-                <h4 className='text-decoration-line-through text-primary fs-5'>
-                  {formatPrice(totals.totalSalePrice)}₫
-                </h4>
+            <div className='me-4 d-flex flex-column'>
+              <div className='d-flex justify-content-between gap-4'>
+                <span className='text-secondary'>
+                  {t('cartDetail.subTotal')}:{' '}
+                </span>
+                <span className='fs-6'>
+                  {formatPrice(totals.totalSalePrice)}
+                  <sup>₫</sup>
+                </span>
               </div>
 
-              <div className='me-4'>
-                <small>
-                  <UserLevelLabel level={level} />
-                </small>
+              <div className='d-flex justify-content-between gap-4'>
+                <span className='text-secondary'>
+                  {t('cartDetail.zenpiiDiscount')} (
+                  {level?.discount?.$numberDecimal}%):{' '}
+                </span>
+                <span className='fs-6'>
+                  -{' '}
+                  {formatPrice(
+                    (totals.totalSalePrice * level?.discount?.$numberDecimal) /
+                      100
+                  )}
+                  <sup>₫</sup>
+                </span>
+              </div>
 
-                <h4 className='text-primary fs-5'>
-                  {formatPrice(totals.amountFromUser1)}₫
-                </h4>
+              <div className='d-flex justify-content-between gap-4'>
+                <span className='text-secondary'>
+                  {t('cartDetail.totalPrice')}:{' '}
+                </span>
+                <span className='fs-6'>
+                  {formatPrice(totals.amountFromUser1)}
+                  <sup>₫</sup>
+                </span>
               </div>
             </div>
           )}
@@ -331,12 +347,17 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
             onClick={toggleShowCheckoutFlag}
           >
             {t('cartDetail.proceedToCheckout')}
+            <i
+              className={`ms-1 fa-solid ${
+                showCheckoutFlag ? 'fa-angle-up' : 'fa-angle-down'
+              } fa-angle-down`}
+            ></i>
           </button>
         </div>
       )}
 
       {showCheckoutFlag && (
-        <div className='mx-2 mt-1'>
+        <div className='mt-1'>
           <CheckoutForm
             cartId={cartId}
             userId={userId}

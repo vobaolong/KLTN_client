@@ -1,8 +1,13 @@
-const SuccessLabel = () => (
-  <span className='badge bg-success rounded-1' style={{ width: '80px' }}>
-    <i className=' fa-solid fa-circle-check'></i>
-    <span className='ms-2'>Success</span>
-  </span>
-)
+import { useTranslation } from 'react-i18next'
+
+const SuccessLabel = () => {
+  const { t } = useTranslation()
+  return (
+    <span className='badge bg-success rounded-1'>
+      <i className=' fa-solid fa-circle-check'></i>
+      <span className='ms-2'>{t('status.success')}</span>
+    </span>
+  )
+}
 
 export default SuccessLabel

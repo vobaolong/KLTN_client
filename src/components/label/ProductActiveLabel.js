@@ -5,12 +5,12 @@ const ProductActiveLabel = ({ isActive = false, detail = true }) => {
   return (
     <span className='position-relative d-inline-block'>
       {isActive ? (
-        <span className='badge bg-success cus-tooltip rounded-1 default'>
+        <span className='badge bg-success rounded-1 default'>
           <i className='fa-solid fa-circle-check'></i>
           {detail && <span className='ms-2'>{t('status.active')}</span>}
         </span>
       ) : (
-        <span className='badge bg-danger cus-tooltip rounded-1 default'>
+        <span className='badge bg-danger rounded-1 default'>
           <i className='fa-solid fa-xmark'></i>
           {detail && <span className='ms-2'>{t('status.banned')}</span>}
         </span>

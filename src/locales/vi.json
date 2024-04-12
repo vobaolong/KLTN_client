@@ -15,6 +15,7 @@
   },
 
   "toastSuccess": {
+    "withDraw": "Rút tiền thành công",
     "userDetail": {
       "updateProfile": "Cập nhật thông tin thành công"
     },
@@ -43,6 +44,12 @@
     "staff": {
       "addStaff": "Thêm nhân viên thành công",
       "removeStaff": "Xoá nhân viên thành công"
+    },
+    "deliveryUnit": {
+      "create": "Thêm ĐVVC thành công",
+      "delete": "Xoá ĐVVC thành công",
+      "restore": "Khôi phục ĐVVC thành công",
+      "update": "Cập nhật ĐVVC thành công"
     },
     "address": {
       "add": "Thêm địa chỉ thành công",
@@ -89,7 +96,7 @@
     }
   },
   "toastError": {
-    "storeBanned": "Shop này đang bị tạm khoá!"
+    "storeBanned": "Cửa hàng này bị tạm khoá!"
   },
   "message": {
     "addStaff": "Bạn có chắc chắn thêm nhân viên này?",
@@ -156,6 +163,7 @@
     },
     "edit": "Sửa hạng mức",
     "delete": "Xoá hạng mức",
+    "restore": "Khôi phục hạng mức",
     "create": "Tạo hạng mức",
     "color": "Màu hạng mức",
     "discount": "Giảm giá",
@@ -199,7 +207,7 @@
   "categories": "Danh Mục",
   "bestSeller": "Bán Chạy",
   "newProduct": "Sản Phẩm Mới",
-  "hotStore": "Store Nổi Bật",
+  "hotStore": "Cửa Hàng Nổi Bật",
   "cart": "Giỏ hàng",
   "favProduct": "Sản phẩm yêu thích",
   "favStore": "Cửa hàng yêu thích",
@@ -285,9 +293,11 @@
     "quantity": "Số lượng",
     "total": "Thành tiền",
     "subTotal": "Tổng tiền hàng",
+    "totalPrice": "Tổng số tiền",
     "shippingFee": "Phí vận chuyển",
     "discountShippingFee": "Giảm giá phí vận chuyển",
     "zenpiiVoucherApplied": "Voucher từ Zenpii",
+    "zenpiiDiscount": "Giảm giá Zenpii",
     "empty": "Giỏ hàng của bạn đang trống",
     "emptyRefer": "Bạn tham khảo thêm các sản phẩm được Zenpii gợi ý phía dưới nhé!"
   },
@@ -337,6 +347,8 @@
     "noTransaction": "Không có giao dịch nào",
     "draw": "Rút tiền",
     "empty": "Ví rỗng",
+    "type": "Loại",
+    "createdAt": "Ngày thực hiện",
     "amount": "Số tiền",
     "amountValid": "Vui lòng nhập số tiền phù hợp!",
     "currentPw": "Mật khẩu hiện tại",
@@ -358,15 +370,17 @@
     "name": "Tên ĐVVC",
     "description": "Mô tả",
     "fee": "Phí",
-    "add": "Thêm Đơn Vị Vận Chuyển",
-    "del": "Xoá Đơn Vị Vận Chuyển",
-    "edit": "Sửa Đơn Vị Vận Chuyển",
+    "add": "Thêm đơn vị vận chuyển",
+    "del": "Xoá đơn vị vận chuyển",
+    "edit": "Sửa đơn vị vận chuyển",
     "nameValid": "Vui lòng cung cấp tên đvvc phù hợp!",
     "bioValid": "Vui lòng cung cấp mô tả phù hợp!",
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
+    "success": "Hoàn thành",
     "status": "Trạng thái",
+    "unActive": "Khoá",
     "active": "Hoạt động",
     "banned": "Tạm khoá",
     "showing": "Đang hoạt động",
@@ -388,7 +402,7 @@
     "parent": "Danh mục lớn",
     "selectLargeCategory": "Chọn danh mục lớn",
     "noCategorySelected": "Không danh mục nào được chọn",
-    "img": "Ảnh danh mục",
+    "img": "Ảnh",
     "delete": "Xoá danh mục",
     "edit": "Chỉnh sửa danh mục",
     "restore": "Khôi phục danh mục",
@@ -475,6 +489,7 @@
   },
   "favorite": "Yêu thích",
   "wallet": "Ví",
+  "myBalance": "Số dư của tôi",
   "dropHere": "Thả tập tin vào đây...",
   "dragNDrop": "Kéo và thả một số file vào đây hoặc click để chọn file",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",

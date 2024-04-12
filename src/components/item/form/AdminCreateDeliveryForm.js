@@ -5,19 +5,14 @@ import { regexTest, numberTest } from '../../../helper/test'
 import TextArea from '../../ui/TextArea'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [delivery, setDelivery] = useState({
     name: '',
     description: '',
@@ -65,14 +60,12 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createDelivery(_id, accessToken, delivery)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(t('toastSuccess.deliveryUnit.create'))
           setDelivery({
             name: '',
             description: '',
@@ -84,24 +77,16 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        console.log('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.addDelivery')}
@@ -115,10 +100,10 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Delivery unit name'
+            label={t('deliveryDetail.name')}
             value={delivery.name}
             isValid={delivery.isValidName}
-            feedback='Please provide a valid delivery name.'
+            feedback={t('deliveryDetail.nameValid')}
             validator='name'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -129,10 +114,10 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Description'
+            label={t('deliveryDetail.description')}
             value={delivery.description}
             isValid={delivery.isValidDescription}
-            feedback='Please provide a valid delivery description.'
+            feedback={t('deliveryDetail.bioValid')}
             validator='bio'
             required={true}
             onChange={(value) =>
@@ -145,28 +130,16 @@ const AdminCreateDeliveryForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Price (₫)'
+            label={`${t('deliveryDetail.fee')} (₫)`}
             value={delivery.price}
             isValid={delivery.isValidPrice}
-            feedback='Please provide a valid price (>=0).'
+            feedback={t('deliveryDetail.feeValid')}
             validator='greaterThanOrEqualTo'
             required={true}
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

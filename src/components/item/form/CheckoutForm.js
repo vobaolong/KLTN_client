@@ -23,7 +23,6 @@ import { formatPrice } from '../../../helper/formatPrice'
 import Logo from '../../layout/menu/Logo'
 import Input from '../../ui/Input'
 import DropDownMenu from '../../ui/DropDownMenu'
-import UserLevelLabel from '../../label/UserLevelLabel'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
@@ -95,7 +94,7 @@ const CheckoutForm = ({
         amountToGD: amountFromUser1 + amountFromUser2 - amountToStore
       })
     } catch (e) {
-      toast.error('Something went wrong')
+      console.log('Something went wrong')
     }
   }
 
@@ -223,7 +222,7 @@ const CheckoutForm = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -352,22 +351,18 @@ const CheckoutForm = ({
         />
       )}
 
-      <form
-        className='border border-primary rounded-1 row mb-2'
-        onSubmit={handleSubmit}
-      >
-        <div className='col-12 bg-primary rounded-top-1 p-3'>
-          <Logo />
+      <form className='rounded-1 row' onSubmit={handleSubmit}>
+        <div className='col-12 bg-primary rounded-top-1 p-2 px-3'>
+          <Logo width='150px' />
         </div>
 
-        <div className='col-xl-8 col-md-6'>
-          <div className='row my-2 p-2 border rounded ms-0'>
-            <h5 className='col-12 text-primary'>
-              <i className='fa-solid fa-location-dot me-2'></i>
+        <div className='col-xl-8 bg-value col-md-6'>
+          <div className='row my-2 p-3 box-shadow bg-body rounded-1 ms-0'>
+            <span style={{ fontSize: '1.2rem' }} className='fw-semibold col-12'>
               {t('orderDetail.userReceiver')}
-            </h5>
-            <hr />
-            <div className='col-6 mt-2 d-flex justify-content-between align-items-end'>
+            </span>
+            <hr className='my-2' />
+            <div className='col-6 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <Input
                   type='text'
@@ -386,11 +381,12 @@ const CheckoutForm = ({
                 />
               </div>
             </div>
-            <div className='col-6 mt-2 d-flex justify-content-between align-items-end'>
+            <div className='col-6 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <Input
                   type='text'
                   label={t('userDetail.lastName')}
+                  ZX
                   value={order.lastName}
                   isValid={order.isValidLastName}
                   feedback={t('userDetail.lastNameValid')}
@@ -510,7 +506,12 @@ const CheckoutForm = ({
                 </div>
               </div>
             </div>
-
+          </div>
+          <div className='row my-2 p-3 box-shadow bg-body rounded-1 ms-0'>
+            <span style={{ fontSize: '1.2rem' }} className='fw-semibold col-12'>
+              {t('orderDetail.deliveryUnit')}
+            </span>
+            <hr className='my-2' />
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               {deliveries?.length > 0 && (
                 <DropDownMenu
@@ -557,71 +558,83 @@ const CheckoutForm = ({
           </div>
         </div>
 
-        <div className='col-xl-4 col-md-6'>
-          <div className='my-2 p-2 border rounded'>
-            <h5 className='text-primary px-2'>{t('cartDetail.yourOrder')}</h5>
-            <hr className='mt-0' />
-            <dl className='row'>
-              <dt className='col-sm-3 col-6'>{t('cartDetail.subTotal')}</dt>
-              <dd className='col-sm-9 col-6'>
+        <div className='col-xl-4 bg-value col-md-6'>
+          <div className='my-2 p-3 box-shadow bg-body rounded-1'>
+            <span
+              style={{ fontSize: '1.2rem' }}
+              className='fw-semibold px-2 col-12'
+            >
+              {t('cartDetail.yourOrder')}
+            </span>
+            <hr className='my-2' />
+            <dl className='row px-2'>
+              <dt className='col-7 text-secondary fw-normal'>
+                {t('cartDetail.subTotal')}
+              </dt>
+              <dd className='col-5'>
                 <dl className='row'>
-                  <dd className='col-sm-6 res-hide'>
-                    <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.totalPrice)}
-                      <sup>₫</sup>
-                    </p>
-
-                    <h4 className='text-decoration-line-through text-primary fs-5'>
+                  <dd className='col-12 text-end'>
+                    <span className='fs-6'>
                       {formatPrice(order.totalSalePrice)}
                       <sup>₫</sup>
-                    </h4>
-                  </dd>
-                  <dd className='col-sm-6'>
-                    <small className='res-hide'>
-                      <UserLevelLabel level={userLevel} />
-                    </small>
-
-                    <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser1)}
-                      <sup>₫</sup>
-                    </h4>
+                    </span>
                   </dd>
                 </dl>
               </dd>
-
-              <dt className='col-sm-3 col-6'>{t('cartDetail.shippingFee')}</dt>
-              <dd className='col-sm-9 col-6'>
+              <dt className='col-7 text-secondary fw-normal'>
+                {t('cartDetail.zenpiiVoucherApplied')}
+              </dt>
+              <dd className='col-5'>
                 <dl className='row'>
-                  <dd className='col-sm-6 res-hide'>
-                    <p className='text-decoration-line-through text-muted'>
-                      {formatPrice(order.deliveryPrice)}
+                  <dd className='col-12 text-end'>
+                    <span className='fs-6'>
+                      -{' '}
+                      {formatPrice(
+                        order.totalSalePrice - order.amountFromUser1
+                      )}
                       <sup>₫</sup>
-                    </p>
-
-                    <h4 className='text-decoration-line-through text-primary fs-5'>
-                      {formatPrice(order.deliveryPrice)}
-                      <sup>₫</sup>
-                    </h4>
+                    </span>
                   </dd>
-                  <dd className='col-sm-6'>
-                    <small className='res-hide'>
-                      <UserLevelLabel level={userLevel} />
-                    </small>
-
-                    <h4 className='text-primary fs-5'>
-                      {formatPrice(order.amountFromUser2)}
+                </dl>
+              </dd>
+              <dt className='col-7 text-secondary fw-normal'>
+                {t('cartDetail.shippingFee')}
+              </dt>
+              <dd className='col-5'>
+                <dl className='row'>
+                  <dd className='col-12 text-end'>
+                    <span className='fs-6'>
+                      {formatPrice(order.deliveryPrice)}
                       <sup>₫</sup>
-                    </h4>
+                    </span>
+                  </dd>
+                </dl>
+              </dd>
+              <dt className='col-7 text-secondary fw-normal'>
+                {t('cartDetail.discountShippingFee')}
+              </dt>
+              <dd className='col-5'>
+                <dl className='row'>
+                  <dd className='col-12 text-end'>
+                    <span className='fs-6'>
+                      -{' '}
+                      {formatPrice(order.deliveryPrice - order.amountFromUser2)}
+                      <sup>₫</sup>
+                    </span>
                   </dd>
                 </dl>
               </dd>
 
-              <dt className='col-sm-3 col-6'>{t('cartDetail.total')}</dt>
-              <dd className='col-sm-9 col-6'>
-                <h4 className='text-primary fs-5'>
-                  {formatPrice(order.amountFromUser)}
-                  <sup>₫</sup>
-                </h4>
+              <dt className='col-7 text-secondary fw-normal'>
+                {t('cartDetail.total')}
+              </dt>
+              <dd className='col-5'>
+                <dl className='row'>
+                  <span className='col-12 text-primary fw-bold fs-6 text-end'>
+                    {formatPrice(order.amountFromUser)}
+                    <sup>₫</sup>
+                  </span>
+                </dl>
               </dd>
             </dl>
 

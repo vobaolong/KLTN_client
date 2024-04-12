@@ -58,7 +58,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -119,7 +119,7 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -128,9 +128,9 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
   return (
     <div className='position-relative'>
       {heading && (
-        <h4 className='text-center text-uppercase'>
+        <h5 className='text-center text-uppercase'>
           {isActive ? t('title.listActiveStores') : t('title.listBannedStores')}
-        </h4>
+        </h5>
       )}
 
       {isLoading && <Loading />}

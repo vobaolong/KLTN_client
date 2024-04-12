@@ -82,8 +82,8 @@ const Footer = () => {
         <hr />
       </div>
       <div className='container-md'>
-        <div className='row'>
-          <div className='col-md-8 col-sm-6 col-xs-12'>
+        <div className='row my-2'>
+          <div className='col-12 text-center'>
             <span className='copyright-text text-center'>
               Copyright &copy; {new Date().getFullYear()} All Rights Reserved by{' '}
               <Link className='link-hover text-reset' to='#'>
@@ -93,8 +93,8 @@ const Footer = () => {
             </span>
           </div>
 
-          <div className='col-md-4 col-sm-6 col-xs-12'>
-            <ul className='social-icons text-start'>
+          <div className='col-12 mt-2'>
+            <ul className='social-icons justify-content-center'>
               <li>
                 <a
                   className='social'

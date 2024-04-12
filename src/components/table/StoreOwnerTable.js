@@ -5,7 +5,7 @@ const StoreOwnerTable = ({ heading = '', ownerId = {} }) => {
   const { t } = useTranslation()
   return (
     <div className='position-relative'>
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
 
       <div className='table-scroll my-2'>
         <table className='table align-middle table-hover table-striped table-sm text-center'>

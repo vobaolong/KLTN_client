@@ -49,7 +49,7 @@ const AdminUsersTable = ({ heading = '' }) => {
         }
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -84,7 +84,7 @@ const AdminUsersTable = ({ heading = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
 
       <div className='d-flex justify-content-between align-items-end'>
         <SearchInput onChange={handleChangeKeyword} />

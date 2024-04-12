@@ -38,7 +38,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
     categoryId: '',
     sortBy: 'categoryId',
     order: 'asc',
-    limit: 8,
+    limit: 7,
     page: 1
   })
 
@@ -60,7 +60,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -115,7 +115,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -132,7 +132,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        toast.error('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }
@@ -145,7 +145,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
           title={t('categoryDetail.delete')}
           message={
             <span>
-              Are you sure you want to delete
+              {t('message.delete')}
               <CategorySmallCard category={deletedCategory} />
             </span>
           }
@@ -159,7 +159,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
           title={t('categoryDetail.restore')}
           message={
             <span>
-              Are you sure you want to restore
+              {t('message.restore')}
               <CategorySmallCard category={restoredCategory} />
             </span>
           }
@@ -168,9 +168,9 @@ const AdminCategoriesTable = ({ heading = '' }) => {
         />
       )}
 
-      {heading && <h4 className='text-center text-uppercase'>{heading}</h4>}
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='d-flex align-items-center'>
+      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
           <div className='ms-2'>
             <Link
@@ -183,167 +183,167 @@ const AdminCategoriesTable = ({ heading = '' }) => {
             </Link>
           </div>
         </div>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
 
-      <div className='table-scroll my-2'>
-        <table className='table table-hover table-striped table-sm align-middle text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col' className='text-start'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('categoryDetail.name')}
-                  sortBy='name'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('categoryDetail.img')}
-                  sortBy=''
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('categoryDetail.parent')}
-                  sortBy='categoryId'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('status.status')}
-                  sortBy='isDeleted'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col'>
-                <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  {t('action')}
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+        <div className='table-scroll my-2'>
+          <table className='table table-hover table-sm align-middle text-center'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col' className='text-start'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('categoryDetail.name')}
+                    sortBy='name'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
-                <td className='text-start'>{category.name}</td>
-                <td>
-                  {category.image ? (
-                    <div
-                      style={{
-                        position: 'relative',
-                        margin: 'auto',
-                        paddingBottom: '50px',
-                        width: '50px',
-                        height: '0'
-                      }}
-                    >
-                      <img
-                        loading='lazy'
-                        src={IMG + category.image}
-                        alt={category.name}
-                        style={{
-                          position: 'absolute',
-                          width: '100%',
-                          height: '100%',
-                          top: '0',
-                          left: '0',
-                          objectFit: 'cover',
-                          borderRadius: '0.25rem',
-                          boxShadow:
-                            'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    '-'
-                  )}
-                </td>
-                <td className='text-start hidden-avatar'>
-                  {category.categoryId ? (
-                    <CategorySmallCard category={category.categoryId} />
-                  ) : (
-                    <span>-</span>
-                  )}
-                </td>
-                <td>
-                  {category.isDeleted ? (
-                    <span>
-                      <DeletedLabel />
-                    </span>
-                  ) : (
-                    <span>
-                      <ActiveLabel />
-                    </span>
-                  )}
-                </td>
-                <td>
-                  <Link
-                    type='button'
-                    className='btn btn-sm btn-primary ripple me-2 rounded-1'
-                    to={`/admin/category/editCategory/${category._id}`}
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('categoryDetail.img')}
+                    sortBy=''
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('categoryDetail.parent')}
+                    sortBy='categoryId'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('status.status')}
+                    sortBy='isDeleted'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+
+                <th scope='col'>
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
                   >
-                    <i className='fa-solid fa-pen'></i>
-                    <span className='ms-2 res-hide'>{t('button.edit')}</span>
-                  </Link>
-
-                  {!category.isDeleted ? (
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
-                      onClick={() => handleDeleteCategory(category)}
-                    >
-                      <i className='fa-solid fa-trash-alt'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.delete')}
-                      </span>
-                    </button>
-                  ) : (
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-success ripple cus-tooltip'
-                      onClick={() => handleRestoreCategory(category)}
-                    >
-                      <i className='fa-solid fa-trash-can-arrow-up'></i>
-                      <span className='ms-2 res-hide'>
-                        {t('button.restore')}
-                      </span>
-                    </button>
-                  )}
-                </td>
+                    {t('action')}
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {categories.map((category, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='text-start'>{category.name}</td>
+                  <td>
+                    {category.image ? (
+                      <div
+                        style={{
+                          position: 'relative',
+                          margin: 'auto',
+                          paddingBottom: '50px',
+                          width: '50px',
+                          height: '0'
+                        }}
+                      >
+                        <img
+                          loading='lazy'
+                          src={IMG + category.image}
+                          alt={category.name}
+                          style={{
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            top: '0',
+                            left: '0',
+                            objectFit: 'cover',
+                            borderRadius: '0.25rem',
+                            boxShadow:
+                              'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      '-'
+                    )}
+                  </td>
+                  <td className='text-start hidden-avatar'>
+                    {category.categoryId ? (
+                      <CategorySmallCard category={category.categoryId} />
+                    ) : (
+                      <span>-</span>
+                    )}
+                  </td>
+                  <td>
+                    {category.isDeleted ? (
+                      <span>
+                        <DeletedLabel />
+                      </span>
+                    ) : (
+                      <span>
+                        <ActiveLabel />
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <Link
+                      type='button'
+                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      to={`/admin/category/edit/${category._id}`}
+                      title={t('button.edit')}
+                    >
+                      <i className='fa-solid fa-pen'></i>
+                    </Link>
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+                    {!category.isDeleted ? (
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
+                        onClick={() => handleDeleteCategory(category)}
+                        title={t('button.delete')}
+                      >
+                        <i className='fa-solid fa-trash-alt'></i>
+                      </button>
+                    ) : (
+                      <button
+                        type='button'
+                        className='btn btn-sm btn-outline-success ripple cus-tooltip'
+                        onClick={() => handleRestoreCategory(category)}
+                        title={t('button.restore')}
+                      >
+                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
