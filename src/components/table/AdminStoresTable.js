@@ -19,7 +19,7 @@ import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import StoreActiveLabel from '../label/StoreActiveLabel'
 
-const AdminStoresTable = ({ heading = true, isActive = true }) => {
+const AdminStoresTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -147,177 +147,177 @@ const AdminStoresTable = ({ heading = true, isActive = true }) => {
         />
       )}
 
-      <div className='d-flex justify-content-between align-items-end'>
-        <div className='option-wrap d-flex align-items-center'>
-          <SearchInput onChange={handleChangeKeyword} />
-        </div>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
-      {!isLoading && pagination.size === 0 ? (
-        <div className='d-flex justify-content-center mt-3 text-primary text-center'>
-          <h5>{t('storeDetail.noStores')}</h5>
-        </div>
-      ) : (
-        <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-striped table-sm text-center'>
-            <thead>
-              <tr>
-                <th scope='col'></th>
-                <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('storeDetail.avatar')}
-                  </span>
-                </th>
-                <th scope='col' className='text-start'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('storeDetail.storeName')}
-                  </span>
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('storeDetail.rating')}
-                    sortBy='rating'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col' className='text-start'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('storeDetail.contactPerson')}
-                  </span>
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('storeDetail.commissions')}
-                    sortBy='commissionId'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('status.status')}
-                    sortBy='isActive'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col' className='text-end'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('joined')}
-                    sortBy='createdAt'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        {!isLoading && pagination.size === 0 ? (
+          <div className='my-4 text-danger text-center'>
+            <h5>{t('storeDetail.noStores')}</h5>
+          </div>
+        ) : (
+          <>
+            <SearchInput onChange={handleChangeKeyword} />
+            <div className='table-scroll my-2'>
+              <table className='table align-middle table-hover table-sm text-start'>
+                <thead>
+                  <tr>
+                    <th scope='col'></th>
+                    <th scope='col' className='text-center'>
+                      {t('storeDetail.avatar')}
+                    </th>
+                    <th scope='col'>{t('storeDetail.storeName')}</th>
+                    <th scope='col' className='text-center'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('storeDetail.rating')}
+                        sortBy='rating'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                        {t('storeDetail.contactPerson')}
+                      </span>
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('storeDetail.commissions')}
+                        sortBy='commissionId'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col' className='text-center'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('status.status')}
+                        sortBy='isActive'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col' className='text-end'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('joined')}
+                        sortBy='createdAt'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
 
-                <th scope='col'>
-                  <span
-                    style={{ fontWeight: '400', fontSize: '.875rem' }}
-                    className='text-secondary'
-                  >
-                    {t('action')}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {stores.map((store, index) => (
-                <tr key={index}>
-                  <th scope='row'>
-                    <span className='text-center align-items-center'>
-                      {index + 1 + (filter.page - 1) * filter.limit}
-                    </span>
-                  </th>
-                  <td className='hidden-name' style={{ maxWidth: '300px' }}>
-                    <StoreSmallCard store={store} />
-                  </td>
-                  <td
-                    className='text-start hidden-avatar'
-                    style={{ maxWidth: '300px' }}
-                  >
-                    <StoreSmallCard store={store} />
-                  </td>
-                  <td>
-                    <small>
-                      <StarRating stars={store.rating} />
-                    </small>
-                  </td>
-                  <td className='text-start'>
-                    <small className='me-2'>
-                      {t('userDetail.name')}:{' '}
-                      <span className='text-primary'>
-                        {store.ownerId.firstName +
-                          ' ' +
-                          store.ownerId.lastName || '-'}
-                      </span>
-                      <br />
-                      Email:{' '}
-                      <span className='text-primary'>
-                        {store.ownerId.email || '-'}
-                      </span>
-                      <br />
-                      {t('userDetail.phone')}:{' '}
-                      <span className='text-primary'>
-                        {store.ownerId.phone || '-'}
-                      </span>
-                    </small>
-                  </td>
-                  <td>
-                    <StoreCommissionLabel commission={store.commissionId} />
-                  </td>
-                  <td>
-                    <StoreActiveLabel isActive={store.isActive} />
-                  </td>
-                  <td className='text-end'>
-                    <small className='me-2'>
-                      {humanReadableDate(store.createdAt)}
-                    </small>
-                  </td>
-                  <td className='py-1'>
-                    <button
-                      type='button'
-                      className={`btn btn-sm rounded-1 ${
-                        !store.isActive
-                          ? 'btn-outline-success'
-                          : 'btn-outline-danger'
-                      } ripple cus-tooltip`}
-                      onClick={() => handleActiveStore(store)}
-                    >
-                      {!store.isActive ? (
-                        <>
-                          <i className='fa-solid fa-circle-check'></i>
-                          <span className='ms-2 res-hide'>
-                            {t('button.active')}
+                    <th scope='col' className='text-center'>
+                      <span className='text-secondary'>{t('action')}</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stores.map((store, index) => (
+                    <tr key={index}>
+                      <th scope='row'>
+                        <span className='text-center align-items-center'>
+                          {index + 1 + (filter.page - 1) * filter.limit}
+                        </span>
+                      </th>
+                      <td
+                        className='hidden-name text-center'
+                        style={{ maxWidth: '300px' }}
+                      >
+                        <StoreSmallCard store={store} />
+                      </td>
+                      <td className='text-start hidden-avatar'>
+                        <StoreSmallCard store={store} />
+                      </td>
+                      <td className='text-center'>
+                        <small>
+                          <StarRating stars={store.rating} />
+                        </small>
+                      </td>
+                      <td>
+                        <small className='d-grid'>
+                          <span>
+                            {t('userDetail.name')}:{' '}
+                            <span className='text-primary'>
+                              {store.ownerId.firstName +
+                                ' ' +
+                                store.ownerId.lastName || '-'}
+                            </span>
                           </span>
-                        </>
-                      ) : (
-                        <>
-                          <i className='fa-solid fa-ban'></i>
-                          <span className='ms-2 res-hide'>
-                            {t('button.ban')}
+                          <span>
+                            Email:{' '}
+                            <span className='text-primary'>
+                              {store.ownerId.email || '-'}
+                            </span>
                           </span>
-                        </>
-                      )}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+                          <span>
+                            {t('userDetail.phone')}:{' '}
+                            <span className='text-primary'>
+                              {store.ownerId.phone || '-'}
+                            </span>
+                          </span>
+                        </small>
+                      </td>
+                      <td>
+                        <StoreCommissionLabel commission={store.commissionId} />
+                      </td>
+                      <td className='text-center'>
+                        <StoreActiveLabel isActive={store.isActive} />
+                      </td>
+                      <td className='text-end'>
+                        <small>{humanReadableDate(store.createdAt)}</small>
+                      </td>
+                      <td className='text-center'>
+                        <button
+                          type='button'
+                          className={`btn btn-sm rounded-1 ${
+                            !store.isActive
+                              ? 'btn-outline-success'
+                              : 'btn-outline-danger'
+                          } ripple cus-tooltip`}
+                          onClick={() => handleActiveStore(store)}
+                          title={
+                            !store.isActive
+                              ? t('button.active')
+                              : t('button.ban')
+                          }
+                        >
+                          <i
+                            className={`fa-solid ${
+                              store.isActive ? 'fa-ban' : 'fa-circle-check'
+                            } `}
+                          ></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className='d-flex justify-content-between align-items-center px-4'>
+              <ShowResult
+                limit={filter.limit}
+                size={pagination.size}
+                pageCurrent={pagination.pageCurrent}
+              />
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }

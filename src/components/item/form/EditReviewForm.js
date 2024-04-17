@@ -71,7 +71,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
         else {
           if (onRun) {
             onRun()
-            toast.success(data.success)
+            toast.success(t('toastSuccess.review.update'))
           }
         }
         setIsLoading(false)
@@ -97,7 +97,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
       <form className='row mb-2' onSubmit={handleSubmit}>
         <div className='col-12'>
           <RatingInput
-            label='Rate'
+            label={t('reviewDetail.productQuality')}
             value={newReview.rating}
             isValid={newReview.isValidRating}
             feedback={t('reviewDetail.isValid')}

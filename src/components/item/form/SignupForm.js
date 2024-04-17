@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { signup } from '../../../apis/auth'
 import { regexTest } from '../../../helper/test'
-import SocialForm from './SocialForm'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
@@ -98,7 +97,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Server error!')
+        console.log('Server error!')
         setIsLoading(false)
       })
   }

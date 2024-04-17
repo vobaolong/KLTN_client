@@ -42,9 +42,9 @@ const StoreNav = ({ store = {} }) => {
             <li className='nav-item'>
               <Link
                 className={`rounded-1 nav-link hover ${
-                  path === 'review&rating' ? 'active link-active' : ''
+                  path === 'rating' ? 'active link-active' : ''
                 }`}
-                to={`/store/review&rating/${store._id}`}
+                to={`/store/rating/${store._id}`}
               >
                 <span className='res-hide-lg'>{t('storeDetail.rating')}</span>
               </Link>
@@ -134,10 +134,8 @@ const StoreNav = ({ store = {} }) => {
               </li>
               <li className='nav-item'>
                 <Link
-                  className={`nav-link ${
-                    path === 'review&rating' ? 'active' : ''
-                  }`}
-                  to={`/store/review&rating/${store._id}`}
+                  className={`nav-link ${path === 'rating' ? 'active' : ''}`}
+                  to={`/store/rating/${store._id}`}
                 >
                   {t('storeDetail.rating')}
                 </Link>

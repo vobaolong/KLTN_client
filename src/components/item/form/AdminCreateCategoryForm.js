@@ -77,7 +77,7 @@ const AdminCreateCategoryForm = () => {
   }
 
   return (
-    <div className='position-relative'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -89,10 +89,10 @@ const AdminCreateCategoryForm = () => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border bg-body rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
+        <div className='col-12 bg-primary p-3 rounded-top-2'>
           <h1 className='text-white fs-5 m-0'>{t('categoryDetail.add')}</h1>
         </div>
 

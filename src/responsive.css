@@ -82,7 +82,7 @@
 
 	.res-d-flex-end-lg {
 		display: flex !important;
-		justify-content: end !important;
+		justify-content: flex-end !important;
 		align-items: center;
 		flex-wrap: nowrap;
 	}
@@ -105,7 +105,7 @@
 	}
 
 	.res-mx--12-md {
-		/* padding: 16px 24px !important; */
+		padding: 16px 24px !important;
 	}
 
 	.res-total-price {
@@ -215,7 +215,7 @@
 /* sm */
 @media (max-width: 575px) {
 
-	.productName {
+	.product-name {
 		font-size: 0.9rem;
 		overflow: hidden;
 		text-overflow: ellipsis;

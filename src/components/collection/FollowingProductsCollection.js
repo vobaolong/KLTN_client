@@ -9,7 +9,7 @@ import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 
-const FollowingProductsCollection = () => {
+const FollowingProductsCollection = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -66,29 +66,31 @@ const FollowingProductsCollection = () => {
     <div className='position-relative'>
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-
-      <h4 className='text-center'>{t('favProduct')}</h4>
-      <div className='d-flex justify-content-end align-items-end'>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
-
-      <div className='container-fluid p-0 mt-3'>
-        <div className='row'>
-          {listProducts?.map((product, index) => (
-            <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
-              <ProductCard product={product} onRun={() => setRun(!run)} />
-            </div>
-          ))}
+      {heading && <h4 className='text-center'>{t('favProduct')}</h4>}
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='container-fluid p-0 mt-3'>
+          <div className='row'>
+            {listProducts?.map((product, index) => (
+              <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
+                <ProductCard product={product} onRun={() => setRun(!run)} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
         </div>
       </div>
-
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
     </div>
   )
 }

@@ -44,21 +44,21 @@ const SearchBar = () => {
 
   return (
     <form
-      className='search-bar m-0 input-group border-1 border rounded-1'
+      className='search-bar m-0 input-group border rounded-2'
       onSubmit={handleFormSubmit}
     >
-      <DropDownMenu
-        listItem={listOptions}
-        value={option}
-        setValue={setOption}
-      />
-
       <input
-        className='form-control'
+        className='form-control rounded-start-1 border-end ms-1'
         type='search'
         placeholder={t('searchHolder')}
         value={query}
         onChange={handleChange}
+      />
+
+      <DropDownMenu
+        listItem={listOptions}
+        value={option}
+        setValue={setOption}
       />
 
       <button

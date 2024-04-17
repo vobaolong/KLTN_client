@@ -62,7 +62,6 @@ const AdminUpdateOrderStatusButton = ({ orderId = '', status = '', onRun }) => {
         size='sm'
         value={statusValue}
         setValue={(value) => handleUpdate(value)}
-        borderBtn={true}
       />
     </div>
   )

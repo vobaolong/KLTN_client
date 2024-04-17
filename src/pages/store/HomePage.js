@@ -11,6 +11,11 @@ const HomePage = () => {
   const { t } = useTranslation()
   const store = useSelector((state) => state.store.store)
 
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: `${store.name}`, url: `/store/${store._id}` }
+  ]
+
   return (
     <>
       <MetaData title={`${store.name} | Zenpii Việt Nam`} />
@@ -19,7 +24,7 @@ const HomePage = () => {
           <Error msg={t('toastError.storeBanned')} />
         </MainLayout>
       ) : (
-        <StoreLayout store={store}>
+        <StoreLayout store={store} paths={paths}>
           <div className='store-home-page'>
             {store.featured_images?.length >= 1 && (
               <div className='mb-4'>

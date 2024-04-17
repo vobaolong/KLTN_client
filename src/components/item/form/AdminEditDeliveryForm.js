@@ -109,6 +109,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
             isValid={delivery.isValidName}
             feedback={t('deliveryDetail.nameValid')}
             validator='name'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -122,6 +123,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
             isValid={delivery.isValidDescription}
             feedback={t('deliveryDetail.bioValid')}
             validator='bio'
+            required={true}
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
             }
@@ -137,6 +139,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
             isValid={delivery.isValidPrice}
             feedback={t('deliveryDetail.feeValid')}
             validator='greaterThanOrEqualTo'
+            required={true}
             onChange={(value) => handleChange('price', 'isValidPrice', value)}
             onValidate={(flag) => handleValidate('isValidPrice', flag)}
           />

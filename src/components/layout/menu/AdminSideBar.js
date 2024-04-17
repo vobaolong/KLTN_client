@@ -33,7 +33,7 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
           onClick={onToggle}
         >
           <i
-            class={`text-muted fs-5 fa-solid fa-circle-chevron-${
+            className={`text-muted fs-5 fa-solid fa-circle-chevron-${
               isCollapsed ? 'right' : 'left'
             }`}
           ></i>

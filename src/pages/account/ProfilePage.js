@@ -10,8 +10,13 @@ import { useTranslation } from 'react-i18next'
 const ProfilePage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.profileInfo'), url: '/account/profile' }
+  ]
+
   return (
-    <AccountLayout user={user}>
+    <AccountLayout user={user} paths={paths}>
       <MetaData title={`${t('userDetail.myAccount')} | Zenpii Việt Nam`} />
       <div className='res-mx--12-md'>
         <div className='position-relative bg-body rounded-2 p-2 box-shadow'>

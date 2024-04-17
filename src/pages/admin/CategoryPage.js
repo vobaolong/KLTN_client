@@ -6,12 +6,16 @@ import CategorySelector from '../../components/selector/CategorySelector'
 import { useTranslation } from 'react-i18next'
 
 const CategoryPage = () => {
-  const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(false)
 
+  const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.category'), url: '/admin/category' }
+  ]
   return (
-    <AdminLayout user={user}>
+    <AdminLayout user={user} paths={paths}>
       <div className='align-items-center d-flex justify-content-end'>
         <div className='position-relative d-inline-block me-2'>
           <button

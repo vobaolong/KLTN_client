@@ -176,9 +176,9 @@ const AdminCategoriesTable = ({ heading = '' }) => {
             <Link
               type='button'
               className='btn btn-primary ripple text-nowrap rounded-1'
-              to='/admin/category/createNewCategory'
+              to='/admin/category/create'
             >
-              <i className='fa-solid fa-plus-circle'></i>
+              <i className='fa-solid fa-plus'></i>
               <span className='ms-2 res-hide'>{t('categoryDetail.add')}</span>
             </Link>
           </div>

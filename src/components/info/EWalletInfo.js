@@ -15,7 +15,11 @@ const EWalletInfo = ({ eWallet = 0 }) => {
         {hide ? formatPrice(eWallet) : '**********'}
         <sup>₫</sup>
       </span>
-      <span onClick={handleHide}>
+      <span
+        title={!hide ? t('button.show') : t('button.hide')}
+        className='pointer'
+        onClick={handleHide}
+      >
         {hide ? (
           <i className='fa-solid fa-eye'></i>
         ) : (

@@ -22,8 +22,14 @@ const ProfilePage = () => {
     updateDispatch('vendor', newStore)
   }
 
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.shopProfile'), url: `/vendor/profile/${store._id}` }
+  ]
+
   return (
-    <VendorLayout user={user} store={store}>
+    <VendorLayout user={user} store={store} paths={paths}>
       <div className='res-mx--12-md'>
         <div className='position-relative bg-white p-2 rounded-2 shadow'>
           <Cover

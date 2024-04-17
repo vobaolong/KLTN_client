@@ -129,11 +129,7 @@ const CategoryPage = () => {
         </nav>
 
         <div className='mb-4'>
-          <ListCategories
-            hasBreadcrumb={true}
-            categoryId={categoryId}
-            heading={false}
-          />
+          <ListCategories categoryId={categoryId} heading={false} />
         </div>
 
         <div className='d-flex justify-content-between align-items-end'>

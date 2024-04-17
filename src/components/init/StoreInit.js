@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -72,7 +73,7 @@ const StoreInit = ({ store, actions }) => {
   }
 
   useEffect(() => {
-    if (!store || store._id != storeId) init()
+    if (!store || store._id !== storeId) init()
   }, [storeId])
 
   return isLoading ? (

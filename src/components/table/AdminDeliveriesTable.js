@@ -21,7 +21,7 @@ import ShowResult from '../ui/ShowResult'
 import { formatPrice } from '../../helper/formatPrice'
 import { toast } from 'react-toastify'
 
-const AdminDeliveriesTable = ({ heading = '' }) => {
+const AdminDeliveriesTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [run, setRun] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -160,7 +160,11 @@ const AdminDeliveriesTable = ({ heading = '' }) => {
           message={t('message.restore')}
         />
       )}
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && (
+        <h5 className='text-center text-uppercase'>
+          {t('deliveryDetail.deliveryUnit')}
+        </h5>
+      )}
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>

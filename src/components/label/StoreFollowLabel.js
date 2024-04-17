@@ -4,7 +4,7 @@ const StoreFollowLabel = ({ numberOfFollowers = 0 }) => {
   const { t } = useTranslation()
   return (
     <span className='position-relative d-inline-block'>
-      <span className='badge bg-pink cus-tooltip rounded-1'>
+      <span className='badge bg-danger-rgba text-danger border cus-tooltip rounded-1'>
         <i className='fa-solid fa-heart me-1'></i>
         {numberOfFollowers}
       </span>

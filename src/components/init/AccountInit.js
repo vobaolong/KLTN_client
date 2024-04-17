@@ -19,7 +19,6 @@ const AccountInit = ({ user, actions }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-
   const { firstName, lastName, avatar } = user
   const history = useHistory()
   const { _id, accessToken, refreshToken, role } = getToken()
@@ -98,7 +97,7 @@ const AccountInit = ({ user, actions }) => {
       <div className='your-account'>
         <div
           type='button'
-          className='your-account-card btn btn-outline-light cus-outline ripple rounded-1'
+          className='your-account-card btn lang ripple rounded-1 text-white'
         >
           <img
             loading='lazy'
@@ -119,36 +118,32 @@ const AccountInit = ({ user, actions }) => {
 
         <ul className='list-group your-account-options'>
           <Link
-            className='list-group-item your-account-options-item ripple text-capitalize'
+            className='list-group-item your-account-options-item ripple '
             to='/account/profile'
           >
-            <i className='fa-solid fa-user-circle'></i>
             {t('userDetail.myAccount')}
           </Link>
           {role === 'user' && (
             <Link
-              className='list-group-item your-account-options-item ripple text-capitalize'
+              className='list-group-item your-account-options-item ripple '
               to='/account/store'
             >
-              <i className='fa-solid fa-store' q></i>
-              {t('manageStore')}
+              {t('myStore')}
             </Link>
           )}
           {role === 'user' && (
             <Link
-              className='list-group-item your-account-options-item ripple text-capitalize'
+              className='list-group-item your-account-options-item ripple '
               to='/account/purchase'
             >
-              <i className='fa-solid fa-bag-shopping'></i>
               {t('userDetail.myPurchase')}
             </Link>
           )}
 
           <li
-            className='list-group-item your-account-options-item ripple text-capitalize'
+            className='list-group-item your-account-options-item ripple '
             onClick={handleSignout}
           >
-            <i className='fa-solid fa-sign-out-alt'></i>
             {t('button.logout')}
           </li>
         </ul>

@@ -16,7 +16,7 @@ import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
 
 const StoreStaffsTable = ({
-  heading = '',
+  heading = false,
   staffIds = [],
   ownerId = {},
   storeId = ''
@@ -134,10 +134,16 @@ const StoreStaffsTable = ({
         />
       )}
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && (
+        <h5 className='text-center text-uppercase'>
+          {t('staffDetail.staffList')}
+        </h5>
+      )}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
-          <SearchInput onChange={handleChangeKeyword} />
+          {pagination.size !== 0 && (
+            <SearchInput onChange={handleChangeKeyword} />
+          )}
           {ownerId && userId === ownerId._id ? (
             <StoreAddStaffItem
               storeId={storeId}
@@ -150,12 +156,12 @@ const StoreStaffsTable = ({
         </div>
 
         {!isLoading && pagination.size === 0 ? (
-          <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <div className='my-4 text-danger text-center'>
             <h5>{t('staffDetail.noStaff')}</h5>
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='store-staffs-table table align-middle align-items-center table-hover table-striped table-sm text-center'>
+            <table className='store-staffs-table table align-middle align-items-center table-hover table-sm text-center'>
               <thead>
                 <tr>
                   <th scope='col'>#</th>

@@ -5,12 +5,9 @@ const StarRating = ({ stars = 5, noStar = false }) => {
       content.push(<i className='fa-solid fa-star link-golden' key={i - 1}></i>)
     }
     if (!noStar)
-      for (let i = stars + 1; i < 6; i++) {
+      for (let i = stars + 1; i <= 5; i++) {
         content.push(
-          <i
-            className='fa-regular fa-star text-muted res-hide-lg'
-            key={i - 1}
-          ></i>
+          <i className='fa-regular fa-star text-black-50' key={i - 1}></i>
         )
       }
     return content

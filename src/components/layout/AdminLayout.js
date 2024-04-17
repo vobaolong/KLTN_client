@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import MainLayout from './MainLayout'
 import AdminSideBar from './menu/AdminSideBar'
+import Breadcrumb from '../ui/Breadcrumb'
 
-const AdminLayout = ({ user = {}, children = null }) => {
+const AdminLayout = ({ user = {}, children = null, paths = {} }) => {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
@@ -10,11 +11,10 @@ const AdminLayout = ({ user = {}, children = null }) => {
 
   return (
     <MainLayout container='container-xxl' navFor='admin'>
+      <Breadcrumb paths={paths} />
       <div className='row'>
         <div
-          className={`col-md-${
-            isCollapsed ? '1' : '2'
-          } res-sticky-top-md mb-4 p-0`}
+          className={`col-md-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}
         >
           <AdminSideBar
             user={user}

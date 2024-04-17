@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminStoreLevelsTable = ({ heading = '' }) => {
+const AdminStoreLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -171,7 +171,11 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
         />
       )}
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && (
+        <h5 className='text-center text-uppercase'>
+          {t('levelDetail.storeLevel.storeLevel')}
+        </h5>
+      )}
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
@@ -181,7 +185,7 @@ const AdminStoreLevelsTable = ({ heading = '' }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-striped table-sm text-center'>
+          <table className='table align-middle table-hover table-sm text-center'>
             <thead>
               <tr>
                 <th scope='col'></th>

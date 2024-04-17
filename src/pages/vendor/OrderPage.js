@@ -22,13 +22,19 @@ const OrderPage = () => {
     { label: t('status.cancelled'), value: 'Cancelled' }
   ]
 
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.order'), url: `/vendor/orders/${store._id}` }
+  ]
+
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
   }
 
   return (
-    <VendorLayout user={user} store={store}>
-      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-4'>
+    <VendorLayout user={user} store={store} paths={paths}>
+      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
@@ -42,9 +48,8 @@ const OrderPage = () => {
           </li>
         ))}
       </div>
-
       <VendorOrdersTable
-        heading={true}
+        heading={false}
         storeId={store._id}
         isEditable={
           selectedStatus === 'Not processed' ||

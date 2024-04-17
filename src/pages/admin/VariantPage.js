@@ -6,9 +6,13 @@ import { useTranslation } from 'react-i18next'
 const VariantPage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.variant'), url: '/admin/variant' }
+  ]
   return (
-    <AdminLayout user={user}>
-      <AdminVariantsTable heading={t('title.productVariants')} />
+    <AdminLayout user={user} paths={paths}>
+      <AdminVariantsTable />
     </AdminLayout>
   )
 }

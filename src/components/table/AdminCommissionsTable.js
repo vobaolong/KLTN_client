@@ -180,11 +180,11 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table table-hover table-striped table-sm align-middle text-center'>
+          <table className='table table-hover table-sm align-middle text-center'>
             <thead>
               <tr>
                 <th scope='col'></th>
-                <th scope='col'>
+                <th scope='col' className='text-start'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -198,7 +198,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
                     title={t('commissionDetail.fee')}
-                    sortBy='cost'
+                    sortBy='fee'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
@@ -218,7 +218,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                 </th>
 
                 <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                  <span style={{ fontWeight: '400', fontSize: '.9rem' }}>
                     {t('action')}
                   </span>
                 </th>
@@ -230,11 +230,11 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   <th scope='row'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td>
+                  <td className='text-start'>
                     <StoreCommissionLabel commission={commission} />
                   </td>
                   <td>
-                    <small>{commission.cost?.$numberDecimal}%</small>
+                    <small>{commission.fee?.$numberDecimal}%</small>
                   </td>
                   <td
                     style={{

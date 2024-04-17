@@ -29,7 +29,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
     status,
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 8,
+    limit: 7,
     page: 1
   })
 
@@ -52,7 +52,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -131,7 +131,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
 
-      <div className='p-3 box-shadow bg-body rounded-2'>
+      <div className='p-3 box-shadow bg-body rounded-1'>
         <SearchInput onChange={handleChangeKeyword} />
         {!isLoading && pagination.size === 0 ? (
           <div className='d-flex justify-content-center mt-3 text-primary text-center'>
@@ -161,7 +161,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col'>
+                  <th scope='col' className='text-end'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -219,10 +219,10 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
               <tbody>
                 {orders?.map((order, index) => (
                   <tr key={index}>
-                    <th scope='row'>
+                    <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <td className='text-end'>
+                    <td className='text-start'>
                       <small>{order._id}</small>
                     </td>
                     <td className='text-end' style={{ whiteSpace: 'normal' }}>
@@ -232,7 +232,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       <small className='text-nowrap'>
                         {order.amountFromUser &&
                           formatPrice(order.amountFromUser.$numberDecimal)}
-                        ₫
+                        <sup>₫</sup>
                       </small>
                     </td>
                     <td
@@ -246,7 +246,8 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                         <small>
                           {order.deliveryId.name}
                           <br />
-                          {formatPrice(order.deliveryId.price.$numberDecimal)}₫
+                          {formatPrice(order.deliveryId.price.$numberDecimal)}
+                          <sup>₫</sup>
                         </small>
                       )}
                     </td>
@@ -263,10 +264,11 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     <td className='text-nowrap text-center'>
                       <Link
                         type='button'
-                        className='btn btn-secondary opacity-75 ripple rounded-1'
+                        className='btn btn-outline-secondary opacity-75 rounded-1'
                         to={`/account/purchase/detail/${order._id}`}
+                        title={t('button.view')}
                       >
-                        <i className='fa-solid fa-info-circle'></i>
+                        <i className='fa-solid fa-eye'></i>
                       </Link>
                     </td>
                   </tr>

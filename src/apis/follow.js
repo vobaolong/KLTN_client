@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const API = process.env.REACT_APP_API_URL
 
 //user follow store
@@ -23,7 +24,7 @@ export const listFollowingStores = async (userId, token, filter) => {
 
 export const getNumberOfFollowers = async (storeId) => {
   try {
-    const res = await fetch(`${API}/store/number/of/followers/${storeId}`, {
+    const res = await fetch(`${API}/store/numberOfFollowers/${storeId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -122,7 +123,7 @@ export const unfollowProduct = async (userId, token, productId) => {
 
 export const getNumberOfFollowersForProduct = async (productId) => {
   try {
-    const res = await fetch(`${API}/product/number/of/followers/${productId}`, {
+    const res = await fetch(`${API}/product/numberOfFollowers/${productId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

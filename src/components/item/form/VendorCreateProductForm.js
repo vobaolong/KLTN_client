@@ -150,7 +150,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
   }
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -165,9 +165,9 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         onSubmit={handleSubmit}
       >
         <div className='col-12 bg-primary rounded-top-1 px-4 py-3'>
-          <h1 className='text-white fs-5 m-0'>
+          <span className='text-white fs-5 m-0'>
             {t('productDetail.createProduct')}
-          </h1>
+          </span>
         </div>
 
         <div className='col-12 px-4'>
@@ -292,7 +292,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             value={newProduct.description}
             isValid={newProduct.isValidDescription}
             required={true}
-            feedback={t('productValid.descriptionValid')}
+            feedback={t('productValid.validDescription')}
             validator='bio'
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)

@@ -7,6 +7,7 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import ColorPickerInput from '../../ui/ColorPickerInput'
 
 const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
   const { t } = useTranslation()
@@ -151,7 +152,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         </div>
 
         <div className='col-12'>
-          <Input
+          {/* <Input
             type='text'
             label={t('levelDetail.color')}
             value={level.color}
@@ -161,6 +162,13 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             required={true}
             onChange={(value) => handleChange('color', 'isValidColor', value)}
             onValidate={(flag) => handleValidate('isValidColor', flag)}
+          /> */}
+          <ColorPickerInput
+            label={t('levelDetail.color')}
+            color={level.color}
+            onChange={(selectedColor) =>
+              handleChange('color', 'isValidColor', selectedColor)
+            }
           />
         </div>
         <div className='col-12 d-grid mt-4'>

@@ -7,9 +7,12 @@ import MetaData from '../../components/layout/meta/MetaData'
 const WalletPage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myWallet'), url: '/account/wallet' }
+  ]
   return (
-    <AccountLayout user={user}>
+    <AccountLayout user={user} paths={paths}>
       <MetaData title={`${t('helmet.myWallet')} | Zenpii Việt Nam`} />
       <TransactionsTable
         eWallet={user.e_wallet ? user.e_wallet.$numberDecimal : 0}

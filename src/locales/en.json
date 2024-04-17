@@ -13,8 +13,47 @@
     "myWallet": "My Wallet",
     "myStore": "My Store"
   },
-
+  "breadcrumbs": {
+    "delivery": "Deliveries",
+    "level": "Levels",
+    "store": "Shops",
+    "user": "Users",
+    "commission": "Commissions",
+    "variant": "Variants",
+    "editVariant": "Edit Variant",
+    "addVariant": "Add Variant",
+    "variantValues": "Variant Values",
+    "addCategory": "Add Category",
+    "createStore": "Create 1 Shop",
+    "category": "Categories",
+    "editCategory": "Edit Category",
+    "transactions": "Transactions",
+    "home": "Home",
+    "myPurchase": "My Purchase",
+    "addressBook": "Address Book",
+    "myWallet": "My Wallet",
+    "myStore": "My Store",
+    "listFavorites": "ListFavorites",
+    "profileInfo": "Profile Information",
+    "collection": "All Product",
+    "rating": "Rating",
+    "about": "About",
+    "overview": "Overview",
+    "shopProfile": "Shop Profile",
+    "product": "Products",
+    "addProduct": "Add New Product",
+    "updateProduct": "Edit Product",
+    "staff": "Staffs",
+    "order": "Orders",
+    "orderDetail": "Order Detail",
+    "wallet": "E-Wallet"
+  },
   "toastSuccess": {
+    "review": {
+      "add": "Rating successfully",
+      "delete": "Delete rating successfully",
+      "update": "Update rating successfully"
+    },
     "withDraw": "Withdraw successfully",
     "userDetail": {
       "updateProfile": "Update profile successfully"
@@ -57,7 +96,7 @@
       "delete": "Delete address successfully"
     },
     "level": {
-      "create": "Create level successfully",
+      "create": "Add level successfully",
       "edit": "Edit level successfully",
       "delete": "Delete level successfully",
       "restore": "Restore level successfully"
@@ -109,8 +148,8 @@
     "openStore": "Open Store",
     "closeStore": "Close Store",
     "productVariants": "Product Variants",
-    "listBannedStores": "List of Banned Stores",
-    "listActiveStores": "List of Active Stores",
+    "listBannedStores": "List of Banned Shops",
+    "listActiveStores": "List of Active Shops",
     "listBannedProducts": "List of Banned Products",
     "listActiveProducts": "List of Active Products",
     "allOrders": "All Orders",
@@ -135,7 +174,7 @@
     "restoreDelivery": "Restore delivery unit",
     "restoreLevel": "Restore level",
     "deleteLevel": "Delete level",
-    "createLevel": "Create level",
+    "createLevel": "Add level",
     "editLevel": "Edit level",
     "restoreValue": "Restore variant value",
     "deleteValue": "Delete variant value",
@@ -151,6 +190,7 @@
     "updateOrder": "Update order status",
     "updateCategory": "Update category"
   },
+  "pickColor": "Click to pick color",
   "levelDetail": {
     "userLevel": {
       "userLevel": "User levels"
@@ -161,7 +201,7 @@
     "edit": "Edit Level",
     "delete": "Delete Level",
     "restore": "Restore Level",
-    "create": "Create Level",
+    "create": "Add Level",
     "color": "Level color",
     "discount": "Level discount",
     "name": "Level name",
@@ -171,11 +211,12 @@
     "validFloorPoint": "Please provide a valid floor point (>=0)!",
     "nameValid": "Please provide a valid level name!"
   },
-  "action": "Action",
+  "action": "Option",
   "showing": "Showing",
   "of": "of",
   "admin": {
     "adDashboard": {
+      "overview": "Overview",
       "dashboard": "Dashboard",
       "hour": "Hour",
       "day": "Day",
@@ -187,7 +228,7 @@
       "bar": "Bar"
     },
     "users": "Users",
-    "stores": "Stores",
+    "stores": "Shops",
     "orders": "Orders",
     "transactions": "Transactions",
     "categories": "Categories",
@@ -212,6 +253,8 @@
   "similarProducts": "Similar Products",
   "sameShop": "From the same shop",
   "productDetail": {
+    "estimatedDelivery": "Estimated Delivery",
+    "offers": "Available Offers",
     "only": "Only",
     "productLeft": "products left",
     "hotSale": "Hot Sale",
@@ -260,7 +303,7 @@
     "nameValid": "Please provide a valid product name!",
     "avatarValid": "Please provide a valid product avatar!",
     "otherValid": "Please provide a valid other images!",
-    "descriptionValid": "Please provide a valid product description!",
+    "validDescription": "Please provide a valid product description!",
     "quantityValid": "Please provide a valid product quantity!",
     "priceValid": "Please provide a valid product price!",
     "salePriceValid": "Please provide a valid product sale price!"
@@ -299,10 +342,21 @@
     "empty": "Your shopping cart is empty",
     "emptyRefer": "Please refer to the products suggested by Zenpii below!"
   },
-
+  "goToUserManager": "Go to User Manager",
+  "goToShopManager": "Go to Shop Manager",
+  "goToOrderManager": "Go to Order Manager",
+  "goToProductManager": "Go to Product Manager",
+  "orderRecent": "Orders Recent",
+  "topShop": "Outstanding Shops",
+  "topUser": "Outstanding User",
+  "topProduct": "Best-selling Product",
   "store": "Store",
-  "searchHolder": "Search for products and stores",
+  "searchHolder": "Search for products and shops",
   "userDetail": {
+    "role": {
+      "admin": "Admin",
+      "user": "User"
+    },
     "owner": "Owner",
     "staff": "Staff",
     "idCard": "ID Card",
@@ -352,8 +406,8 @@
     "currentPw": "Current password",
     "currentPwValid": "Please provide a valid password!"
   },
-  "manageStore": "Stores",
-  "myStore": "My Stores",
+  "manageStore": "Shops",
+  "myStore": "My Shops",
   "createStore": "Create store",
   "commissionDetail": {
     "description": "Description",
@@ -361,7 +415,10 @@
     "add": "Add Commission",
     "delete": "Delete Commission",
     "edit": "Edit Commission",
-    "name": "Commission Name"
+    "name": "Commission Name",
+    "validName": "Please provide a valid commission name!",
+    "validDescription": "Please provide a valid commission description!",
+    "feeValid": "'Please provide a valid fee (>=0)!"
   },
   "deliveryDetail": {
     "deliveryUnit": "Delivery Unit",
@@ -447,8 +504,8 @@
     "address": "Address",
     "viewShop": "View Shop",
     "staple": "Staple Goods",
-    "activeStores": "Active Stores",
-    "bannedStores": "Banned Stores",
+    "activeStores": "Active Shops",
+    "bannedStores": "Banned Shops",
     "addFeaturedImg": "Add Featured Image",
     "limitFeatured": "The limit is 6 featured images",
     "bio": "Bio",
@@ -472,7 +529,7 @@
     "allProduct": "All Products",
     "rating": "Rating",
     "about": "About",
-    "noStores": "No store yet!",
+    "noStores": "No shop yet!",
     "createStore": "Create an online store for free",
     "pickupAddress": "Pickup Address",
     "avatar": "Logo",
@@ -494,6 +551,7 @@
   "confirmDialog": "Are you sure about that?",
   "button": {
     "detail": "Detail",
+    "view": "View",
     "restore": "Restore",
     "hide": "Hide",
     "cancel": "Cancel",
@@ -534,6 +592,7 @@
   "signUpForm": {
     "passwordFeedback": "Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &."
   },
+  "seller": "Seller",
   "point": "Point",
   "success/failure": "Order Completion Rate",
   "orderDetail": {
@@ -566,7 +625,15 @@
     "edit": "Edit Rating",
     "content": "Content",
     "isValid": "Please provide a valid content!",
-    "noReview": "The product has not been rated!"
+    "noReview": "The product has not been rated!",
+    "ratingBy": "Rating by ",
+    "cannotReview": "You will not be able to rate orders after ",
+    "productQuality": "Product Quality",
+    "terrible": "Terrible",
+    "poor": "Poor",
+    "fair": "Fair",
+    "good": "Good",
+    "amazing": "Amazing"
   },
   "verified": "Verified",
   "verifyNow": "Verify now",
@@ -591,6 +658,13 @@
     "districtValid": "Please provide a valid city/district (',' is not allowed)!",
     "cityValid": "Please provide a valid province/city (',' is not allowed)!"
   },
+
+  "services": {
+    "refund": "Get a 111% refund if the product is fake",
+    "return": "Free return at home within 30 days if the product is defective",
+    "checkPackage": "Open the box to check when receiving the goods"
+  },
+
   "footer": {
     "quickLink": "Quick Link",
     "about": "About Us",

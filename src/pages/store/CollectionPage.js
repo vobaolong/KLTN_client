@@ -77,13 +77,17 @@ const CollectionPage = () => {
       page: newPage
     })
   }
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: `${store.name}`, url: `/store/${store._id}` },
+    { name: t('breadcrumbs.collection'), url: `/store/collection/${store._id}` }
+  ]
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
       <Error msg={t('toastError.storeBanned')} />
     </MainLayout>
   ) : (
-    <StoreLayout store={store}>
+    <StoreLayout store={store} paths={paths}>
       <div className='position-relative'>
         {isLoading && <Loading />}
         {error && <Error msg={error} />}

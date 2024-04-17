@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminUserLevelsTable = ({ heading = '' }) => {
+const AdminUserLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -171,7 +171,11 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
         />
       )}
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && (
+        <h5 className='text-center text-uppercase'>
+          {t('levelDetail.userLevel.userLevel')}
+        </h5>
+      )}
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
@@ -189,7 +193,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='User level'
+                    title={t('levelDetail.name')}
                     sortBy='name'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -198,7 +202,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Floor point'
+                    title={t('levelDetail.floorPoint')}
                     sortBy='minPoint'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -207,7 +211,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Discount'
+                    title={t('levelDetail.discount')}
                     sortBy='discount'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -216,7 +220,7 @@ const AdminUserLevelsTable = ({ heading = '' }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Status'
+                    title={t('status.status')}
                     sortBy='isDeleted'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />

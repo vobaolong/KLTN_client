@@ -101,7 +101,7 @@ const UserAddressesTable = ({ addresses = [] }) => {
                   <tr key={index}>
                     <th scope='row'>{index + 1}</th>
                     <td className='text-start px-2'>
-                      <span>{address}</span>
+                      <span style={{ fontSize: '0.9rem' }}>{address}</span>
                     </td>
                     <td>
                       <button

@@ -10,9 +10,15 @@ const StaffsPage = () => {
   const store = useSelector((state) => state.vendor.store)
   const [flag, toggleFlag] = useToggle(true)
   const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.staff'), url: `/vendor/staffs/${store._id}` }
+  ]
+
   return (
-    <VendorLayout user={user} store={store}>
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+    <VendorLayout user={user} store={store} paths={paths}>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span
@@ -36,16 +42,12 @@ const StaffsPage = () => {
       </div>
       {flag ? (
         <StoreStaffsTable
-          heading={t('staffDetail.staffList')}
           staffIds={store.staffIds}
           ownerId={store.ownerId}
           storeId={store._id}
         />
       ) : (
-        <StoreOwnerTable
-          heading={t('staffDetail.owner')}
-          ownerId={store.ownerId}
-        />
+        <StoreOwnerTable ownerId={store.ownerId} />
       )}
     </VendorLayout>
   )

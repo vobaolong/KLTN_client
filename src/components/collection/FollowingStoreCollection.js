@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { listFollowingStores } from '../../apis/follow'
@@ -8,7 +9,7 @@ import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 
-const FollowingStoresCollection = () => {
+const FollowingStoresCollection = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -66,28 +67,31 @@ const FollowingStoresCollection = () => {
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
 
-      <h4 className='text-center'>{t('favStore')}</h4>
-      <div className='d-flex justify-content-end align-items-end'>
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
-
-      <div className='container-fluid p-0 mt-3'>
-        <div className='row'>
-          {listStores?.map((store, index) => (
-            <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
-              <StoreCard store={store} onRun={() => setRun(!run)} />
-            </div>
-          ))}
+      {heading && <h4 className='text-center'>{t('favStore')}</h4>}
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='container-fluid p-0 mt-3'>
+          <div className='row'>
+            {listStores?.map((store, index) => (
+              <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
+                <StoreCard store={store} onRun={() => setRun(!run)} />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
         </div>
       </div>
-
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
     </div>
   )
 }

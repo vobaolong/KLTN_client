@@ -68,7 +68,7 @@ const AdminCreateVariantForm = () => {
   }
 
   return (
-    <div className='p-1 position-relative'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -80,15 +80,15 @@ const AdminCreateVariantForm = () => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border bg-body rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
-          <h1 className='text-white fs-5 m-0'>{t('variantDetail.add')}</h1>
+        <div className='col-12 bg-primary rounded-top-1 px-4 py-3'>
+          <span className='text-white fs-5 m-0'>{t('variantDetail.add')}</span>
         </div>
 
         <div className='col-12 mt-4 px-4'>
-          <p className=''>{t('productDetail.chooseCategory')}</p>
+          <span className=''>{t('productDetail.chooseCategory')}</span>
           <MultiCategorySelector
             label={t('chosenCategory')}
             isActive={false}

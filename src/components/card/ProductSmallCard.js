@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom'
+import StarRating from '../label/StarRating'
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
+const ProductSmallCard = ({
+  product = {},
+  borderName = false,
+  style = {},
+  rating = false
+}) => (
   <span
     className={`d-inline-flex align-items-center ${
       borderName && 'bg-value rounded-1 px-1'
@@ -26,7 +32,12 @@ const ProductSmallCard = ({ product = {}, borderName = false, style = {} }) => (
       title={product.name}
       style={style}
     >
-      <span className='productName'>{product.name}</span>
+      <span className='product-name'>{product.name}</span>
+      {rating && (
+        <small>
+          {product.rating} <StarRating stars={product.rating} />
+        </small>
+      )}
     </Link>
   </span>
 )

@@ -18,7 +18,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
     storeId,
     orderId,
     productId,
-    rating: 1,
+    rating: 4,
     content: '',
     isValidRating: true,
     isValidContent: true
@@ -77,7 +77,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.review.add'))
           if (onRun) onRun()
         }
         setIsLoading(false)
@@ -93,7 +93,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Review & rate'
+          title={t('productDetail.productReview')}
           onSubmit={onSubmit}
           message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
@@ -103,10 +103,10 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
       <form className='row mb-2' onSubmit={handleSubmit}>
         <div className='col-12'>
           <RatingInput
-            label='Rate'
+            label={t('reviewDetail.productQuality')}
             value={review.rating}
             isValid={review.isValidRating}
-            feedback='Please provide a valid rating.'
+            feedback={t('reviewDetail.isValid')}
             onChange={(value) => handleChange('rating', 'isValidRating', value)}
           />
         </div>
@@ -114,10 +114,10 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
         <div className='col-12'>
           <TextArea
             type='text'
-            label='Content'
+            label={t('reviewDetail.content')}
             value={review.content}
             isValid={review.isValidContent}
-            feedback='Please provide a valid content.'
+            feedback={t('reviewDetail.isValid')}
             validator='nullable'
             onChange={(value) =>
               handleChange('content', 'isValidContent', value)

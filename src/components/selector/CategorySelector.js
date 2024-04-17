@@ -6,6 +6,7 @@ import SearchInput from '../ui/SearchInput'
 import CategorySmallCard from '../card/CategorySmallCard'
 import Loading from '../ui/Loading'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const CategorySelector = ({
   defaultValue = '',
@@ -16,12 +17,11 @@ const CategorySelector = ({
   isSelected = true,
   isRequired = false
 }) => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-
   const [lv1Categories, setLv1Categories] = useState([])
   const [lv2Categories, setLv2Categories] = useState([])
   const [lv3Categories, setLv3Categories] = useState([])
-
   const [lv1Filter, setLv1Filter] = useState({
     search: '',
     categoryId: null,
@@ -152,21 +152,24 @@ const CategorySelector = ({
             className='list-group m-1'
             style={{
               width: '33.33333%',
-              overflowY: 'auto'
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv1Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
-                  category._id === lv2Filter.categoryId ? 'active' : ''
-                }`}
-                onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
+                    category._id === lv2Filter.categoryId ? 'active' : ''
+                  }`}
+                  onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                  <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
+                </button>
+              </div>
             ))}
           </div>
 
@@ -174,21 +177,24 @@ const CategorySelector = ({
             className='list-group m-1'
             style={{
               width: '33.33333%',
-              overflowY: 'auto'
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv2Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
-                  category._id === lv3Filter.categoryId && 'active'
-                }`}
-                onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
+                    category._id === lv3Filter.categoryId && 'active'
+                  }`}
+                  onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                  <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
+                </button>
+              </div>
             ))}
           </div>
 
@@ -196,22 +202,25 @@ const CategorySelector = ({
             className='list-group m-1'
             style={{
               width: '33.33333%',
-              overflowY: 'auto'
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv3Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action ${
-                  selectedCategory && category._id === selectedCategory._id
-                    ? 'active'
-                    : ''
-                }`}
-                onClick={() => handleClick(null, null, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action ${
+                    selectedCategory && category._id === selectedCategory._id
+                      ? 'active'
+                      : ''
+                  }`}
+                  onClick={() => handleClick(null, null, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                </button>
+              </div>
             ))}
           </div>
         </div>
@@ -252,8 +261,8 @@ const CategorySelector = ({
                   </button>
                 </div>
               ) : (
-                <span className={isRequired ? 'text-danger' : ''}>
-                  Không danh mục nào được chọn
+                <span className={isRequired && 'text-danger'}>
+                  {t('variantDetail.required')}
                 </span>
               )}
             </div>

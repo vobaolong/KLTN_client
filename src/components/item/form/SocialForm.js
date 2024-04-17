@@ -41,7 +41,7 @@ const SocialForm = () => {
         }
       })
       .catch((error) => {
-        setError('Server error!')
+        console.log('Server error!')
         setIsLoading(false)
       })
   }

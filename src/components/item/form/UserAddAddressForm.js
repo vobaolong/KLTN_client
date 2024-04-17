@@ -113,6 +113,7 @@ const UserAddAddressForm = () => {
             isValid={address.isValidStreet}
             feedback={t('addressFormValid.streetValid')}
             validator='address'
+            required={true}
             onChange={(value) => handleChange('street', 'isValidStreet', value)}
             onValidate={(flag) => handleValidate('isValidStreet', flag)}
           />
@@ -125,6 +126,7 @@ const UserAddAddressForm = () => {
             isValid={address.isValidWard}
             feedback={t('addressFormValid.wardValid')}
             validator='address'
+            required={true}
             onChange={(value) => handleChange('ward', 'isValidWard', value)}
             onValidate={(flag) => handleValidate('isValidWard', flag)}
           />
@@ -137,6 +139,7 @@ const UserAddAddressForm = () => {
             isValid={address.isValidDistrict}
             feedback={t('addressFormValid.districtValid')}
             validator='address'
+            required={true}
             onChange={(value) =>
               handleChange('district', 'isValidDistrict', value)
             }
@@ -152,6 +155,7 @@ const UserAddAddressForm = () => {
             isValid={address.isValidCity}
             feedback={t('addressFormValid.cityValid')}
             validator='address'
+            required={true}
             onChange={(value) => handleChange('city', 'isValidCity', value)}
             onValidate={(flag) => handleValidate('isValidCity', flag)}
           />

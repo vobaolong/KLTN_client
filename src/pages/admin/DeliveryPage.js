@@ -4,11 +4,15 @@ import AdminDeliveriesTable from '../../components/table/AdminDeliveriesTable'
 import { useTranslation } from 'react-i18next'
 
 const DeliveryPage = () => {
-  const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
+  const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.delivery'), url: '/admin/delivery' }
+  ]
   return (
-    <AdminLayout user={user}>
-      <AdminDeliveriesTable heading={t('deliveryDetail.deliveryUnit')} />
+    <AdminLayout user={user} paths={paths}>
+      <AdminDeliveriesTable heading={true} />
     </AdminLayout>
   )
 }

@@ -43,6 +43,18 @@ export const formatDate = (date) => {
   return day + '/' + month + '/' + new Date(date).getFullYear()
 }
 
+export const formatDateMonth = (date) => {
+  date = new Date(date)
+  const day = ('0' + date.getDate()).slice(-2)
+  const month = ('0' + (date.getMonth() + 1)).slice(-2)
+  return day + '/' + month
+}
+
+export const formatOnlyDate = (date) => {
+  date = new Date(date)
+  const day = ('0' + date.getDate()).slice(-2)
+  return day
+}
 export const formatMonth = (date) => {
   date = new Date(date)
   const month = ('0' + (date.getMonth() + 1)).slice(-2)

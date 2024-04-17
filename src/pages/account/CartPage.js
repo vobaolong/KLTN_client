@@ -74,7 +74,7 @@ const CartPage = () => {
                     <input type='checkbox' id='myCheckbox' />
                     <label
                       style={{ fontSize: '0.9rem' }}
-                      for='myCheckbox'
+                      htmlFor='myCheckbox'
                       className='ms-2 text-secondary'
                     >
                       {t('cartDetail.all')} ({cartCount}{' '}

@@ -5,7 +5,7 @@ import ListBestSellerProduct from '../../components/list/ListBestSellerProduct'
 import ListHotStores from '../../components/list/ListHotStores'
 import { useTranslation } from 'react-i18next'
 import MetaData from '../../components/layout/meta/MetaData'
-import Policy from '../../components/ui/Policy'
+import Offers from '../../components/ui/Offers'
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ const HomePage = () => {
       <div className='mb-4'>
         <ListCategories heading={t('categories')} />
       </div>
-      <Policy />
+      <Offers />
       <div className='mb-4'>
         <ListBestSellerProduct heading={t('bestSeller')} />
       </div>

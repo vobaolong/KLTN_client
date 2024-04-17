@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 const RatingInput = ({
   label = 'Rating',
   value = 0,
@@ -8,21 +10,14 @@ const RatingInput = ({
   const handleChange = (value) => {
     onChange(value)
   }
+  const { t } = useTranslation()
 
   return (
-    <div className='mt-4 position-relative'>
-      <label
-        className='position-absolute text-muted'
-        style={{
-          fontSize: '0.8rem',
-          left: '12px',
-          top: '-16px'
-        }}
-      >
+    <div className='mt-4 d-flex gap-2 align-items-center'>
+      <span style={{ fontSize: '0.9rem' }} className='text-dark-emphasis'>
         {label}
-      </label>
-
-      <div className='cus-rating form-control border-0 d-flex flex-row-reverse justify-content-end'>
+      </span>
+      <div className='cus-rating border-0 d-flex flex-row-reverse justify-content-center'>
         <span>
           <input
             className='visually-hidden'
@@ -120,7 +115,13 @@ const RatingInput = ({
           </label>
         </span>
       </div>
-
+      <small className='text-secondary'>
+        {(value === 5 && t('reviewDetail.amazing')) ||
+          (value === 4 && t('reviewDetail.good')) ||
+          (value === 3 && t('reviewDetail.fair')) ||
+          (value === 2 && t('reviewDetail.poor')) ||
+          (value === 1 && t('reviewDetail.terrible'))}
+      </small>
       {!isValid && (
         <small
           className='text-danger'

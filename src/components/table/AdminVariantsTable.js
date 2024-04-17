@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminVariantsTable = ({ heading = '' }) => {
+const AdminVariantsTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -102,7 +102,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(t('button.edit'))
+          toast.success(t('toastSuccess.variant.delete'))
           setRun(!run)
         }
         setIsLoading(false)
@@ -119,7 +119,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.variant.restore'))
           setRun(!run)
         }
         setIsLoading(false)
@@ -149,7 +149,11 @@ const AdminVariantsTable = ({ heading = '' }) => {
         />
       )}
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && (
+        <h5 className='text-center text-uppercase'>
+          {t('title.productVariants')}
+        </h5>
+      )}
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
@@ -157,9 +161,9 @@ const AdminVariantsTable = ({ heading = '' }) => {
           <Link
             type='button'
             className='btn btn-primary ripple text-nowrap rounded-1'
-            to='/admin/variant/createNewStyle'
+            to='/admin/variant/create'
           >
-            <i className='fa-solid fa-plus-circle'></i>
+            <i className='fa-solid fa-plus'></i>
             <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
           </Link>
         </div>
@@ -210,12 +214,11 @@ const AdminVariantsTable = ({ heading = '' }) => {
                   <th scope='row'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td className='text-start'>{variant.name}</td>
+                  <td className='text-start'>
+                    <span style={{ fontSize: '.9rem' }}>{variant.name}</span>
+                  </td>
 
-                  <td
-                    className='text-start ps-2'
-                    style={{ maxWidth: '1000px' }}
-                  >
+                  <td className='text-start'>
                     <div
                       className=''
                       style={{
@@ -224,7 +227,11 @@ const AdminVariantsTable = ({ heading = '' }) => {
                       }}
                     >
                       {variant.categoryIds.map((category, index) => (
-                        <div className='hidden-avatar' key={index}>
+                        <div
+                          className='hidden-avatar badge bg-value text-dark-emphasis border rounded-1 fw-normal'
+                          style={{ fontSize: '0.875rem' }}
+                          key={index}
+                        >
                           <CategorySmallCard category={category} />
                         </div>
                       ))}
@@ -256,7 +263,7 @@ const AdminVariantsTable = ({ heading = '' }) => {
                     <Link
                       type='button'
                       className='btn btn-sm btn-primary ripple me-2 rounded-1'
-                      to={`/admin/variant/editStyle/${variant._id}`}
+                      to={`/admin/variant/edit/${variant._id}`}
                       title={t('button.edit')}
                     >
                       <i className='fa-solid fa-pen'></i>

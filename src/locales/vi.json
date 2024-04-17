@@ -11,18 +11,58 @@
     "addressBook": "Sổ địa chỉ",
     "listFavorites": "Danh sách yêu thích",
     "myWallet": "Ví của tôi",
-    "myStore": "Cửa hàng của tôi"
+    "myStore": "Shop của tôi"
   },
-
+  "breadcrumbs": {
+    "delivery": "Vận chuyển",
+    "level": "Hạng mức",
+    "store": "Shop",
+    "user": "Người dùng",
+    "commission": "Chiết khấu",
+    "variant": "Phân loại",
+    "editVariant": "Chỉnh sửa phân loại",
+    "addVariant": "Thêm phân loại",
+    "variantValues": "Thuộc tính phân loại",
+    "addCategory": "Thêm danh mục hàng",
+    "home": "Trang chủ",
+    "myPurchase": "Đơn hàng của tôi",
+    "addressBook": "Sổ địa chỉ",
+    "myWallet": "Ví của tôi",
+    "myStore": "Shop của tôi",
+    "createStore": "Mở 1 shop mới",
+    "collection": "Tất cả sản phẩm",
+    "rating": "Đánh giá sản phẩm",
+    "about": "Thông tin shop",
+    "listFavorites": "Danh sách yêu thích",
+    "profileInfo": "Thông tin tài khoản",
+    "category": "Danh mục hàng",
+    "editCategory": "Chỉnh sửa danh mục hàng",
+    "overview": "Tổng quan",
+    "shopProfile": "Thông tin shop",
+    "product": "Sản phẩm",
+    "addProduct": "Thêm sản phẩm mới",
+    "updateProduct": "Chỉnh sửa sản phẩm",
+    "staff": "Nhân viên",
+    "order": "Đơn hàng",
+    "orderDetail": "Chi tiết đơn hàng",
+    "wallet": "Ví",
+    "transactions": "Giao dịch"
+  },
   "toastSuccess": {
+    "variant": { "update": "Chỉnh sửa phân loại thành công" },
+    "review": {
+      "add": "Đánh giá sản phẩm thành công",
+      "delete": "Xoá đánh giá thành công",
+      "update": "Chỉnh sửa đánh giá thành công"
+    },
     "withDraw": "Rút tiền thành công",
     "userDetail": {
       "updateProfile": "Cập nhật thông tin thành công"
     },
     "signIn": "Đăng nhập thành công",
     "signUp": "Đăng ký thành công",
-    "lockStore": "Đóng cửa hàng thành công",
-    "unlockStore": "Mở cửa hàng thành công",
+    "lockStore": "Đóng shop thành công",
+    "unlockStore": "Mở shop thành công",
     "cart": {
       "add": "Thêm vào giỏ hàng thành công",
       "delete": "Xoá giỏ hàng thành công",
@@ -34,8 +74,8 @@
       "editValue": "Sửa giá trị thành công"
     },
     "followStore": {
-      "follow": "Theo dõi cửa hàng thành công",
-      "unfollow": "Bỏ theo dõi cửa hàng thành công"
+      "follow": "Theo dõi shop thành công",
+      "unfollow": "Bỏ theo dõi shop thành công"
     },
     "followProduct": {
       "follow": "Đã thêm sản phẩm vào yêu thích",
@@ -57,7 +97,7 @@
       "delete": "Xoá địa chỉ thành công"
     },
     "level": {
-      "create": "Tạo hạng mức thành công",
+      "create": "Thêm hạng mức thành công",
       "edit": "Sửa hạng mức thành công",
       "delete": "Xoá hạng mức thành công",
       "restore": "Khôi phục hạng mức thành công"
@@ -80,8 +120,8 @@
       "addImg": "Thêm hình ảnh thành công"
     },
     "store": {
-      "ban": "Khoá cửa hàng thành công",
-      "active": "Kích hoạt cửa hàng thành công",
+      "ban": "Khoá shop thành công",
+      "active": "Kích hoạt shop thành công",
       "update": "Cập nhật thông tin thành công"
     },
     "order": {
@@ -96,7 +136,7 @@
     }
   },
   "toastError": {
-    "storeBanned": "Cửa hàng này bị tạm khoá!"
+    "storeBanned": "Shop này bị tạm khoá!"
   },
   "message": {
     "addStaff": "Bạn có chắc chắn thêm nhân viên này?",
@@ -108,11 +148,11 @@
   "title": {
     "showProduct": "Hiển thị sản phẩm",
     "hideProduct": "Ẩn sản phẩm",
-    "openStore": "Mở cửa hàng",
-    "closeStore": "Đóng cửa hàng",
+    "openStore": "Mở shop",
+    "closeStore": "Đóng shop",
     "productVariants": "Phân loại sản phẩm",
-    "listBannedStores": "Cửa hàng bị tạm khoá",
-    "listActiveStores": "Cửa hàng đang hoạt động",
+    "listBannedStores": "Shop bị tạm khoá",
+    "listActiveStores": "Shop đang hoạt động",
     "listBannedProducts": "Sản phẩm bị tạm khoá",
     "listActiveProducts": "Sản phẩm đang bán",
     "allOrders": "Tất cả đơn hàng",
@@ -126,8 +166,8 @@
   "dialog": {
     "removeImg": "Xoá hình ảnh",
     "logOut": "Đăng xuất",
-    "closeStore": "Đóng cửa hàng",
-    "openStore": "Mở cửa hàng",
+    "closeStore": "Đóng shop",
+    "openStore": "Mở shop",
     "addCommission": "Thêm mức phí chiết khấu",
     "deleteCommission": "Xoá mức phí chiết khấu",
     "editCommission": "Sửa mức phí chiết khấu",
@@ -142,29 +182,30 @@
     "restoreValue": "Khôi phục thuộc tính",
     "deleteValue": "Xoá thuộc tính",
     "signUp": "Đăng ký",
-    "createUserLevel": "Tạo hạng mức người dùng",
-    "createStoreLevel": "Tạo hạng mức cửa hàng",
+    "createUserLevel": "Thêm hạng mức người dùng",
+    "createStoreLevel": "Thêm hạng mức shop",
     "createCommission": "Thêm chiết khấu",
-    "banStore": "Khoá cửa hàng",
-    "createStore": "Tạo cửa hàng",
-    "activeStore": "Kích hoạt cửa hàng",
+    "banStore": "Khoá shop",
+    "createStore": "Mở 1 shop mới",
+    "activeStore": "Kích hoạt shop",
     "activeProduct": "Kích hoạt sản phẩm",
     "banProduct": "Khoá sản phẩm",
     "removeProductFromCart": "Xoá sản phẩm khỏi giỏ hàng",
     "updateOrder": "Cập nhật trạng thái đơn hàng",
     "updateCategory": "Cập nhật danh mục"
   },
+  "pickColor": "Nhấn để chọn màu",
   "levelDetail": {
     "userLevel": {
       "userLevel": "Hạng mức người dùng"
     },
     "storeLevel": {
-      "storeLevel": "Hạng mức cửa hàng"
+      "storeLevel": "Hạng mức shop"
     },
     "edit": "Sửa hạng mức",
     "delete": "Xoá hạng mức",
     "restore": "Khôi phục hạng mức",
-    "create": "Tạo hạng mức",
+    "create": "Thêm hạng mức",
     "color": "Màu hạng mức",
     "discount": "Giảm giá",
     "name": "Tên hạng mức",
@@ -174,11 +215,12 @@
     "validFloorPoint": "Vui lòng cung cấp điểm sàn phù hợp (>=0)!",
     "nameValid": "Vui lòng cung cấp tên hạng mức phù hợp!"
   },
-  "action": "Hành động",
+  "action": "Lựa chọn",
   "showing": "Hiển thị",
   "of": "trên",
   "admin": {
     "adDashboard": {
+      "overview": "Tổng quan",
       "dashboard": "Quản lý",
       "hour": "Giờ",
       "day": "Ngày",
@@ -190,13 +232,13 @@
       "bar": "Cột"
     },
     "users": "Người dùng",
-    "stores": "Cửa hàng",
+    "stores": "Shop",
     "orders": "Đơn hàng",
     "transactions": "Giao dịch",
-    "categories": "Danh mục",
+    "categories": "Danh mục hàng",
     "variants": "Phân loại",
     "products": "Sản phẩm",
-    "levels": "Cấp",
+    "levels": "Hạng mức",
     "commissions": "Chiết khấu",
     "deliveries": "Vận chuyển",
     "setting": "Cài đặt",
@@ -207,14 +249,16 @@
   "categories": "Danh Mục",
   "bestSeller": "Bán Chạy",
   "newProduct": "Sản Phẩm Mới",
-  "hotStore": "Cửa Hàng Nổi Bật",
+  "hotStore": "Shop Nổi Bật",
   "cart": "Giỏ hàng",
   "favProduct": "Sản phẩm yêu thích",
-  "favStore": "Cửa hàng yêu thích",
+  "favStore": "Shop yêu thích",
   "product": "Sản Phẩm",
   "similarProducts": "Sản Phẩm Tương Tự",
   "sameShop": "Các Sản Phẩm Khác Của Shop",
   "productDetail": {
+    "estimatedDelivery": "Dự kiến giao",
+    "offers": "Ưu đãi có sẵn",
     "only": "Còn",
     "productLeft": "sản phẩm",
     "hotSale": "Giảm sốc",
@@ -234,7 +278,7 @@
     "noValuesSelected": "Không giá trị nào được chọn",
     "chooseCateFirst": "*vui lòng chọn ngành hàng trước",
     "noProduct": "Không có sản phẩm",
-    "createProduct": "Thêm sản phẩm",
+    "createProduct": "Thêm 1 sản phẩm mới",
     "show": "Đang hoạt động",
     "hide": "Đã ẩn",
     "editProInfo": "Chỉnh sửa thông tin sản phẩm",
@@ -263,7 +307,7 @@
     "nameValid": "Vui lòng cung cấp tên sản phẩm phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
     "otherValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
-    "descriptionValid": "Vui lòng cung cấp mô tả sản phẩm phù hợp!",
+    "validDescription": "Vui lòng cung cấp mô tả sản phẩm phù hợp!",
     "quantityValid": "Vui lòng cung cấp số lượng sản phẩm phù hợp!",
     "priceValid": "Vui lòng cung cấp giá sản phẩm phù hợp!",
     "salePriceValid": "Vui lòng cung cấp giá giảm sản phẩm phù hợp!"
@@ -301,11 +345,22 @@
     "empty": "Giỏ hàng của bạn đang trống",
     "emptyRefer": "Bạn tham khảo thêm các sản phẩm được Zenpii gợi ý phía dưới nhé!"
   },
-
-  "store": "Cửa hàng",
-  "searchHolder": "Tìm sản phẩm và tên cửa hàng",
+  "goToUserManager": "Đến quản lý người dùng",
+  "goToShopManager": "Đến quản lý shop",
+  "goToOrderManager": "Đến quản lý đơn hàng",
+  "goToProductManager": "Đến quản lý sản phẩm",
+  "orderRecent": "Đơn hàng gần đây",
+  "topShop": "Shop tiêu biểu",
+  "topUser": "Khách hàng tiềm năng",
+  "topProduct": "Sản phẩm bán chạy",
+  "store": "Shop",
+  "searchHolder": "Tìm sản phẩm và tên shop",
   "userDetail": {
-    "owner": "Chủ cửa hàng",
+    "role": {
+      "admin": "Quản trị viên",
+      "user": "Người dùng"
+    },
+    "owner": "Chủ shop",
     "staff": "Nhân viên",
     "idCard": "ID Card",
     "email": "Email",
@@ -314,7 +369,7 @@
     "followers": "Người theo dõi",
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
-    "profile": "Thông tin cá nhân",
+    "profile": "Thông tin tài khoản",
     "editProfile": "Chỉnh sửa thông tin",
     "address": "Địa chỉ",
     "addAddress": "Thêm địa chỉ",
@@ -354,16 +409,19 @@
     "currentPw": "Mật khẩu hiện tại",
     "currentPwValid": "Vui lòng cung cấp mật khẩu đúng!"
   },
-  "manageStore": "Cửa hàng",
-  "myStore": "Cửa hàng của tôi",
-  "createStore": "Tạo cửa hàng",
+  "manageStore": "Shop",
+  "myStore": "Shop của tôi",
+  "createStore": "Mở 1 shop mới",
   "commissionDetail": {
     "description": "Mô tả",
     "fee": "Phí chiết khấu",
     "add": "Thêm chiết khấu",
     "delete": "Xoá chiết khấu",
     "edit": "Sửa chiết khấu",
-    "name": "Loại chiết khấu"
+    "name": "Loại chiết khấu",
+    "validName": "Vui lòng cung cấp tên chiết khấu phù hợp!",
+    "validDescription": "Vui lòng cung cấp mô tả phù hợp!!",
+    "feeValid": "Vui lòng cung cấp tên phí chiết khấu phù hợp (>=0)!"
   },
   "deliveryDetail": {
     "deliveryUnit": "Vận chuyển",
@@ -397,16 +455,16 @@
   },
   "categoryDetail": {
     "tree": "Danh mục kiểu cây",
-    "add": "Thêm danh mục",
-    "name": "Tên danh mục",
+    "add": "Thêm danh mục hàng",
+    "name": "Tên danh mục hàng",
     "parent": "Danh mục lớn",
     "selectLargeCategory": "Chọn danh mục lớn",
     "noCategorySelected": "Không danh mục nào được chọn",
     "img": "Ảnh",
-    "delete": "Xoá danh mục",
-    "edit": "Chỉnh sửa danh mục",
-    "restore": "Khôi phục danh mục",
-    "chosenParentCategory": "Danh mục đã chọn"
+    "delete": "Xoá danh mục hàng",
+    "edit": "Chỉnh sửa danh mục hàng",
+    "restore": "Khôi phục danh mục hàng",
+    "chosenParentCategory": "Danh mục hàng đã chọn"
   },
   "categoryValid": {
     "nameValid": "Vui lòng cung cấp tên danh mục hợp lệ!",
@@ -422,7 +480,7 @@
     "res": "Khôi phục phân loại",
     "name": "Tên phân loại",
     "nameValid": "Vui lòng cung cấp tên phân loại phù hợp!",
-    "selectCategory": "Chọn danh mục",
+    "selectCategory": "Chọn danh mục hàng",
     "required": "Không danh mục nào được chọn",
     "value": {
       "addBtn": "Thêm thuộc tính",
@@ -439,32 +497,32 @@
     "name": "Tên nhân viên",
     "delete": "Xoá nhân viên",
     "add": "Thêm nhân viên",
-    "leave": "Rời cửa hàng",
+    "leave": "Rời shop",
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
-    "banned": "Cửa hàng đang tạm thời bị zenpi khóa, liên hệ để biết thêm chi tiết",
-    "active": "Cửa hàng đang hoạt động",
+    "banned": "Shop đang tạm thời bị zenpi khóa, liên hệ để biết thêm chi tiết",
+    "active": "Shop đang hoạt động",
     "address": "Địa chỉ",
     "viewShop": "Xem shop",
     "staple": "Ngành hàng chủ lực",
-    "activeStores": "Cửa hàng đang hoạt động",
-    "bannedStores": "Cửa hàng bị tạm khoá",
+    "activeStores": "Shop đang hoạt động",
+    "bannedStores": "Shop bị tạm khoá",
     "addFeaturedImg": "Thêm hình ảnh nổi bật",
     "limitFeatured": "Tối đa 6 hình ảnh nổi bật",
     "bio": "Giới thiệu",
     "editProfile": "Chỉnh sửa thông tin",
     "products": "Sản phẩm",
-    "storeName": "Tên cửa hàng",
+    "storeName": "Tên shop",
     "name": "Tên",
-    "profile": "Thông tin",
+    "profile": "Thông tin shop",
     "staffs": "Nhân viên",
     "orders": "Đơn hàng",
     "role": "Vai trò",
     "commissions": "Chiết khấu",
     "getPaid": "Bạn sẽ được trả tiền bằng cách nào?",
     "sellOn": "Bán trên Zenpii",
-    "agreeBy": "Bằng việc tạo cửa hàng, bạn đồng ý với ",
+    "agreeBy": "Bằng việc tạo shop, bạn đồng ý với ",
     "backToStore": "Quay lại trang quản lý",
     "follow": "Theo dõi",
     "following": "Đang theo dõi",
@@ -473,15 +531,15 @@
     "allProduct": "Tất cả sản phẩm",
     "rating": "Đánh giá",
     "about": "Thông tin",
-    "noStores": "Không có cửa hàng!",
-    "createStore": "Tạo một cửa hàng trực tuyến miễn phí",
+    "noStores": "Không có shop!",
+    "createStore": "Tạo một shop trực tuyến miễn phí",
     "pickupAddress": "Địa chỉ lấy hàng",
     "avatar": "Ảnh nền",
     "cover": "Ảnh bìa",
     "contactPerson": "Người liên hệ"
   },
   "storeDetailValid": {
-    "nameValid": "Vui lòng cung cấp tên cửa hàng phù hợp!",
+    "nameValid": "Vui lòng cung cấp tên shop phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",
     "coverValid": "Vui lòng cung cấp ảnh bìa phù hợp!",
@@ -495,6 +553,7 @@
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
     "detail": "Chi tiết",
+    "view": "Xem",
     "restore": "Khôi phục",
     "hide": "Ẩn",
     "cancel": "Huỷ",
@@ -515,8 +574,8 @@
     "show": "Hiển thị",
     "ban": "Khoá",
     "active": "Kích hoạt",
-    "clickToClose": "Nhấn để đóng cửa hàng",
-    "clickToOpen": "Nhấn để mở cửa hàng",
+    "clickToClose": "Nhấn để đóng shop",
+    "clickToOpen": "Nhấn để mở shop",
     "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)",
     "addLevel": "Thêm hạng mức"
   },
@@ -535,6 +594,7 @@
   "signUpForm": {
     "passwordFeedback": "Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!"
   },
+  "seller": "Người bán",
   "point": "Điểm",
   "success/failure": "Tỷ lệ hoàn thành",
   "orderDetail": {
@@ -547,7 +607,7 @@
     "id": "Mã đơn hàng",
     "date": "Ngày đặt hàng",
     "total": "Tổng",
-    "store": "Cửa hàng",
+    "store": "Shop",
     "deliveryUnit": "Vận chuyển",
     "payment": "Thanh toán",
     "paymentMethod": "Thanh toán",
@@ -567,7 +627,15 @@
     "edit": "Chỉnh Sửa Đánh Giá",
     "content": "Nội dung",
     "isValid": "Vui lòng đánh giá phù hợp!",
-    "noReview": "Không có đánh giá!"
+    "noReview": "Không có đánh giá!",
+    "ratingBy": "Đánh giá trước ",
+    "cannotReview": "Bạn sẽ không thể đánh giá đơn hàng sau",
+    "productQuality": "Chất lượng sản phẩm",
+    "terrible": "Tệ",
+    "poor": "Không hài lòng",
+    "fair": "Bình thường",
+    "good": "Hài lòng",
+    "amazing": "Tuyệt vời"
   },
   "verified": "Đã xác thực",
   "verifyNow": "Xác thực ngay",
@@ -592,15 +660,21 @@
     "districtValid": "Vui lòng cung cấp quận/huyện phù hợp (','không được chấp nhận)!",
     "cityValid": "Vui lòng cung cấp thành phố/tỉnh phù hợp (','không được chấp nhận)!"
   },
+  "services": {
+    "refund": "Được hoàn tiền 111% nếu là hàng giả",
+    "return": "Đổi trả miễn phí tại nhà trong 30 ngày nếu sản phẩm lỗi",
+    "checkPackage": "Được mở hộp kiểm tra khi nhận hàng"
+  },
+
   "footer": {
     "quickLink": "truy cập nhanh",
     "about": "Về Zenpii",
     "policy": "Chính sách bảo mật",
     "title": "Zenpii - Thật nhanh, thật chất lượng, thật rẻ",
     "p1": "Zenpii có tất cả",
-    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, cửa hàng uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,Zenpii mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
+    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, shop uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,Zenpii mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
     "p2": "Khuyến mãi, ưu đãi tràn ngập",
-    "small2": "Bạn muốn săn giá sốc, Zenpii có giá sốc mỗi ngày cho bạn! Bạn là tín đồ của các thương hiệu, các cửa hàng Official chính hãng đang chờ đón bạn. Không cần săn mã freeship, vì Zenpii đã có hàng triệu sản phẩm trong chương trình Freeship+, không giới hạn lượt đặt, tiết kiệm thời gian vàng bạc của bạn. Gói ZenNOW (Áp dụng đơn hàng trên 200k) tiết kiệm để nhận 100% free ship 2h & trong ngày, áp dụng cho 100% sản phẩm, 100% tỉnh thành Việt Nam."
+    "small2": "Bạn muốn săn giá sốc, Zenpii có giá sốc mỗi ngày cho bạn! Bạn là tín đồ của các thương hiệu, các shop Official chính hãng đang chờ đón bạn. Không cần săn mã freeship, vì Zenpii đã có hàng triệu sản phẩm trong chương trình Freeship+, không giới hạn lượt đặt, tiết kiệm thời gian vàng bạc của bạn. Gói ZenNOW (Áp dụng đơn hàng trên 200k) tiết kiệm để nhận 100% free ship 2h & trong ngày, áp dụng cho 100% sản phẩm, 100% tỉnh thành Việt Nam."
   },
   "showMore": "Xem thêm",
   "showLess": "Thu gọn"

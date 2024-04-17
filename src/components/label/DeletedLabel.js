@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 const DeletedLabel = () => {
   const { t } = useTranslation()
   return (
-    <span className='badge bg-danger rounded-1'>
+    <span className='badge bg-danger-rgba text-danger rounded-1'>
+      <i className='me-2 fa-solid fa-toggle-off'></i>
       <span>{t('status.unActive')}</span>
-      <i className='ms-2 fa-solid fa-toggle-off'></i>
     </span>
   )
 }

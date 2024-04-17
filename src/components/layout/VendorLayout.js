@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import MainLayout from './MainLayout'
 import VendorSideBar from './menu/VendorSideBar'
+import Breadcrumb from '../ui/Breadcrumb'
 
-const VendorLayout = ({ user = {}, store = {}, children = null }) => {
+const VendorLayout = ({
+  user = {},
+  store = {},
+  children = null,
+  paths = {}
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
@@ -10,11 +16,10 @@ const VendorLayout = ({ user = {}, store = {}, children = null }) => {
 
   return (
     <MainLayout container='container-xxl' navFor='vendor'>
+      <Breadcrumb paths={paths} />
       <div className='row'>
         <div
-          className={`col-md-${
-            isCollapsed ? '1' : '2'
-          } res-sticky-top-md mb-4 p-0`}
+          className={`col-md-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}
         >
           <VendorSideBar
             user={user}

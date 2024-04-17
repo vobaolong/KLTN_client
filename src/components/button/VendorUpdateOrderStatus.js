@@ -69,7 +69,7 @@ const VendorUpdateOrderStatusButton = ({
         size='sm'
         value={statusValue}
         setValue={(value) => handleUpdate(value)}
-        borderBtn={true}
+        borderBtn={false}
       />
     </div>
   )

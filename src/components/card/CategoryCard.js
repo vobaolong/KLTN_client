@@ -44,7 +44,7 @@ const CategoryCard = ({ category = {} }) => {
               src={
                 categoryValue.image ? IMG + categoryValue.image : defaultImage
               }
-              className='cus-card-img rounded-circle'
+              className='cus-card-img rounded-circle border'
               alt={categoryValue.name}
             />
           </div>

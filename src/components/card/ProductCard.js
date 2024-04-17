@@ -136,7 +136,7 @@ const ProductCard = ({ product = {}, onRun }) => {
           to={`/product/${productValue._id}`}
           title={productValue.name}
         >
-          <h6 className='card-title productName'>{productValue.name}</h6>
+          <h6 className='card-title product-name'>{productValue.name}</h6>
         </Link>
         <small className='card-subtitle d-flex justify-content-between align-items-center'>
           <h5 className='text-danger me-2 mb-0'>

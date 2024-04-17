@@ -16,10 +16,10 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
   const [commission, setCommission] = useState({
     name: '',
     description: '',
-    cost: 0,
+    fee: 0,
     isValidName: true,
     isValidDescription: true,
-    isValidCost: true
+    isValidFee: true
   })
 
   const { _id, accessToken } = getToken()
@@ -42,19 +42,19 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { name, description, cost } = commission
-    if (!name || !description || cost === '') {
+    const { name, description, fee } = commission
+    if (!name || !description || fee === '') {
       setCommission({
         ...commission,
         isValidName: regexTest('name', name),
         isValidDescription: regexTest('bio', description),
-        isValidCost: numberTest('zeroTo100', cost)
+        isValidFee: numberTest('zeroTo100', fee)
       })
       return
     }
 
-    const { isValidName, isValidDescription, isValidCost } = commission
-    if (!isValidName || !isValidDescription || !isValidCost) return
+    const { isValidName, isValidDescription, isValidFee } = commission
+    if (!isValidName || !isValidDescription || !isValidFee) return
 
     setIsConfirming(true)
   }
@@ -70,10 +70,10 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
           setCommission({
             name: '',
             description: '',
-            cost: 0,
+            fee: 0,
             isValidName: true,
             isValidDescription: true,
-            isValidCost: true
+            isValidFee: true
           })
           if (onRun) onRun()
         }
@@ -88,7 +88,6 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.createCommission')}
@@ -105,7 +104,7 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
             label={t('commissionDetail.name')}
             value={commission.name}
             isValid={commission.isValidName}
-            feedback='Please provide a valid commission name.'
+            feedback={t('commissionDetail.validName')}
             validator='bio'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -119,7 +118,8 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
             label={t('commissionDetail.description')}
             value={commission.description}
             isValid={commission.isValidDescription}
-            feedback='Please provide a valid commission description.'
+            required={true}
+            feedback={t('commissionDetail.validDescription')}
             validator='bio'
             onChange={(value) =>
               handleChange('description', 'isValidDescription', value)
@@ -132,13 +132,13 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
           <Input
             type='number'
             label={`${t('commissionDetail.fee')} (%)`}
-            value={commission.cost}
-            isValid={commission.isValidCost}
-            feedback='Please provide a valid cost (>=0).'
+            value={commission.fee}
+            isValid={commission.isValidFee}
+            feedback={t('commissionDetail.feeValid')}
             validator='zeroTo100'
             required={true}
-            onChange={(value) => handleChange('cost', 'isValidCost', value)}
-            onValidate={(flag) => handleValidate('isValidCost', flag)}
+            onChange={(value) => handleChange('fee', 'isValidFee', value)}
+            onValidate={(flag) => handleValidate('isValidFee', flag)}
           />
         </div>
 

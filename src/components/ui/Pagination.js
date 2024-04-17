@@ -3,19 +3,19 @@ const pages = (pageCurrent, pageCount) => {
   let midPages = []
   let botPages = []
 
-  for (let i = 1; i <= 3; i++) {
-    if (i < pageCurrent - 3) {
+  for (let i = 1; i <= 2; i++) {
+    if (i < pageCurrent - 2) {
       topPages.push(i)
     }
   }
   if (pageCount <= 0) midPages = [1]
-  for (let i = pageCurrent - 3; i <= pageCurrent + 3; i++) {
+  for (let i = pageCurrent - 2; i <= pageCurrent + 2; i++) {
     if (i > 0 && i <= pageCount) {
       midPages.push(i)
     }
   }
-  for (let i = pageCount; i >= pageCount - 3; i--) {
-    if (i > pageCurrent + 3) {
+  for (let i = pageCount; i >= pageCount - 2; i--) {
+    if (i > pageCurrent + 2) {
       botPages.unshift(i)
     }
   }
@@ -56,7 +56,7 @@ const Pagination = ({
             style={{ minWidth: '40px' }}
             onClick={() => handleChangePage(pageCurrent - 1)}
           >
-            <i class='fa-solid fa-angle-left'></i>
+            <i className='fa-solid fa-angle-left'></i>
           </button>
 
           {!isSmall && (
@@ -134,7 +134,7 @@ const Pagination = ({
             style={{ minWidth: '40px' }}
             onClick={() => handleChangePage(pageCurrent + 1)}
           >
-            <i class='fa-solid fa-angle-right'></i>
+            <i className='fa-solid fa-angle-right'></i>
           </button>
         </div>
       </ul>

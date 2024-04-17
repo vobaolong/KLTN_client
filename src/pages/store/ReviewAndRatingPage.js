@@ -8,13 +8,17 @@ import { useTranslation } from 'react-i18next'
 const ReviewAndRatingPage = () => {
   const store = useSelector((state) => state.store.store)
   const { t } = useTranslation()
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: `${store.name}`, url: `/store/${store._id}` },
+    { name: t('breadcrumbs.rating'), url: `/store/rating/${store._id}` }
+  ]
   return typeof store.isActive === 'boolean' && !store.isActive ? (
     <MainLayout>
       <Error msg={t('toastError.storeBanned')} />
     </MainLayout>
   ) : (
-    <StoreLayout store={store}>
+    <StoreLayout store={store} paths={paths}>
       <div style={{ margin: '0 auto' }}>
         <div className='mt-4'>
           <ListReviews storeId={store._id} heading={false} />

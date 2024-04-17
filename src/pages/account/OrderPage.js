@@ -28,15 +28,18 @@ const OrderPage = () => {
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
   }
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myPurchase'), url: '/account/purchase' }
+  ]
   return (
-    <AccountLayout user={user}>
+    <AccountLayout user={user} paths={paths}>
       <MetaData title={`${t('helmet.myPurchase')} | Zenpii Việt Nam`} />
-      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-4'>
+      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
-              className={`nav-link ${
+              className={`nav-link text-dark-emphasis ${
                 selectedStatus === status.value ? `active` : ``
               }`}
               onClick={() => handleStatusChange(status.value)}
@@ -47,7 +50,7 @@ const OrderPage = () => {
         ))}
       </div>
 
-      <UserOrdersTable heading={true} status={selectedStatus} />
+      <UserOrdersTable heading={false} status={selectedStatus} />
     </AccountLayout>
   )
 }

@@ -16,7 +16,7 @@ export const groupByDate = (items, by, role) => {
       return {
         amount:
           role === 'admin'
-            ? item.amountToGD.$numberDecimal
+            ? item.amountToZenpii.$numberDecimal
             : item.amountToStore.$numberDecimal,
         createdAt: formatFunc(item.createdAt)
       }

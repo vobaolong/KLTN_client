@@ -8,10 +8,13 @@ const StorePage = () => {
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
   const { t } = useTranslation()
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.store'), url: '/admin/store' }
+  ]
   return (
-    <AdminLayout user={user}>
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+    <AdminLayout user={user} paths={paths}>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span

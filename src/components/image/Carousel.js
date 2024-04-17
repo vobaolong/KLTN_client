@@ -13,7 +13,7 @@ const Carousel = ({
   <div
     id='carouselInterval'
     className='carousel carousel-dark slide'
-    data-bs-ride='carousel'
+    data-ride='carousel'
   >
     <div className='carousel-indicators'>
       {listImages?.map((image, index) => (
@@ -65,7 +65,7 @@ const Carousel = ({
       data-bs-target='#carouselInterval'
       data-bs-slide='next'
     >
-      <span className='carousel-control-next-icon ' aria-hidden='true'></span>
+      <span className='carousel-control-next-icon' aria-hidden='true'></span>
       <span className='visually-hidden'>{'>'}</span>
     </button>
   </div>

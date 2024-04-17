@@ -9,9 +9,17 @@ const OrderDetailPage = () => {
   const store = useSelector((state) => state.vendor.store)
   const { orderId, storeId } = useParams()
   const { t } = useTranslation()
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.order'), url: `/vendor/orders/${storeId}` },
+    {
+      name: t('breadcrumbs.orderDetail'),
+      url: `/vendor/orders/detail/${orderId}/${storeId}`
+    }
+  ]
   return (
-    <VendorLayout user={user} store={store}>
+    <VendorLayout user={user} store={store} paths={paths}>
       <div className='res-mx--12-md bg-white rounded-1 box-shadow p-4'>
         <OrderDetailInfo
           orderId={orderId}

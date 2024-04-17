@@ -263,7 +263,7 @@ const OrderDetailInfo = ({
           />
           <div className='d-flex justify-content-end border-top flex-column align-items-end'>
             {by === 'user' && getToken().role === 'user' && (
-              <table className='col-lg-4 text-start'>
+              <table className='col-4 text-start table-sm'>
                 <tbody>
                   <tr className='border-bottom'>
                     <th
@@ -283,24 +283,26 @@ const OrderDetailInfo = ({
                       </span>
                     </td>
                   </tr>
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      {t('cartDetail.zenpiiVoucherApplied')}
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        -{formatPrice(saleFromSystem)}
-                        <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
+                  {saleFromSystem !== 0 && (
+                    <tr className='border-bottom'>
+                      <th
+                        style={{
+                          fontSize: '0.9rem',
+                          fontWeight: '500',
+                          backgroundColor: 'transparent'
+                        }}
+                        scope='col'
+                      >
+                        {t('cartDetail.zenpiiVoucherApplied')}
+                      </th>
+                      <td className='text-end'>
+                        <span style={{ fontSize: '0.9rem' }}>
+                          -{formatPrice(saleFromSystem)}
+                          <sup>₫</sup>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
                   <tr className='border-bottom'>
                     <th
                       style={{
@@ -319,28 +321,34 @@ const OrderDetailInfo = ({
                       </span>
                     </td>
                   </tr>
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      {t('cartDetail.discountShippingFee')}
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        -{formatPrice(saleFromShipping)}
-                        <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
+                  {saleFromShipping !== 0 && (
+                    <tr className='border-bottom'>
+                      <th
+                        style={{
+                          fontSize: '0.9rem',
+                          fontWeight: '500',
+                          backgroundColor: 'transparent'
+                        }}
+                        scope='col'
+                      >
+                        {t('cartDetail.discountShippingFee')}
+                      </th>
+                      <td className='text-end'>
+                        <span style={{ fontSize: '0.9rem' }}>
+                          -{formatPrice(saleFromShipping)}
+                          <sup>₫</sup>
+                        </span>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             )}
-            <span className='col-4 justify-content-between gap-3 align-items-center d-flex pt-2'>
+            <span
+              className={` ${
+                getToken().role === 'user' ? 'col-4' : 'col-3'
+              } justify-content-between gap-3 align-items-center d-flex pt-2`}
+            >
               <b className='text-muted'>{t('cartDetail.total')}:</b>
               <span
                 style={{ fontSize: '1.4rem' }}
@@ -349,14 +357,14 @@ const OrderDetailInfo = ({
                 {formatPrice(order.amountFromUser?.$numberDecimal)}
                 <sup>₫</sup>
                 {by !== 'user' && (
-                  <span className='d-inline-block position-relative ms-3'>
+                  <span
+                    title={t('orderDetail.includedDiscount')}
+                    className='d-inline-block position-relative ms-3'
+                  >
                     <i
                       style={{ fontSize: '15px', cursor: 'help' }}
-                      className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
+                      className='fa-solid fa-circle-info ms-1 border rounded-circle text-secondary opacity-50'
                     ></i>
-                    <small className='cus-tooltip-msg'>
-                      {t('orderDetail.includedDiscount')}
-                    </small>
                   </span>
                 )}
               </span>

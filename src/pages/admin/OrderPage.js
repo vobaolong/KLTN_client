@@ -24,9 +24,14 @@ const OrderPage = () => {
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
   }
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.order'), url: '/admin/order' }
+  ]
+
   return (
-    <AdminLayout user={user}>
-      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-4'>
+    <AdminLayout user={user} paths={paths}>
+      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
@@ -42,7 +47,7 @@ const OrderPage = () => {
       </div>
 
       <AdminOrdersTable
-        heading={true}
+        heading={false}
         isEditable={
           selectedStatus === 'Not processed' ||
           selectedStatus === 'Processing' ||

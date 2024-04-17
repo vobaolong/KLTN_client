@@ -9,10 +9,15 @@ const ProductsPage = () => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.vendor.store)
   const [flag, toggleFlag] = useToggle(true)
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.product'), url: `/vendor/products/$${store._id}` }
+  ]
 
   return (
-    <VendorLayout user={user} store={store}>
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+    <VendorLayout user={user} store={store} paths={paths}>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span

@@ -19,7 +19,7 @@ import { toast } from 'react-toastify'
 import ProductActiveLabel from '../label/ProductActiveLabel'
 import CategorySmallCard from '../card/CategorySmallCard'
 
-const AdminProductsTable = ({ heading = true, isActive = true }) => {
+const AdminProductsTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)

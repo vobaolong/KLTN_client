@@ -8,8 +8,14 @@ const VariantValuesPage = () => {
   const user = useSelector((state) => state.account.user)
   const { variantId } = useParams()
   const { t } = useTranslation()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.variant'), url: '/admin/variant' },
+    { name: t('breadcrumbs.variantValues'), url: '/admin/variant/create' }
+  ]
+
   return (
-    <AdminLayout user={user}>
+    <AdminLayout user={user} paths={paths}>
       <VariantValuesTable variantId={variantId} />
       <div className='mt-4'>
         <Link

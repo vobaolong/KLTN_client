@@ -100,7 +100,7 @@ const Routes = () => {
           component={AdminCategoryPage}
         />
         <AdminRoute
-          path='/admin/category/createNewCategory'
+          path='/admin/category/create'
           exact
           component={AdminCreateCategoryPage}
         />
@@ -111,12 +111,12 @@ const Routes = () => {
         />
         <AdminRoute path='/admin/variant' exact component={AdminVariantPage} />
         <AdminRoute
-          path='/admin/variant/createNewStyle'
+          path='/admin/variant/create'
           exact
           component={AdminCreateVariantPage}
         />
         <AdminRoute
-          path='/admin/variant/editStyle/:variantId'
+          path='/admin/variant/edit/:variantId'
           exact
           component={AdminEditVariantPage}
         />
@@ -255,7 +255,7 @@ const Routes = () => {
           component={StoreCollectionPage}
         />
         <Route
-          path='/store/review&rating/:storeId'
+          path='/store/rating/:storeId'
           exact
           component={StoreReviewAndRatingPage}
         />

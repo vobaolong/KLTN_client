@@ -21,7 +21,7 @@ import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
 
 const StoreProductsTable = ({
-  heading = true,
+  heading = false,
   isSelling = true,
   storeId = ''
 }) => {
@@ -156,7 +156,7 @@ const StoreProductsTable = ({
               className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
               to={`/vendor/products/createNewProduct/${storeId}`}
             >
-              <i className='fa-solid fa-plus-circle'></i>
+              <i className='fa-solid fa-plus'></i>
               <span className='ms-2 res-hide'>
                 {t('productDetail.createProduct')}
               </span>
@@ -164,26 +164,29 @@ const StoreProductsTable = ({
           )}
         </div>
         {!isLoading && pagination.size === 0 ? (
-          <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+          <div className='d-flex justify-content-center my-4 text-danger text-center'>
             <h5>{t('productDetail.noProduct')}</h5>
           </div>
         ) : (
-          <div className='table-scroll my-2'>
-            <table className='table align-middle table-hover table-sm text-center'>
-              <thead>
-                <tr>
-                  <th scope='col'></th>
-                  <th scope='col' className='text-start'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.name')}
-                      sortBy='name'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
+          <>
+            <div className='table-scroll my-2'>
+              <table className='table align-middle table-hover table-sm text-center'>
+                <thead>
+                  <tr>
+                    <th scope='col'></th>
+                    <th scope='col' className='text-start'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.name')}
+                        sortBy='name'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
 
-                  {/* <th scope='col'>
+                    {/* <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -213,113 +216,131 @@ const StoreProductsTable = ({
                     />
                   </th> */}
 
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.price')}
-                      sortBy='price'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.salePrice')}
-                      sortBy='salePrice'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.stock')}
-                      sortBy='quantity'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.sold')}
-                      sortBy='sold'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.category')}
-                      sortBy='categoryId'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.values')}
-                      sortBy='variantValueIds'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('filters.rating')}
-                      sortBy='rating'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('status.status')}
-                      sortBy='isActive'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('productDetail.date')}
-                      sortBy='createdAt'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-
-                  <th scope='col'>
-                    {' '}
-                    <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                      {t('action')}
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product, index) => (
-                  <tr key={index}>
-                    <th scope='row'>
-                      {index + 1 + (filter.page - 1) * filter.limit}
+                    <th scope='col' className='text-end'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.price')}
+                        sortBy='price'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
                     </th>
-                    <td
-                      className='text-start py-1'
-                      style={{
-                        whiteSpace: 'normal',
-                        minWidth: '400px',
-                        width: 'fit-content'
-                      }}
-                    >
-                      <ProductSmallCard product={product} />
-                    </td>
-                    {/* <td>
+                    <th scope='col' className='text-end'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.salePrice')}
+                        sortBy='salePrice'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.stock')}
+                        sortBy='quantity'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.sold')}
+                        sortBy='sold'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col' className='text-start'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.category')}
+                        sortBy='categoryId'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.values')}
+                        sortBy='variantValueIds'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('filters.rating')}
+                        sortBy='rating'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('status.status')}
+                        sortBy='isActive'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col' className='text-end'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.date')}
+                        sortBy='createdAt'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+
+                    <th scope='col'>
+                      {' '}
+                      <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                        {t('action')}
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product, index) => (
+                    <tr key={index}>
+                      <th scope='row'>
+                        {index + 1 + (filter.page - 1) * filter.limit}
+                      </th>
+                      <td
+                        className='text-start py-1'
+                        style={{
+                          whiteSpace: 'normal',
+                          minWidth: '400px',
+                          width: 'fit-content'
+                        }}
+                      >
+                        <ProductSmallCard product={product} />
+                      </td>
+                      {/* <td>
                   <div
                     className='align-items-center d-flex mx-auto my-1'
                     style={{
@@ -407,118 +428,122 @@ const StoreProductsTable = ({
                   </div>
                 </td> */}
 
-                    <td>
-                      <small>
-                        {formatPrice(product.price?.$numberDecimal)}₫
-                      </small>
-                    </td>
-                    <td>
-                      <small>
-                        {formatPrice(product.salePrice?.$numberDecimal)}₫
-                      </small>
-                    </td>
-                    <td>
-                      <small>{product.quantity}</small>
-                    </td>
-                    <td>
-                      <small>{product.sold}</small>
-                    </td>
-                    <td className='text-start'>
-                      <small className='badge border rounded-1 bg-value text-dark-emphasis'>
-                        <CategorySmallCard
-                          parent={false}
-                          category={product.categoryId}
-                        />
-                      </small>
-                    </td>
+                      <td className='text-end'>
+                        <small>
+                          {formatPrice(product.price?.$numberDecimal)}
+                          <sup>₫</sup>
+                        </small>
+                      </td>
+                      <td className='text-end'>
+                        <small>
+                          {formatPrice(product.salePrice?.$numberDecimal)}
+                          <sup>₫</sup>
+                        </small>
+                      </td>
+                      <td>
+                        <small>{product.quantity}</small>
+                      </td>
+                      <td>
+                        <small>{product.sold}</small>
+                      </td>
+                      <td className='text-start'>
+                        <small className='badge border rounded-1 bg-value text-dark-emphasis'>
+                          <CategorySmallCard
+                            parent={false}
+                            category={product.categoryId}
+                          />
+                        </small>
+                      </td>
 
-                    <td style={{ whiteSpace: 'normal' }}>
-                      <div
-                        className='d-flex justify-content-start align-items-center text-start mx-1'
-                        style={{
-                          maxWidth: '150px'
-                          // height: '120px',
-                          // overflow: 'auto'
-                        }}
-                      >
-                        {product.variantValueIds?.length > 0 ? (
-                          <small>
-                            {/* <VariantValueSelector
+                      <td style={{ whiteSpace: 'normal' }}>
+                        <div
+                          className='d-flex justify-content-start align-items-center text-start mx-1'
+                          style={{
+                            maxWidth: '150px'
+                            // height: '120px',
+                            // overflow: 'auto'
+                          }}
+                        >
+                          {product.variantValueIds?.length > 0 ? (
+                            <small>
+                              {/* <VariantValueSelector
                           listValues={product.variantValueIds}
                           isEditable={false}
                         /> */}
-                            {product.variantValueIds
-                              ?.map((value) => value.name)
-                              .join(', ')}
-                          </small>
-                        ) : (
-                          <small className='mx-auto'>-</small>
-                        )}
-                      </div>
-                    </td>
-                    <td>
-                      <small>
-                        <i className='fa-solid fa-star text-warning me-1'></i>
-                        {product.rating}
-                      </small>
-                    </td>
-                    <td>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        <ProductActiveLabel isActive={product.isActive} />
-                      </span>
-                    </td>
-                    <td className='text-end'>
-                      <small>{humanReadableDate(product.createdAt)}</small>
-                    </td>
-                    <td>
-                      <div className='d-flex justify-content-center align-items-center'>
-                        <button
-                          type='button'
-                          className={`btn btn-sm rounded-1 ripple me-2 btn-outline-${
-                            !product.isSelling ? 'success' : 'secondary'
-                          }`}
-                          onClick={() => handleSellingProduct(product)}
-                          title={
-                            !product.isSelling
-                              ? t('button.show')
-                              : t('button.hide')
-                          }
-                        >
-                          <i
-                            className={`fa-solid ${
-                              !product.isSelling ? 'fa-box' : 'fa-archive'
+                              {product.variantValueIds
+                                ?.map((value) => value.name)
+                                .join(', ')}
+                            </small>
+                          ) : (
+                            <small className='mx-auto'>-</small>
+                          )}
+                        </div>
+                      </td>
+                      <td>
+                        <small>
+                          <i className='fa-solid fa-star text-warning me-1'></i>
+                          {product.rating}
+                        </small>
+                      </td>
+                      <td>
+                        <span style={{ fontSize: '0.9rem' }}>
+                          <ProductActiveLabel isActive={product.isActive} />
+                        </span>
+                      </td>
+                      <td className='text-end'>
+                        <small>{humanReadableDate(product.createdAt)}</small>
+                      </td>
+                      <td>
+                        <div className='d-flex justify-content-center align-items-center'>
+                          <button
+                            type='button'
+                            className={`btn btn-sm rounded-1 ripple me-2 btn-outline-${
+                              !product.isSelling ? 'success' : 'secondary'
                             }`}
-                          ></i>
-                        </button>
-                        <Link
-                          type='button'
-                          className='btn btn-sm btn-primary ripple rounded-1'
-                          to={`/vendor/products/edit/${product._id}/${storeId}`}
-                          title={t('button.edit')}
-                        >
-                          <i className='fa-solid fa-pen'></i>
-                        </Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                            onClick={() => handleSellingProduct(product)}
+                            title={
+                              !product.isSelling
+                                ? t('button.show')
+                                : t('button.hide')
+                            }
+                          >
+                            <i
+                              className={`fa-solid ${
+                                !product.isSelling ? 'fa-box' : 'fa-archive'
+                              }`}
+                            ></i>
+                          </button>
+                          <Link
+                            type='button'
+                            className='btn btn-sm btn-primary ripple rounded-1'
+                            to={`/vendor/products/edit/${product._id}/${storeId}`}
+                            title={t('button.edit')}
+                          >
+                            <i className='fa-solid fa-pen'></i>
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className='d-flex justify-content-between align-items-center px-4'>
+              <ShowResult
+                limit={filter.limit}
+                size={pagination.size}
+                pageCurrent={pagination.pageCurrent}
+              />
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
+          </>
         )}
-        <div className='d-flex justify-content-between align-items-center px-4'>
-          <ShowResult
-            limit={filter.limit}
-            size={pagination.size}
-            pageCurrent={pagination.pageCurrent}
-          />
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
-        </div>
       </div>
     </div>
   )

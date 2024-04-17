@@ -69,7 +69,7 @@ const ReviewItem = ({
               <Modal
                 id='review-form'
                 hasCloseBtn={false}
-                title='Review & Rate product'
+                title={t('productDetail.productReview')}
               >
                 <ReviewForm
                   orderId={orderId}
@@ -81,18 +81,17 @@ const ReviewItem = ({
             )}
           </div>
           {!isReviewed && (
-            <div className=''>
-              <small>
-                Đánh giá trước{' '}
-                <u className='cus-tooltip' style={{ cursor: 'help' }}>
-                  {humanReadableDate(deliveredDate)}
-                </u>
-                <small className='cus-tooltip-msg'>
-                  Bạn sẽ không thể đánh giá đơn hàng sau{' '}
-                  {humanReadableDate(deliveredDate)}.
-                </small>
-              </small>
-            </div>
+            <small>
+              {t('reviewDetail.ratingBy')}
+              <u
+                title={`${t('reviewDetail.cannotReview')} ${humanReadableDate(
+                  deliveredDate
+                )}.`}
+                style={{ cursor: 'help' }}
+              >
+                {humanReadableDate(deliveredDate)}
+              </u>
+            </small>
           )}
           {isReviewed && (
             <small className='cus-tooltip-msg'>Sản phẩm đã được đánh giá</small>

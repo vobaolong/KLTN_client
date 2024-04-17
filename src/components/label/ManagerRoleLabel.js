@@ -1,15 +1,20 @@
-const UserRoleLabel = ({ role = '', detail = true }) => (
-  <span className='position-relative d-inline-block'>
-    {role === 'owner' ? (
-      <span className='badge bg-primary cus-tooltip rounded-1'>
-        {detail && <span>{role}</span>}
-      </span>
-    ) : (
-      <span className='badge bg-primary cus-tooltip rounded-1'>
-        {detail && <span>{role}</span>}
-      </span>
-    )}
-  </span>
-)
+import { useTranslation } from 'react-i18next'
 
+const UserRoleLabel = ({ role = '', detail = true }) => {
+  const { t } = useTranslation()
+  return (
+    <span className='position-relative d-inline-block'>
+      <span
+        className={`badge border cus-tooltip rounded-1
+			${
+        role === 'owner'
+          ? 'bg-primary-rgba text-primary'
+          : 'bg-success-rgba text-success'
+      }`}
+      >
+        {detail && <span>{t(`userDetail.${role}`)}</span>}
+      </span>
+    </span>
+  )
+}
 export default UserRoleLabel

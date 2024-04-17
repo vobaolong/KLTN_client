@@ -15,20 +15,19 @@ import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 
-const UserStoresTable = () => {
+const UserStoresTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
   const [stores, setStores] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'name',
+    sortBy: 'point',
     sortMoreBy: 'rating',
-    order: 'asc',
+    order: 'desc',
     limit: 8,
     page: 1
   })
@@ -86,7 +85,9 @@ const UserStoresTable = () => {
 
   return (
     <div className='position-relative'>
-      <h5 className='text-center text-uppercase'>{t('myStore')}</h5>
+      {heading && (
+        <h5 className='text-center text-uppercase'>{t('myStore')}</h5>
+      )}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
@@ -98,7 +99,7 @@ const UserStoresTable = () => {
               className='btn btn-primary ripple text-nowrap rounded-1'
               to='/account/store/create'
             >
-              <i className='fa-solid fa-plus-circle'></i>
+              <i className='fa-solid fa-plus'></i>
               <span className='ms-2 res-hide'>{t('createStore')}</span>
             </Link>
           </div>
@@ -110,7 +111,7 @@ const UserStoresTable = () => {
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='table table-striped table-sm table-hover align-middle text-center'>
+            <table className='table table-sm table-hover align-middle text-center'>
               <thead>
                 <tr>
                   <th scope='col'>
@@ -139,7 +140,7 @@ const UserStoresTable = () => {
                   </th>
                   <th scope='col' className='text-start'>
                     <span
-                      style={{ fontWeight: '400', fontSize: '.875rem' }}
+                      style={{ fontWeight: '400', fontSize: '.9rem' }}
                       className='text-secondary'
                     >
                       {t('storeDetail.address')}
@@ -194,11 +195,7 @@ const UserStoresTable = () => {
                     </th>
                     <td className='text-center'>
                       <ManagerRoleLabel
-                        role={
-                          _id === store.ownerId._id
-                            ? t('userDetail.owner')
-                            : t('userDetail.staff')
-                        }
+                        role={_id === store.ownerId._id ? 'owner' : 'staff'}
                       />
                     </td>
                     <td className='text-center'>
@@ -210,7 +207,7 @@ const UserStoresTable = () => {
                     <td>
                       <Link
                         type='button'
-                        className='btn btn-secondary ripple rounded-1'
+                        className='btn btn-outline-secondary ripple rounded-1'
                         to={`/vendor/${store._id}`}
                         title={t('admin.adDashboard.dashboard')}
                       >

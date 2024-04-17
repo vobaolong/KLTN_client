@@ -4,10 +4,12 @@ import Cover from '../image/Cover'
 import Avatar from '../image/Avatar'
 import StoreStatusLabel from '../label/StoreStatusLabel'
 import StoreLevelInfo from '../info/StoreLevelInfo'
+import Breadcrumb from '../ui/Breadcrumb'
 
-const StoreLayout = ({ store = {}, children = null }) => {
+const StoreLayout = ({ store = {}, children = null, paths = {} }) => {
   return (
     <MainLayout>
+      <Breadcrumb paths={paths} />
       <div className='store-layout'>
         <div className='position-relative bg-white p-3 rounded-top-2'>
           <Cover cover={store.cover} alt={store.name} />

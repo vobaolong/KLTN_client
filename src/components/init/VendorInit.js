@@ -98,7 +98,7 @@ const VendorInit = ({ store, actions }) => {
           <div className='your-store'>
             <div
               type='button'
-              className='your-store-card btn btn-outline-light cus-outline ripple'
+              className='your-store-card btn lang text-white ripple'
             >
               <img
                 loading='lazy'
@@ -118,7 +118,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/profile/${storeId}`}
               >
-                <i className='fa-solid fa-store me-1'></i>
+                {/* <i className='fa-solid fa-store'></i> */}
                 {t('storeDetail.profile')}
               </Link>
 
@@ -126,7 +126,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/orders/${storeId}`}
               >
-                <i className='fa-solid fa-clipboard me-1'></i>
+                {/* <i className='fa-solid fa-clipboard'></i> */}
                 {t('storeDetail.orders')}
               </Link>
 
@@ -134,7 +134,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to='/account/store'
               >
-                <i className='fa-solid fa-angle-left me-1'></i>
+                {/* <i className='fa-solid fa-angle-left'></i> */}
                 {t('button.back')}
               </Link>
             </ul>

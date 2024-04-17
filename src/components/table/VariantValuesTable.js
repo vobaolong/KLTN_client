@@ -32,7 +32,7 @@ const VariantValuesTable = ({
   const [restoredVariantValue, setRestoredVariantValue] = useState({})
   const [editedVariantValue, setEditedVariantValue] = useState({})
   const [variantValues, setVariantValues] = useState([])
-  const [style, setVariant] = useState({})
+  const [variant, setVariant] = useState({})
   const { _id, accessToken } = getToken()
 
   const init = () => {
@@ -43,7 +43,7 @@ const VariantValuesTable = ({
           if (data.error) toast.error(data.error)
           else {
             setVariantValues(data.variantValues)
-            setVariant(data.style)
+            setVariant(data.variant)
           }
           setIsLoading(false)
         })
@@ -57,7 +57,7 @@ const VariantValuesTable = ({
           if (data.error) toast.error(data.error)
           else {
             setVariantValues(data.variantValues)
-            setVariant(data.style)
+            setVariant(data.variant)
           }
           setIsLoading(false)
         })
@@ -99,6 +99,7 @@ const VariantValuesTable = ({
       })
   }
 
+  console.log(variant)
   const onSubmitRestore = () => {
     setIsLoading(true)
     restoreVariantValue(_id, accessToken, restoredVariantValue._id)
@@ -137,7 +138,7 @@ const VariantValuesTable = ({
 
       {heading && (
         <h5 className='text-center text-uppercase'>
-          Values of <span className='text-primary'>{style.name}</span>
+          Values of <span className='text-primary'>{variant?.name}</span>
         </h5>
       )}
 
@@ -146,7 +147,7 @@ const VariantValuesTable = ({
       <div className='d-flex justify-content-between align-items-end'>
         <AddValueVariantItem
           variantId={variantId}
-          variantName={style.name}
+          variantName={variant?.name}
           onRun={() => setRun(!run)}
         />
         <span className='text-nowrap res-hide'>
@@ -155,7 +156,7 @@ const VariantValuesTable = ({
       </div>
 
       <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-striped table-sm text-center'>
+        <table className='table align-middle table-hover table-sm text-center'>
           <thead>
             <tr>
               <th scope='col'></th>
@@ -191,7 +192,7 @@ const VariantValuesTable = ({
                         type='button'
                         className='btn btn-primary ripple me-2 rounded-1'
                         data-bs-toggle='modal'
-                        data-bs-target='#edit-style-value-form'
+                        data-bs-target='#edit-variant-value-form'
                         onClick={() => setEditedVariantValue(value)}
                       >
                         <i className='fa-solid fa-pen'></i>
@@ -234,7 +235,7 @@ const VariantValuesTable = ({
 
       {!isActive && (
         <Modal
-          id='edit-style-value-form'
+          id='edit-variant-value-form'
           hasCloseBtn={false}
           title='Edit value'
         >

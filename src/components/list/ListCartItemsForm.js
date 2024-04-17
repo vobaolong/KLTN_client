@@ -16,7 +16,6 @@ import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import DropDownMenu from '../ui/DropDownMenu'
-import UserLevelLabel from '../label/UserLevelLabel'
 import CheckoutForm from '../item/form/CheckoutForm'
 import { useTranslation } from 'react-i18next'
 import MallLabel from '../label/MallLabel'
@@ -66,7 +65,6 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
   }
-  console.log(level)
 
   useEffect(() => {
     if (cartId) init()
@@ -173,7 +171,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   20 && <HotSaleLabel />}
               </div>
               <Link
-                className='text-reset productName text-decoration-none link-hover'
+                className='text-reset product-name text-decoration-none link-hover'
                 to={`/product/${item.productId?._id}`}
                 title={item.productId?.name}
               >

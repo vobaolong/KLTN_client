@@ -86,115 +86,108 @@ const AdminUsersTable = ({ heading = '' }) => {
       {isLoading && <Loading />}
       {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
 
-      <div className='d-flex justify-content-between align-items-end'>
+      <div className='p-3 box-shadow bg-body rounded-2'>
         <SearchInput onChange={handleChangeKeyword} />
-        <ShowResult
-          limit={filter.limit}
-          size={pagination.size}
-          pageCurrent={pagination.pageCurrent}
-        />
-      </div>
-
-      <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-striped table-sm text-end'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col' className='text-start'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('userDetail.name')}
-                </span>
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('point')}
-                  sortBy='point'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='ID Card'
-                  sortBy='id_card'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title='Email'
-                  sortBy='email'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-              <th scope='col' className='text-center'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('userDetail.KYC')}
-                  sortBy='email'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-
-              <th scope='col' className='text-secondary'>
-                <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                  {t('userDetail.phone')}
-                </span>
-              </th>
-
-              <th scope='col'>
-                <SortByButton
-                  currentOrder={filter.order}
-                  currentSortBy={filter.sortBy}
-                  title={t('joined')}
-                  sortBy='createdAt'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                />
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={index}>
-                <th scope='row'>
-                  {index + 1 + (filter.page - 1) * filter.limit}
+        <div className='table-scroll my-2'>
+          <table className='table align-middle table-hover table-sm text-end'>
+            <thead>
+              <tr>
+                <th scope='col'></th>
+                <th scope='col' className='text-start'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('userDetail.name')}
+                  </span>
                 </th>
-                <td className='text-start'>
-                  <UserSmallCard user={user} />
-                </td>
-                <td className='text-end'>
-                  <small>{user.point}</small>
-                </td>
-                <td className='text-end'>
-                  <small>{user.id_card || '-'}</small>
-                </td>
-                <td className='text-end'>
-                  <small>{user.email || '-'}</small>
-                </td>
-                <td className='text-center'>
-                  <VerifyLabel verify={user.isEmailActive} />
-                </td>
-                <td className='text-end'>
-                  <small>{user.phone || '-'}</small>
-                </td>
-                <td className='text-end'>
-                  <small>{humanReadableDate(user.createdAt)}</small>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('point')}
+                    sortBy='point'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='ID Card'
+                    sortBy='id_card'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title='Email'
+                    sortBy='email'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col' className='text-center'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('userDetail.KYC')}
+                    sortBy='email'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
 
-      {pagination.size !== 0 && (
-        <Pagination pagination={pagination} onChangePage={handleChangePage} />
-      )}
+                <th scope='col' className='text-secondary'>
+                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                    {t('userDetail.phone')}
+                  </span>
+                </th>
+
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('joined')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={index}>
+                  <th scope='row'>
+                    {index + 1 + (filter.page - 1) * filter.limit}
+                  </th>
+                  <td className='text-start'>
+                    <UserSmallCard user={user} />
+                  </td>
+                  <td>{user.point}</td>
+                  <td>{user.id_card || '-'}</td>
+                  <td>{user.email || '-'}</td>
+                  <td className='text-center'>
+                    <VerifyLabel verify={user.isEmailActive} />
+                  </td>
+                  <td>{user.phone || '-'}</td>
+                  <td>{humanReadableDate(user.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

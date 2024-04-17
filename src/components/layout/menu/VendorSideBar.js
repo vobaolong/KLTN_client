@@ -19,7 +19,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             alt=''
           />
           {!isCollapsed && (
-            <span className='p-0 m-0 text-muted text-uppercase fw-bold'>
+            <span className='p-0 m-0 text-dark-emphasis text-uppercase fw-bold'>
               {`${vendor.firstName} ${vendor.lastName}`}
             </span>
           )}
@@ -30,7 +30,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
           onClick={onToggle}
         >
           <i
-            class={`text-muted fs-5 fa-solid fa-circle-chevron-${
+            className={`text-muted fs-5 fa-solid fa-circle-chevron-${
               isCollapsed ? 'right' : 'left'
             }`}
           ></i>
@@ -48,10 +48,10 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === store._id ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-chart-pie'></i>
+            <i class='fa-solid fa-chart-line'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
-                {t('admin.adDashboard.dashboard')}
+                {t('admin.adDashboard.overview')}
               </span>
             )}
           </Link>

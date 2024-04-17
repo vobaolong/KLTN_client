@@ -4,17 +4,15 @@ import { createStoreLevel } from '../../../apis/level'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import ColorPickerInput from '../../ui/ColorPickerInput'
+import { toast } from 'react-toastify'
 
 const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [level, setLevel] = useState({
     name: '',
@@ -69,14 +67,12 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     createStoreLevel(_id, accessToken, level)
       .then((data) => {
-        if (data.error) setError(data.error)
+        if (data.error) toast.error(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(data.success)
           setLevel({
             name: '',
             minPoint: 0,
@@ -89,24 +85,16 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setSuccess('')
-          setError('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
+        console.log('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.createStoreLevel')}
@@ -120,10 +108,10 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Level name'
+            label={t('levelDetail.name')}
             value={level.name}
             isValid={level.isValidName}
-            feedback='Please provide a valid level name.'
+            feedback={t('levelDetail.nameValid')}
             validator='level'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -134,10 +122,10 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Floor point'
+            label={t('levelDetail.floorPoint')}
             value={level.minPoint}
             isValid={level.isValidMinPoint}
-            feedback='Please provide a valid floor point (>=0).'
+            feedback={t('levelDetail.validFloorPoint')}
             validator='positive|zero'
             required={true}
             onChange={(value) =>
@@ -150,10 +138,10 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label='Discount (%)'
+            label={`${t('levelDetail.discount')} (%)`}
             value={level.discount}
             isValid={level.isValidDiscount}
-            feedback='Please provide a valid floor point (0% - 100%).'
+            feedback={t('levelDetail.validDiscount')}
             validator='zeroTo100'
             required={true}
             onChange={(value) =>
@@ -164,30 +152,14 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
         </div>
 
         <div className='col-12'>
-          <Input
-            type='text'
-            label='Color'
-            value={level.color}
-            isValid={level.isValidColor}
-            feedback='Please provide a valid color.'
-            validator='anything'
-            required={true}
-            onChange={(value) => handleChange('color', 'isValidColor', value)}
-            onValidate={(flag) => handleValidate('isValidColor', flag)}
+          <ColorPickerInput
+            label={t('levelDetail.color')}
+            color={level.color}
+            onChange={(selectedColor) =>
+              handleChange('color', 'isValidColor', selectedColor)
+            }
           />
         </div>
-
-        {error && (
-          <div className='col-12'>
-            <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

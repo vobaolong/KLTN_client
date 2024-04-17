@@ -4,22 +4,15 @@ const UserRoleLabel = ({ role = '', detail = true }) => {
   const { t } = useTranslation()
   return (
     <span className='position-relative d-inline-block'>
-      {role === 'user' ? (
-        <span className='badge bg-primary cus-tooltip rounded-1'>
-          {detail && <span>{role}</span>}
-        </span>
-      ) : (
-        <span className='badge bg-primary cus-tooltip rounded-1'>
-          {detail && <span>{role}</span>}
-        </span>
-      )}
-      {!detail ? (
-        <small className='cus-tooltip-msg'>{role}</small>
-      ) : (
-        <small className='cus-tooltip-msg'>
-          {t('role')}: {role}
-        </small>
-      )}
+      <span
+        className={`badge ${
+          role === 'user'
+            ? 'bg-success-rgba text-success'
+            : 'bg-primary-rgba text-primary'
+        } rounded-1`}
+      >
+        {detail && <span>{t(`userDetail.role.${role}`)}</span>}
+      </span>
     </span>
   )
 }

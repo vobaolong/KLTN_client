@@ -30,7 +30,7 @@ const ListReviews = ({
     rating: '',
     sortBy: 'rating',
     order: 'desc',
-    limit: 5,
+    limit: 10,
     page: 1
   })
 
@@ -76,6 +76,26 @@ const ListReviews = ({
       page: newPage
     })
   }
+  const renderRating = () => {
+    const render = []
+    for (let i = 1; i <= 5; i++) {
+      const ratingCount =
+        ratingsCounts.find((item) => item.rating === i)?.count || 0
+      const percentage = (ratingCount / reviews.length) * 100
+      render.push(
+        <small className='d-flex align-items-center gap-2' key={i}>
+          <StarRating stars={i} />
+          <progress
+            className='custom-progress'
+            value={percentage}
+            max={100}
+          ></progress>
+          <span>{ratingCount}</span>
+        </small>
+      )
+    }
+    return render
+  }
 
   const renderFilterRating = () => {
     const render = []
@@ -114,7 +134,7 @@ const ListReviews = ({
               <span>{t('filters.all')}</span>
             ) : (
               <small>
-                <StarRating stars={i} />
+                <StarRating stars={i} noStar={true} />
               </small>
             )}
           </label>
@@ -122,55 +142,78 @@ const ListReviews = ({
       )
     return render
   }
+  const ratingsCounts = []
+  for (let i = 1; i <= 5; i++) {
+    const count = reviews.filter((review) => review.rating === i).length
+    ratingsCounts.push({ rating: i, count: count })
+  }
+  const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0)
+  const averageRating = (totalRating / reviews.length).toFixed(1)
 
   return (
     <div className='container-fluid position-relative'>
       {heading && <h5 className='my-3'>{heading}</h5>}
-
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      {reviews.length > 0 ? (
-        <div>
-          <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border'>
-            <div className='d-flex flex-wrap justify-content-start align-items-center'>
-              {renderFilterRating()}
-            </div>
-            <small className='text-nowrap res-hide'>
-              {t('showing')}{' '}
-              <b>
-                {Math.min(
-                  filter.limit,
-                  pagination.size - filter.limit * (pagination.pageCurrent - 1)
-                )}{' '}
-              </b>
-              {t('of')} {pagination.size} {t('result')}
-            </small>
+      <div>
+        <div className='d-flex flex-column gap-1 pb-3 mb-4 border-bottom'>
+          <h6>Tổng quan</h6>
+          <div className='d-flex gap-2 align-items-center'>
+            <span style={{ fontSize: '1.7rem', fontWeight: '600' }}>
+              {(averageRating >= 0 && averageRating) || 0}
+            </span>
+            <StarRating stars={averageRating} />
           </div>
-
-          <div className='p-2'>
-            {reviews?.map((review, index) => (
-              <div className='col-12' key={index}>
-                <ReviewInfo
-                  review={review}
-                  about={!!storeId}
-                  onRun={() => setRun(!run)}
-                />
-              </div>
-            ))}
+          <span className='text-secondary' style={{ fontSize: '.9rem' }}>
+            ({reviews?.length} đánh giá)
+          </span>
+          <div className='d-flex flex-column-reverse flex-wrap justify-content-start align-items-start'>
+            {renderRating()}
           </div>
-
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
         </div>
-      ) : (
-        <h6 className='text-center text-danger'>
-          {t('reviewDetail.noReview')}
-        </h6>
-      )}
+        <span>Lọc theo</span>
+        <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border-bottom'>
+          <div className='d-flex flex-wrap justify-content-start align-items-center'>
+            {renderFilterRating()}
+          </div>
+          <small className='text-nowrap res-hide'>
+            {t('showing')}{' '}
+            <b>
+              {Math.min(
+                filter.limit,
+                pagination.size - filter.limit * (pagination.pageCurrent - 1)
+              )}{' '}
+            </b>
+            {t('of')} {pagination.size} {t('result')}
+          </small>
+        </div>
+        {reviews.length > 0 ? (
+          <>
+            <div className='p-2'>
+              {reviews?.map((review, index) => (
+                <div className='col-12' key={index}>
+                  <ReviewInfo
+                    review={review}
+                    about={!!storeId}
+                    onRun={() => setRun(!run)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {pagination.size !== 0 && (
+              <Pagination
+                pagination={pagination}
+                onChangePage={handleChangePage}
+              />
+            )}
+          </>
+        ) : (
+          <h6 className='text-center text-danger mt-2'>
+            {t('reviewDetail.noReview')}
+          </h6>
+        )}
+      </div>
     </div>
   )
 }

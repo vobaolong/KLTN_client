@@ -31,7 +31,7 @@ const Loading = ({ size = 'medium' }) => (
         }}
       >
         <div
-          className={`spinner-border text-secondary ${
+          className={`spinner-border text-primary ${
             size === 'small' && 'spinner-border-sm'
           }`}
           role='status'

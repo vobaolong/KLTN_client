@@ -14,7 +14,7 @@ const ListHotStores = ({ heading = '' }) => {
     speed: 600,
     slidesToShow: 5,
     slidesToScroll: 4,
-    initialSlide: 1,
+    initialSlide: 0,
     swipeToSlide: true,
     responsive: [
       {

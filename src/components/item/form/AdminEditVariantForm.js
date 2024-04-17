@@ -91,7 +91,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
     updateVariant(_id, accessToken, variantId, newVariant)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        else toast.success(t('toastSuccess.variant.update'))
         setIsLoading(false)
       })
       .catch((error) => {
@@ -101,7 +101,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
   }
 
   return (
-    <div className='p-1 position-relative'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -113,10 +113,10 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
       )}
 
       <form
-        className='border border-primary rounded-1 row mb-2'
+        className='border bg-body rounded-1 row mb-2'
         onSubmit={handleSubmit}
       >
-        <div className='col-12 bg-primary p-3'>
+        <div className='col-12 bg-primary rounded-top-1 px-4 py-3'>
           <h1 className='text-white fs-5 m-0'>{t('variantDetail.edit')}</h1>
         </div>
 
@@ -140,6 +140,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
         <div className='col-12 px-4 mt-2'>
           <Input
             type='text'
+            required={true}
             label={t('variantDetail.name')}
             value={newVariant.name}
             isValid={newVariant.isValidName}

@@ -4,18 +4,17 @@ import { removeReview } from '../../apis/review'
 import StarRating from '../label/StarRating'
 import ProductSmallCard from '../card/ProductSmallCard'
 import Loading from '../ui/Loading'
-import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import EditReviewItem from '../item/EditReviewItem'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { useTranslation } from 'react-i18next'
 import { calcTime } from '../../helper/calcTime'
+import { toast } from 'react-toastify'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-  const [error, setError] = useState('')
   const handleRemove = () => {
     if (!isReviewAllowed) return
     setIsConfirming(true)
@@ -23,31 +22,27 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
 
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
-    setError('')
     setIsLoading(true)
     removeReview(_id, accessToken, review._id)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else if (onRun) onRun()
+          toast.error(data.error)
+        } else if (onRun) {
+          onRun()
+          toast.success(t('toastSuccess.review.delete'))
+        }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        console.log('Something went wrong')
       })
   }
   const hoursDifference = calcTime(review?.orderId?.updatedAt)
   const isReviewAllowed = hoursDifference < 720 //30days
+
   return (
     <div className='row py-2 border-bottom position-relative'>
       {isLoading && <Loading />}
-      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('reviewDetail.delete')}
@@ -62,6 +57,13 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
         <div className='d-flex justify-content-between flex-grow-1'>
           <small className='hidden-avatar d-inline-flex gap-2'>
             <StarRating stars={review.rating} />
+            <small className='text-secondary'>
+              {(review.rating === 5 && t('reviewDetail.amazing')) ||
+                (review.rating === 4 && t('reviewDetail.good')) ||
+                (review.rating === 3 && t('reviewDetail.fair')) ||
+                (review.rating === 2 && t('reviewDetail.poor')) ||
+                (review.rating === 1 && t('reviewDetail.terrible'))}
+            </small>
             <span className='text-primary fw-medium'>
               {review?.userId?.firstName} {review?.userId?.lastName}
             </span>
@@ -71,12 +73,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               {t('productDetail.purchased')}
             </span>
             {about && (
-              <>
-                <ProductSmallCard
-                  borderName={true}
-                  product={review.productId}
-                />
-              </>
+              <ProductSmallCard borderName={true} product={review.productId} />
             )}
           </small>
 

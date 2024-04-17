@@ -38,7 +38,7 @@ const TransactionsTable = ({
   const [filter, setFilter] = useState({
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 10,
+    limit: 9,
     page: 1
   })
 

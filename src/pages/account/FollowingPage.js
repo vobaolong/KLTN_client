@@ -10,11 +10,14 @@ const FollowingPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.listFavorites'), url: '/account/following' }
+  ]
   return (
-    <AccountLayout user={user}>
+    <AccountLayout user={user} paths={paths}>
       <MetaData title={`${t('helmet.listFavorites')} | Zenpii Việt Nam`} />
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span

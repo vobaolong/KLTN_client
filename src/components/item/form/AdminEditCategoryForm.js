@@ -112,7 +112,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
   }
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog

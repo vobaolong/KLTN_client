@@ -8,14 +8,17 @@ const ProductPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
-
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.product'), url: '/admin/product' }
+  ]
   return (
-    <AdminLayout user={user}>
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+    <AdminLayout user={user} paths={paths}>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`text-primary nav-link ${flag ? 'active' : ''}`}
+              className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
               <i className='fa-solid fa-circle-check me-2'></i>
@@ -24,7 +27,7 @@ const ProductPage = () => {
           </li>
           <li className='nav-item col-6 text-center pointer'>
             <span
-              className={`text-danger nav-link ${!flag ? 'active' : ''}`}
+              className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
               <i className='fa-solid fa-ban me-2'></i>

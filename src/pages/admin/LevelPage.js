@@ -9,10 +9,14 @@ const LevelPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
   const [flag, toggleFlag] = useToggle(true)
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+    { name: t('breadcrumbs.level'), url: '/admin/level' }
+  ]
 
   return (
-    <AdminLayout user={user}>
-      <div className='mb-4 bg-body rounded-top-1 box-shadow'>
+    <AdminLayout user={user} paths={paths}>
+      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
             <span
@@ -38,13 +42,7 @@ const LevelPage = () => {
           </li>
         </ul>
       </div>
-      {flag ? (
-        <AdminUserLevelsTable heading={t('levelDetail.userLevel.userLevel')} />
-      ) : (
-        <AdminStoreLevelTable
-          heading={t('levelDetail.storeLevel.storeLevel')}
-        />
-      )}
+      {flag ? <AdminUserLevelsTable /> : <AdminStoreLevelTable />}
     </AdminLayout>
   )
 }

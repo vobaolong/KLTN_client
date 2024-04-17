@@ -30,7 +30,6 @@ const ListOrderItems = ({
     const { _id, accessToken } = getToken()
     setError('')
     setIsLoading(true)
-
     if (by === 'store')
       listItemsByOrderByStore(_id, accessToken, orderId, storeId)
         .then((data) => {
@@ -39,7 +38,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     else if (by === 'admin')
@@ -50,7 +49,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
     else
@@ -61,7 +60,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Something went wrong')
           setIsLoading(false)
         })
   }
@@ -84,8 +83,8 @@ const ListOrderItems = ({
                 className='border rounded-1'
                 style={{
                   position: 'relative',
-                  paddingBottom: '97px',
-                  maxWidth: '98px',
+                  paddingBottom: '80px',
+                  maxWidth: '80px',
                   width: '100%',
                   height: '0'
                 }}
@@ -108,7 +107,7 @@ const ListOrderItems = ({
 
               <div
                 className='flex-grow-1 ms-3 align-items-start'
-                style={{ flexDirection: 'column-reverse', width: '60%' }}
+                style={{ flexDirection: 'column-reverse', width: '50%' }}
               >
                 <Link
                   className='text-reset text-decoration-none link-hover d-block mt-1'
@@ -130,16 +129,16 @@ const ListOrderItems = ({
                   ))}
                 </div>
 
-                <div className='mt-1'>
+                <div className='mt-1 d-flex gap-4'>
                   <p className='text-decoration-line-through text-muted'>
-                    {item.productId?.price &&
-                      formatPrice(item.productId?.price.$numberDecimal)}{' '}
+                    {formatPrice(item.productId?.price?.$numberDecimal)}
                     <sup>₫</sup>
                   </p>
 
                   <h4 className='text-primary fs-5'>
-                    {formatPrice(item.productId?.salePrice?.$numberDecimal)}{' '}
-                    <sup>₫</sup> x {item.count}
+                    {formatPrice(item.productId?.salePrice?.$numberDecimal)}
+                    <sup>₫</sup>{' '}
+                    <span className='text-secondary fs-6'>x {item.count}</span>
                   </h4>
                 </div>
 

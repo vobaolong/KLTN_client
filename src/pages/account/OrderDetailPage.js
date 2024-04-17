@@ -7,10 +7,13 @@ import { useTranslation } from 'react-i18next'
 const OrderDetailPage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
-
   const { orderId } = useParams()
+  const paths = [
+    { name: t('breadcrumbs.home'), url: '/' },
+    { name: t('breadcrumbs.myPurchase'), url: '/account/purchase' }
+  ]
   return (
-    <AccountLayout user={user}>
+    <AccountLayout user={user} paths={paths}>
       <div className='res-mx--12-md bg-white rounded-1 box-shadow p-4'>
         <OrderDetailInfo orderId={orderId} />
         <div>

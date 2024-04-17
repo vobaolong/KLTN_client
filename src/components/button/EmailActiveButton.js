@@ -34,10 +34,7 @@ const EmailActiveButton = ({
     <div className='d-inline-flex flex-column'>
       {email && isEmailActive && (
         <div className='position-relative d-inline-block'>
-          <span
-            style={{ backgroundColor: '#c7f6d3' }}
-            className='badge text-success cus-tooltip rounded-1'
-          >
+          <span className='badge text-success cus-tooltip rounded-1 bg-success-rgba'>
             <i className='fa-solid fa-circle-check me-2'></i>
             {t('verified')}
           </span>

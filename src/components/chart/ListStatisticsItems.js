@@ -18,9 +18,7 @@ import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
 import Loading from '../ui/Loading'
-
 const groupByFunc = {
   order: groupByDate,
   product: groupBySold,
@@ -65,11 +63,11 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
     try {
       const orderData = await listOrdersForAdmin(_id, accessToken, {
         search: '',
-        limit: 1000,
         sortBy: 'createdAt',
         order: 'desc',
-        page: 1,
-        status: 'Delivered'
+        status: 'Delivered',
+        limit: 1000,
+        page: 1
       })
 
       const productData = await listProductsForAdmin(_id, accessToken, {
@@ -84,10 +82,10 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
       const userData = await listUserForAdmin(_id, accessToken, {
         search: '',
         sortBy: 'point',
+        role: 'user',
         order: 'desc',
         limit: 1000,
-        page: 1,
-        role: 'user'
+        page: 1
       })
 
       const storeData = await listStoresForAdmin(_id, accessToken, {
@@ -123,7 +121,6 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
 
   const vendorInit = async () => {
     setIsLoading(true)
-
     try {
       const orderData = await listOrdersByStore(
         _id,
@@ -177,57 +174,10 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   }, [by, storeId])
 
   return (
-    <div className=''>
+    <div className='position-relative'>
       {isLoading && <Loading />}
-
       <div className='container-fluid px-2'>
         <div className='row'>
-          {by === 'admin' && (
-            <>
-              <div className='col-md-3 col-6'>
-                <button
-                  type='button'
-                  className={`btn ${
-                    options.flag === 'user'
-                      ? 'btn-primary'
-                      : 'btn-outline-primary'
-                  } btn-lg ripple w-100 py-4 mb-2`}
-                  onClick={() =>
-                    setOptions({
-                      ...options,
-                      flag: 'user'
-                    })
-                  }
-                >
-                  <i className='fa-solid fa-user-group'></i>
-                  <span className='ms-3 res-hide'>{sizes.user}</span>
-                  <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
-                </button>
-              </div>
-
-              <div className='col-md-3 col-6'>
-                <button
-                  type='button'
-                  className={`btn ${
-                    options.flag === 'store'
-                      ? 'btn-golden'
-                      : 'btn-outline-golden'
-                  } btn-lg ripple w-100 py-4 mb-2`}
-                  onClick={() =>
-                    setOptions({
-                      ...options,
-                      flag: 'store'
-                    })
-                  }
-                >
-                  <i className='fa-solid fa-store'></i>
-                  <span className='ms-3 res-hide'>{sizes.store}</span>
-                  <span className='ms-1 res-hide-lg'>{t('admin.stores')}</span>
-                </button>
-              </div>
-            </>
-          )}
-
           <div className='col-md-3 col-6'>
             <button
               type='button'
@@ -266,14 +216,59 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
               <span className='ms-1 res-hide-lg'>{t('admin.products')}</span>
             </button>
           </div>
+          {by === 'admin' && (
+            <>
+              <div className='col-md-3 col-6'>
+                <button
+                  type='button'
+                  className={`btn ${
+                    options.flag === 'user'
+                      ? 'btn-primary'
+                      : 'btn-outline-primary'
+                  } btn-lg ripple w-100 py-4 mb-2`}
+                  onClick={() =>
+                    setOptions({
+                      ...options,
+                      flag: 'user'
+                    })
+                  }
+                >
+                  <i class='fa-solid fa-user-group'></i>
+                  <span className='ms-3 res-hide'>{sizes.user}</span>
+                  <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
+                </button>
+              </div>
+
+              <div className='col-md-3 col-6'>
+                <button
+                  type='button'
+                  className={`btn ${
+                    options.flag === 'store'
+                      ? 'btn-golden'
+                      : 'btn-outline-golden'
+                  } btn-lg ripple w-100 py-4 mb-2`}
+                  onClick={() =>
+                    setOptions({
+                      ...options,
+                      flag: 'store'
+                    })
+                  }
+                >
+                  <i className='fa-solid fa-store'></i>
+                  <span className='ms-3 res-hide'>{sizes.store}</span>
+                  <span className='ms-1 res-hide-lg'>{t('admin.stores')}</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
-      <div className='container-fluid px-2 mt-2'>
+      <div className='container-fluid px-2 mt-3'>
         <div className='row'>
-          <div className='col-xl-8 col-lg-6'>
+          <div className='col-xl-8 col-lg-6 position-relative'>
             <form
-              style={{ right: '29%', top: '28%' }}
+              style={{ right: '2%', top: '1%' }}
               className='d-flex justify-content-end me-2 position-absolute'
             >
               {options.flag !== 'product' ? (
@@ -356,7 +351,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     {
                       label: t('admin.adDashboard.bar'),
                       value: 'bar',
-                      icon: <i className='fa-solid fa-chart-bar'></i>
+                      icon: <i className='fa-solid fa-chart-column'></i>
                     }
                     // {
                     //   label: 'Doughnut',
@@ -377,7 +372,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
               </div>
             </form>
 
-            <div className='mt-2 position-relative'>
+            <div>
               {options.type === 'line' && (
                 <LineChart
                   by={options.by}
@@ -410,34 +405,49 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             </div>
           </div>
 
-          <div className='col-xl-4 col-lg-6 px-0'>
-            {/* <h4 className='text-center my-4'>Top 5 {options.flag}s</h4> */}
-            <div className='table-scroll my-2  box-shadow'>
+          <div className='col-xl-4 col-lg-6 bg-body rounded-1 box-shadow p-2'>
+            <h5 className='text-center mt-2'>
+              {options.flag === 'user' && t('topUser')}
+              {options.flag === 'store' && t('topShop')}
+              {options.flag === 'product' && t('topProduct')}
+              {options.flag === 'order' && t('orderRecent')}
+            </h5>
+            <div className='table-scroll'>
               <table className='table align-middle table-hover table-sm text-center'>
                 <thead>
                   <tr>
                     <th scope='col'></th>
-                    <th scope='col' className='text-start'>
-                      {options.flag[0].toUpperCase() +
-                        options.flag.substring(1)}
+                    <th
+                      scope='col'
+                      className='text-start  border-end-0'
+                      style={{ fontSize: '.9rem' }}
+                    >
+                      {options.flag === 'user' && t('userDetail.name')}
+                      {options.flag === 'store' && t('storeDetail.storeName')}
+                      {options.flag === 'product' && t('productDetail.name')}
+                      {options.flag === 'order' && t('orderDetail.id')}
                     </th>
-                    <th scope='col' className='text-end'>
-                      {options.flag === 'user' && 'Point'}
-                      {options.flag === 'store' && 'Point'}
-                      {options.flag === 'product' && 'Sold'}
-                      {options.flag === 'order' && 'Date'}
+                    <th
+                      scope='col'
+                      className='text-end'
+                      style={{ fontSize: '.9rem' }}
+                    >
+                      {options.flag === 'user' && t('point')}
+                      {options.flag === 'store' && t('point')}
+                      {options.flag === 'product' && t('productDetail.sold')}
+                      {options.flag === 'order' && t('orderDetail.date')}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {(options.flag === 'order'
-                    ? items[options.flag].slice(-5).reverse()
-                    : items[options.flag].slice(0, 5)
+                    ? items[options.flag].slice(-6).reverse()
+                    : items[options.flag].slice(0, 6)
                   ).map((item, index) => (
                     <tr key={index}>
-                      <th scope='row'>{index} </th>
+                      <th scope='row'>{index + 1} </th>
                       <td
-                        className='text-start hidden-avatar'
+                        className='text-start border-end-0'
                         style={{
                           whiteSpace: 'normal'
                         }}
@@ -449,9 +459,21 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                           <StoreSmallCard store={item} />
                         )}
                         {options.flag === 'product' && (
-                          <ProductSmallCard product={item} />
+                          <ProductSmallCard product={item} rating={true} />
                         )}
-                        {options.flag === 'order' && <small>{item._id}</small>}
+                        {options.flag === 'order' && (
+                          <Link
+                            className='link-hover'
+                            style={{ fontSize: '.875rem' }}
+                            to={`/${by}/${
+                              by === 'admin' ? 'order' : 'orders'
+                            }/detail/${item._id}${
+                              by !== 'admin' ? `/${storeId}` : ''
+                            }`}
+                          >
+                            {item._id}
+                          </Link>
+                        )}
                       </td>
                       <td
                         className='text-end'
@@ -463,7 +485,9 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         {options.flag === 'store' && item.point}
                         {options.flag === 'product' && item.sold}
                         {options.flag === 'order' && (
-                          <small>{humanReadableDate(item.createdAt)}</small>
+                          <span style={{ fontSize: '.875rem' }}>
+                            {humanReadableDate(item.createdAt)}
+                          </span>
                         )}
                       </td>
                     </tr>
@@ -479,7 +503,10 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 className='link-hover'
               >
                 <span className='me-2 res-hide'>
-                  Go to {options.flag} manager
+                  {options.flag === 'user' && t('goToUserManager')}
+                  {options.flag === 'store' && t('goToShopManager')}
+                  {options.flag === 'product' && t('goToProductManager')}
+                  {options.flag === 'order' && t('goToOrderManager')}
                 </span>
                 <i className='fa-solid fa-external-link-alt'></i>
               </Link>

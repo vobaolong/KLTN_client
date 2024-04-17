@@ -4,7 +4,7 @@ const StoreCommissionLabel = ({ commission = {}, detail = true }) => {
   const { t } = useTranslation()
   return (
     <span className='position-relative d-inline-block'>
-      <span className='badge bg-dark-subtle rounded-1 cus-tooltip text-muted'>
+      <span className='badge border bg-dark-rgba rounded-1 cus-tooltip text-muted'>
         {detail && <span>{commission.name}</span>}
       </span>
 
@@ -12,7 +12,7 @@ const StoreCommissionLabel = ({ commission = {}, detail = true }) => {
         <small className='cus-tooltip-msg'>{commission.name}</small>
       ) : (
         <small className='cus-tooltip-msg'>
-          {t('storeDetail.commissions')}: {commission.cost?.$numberDecimal}% /
+          {t('storeDetail.commissions')}: {commission.fee?.$numberDecimal}% /
           {t('order')}
         </small>
       )}

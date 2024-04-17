@@ -67,7 +67,7 @@ const MainNav = ({ navFor = 'user' }) => {
           </h3>
         )}
         {!getToken() ? (
-          <ul className='nav cus-sub-nav ms-2' style={{ minWidth: 'unset' }}>
+          <ul className='nav cus-sub-nav ms-1' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
               <Language />
             </li>
@@ -79,18 +79,15 @@ const MainNav = ({ navFor = 'user' }) => {
           <>
             <ul className='nav cus-sub-nav ms-4 d-flex justify-content-end res-hide-md'>
               <Language />
-              <li className='nav-item ms-2'>
-                <AccountInit />
-              </li>
               {navFor === 'vendor' && (
-                <li className='nav-item'>
+                <li className='nav-item ms-1'>
                   <VendorInit />
                 </li>
               )}
               {navFor === 'user' && getToken().role !== 'admin' && (
-                <li className='nav-item position-relative'>
+                <li className='nav-item position-relative ms-1'>
                   <Link
-                    className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
+                    className='btn lang text-white ripple cus-tooltip rounded-1'
                     to='/account/following'
                   >
                     <i className='fa-solid fa-heart'></i>
@@ -99,16 +96,19 @@ const MainNav = ({ navFor = 'user' }) => {
                 </li>
               )}
               {navFor === 'user' && getToken().role === 'user' && (
-                <li className='nav-item'>
+                <li className='nav-item ms-0'>
                   <div className='cart-item-wrap position-relative'>
                     <Link
-                      className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
+                      className='btn lang text-white ripple cus-tooltip rounded-1'
                       to='/cart'
                     >
                       <i className='fa-solid fa-bag-shopping'></i>
                     </Link>
                     {
-                      <span className='position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cus-tooltip'>
+                      <span
+                        style={{ top: '20%' }}
+                        className='position-absolute translate-middle badge rounded-pill bg-danger'
+                      >
                         {cartCount < 100 ? cartCount : '99+'}
                       </span>
                     }
@@ -119,16 +119,19 @@ const MainNav = ({ navFor = 'user' }) => {
               {navFor === 'user' && getToken().role === 'admin' && (
                 <li className='nav-item position-relative'>
                   <Link
-                    className='btn btn-outline-light cus-outline ripple cus-tooltip rounded-1'
+                    className='btn lang text-white ripple cus-tooltip rounded-1'
                     to='/admin/dashboard'
                   >
-                    <i className='fa-solid fa-chart-pie'></i>
+                    <i className='fa-solid fa-chart-line'></i>
                   </Link>
                   <small className='cus-tooltip-msg'>
                     {t('admin.adDashboard.dashboard')}
                   </small>
                 </li>
               )}
+              <li className='nav-item ms-1'>
+                <AccountInit />
+              </li>
             </ul>
 
             <button
@@ -224,7 +227,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         className='link-hover link-dark d-block'
                         to='/admin/dashboard'
                       >
-                        <i className='fa-solid fa-chart-pie me-2'></i>
+                        <i className='fa-solid fa-chart-line me-2'></i>
                         {t('admin.adDashboard.dashboard')}
                       </Link>
                     </li>

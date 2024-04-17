@@ -28,6 +28,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
+
 const CheckoutForm = ({
   cartId = '',
   storeId = '',
@@ -91,7 +92,7 @@ const CheckoutForm = ({
         amountFromStore,
         amountToStore,
         commissionId: res2.commission._id,
-        amountToGD: amountFromUser1 + amountFromUser2 - amountToStore
+        amountToZenpii: amountFromUser1 + amountFromUser2 - amountToStore
       })
     } catch (e) {
       console.log('Something went wrong')
@@ -148,7 +149,7 @@ const CheckoutForm = ({
       amountFromUser,
       amountFromStore,
       amountToStore,
-      amountToGD
+      amountToZenpii
     } = order
 
     if (
@@ -162,7 +163,7 @@ const CheckoutForm = ({
       !amountFromUser ||
       !amountFromStore ||
       !amountToStore ||
-      !amountToGD
+      !amountToZenpii
     ) {
       setOrder({
         ...order,
@@ -193,7 +194,7 @@ const CheckoutForm = ({
       amountFromUser,
       amountFromStore,
       amountToStore,
-      amountToGD
+      amountToZenpii
     } = order
 
     const orderBody = {
@@ -206,7 +207,7 @@ const CheckoutForm = ({
       amountFromUser,
       amountFromStore,
       amountToStore,
-      amountToGD,
+      amountToZenpii,
       isPaidBefore: false
     }
 
@@ -239,7 +240,7 @@ const CheckoutForm = ({
       amountFromUser,
       amountFromStore,
       amountToStore,
-      amountToGD
+      amountToZenpii
     } = order
 
     if (
@@ -253,7 +254,7 @@ const CheckoutForm = ({
       !amountFromUser ||
       !amountFromStore ||
       !amountToStore ||
-      !amountToGD
+      !amountToZenpii
     ) {
       setOrder({
         ...order,
@@ -301,7 +302,7 @@ const CheckoutForm = ({
         amountFromUser,
         amountFromStore,
         amountToStore,
-        amountToGD
+        amountToZenpii
       } = order
 
       const orderBody = {
@@ -314,7 +315,7 @@ const CheckoutForm = ({
         amountFromUser,
         amountFromStore,
         amountToStore,
-        amountToGD,
+        amountToZenpii,
         isPaidBefore: true
       }
 
@@ -519,7 +520,12 @@ const CheckoutForm = ({
                   listItem={deliveries?.map((d, i) => {
                     const newD = {
                       value: d,
-                      label: d.name + ' (' + d.price.$numberDecimal + '₫)'
+                      label:
+                        d.name +
+                        ' (' +
+                        formatPrice(d.price.$numberDecimal) +
+                        '₫) - ' +
+                        d.description
                     }
                     return newD
                   })}
@@ -537,7 +543,7 @@ const CheckoutForm = ({
                       deliveryPrice,
                       amountFromUser2,
                       amountFromUser: order.amountFromUser1 + amountFromUser2,
-                      amountToGD:
+                      amountToZenpii:
                         order.amountFromUser1 +
                         amountFromUser2 -
                         order.amountToStore
@@ -581,22 +587,26 @@ const CheckoutForm = ({
                   </dd>
                 </dl>
               </dd>
-              <dt className='col-7 text-secondary fw-normal'>
-                {t('cartDetail.zenpiiVoucherApplied')}
-              </dt>
-              <dd className='col-5'>
-                <dl className='row'>
-                  <dd className='col-12 text-end'>
-                    <span className='fs-6'>
-                      -{' '}
-                      {formatPrice(
-                        order.totalSalePrice - order.amountFromUser1
-                      )}
-                      <sup>₫</sup>
-                    </span>
-                  </dd>
-                </dl>
-              </dd>
+              {order.totalSalePrice - order.amountFromUser1 > 0 && (
+                <dt className='col-7 text-secondary fw-normal'>
+                  {t('cartDetail.zenpiiVoucherApplied')}
+                </dt>
+              )}
+              {order.totalSalePrice - order.amountFromUser1 > 0 && (
+                <dd className='col-5'>
+                  <dl className='row'>
+                    <dd className='col-12 text-end'>
+                      <span className='fs-6'>
+                        -{' '}
+                        {formatPrice(
+                          order.totalSalePrice - order.amountFromUser1
+                        )}
+                        <sup>₫</sup>
+                      </span>
+                    </dd>
+                  </dl>
+                </dd>
+              )}
               <dt className='col-7 text-secondary fw-normal'>
                 {t('cartDetail.shippingFee')}
               </dt>
@@ -610,20 +620,26 @@ const CheckoutForm = ({
                   </dd>
                 </dl>
               </dd>
-              <dt className='col-7 text-secondary fw-normal'>
-                {t('cartDetail.discountShippingFee')}
-              </dt>
-              <dd className='col-5'>
-                <dl className='row'>
-                  <dd className='col-12 text-end'>
-                    <span className='fs-6'>
-                      -{' '}
-                      {formatPrice(order.deliveryPrice - order.amountFromUser2)}
-                      <sup>₫</sup>
-                    </span>
-                  </dd>
-                </dl>
-              </dd>
+              {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                <dt className='col-7 text-secondary fw-normal'>
+                  {t('cartDetail.discountShippingFee')}
+                </dt>
+              )}
+              {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                <dd className='col-5'>
+                  <dl className='row'>
+                    <dd className='col-12 text-end'>
+                      <span className='fs-6'>
+                        -{' '}
+                        {formatPrice(
+                          order.deliveryPrice - order.amountFromUser2
+                        )}
+                        <sup>₫</sup>
+                      </span>
+                    </dd>
+                  </dl>
+                </dd>
+              )}
 
               <dt className='col-7 text-secondary fw-normal'>
                 {t('cartDetail.total')}

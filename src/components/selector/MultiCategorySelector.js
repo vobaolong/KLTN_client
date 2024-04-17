@@ -169,66 +169,78 @@ const MultiCategorySelector = ({
           <div
             className='list-group m-1'
             style={{
-              width: '33.33333%'
+              width: '33.33333%',
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv1Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center ${
-                  category._id === lv2Filter.categoryId && 'active'
-                }`}
-                onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center ${
+                    category._id === lv2Filter.categoryId && 'active'
+                  }`}
+                  onClick={() => handleClick(lv2Filter, setLv2Filter, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                  <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
+                </button>
+              </div>
             ))}
           </div>
 
           <div
             className='list-group m-1'
             style={{
-              width: '33.33333%'
+              width: '33.33333%',
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv2Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
-                  category._id === lv3Filter.categoryId && 'active'
-                }`}
-                onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-                <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
+                    category._id === lv3Filter.categoryId && 'active'
+                  }`}
+                  onClick={() => handleClick(lv3Filter, setLv3Filter, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                  <i className='fa-solid fa-angle-right res-smaller-lg res-hide'></i>
+                </button>
+              </div>
             ))}
           </div>
 
           <div
             className='list-group m-1'
             style={{
-              width: '33.33333%'
+              width: '33.33333%',
+              overflowY: 'auto',
+              height: '250px'
             }}
           >
             {lv3Categories?.map((category, index) => (
-              <button
-                key={index}
-                type='button'
-                className={`list-group-item ripple list-group-item-action ${
-                  selectedCategories &&
-                  selectedCategories
-                    .map((category) => category._id)
-                    .indexOf(category._id) !== -1 &&
-                  'active'
-                }`}
-                onClick={() => handleClick(null, null, category)}
-              >
-                <span className='res-smaller-md'>{category.name}</span>
-              </button>
+              <div>
+                <button
+                  key={index}
+                  type='button'
+                  className={`list-group-item ripple list-group-item-action ${
+                    selectedCategories &&
+                    selectedCategories
+                      .map((category) => category._id)
+                      .indexOf(category._id) !== -1 &&
+                    'active'
+                  }`}
+                  onClick={() => handleClick(null, null, category)}
+                >
+                  <span className='res-smaller-md'>{category.name}</span>
+                </button>
+              </div>
             ))}
           </div>
         </div>
@@ -248,14 +260,22 @@ const MultiCategorySelector = ({
               {label}
             </label>
 
-            <div className='form-control border-0'>
+            <div className='form-control border bg-light-subtle'>
               {selectedCategories ? (
                 selectedCategories.map((category, index) => (
-                  <span key={index} className='mb-1 d-flex align-items-center'>
+                  <span
+                    key={index}
+                    className='d-flex align-items-center position-relative'
+                  >
                     <CategorySmallCard category={category} />
                     <button
+                      style={{
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        right: '0'
+                      }}
                       type='button'
-                      className='btn btn-outline-danger btn-sm ripple ms-2'
+                      className='btn btn-outline-danger btn-sm ripple ms-2 position-absolute'
                       onClick={() => handleRemove(index)}
                     >
                       <i className='fa-solid fa-xmark'></i>

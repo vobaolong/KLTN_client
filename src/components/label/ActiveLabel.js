@@ -3,10 +3,9 @@ const ActiveLabel = () => {
   const { t } = useTranslation()
 
   return (
-    <span className='badge bg-success rounded-1'>
+    <span className='badge border bg-success-rgba text-success rounded-1'>
+      <i className='me-2 fa-solid fa-toggle-on'></i>
       <span>{t('status.active')}</span>
-
-      <i className='ms-2 fa-solid fa-toggle-on'></i>
     </span>
   )
 }

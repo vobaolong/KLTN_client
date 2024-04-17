@@ -12,14 +12,14 @@ const AdminCreateCommissionItem = ({ onRun = () => {} }) => {
         data-bs-toggle='modal'
         data-bs-target='#admin-create-commission-form'
       >
-        <i className='fa-solid fa-plus-circle'></i>
+        <i className='fa-solid fa-plus'></i>
         <span className='ms-2 res-hide'>{t('commissionDetail.add')}</span>
       </button>
 
       <Modal
         id='admin-create-commission-form'
         hasCloseBtn={false}
-        title='Create new commission'
+        title={t('dialog.addCommission')}
       >
         <AdminCreateCommissionForm onRun={onRun} />
       </Modal>

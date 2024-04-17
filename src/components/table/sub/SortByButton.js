@@ -27,20 +27,22 @@ const SortByButton = ({
   }
 
   return (
-    <span
-      className='btn text-nowrap text-secondary pointer'
-      onClick={handleClick}
-      style={{ fontSize: '0.95rem' }}
-    >
-      {title}
-      {!flag ? (
-        <i className='fa-solid fa-sort ms-2'></i>
-      ) : flag === 'asc' ? (
-        <i className='fa-solid fa-arrow-down-wide-short ms-2'></i>
-      ) : (
-        <i className='fa-solid fa-arrow-up-wide-short ms-2'></i>
-      )}
-    </span>
+    <div className='py-1'>
+      <span
+        className='text-nowrap py-2 text-secondary pointer fw-normal'
+        onClick={handleClick}
+        style={{ fontSize: '0.9rem' }}
+      >
+        {title}
+        {!flag ? (
+          <i className='fa-solid fa-sort ms-2'></i>
+        ) : flag === 'asc' ? (
+          <i className='fa-solid fa-arrow-up-wide-short ms-2'></i>
+        ) : (
+          <i className='fa-solid fa-arrow-down-wide-short ms-2'></i>
+        )}
+      </span>
+    </div>
   )
 }
 

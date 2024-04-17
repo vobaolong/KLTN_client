@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { groupByDate } from '../../helper/groupBy'
 import { Line } from 'react-chartjs-2'
 import { Chart, registerables } from 'chart.js'
+import { useTranslation } from 'react-i18next'
 Chart.register(...registerables)
 
 const LineChart = ({
@@ -18,7 +19,7 @@ const LineChart = ({
     labels: [],
     datasets: []
   })
-
+  const { t } = useTranslation()
   const init = () => {
     const newData = groupBy(items, by, role, sliceEnd)
 
@@ -64,7 +65,7 @@ const LineChart = ({
           textTransform: 'capitalize'
         }}
       >
-        {value}s overview
+        {value} {t('breadcrumbs.overview')}
       </h5>
       <Line
         data={data}

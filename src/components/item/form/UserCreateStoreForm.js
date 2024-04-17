@@ -183,7 +183,7 @@ const CreateStoreForm = () => {
                 const newC = {
                   value: c._id,
                   label:
-                    c.name + ' (' + c.cost.$numberDecimal + `%/${t('order')})`
+                    c.name + ' (' + c.fee.$numberDecimal + `%/${t('order')})`
                 }
                 return newC
               })}
