@@ -87,7 +87,7 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -111,7 +111,7 @@ const AdminCreateStoreLevelForm = ({ onRun = () => {} }) => {
             label={t('levelDetail.name')}
             value={level.name}
             isValid={level.isValidName}
-            feedback={t('levelDetail.nameValid')}
+            feedback={t('levelDetail.validName')}
             validator='level'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}

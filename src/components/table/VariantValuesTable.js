@@ -137,7 +137,7 @@ const VariantValuesTable = ({
       )}
 
       {heading && (
-        <h5 className='text-center text-uppercase'>
+        <h5 className='text-start'>
           Values of <span className='text-primary'>{variant?.name}</span>
         </h5>
       )}
@@ -177,15 +177,7 @@ const VariantValuesTable = ({
                 {!isActive && (
                   <Fragment>
                     <td>
-                      {value.isDeleted ? (
-                        <span>
-                          <DeletedLabel />
-                        </span>
-                      ) : (
-                        <span>
-                          <ActiveLabel />
-                        </span>
-                      )}
+                      {value.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                     </td>
                     <td className='text-nowrap'>
                       <button

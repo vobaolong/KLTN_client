@@ -14,7 +14,7 @@ const ProductSmallCard = ({
     }`}
   >
     <Link
-      className='text-reset text-decoration-none'
+      className='text-decoration-none'
       title={product.name}
       to={`/product/${product._id}`}
     >
@@ -27,7 +27,7 @@ const ProductSmallCard = ({
     </Link>
 
     <Link
-      className='text-reset link-hover ms-2'
+      className='link-hover ms-2'
       to={`/product/${product._id}`}
       title={product.name}
       style={style}

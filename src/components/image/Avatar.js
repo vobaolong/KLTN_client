@@ -16,7 +16,8 @@ const Avatar = ({
   size = '',
   noRadius = false,
   onRun,
-  hide = false
+  hide = false,
+  status = ''
 }) => (
   <div className='cus-avatar-wrap'>
     <div className={`cus-avatar-box ${size && 'cus-avatar-box--small'}`}>
@@ -42,13 +43,16 @@ const Avatar = ({
     </div>
 
     {(size !== 'small' || !hide) && (
-      <h1
-        className={`cus-avatar-name m-0 p-1 rounded-1 d-inline-block fs-5 ${
-          borderName && 'bg-secondary shadow'
-        }`}
-      >
-        {name}
-      </h1>
+      <div className='d-flex'>
+        <h1
+          className={`cus-avatar-name m-0 p-1 rounded-1 d-inline-block fs-5 ${
+            borderName && 'bg-secondary box-shadow'
+          }`}
+        >
+          {name}
+        </h1>
+        <small className='cus-shop-status'>{status}</small>
+      </div>
     )}
   </div>
 )

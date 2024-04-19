@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminCommissionTable = ({ heading = 'Commissions' }) => {
+const AdminCommissionTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -118,7 +118,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -135,7 +135,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -171,7 +171,7 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         />
       )}
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && <h5 className='text-start'>{t('admin.commissions')}</h5>}
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
@@ -180,11 +180,11 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table table-hover table-sm align-middle text-center'>
+          <table className='table table-hover table-sm align-middle text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
+                <th scope='col' className='text-center'></th>
+                <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -227,10 +227,10 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
             <tbody>
               {commissions.map((commission, index) => (
                 <tr key={index}>
-                  <th scope='row'>
+                  <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td className='text-start'>
+                  <td>
                     <StoreCommissionLabel commission={commission} />
                   </td>
                   <td>
@@ -241,7 +241,6 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                       width: '300px',
                       overflow: 'auto'
                     }}
-                    className='text-start'
                   >
                     <small>{commission.description}</small>
                   </td>
@@ -259,13 +258,13 @@ const AdminCommissionTable = ({ heading = 'Commissions' }) => {
                   <td className='py-1'>
                     <button
                       type='button'
-                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
                       data-bs-toggle='modal'
                       data-bs-target='#edit-commission-form'
                       onClick={() => handleEditCommission(commission)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-solid fa-pen'></i>
+                      <i className='fa-duotone fa-pen-to-square'></i>
                     </button>
 
                     {!commission.isDeleted ? (

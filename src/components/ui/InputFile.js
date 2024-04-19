@@ -91,11 +91,14 @@ const InputFile = ({
               style={{ borderRadius: `${noRadius ? '0' : '0.375rem'}` }}
             >
               {isDragActive ? (
-                <small>{t('dropHere')}</small>
+                <>
+                  <small>{t('dropHere')}</small>
+                  <i className='fa-light fa-cloud-check'></i>
+                </>
               ) : (
                 <>
                   <small>{t('dragNDrop')}</small>
-                  <i className='ms-2 fa-regular fa-images'></i>
+                  <i className='ms-2 fa-light fa-cloud-arrow-up'></i>
                   <small
                     className='invalid-feedback ms-2 mt-0'
                     style={{ width: 'unset' }}

@@ -170,11 +170,11 @@ const StoreProductsTable = ({
         ) : (
           <>
             <div className='table-scroll my-2'>
-              <table className='table align-middle table-hover table-sm text-center'>
+              <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
                   <tr>
-                    <th scope='col'></th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col' className='text-center'></th>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -260,7 +260,7 @@ const StoreProductsTable = ({
                         }
                       />
                     </th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -304,7 +304,7 @@ const StoreProductsTable = ({
                         }
                       />
                     </th>
-                    <th scope='col' className='text-end'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -317,10 +317,7 @@ const StoreProductsTable = ({
                     </th>
 
                     <th scope='col'>
-                      {' '}
-                      <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                        {t('action')}
-                      </span>
+                      <span style={{ fontWeight: '400' }}>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
@@ -331,14 +328,15 @@ const StoreProductsTable = ({
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
                       <td
-                        className='text-start py-1'
                         style={{
                           whiteSpace: 'normal',
                           minWidth: '400px',
                           width: 'fit-content'
                         }}
                       >
-                        <ProductSmallCard product={product} />
+                        <small>
+                          <ProductSmallCard product={product} />
+                        </small>
                       </td>
                       {/* <td>
                   <div
@@ -429,24 +427,16 @@ const StoreProductsTable = ({
                 </td> */}
 
                       <td className='text-end'>
-                        <small>
-                          {formatPrice(product.price?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
+                        {formatPrice(product.price?.$numberDecimal)}
+                        <sup>₫</sup>
                       </td>
                       <td className='text-end'>
-                        <small>
-                          {formatPrice(product.salePrice?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
+                        {formatPrice(product.salePrice?.$numberDecimal)}
+                        <sup>₫</sup>
                       </td>
+                      <td>{product.quantity}</td>
+                      <td>{product.sold}</td>
                       <td>
-                        <small>{product.quantity}</small>
-                      </td>
-                      <td>
-                        <small>{product.sold}</small>
-                      </td>
-                      <td className='text-start'>
                         <small className='badge border rounded-1 bg-value text-dark-emphasis'>
                           <CategorySmallCard
                             parent={false}
@@ -457,7 +447,7 @@ const StoreProductsTable = ({
 
                       <td style={{ whiteSpace: 'normal' }}>
                         <div
-                          className='d-flex justify-content-start align-items-center text-start mx-1'
+                          className='d-flex justify-content-start align-items-center '
                           style={{
                             maxWidth: '150px'
                             // height: '120px',
@@ -490,7 +480,7 @@ const StoreProductsTable = ({
                           <ProductActiveLabel isActive={product.isActive} />
                         </span>
                       </td>
-                      <td className='text-end'>
+                      <td>
                         <small>{humanReadableDate(product.createdAt)}</small>
                       </td>
                       <td>
@@ -515,11 +505,11 @@ const StoreProductsTable = ({
                           </button>
                           <Link
                             type='button'
-                            className='btn btn-sm btn-primary ripple rounded-1'
+                            className='btn btn-sm btn-outline-primary ripple rounded-1'
                             to={`/vendor/products/edit/${product._id}/${storeId}`}
                             title={t('button.edit')}
                           >
-                            <i className='fa-solid fa-pen'></i>
+                            <i className='fa-duotone fa-pen-to-square'></i>
                           </Link>
                         </div>
                       </td>

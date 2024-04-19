@@ -14,12 +14,12 @@ const AccountSideBar = ({ user = {} }) => {
               path === 'profile' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-user-circle'></i>
-            <span className='ms-3 res-hide-xl text-capitalize'>
-              {t('userDetail.profile')}
+            <i className='fa-light fa-user'></i>
+            <span className='ms-2 res-hide-xl text-capitalize'>
+              {t('userDetail.myAccount')}
             </span>
-            <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
-              {t('userDetail.profile')}
+            <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              {t('userDetail.myAccount')}
             </span>
           </Link>
         </li>
@@ -31,11 +31,11 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'purchase' ? 'active' : ''
               }`}
             >
-              <i className='fa-solid fa-bag-shopping'></i>
-              <span className='ms-3 res-hide-xl text-capitalize'>
+              <i className='fa-light fa-receipt'></i>
+              <span className='ms-2 res-hide-xl text-capitalize'>
                 {t('userDetail.myPurchase')}
               </span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
                 {t('userDetail.myPurchase')}
               </span>
             </Link>
@@ -49,11 +49,11 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'addresses' ? 'active' : ''
               }`}
             >
-              <i className='fa-solid fa-map-marker-alt'></i>
-              <span className='ms-3 res-hide-xl text-capitalize'>
+              <i className='fa-light fa-location-dot'></i>
+              <span className='ms-2 res-hide-xl text-capitalize'>
                 {t('userDetail.address')}
               </span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
                 {t('userDetail.address')}
               </span>
             </Link>
@@ -67,8 +67,8 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'wallet' ? 'active' : ''
               }`}
             >
-              <i className='fa-solid fa-wallet'></i>
-              <span className='ms-3 res-hide-lg'>{t('wallet')}</span>
+              <i className='fa-light fa-wallet'></i>
+              <span className='ms-2 res-hide-lg'>{t('wallet')}</span>
             </Link>
           </li>
         )}
@@ -80,11 +80,11 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'store' ? 'active' : ''
               }`}
             >
-              <i className='fa-solid fa-store'></i>
-              <span className='ms-3 res-hide-xl text-capitalize'>
+              <i className='fa-light fa-store'></i>
+              <span className='ms-2 res-hide-xl text-capitalize'>
                 {t('manageStore')}
               </span>
-              <span className='ms-3 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
                 {t('manageStore')}
               </span>
             </Link>
@@ -98,8 +98,8 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'following' ? 'active' : ''
               }`}
             >
-              <i className='fa-solid fa-heart'></i>
-              <span className='ms-3 res-hide-lg text-capitalize'>
+              <i className='fa-light fa-heart'></i>
+              <span className='ms-2 res-hide-lg text-capitalize'>
                 {t('favorite')}
               </span>
             </Link>

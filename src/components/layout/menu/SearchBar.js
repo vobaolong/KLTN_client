@@ -9,12 +9,12 @@ const SearchBar = () => {
     {
       value: 'products',
       label: t('product'),
-      icon: <i className='fa-solid fa-box'></i>
+      icon: <i className='fa-light fa-box'></i>
     },
     {
       value: 'stores',
       label: t('store'),
-      icon: <i className='fa-solid fa-store'></i>
+      icon: <i className='fa-light fa-store'></i>
     }
   ]
   const location = useLocation()

@@ -80,7 +80,7 @@ const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }

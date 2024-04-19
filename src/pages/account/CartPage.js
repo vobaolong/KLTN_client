@@ -31,7 +31,7 @@ const CartPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -127,7 +127,7 @@ const CartPage = () => {
                     <StoreSmallCard store={cart.storeId} />
                     <i
                       style={{ fontSize: '0.9rem' }}
-                      className='fa-solid fa-angle-right ms-1 mt-1 opacity-75'
+                      className='fa-solid fa-angle-right ms-1 text-secondary'
                     ></i>
                   </button>
                 </h2>

@@ -34,7 +34,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
       })
   }
   const hoursDifference = calcTime(review?.orderId?.updatedAt)
@@ -68,8 +68,8 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
               {review?.userId?.firstName} {review?.userId?.lastName}
             </span>
             {/* <span className='text-secondary'>{review?.productId?.name}</span> */}
-            <span className='text-success rounded-1 px-1 bg-value'>
-              <i className='fa-solid fa-circle-check'></i>{' '}
+            <span className='text-success rounded-1 px-1 bg-success-rgba my-auto'>
+              <i className='fa-regular fa-circle-check'></i>{' '}
               {t('productDetail.purchased')}
             </span>
             {about && (

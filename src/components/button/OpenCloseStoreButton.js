@@ -6,13 +6,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 
-const OpenCloseStoreButton = ({
-  storeId = '',
-  isOpen = true,
-  detail = true,
-  className = '',
-  onRun
-}) => {
+const OpenCloseStoreButton = ({ storeId = '', isOpen = true, onRun }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [openFlag, setOpenFlag] = useState(isOpen)
@@ -48,46 +42,32 @@ const OpenCloseStoreButton = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
 
   return (
     <div className='position-relative'>
-      {isLoading && <Loading />}
+      {isLoading && <Loading size='small' />}
       {isConfirming && (
         <ConfirmDialog
           title={openFlag ? t('title.closeStore') : t('title.openStore')}
-          color={openFlag ? 'danger' : 'primary'}
+          color={openFlag ? 'warning' : 'primary'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
           message={t('confirmDialog')}
         />
       )}
-      <button
-        type='button'
-        className={`btn ${
-          openFlag ? 'btn-outline-primary' : 'btn-outline-danger'
-        } ripple ${className}`}
-        onClick={handleOpenStore}
-      >
-        {openFlag ? (
-          <span>
-            <i className='fa-solid fa-lock-open'></i>
-            {detail && (
-              <span className='ms-2 res-hide'>{t('storeDetail.open')}</span>
-            )}
-          </span>
-        ) : (
-          <span>
-            <i className='fa-solid fa-lock'></i>
-            {detail && (
-              <span className='ms-2 res-hide'>{t('storeDetail.close')}</span>
-            )}
-          </span>
-        )}
-      </button>
+      <label className='form-switch'>
+        <input
+          type='checkbox'
+          className='form-check-input'
+          checked={!openFlag}
+          onChange={handleOpenStore}
+        />
+        <i></i>
+      </label>
     </div>
   )
 }

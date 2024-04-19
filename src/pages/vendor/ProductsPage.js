@@ -24,7 +24,7 @@ const ProductsPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-solid fa-box me-2'></i>
+              <i className='fa-light fa-box me-2'></i>
               <span className='res-hide'>{t('productDetail.show')}</span>
             </span>
           </li>

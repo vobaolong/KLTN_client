@@ -52,7 +52,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -97,34 +97,22 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         <>
           {status ===
             'Not processed|Processing|Shipped|Delivered|Cancelled' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.allOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.allOrders')}</h5>
           )}
           {status === 'Not processed' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.notProcessedOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.notProcessedOrders')}</h5>
           )}
           {status === 'Processing' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.processingOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.processingOrders')}</h5>
           )}
           {status === 'Shipped' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.shippedOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.shippedOrders')}</h5>
           )}
           {status === 'Delivered' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.deliveredOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.deliveredOrders')}</h5>
           )}
           {status === 'Cancelled' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.cancelledOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.cancelledOrders')}</h5>
           )}
         </>
       )}
@@ -142,7 +130,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
             <table className='table table-sm table-hover align-middle text-start'>
               <thead>
                 <tr>
-                  <th scope='col' style={{ width: '20px' }}></th>
+                  <th scope='col' className='text-center'></th>
                   <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
@@ -152,7 +140,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col' className='text-end'>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -179,7 +167,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col' className='text-end'>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -188,7 +176,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col' className='text-center'>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -222,10 +210,10 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <td className='text-start'>
+                    <td>
                       <small>{order._id}</small>
                     </td>
-                    <td className='text-end' style={{ whiteSpace: 'normal' }}>
+                    <td>
                       <small>{humanReadableDate(order.createdAt)}</small>
                     </td>
                     <td className='text-end'>
@@ -235,10 +223,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                         <sup>₫</sup>
                       </small>
                     </td>
-                    <td
-                      className='text-start hidden-avatar'
-                      style={{ maxWidth: '300px' }}
-                    >
+                    <td className='hidden-avatar'>
                       <StoreSmallCard store={order.storeId} />
                     </td>
                     <td className='text-end'>
@@ -251,20 +236,20 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                         </small>
                       )}
                     </td>
-                    <td className='text-center'>
-                      <span style={{ fontSize: '1rem' }}>
+                    <td>
+                      <span style={{ fontSize: '0.9rem' }}>
                         <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />
                       </span>
                     </td>
-                    <td className='text-center'>
-                      <span style={{ fontSize: '1rem' }}>
+                    <td>
+                      <span style={{ fontSize: '0.9rem' }}>
                         <OrderStatusLabel status={order.status} />
                       </span>
                     </td>
-                    <td className='text-nowrap text-center'>
+                    <td>
                       <Link
                         type='button'
-                        className='btn btn-outline-secondary opacity-75 rounded-1'
+                        className='btn btn-sm btn-outline-secondary opacity-75 rounded-1'
                         to={`/account/purchase/detail/${order._id}`}
                         title={t('button.view')}
                       >

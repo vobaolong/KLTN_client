@@ -228,7 +228,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                       resetDefault={false}
                       value={item.count}
                       setValue={(value) => handleUpdate(value, item)}
-                      borderBtn={true}
+                      borderBtn={false}
                       size='sm'
                     />
                   </div>
@@ -279,6 +279,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 type='button'
                 className='btn btn-sm btn-outline-danger ripple rounded-1'
                 onClick={() => handleDelete(item)}
+                title={t('button.delete')}
               >
                 <i className='fa-solid fa-trash-alt'></i>
               </button>
@@ -309,22 +310,23 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   <sup>₫</sup>
                 </span>
               </div>
-
-              <div className='d-flex justify-content-between gap-4'>
-                <span className='text-secondary'>
-                  {t('cartDetail.zenpiiDiscount')} (
-                  {level?.discount?.$numberDecimal}%):{' '}
-                </span>
-                <span className='fs-6'>
-                  -{' '}
-                  {formatPrice(
-                    (totals.totalSalePrice * level?.discount?.$numberDecimal) /
-                      100
-                  )}
-                  <sup>₫</sup>
-                </span>
-              </div>
-
+              {level?.discount?.$numberDecimal > 0 && (
+                <div className='d-flex justify-content-between gap-4'>
+                  <span className='text-secondary'>
+                    {t('cartDetail.zenpiiDiscount')} (
+                    {level?.discount?.$numberDecimal}%):{' '}
+                  </span>
+                  <span className='fs-6'>
+                    -{' '}
+                    {formatPrice(
+                      (totals.totalSalePrice *
+                        level?.discount?.$numberDecimal) /
+                        100
+                    )}
+                    <sup>₫</sup>
+                  </span>
+                </div>
+              )}
               <div className='d-flex justify-content-between gap-4'>
                 <span className='text-secondary'>
                   {t('cartDetail.totalPrice')}:{' '}

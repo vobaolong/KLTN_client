@@ -149,11 +149,7 @@ const AdminVariantsTable = ({ heading = false }) => {
         />
       )}
 
-      {heading && (
-        <h5 className='text-center text-uppercase'>
-          {t('title.productVariants')}
-        </h5>
-      )}
+      {heading && <h5 className='text-start'>{t('title.productVariants')}</h5>}
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
@@ -169,11 +165,11 @@ const AdminVariantsTable = ({ heading = false }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-center'>
+          <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
+                <th scope='col' className='text-center'></th>
+                <th scope='col' className=''>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -182,7 +178,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col' className='text-start'>
+                <th scope='col' className=''>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -211,62 +207,45 @@ const AdminVariantsTable = ({ heading = false }) => {
             <tbody>
               {variants.map((variant, index) => (
                 <tr key={index}>
-                  <th scope='row'>
+                  <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td className='text-start'>
+                  <td>
                     <span style={{ fontSize: '.9rem' }}>{variant.name}</span>
                   </td>
-
-                  <td className='text-start'>
-                    <div
-                      className=''
-                      style={{
-                        maxHeight: '200px',
-                        overflow: 'auto'
-                      }}
-                    >
-                      {variant.categoryIds.map((category, index) => (
-                        <div
-                          className='hidden-avatar badge bg-value text-dark-emphasis border rounded-1 fw-normal'
-                          style={{ fontSize: '0.875rem' }}
-                          key={index}
-                        >
-                          <CategorySmallCard category={category} />
-                        </div>
-                      ))}
-                    </div>
+                  <td>
+                    {variant.categoryIds.map((category, index) => (
+                      <div
+                        className='hidden-avatar badge bg-value text-dark-emphasis border rounded-1 fw-normal'
+                        style={{ fontSize: '0.875rem' }}
+                        key={index}
+                      >
+                        <CategorySmallCard category={category} />
+                      </div>
+                    ))}
                   </td>
 
                   <td>
-                    {variant.isDeleted ? (
-                      <span>
-                        <DeletedLabel />
-                      </span>
-                    ) : (
-                      <span>
-                        <ActiveLabel />
-                      </span>
-                    )}
+                    {variant.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
 
                   <td className='text-nowrap py-1'>
                     <Link
                       type='button'
-                      className='btn btn-sm btn-secondary ripple me-2 my-1'
+                      className='btn btn-sm btn-outline-secondary ripple me-2 my-1'
                       to={`/admin/variant/values/${variant._id}`}
                       title={t('button.detail')}
                     >
-                      <i className='fa-solid fa-info-circle'></i>
+                      <i className='fa-solid fa-circle-info'></i>
                     </Link>
 
                     <Link
                       type='button'
-                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
                       to={`/admin/variant/edit/${variant._id}`}
                       title={t('button.edit')}
                     >
-                      <i className='fa-solid fa-pen'></i>
+                      <i className='fa-duotone fa-pen-to-square'></i>
                     </Link>
 
                     {!variant.isDeleted ? (

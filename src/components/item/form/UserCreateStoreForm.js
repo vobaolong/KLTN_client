@@ -208,7 +208,7 @@ const CreateStoreForm = () => {
             label={t('storeDetail.storeName')}
             value={store.name}
             isValid={store.isValidName}
-            feedback={t('storeDetailValid.nameValid')}
+            feedback={t('storeDetailValid.validName')}
             validator='name'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}

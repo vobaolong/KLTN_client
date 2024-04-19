@@ -117,7 +117,7 @@ const AdminCreateCategoryForm = () => {
             label={t('categoryDetail.name')}
             value={newCategory.name}
             isValid={newCategory.isValidName}
-            feedback={t('categoryValid.nameValid')}
+            feedback={t('categoryValid.validName')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -132,7 +132,7 @@ const AdminCreateCategoryForm = () => {
             noRadius={true}
             value={newCategory.image}
             isValid={newCategory.isValidImage}
-            feedback={t('categoryValid.imgValid')}
+            feedback={t('categoryValid.validImg')}
             accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}

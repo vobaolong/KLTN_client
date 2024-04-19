@@ -20,6 +20,7 @@ import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const AdminUserLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -60,7 +61,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -118,7 +119,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -135,7 +136,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -172,9 +173,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
       )}
 
       {heading && (
-        <h5 className='text-center text-uppercase'>
-          {t('levelDetail.userLevel.userLevel')}
-        </h5>
+        <h5 className='text-start'>{t('levelDetail.userLevel.userLevel')}</h5>
       )}
       {isLoading && <Loading />}
 
@@ -185,10 +184,10 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-center'>
+          <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
+                <th scope='col' className='text-center'></th>
                 <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
@@ -226,6 +225,15 @@ const AdminUserLevelsTable = ({ heading = false }) => {
                   />
                 </th>
                 <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('levelDetail.createdAt')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
                   <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
                     {t('action')}
                   </span>
@@ -235,43 +243,28 @@ const AdminUserLevelsTable = ({ heading = false }) => {
             <tbody>
               {levels.map((level, index) => (
                 <tr key={index}>
-                  <th scope='row'>
+                  <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <small>
-                      <UserLevelLabel level={level} />
-                    </small>
+                    <UserLevelLabel level={level} />
                   </td>
+                  <td>{level.minPoint}</td>
+                  <td>{level.discount && level.discount.$numberDecimal}%</td>
                   <td>
-                    <small>{level.minPoint}</small>
+                    {level.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
+                  <td>{humanReadableDate(level.createdAt)}</td>
                   <td>
-                    <small>
-                      {level.discount && level.discount.$numberDecimal}%
-                    </small>
-                  </td>
-                  <td>
-                    {level.isDeleted ? (
-                      <span>
-                        <DeletedLabel />
-                      </span>
-                    ) : (
-                      <span>
-                        <ActiveLabel />
-                      </span>
-                    )}
-                  </td>
-                  <td className='text-center'>
                     <button
                       type='button'
-                      className='btn btn-sm btn-primary ripple me-2 rounded-1 my-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
                       data-bs-toggle='modal'
                       data-bs-target='#edit-level-form'
                       onClick={() => handleEditLevel(level)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-solid fa-pen'></i>
+                      <i className='fa-duotone fa-pen-to-square'></i>
                     </button>
 
                     {!level.isDeleted ? (

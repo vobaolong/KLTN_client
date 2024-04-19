@@ -95,7 +95,7 @@ const DetailPage = () => {
   deliveryDateMin.setDate(deliveryDateMin.getDate() + 1)
   const deliveryDateMax = new Date()
   deliveryDateMax.setDate(deliveryDateMax.getDate() + 8)
-  console.log(product)
+
   return (
     <MainLayout>
       <div className='position-relative'>
@@ -292,7 +292,7 @@ const DetailPage = () => {
                           }
                           quote={product.name}
                         >
-                          <i class='fa-brands fa-facebook-f text-secondary'></i>
+                          <i className='fa-brands fa-facebook-f text-secondary'></i>
                         </FacebookShareButton>
                       </div>
                       {getToken() && (

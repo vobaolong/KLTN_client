@@ -43,17 +43,11 @@ const ProfilePage = () => {
             <Avatar
               avatar={store.avatar}
               alt={store.name}
-              name={
-                <span className='d-inline-flex justify-content-center align-items-center'>
-                  {store.name}
-                  <small className='ms-2'>
-                    <StoreStatusLabel isOpen={store.isOpen} />
-                  </small>
-                </span>
-              }
+              name={store.name}
               borderName={true}
               isEditable='store'
               storeId={store._id}
+              status={<StoreStatusLabel isOpen={store.isOpen} />}
             />
           </div>
 
@@ -74,27 +68,12 @@ const ProfilePage = () => {
           </div>
         )}
 
-        <div className='align-items-center bg-white border d-flex justify-content-between my-2 p-2 rounded-1'>
+        <div className='align-items-center bg-white box-shadow d-flex justify-content-between my-3 px-4 py-3 rounded-1'>
           <div className='d-flex justify-content-between align-items-start'>
             <StoreAddFeaturedImageItem
               count={store.featured_images?.length}
               storeId={store._id}
             />
-            <div className='position-relative ms-2'>
-              <div className='cus-tooltip'>
-                <OpenCloseStoreButton
-                  storeId={store._id}
-                  isOpen={store.isOpen}
-                  className='btn-sm px-4'
-                  onRun={(store) => onHandleRun(store)}
-                />
-              </div>
-              <small className='cus-tooltip-msg'>
-                {store.isOpen
-                  ? t('button.clickToClose')
-                  : t('button.clickToOpen')}
-              </small>
-            </div>
             <div className='cus-tooltip ms-2 m-auto'>
               <StoreActiveLabel isActive={store.isActive} detail={true} />
             </div>
@@ -105,17 +84,37 @@ const ProfilePage = () => {
             to={`/store/${store._id}`}
             target='_blank'
           >
-            <span className='me-2'>{t('storeDetail.viewShop')}</span>
-            <i className='fa-solid fa-desktop'></i>
+            <i className='fa-solid fa-desktop me-2'></i>
+            <span>{t('storeDetail.viewShop')}</span>
           </Link>
         </div>
 
-        <div className='mt-2 d-none res-dis'>
-          <StoreLevelInfo store={store} />
+        <div className='align-items-center bg-white box-shadow d-flex justify-content-between my-3 p-4 rounded-1'>
+          <div className='d-flex align-items-center gap-3'>
+            <div className='d-grid'>
+              <span style={{ fontSize: '1.1rem' }}>
+                {t('storeDetail.vacationMode')}{' '}
+                <i className='fa-light fa-moon text-secondary'></i>
+              </span>
+              <small className='text-secondary'>
+                {t('storeDetail.vacationModeContent')}
+              </small>
+            </div>
+          </div>
+          <div className='position-relative ms-2'>
+            <OpenCloseStoreButton
+              storeId={store._id}
+              isOpen={store.isOpen}
+              onRun={(store) => onHandleRun(store)}
+            />
+          </div>
         </div>
-
-        <div className='mt-2'>
-          <StoreProfileInfo store={store} isEditable={true} />
+        <div className='mt-3'>
+          <StoreProfileInfo
+            store={store}
+            showProfile={true}
+            isEditable={true}
+          />
         </div>
       </div>
     </VendorLayout>

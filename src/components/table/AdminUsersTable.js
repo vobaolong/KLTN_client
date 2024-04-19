@@ -13,7 +13,7 @@ import VerifyLabel from '../label/VerifyLabel'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 
-const AdminUsersTable = ({ heading = '' }) => {
+const AdminUsersTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])
@@ -84,17 +84,17 @@ const AdminUsersTable = ({ heading = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+      {heading && <h5 className='text-start'>{t('title.userInSystem')}</h5>}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
         <SearchInput onChange={handleChangeKeyword} />
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-end'>
+          <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                <th scope='col' className='text-center'></th>
+                <th scope='col'>
+                  <span style={{ fontWeight: '400' }}>
                     {t('userDetail.name')}
                   </span>
                 </th>
@@ -125,7 +125,7 @@ const AdminUsersTable = ({ heading = '' }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col' className='text-center'>
+                <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -164,7 +164,7 @@ const AdminUsersTable = ({ heading = '' }) => {
                   <td>{user.point}</td>
                   <td>{user.id_card || '-'}</td>
                   <td>{user.email || '-'}</td>
-                  <td className='text-center'>
+                  <td>
                     <VerifyLabel verify={user.isEmailActive} />
                   </td>
                   <td>{user.phone || '-'}</td>

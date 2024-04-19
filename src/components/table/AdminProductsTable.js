@@ -56,7 +56,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -118,16 +118,15 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
 
-  console.log(products)
   return (
     <div className='position-relative'>
       {heading && (
-        <h5 className='text-center text-uppercase'>
+        <h5 className='text-start'>
           {isActive
             ? t('title.listActiveProducts')
             : t('title.listBannedProducts')}
@@ -301,7 +300,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                           }
                         >
                           {!product.isActive ? (
-                            <i className='fa-solid fa-circle-check'></i>
+                            <i className='fa-regular fa-circle-check'></i>
                           ) : (
                             <i className='fa-solid fa-ban'></i>
                           )}

@@ -77,7 +77,7 @@ const ListProductsByStore = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        // console.log('Some thing went wrong')
+        console.log('Some thing went wrong')
         setIsLoading(false)
       })
   }

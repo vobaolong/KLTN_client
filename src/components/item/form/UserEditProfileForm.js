@@ -113,7 +113,7 @@ const UserEditProfileForm = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -136,7 +136,7 @@ const UserEditProfileForm = ({
             label={t('userDetail.firstName')}
             value={profile.firstName}
             isValid={profile.isValidFirstName}
-            feedback={t('userDetail.firstNameValid')}
+            feedback={t('userDetail.validFirstName')}
             validator='name'
             required={true}
             onChange={(value) =>
@@ -152,7 +152,7 @@ const UserEditProfileForm = ({
             label={t('userDetail.lastName')}
             value={profile.lastName}
             isValid={profile.isValidLastName}
-            feedback={t('userDetail.lastNameValid')}
+            feedback={t('userDetail.validLastName')}
             validator='name'
             required={true}
             onChange={(value) =>

@@ -59,7 +59,7 @@ const CategorySelector = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     } else {
@@ -71,7 +71,7 @@ const CategorySelector = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     }
@@ -141,13 +141,12 @@ const CategorySelector = ({
 
   return (
     <div className='row'>
-      <div className='col'>
-        <SearchInput onChange={handleChangeKeyword} />
-      </div>
+      <div className='col'></div>
       <div className='col-12 position-relative'>
-        {isLoading && <Loading />}
+        <SearchInput onChange={handleChangeKeyword} />
 
-        <div className='d-flex border p-1 mt-2 rounded-2 bg-light-subtle'>
+        {isLoading && <Loading />}
+        <div className='d-flex box-shadow p-2 mt-2 rounded-2 bg-body'>
           <div
             className='list-group m-1'
             style={{

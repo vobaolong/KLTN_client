@@ -16,19 +16,13 @@ const StoreLayout = ({ store = {}, children = null, paths = {} }) => {
           <div className='avatar-absolute avatar-absolute--store'>
             <Avatar
               avatar={store.avatar}
-              name={
-                <span className='d-inline-flex justify-content-center align-items-center'>
-                  {store.name}
-                  <small className='ms-2'>
-                    <StoreStatusLabel isOpen={store.isOpen} />
-                  </small>
-                </span>
-              }
+              name={store.name}
+              status={<StoreStatusLabel isOpen={store.isOpen} />}
               alt={store.name}
               borderName={true}
             />
           </div>
-          <div className='level-group-absolute res-hide bg-white w-50 h-100'>
+          <div className='level-group-absolute res-hide bg-white w-50 h-100 p-2'>
             <StoreLevelInfo store={store} />
           </div>
         </div>

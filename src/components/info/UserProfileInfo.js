@@ -1,5 +1,6 @@
 import Paragraph from '../ui/Paragraph'
 import EmailActiveButton from '../button/EmailActiveButton'
+// import PhoneActiveButton from '../button/PhoneActiveButton'
 import UserEditProfileItem from '../item/UserEditProfileItem'
 import UserEditPasswordItem from '../item/UserEditPasswordItem'
 import { useTranslation } from 'react-i18next'
@@ -30,7 +31,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           <Paragraph
             label={
               <span>
-                <i className='fa-solid fa-user	 me-2 text-secondary'></i>
+                <i className='fa-light fa-user me-2 text-secondary'></i>
                 {t('userDetail.name')}
               </span>
             }
@@ -40,11 +41,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
         </div>
 
         {!isEditable ? (
-          <div className='col-sm-12'>
+          <div className='col-12'>
             <Paragraph
               label={
                 <span>
-                  <i className='fa-solid fa-envelope	 me-2 text-secondary'></i>
+                  <i className='fa-light fa-envelope me-2 text-secondary'></i>
                   Email
                 </span>
               }
@@ -53,11 +54,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           </div>
         ) : (
           <>
-            <div className='col-sm-12 d-flex'>
+            <div className='col-12 d-flex'>
               <Paragraph
                 label={
                   <span>
-                    <i className='fa-solid fa-envelope me-2 text-secondary'></i>
+                    <i className='fa-light fa-envelope me-2 text-secondary'></i>
                     Email
                   </span>
                 }
@@ -75,11 +76,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
         )}
 
         {!isEditable ? (
-          <div className='col-sm-6'>
+          <div className='col-12'>
             <Paragraph
               label={
                 <span>
-                  <i className='fa-solid fa-phone	 me-2 text-secondary'></i>
+                  <i className='fa-light fa-phone me-2 text-secondary'></i>
                   {t('userDetail.phone')}
                 </span>
               }
@@ -89,11 +90,11 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           </div>
         ) : (
           <>
-            <div className='col-sm-6'>
+            <div className='col-12'>
               <Paragraph
                 label={
                   <span>
-                    <i className='fa-solid fa-phone	 me-2 text-secondary'></i>
+                    <i className='fa-light fa-phone	me-2 text-secondary'></i>
                     {t('userDetail.phone')}
                   </span>
                 }
@@ -111,7 +112,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           </>
         )}
 
-        <div className='col-sm-6'>
+        <div className='col-12'>
           <Paragraph
             label={
               <span>

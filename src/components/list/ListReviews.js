@@ -151,11 +151,11 @@ const ListReviews = ({
   const averageRating = (totalRating / reviews.length).toFixed(1)
 
   return (
-    <div className='container-fluid position-relative'>
-      {heading && <h5 className='my-3'>{heading}</h5>}
+    <div className='position-relative'>
+      {heading && <h5 className='my-2'>{heading}</h5>}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      <div>
+      <div className='bg-body rounded box-shadow p-3'>
         <div className='d-flex flex-column gap-1 pb-3 mb-4 border-bottom'>
           <h6>Tổng quan</h6>
           <div className='d-flex gap-2 align-items-center'>
@@ -176,16 +176,6 @@ const ListReviews = ({
           <div className='d-flex flex-wrap justify-content-start align-items-center'>
             {renderFilterRating()}
           </div>
-          <small className='text-nowrap res-hide'>
-            {t('showing')}{' '}
-            <b>
-              {Math.min(
-                filter.limit,
-                pagination.size - filter.limit * (pagination.pageCurrent - 1)
-              )}{' '}
-            </b>
-            {t('of')} {pagination.size} {t('result')}
-          </small>
         </div>
         {reviews.length > 0 ? (
           <>
@@ -201,12 +191,25 @@ const ListReviews = ({
               ))}
             </div>
 
-            {pagination.size !== 0 && (
-              <Pagination
-                pagination={pagination}
-                onChangePage={handleChangePage}
-              />
-            )}
+            <div className='d-flex justify-content-between align-items-center px-4'>
+              <small className='text-nowrap res-hide'>
+                {t('showing')}{' '}
+                <b>
+                  {Math.min(
+                    filter.limit,
+                    pagination.size -
+                      filter.limit * (pagination.pageCurrent - 1)
+                  )}{' '}
+                </b>
+                {t('of')} {pagination.size} {t('result')}
+              </small>
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
           </>
         ) : (
           <h6 className='text-center text-danger mt-2'>

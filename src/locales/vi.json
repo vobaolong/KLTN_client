@@ -1,4 +1,5 @@
 {
+  "createdAt": "Ngày tạo",
   "orderStatus": {
     "Not processed": "Chưa xử lý",
     "Processing": "Đang xử lý",
@@ -34,7 +35,7 @@
     "rating": "Đánh giá sản phẩm",
     "about": "Thông tin shop",
     "listFavorites": "Danh sách yêu thích",
-    "profileInfo": "Thông tin tài khoản",
+    "profileInfo": "Tài khoản của tôi",
     "category": "Danh mục hàng",
     "editCategory": "Chỉnh sửa danh mục hàng",
     "overview": "Tổng quan",
@@ -148,8 +149,8 @@
   "title": {
     "showProduct": "Hiển thị sản phẩm",
     "hideProduct": "Ẩn sản phẩm",
-    "openStore": "Mở shop",
-    "closeStore": "Đóng shop",
+    "openStore": "Tắt Chế độ Tạm nghỉ",
+    "closeStore": "Bật Chế độ Tạm nghỉ",
     "productVariants": "Phân loại sản phẩm",
     "listBannedStores": "Shop bị tạm khoá",
     "listActiveStores": "Shop đang hoạt động",
@@ -202,6 +203,7 @@
     "storeLevel": {
       "storeLevel": "Hạng mức shop"
     },
+    "createdAt": "Ngày tạo",
     "edit": "Sửa hạng mức",
     "delete": "Xoá hạng mức",
     "restore": "Khôi phục hạng mức",
@@ -213,7 +215,7 @@
     "validColor": "Vui lòng cung cấp màu phù hợp!",
     "validDiscount": "Vui lòng cung cấp giảm giá phù hợp (0% - 100%)!",
     "validFloorPoint": "Vui lòng cung cấp điểm sàn phù hợp (>=0)!",
-    "nameValid": "Vui lòng cung cấp tên hạng mức phù hợp!"
+    "validName": "Vui lòng cung cấp tên hạng mức phù hợp!"
   },
   "action": "Lựa chọn",
   "showing": "Hiển thị",
@@ -304,7 +306,7 @@
   },
   "chosenCategory": "Danh mục đã chọn",
   "productValid": {
-    "nameValid": "Vui lòng cung cấp tên sản phẩm phù hợp!",
+    "validName": "Vui lòng cung cấp tên sản phẩm phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
     "otherValid": "Vui lòng cung cấp ảnh sản phẩm phù hợp!",
     "validDescription": "Vui lòng cung cấp mô tả sản phẩm phù hợp!",
@@ -366,12 +368,11 @@
     "email": "Email",
     "KYC": "Xác thực",
     "level": "Hạng mức",
-    "followers": "Người theo dõi",
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
     "profile": "Thông tin tài khoản",
     "editProfile": "Chỉnh sửa thông tin",
-    "address": "Địa chỉ",
+    "address": "Địa chỉ của tôi",
     "addAddress": "Thêm địa chỉ",
     "delAddress": "Xoá địa chỉ",
     "editAddress": "Sửa địa chỉ",
@@ -392,8 +393,8 @@
     "lastName": "Tên",
     "name": "Họ và tên",
     "phone": "Điện thoại",
-    "firstNameValid": "Vui lòng cung cấp họ và tên đệm hợp lệ!",
-    "lastNameValid": "Vui lòng cung cấp tên hợp lệ!",
+    "validFirstName": "Vui lòng cung cấp họ và tên đệm hợp lệ!",
+    "validLastName": "Vui lòng cung cấp tên hợp lệ!",
     "emailValid": "Vui lòng cung cấp Email hợp lệ!",
     "phoneValid": "Vui lòng cung cấp số điện thoại hợp lệ!",
     "idCardValid": "Vui lòng cung cấp số thẻ hợp lệ!"
@@ -431,7 +432,7 @@
     "add": "Thêm đơn vị vận chuyển",
     "del": "Xoá đơn vị vận chuyển",
     "edit": "Sửa đơn vị vận chuyển",
-    "nameValid": "Vui lòng cung cấp tên đvvc phù hợp!",
+    "validName": "Vui lòng cung cấp tên đvvc phù hợp!",
     "bioValid": "Vui lòng cung cấp mô tả phù hợp!",
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
@@ -467,9 +468,9 @@
     "chosenParentCategory": "Danh mục hàng đã chọn"
   },
   "categoryValid": {
-    "nameValid": "Vui lòng cung cấp tên danh mục hợp lệ!",
-    "imgValid": "Vui lòng cung cấp ảnh danh mục hợp lệ!",
-    "variantValid": "Vui lòng cung cấp phân loại hợp lệ!"
+    "validName": "Vui lòng cung cấp tên danh mục hợp lệ!",
+    "validImg": "Vui lòng cung cấp ảnh danh mục hợp lệ!",
+    "validVariant": "Vui lòng cung cấp phân loại hợp lệ!"
   },
   "variantDetail": {
     "variants": "Phân loại",
@@ -479,7 +480,7 @@
     "del": "Xoá phân loại",
     "res": "Khôi phục phân loại",
     "name": "Tên phân loại",
-    "nameValid": "Vui lòng cung cấp tên phân loại phù hợp!",
+    "validName": "Vui lòng cung cấp tên phân loại phù hợp!",
     "selectCategory": "Chọn danh mục hàng",
     "required": "Không danh mục nào được chọn",
     "value": {
@@ -501,6 +502,10 @@
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
+    "numberOfProduct": "Sản phẩm",
+    "followers": "Người theo dõi",
+    "vacationMode": "Chế độ tạm nghỉ",
+    "vacationModeContent": "Kích hoạt Chế độ Tạm nghỉ để ngăn khách hàng đặt đơn hàng mới. Nhưng những đơn hàng đang tiến hành vẫn phải được xử lý.",
     "banned": "Shop đang tạm thời bị zenpi khóa, liên hệ để biết thêm chi tiết",
     "active": "Shop đang hoạt động",
     "address": "Địa chỉ",
@@ -526,8 +531,8 @@
     "backToStore": "Quay lại trang quản lý",
     "follow": "Theo dõi",
     "following": "Đang theo dõi",
-    "open": "Đang mở",
-    "close": "Đang đóng",
+    "open": "Đang hoạt động",
+    "close": "Đang tạm nghỉ bán",
     "allProduct": "Tất cả sản phẩm",
     "rating": "Đánh giá",
     "about": "Thông tin",
@@ -539,7 +544,7 @@
     "contactPerson": "Người liên hệ"
   },
   "storeDetailValid": {
-    "nameValid": "Vui lòng cung cấp tên shop phù hợp!",
+    "validName": "Vui lòng cung cấp tên shop phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",
     "coverValid": "Vui lòng cung cấp ảnh bìa phù hợp!",
@@ -548,8 +553,8 @@
   "favorite": "Yêu thích",
   "wallet": "Ví",
   "myBalance": "Số dư của tôi",
-  "dropHere": "Thả tập tin vào đây...",
-  "dragNDrop": "Kéo và thả một số file vào đây hoặc click để chọn file",
+  "dropHere": "Thả ảnh vào đây...",
+  "dragNDrop": "Kéo/Thả ảnh vào đây hoặc nhấn để chọn",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
     "detail": "Chi tiết",
@@ -603,6 +608,7 @@
     "useRegisterPhone": "Sử dụng điện thoại đã đăng ký",
     "noOrder": "Chưa có đơn hàng",
     "commission": "Chiết khấu",
+    "profit": "Lợi nhuận",
     "buyer": "Người mua",
     "id": "Mã đơn hàng",
     "date": "Ngày đặt hàng",

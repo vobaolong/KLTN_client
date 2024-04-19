@@ -18,14 +18,19 @@ import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import useToggle from '../../hooks/useToggle'
+import CategorySelector from '../selector/CategorySelector'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const AdminCategoriesTable = ({ heading = '' }) => {
+const AdminCategoriesTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
+  const [flag, toggleFlag] = useToggle(false)
+
   const [run, setRun] = useState(false)
   const [deletedCategory, setDeletedCategory] = useState({})
   const [restoredCategory, setRestoredCategory] = useState({})
@@ -167,8 +172,33 @@ const AdminCategoriesTable = ({ heading = '' }) => {
           onClose={() => setIsConfirmingRestore(false)}
         />
       )}
+      <div className='mb-2'>
+        {heading && <h5 className='text-start'>{t('admin.categories')}</h5>}
+        <div className='align-items-center d-flex justify-content-end'>
+          <div className='position-relative d-inline-block'>
+            <button
+              type='button'
+              className={`btn ${
+                flag ? 'btn-primary' : 'btn-outline-primary'
+              } ripple cus-tooltip rounded-1`}
+              onClick={() => toggleFlag()}
+            >
+              <i className='fa-light fa-list-tree me-2'></i>
+              <span className='res-hide'>{t('categoryDetail.tree')}</span>
+            </button>
 
-      {heading && <h5 className='text-center text-uppercase'>{heading}</h5>}
+            <small className='cus-tooltip-msg'>
+              {t('categoryDetail.tree')}
+            </small>
+          </div>
+        </div>
+
+        {flag && (
+          <div className='mb-3'>
+            <CategorySelector isActive={true} isSelected={false} />
+          </div>
+        )}
+      </div>
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
@@ -185,11 +215,11 @@ const AdminCategoriesTable = ({ heading = '' }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table table-hover table-sm align-middle text-center'>
+          <table className='table table-hover table-sm align-middle text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
-                <th scope='col' className='text-start'>
+                <th scope='col' className='text-center'></th>
+                <th scope='col' className=''>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -199,15 +229,13 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                   />
                 </th>
                 <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('categoryDetail.img')}
-                    sortBy=''
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
+                  >
+                    {t('categoryDetail.img')}
+                  </span>
                 </th>
-
                 <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
@@ -227,7 +255,15 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('createdAt')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
                 <th scope='col'>
                   <span
                     style={{ fontWeight: '400', fontSize: '.875rem' }}
@@ -241,18 +277,17 @@ const AdminCategoriesTable = ({ heading = '' }) => {
             <tbody>
               {categories.map((category, index) => (
                 <tr key={index}>
-                  <th scope='row'>
+                  <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
-                  <td className='text-start'>{category.name}</td>
+                  <td>{category.name}</td>
                   <td>
                     {category.image ? (
                       <div
                         style={{
                           position: 'relative',
-                          margin: 'auto',
                           paddingBottom: '50px',
-                          width: '50px',
+                          width: '100%',
                           height: '0'
                         }}
                       >
@@ -266,7 +301,7 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                             height: '100%',
                             top: '0',
                             left: '0',
-                            objectFit: 'cover',
+                            objectFit: 'contain',
                             borderRadius: '0.25rem',
                             boxShadow:
                               'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
@@ -277,32 +312,30 @@ const AdminCategoriesTable = ({ heading = '' }) => {
                       '-'
                     )}
                   </td>
-                  <td className='text-start hidden-avatar'>
+                  <td>
                     {category.categoryId ? (
-                      <CategorySmallCard category={category.categoryId} />
+                      <span
+                        className='hidden-avatar badge bg-value text-dark-emphasis border rounded-1 fw-normal'
+                        style={{ fontSize: '0.875rem' }}
+                      >
+                        <CategorySmallCard category={category.categoryId} />
+                      </span>
                     ) : (
                       <span>-</span>
                     )}
                   </td>
                   <td>
-                    {category.isDeleted ? (
-                      <span>
-                        <DeletedLabel />
-                      </span>
-                    ) : (
-                      <span>
-                        <ActiveLabel />
-                      </span>
-                    )}
+                    {category.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
+                  <td>{humanReadableDate(category.createdAt)}</td>
                   <td>
                     <Link
                       type='button'
-                      className='btn btn-sm btn-primary ripple me-2 rounded-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
                       to={`/admin/category/edit/${category._id}`}
                       title={t('button.edit')}
                     >
-                      <i className='fa-solid fa-pen'></i>
+                      <i className='fa-duotone fa-pen-to-square'></i>
                     </Link>
 
                     {!category.isDeleted ? (

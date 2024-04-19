@@ -12,7 +12,7 @@ const StoreEditProfileItem = ({ store = {} }) => {
         data-bs-toggle='modal'
         data-bs-target='#store-profile-edit-form'
       >
-        <i className='fa-solid fa-pen'></i>
+        <i className='fa-duotone fa-pen-to-square'></i>
         <span className='res-hide ms-2'>{t('button.edit')}</span>
       </button>
 

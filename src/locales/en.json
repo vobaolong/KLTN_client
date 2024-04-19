@@ -1,4 +1,5 @@
 {
+  "createdAt": "Created At",
   "orderStatus": {
     "Not processed": "Not processed",
     "Processing": "Processing",
@@ -108,7 +109,7 @@
       "restore": "Restore commission successfully"
     },
     "product": {
-      "create": "Create product successfully",
+      "create": "Add product successfully",
       "delete": "Delete product successfully",
       "edit": "Edit product successfully",
       "ban": "Ban product successfully",
@@ -145,8 +146,8 @@
     "edit": "Are you sure to edit "
   },
   "title": {
-    "openStore": "Open Store",
-    "closeStore": "Close Store",
+    "openStore": "Turn off vacation mode",
+    "closeStore": "Turn on vacation mode",
     "productVariants": "Product Variants",
     "listBannedStores": "List of Banned Shops",
     "listActiveStores": "List of Active Shops",
@@ -163,8 +164,8 @@
   "dialog": {
     "removeImg": "Remove Image",
     "logOut": "Log Out",
-    "closeStore": "Close store",
-    "openStore": "Open store",
+    "closeStore": "Turn on vacation mode",
+    "openStore": "Turn off vacation mode",
     "addCommission": "Add commission",
     "deleteCommission": "Delete commission",
     "editCommission": "Edit commission",
@@ -198,6 +199,7 @@
     "storeLevel": {
       "storeLevel": "Store levels"
     },
+    "createdAt": "Created At",
     "edit": "Edit Level",
     "delete": "Delete Level",
     "restore": "Restore Level",
@@ -209,7 +211,7 @@
     "validColor": "Please provide a valid color!",
     "validDiscount": "Please provide a valid floor point (0% - 100%)!",
     "validFloorPoint": "Please provide a valid floor point (>=0)!",
-    "nameValid": "Please provide a valid level name!"
+    "validName": "Please provide a valid level name!"
   },
   "action": "Option",
   "showing": "Showing",
@@ -274,7 +276,7 @@
     "noValuesSelected": "No values selected",
     "chooseCateFirst": "*need to choose category before",
     "noProduct": "No product yet",
-    "createProduct": "Create Product",
+    "createProduct": "Add Product",
     "show": "Show products",
     "hide": "Hide products",
     "editProInfo": "Edit product information",
@@ -300,7 +302,7 @@
   },
   "chosenCategory": "Chosen Category",
   "productValid": {
-    "nameValid": "Please provide a valid product name!",
+    "validName": "Please provide a valid product name!",
     "avatarValid": "Please provide a valid product avatar!",
     "otherValid": "Please provide a valid other images!",
     "validDescription": "Please provide a valid product description!",
@@ -363,7 +365,6 @@
     "email": "Email",
     "KYC": "KYC",
     "level": "Level",
-    "followers": "Followers",
     "myAccount": "My account",
     "myPurchase": "My purchase",
     "profile": "Profile",
@@ -389,8 +390,8 @@
     "lastName": "Last Name",
     "name": "Full name",
     "phone": "Phone",
-    "firstNameValid": "Please provide a valid First Name!",
-    "lastNameValid": "Please provide a valid Last Name!",
+    "validFirstName": "Please provide a valid First Name!",
+    "validLastName": "Please provide a valid Last Name!",
     "emailValid": "Please provide a valid Email!",
     "phoneValid": "Please provide a valid Phone!",
     "idCardValid": "Please provide a valid ID Card!"
@@ -428,7 +429,7 @@
     "add": "Add Delivery Unit",
     "del": "Delete Delivery Unit",
     "edit": "Edit Delivery Unit",
-    "nameValid": "Please provide a valid delivery unit name!",
+    "validName": "Please provide a valid delivery unit name!",
     "bioValid": "Please provide a valid delivery unit description!",
     "feeValid": "Please provide a valid fee (>0₫)"
   },
@@ -464,9 +465,9 @@
     "chosenParentCategory": "Chosen parent category"
   },
   "categoryValid": {
-    "nameValid": "Please provide category name valid!",
-    "imgValid": "Please provide category image valid!",
-    "variantValid": "Please provide category image valid!"
+    "validName": "Please provide category name valid!",
+    "validImg": "Please provide category image valid!",
+    "validVariant": "Please provide category image valid!"
   },
   "variantDetail": {
     "variants": "Variants",
@@ -476,7 +477,7 @@
     "del": "Delete Variant",
     "res": "Restore Variant",
     "name": "Variant name",
-    "nameValid": "Please provide a valid variant name!",
+    "validName": "Please provide a valid variant name!",
     "selectCategory": "Select category",
     "required": "No categories selected",
     "value": {
@@ -499,6 +500,10 @@
   },
 
   "storeDetail": {
+    "numberOfProduct": "Products",
+    "followers": "Followers",
+    "vacationMode": "Vacation Mode",
+    "vacationModeContent": "Enable Vacation Mode to prevent customers from placing new orders. But orders in progress still have to be processed.",
     "banned": "The store is temporarily locked by Zenpii, contact us for more details",
     "active": "The store is active",
     "address": "Address",
@@ -513,7 +518,7 @@
     "products": "Products",
     "storeName": "Store Name",
     "name": "Name",
-    "profile": "Profile",
+    "profile": "Shop Profile",
     "staffs": "Staffs",
     "orders": "Orders",
     "role": "Role",
@@ -525,7 +530,7 @@
     "follow": "Follow",
     "following": "Following",
     "open": "Opening",
-    "close": "Closed",
+    "close": "On Vacation",
     "allProduct": "All Products",
     "rating": "Rating",
     "about": "About",
@@ -537,7 +542,7 @@
     "contactPerson": "Contact person"
   },
   "storeDetailValid": {
-    "nameValid": "Please provide a valid store name!",
+    "validName": "Please provide a valid store name!",
     "bioValid": "Please provide a valid store bio!",
     "avatarValid": "Please provide a valid store avatar!",
     "coverValid": "Please provide a valid store cover!",
@@ -547,7 +552,7 @@
   "wallet": "E-Wallet",
   "myBalance": "My Balance",
   "dropHere": "Drop the files here...",
-  "dragNDrop": "Drag 'n' drop some files here, or click to select files",
+  "dragNDrop": "Drag your photo here or Browse from device",
   "confirmDialog": "Are you sure about that?",
   "button": {
     "detail": "Detail",
@@ -601,6 +606,7 @@
     "useRegisterPhone": "Use registered phone",
     "noOrder": "No orders yet!",
     "commission": "Commission",
+    "profit": "Profit",
     "buyer": "Buyer",
     "id": "Order ID",
     "date": "Order placed",

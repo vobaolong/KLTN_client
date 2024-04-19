@@ -63,7 +63,7 @@ const AdminCreateVariantForm = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
       })
   }
 
@@ -110,7 +110,7 @@ const AdminCreateVariantForm = () => {
             label={t('variantDetail.name')}
             value={newVariant.name}
             isValid={newVariant.isValidName}
-            feedback={t('variantDetail.nameValid')}
+            feedback={t('variantDetail.validName')}
             required={true}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}

@@ -26,7 +26,8 @@ const TransactionsTable = ({
   storeId = '',
   by = 'admin',
   owner = {},
-  eWallet = 0
+  eWallet = 0,
+  heading = false
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -60,7 +61,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     else if (by === 'store')
@@ -78,7 +79,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     else
@@ -96,7 +97,7 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
   }
@@ -122,12 +123,11 @@ const TransactionsTable = ({
 
   return (
     <div className='position-relative'>
-      {t('userDetail.wallet') && by !== 'admin' ? (
-        <h5 className='text-center text-uppercase'>{t('userDetail.wallet')}</h5>
-      ) : (
-        <h5 className='text-center text-uppercase'>{t('transactions')}</h5>
+      {heading && (
+        <h5 className='text-start'>
+          {by !== 'admin' ? t('userDetail.wallet') : t('transactions')}
+        </h5>
       )}
-
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='d-flex align-items-center justify-content-between mb-2'>
@@ -164,11 +164,11 @@ const TransactionsTable = ({
           </div>
         ) : (
           <div className='table-scroll'>
-            <table className='table table-sm table-hover align-middle text-end'>
+            <table className='table table-sm table-hover align-middle text-start'>
               <thead>
                 <tr>
-                  <th scope='col'></th>
-                  <th scope='col' className='text-start'>
+                  <th scope='col' className='text-center'></th>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -177,16 +177,7 @@ const TransactionsTable = ({
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('transactionDetail.createdAt')}
-                      sortBy='createdAt'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-                  <th scope='col'>
+                  <th scope='col' className='text-end'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -208,7 +199,7 @@ const TransactionsTable = ({
                       />
                     </th>
                   )}
-                  <th scope='col' className='text-center'>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -217,12 +208,21 @@ const TransactionsTable = ({
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col' className='text-center'>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
                       title={t('status.status')}
                       sortBy='isUp'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentOrder={filter.order}
+                      currentSortBy={filter.sortBy}
+                      title={t('transactionDetail.createdAt')}
+                      sortBy='createdAt'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
@@ -234,19 +234,17 @@ const TransactionsTable = ({
                     <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <td className='text-start'>
+                    <td>
                       <small>{transaction._id}</small>
                     </td>
-                    <td>
-                      <small>{humanReadableDate(transaction.createdAt)}</small>
-                    </td>
-                    <td>
-                      <small className='text-nowrap'>
-                        {formatPrice(transaction.amount?.$numberDecimal)}₫
+                    <td className='text-end'>
+                      <small>
+                        {formatPrice(transaction.amount?.$numberDecimal)}
+                        <sup>₫</sup>
                       </small>
                     </td>
                     {by === 'admin' && (
-                      <td className='text-start'>
+                      <td>
                         {transaction && transaction.storeId ? (
                           <StoreSmallCard store={transaction.storeId} />
                         ) : (
@@ -254,15 +252,18 @@ const TransactionsTable = ({
                         )}
                       </td>
                     )}
-                    <td className='text-center'>
-                      <span>
+                    <td>
+                      <span style={{ fontSize: '0.9rem' }}>
                         <TransactionStatusLabel isUp={transaction.isUp} />
                       </span>
                     </td>
-                    <td className='text-center'>
-                      <span>
+                    <td>
+                      <span style={{ fontSize: '0.9rem' }}>
                         <SuccessLabel />
                       </span>
+                    </td>
+                    <td>
+                      <small>{humanReadableDate(transaction.createdAt)}</small>
                     </td>
                   </tr>
                 ))}

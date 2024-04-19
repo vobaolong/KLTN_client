@@ -20,6 +20,7 @@ import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const AdminStoreLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -118,7 +119,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -135,10 +136,11 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
+  console.log(levels)
 
   return (
     <div className='position-relative'>
@@ -172,9 +174,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
       )}
 
       {heading && (
-        <h5 className='text-center text-uppercase'>
-          {t('levelDetail.storeLevel.storeLevel')}
-        </h5>
+        <h5 className='text-start'>{t('levelDetail.storeLevel.storeLevel')}</h5>
       )}
       {isLoading && <Loading />}
 
@@ -185,10 +185,10 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-center'>
+          <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
-                <th scope='col'></th>
+                <th scope='col' className='text-center'></th>
                 <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
@@ -225,7 +225,15 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('levelDetail.createdAt')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
                 <th scope='col'>
                   <span
                     style={{ fontWeight: '400', fontSize: '.875rem' }}
@@ -236,25 +244,17 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className='text-center'>
+            <tbody>
               {levels.map((level, index) => (
                 <tr key={index}>
-                  <th scope='row'>
+                  <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <small>
-                      <StoreLevelLabel level={level} />
-                    </small>
+                    <StoreLevelLabel level={level} />
                   </td>
-                  <td>
-                    <small>{level.minPoint}</small>
-                  </td>
-                  <td>
-                    <small>
-                      {level.discount && level.discount.$numberDecimal}%
-                    </small>
-                  </td>
+                  <td>{level.minPoint}</td>
+                  <td>{level.discount && level.discount.$numberDecimal}%</td>
                   <td>
                     {level.isDeleted ? (
                       <span>
@@ -266,6 +266,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                       </span>
                     )}
                   </td>
+                  <td>{humanReadableDate(level.createdAt)}</td>
                   <td>
                     <button
                       type='button'

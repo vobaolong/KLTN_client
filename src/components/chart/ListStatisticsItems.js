@@ -114,7 +114,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         store: storeData.size
       })
     } catch (e) {
-      console.log('Something went wrong')
+      console.error('Something went wrong')
     }
     setIsLoading(false)
   }
@@ -162,7 +162,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         product: productData.size
       })
     } catch (e) {
-      console.log('Something went wrong')
+      console.error('Something went wrong')
     }
 
     setIsLoading(false)
@@ -233,7 +233,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     })
                   }
                 >
-                  <i class='fa-solid fa-user-group'></i>
+                  <i className='fa-solid fa-user-group'></i>
                   <span className='ms-3 res-hide'>{sizes.user}</span>
                   <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
                 </button>
@@ -406,7 +406,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
           </div>
 
           <div className='col-xl-4 col-lg-6 bg-body rounded-1 box-shadow p-2'>
-            <h5 className='text-center mt-2'>
+            <h5 className='text-start mt-2'>
               {options.flag === 'user' && t('topUser')}
               {options.flag === 'store' && t('topShop')}
               {options.flag === 'product' && t('topProduct')}

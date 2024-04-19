@@ -30,7 +30,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
           onClick={onToggle}
         >
           <i
-            className={`text-muted fs-5 fa-solid fa-circle-chevron-${
+            className={`text-muted fs-5 fa-light fa-circle-chevron-${
               isCollapsed ? 'right' : 'left'
             }`}
           ></i>
@@ -48,7 +48,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === store._id ? 'active' : ''
             }`}
           >
-            <i class='fa-solid fa-chart-line'></i>
+            <i className='fa-light fa-chart-line'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
                 {t('admin.adDashboard.overview')}
@@ -64,7 +64,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === 'profile' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-store'></i>
+            <i className='fa-light fa-store'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
                 {t('storeDetail.profile')}
@@ -80,7 +80,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === 'products' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-box'></i>
+            <i className='fa-light fa-box'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
                 {t('storeDetail.products')}
@@ -96,7 +96,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === 'staffs' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-user-group'></i>
+            <i className='fa-light fa-user-group'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
                 {t('storeDetail.staffs')}
@@ -112,7 +112,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === 'orders' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-clipboard'></i>
+            <i className='fa-light fa-receipt'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
                 {t('storeDetail.orders')}
@@ -128,7 +128,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
               path === 'wallet' ? 'active' : ''
             }`}
           >
-            <i className='fa-solid fa-wallet'></i>
+            <i className='fa-light fa-wallet'></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>{t('wallet')}</span>
             )}

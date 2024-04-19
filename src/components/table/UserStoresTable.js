@@ -85,9 +85,7 @@ const UserStoresTable = ({ heading = false }) => {
 
   return (
     <div className='position-relative'>
-      {heading && (
-        <h5 className='text-center text-uppercase'>{t('myStore')}</h5>
-      )}
+      {heading && <h5 className='text-start'>{t('myStore')}</h5>}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
@@ -111,26 +109,26 @@ const UserStoresTable = ({ heading = false }) => {
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='table table-sm table-hover align-middle text-center'>
+            <table className='table table-sm table-hover align-middle text-start'>
               <thead>
                 <tr>
-                  <th scope='col'>
-                    {/* <SortByButton
-                  currentSortBy={filter.sortBy}
-                  title=''
-                  sortBy='point'
-                  onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                /> */}
+                  <th scope='col' className='text-center'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title=''
+                      sortBy='point'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
                   </th>
                   <th scope='col'>
                     <span
-                      style={{ fontWeight: '400', fontSize: '.875rem' }}
+                      style={{ fontWeight: '400' }}
                       className='text-secondary'
                     >
                       {t('storeDetail.avatar')}
                     </span>
                   </th>
-                  <th scope='col' className='text-start'>
+                  <th scope='col'>
                     <SortByButton
                       currentSortBy={filter.sortBy}
                       title={t('storeDetail.storeName')}
@@ -138,7 +136,7 @@ const UserStoresTable = ({ heading = false }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col' className='text-start'>
+                  <th scope='col'>
                     <span
                       style={{ fontWeight: '400', fontSize: '.9rem' }}
                       className='text-secondary'
@@ -177,37 +175,35 @@ const UserStoresTable = ({ heading = false }) => {
               <tbody>
                 {stores.map((store, index) => (
                   <tr key={index}>
-                    <th scope='row'>
+                    <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <th scope='text-start'>
+                    <th>
                       <small className='hidden-name'>
                         <StoreSmallCard store={store} />
                       </small>
                     </th>
-                    <td className='text-start'>
+                    <td>
                       <small className='hidden-avatar'>
                         <StoreSmallCard store={store} />
                       </small>
                     </td>
-                    <th className='text-start fw-normal'>
-                      <small>{store.address}</small>
-                    </th>
-                    <td className='text-center'>
+                    <th>{store.address}</th>
+                    <td>
                       <ManagerRoleLabel
                         role={_id === store.ownerId._id ? 'owner' : 'staff'}
                       />
                     </td>
-                    <td className='text-center'>
+                    <td>
                       <StoreActiveLabel isActive={store.isActive} />
                     </td>
-                    <td className='text-center'>
+                    <td>
                       <StoreStatusLabel isOpen={store.isOpen} />
                     </td>
                     <td>
                       <Link
                         type='button'
-                        className='btn btn-outline-secondary ripple rounded-1'
+                        className='btn btn-sm btn-outline-secondary ripple rounded-1'
                         to={`/vendor/${store._id}`}
                         title={t('admin.adDashboard.dashboard')}
                       >

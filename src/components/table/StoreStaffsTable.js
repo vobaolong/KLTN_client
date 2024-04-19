@@ -117,10 +117,11 @@ const StoreStaffsTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
+  console.log(listStaffs)
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -134,11 +135,7 @@ const StoreStaffsTable = ({
         />
       )}
 
-      {heading && (
-        <h5 className='text-center text-uppercase'>
-          {t('staffDetail.staffList')}
-        </h5>
-      )}
+      {heading && <h5 className='text-start'>{t('staffDetail.staffList')}</h5>}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
           {pagination.size !== 0 && (
@@ -161,11 +158,13 @@ const StoreStaffsTable = ({
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='store-staffs-table table align-middle align-items-center table-hover table-sm text-center'>
+            <table className='store-staffs-table table align-middle align-items-center table-hover table-sm text-start'>
               <thead>
                 <tr>
-                  <th scope='col'>#</th>
-                  <th scope='col' className='text-start'>
+                  <th scope='col' className='text-center'>
+                    #
+                  </th>
+                  <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -201,41 +200,40 @@ const StoreStaffsTable = ({
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  {ownerId && userId === ownerId._id && <th scope='col'></th>}
+
+                  {ownerId && userId === ownerId._id && (
+                    <th scope='col'>
+                      <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
+                        {t('action')}
+                      </span>
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody>
                 {listStaffs?.map((staff, index) => (
                   <tr key={index}>
-                    <th scope='row'>
+                    <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <td
-                      className='text-start ps-2'
-                      style={{ maxWidth: '300px' }}
-                    >
+                    <td style={{ maxWidth: '300px' }}>
                       <UserSmallCard user={staff} />
                     </td>
-                    <td>
-                      <small>{staff.id_card || '-'}</small>
-                    </td>
-                    <td>
-                      <small>{staff.email || '-'}</small>
-                    </td>
-                    <td>
-                      <small>{staff.phone || '-'}</small>
-                    </td>
+                    <td>{staff.id_card || '-'}</td>
+                    <td>{staff.email || '-'}</td>
+                    <td>{staff.phone || '-'}</td>
                     {ownerId && userId === ownerId._id && (
-                      <td className='text-center'>
+                      <td>
                         <button
                           type='button'
                           className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
                           onClick={() => handleDeleteStaff(staff)}
+                          title={t('button.delete')}
                         >
-                          <i className='fa-solid fa-trash-alt'></i>
-                          <span className='ms-2 res-hide'>
+                          <i className='fa-solid fa-user-minus'></i>
+                          {/* <span className='ms-2 res-hide'>
                             {t('button.delete')}
-                          </span>
+                          </span> */}
                         </button>
                       </td>
                     )}

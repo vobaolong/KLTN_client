@@ -148,7 +148,6 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         setIsLoading(false)
       })
   }
-
   return (
     <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
@@ -176,7 +175,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
             label={t('productDetail.name')}
             value={newProduct.name}
             isValid={newProduct.isValidName}
-            feedback={t('productValid.nameValid')}
+            feedback={t('productValid.validName')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -347,7 +346,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 mt-5 px-4'>
+        <div className='col-12 mt-3 px-4'>
           <p className=''>
             {t('productDetail.chooseCategory')}{' '}
             <span className='text-danger'>*</span>{' '}
@@ -365,7 +364,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 mt-5 px-4'>
+        <div className='col-12 mt-3 px-4'>
           <span className='px-2'>
             {t('productDetail.chooseStyles')}{' '}
             <small className='text-muted'>

@@ -31,7 +31,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
     sortBy: 'createdAt',
     order: 'desc',
     status,
-    limit: 8,
+    limit: 7,
     page: 1
   })
 
@@ -98,34 +98,22 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         <>
           {status ===
             'Not processed|Processing|Shipped|Delivered|Cancelled' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.allOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.allOrders')}</h5>
           )}
           {status === 'Not processed' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.notProcessedOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.notProcessedOrders')}</h5>
           )}
           {status === 'Processing' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.processingOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.processingOrders')}</h5>
           )}
           {status === 'Shipped' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.shippedOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.shippedOrders')}</h5>
           )}
           {status === 'Delivered' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.deliveredOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.deliveredOrders')}</h5>
           )}
           {status === 'Cancelled' && (
-            <h5 className='text-center text-uppercase'>
-              {t('title.cancelledOrders')}
-            </h5>
+            <h5 className='text-start'>{t('title.cancelledOrders')}</h5>
           )}
         </>
       )}
@@ -142,11 +130,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
           <>
             <SearchInput onChange={handleChangeKeyword} />
             <div className='table-scroll my-2'>
-              <table className='table align-middle table-hover table-sm text-center'>
+              <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
                   <tr>
-                    <th scope='col'></th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col' className='text-center'></th>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -157,7 +145,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-end'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -179,7 +167,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -190,7 +178,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -213,6 +201,17 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       />
                     </th>
                     <th scope='col' className='text-end'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('orderDetail.profit')}
+                        sortBy='amountToStore'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -252,47 +251,40 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                 <tbody>
                   {orders.map((order, index) => (
                     <tr key={index}>
-                      <th scope='row'>
+                      <th scope='row' className='text-center'>
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
-                      <td className='text-start'>
-                        <small>{order._id}</small>
-                      </td>
-                      <td style={{ whiteSpace: 'normal' }} className='text-end'>
-                        <small>{humanReadableDate(order.createdAt)}</small>
-                      </td>
+                      <td>{order._id}</td>
+                      <td>{humanReadableDate(order.createdAt)}</td>
                       <td className='text-end'>
-                        <small className='text-nowrap'>
-                          {formatPrice(order.amountFromUser?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
+                        {formatPrice(order.amountFromUser?.$numberDecimal)}
+                        <sup>₫</sup>
                       </td>
-                      <td className='text-start'>
+                      <td>
                         <small className='hidden-avatar'>
                           <UserSmallCard user={order.userId} />
                         </small>
                       </td>
-                      <td className='text-start'>
+                      <td>
                         <small className='hidden-avatar'>
                           <StoreSmallCard store={order.storeId} />
                         </small>
                       </td>
                       <td className='text-end'>
                         <small className='text-nowrap'>
-                          <i className='text-danger'>For Seller: </i>
-                          {order.amountToStore &&
-                            formatPrice(order.amountToStore.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
-                        <br />
-                        <small className='text-nowrap'>
-                          <i className='text-success'>For Zenpii: </i>
                           {order.amountToZenpii &&
                             formatPrice(order.amountToZenpii.$numberDecimal)}
                           <sup>₫</sup>
                         </small>
                       </td>
                       <td className='text-end'>
+                        <small className='text-nowrap'>
+                          {order.amountToStore &&
+                            formatPrice(order.amountToStore.$numberDecimal)}
+                          <sup>₫</sup>
+                        </small>
+                      </td>
+                      <td>
                         {order.deliveryId && (
                           <small>
                             <i>{order.deliveryId.name}</i>
@@ -302,23 +294,23 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                           </small>
                         )}
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <span style={{ fontSize: '1rem' }}>
                           <OrderPaymentLabel
                             isPaidBefore={order.isPaidBefore}
                           />
                         </span>
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <span style={{ fontSize: '1rem' }}>
                           <OrderStatusLabel status={order.status} />
                         </span>
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <div className='position-relative d-inline-block'>
                           <Link
                             type='button'
-                            className='btn btn-outline-secondary rounded-1 ripple'
+                            className='btn btn-sm btn-outline-secondary rounded-1 ripple'
                             to={`/admin/order/detail/${order._id}`}
                             title={t('button.detail')}
                           >

@@ -38,7 +38,6 @@ const ProductCard = ({ product = {}, onRun }) => {
     } catch {
       newProduct.isFollowing = false
     }
-
     setProductValue(newProduct)
   }
 

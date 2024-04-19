@@ -16,7 +16,6 @@ const VendorLayout = ({
 
   return (
     <MainLayout container='container-xxl' navFor='vendor'>
-      <Breadcrumb paths={paths} />
       <div className='row'>
         <div
           className={`col-md-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}
@@ -28,7 +27,10 @@ const VendorLayout = ({
             onToggle={toggleSidebar}
           />
         </div>
-        <div className={`col-md-${isCollapsed ? '11' : '10'}`}>{children}</div>
+        <div className={`col-md-${isCollapsed ? '11' : '10'}`}>
+          <Breadcrumb paths={paths} />
+          {children}
+        </div>
       </div>
     </MainLayout>
   )

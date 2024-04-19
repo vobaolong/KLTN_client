@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Error from '../ui/Error'
 import Loading from '../ui/Loading'
 import { getToken } from '../../apis/auth'
 import { followProduct, unfollowProduct } from '../../apis/follow'
@@ -40,7 +39,7 @@ const FollowProductButton = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     } else {
@@ -59,7 +58,7 @@ const FollowProductButton = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Something went wrong')
+          console.error('Something went wrong')
           setIsLoading(false)
         })
     }

@@ -152,7 +152,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             label={t('categoryDetail.name')}
             value={newCategory.name}
             isValid={newCategory.isValidName}
-            feedback='Please provide a valid category name.'
+            feedback={t('categoryValid.validName')}
             validator='anything'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -168,7 +168,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             defaultSrc={newCategory.defaultSrc}
             value={newCategory.image}
             isValid={newCategory.isValidImage}
-            feedback='Please provide a valid category avatar.'
+            feedback={t('categoryValid.validImg')}
             accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
             onChange={(value) => handleChange('image', 'isValidImage', value)}
             onValidate={(flag) => handleValidate('isValidImage', flag)}

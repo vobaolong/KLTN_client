@@ -128,7 +128,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             label={t('userDetail.firstName')}
             value={account.firstName}
             isValid={account.isValidFirstName}
-            feedback={t('userDetail.firstNameValid')}
+            feedback={t('userDetail.validFirstName')}
             required={true}
             validator='name'
             onChange={(value) =>
@@ -144,7 +144,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             label={t('userDetail.lastName')}
             value={account.lastName}
             isValid={account.isValidLastName}
-            feedback={t('userDetail.lastNameValid')}
+            feedback={t('userDetail.validLastName')}
             validator='name'
             required={true}
             onChange={(value) =>

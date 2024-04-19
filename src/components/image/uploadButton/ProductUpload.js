@@ -28,7 +28,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
       })
       .catch((error) => {
         setIsLoading(false)
-        console.log('Something went wrong')
+        console.error('Something went wrong')
       })
   }
 
@@ -46,7 +46,7 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
         if (onRun) onRun()
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }

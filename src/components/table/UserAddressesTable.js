@@ -10,7 +10,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const UserAddressesTable = ({ addresses = [] }) => {
+const UserAddressesTable = ({ addresses = [], heading = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [editAddress, setEditAddress] = useState({})
@@ -64,14 +64,11 @@ const UserAddressesTable = ({ addresses = [] }) => {
         />
       )}
 
-      {t('address') && (
-        <h5 className='text-center text-uppercase'>
-          {t('userDetail.address')}
-        </h5>
-      )}
-
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='text-end'>
+          {heading && (
+            <h5 className='text-start mb-0'>{t('userDetail.address')}</h5>
+          )}
           <UserAddAddressItem count={addresses?.length || 0} />
         </div>
         {!isLoading && addresses.length === 0 ? (
@@ -80,39 +77,37 @@ const UserAddressesTable = ({ addresses = [] }) => {
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='table table-sm table-hover align-middle text-center'>
+            <table className='table table-sm table-hover align-middle text-start'>
               <thead>
                 <tr>
-                  <th scope='col'></th>
-                  <th scope='col' className='text-start'>
-                    <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
-                      {t('userDetail.address')}
-                    </span>
+                  <th scope='col' className='text-center'></th>
+                  <th scope='col'>
+                    <span>{t('userDetail.address')}</span>
                   </th>
                   <th scope='col'>
-                    <span style={{ fontWeight: '500', fontSize: '.875rem' }}>
-                      {t('action')}
-                    </span>
+                    <span>{t('action')}</span>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {addresses?.map((address, index) => (
                   <tr key={index}>
-                    <th scope='row'>{index + 1}</th>
-                    <td className='text-start px-2'>
-                      <span style={{ fontSize: '0.9rem' }}>{address}</span>
+                    <th scope='row' className='text-center'>
+                      {index + 1}
+                    </th>
+                    <td>
+                      <span>{address}</span>
                     </td>
                     <td>
                       <button
                         type='button'
-                        className='btn btn-sm btn-primary ripple me-2 my-1 rounded-1'
+                        className='btn btn-sm btn-outline-primary ripple me-2 my-1 rounded-1'
                         data-bs-toggle='modal'
                         data-bs-target='#edit-address-form'
                         onClick={() => handleEditAddress(address, index)}
                         title={t('button.edit')}
                       >
-                        <i className='fa-solid fa-pen'></i>
+                        <i className='fa-duotone fa-pen-to-square'></i>
                       </button>
                       <button
                         type='button'
@@ -141,9 +136,14 @@ const UserAddressesTable = ({ addresses = [] }) => {
         </Modal>
         {addresses?.length !== 0 && (
           <span className='text-nowrap'>
-            <small className='text-nowrap res-hide'>
-              {t('showing')} {addresses?.length || 0} {t('result')}
-            </small>
+            <span
+              style={{ fontSize: '0.85rem' }}
+              className='text-nowrap text-secondary'
+            >
+              {t('showing')}{' '}
+              <span className='fw-bold'>{addresses?.length || 0} </span>
+              {t('result')}
+            </span>
           </span>
         )}
       </div>

@@ -82,7 +82,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -107,7 +107,7 @@ const AdminEditDeliveryForm = ({ oldDelivery = '', onRun = () => {} }) => {
             label={t('deliveryDetail.name')}
             value={delivery.name}
             isValid={delivery.isValidName}
-            feedback={t('deliveryDetail.nameValid')}
+            feedback={t('deliveryDetail.validName')}
             validator='name'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}

@@ -139,7 +139,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             label={t('productDetail.name')}
             value={newProduct.name}
             isValid={newProduct.isValidName}
-            feedback={t('productValid.nameValid')}
+            feedback={t('productValid.validName')}
             required={true}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -209,7 +209,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 mt-5 px-4'>
+        <div className='col-12 mt-3 px-4'>
           <p className=''>
             {t('productDetail.chooseCategory')}
             <small className='text-danger'> *</small>
@@ -228,7 +228,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
           />
         </div>
 
-        <div className='col-12 mt-5 px-4'>
+        <div className='col-12 mt-3 px-4'>
           <p className='px-2'>
             {t('productDetail.chooseStyles')}{' '}
             <small className='text-muted'>

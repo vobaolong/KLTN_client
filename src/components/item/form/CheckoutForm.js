@@ -95,7 +95,7 @@ const CheckoutForm = ({
         amountToZenpii: amountFromUser1 + amountFromUser2 - amountToStore
       })
     } catch (e) {
-      console.log('Something went wrong')
+      console.error('Something went wrong')
     }
   }
 
@@ -370,7 +370,7 @@ const CheckoutForm = ({
                   label={t('userDetail.firstName')}
                   value={order.firstName}
                   isValid={order.isValidFirstName}
-                  feedback={t('userDetail.firstNameValid')}
+                  feedback={t('userDetail.validFirstName')}
                   validator='name'
                   required={true}
                   onChange={(value) =>
@@ -390,7 +390,7 @@ const CheckoutForm = ({
                   ZX
                   value={order.lastName}
                   isValid={order.isValidLastName}
-                  feedback={t('userDetail.lastNameValid')}
+                  feedback={t('userDetail.validLastName')}
                   validator='name'
                   required={true}
                   onChange={(value) =>
@@ -403,7 +403,7 @@ const CheckoutForm = ({
               <div className='d-inline-block position-relative ms-4'>
                 <div className='d-inline-block cus-tooltip'>
                   <button
-                    className='btn btn-primary ripple rounded-1'
+                    className='btn btn-outline-primary ripple rounded-1'
                     type='button'
                     disabled={!!!firstName || !!!lastName}
                     onClick={() =>
@@ -416,7 +416,7 @@ const CheckoutForm = ({
                       })
                     }
                   >
-                    <i className='fa-solid fa-user'></i>
+                    <i className='fa-solid fa-user-large'></i>
                   </button>
                 </div>
                 <small className='cus-tooltip-msg'>
@@ -444,7 +444,7 @@ const CheckoutForm = ({
               <div className='d-inline-block position-relative ms-4'>
                 <div className='d-inline-block cus-tooltip'>
                   <button
-                    className='btn btn-primary ripple rounded-1'
+                    className='btn btn-outline-primary ripple rounded-1'
                     type='button'
                     disabled={!!!phone}
                     onClick={() =>
@@ -467,7 +467,7 @@ const CheckoutForm = ({
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               <div className='flex-grow-1'>
                 <DropDownMenu
-                  borderBtn={true}
+                  borderBtn={false}
                   required={true}
                   listItem={addresses?.map((a, i) => {
                     const newA = {
@@ -516,7 +516,7 @@ const CheckoutForm = ({
             <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
               {deliveries?.length > 0 && (
                 <DropDownMenu
-                  borderBtn={true}
+                  borderBtn={false}
                   listItem={deliveries?.map((d, i) => {
                     const newD = {
                       value: d,
@@ -555,7 +555,7 @@ const CheckoutForm = ({
               )}
               <div className='d-inline-block position-relative ms-4 mb-2'>
                 <div className='d-inline-block'>
-                  <span className='btn btn-md default btn-primary rounded-1'>
+                  <span className='btn btn-outline-primary default rounded-1'>
                     <i className='fa-solid fa-truck'></i>
                   </span>
                 </div>

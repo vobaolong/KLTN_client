@@ -21,7 +21,7 @@ const ProductPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-solid fa-circle-check me-2'></i>
+              <i className='fa-regular fa-circle-check me-2'></i>
               <span className='res-hide'>{t('title.listActiveProducts')}</span>
             </span>
           </li>

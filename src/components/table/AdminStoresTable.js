@@ -34,7 +34,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
     sortMoreBy: 'point',
     isActive,
     order: 'asc',
-    limit: 8,
+    limit: 5,
     page: 1
   })
 
@@ -128,7 +128,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
   return (
     <div className='position-relative'>
       {heading && (
-        <h5 className='text-center text-uppercase'>
+        <h5 className='text-start'>
           {isActive ? t('title.listActiveStores') : t('title.listBannedStores')}
         </h5>
       )}
@@ -159,12 +159,12 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
               <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
                   <tr>
-                    <th scope='col'></th>
+                    <th scope='col' className='text-center'></th>
                     <th scope='col' className='text-center'>
                       {t('storeDetail.avatar')}
                     </th>
                     <th scope='col'>{t('storeDetail.storeName')}</th>
-                    <th scope='col' className='text-center'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -191,7 +191,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-center'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -202,7 +202,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-end'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -214,7 +214,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                       />
                     </th>
 
-                    <th scope='col' className='text-center'>
+                    <th scope='col'>
                       <span className='text-secondary'>{t('action')}</span>
                     </th>
                   </tr>
@@ -233,10 +233,10 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                       >
                         <StoreSmallCard store={store} />
                       </td>
-                      <td className='text-start hidden-avatar'>
+                      <td className='hidden-avatar'>
                         <StoreSmallCard store={store} />
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <small>
                           <StarRating stars={store.rating} />
                         </small>
@@ -268,13 +268,13 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                       <td>
                         <StoreCommissionLabel commission={store.commissionId} />
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <StoreActiveLabel isActive={store.isActive} />
                       </td>
-                      <td className='text-end'>
+                      <td>
                         <small>{humanReadableDate(store.createdAt)}</small>
                       </td>
-                      <td className='text-center'>
+                      <td>
                         <button
                           type='button'
                           className={`btn btn-sm rounded-1 ${

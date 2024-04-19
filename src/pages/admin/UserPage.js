@@ -12,7 +12,7 @@ const UserPage = () => {
   ]
   return (
     <AdminLayout user={user} paths={paths}>
-      <AdminUsersTable heading={t('title.userInSystem')} />
+      <AdminUsersTable />
     </AdminLayout>
   )
 }

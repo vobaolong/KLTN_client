@@ -7,7 +7,7 @@ const StarRating = ({ stars = 5, noStar = false }) => {
     if (!noStar)
       for (let i = stars + 1; i <= 5; i++) {
         content.push(
-          <i className='fa-regular fa-star text-black-50' key={i - 1}></i>
+          <i className='fa-light fa-star text-black-50' key={i - 1}></i>
         )
       }
     return content

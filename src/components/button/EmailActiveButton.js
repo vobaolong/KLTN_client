@@ -35,7 +35,7 @@ const EmailActiveButton = ({
       {email && isEmailActive && (
         <div className='position-relative d-inline-block'>
           <span className='badge text-success cus-tooltip rounded-1 bg-success-rgba'>
-            <i className='fa-solid fa-circle-check me-2'></i>
+            <i className='fa-regular fa-circle-check me-2'></i>
             {t('verified')}
           </span>
           <small className='cus-tooltip-msg'>Email {t('verified')}</small>

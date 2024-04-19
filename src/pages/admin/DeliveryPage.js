@@ -12,7 +12,7 @@ const DeliveryPage = () => {
   ]
   return (
     <AdminLayout user={user} paths={paths}>
-      <AdminDeliveriesTable heading={true} />
+      <AdminDeliveriesTable />
     </AdminLayout>
   )
 }

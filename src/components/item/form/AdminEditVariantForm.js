@@ -44,7 +44,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -95,7 +95,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        console.error('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -144,7 +144,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
             label={t('variantDetail.name')}
             value={newVariant.name}
             isValid={newVariant.isValidName}
-            feedback={t('categoryValid.variantValid')}
+            feedback={t('categoryValid.validVariant')}
             validator='anything'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
