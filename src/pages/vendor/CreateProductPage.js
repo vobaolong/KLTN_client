@@ -14,7 +14,7 @@ const CreateProductPage = () => {
     { name: t('breadcrumbs.product'), url: `/vendor/products/${store._id}` },
     {
       name: t('breadcrumbs.addProduct'),
-      url: `/vendor/products/createNewProduct/${store._id}`
+      url: `/vendor/products/addNew/${store._id}`
     }
   ]
   return (

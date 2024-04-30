@@ -2,23 +2,25 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { listActiveCategories } from '../../../apis/category'
 import { useTranslation } from 'react-i18next'
+import ListCategoryFooter from '../../list/ListCategoryFooter'
 
 const Footer = () => {
   const { t } = useTranslation()
   const [categories, setCategories] = useState([])
-
   const loadCategories = () => {
     listActiveCategories({
       search: '',
       categoryId: null,
       sortBy: 'name',
       order: 'asc',
-      limit: 10,
+      limit: 30,
       page: 1
     })
       .then((data) => {
         if (data.error) return
-        else setCategories(data.categories)
+        else {
+          setCategories(data.categories)
+        }
       })
       .catch((error) => {
         return
@@ -33,7 +35,7 @@ const Footer = () => {
           <div className='col-sm-12 col-md-6'>
             <div className='mb-4'>
               <span style={{ textAlign: 'justify' }}>
-                <b>{t('footer.title')}</b>
+                <b className='text-dark-emphasis'>{t('footer.title')}</b>
                 <span className='text-muted'>
                   <p className='mt-2 font-weight-bold'>{t('footer.p1')}</p>
                   <small className='lh-1'>{t('footer.small1')}</small>
@@ -46,25 +48,10 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className='col-xs-6 col-md-3'>
-            <h6>{t('categories')}</h6>
-            <ul className='footer-links'>
-              {categories?.map((category, index) => (
-                <li key={index}>
-                  <Link
-                    className='link-hover'
-                    to={`/category/${category._id}`}
-                    title={category.name}
-                  >
-                    {category.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className='col-xs-6 col-md-3'>
-            <h6>{t('footer.quickLink')}</h6>
+          <div className='col-sm-12 col-md-6'>
+            <h6 className='text-dark-emphasis fw-bold text-capitalize'>
+              {t('footer.quickLink')}
+            </h6>
             <ul className='footer-links'>
               <li>
                 <Link className='link-hover text-reset' to='#'>
@@ -72,11 +59,22 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link className='link-hover text-reset' to='/legal/privacy'>
+                <Link className='link-hover' to='/legal/privacy'>
                   {t('footer.policy')}
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className='col-12'>
+            <hr />
+            <h6 className='text-dark-emphasis fw-bold'>{t('categories')}</h6>
+            <div className='footer-links row'>
+              {categories?.map((category, index) => (
+                <span key={index} className='col-3 mt-2'>
+                  <ListCategoryFooter category={category} />
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         <hr />

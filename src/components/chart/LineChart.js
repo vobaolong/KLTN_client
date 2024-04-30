@@ -4,7 +4,17 @@ import { groupByDate } from '../../helper/groupBy'
 import { Line } from 'react-chartjs-2'
 import { Chart, registerables } from 'chart.js'
 import { useTranslation } from 'react-i18next'
-Chart.register(...registerables)
+import CrosshairPlugin from 'chartjs-plugin-crosshair'
+const CustomCrosshairPlugin = function (plugin) {
+  const originalAfterDraw = plugin.afterDraw
+  plugin.afterDraw = function (chart, easing) {
+    if (chart && chart.crosshair) {
+      originalAfterDraw.call(this, chart, easing)
+    }
+  }
+  return plugin
+}
+Chart.register(...registerables, CustomCrosshairPlugin(CrosshairPlugin))
 
 const LineChart = ({
   by = 'hours',
@@ -23,24 +33,35 @@ const LineChart = ({
   const init = () => {
     const newData = groupBy(items, by, role, sliceEnd)
 
+    const datasets = [
+      {
+        data: newData?.map((item) => item[1]),
+        label: role === 'admin' ? title : 'Lợi nhuận',
+        fill: false,
+        tension: 0.4,
+        borderWidth: 2,
+        borderColor: '#1162D5',
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: '#1162D5'
+      }
+    ]
+
+    if (role === 'vendor') {
+      datasets.push({
+        data: newData?.map((item) => item[2]),
+        label: 'Chiết khấu',
+        fill: false,
+        tension: 0.4,
+        borderWidth: 2,
+        borderColor: '#F66',
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: '#F66'
+      })
+    }
+
     setData({
-      labels: newData.reduce(
-        (labels, currentData) => [...labels, currentData[0]],
-        []
-      ),
-      datasets: [
-        {
-          data: newData.reduce(
-            (datas, currentData) => [...datas, currentData[1]],
-            []
-          ),
-          label: title,
-          fill: false,
-          tension: 0.4,
-          borderWidth: 2,
-          borderColor: '#1162D5'
-        }
-      ]
+      labels: newData?.map((item) => item[0]),
+      datasets
     })
   }
 
@@ -50,12 +71,8 @@ const LineChart = ({
 
   return (
     <div
-      style={{
-        boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
-        borderRadius: '0.25rem',
-        backgroundColor: '#fff',
-        width: '100%'
-      }}
+      style={{ cursor: 'crosshair' }}
+      className='bg-body box-shadow rounded w-100'
     >
       <h5
         style={{
@@ -67,27 +84,65 @@ const LineChart = ({
       >
         {value} {t('breadcrumbs.overview')}
       </h5>
-      <Line
-        data={data}
-        options={{
-          title: {
-            display: true,
-            text: title
-          },
-          legend: {
-            display: true,
-            position: 'bottom'
-          },
-          scales: {
-            x: {
-              display: false
+      <div className='px-3 py-2'>
+        <Line
+          data={data}
+          options={{
+            interaction: {
+              mode: 'index',
+              intersect: false
             },
-            y: {
-              beginAtZero: true
+
+            title: {
+              display: true,
+              text: title
+            },
+            legend: {
+              display: true,
+              position: 'bottom'
+            },
+            responsive: true,
+            scales: {
+              x: {
+                display: false
+              },
+              y: {
+                beginAtZero: true
+              }
+            },
+
+            elements: {
+              point: {
+                radius: 1,
+                hoverRadius: 3
+              }
+            },
+            plugins: {
+              tooltip: {
+                enabled: true,
+                mode: 'index',
+                intersect: false
+              },
+              crosshair: {
+                enabled: true,
+                mode: 'xy',
+                line: {
+                  color: '#F66',
+                  width: 1
+                },
+                sync: {
+                  enabled: true,
+                  group: 1,
+                  suppressTooltips: false
+                },
+                zoom: {
+                  enabled: true
+                }
+              }
             }
-          }
-        }}
-      />
+          }}
+        />
+      </div>
     </div>
   )
 }

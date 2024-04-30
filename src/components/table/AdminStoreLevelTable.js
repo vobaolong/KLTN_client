@@ -130,7 +130,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(toast.success(t('toastSuccess.level.restore')))
+          toast.success(t('toastSuccess.level.restore'))
           setRun(!run)
         }
         setIsLoading(false)

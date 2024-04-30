@@ -247,7 +247,9 @@ const AdminUserLevelsTable = ({ heading = false }) => {
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <UserLevelLabel level={level} />
+                    <span style={{ fontSize: '.9rem' }}>
+                      <UserLevelLabel level={level} />
+                    </span>
                   </td>
                   <td>{level.minPoint}</td>
                   <td>{level.discount && level.discount.$numberDecimal}%</td>

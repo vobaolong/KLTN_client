@@ -92,16 +92,7 @@ const CollectionPage = () => {
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
 
-        <div className='d-flex justify-content-between align-items-center'>
-          <div className=''>
-            <ProductFilter filter={filter} setFilter={setFilter} />
-          </div>
-          <ShowResult
-            limit={filter.limit}
-            size={pagination.size}
-            pageCurrent={pagination.pageCurrent}
-          />
-        </div>
+        <ProductFilter filter={filter} setFilter={setFilter} />
 
         <div className='row mt-3'>
           {listProducts?.map((product, index) => (
@@ -118,10 +109,19 @@ const CollectionPage = () => {
             <h5>{t('productDetail.noProduct')}</h5>
           </div>
         )}
-
-        {pagination.size !== 0 && (
-          <Pagination pagination={pagination} onChangePage={handleChangePage} />
-        )}
+        <div className='d-flex px-5 align-items-center justify-content-between'>
+          <ShowResult
+            limit={filter.limit}
+            size={pagination.size}
+            pageCurrent={pagination.pageCurrent}
+          />
+          {pagination.size !== 0 && (
+            <Pagination
+              pagination={pagination}
+              onChangePage={handleChangePage}
+            />
+          )}
+        </div>
       </div>
     </StoreLayout>
   )

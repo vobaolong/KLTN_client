@@ -134,16 +134,6 @@ const CategoryPage = () => {
 
         <div className='d-flex justify-content-between align-items-end'>
           <ProductFilter filter={filter} setFilter={setFilter} />
-          <small className='text-nowrap res-hide'>
-            {t('showing')}{' '}
-            <b>
-              {Math.min(
-                filter.limit,
-                pagination.size - filter.limit * (pagination.pageCurrent - 1)
-              )}{' '}
-            </b>
-            {t('of')} {pagination.size} {t('result')}
-          </small>
         </div>
 
         <div className='product-search-list row mt-3'>

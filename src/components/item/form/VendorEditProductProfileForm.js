@@ -108,7 +108,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     updateProduct(_id, accessToken, formData, product._id, storeId)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        else toast.success(t('toastSuccess.product.edit'))
         setIsLoading(false)
       })
       .catch((error) => {

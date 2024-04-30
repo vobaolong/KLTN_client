@@ -11,7 +11,7 @@ import DeletedLabel from '../label/DeletedLabel'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import Modal from '../ui/Modal'
-import AddValueVariantItem from '../item/AddValueVariantItem'
+import AddVariantValueItem from '../item/AddVariantValueItem'
 import AdminEditVariantValueForm from '../item/form/AdminEditVariantValueForm'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
@@ -88,7 +88,7 @@ const VariantValuesTable = ({
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.variantValue.delete'))
           setRun(!run)
         }
         setIsLoading(false)
@@ -106,7 +106,7 @@ const VariantValuesTable = ({
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.variantValue.restore'))
           setRun(!run)
         }
         setIsLoading(false)
@@ -145,7 +145,7 @@ const VariantValuesTable = ({
       {isLoading && <Loading />}
 
       <div className='d-flex justify-content-between align-items-end'>
-        <AddValueVariantItem
+        <AddVariantValueItem
           variantId={variantId}
           variantName={variant?.name}
           onRun={() => setRun(!run)}

@@ -28,7 +28,11 @@ const ProfilePage = () => {
           <div className='avatar-absolute avatar-absolute--store'>
             <Avatar
               avatar={user.avatar}
-              name={user.firstName + ' ' + user.lastName}
+              name={
+                user.firstName && user.lastName
+                  ? user.firstName + ' ' + user.lastName
+                  : undefined
+              }
               alt={user.firstName + ' ' + user.lastName}
               borderName={true}
               isEditable='user'

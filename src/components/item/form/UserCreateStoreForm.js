@@ -130,7 +130,7 @@ const CreateStoreForm = () => {
           setIsLoading(false)
         } else {
           history.push(`/vendor/${data.storeId}`)
-          toast.success('Tạo cửa hàng thành công')
+          toast.success(t('toastSuccess.store.create'))
         }
       })
       .catch((error) => {
@@ -138,9 +138,10 @@ const CreateStoreForm = () => {
         setIsLoading(false)
       })
   }
-
+  console.log(store.commissionId)
+  console.log(listActiveCommissions)
   return (
-    <div className='position-relative'>
+    <div className='position-relative container-fluid'>
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -192,7 +193,7 @@ const CreateStoreForm = () => {
               size='lg'
               label={t('storeDetail.commissions')}
               required={true}
-              borderBtn={true}
+              borderBtn={false}
             />
           )}
         </div>

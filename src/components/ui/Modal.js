@@ -5,7 +5,8 @@ const Modal = ({
   title = '',
   subTitle = '',
   hasCloseBtn = true,
-  children = null
+  children = null,
+  style = {}
 }) => {
   const { t } = useTranslation()
   return (
@@ -16,7 +17,7 @@ const Modal = ({
         tabIndex='-1'
         aria-hidden='true'
       >
-        <div className='modal-dialog modal-dialog-centered'>
+        <div className='modal-dialog modal-dialog-centered' style={style}>
           <div className='modal-content rounded-1'>
             <div className='modal-header'>
               <div>

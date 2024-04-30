@@ -51,7 +51,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'dashboard' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-chart-line'></i>
+            <i
+              className={`${
+                path === 'dashboard' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-chart-line`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>
                 {t('admin.adDashboard.dashboard')}
@@ -66,7 +70,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'user' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-user-group'></i>
+            <i
+              className={`${
+                path === 'user' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-user-group`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.users')}</span>
             )}
@@ -79,7 +87,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'store' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-store'></i>
+            <i
+              className={`${
+                path === 'store' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-store`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.stores')}</span>
             )}
@@ -92,7 +104,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'order' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-clipboard'></i>
+            <i
+              className={`${
+                path === 'order' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-receipt`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.orders')}</span>
             )}
@@ -105,7 +121,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'transaction' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-retweet'></i>
+            <i
+              className={`${
+                path === 'transaction' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-money-bill-transfer`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>
                 {t('admin.transactions')}
@@ -120,7 +140,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'category' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-list'></i>
+            <i
+              className={`${
+                path === 'category' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-list`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.categories')}</span>
             )}
@@ -133,7 +157,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'variant' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-palette'></i>
+            <i
+              className={`${
+                path === 'variant' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-palette`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.variants')}</span>
             )}
@@ -146,7 +174,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'product' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-box'></i>
+            <i
+              className={`${
+                path === 'product' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-box`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.products')}</span>
             )}
@@ -159,7 +191,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'level' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-shield-alt'></i>
+            <i
+              className={`${
+                path === 'level' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-shield-alt`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.levels')}</span>
             )}
@@ -172,7 +208,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'commission' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-calculator'></i>
+            <i
+              className={`${
+                path === 'commission' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-percent`}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.commissions')}</span>
             )}
@@ -185,7 +225,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
               path === 'delivery' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-truck'></i>
+            <i
+              className={`${
+                path === 'delivery' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-truck-fast `}
+            ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-lg'>{t('admin.deliveries')}</span>
             )}

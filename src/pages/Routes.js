@@ -1,72 +1,65 @@
-import { lazy } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import PrivateRoute from '../components/route/PrivateRoute'
 import AdminRoute from '../components/route/AdminRoute'
-
 //core
-const HomePage = lazy(() => import('./core/HomePage'))
-const ProductSearchPage = lazy(() => import('./core/ProductSearchPage'))
-const StoreSearchPage = lazy(() => import('./core/StoreSearchPage'))
-const UserSearchPage = lazy(() => import('./core/UserSearchPage'))
-const CategoryPage = lazy(() => import('./core/CategoryPage'))
-const Policy = lazy(() => import('./core/Policy'))
+import HomePage from './core/HomePage'
+import ProductSearchPage from './core/ProductSearchPage'
+import StoreSearchPage from './core/StoreSearchPage'
+import UserSearchPage from './core/UserSearchPage'
+import CategoryPage from './core/CategoryPage'
 //admin
-const AdminDashboardPage = lazy(() => import('./admin/DashboardPage'))
-const AdminLevelPage = lazy(() => import('./admin/LevelPage'))
-const AdminCommissionPage = lazy(() => import('./admin/CommissionPage'))
-const AdminUserPage = lazy(() => import('./admin/UserPage'))
-const AdminStorePage = lazy(() => import('./admin/StorePage'))
-const AdminCategoryPage = lazy(() => import('./admin/CategoryPage'))
-const AdminCreateCategoryPage = lazy(() => import('./admin/CreateCategoryPage'))
-const AdminEditCategoryPage = lazy(() => import('./admin/EditCategoryPage'))
-const AdminVariantPage = lazy(() => import('./admin/VariantPage'))
-const AdminCreateVariantPage = lazy(() => import('./admin/CreateVariantPage'))
-const AdminEditVariantPage = lazy(() => import('./admin/EditVariantPage'))
-const AdminVariantValuesPage = lazy(() => import('./admin/VariantValuePage'))
-const AdminProductPage = lazy(() => import('./admin/ProductPage'))
-const AdminDeliveryPage = lazy(() => import('./admin/DeliveryPage'))
-const AdminOrderPage = lazy(() => import('./admin/OrderPage'))
-const AdminOrderDetailPage = lazy(() => import('./admin/OrderDetailPage'))
-const AdminTransactionPage = lazy(() => import('./admin/TransactionPage'))
-// account
-const AccountProfilePage = lazy(() => import('./account/ProfilePage'))
-const AccountAddressesPage = lazy(() => import('./account/AddressesPage'))
-const AccountOrderPage = lazy(() => import('./account/OrderPage'))
-const AccountFollowingPage = lazy(() => import('./account/FollowingPage'))
-const AccountWalletsPage = lazy(() => import('./account/WalletPage'))
-const AccountStoreManagerPage = lazy(() => import('./account/StoreManagerPage'))
-const AccountCreateStorePage = lazy(() => import('./account/CreateStorePage'))
-const AccountVerifyEmailPage = lazy(() => import('./account/VerifyEmailPage'))
-const AccountChangePasswordPage = lazy(() =>
-  import('./account/ChangePasswordPage')
-)
-const AccountCartPage = lazy(() => import('./account/CartPage'))
-const AccountOrderDetailPage = lazy(() => import('./account/OrderDetailPage'))
-const VendorProfilePage = lazy(() => import('./vendor/ProfilePage'))
-const VendorDashboardPage = lazy(() => import('./vendor/DashboardPage'))
-const VendorProductsPage = lazy(() => import('./vendor/ProductsPage'))
-const VendorOrderPage = lazy(() => import('./vendor/OrderPage'))
-const VendorOrderDetailPage = lazy(() => import('./vendor/OrderDetailPage'))
-const VendorStaffsPage = lazy(() => import('./vendor/StaffsPage'))
-const VendorWalletPage = lazy(() => import('./vendor/WalletPage'))
-const VendorCreateProductPage = lazy(() => import('./vendor/CreateProductPage'))
-const VendorEditProductPage = lazy(() => import('./vendor/EditProductPage'))
+import AdminDashboardPage from './admin/DashboardPage'
+import AdminLevelPage from './admin/LevelPage'
+import AdminCommissionPage from './admin/CommissionPage'
+import AdminUserPage from './admin/UserPage'
+import AdminStorePage from './admin/StorePage'
+import AdminCategoryPage from './admin/CategoryPage'
+import AdminCreateCategoryPage from './admin/CreateCategoryPage'
+import AdminEditCategoryPage from './admin/EditCategoryPage'
+import AdminVariantPage from './admin/VariantPage'
+import AdminCreateVariantPage from './admin/CreateVariantPage'
+import AdminEditVariantPage from './admin/EditVariantPage'
+import AdminVariantValuesPage from './admin/VariantValuePage'
+import AdminProductPage from './admin/ProductPage'
+import AdminDeliveryPage from './admin/DeliveryPage'
+import AdminOrderPage from './admin/OrderPage'
+import AdminOrderDetailPage from './admin/OrderDetailPage'
+import AdminTransactionPage from './admin/TransactionPage'
+//account
+import AccountProfilePage from './account/ProfilePage'
+import AccountAddressesPage from './account/AddressesPage'
+import AccountOrderPage from './account/OrderPage'
+import AccountFollowingPage from './account/FollowingPage'
+import AccountWalletPage from './account/WalletPage'
+import AccountStoreManagerPage from './account/StoreManagerPage'
+import AccountCreateStorePage from './account/CreateStorePage'
+import AccountVerifyEmailPage from './account/VerifyEmailPage'
+import AccountChangePasswordPage from './account/ChangePasswordPage'
+import AccountCartPage from './account/CartPage'
+import AccountOrderDetailPage from './account/OrderDetailPage'
+//vendor
+import VendorProfilePage from './vendor/ProfilePage'
+import VendorDashboardPage from './vendor/DashboardPage'
+import VendorProductsPage from './vendor/ProductsPage'
+import VendorOrderPage from './vendor/OrderPage'
+import VendorOrderDetailPage from './vendor/OrderDetailPage'
+import VendorStaffsPage from './vendor/StaffsPage'
+import VendorWalletPage from './vendor/WalletPage'
+import VendorCreateProductPage from './vendor/CreateProductPage'
+import VendorEditProductPage from './vendor/EditProductPage'
 //user
-// import UserAboutPage from './user/UserAboutPage'
-const UserAboutPage = lazy(() => import('./user/UserAboutPage'))
+import UserHomePage from './user/UserHomePage'
+import UserAboutPage from './user/UserAboutPage'
 //store
-const StoreHomePage = lazy(() => import('./store/HomePage'))
-const StoreAboutPage = lazy(() => import('./store/AboutPage'))
-const StoreCollectionPage = lazy(() => import('./store/CollectionPage'))
-const StoreReviewAndRatingPage = lazy(() =>
-  import('./store/ReviewAndRatingPage')
-)
+import StoreHomePage from './store/HomePage'
+import StoreAboutPage from './store/AboutPage'
+import StoreCollectionPage from './store/CollectionPage'
+import StoreReviewAndRatingPage from './store/ReviewAndRatingPage'
 //product
-const ProductDetailPage = lazy(() => import('./product/DetailPage'))
-const UserHomePage = lazy(() => import('./user/UserHomePage'))
-const PageNotFound = lazy(() => import('../components/ui/PageNotFound'))
-const ScrollToTops = lazy(() => import('../hooks/ScrollToTops'))
-
+import ProductDetailPage from './product/DetailPage'
+import PageNotFound from '../components/ui/PageNotFound'
+import ScrollToTops from '../hooks/ScrollToTops'
+import Policy from './core/Policy'
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -172,7 +165,7 @@ const Routes = () => {
         <PrivateRoute
           path='/account/wallet'
           exact
-          component={AccountWalletsPage}
+          component={AccountWalletPage}
         />
         <PrivateRoute
           path='/account/store'
@@ -213,7 +206,7 @@ const Routes = () => {
           component={VendorProductsPage}
         />
         <PrivateRoute
-          path='/vendor/products/createNewProduct/:storeId'
+          path='/vendor/products/addNew/:storeId'
           exact
           component={VendorCreateProductPage}
         />

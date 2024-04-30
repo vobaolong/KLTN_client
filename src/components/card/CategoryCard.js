@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { listActiveCategories } from '../../apis/category'
 import defaultImage from '../../assets/default.png'
+import Skeleton from 'react-loading-skeleton'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 const CategoryCard = ({ category = {} }) => {
   const [categoryValue, setCategoryValue] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
   const init = () => {
     setCategoryValue(category)
+    setIsLoading(true)
     listActiveCategories({
       search: '',
       categoryId: category._id,
@@ -19,9 +22,12 @@ const CategoryCard = ({ category = {} }) => {
       page: 1
     })
       .then((data) => {
+        setIsLoading(false)
         if (data.error) return
+        // else setChildren(data.categories)
       })
       .catch((error) => {
+        setIsLoading(false)
         return
       })
   }
@@ -39,14 +45,18 @@ const CategoryCard = ({ category = {} }) => {
           title={categoryValue.name}
         >
           <div className='card-img-top cus-card-img-top'>
-            <img
-              loading='lazy'
-              src={
-                categoryValue.image ? IMG + categoryValue.image : defaultImage
-              }
-              className='cus-card-img rounded-circle border'
-              alt={categoryValue.name}
-            />
+            {isLoading ? (
+              <Skeleton circle={true} height={100} width={100} />
+            ) : (
+              <img
+                loading='lazy'
+                src={
+                  categoryValue.image ? IMG + categoryValue.image : defaultImage
+                }
+                className='cus-card-img rounded-circle border'
+                alt={categoryValue.name}
+              />
+            )}
           </div>
         </Link>
       </div>
@@ -67,28 +77,9 @@ const CategoryCard = ({ category = {} }) => {
               fontWeight: '500'
             }}
           >
-            {categoryValue.name}
+            {isLoading ? <Skeleton width={100} /> : categoryValue.name}
           </span>
         </Link>
-
-        {/* {children?.length > 0 && (
-          <div className='card-subtitle ms-2' style={{ minHeight: '80px' }}>
-            {children?.map((child, index) => (
-              <Link
-                key={index}
-                className='text-reset link-hover d-block mt-1'
-                to={`/category/${child._id}`}
-                style={{
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <small>{child.name}</small>
-              </Link>
-            ))}
-          </div>
-        )} */}
       </div>
     </div>
   )

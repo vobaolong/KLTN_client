@@ -1,18 +1,36 @@
-import { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
 import { useTranslation } from 'react-i18next'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const ProductFilter = ({ filter, setFilter }) => {
   const { t } = useTranslation()
-
   const [price, setPrice] = useState({
     min: 0,
     max: ''
   })
-  const typingTimeoutRef = useRef(null)
-  const handleFilter = (name, value, order) => {
-    setFilter({ ...filter, [name]: value, order: order })
+  const history = useHistory()
+  const location = useLocation()
+
+  const handleFilter = (name, value, order = 'desc') => {
+    let newOrder = order
+    if (value === 'asc' || value === 'desc') {
+      newOrder = value
+      value = 'salePrice'
+    }
+
+    setFilter({ ...filter, [name]: value, order: newOrder })
+
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set(name, value)
+
+    if (name === 'sortBy' && value === 'salePrice') {
+      searchParams.set('order', newOrder)
+    } else {
+      searchParams.delete('order')
+    }
+    history.push(`${location.pathname}?${searchParams.toString()}`)
   }
 
   const handleSetPrice = (name1, name2, value) => {
@@ -20,13 +38,30 @@ const ProductFilter = ({ filter, setFilter }) => {
       ...price,
       [name1]: value
     })
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current)
-    }
-    typingTimeoutRef.current = setTimeout(() => {
-      handleFilter(name2, value)
-    }, 3000)
-    handleFilter(name2, value)
+  }
+
+  const applyPriceFilter = (event) => {
+    event.preventDefault()
+    handleFilter('minPrice', price.min)
+    handleFilter('maxPrice', price.max)
+  }
+
+  const handleResetFilter = () => {
+    setFilter({
+      ...filter,
+      rating: '',
+      minPrice: 0,
+      maxPrice: ''
+    })
+    setPrice({
+      min: 0,
+      max: ''
+    })
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.delete('rating')
+    searchParams.delete('minPrice')
+    searchParams.delete('maxPrice')
+    history.push(`${location.pathname}?${searchParams.toString()}`)
   }
 
   const renderFilterRating = () => {
@@ -39,9 +74,7 @@ const ProductFilter = ({ filter, setFilter }) => {
             type='radio'
             name='rating'
             id={`rating${i}`}
-            defaultChecked={
-              i !== 0 ? filter.rating === i : filter.rating === ''
-            }
+            checked={i !== 0 ? filter.rating === i : filter.rating === ''}
             onClick={() => {
               if (i === 0) handleFilter('rating', '')
               else handleFilter('rating', i)
@@ -75,11 +108,11 @@ const ProductFilter = ({ filter, setFilter }) => {
           data-bs-target='#offcanvasFilter'
           aria-controls='offcanvasFilter'
         >
-          <i className='fa-solid fa-sliders-h'></i>
+          <i className='fa-light fa-filter'></i>
           <span className='ms-2'>{t('filters.filter')}</span>
         </button>
         <select
-          className='form-select mx-3 rounded-1 pointer'
+          className='form-select rounded-1 pointer'
           style={{ width: 'max-content' }}
           value={filter.sortBy === 'salePrice' ? filter.order : filter.sortBy}
           onChange={(e) => {
@@ -121,11 +154,11 @@ const ProductFilter = ({ filter, setFilter }) => {
             <h6>{t('filters.rating')}</h6>
             {renderFilterRating()}
           </div>
-
-          <div className='mb-4'>
-            <h6 className='mb-0'>{t('filters.price')}</h6>
+          <hr />
+          <div className='mb-2'>
+            <h6>{t('filters.price')}</h6>
             <form className='row'>
-              <div className='col-12'>
+              <div className='col-md-6 col-sm-12'>
                 <Input
                   type='number'
                   label={t('filters.min')}
@@ -135,7 +168,7 @@ const ProductFilter = ({ filter, setFilter }) => {
                   onChange={(value) => handleSetPrice('min', 'minPrice', value)}
                 />
               </div>
-              <div className='col-12'>
+              <div className='col-md-6 col-sm-12'>
                 <Input
                   type='number'
                   label={t('filters.max')}
@@ -145,11 +178,23 @@ const ProductFilter = ({ filter, setFilter }) => {
                   onChange={(value) => handleSetPrice('max', 'maxPrice', value)}
                 />
               </div>
+              <div className='col-sm-12'>
+                <button
+                  className='btn btn-outline-primary w-100 mt-3 rounded-1 ripple'
+                  onClick={applyPriceFilter}
+                >
+                  {t('filters.apply')}
+                </button>
+              </div>
             </form>
           </div>
-          {/* <button className='btn btn-secondary mb-2' onClick={resetFilter}>
-            Reset filters
-          </button> */}
+          <hr />
+          <button
+            className='btn btn-primary w-100 mb-2 rounded-1 ripple'
+            onClick={(event) => handleResetFilter(event)}
+          >
+            {t('filters.reset')}
+          </button>
         </div>
       </div>
     </div>

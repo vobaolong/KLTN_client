@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getToken, signout } from '../../apis/auth'
@@ -8,10 +8,12 @@ import { getUserLevel } from '../../apis/level'
 import { getCartCount } from '../../apis/cart'
 import { countOrder } from '../../apis/order'
 import { addAccount } from '../../actions/account'
-import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import Loading from '../ui/Loading'
+import defaultImage from '../../assets/default.png'
+import Skeleton from 'react-loading-skeleton'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -23,13 +25,11 @@ const AccountInit = ({ user, actions }) => {
   const history = useHistory()
   const { _id, accessToken, refreshToken, role } = getToken()
   const init = () => {
-    setIsLoading(true)
     setError('')
     getUserProfile(_id, accessToken)
       .then(async (data) => {
         if (data.error) {
           setError(data.error)
-          setIsLoading(false)
         } else {
           const newUser = data.user
           try {
@@ -99,19 +99,23 @@ const AccountInit = ({ user, actions }) => {
           type='button'
           className='your-account-card btn lang ripple rounded-1 text-white'
         >
-          <img
-            loading='lazy'
-            src={avatar ? `${IMG + avatar}` : ''}
-            className='your-account-img'
-            alt=''
-          />
-
-          <span
-            className={`your-account-name unselect res-hide-xl ${
-              firstName && lastName ? '' : 'mx-0'
-            }`}
-          >
-            {firstName && lastName && firstName + ' ' + lastName}
+          {avatar ? (
+            <img
+              loading='lazy'
+              src={avatar ? `${IMG + avatar}` : defaultImage}
+              className='your-account-img'
+              alt=''
+            />
+          ) : (
+            <Skeleton
+              className='text-center'
+              circle={true}
+              width={25}
+              height={25}
+            />
+          )}
+          <span className='your-account-name unselect res-hide-xl'>
+            {t('userDetail.account')}
             {error && <Error msg={error} />}
           </span>
         </div>

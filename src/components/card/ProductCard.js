@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { formatPrice } from '../../helper/formatPrice'
@@ -13,17 +13,17 @@ import { useTranslation } from 'react-i18next'
 import { calcPercent } from '../../helper/calcPercent'
 import MallLabel from '../label/MallLabel'
 import defaultImage from '../../assets/default.png'
+import Skeleton from 'react-loading-skeleton'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const ProductCard = ({ product = {}, onRun }) => {
   const [productValue, setProductValue] = useState({})
   const [isHovered, setIsHovered] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const { t } = useTranslation()
 
-  const salePercent = calcPercent(productValue.price, productValue.salePrice)
-
-  const init = async () => {
+  const initProduct = async () => {
     let newProduct = product
     try {
       const res = await getNumberOfFollowersForProduct(product._id)
@@ -39,11 +39,17 @@ const ProductCard = ({ product = {}, onRun }) => {
       newProduct.isFollowing = false
     }
     setProductValue(newProduct)
+    setIsLoading(false)
   }
+  const fetchProductData = useCallback(async () => {
+    setIsLoading(true)
+    await initProduct()
+    setIsLoading(false)
+  }, [product])
 
   useEffect(() => {
-    init()
-  }, [product])
+    fetchProductData()
+  }, [fetchProductData])
 
   const onHandleRun = async (newProduct) => {
     if (onRun) onRun(newProduct)
@@ -63,6 +69,24 @@ const ProductCard = ({ product = {}, onRun }) => {
       numberOfFollowers
     })
   }
+  const salePercent = useMemo(
+    () => calcPercent(productValue.price, productValue.salePrice),
+    [productValue.price, productValue.salePrice]
+  )
+
+  if (isLoading) {
+    return (
+      <div className='card border-0 m-auto'>
+        <Skeleton height={220} />
+        <div className='card-body'>
+          <Skeleton height={21} width={94} />
+          <Skeleton height={20} width={120} />
+          <Skeleton height={35} />
+          <Skeleton height={24} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className='card border-0 m-auto'>
@@ -78,7 +102,6 @@ const ProductCard = ({ product = {}, onRun }) => {
           style={{ position: 'relative' }}
         >
           <img
-            loading='lazy'
             src={
               productValue.listImages
                 ? IMG + productValue.listImages[0]
@@ -92,7 +115,6 @@ const ProductCard = ({ product = {}, onRun }) => {
             }}
           />
           <img
-            loading='lazy'
             src={
               productValue.listImages
                 ? IMG + productValue.listImages[1]
@@ -124,7 +146,11 @@ const ProductCard = ({ product = {}, onRun }) => {
       <div className='card-body'>
         <MallLabel className='mb-2' />
         <small className='card-subtitle'>
-          <StarRating stars={productValue.rating} />{' '}
+          {productValue.rating ? (
+            <StarRating stars={productValue.rating} />
+          ) : (
+            <Skeleton />
+          )}{' '}
           <small>
             {productValue.sold} {t('productDetail.sold')}
           </small>

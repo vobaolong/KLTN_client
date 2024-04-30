@@ -12,7 +12,7 @@ const DashboardPage = () => {
   ]
   return (
     <AdminLayout user={user} paths={paths}>
-      <ListStatisticsItems />
+      <ListStatisticsItems by='admin' />
     </AdminLayout>
   )
 }

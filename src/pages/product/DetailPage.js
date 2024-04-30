@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { Link, useParams } from 'react-router-dom'
 import { getProduct } from '../../apis/product'
@@ -9,7 +9,6 @@ import {
 } from '../../apis/follow'
 import Error from '../../components/ui/Error'
 import { useTranslation } from 'react-i18next'
-import Loading from '../../components/ui/Loading'
 import { FacebookShareButton } from 'react-share'
 import Carousel from '../../components/image/Carousel'
 import { formatPrice } from '../../helper/formatPrice'
@@ -30,6 +29,7 @@ import refundImg from '../../assets/refund.svg'
 import returnImg from '../../assets/return.svg'
 import checkImg from '../../assets/package.svg'
 import { formatDate, formatOnlyDate } from '../../helper/humanReadable'
+import Skeleton from 'react-loading-skeleton'
 
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -99,7 +99,7 @@ const DetailPage = () => {
   return (
     <MainLayout>
       <div className='position-relative'>
-        {isLoading && <Loading />}
+        {/* {isLoading && <Loading />} */}
         {error ? (
           <Error msg={error} />
         ) : (
@@ -150,137 +150,172 @@ const DetailPage = () => {
                 style={{ paddingTop: '12px', paddingBottom: '12px' }}
               >
                 <div className='col-lg-5 col-md-6 '>
-                  <Carousel
-                    listImages={product.listImages}
-                    alt={product.name}
-                    style={{
-                      paddingBottom: 'calc(2/3*100%)'
-                    }}
-                  />
+                  {isLoading ? (
+                    <Skeleton height={400} />
+                  ) : (
+                    <Carousel
+                      listImages={product.listImages}
+                      alt={product.name}
+                      style={{
+                        paddingBottom: 'calc(2/3*100%)'
+                      }}
+                    />
+                  )}
                 </div>
                 <div className='col-lg-7 col-md-6 ps-4'>
                   <small className='text-primary'>
-                    <StoreSmallCard store={product.storeId} />
+                    <StoreSmallCard
+                      isLoading={isLoading}
+                      store={product.storeId}
+                    />
                   </small>
                   <h5
                     style={{ fontSize: '1.25rem' }}
                     className='product-name text-dark'
                   >
-                    {product.name}
+                    {isLoading ? <Skeleton height={30} /> : product.name}
                   </h5>
                   <div className='d-flex'>
                     <span className='me-2 text-primary text-decoration-none'>
-                      {product.rating}
+                      {isLoading ? <Skeleton width={50} /> : product.rating}
                     </span>
-                    <StarRating stars={product.rating} />
+                    <StarRating stars={isLoading ? 0 : product.rating} />
                     <span className='mx-2 px-2 border-start'>
-                      {product.sold}
-                      <span className='text-muted ms-1'>
-                        {t('productDetail.sold')}
-                      </span>
+                      {isLoading ? (
+                        <Skeleton width={50} />
+                      ) : (
+                        <>
+                          {product.sold}
+                          <span className='text-muted ms-1'>
+                            {t('productDetail.sold')}
+                          </span>
+                        </>
+                      )}
                     </span>
                   </div>
                   <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
-                    {product.salePrice?.$numberDecimal !==
-                      product.price?.$numberDecimal && (
-                      <del className=' text-muted mt-1'>
-                        {formatPrice(product.price?.$numberDecimal)}
-                        <sup>₫</sup>
-                      </del>
-                    )}
-                    <h4 className='text-primary m-0 ms-3 fw-bold'>
-                      {formatPrice(product.salePrice?.$numberDecimal)}
-                      <sup>₫</sup>
-                    </h4>
+                    {isLoading ? (
+                      <Skeleton width={100} />
+                    ) : (
+                      <>
+                        {product.salePrice?.$numberDecimal !==
+                          product.price?.$numberDecimal && (
+                          <del className=' text-muted mt-1'>
+                            {formatPrice(product.price?.$numberDecimal)}
+                            <sup>₫</sup>
+                          </del>
+                        )}
+                        <h4 className='text-primary m-0 ms-3 fw-bold'>
+                          {formatPrice(product.salePrice?.$numberDecimal)}
+                          <sup>₫</sup>
+                        </h4>
 
-                    {salePercent > 5 && (
-                      <SalePercentLabel salePercent={salePercent} />
+                        {salePercent > 5 && (
+                          <SalePercentLabel salePercent={salePercent} />
+                        )}
+                      </>
                     )}
                   </div>
 
                   <div className='mt-xl-4 mt-lg-3 mt-md-2 mt-sm-1'>
-                    {!product.storeId?.isOpen && (
-                      <Error msg="This store is closed, can' t order in this time!" />
-                    )}
-                    {product.quantity <= 0 && (
-                      <Error msg={t('productDetail.soldOut')} />
-                    )}
-                    {!getToken() && (
-                      <SigninButton
-                        className='w-100 btn-lg'
-                        title={t('button.signInToShopping')}
-                      />
-                    )}
-                    {product.storeId?.isOpen &&
-                      product.quantity > 0 &&
-                      getToken() &&
-                      getToken().role === 'user' && (
-                        <AddToCartForm product={product} />
-                      )}
-
-                    <div className='text-dark-emphasis d-grid mt-3 gap-2'>
-                      <b style={{ fontSize: '0.9rem' }}>
-                        {t('productDetail.offers')} (3)
-                      </b>
-                      <div className=' d-grid gap-1'>
-                        <span className='d-flex align-items-center'>
-                          <img
-                            src={refundImg}
-                            className='me-2'
-                            style={{ width: '25px' }}
-                            alt='refundImg'
+                    {isLoading ? (
+                      <>
+                        <Skeleton width={200} height={30} />
+                        <Skeleton width={200} height={30} />
+                      </>
+                    ) : (
+                      <>
+                        {!product.storeId?.isOpen && (
+                          <Error msg={t('storeDetail.messageClose')} />
+                        )}
+                        {product.quantity <= 0 && (
+                          <Error msg={t('productDetail.soldOut')} />
+                        )}
+                        {!getToken() && (
+                          <SigninButton
+                            className='w-100 btn-lg'
+                            title={t('button.signInToShopping')}
                           />
-                          <span style={{ fontSize: '.9rem' }}>
-                            {t('services.refund')}
+                        )}
+                        {product.storeId?.isOpen &&
+                          product.quantity > 0 &&
+                          getToken() &&
+                          getToken().role === 'user' && (
+                            <AddToCartForm product={product} />
+                          )}
+                      </>
+                    )}
+                    {isLoading ? (
+                      <Skeleton height={30} count={3} />
+                    ) : (
+                      <div className='text-dark-emphasis d-grid mt-3 gap-2'>
+                        <b style={{ fontSize: '0.9rem' }}>
+                          {t('productDetail.offers')} (3)
+                        </b>
+                        <div className=' d-grid gap-1'>
+                          <span className='d-flex align-items-center'>
+                            <img
+                              src={refundImg}
+                              className='me-2'
+                              style={{ width: '25px' }}
+                              alt='refundImg'
+                            />
+                            <span style={{ fontSize: '.9rem' }}>
+                              {t('services.refund')}
+                            </span>
                           </span>
-                        </span>
-                        <hr className='my-0 opacity-100' />
-                        <span className='d-flex align-items-center'>
-                          <img
-                            src={returnImg}
-                            className='me-2'
-                            style={{ width: '25px' }}
-                            alt='returnImg'
-                          />
-                          <span style={{ fontSize: '.9rem' }}>
-                            {t('services.return')}
+                          <hr className='my-0 opacity-100' />
+                          <span className='d-flex align-items-center'>
+                            <img
+                              src={returnImg}
+                              className='me-2'
+                              style={{ width: '25px' }}
+                              alt='returnImg'
+                            />
+                            <span style={{ fontSize: '.9rem' }}>
+                              {t('services.return')}
+                            </span>
                           </span>
-                        </span>
-                        <hr className='my-0 opacity-100' />
-                        <span className='d-flex align-items-center'>
-                          <img
-                            src={checkImg}
-                            className='me-2'
-                            style={{ width: '25px' }}
-                            alt='checkImg'
-                          />
-                          <span style={{ fontSize: '.9rem' }}>
-                            {t('services.checkPackage')}
+                          <hr className='my-0 opacity-100' />
+                          <span className='d-flex align-items-center'>
+                            <img
+                              src={checkImg}
+                              className='me-2'
+                              style={{ width: '25px' }}
+                              alt='checkImg'
+                            />
+                            <span style={{ fontSize: '.9rem' }}>
+                              {t('services.checkPackage')}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {isLoading ? (
+                      <Skeleton className='mt-2' width={150} height={70} />
+                    ) : (
+                      <div
+                        style={{ width: 'max-content' }}
+                        className='my-3 text-secondary border rounded p-3'
+                      >
+                        <span className='d-flex align-items-center gap-2'>
+                          <i className='fa-solid fa-truck me-2'></i>
+                          <span
+                            className='d-grid gap-1'
+                            style={{ fontSize: '0.9rem' }}
+                          >
+                            <span className='text-dark-emphasis fw-bold'>
+                              {t('productDetail.estimatedDelivery')}
+                            </span>
+                            <span>
+                              {formatOnlyDate(deliveryDateMin)}
+                              {' - '}
+                              {formatDate(deliveryDateMax)}
+                            </span>
                           </span>
                         </span>
                       </div>
-                    </div>
-                    <div
-                      style={{ width: 'max-content' }}
-                      className='my-3 text-secondary border rounded p-3'
-                    >
-                      <span className='d-flex align-items-center gap-2'>
-                        <i className='fa-solid fa-truck me-2'></i>
-                        <span
-                          className='d-grid gap-1'
-                          style={{ fontSize: '0.9rem' }}
-                        >
-                          <span className='text-dark-emphasis fw-bold'>
-                            {t('productDetail.estimatedDelivery')}
-                          </span>
-                          <span>
-                            {formatOnlyDate(deliveryDateMin)}
-                            {' - '}
-                            {formatDate(deliveryDateMax)}
-                          </span>
-                        </span>
-                      </span>
-                    </div>
+                    )}
                     <hr />
                     <div className='d-flex align-items-center gap-2'>
                       <div className='me-2 px-3 border-end'>
@@ -311,10 +346,12 @@ const DetailPage = () => {
                           className='btn-lg'
                         />
                       )}
-                      {product?.numberOfFollowers > 0 && (
+                      {product?.numberOfFollowers > 0 ? (
                         <span className='ms-2'>
                           {product?.numberOfFollowers} đã thích
                         </span>
+                      ) : (
+                        <Skeleton width={100} height={20} />
                       )}
                     </div>
                   </div>
@@ -373,15 +410,19 @@ const DetailPage = () => {
                               marginTop: '2rem'
                             }}
                           >
-                            <span
-                              style={{
-                                whiteSpace: 'pre-line',
-                                textAlign: 'justify',
-                                fontSize: '0.9rem'
-                              }}
-                            >
-                              {product.description}
-                            </span>
+                            {isLoading ? (
+                              <Skeleton height={400} />
+                            ) : (
+                              <span
+                                style={{
+                                  whiteSpace: 'pre-line',
+                                  textAlign: 'justify',
+                                  fontSize: '0.9rem'
+                                }}
+                              >
+                                {product.description}
+                              </span>
+                            )}
                             <div
                               className={`position-absolute w-100 text-center align-content-end ${
                                 !isExpanded ? 'gradient' : ''
@@ -428,7 +469,10 @@ const DetailPage = () => {
                 </div>
                 <div className='res-hide col-lg-3 pe-0 d-lg-block d-md-none'>
                   <div className='box-shadow w-100 mb-2'>
-                    <StoreCardSmall store={product.storeId} />
+                    <StoreCardSmall
+                      store={product.storeId}
+                      isLoading={isLoading}
+                    />
                   </div>
                 </div>
               </div>

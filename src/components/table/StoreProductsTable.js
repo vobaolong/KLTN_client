@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import {
   listProductsForManager,
-  sellingProduct as sellOrStore
+  sellingProduct as showOrHide
 } from '../../apis/product'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
@@ -19,19 +19,20 @@ import { useTranslation } from 'react-i18next'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
+// import VariantValueSelector from '../selector/VariantValueSelector'
 
 const StoreProductsTable = ({
+  storeId = '',
   heading = false,
-  isSelling = true,
-  storeId = ''
+  isSelling = true
 }) => {
   const { t } = useTranslation()
-  const [isLoading, setIsLoading] = useState(false)
-  const [products, setProducts] = useState([])
-  const [isConfirming, setIsConfirming] = useState(false)
   const [run, setRun] = useState('')
-  const [sellingProduct, setSellingProduct] = useState({})
   const { _id, accessToken } = getToken()
+  const [products, setProducts] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [isConfirming, setIsConfirming] = useState(false)
+  const [sellingProduct, setSellingProduct] = useState({})
   const [pagination, setPagination] = useState({
     size: 0
   })
@@ -110,7 +111,7 @@ const StoreProductsTable = ({
     setIsLoading(true)
     const value = { isSelling: !sellingProduct.isSelling }
     const action = sellingProduct.isSelling ? 'hide' : 'show'
-    sellOrStore(_id, accessToken, value, storeId, sellingProduct._id)
+    showOrHide(_id, accessToken, value, storeId, sellingProduct._id)
       .then((data) => {
         if (data.error) {
           toast.error(data.error)
@@ -154,7 +155,7 @@ const StoreProductsTable = ({
             <Link
               type='button'
               className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
-              to={`/vendor/products/createNewProduct/${storeId}`}
+              to={`/vendor/products/addNew/${storeId}`}
             >
               <i className='fa-solid fa-plus'></i>
               <span className='ms-2 res-hide'>
@@ -185,7 +186,17 @@ const StoreProductsTable = ({
                         }
                       />
                     </th>
-
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.category')}
+                        sortBy='categoryId'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
                     {/* <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
@@ -260,17 +271,7 @@ const StoreProductsTable = ({
                         }
                       />
                     </th>
-                    <th scope='col'>
-                      <SortByButton
-                        currentOrder={filter.order}
-                        currentSortBy={filter.sortBy}
-                        title={t('productDetail.category')}
-                        sortBy='categoryId'
-                        onSet={(order, sortBy) =>
-                          handleSetSortBy(order, sortBy)
-                        }
-                      />
-                    </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -336,6 +337,14 @@ const StoreProductsTable = ({
                       >
                         <small>
                           <ProductSmallCard product={product} />
+                        </small>
+                      </td>
+                      <td>
+                        <small className='badge border rounded-1 bg-value text-dark-emphasis'>
+                          <CategorySmallCard
+                            parent={false}
+                            category={product.categoryId}
+                          />
                         </small>
                       </td>
                       {/* <td>
@@ -436,36 +445,24 @@ const StoreProductsTable = ({
                       </td>
                       <td>{product.quantity}</td>
                       <td>{product.sold}</td>
-                      <td>
-                        <small className='badge border rounded-1 bg-value text-dark-emphasis'>
-                          <CategorySmallCard
-                            parent={false}
-                            category={product.categoryId}
-                          />
-                        </small>
-                      </td>
 
                       <td style={{ whiteSpace: 'normal' }}>
                         <div
-                          className='d-flex justify-content-start align-items-center '
+                          className='d-flex flex-wrap justify-content-start align-items-center gap-1'
                           style={{
-                            maxWidth: '150px'
-                            // height: '120px',
-                            // overflow: 'auto'
+                            maxWidth: '250px',
+                            maxHeight: '120px',
+                            overflow: 'auto'
                           }}
                         >
                           {product.variantValueIds?.length > 0 ? (
-                            <small>
-                              {/* <VariantValueSelector
-                          listValues={product.variantValueIds}
-                          isEditable={false}
-                        /> */}
-                              {product.variantValueIds
-                                ?.map((value) => value.name)
-                                .join(', ')}
-                            </small>
+                            product.variantValueIds?.map((value) => (
+                              <small className='badge rounded-1 text-dark-emphasis bg-value me-1'>
+                                {value.name}
+                              </small>
+                            ))
                           ) : (
-                            <small className='mx-auto'>-</small>
+                            <small>-</small>
                           )}
                         </div>
                       </td>

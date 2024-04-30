@@ -8,6 +8,7 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+// import SocialForm from './SocialForm'
 
 const SignupForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()

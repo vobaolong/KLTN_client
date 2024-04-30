@@ -50,7 +50,11 @@
     "transactions": "Giao dịch"
   },
   "toastSuccess": {
-    "variant": { "update": "Chỉnh sửa phân loại thành công" },
+    "variant": {
+      "create": "Thêm phân loại thành công",
+      "update": "Chỉnh sửa phân loại thành công",
+      "delete": "Xoá phân loại thành công"
+    },
     "review": {
       "add": "Đánh giá sản phẩm thành công",
       "delete": "Xoá đánh giá thành công",
@@ -64,15 +68,17 @@
     "signUp": "Đăng ký thành công",
     "lockStore": "Đóng shop thành công",
     "unlockStore": "Mở shop thành công",
+    "withdraw": "Giao dịch thành công",
     "cart": {
       "add": "Thêm vào giỏ hàng thành công",
       "delete": "Xoá giỏ hàng thành công",
       "update": "Cập nhật giỏ hàng thành công"
     },
-    "addValueVariant": {
-      "addValue": "Thêm giá trị thành công",
-      "deleteValue": "Xoá giá trị thành công",
-      "editValue": "Sửa giá trị thành công"
+    "variantValue": {
+      "add": "Thêm giá trị thành công",
+      "delete": "Xoá giá trị thành công",
+      "edit": "Cập nhật giá trị thành công",
+      "restore": "Khôi phục giá trị thành công"
     },
     "followStore": {
       "follow": "Theo dõi shop thành công",
@@ -99,20 +105,20 @@
     },
     "level": {
       "create": "Thêm hạng mức thành công",
-      "edit": "Sửa hạng mức thành công",
+      "edit": "Cập nhật hạng mức thành công",
       "delete": "Xoá hạng mức thành công",
       "restore": "Khôi phục hạng mức thành công"
     },
     "commission": {
-      "create": "Tạo phí chiết khấu thành công",
-      "delete": "Xoá phí chiết khấu thành công",
-      "edit": "Sửa phí chiết khấu thành công",
-      "restore": "Khôi phục phí chiết khấu thành công"
+      "create": "Tạo chiết khấu thành công",
+      "delete": "Xoá chiết khấu thành công",
+      "edit": "Cập nhật chiết khấu thành công",
+      "restore": "Khôi phục chiết khấu thành công"
     },
     "product": {
       "create": "Thêm sản phẩm thành công",
       "delete": "Xoá sản phẩm thành công",
-      "edit": "Sửa sản phẩm thành công",
+      "edit": "Cập nhật sản phẩm thành công",
       "ban": "Khoá sản phẩm thành công",
       "active": "Kích hoạt sản phẩm thành công",
       "hide": "Ẩn sản phẩm thành công",
@@ -123,11 +129,18 @@
     "store": {
       "ban": "Khoá shop thành công",
       "active": "Kích hoạt shop thành công",
-      "update": "Cập nhật thông tin thành công"
+      "update": "Cập nhật thông tin thành công",
+      "create": "Mở shop thành công",
+      "addCarousel": "Thêm banner thành công",
+      "removeCarousel": "Xoá banner thành công",
+      "updateCarousel": "Cập nhật banner thành công"
     },
+    "addAvatar": "Cập nhật ảnh nền thành công",
+    "addCover": "Cập nhật ảnh bìa thành công",
     "order": {
       "update": "Cập nhật đơn hàng thành công",
-      "cancel": "Huỷ đơn thành công"
+      "cancel": "Huỷ đơn thành công",
+      "create": "Đặt hàng thành công"
     },
     "category": {
       "create": "Tạo danh mục thành công",
@@ -165,6 +178,7 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
+    "removeFeatured": "Xoá ảnh nổi bật",
     "removeImg": "Xoá hình ảnh",
     "logOut": "Đăng xuất",
     "closeStore": "Đóng shop",
@@ -231,7 +245,12 @@
       "statisticsBy": "Thống kê theo",
       "chartType": "Loại biểu đồ",
       "line": "Đường",
-      "bar": "Cột"
+      "bar": "Cột",
+      "salesStatisticsByOrders": "Thống kê doanh thu",
+      "statisticsByProducts": "Thống kê lượt bán",
+      "statisticsNewStore": "Thống kê cửa hàng mới",
+      "statisticsNewUser": "Thống kê người dùng mới",
+      "totalRevenue": "Tổng doanh thu"
     },
     "users": "Người dùng",
     "stores": "Shop",
@@ -315,17 +334,19 @@
     "salePriceValid": "Vui lòng cung cấp giá giảm sản phẩm phù hợp!"
   },
   "filters": {
-    "filter": "Bộ lọc",
+    "filter": "Bộ lọc tìm kiếm",
     "rating": "Đánh giá",
-    "price": "Giá",
+    "price": "Khoảng giá",
     "all": "Tất cả",
-    "min": "Giá thấp nhất",
-    "max": "Giá cao nhất",
+    "min": "Giá thấp nhất (₫)",
+    "max": "Giá cao nhất (₫)",
     "latest": "Mới nhất",
     "topSale": "Bán chạy",
     "lowToHigh": "Giá: Thấp tới cao",
     "hightToLow": "Giá: Cao tới thấp",
-    "up": "trở lên"
+    "up": "trở lên",
+    "apply": "Áp dụng",
+    "reset": "Xoá tất cả"
   },
   "transactions": "Giao dịch trong hệ thống",
 
@@ -368,6 +389,7 @@
     "email": "Email",
     "KYC": "Xác thực",
     "level": "Hạng mức",
+    "account": "Tài khoản",
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
     "profile": "Thông tin tài khoản",
@@ -502,6 +524,7 @@
     "noStaff": "Không có nhân viên!"
   },
   "storeDetail": {
+    "messageClose": "Cửa hàn đang tạm nghỉ, tạm thời không thể đặt hàng!",
     "numberOfProduct": "Sản phẩm",
     "followers": "Người theo dõi",
     "vacationMode": "Chế độ tạm nghỉ",
@@ -544,6 +567,7 @@
     "contactPerson": "Người liên hệ"
   },
   "storeDetailValid": {
+    "addressValid": "Vui lòng cung cấp địa chỉ phù hợp!",
     "validName": "Vui lòng cung cấp tên shop phù hợp!",
     "bioValid": "Vui lòng cung cấp bio phù hợp!",
     "avatarValid": "Vui lòng cung cấp ảnh nền phù hợp!",

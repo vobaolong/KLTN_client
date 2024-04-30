@@ -50,6 +50,11 @@
     "wallet": "E-Wallet"
   },
   "toastSuccess": {
+    "variant": {
+      "create": "Create variant successfully",
+      "update": "Update variant successfully",
+      "delete": "Delete variant successfully"
+    },
     "review": {
       "add": "Rating successfully",
       "delete": "Delete rating successfully",
@@ -63,15 +68,18 @@
     "signUp": "Sign up successfully",
     "lockStore": "Close store successfully",
     "unlockStore": "Open store successfully",
+    "withdraw": "Withdraw successfully",
+
     "cart": {
       "add": "Add to cart successfully",
       "delete": "Delete item successfully",
       "update": "Update cart successfully"
     },
-    "addValueVariant": {
-      "addValue": "Add value successfully",
-      "deleteValue": "Delete value successfully",
-      "editValue": "Edit value successfully"
+    "variantValue": {
+      "add": "Add value successfully",
+      "delete": "Delete value successfully",
+      "edit": "Update value successfully",
+      "restore": "Restore value successfully"
     },
     "followStore": {
       "follow": "Follow store successfully",
@@ -98,20 +106,20 @@
     },
     "level": {
       "create": "Add level successfully",
-      "edit": "Edit level successfully",
+      "edit": "Update level successfully",
       "delete": "Delete level successfully",
       "restore": "Restore level successfully"
     },
     "commission": {
       "create": "Create commission successfully",
       "delete": "Delete commission successfully",
-      "edit": "Edit commission successfully",
+      "edit": "Update commission successfully",
       "restore": "Restore commission successfully"
     },
     "product": {
       "create": "Add product successfully",
       "delete": "Delete product successfully",
-      "edit": "Edit product successfully",
+      "edit": "Update product successfully",
       "ban": "Ban product successfully",
       "active": "Active product successfully",
       "hide": "Hide product successfully",
@@ -122,11 +130,13 @@
     "store": {
       "ban": "Ban store successfully",
       "active": "Active store successfully",
-      "update": "Update store successfully"
+      "update": "Update store successfully",
+      "create": "Create store successfully"
     },
     "order": {
       "update": "Update order successfully",
-      "cancel": "Cancel order successfully"
+      "cancel": "Cancel order successfully",
+      "create": "Place order successfully"
     },
     "category": {
       "create": "Create category successfully",
@@ -227,7 +237,12 @@
       "statisticsBy": "Statistics by",
       "chartType": "Chart type",
       "line": "Line",
-      "bar": "Bar"
+      "bar": "Bar",
+      "salesStatisticsByOrders": "Sales statistics by orders",
+      "statisticsByProducts": "Statistics by sold products",
+      "statisticsNewStore": "Statistics of new stores",
+      "statisticsNewUser": "Statistics of new users",
+      "totalRevenue": "Total Revenue"
     },
     "users": "Users",
     "stores": "Shops",
@@ -312,9 +327,9 @@
   },
 
   "filters": {
-    "filter": "Filters",
+    "filter": "Search Filter",
     "rating": "Rating",
-    "price": "Price",
+    "price": "Price Range",
     "all": "All",
     "min": "Min Price",
     "max": "Max Price",
@@ -322,7 +337,9 @@
     "topSale": "Top Sales",
     "lowToHigh": "Price: Low to Hight",
     "hightToLow": "Price: Hight to Low",
-    "up": "up"
+    "up": "up",
+    "apply": "Apply",
+    "reset": "Clear all"
   },
   "transactions": "Transactions in the system",
 
@@ -365,6 +382,7 @@
     "email": "Email",
     "KYC": "KYC",
     "level": "Level",
+    "account": "Account",
     "myAccount": "My account",
     "myPurchase": "My purchase",
     "profile": "Profile",
@@ -500,6 +518,7 @@
   },
 
   "storeDetail": {
+    "messageClose": "This store is on vacation, can't order at this time!",
     "numberOfProduct": "Products",
     "followers": "Followers",
     "vacationMode": "Vacation Mode",
@@ -542,6 +561,7 @@
     "contactPerson": "Contact person"
   },
   "storeDetailValid": {
+    "addressValid": "Please provide a valid pickup address!",
     "validName": "Please provide a valid store name!",
     "bioValid": "Please provide a valid store bio!",
     "avatarValid": "Please provide a valid store avatar!",
@@ -679,7 +699,7 @@
     "p1": "Zenpii has it all",
     "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, Zenpii brings you an online shopping experience that starts with trust.",
     "p2": "Overflowing with promotions and offers",
-    "small2": "Do you want to hunt for hot deals? Zenpii has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because Zenpii has millions of products in the Freeship+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
+    "small2": "Do you want to hunt for hot deals? Zenpii has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because Zenpii has millions of products in the FreeShip+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
   },
   "showMore": "Show more",
   "showLess": "Show less"

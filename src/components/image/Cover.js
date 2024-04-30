@@ -1,6 +1,6 @@
 import UserCoverUpload from './uploadButton/UserCoverUpload'
 import StoreCoverUpload from './uploadButton/StoreCoverUpload'
-import defaultCover from '../../assets/placeholderCover.png'
+import defaultCover from '../../assets/placeholderCover.webp'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const Cover = ({
@@ -17,6 +17,7 @@ const Cover = ({
         className='cus-cover-img'
         alt={alt}
       />
+
       <div className='position-absolute overlay'></div>
       {isEditable === 'user' && <UserCoverUpload />}
       {isEditable === 'store' && <StoreCoverUpload storeId={storeId} />}

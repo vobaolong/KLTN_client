@@ -4,6 +4,7 @@ import EmailActiveButton from '../button/EmailActiveButton'
 import UserEditProfileItem from '../item/UserEditProfileItem'
 import UserEditPasswordItem from '../item/UserEditPasswordItem'
 import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
 
 const UserProfileInfo = ({ user = {}, isEditable = false }) => {
   const { t } = useTranslation()
@@ -36,7 +37,13 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
               </span>
             }
             colon
-            value={`${user.firstName} ${user.lastName}`}
+            value={
+              user.firstName !== undefined && user.lastName !== undefined ? (
+                `${user.firstName} ${user.lastName}`
+              ) : (
+                <Skeleton width={200} height={25} />
+              )
+            }
           />
         </div>
 
@@ -49,7 +56,13 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                   Email
                 </span>
               }
-              value={hideLastDigits(user.email, 3, 1) || '-'}
+              value={
+                user.email ? (
+                  hideLastDigits(user.email, 3, 1) || '-'
+                ) : (
+                  <Skeleton width={200} height={25} />
+                )
+              }
             />
           </div>
         ) : (
@@ -63,13 +76,18 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                   </span>
                 }
                 colon
-                value={hideLastDigits(user.email, 3, 1) || '-'}
+                value={
+                  user.email ? (
+                    hideLastDigits(user.email, 3, 1) || '-'
+                  ) : (
+                    <Skeleton width={200} height={25} />
+                  )
+                }
               />
               <EmailActiveButton
                 email={user.email}
                 isEmailActive={user.isEmailActive}
                 googleId={user.googleId}
-                facebookId={user.facebookId}
               />
             </div>
           </>
@@ -85,7 +103,13 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                 </span>
               }
               colon
-              value={user.phone || '-'}
+              value={
+                user.phone ? (
+                  user.phone || '-'
+                ) : (
+                  <Skeleton width={200} height={25} />
+                )
+              }
             />
           </div>
         ) : (
@@ -99,7 +123,13 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                   </span>
                 }
                 colon
-                value={hideLastDigits(user.phone, 8, 0) || '-'}
+                value={
+                  user.phone ? (
+                    hideLastDigits(user.phone, 8, 0) || '-'
+                  ) : (
+                    <Skeleton width={120} height={25} />
+                  )
+                }
               />
             </div>
 
@@ -121,7 +151,13 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
               </span>
             }
             colon
-            value={hideLastDigits(user.id_card, 8, 0) || '-'}
+            value={
+              user.id_card ? (
+                hideLastDigits(user.id_card, 8, 0) || '-'
+              ) : (
+                <Skeleton width={120} height={25} />
+              )
+            }
           />
         </div>
 
@@ -129,7 +165,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
           <div className='col-12 d-flex justify-content-end'>
             <UserEditProfileItem user={user} />
 
-            {!user.googleId && !user.facebookId && (
+            {!user.googleId && (
               <div className='ms-1'>
                 <UserEditPasswordItem />
               </div>

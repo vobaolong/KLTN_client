@@ -146,7 +146,7 @@ const CategorySelector = ({
         <SearchInput onChange={handleChangeKeyword} />
 
         {isLoading && <Loading />}
-        <div className='d-flex box-shadow p-2 mt-2 rounded-2 bg-body'>
+        <div className='d-flex box-shadow p-2 mt-2 bg-body'>
           <div
             className='list-group m-1'
             style={{

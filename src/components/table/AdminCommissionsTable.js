@@ -20,6 +20,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const AdminCommissionTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -216,7 +217,15 @@ const AdminCommissionTable = ({ heading = false }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-
+                <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('createdAt')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
                 <th scope='col'>
                   <span style={{ fontWeight: '400', fontSize: '.9rem' }}>
                     {t('action')}
@@ -231,7 +240,9 @@ const AdminCommissionTable = ({ heading = false }) => {
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <StoreCommissionLabel commission={commission} />
+                    <span style={{ fontSize: '0.9rem' }}>
+                      <StoreCommissionLabel commission={commission} />
+                    </span>
                   </td>
                   <td>
                     <small>{commission.fee?.$numberDecimal}%</small>
@@ -245,15 +256,10 @@ const AdminCommissionTable = ({ heading = false }) => {
                     <small>{commission.description}</small>
                   </td>
                   <td>
-                    {commission.isDeleted ? (
-                      <span>
-                        <DeletedLabel />
-                      </span>
-                    ) : (
-                      <span>
-                        <ActiveLabel />
-                      </span>
-                    )}
+                    {commission.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
+                  </td>
+                  <td>
+                    <small>{humanReadableDate(commission.createdAt)}</small>
                   </td>
                   <td className='py-1'>
                     <button

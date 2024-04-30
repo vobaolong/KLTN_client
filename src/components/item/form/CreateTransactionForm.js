@@ -82,7 +82,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
             isValidCurrentPassword: true
           })
           updateDispatch('vendor', data.store)
-          toast.success('Withdraw successful')
+          toast.success(t('toastSuccess.withdraw'))
           if (onRun) onRun()
         }
         setIsLoading(false)

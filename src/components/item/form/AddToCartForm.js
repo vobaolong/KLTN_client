@@ -73,11 +73,11 @@ const AddToCartForm = ({ product = {} }) => {
         }
         setTimeout(() => {
           setCartItem({})
-        }, 3000)
+        }, 1000)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }

@@ -25,7 +25,7 @@ const EmailActiveButton = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }

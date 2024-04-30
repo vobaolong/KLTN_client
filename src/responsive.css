@@ -19,6 +19,10 @@
 		width: 20%;
 	}
 
+	.w-10 {
+		width: 10%;
+	}
+
 	.res-product-name {
 		width: 35%;
 	}
@@ -214,14 +218,8 @@
 
 /* sm */
 @media (max-width: 575px) {
-
-	.product-name {
-		font-size: 0.9rem;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-line-clamp: 1;
-		-webkit-box-orient: vertical;
+	.cus-avatar-box {
+		width: 76px !important;
 	}
 
 	.res-product-name,

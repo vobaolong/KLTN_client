@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { listActiveVariantValues } from '../../apis/variant'
 import Error from '../ui/Error'
 import Loading from '../ui/Loading'
-import AddValueVariantItem from '../item/AddValueVariantItem'
+import AddVariantValueItem from '../item/AddVariantValueItem'
 import { useTranslation } from 'react-i18next'
 
 const MultiVariantValueSelector = ({
@@ -144,7 +144,7 @@ const MultiVariantValueSelector = ({
               ))}
 
               <span className='list-group-item'>
-                <AddValueVariantItem
+                <AddVariantValueItem
                   variantId={variantId}
                   variantName={variantName}
                   onRun={() => setRun(!run)}

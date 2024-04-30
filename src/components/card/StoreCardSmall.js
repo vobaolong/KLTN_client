@@ -6,9 +6,10 @@ import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
 import { getStoreLevel } from '../../apis/level'
 import FollowStoreButton from '../button/FollowStoreButton'
 import defaultImage from '../../assets/default.png'
+import Skeleton from 'react-loading-skeleton'
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const StoreCardSmall = ({ store = {}, onRun }) => {
+const StoreCardSmall = ({ isLoading = false, store = {}, onRun }) => {
   const [storeValue, setStoreValue] = useState({})
 
   const init = async () => {
@@ -35,8 +36,10 @@ const StoreCardSmall = ({ store = {}, onRun }) => {
   }
 
   useEffect(() => {
-    init()
-  }, [store])
+    if (!isLoading) {
+      init()
+    }
+  }, [store, isLoading])
 
   const onHandleRun = async (newStore) => {
     if (onRun) onRun(newStore)
@@ -60,37 +63,45 @@ const StoreCardSmall = ({ store = {}, onRun }) => {
 
   return (
     <div className='card-small border-0 bg-body rounded-2 w-100'>
-      <Link
-        className='text-reset text-decoration-none'
-        to={`/store/${storeValue._id}`}
-        title={storeValue.name}
-      >
-        <div className='card-img-top cus-card-img-top-small'>
-          <img
-            loading='lazy'
-            src={storeValue.avatar ? IMG + storeValue.avatar : defaultImage}
-            className='cus-card-img-small'
-            alt={storeValue.name}
-          />
-        </div>
-      </Link>
+      {isLoading ? (
+        <Skeleton height={150} />
+      ) : (
+        <Link
+          className='text-reset text-decoration-none'
+          to={`/store/${storeValue._id}`}
+          title={storeValue.name}
+        >
+          <div className='card-img-top cus-card-img-top-small'>
+            <img
+              loading='lazy'
+              src={storeValue.avatar ? IMG + storeValue.avatar : defaultImage}
+              className='cus-card-img-small'
+              alt={storeValue.name}
+            />
+          </div>
+        </Link>
+      )}
 
       <div className='card-body border-top border-value'>
-        <small className='card-subtitle'>
-          <div className='d-flex justify-content-between align-items-center'>
-            {getToken() && (
-              <FollowStoreButton
-                storeId={store._id}
-                isFollowing={store.isFollowing}
-                className='w-70'
-                onRun={(store) => onHandleRun(store)}
-              />
-            )}
-            <label className='btn w-25 btn-group border rounded-1 justify-content-center'>
-              {storeValue.numberOfFollowers}
-            </label>
-          </div>
-        </small>
+        {isLoading ? (
+          <Skeleton height={40} />
+        ) : (
+          <small className='card-subtitle'>
+            <div className='d-flex justify-content-between align-items-center'>
+              {getToken() && (
+                <FollowStoreButton
+                  storeId={store._id}
+                  isFollowing={storeValue.isFollowing}
+                  className='w-70'
+                  onRun={(store) => onHandleRun(store)}
+                />
+              )}
+              <label className='btn w-25 btn-group border rounded-1 justify-content-center'>
+                {storeValue.numberOfFollowers}
+              </label>
+            </div>
+          </small>
+        )}
       </div>
     </div>
   )

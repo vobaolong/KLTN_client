@@ -61,7 +61,6 @@ const VendorAddProductImageForm = ({ productId = '', storeId = '', onRun }) => {
             image: '',
             isValidImage: true
           })
-          toast.success(t('toastSuccess.product.addImg'))
           if (onRun) onRun()
         }
         setIsLoading(false)

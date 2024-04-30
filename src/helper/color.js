@@ -4,10 +4,12 @@ export const randomColor = (() => {
   }
 
   return () => {
-    var h = randomInt(0, 360)
-    var s = randomInt(42, 98)
-    var l = randomInt(40, 90)
-    return `hsl(${h},${s}%,${l}%)`
+    var r = randomInt(100, 255)
+    var g = randomInt(100, 255)
+    var b = randomInt(100, 255)
+    var a = (Math.random() * 0.5 + 0.5).toFixed(2)
+
+    return `rgba(${r},${g},${b},${a})`
   }
 })()
 

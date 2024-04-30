@@ -27,14 +27,14 @@ const ProductSmallCard = ({
     </Link>
 
     <Link
-      className='link-hover ms-2'
+      className='text-decoration-none ms-2'
       to={`/product/${product._id}`}
       title={product.name}
       style={style}
     >
-      <span className='product-name'>{product.name}</span>
+      <span className='product-name link-hover'>{product.name}</span>
       {rating && (
-        <small>
+        <small className='text-dark'>
           {product.rating} <StarRating stars={product.rating} />
         </small>
       )}

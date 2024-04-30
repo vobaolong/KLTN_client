@@ -27,7 +27,6 @@ const UserEditProfileItem = ({ user = {} }) => {
           phone={user.phone}
           id_card={user.id_card}
           googleId={user.googleId}
-          facebookId={user.facebookId}
         />
       </Modal>
 

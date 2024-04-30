@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
-import AddValueVariantForm from './form/AddValueVariantForm'
+import AddVariantValueForm from './form/AddVariantValueForm'
 
-const AddValueVariantItem = ({
+const AddVariantValueItem = ({
   variantId = '',
   variantName = '',
   onRun,
@@ -32,7 +32,7 @@ const AddValueVariantItem = ({
         hasCloseBtn={false}
         title={`${t('variantDetail.value.add')} '${variantName}'`}
       >
-        <AddValueVariantForm
+        <AddVariantValueForm
           variantId={variantId}
           variantName={variantName}
           onRun={onRun}
@@ -42,4 +42,4 @@ const AddValueVariantItem = ({
   )
 }
 
-export default AddValueVariantItem
+export default AddVariantValueItem

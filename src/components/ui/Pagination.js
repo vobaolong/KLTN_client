@@ -1,3 +1,5 @@
+import { useHistory, useLocation } from 'react-router-dom'
+
 const pages = (pageCurrent, pageCount) => {
   let topPages = []
   let midPages = []
@@ -33,8 +35,12 @@ const Pagination = ({
 }) => {
   const { pageCurrent, pageCount } = pagination
   const { topPages, midPages, botPages } = pages(pageCurrent, pageCount)
-
+  const history = useHistory()
+  const location = useLocation()
   const handleChangePage = (newPage) => {
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set('page', newPage)
+    history.push(`${location.pathname}?${searchParams.toString()}`)
     if (onChangePage) {
       onChangePage(newPage)
     }

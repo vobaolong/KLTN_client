@@ -118,7 +118,6 @@ export const authSocial = async (user) => {
   }
 }
 
-//confirm email
 export const sendConfirmationEmail = async (userId, token) => {
   try {
     const res = await fetch(`${API}/confirm/email/${userId}`, {
@@ -150,7 +149,6 @@ export const verifyEmail = async (emailCode) => {
   }
 }
 
-//forgot password
 export const forgotPassword = async (username) => {
   try {
     const res = await fetch(`${API}/forgot/password`, {

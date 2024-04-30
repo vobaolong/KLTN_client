@@ -25,7 +25,11 @@ const StaffsPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-light fa-user-group me-2'></i>
+              <i
+                className={`${
+                  flag ? 'fa-solid' : 'fa-light'
+                } fa-user-group me-2`}
+              ></i>
               <span className='res-hide'>{t('staffDetail.staffList')}</span>
             </span>
           </li>
@@ -34,7 +38,11 @@ const StaffsPage = () => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <i className='fa-light fa-user-shield me-2'></i>
+              <i
+                className={`${
+                  flag ? 'fa-light' : 'fa-solid'
+                } fa-user-shield me-2`}
+              ></i>
               <span className='res-hide'>{t('staffDetail.owner')}</span>
             </span>
           </li>

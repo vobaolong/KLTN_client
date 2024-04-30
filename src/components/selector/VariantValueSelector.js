@@ -47,7 +47,7 @@ const VariantValueSelector = ({
   const handleSet = (oldValue, newValue) => {
     if (isEditable && selectedValues) {
       const newArray = selectedValues
-      const index = newArray.map((v) => v._id).indexOf(oldValue._id)
+      const index = newArray.map((v) => v?._id).indexOf(oldValue?._id)
       if (index !== -1) {
         newArray.splice(index, 1)
         newArray.push(newValue)

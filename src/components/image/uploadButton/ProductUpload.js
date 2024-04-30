@@ -21,7 +21,6 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
@@ -41,7 +40,6 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
     removeListImages(_id, accessToken, index, productId, storeId)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(t('toastSuccess.product.removeImg'))
         setIsLoading(false)
         if (onRun) onRun()
       })

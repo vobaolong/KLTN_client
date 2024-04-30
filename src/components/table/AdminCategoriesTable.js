@@ -18,9 +18,9 @@ import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
-import useToggle from '../../hooks/useToggle'
 import CategorySelector from '../selector/CategorySelector'
 import { humanReadableDate } from '../../helper/humanReadable'
+import Modal from '../ui/Modal'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -29,7 +29,6 @@ const AdminCategoriesTable = ({ heading = false }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
-  const [flag, toggleFlag] = useToggle(false)
 
   const [run, setRun] = useState(false)
   const [deletedCategory, setDeletedCategory] = useState({})
@@ -174,35 +173,44 @@ const AdminCategoriesTable = ({ heading = false }) => {
       )}
       <div className='mb-2'>
         {heading && <h5 className='text-start'>{t('admin.categories')}</h5>}
-        <div className='align-items-center d-flex justify-content-end'>
-          <div className='position-relative d-inline-block'>
-            <button
-              type='button'
-              className={`btn ${
-                flag ? 'btn-primary' : 'btn-outline-primary'
-              } ripple cus-tooltip rounded-1`}
-              onClick={() => toggleFlag()}
-            >
-              <i className='fa-light fa-list-tree me-2'></i>
-              <span className='res-hide'>{t('categoryDetail.tree')}</span>
-            </button>
-
-            <small className='cus-tooltip-msg'>
-              {t('categoryDetail.tree')}
-            </small>
-          </div>
-        </div>
-
-        {flag && (
+        {/* {flag && (
           <div className='mb-3'>
             <CategorySelector isActive={true} isSelected={false} />
           </div>
-        )}
+        )} */}
       </div>
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='option-wrap d-flex align-items-center justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
-          <div className='ms-2'>
+
+          <div className='d-flex gap-1'>
+            <div className='align-items-center d-flex justify-content-end'>
+              <div className='position-relative d-inline-block'>
+                <button
+                  type='button'
+                  className='btn btn-primary ripple cus-tooltip rounded-1'
+                  data-bs-toggle='modal'
+                  data-bs-target='#admin-category-tree'
+                >
+                  <i className='fa-light fa-list-tree'></i>
+                  <span className='res-hide ms-2'>
+                    {t('categoryDetail.tree')}
+                  </span>
+                </button>
+
+                <small className='cus-tooltip-msg'>
+                  {t('categoryDetail.tree')}
+                </small>
+              </div>
+            </div>
+            <Modal
+              id='admin-category-tree'
+              hasCloseBtn={false}
+              title={t('categoryDetail.tree')}
+              style={{ maxWidth: '1000px', width: '100%', margin: 'auto' }}
+            >
+              <CategorySelector isActive={true} isSelected={false} />
+            </Modal>
             <Link
               type='button'
               className='btn btn-primary ripple text-nowrap rounded-1'
@@ -286,9 +294,8 @@ const AdminCategoriesTable = ({ heading = false }) => {
                       <div
                         style={{
                           position: 'relative',
-                          paddingBottom: '50px',
-                          width: '100%',
-                          height: '0'
+                          width: '50px',
+                          height: '50px'
                         }}
                       >
                         <img

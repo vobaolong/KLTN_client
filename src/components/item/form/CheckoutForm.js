@@ -26,6 +26,7 @@ import DropDownMenu from '../../ui/DropDownMenu'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+const IMG = process.env.REACT_APP_STATIC_URL
 
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 
@@ -218,7 +219,7 @@ const CheckoutForm = ({
         else {
           updateDispatch('account', data.user)
           history.push('/account/purchase')
-          toast.success('Order successfully!')
+          toast.success(t('toastSuccess.order.create'))
         }
         setIsLoading(false)
       })
@@ -287,7 +288,7 @@ const CheckoutForm = ({
       })
     }
   }
-
+  console.log(items)
   const handlePayPalApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
       const { _id, accessToken } = getToken()
@@ -357,7 +358,7 @@ const CheckoutForm = ({
           <Logo width='150px' />
         </div>
 
-        <div className='col-xl-8 bg-value col-md-6'>
+        <div className='col-xl-7 bg-value col-md-6'>
           <div className='row my-2 p-3 box-shadow bg-body rounded-1 ms-0'>
             <span style={{ fontSize: '1.2rem' }} className='fw-semibold col-12'>
               {t('orderDetail.userReceiver')}
@@ -564,7 +565,7 @@ const CheckoutForm = ({
           </div>
         </div>
 
-        <div className='col-xl-4 bg-value col-md-6'>
+        <div className='col-xl-5 bg-value col-md-6'>
           <div className='my-2 p-3 box-shadow bg-body rounded-1'>
             <span
               style={{ fontSize: '1.2rem' }}
@@ -574,6 +575,36 @@ const CheckoutForm = ({
             </span>
             <hr className='my-2' />
             <dl className='row px-2'>
+              {items.map((item) => (
+                <>
+                  <dt className='col-8 text-secondary fw-normal d-flex align-items-start gap-1 mb-1'>
+                    <img
+                      src={IMG + item.productId?.listImages[0]}
+                      alt=''
+                      style={{ width: '20%' }}
+                      className='rounded-2'
+                    />
+                    <small className='product-name'>
+                      {item.productId?.name}
+                    </small>
+                    <span className='text-nowrap'>x {item.count}</span>
+                  </dt>
+                  <dd className='col-4'>
+                    <dl className='row'>
+                      <dd className='col-12 text-end'>
+                        <span className='fs-6'>
+                          {formatPrice(
+                            item.productId?.salePrice?.$numberDecimal *
+                              item.count
+                          )}
+                          <sup>₫</sup>
+                        </span>
+                      </dd>
+                    </dl>
+                  </dd>
+                </>
+              ))}
+
               <dt className='col-7 text-secondary fw-normal'>
                 {t('cartDetail.subTotal')}
               </dt>

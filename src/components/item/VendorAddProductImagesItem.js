@@ -10,6 +10,7 @@ const VendorAddProductImagesItem = ({
   onRun
 }) => {
   const { t } = useTranslation()
+
   return (
     <div className='position-relative d-inline-block'>
       <div className='cus-tooltip'>

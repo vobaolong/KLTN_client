@@ -73,7 +73,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success('toastSuccess.level.create')
           setLevel({
             name: '',
             minPoint: 0,
@@ -111,7 +111,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             label={t('levelDetail.name')}
             value={level.name}
             isValid={level.isValidName}
-            feedback='Please provide a valid level name.'
+            feedback={t('levelDetail.validName')}
             validator='level'
             required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
@@ -125,7 +125,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             label={t('levelDetail.floorPoint')}
             value={level.minPoint}
             isValid={level.isValidMinPoint}
-            feedback='Please provide a valid floor point (>=0).'
+            feedback={t('levelDetail.validFloorPoint')}
             validator='positive|zero'
             required={true}
             onChange={(value) =>
@@ -141,7 +141,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             label={`${t('levelDetail.discount')} (%)`}
             value={level.discount}
             isValid={level.isValidDiscount}
-            feedback='Please provide a valid floor point (0% - 100%).'
+            feedback={t('levelDetail.validDiscount')}
             validator='zeroTo100'
             required={true}
             onChange={(value) =>
@@ -152,17 +152,6 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
         </div>
 
         <div className='col-12'>
-          {/* <Input
-            type='text'
-            label={t('levelDetail.color')}
-            value={level.color}
-            isValid={level.isValidColor}
-            feedback='Please provide a valid color.'
-            validator='anything'
-            required={true}
-            onChange={(value) => handleChange('color', 'isValidColor', value)}
-            onValidate={(flag) => handleValidate('isValidColor', flag)}
-          /> */}
           <ColorPickerInput
             label={t('levelDetail.color')}
             color={level.color}

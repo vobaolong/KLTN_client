@@ -14,11 +14,15 @@ const AccountSideBar = ({ user = {} }) => {
               path === 'profile' ? 'active' : ''
             }`}
           >
-            <i className='fa-light fa-user'></i>
-            <span className='ms-2 res-hide-xl text-capitalize'>
+            <i
+              className={`${
+                path === 'profile' ? 'fa-solid' : 'fa-light'
+              } text-start fa-user`}
+            ></i>
+            <span className='ms-2 res-hide-xl'>
               {t('userDetail.myAccount')}
             </span>
-            <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+            <span className='ms-2 d-none res-dis-inline-xl res-hide-lg'>
               {t('userDetail.myAccount')}
             </span>
           </Link>
@@ -31,11 +35,15 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'purchase' ? 'active' : ''
               }`}
             >
-              <i className='fa-light fa-receipt'></i>
-              <span className='ms-2 res-hide-xl text-capitalize'>
+              <i
+                className={`${
+                  path === 'purchase' ? 'fa-solid' : 'fa-light'
+                } w-10 text-start fa-receipt`}
+              ></i>
+              <span className='ms-2 res-hide-xl'>
                 {t('userDetail.myPurchase')}
               </span>
-              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg'>
                 {t('userDetail.myPurchase')}
               </span>
             </Link>
@@ -49,11 +57,15 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'addresses' ? 'active' : ''
               }`}
             >
-              <i className='fa-light fa-location-dot'></i>
-              <span className='ms-2 res-hide-xl text-capitalize'>
+              <i
+                className={`${
+                  path === 'addresses' ? 'fa-solid' : 'fa-light'
+                } w-10 text-start fa-location-dot`}
+              ></i>
+              <span className='ms-2 res-hide-xl'>
                 {t('userDetail.address')}
               </span>
-              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg'>
                 {t('userDetail.address')}
               </span>
             </Link>
@@ -67,7 +79,11 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'wallet' ? 'active' : ''
               }`}
             >
-              <i className='fa-light fa-wallet'></i>
+              <i
+                className={`${
+                  path === 'wallet' ? 'fa-solid' : 'fa-light'
+                } w-10 text-start fa-wallet`}
+              ></i>
               <span className='ms-2 res-hide-lg'>{t('wallet')}</span>
             </Link>
           </li>
@@ -80,11 +96,13 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'store' ? 'active' : ''
               }`}
             >
-              <i className='fa-light fa-store'></i>
-              <span className='ms-2 res-hide-xl text-capitalize'>
-                {t('manageStore')}
-              </span>
-              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg text-capitalize'>
+              <i
+                className={`${
+                  path === 'store' ? 'fa-solid' : 'fa-light'
+                } w-10 text-start fa-store`}
+              ></i>
+              <span className='ms-2 res-hide-xl'>{t('manageStore')}</span>
+              <span className='ms-2 d-none res-dis-inline-xl res-hide-lg'>
                 {t('manageStore')}
               </span>
             </Link>
@@ -98,10 +116,12 @@ const AccountSideBar = ({ user = {} }) => {
                 path === 'following' ? 'active' : ''
               }`}
             >
-              <i className='fa-light fa-heart'></i>
-              <span className='ms-2 res-hide-lg text-capitalize'>
-                {t('favorite')}
-              </span>
+              <i
+                className={`${
+                  path === 'following' ? 'fa-solid' : 'fa-light'
+                } w-10 text-start fa-heart`}
+              ></i>
+              <span className='ms-2 res-hide-lg'>{t('favorite')}</span>
             </Link>
           </li>
         )}

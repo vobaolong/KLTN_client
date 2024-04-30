@@ -4,23 +4,27 @@ import { updateCover } from '../../../apis/user'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
+import { toast } from 'react-toastify'
 
 const UserCoverUpload = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
+
   const handleChange = (e) => {
     if (e.target.files[0] == null) return
     const formData = new FormData()
     formData.set('photo', e.target.files[0])
-    setError('')
     setIsLoading(true)
     updateCover(_id, accessToken, formData)
       .then((data) => {
         if (data.error) {
           setError(data.error)
-        } else updateDispatch('account', data.user)
+        } else {
+          toast.success('Cập nhật ảnh bìa thành công')
+          updateDispatch('account', data.user)
+        }
         setIsLoading(false)
       })
       .catch((error) => {

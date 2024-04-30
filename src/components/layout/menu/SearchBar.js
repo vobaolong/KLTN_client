@@ -19,9 +19,7 @@ const SearchBar = () => {
   ]
   const location = useLocation()
   const history = useHistory()
-
   const currentOption = location.pathname.split('/')[1]
-
   const [query, setQuery] = useState(() => {
     if (currentOption === 'products' || currentOption === 'stores')
       return new URLSearchParams(location.search).get('keyword') || ''
@@ -66,7 +64,7 @@ const SearchBar = () => {
         type='submit'
         onClick={handleFormSubmit}
       >
-        <i className='fa-solid fa-search'></i>
+        <i className='fa-light fa-search'></i>
       </button>
     </form>
   )

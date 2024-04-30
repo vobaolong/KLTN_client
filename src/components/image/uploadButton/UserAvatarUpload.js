@@ -5,12 +5,13 @@ import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const UserAvatarUpload = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [updateDispatch] = useUpdateDispatch()
-
+  const { t } = useTranslation()
   const handleChange = (e) => {
     if (e.target.files[0] == null) return
     const { _id, accessToken } = getToken()
@@ -23,16 +24,13 @@ const UserAvatarUpload = () => {
           setError(data.error)
         } else {
           updateDispatch('account', data.user)
+          toast.success(t('toastSuccess.addAvatar'))
         }
-        toast.success('Đỏi ảnh thành công')
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 

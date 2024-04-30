@@ -15,7 +15,7 @@ const AddressesPage = () => {
   return (
     <AccountLayout user={user} paths={paths}>
       <MetaData title={`${t('helmet.addressBook')} | Zenpii Việt Nam`} />
-      <UserAddressesTable addresses={user.addresses} />
+      <UserAddressesTable heading={false} addresses={user.addresses} />
     </AccountLayout>
   )
 }

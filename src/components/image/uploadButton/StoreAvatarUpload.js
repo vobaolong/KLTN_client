@@ -4,6 +4,8 @@ import { updateAvatar } from '../../../apis/store'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
+import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const StoreAvatarUpload = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -11,6 +13,7 @@ const StoreAvatarUpload = ({ storeId = '' }) => {
 
   const { _id, accessToken } = getToken()
   const [updateDispatch] = useUpdateDispatch()
+  const { t } = useTranslation()
 
   const handleChange = (e) => {
     if (e.target.files[0] == null) return
@@ -18,24 +21,20 @@ const StoreAvatarUpload = ({ storeId = '' }) => {
     const formData = new FormData()
     formData.set('photo', e.target.files[0])
 
-    setError('')
     setIsLoading(true)
     updateAvatar(_id, accessToken, formData, storeId)
       .then((data) => {
         if (data.error) {
           setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
-        } else updateDispatch('vendor', data.store)
+        } else {
+          updateDispatch('vendor', data.store)
+          toast.success(t('toastSuccess.addAvatar'))
+        }
         setIsLoading(false)
       })
       .catch((error) => {
         setError(error)
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-        }, 3000)
       })
   }
 

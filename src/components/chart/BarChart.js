@@ -1,10 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { groupByDate } from '../../helper/groupBy'
-import { randomColorsArray } from '../../helper/color'
+// import { randomColorsArray } from '../../helper/color'
 import { Bar } from 'react-chartjs-2'
 import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables)
+import CrosshairPlugin from 'chartjs-plugin-crosshair'
+const CustomCrosshairPlugin = function (plugin) {
+  const originalAfterDraw = plugin.afterDraw
+  plugin.afterDraw = function (chart, easing) {
+    if (chart && chart.crosshair) {
+      originalAfterDraw.call(this, chart, easing)
+    }
+  }
+  return plugin
+}
+Chart.register(...registerables, CustomCrosshairPlugin(CrosshairPlugin))
 
 const BarChart = ({
   by = 'hours',
@@ -23,36 +33,29 @@ const BarChart = ({
   const init = () => {
     const newData = groupBy(items, by, role, sliceEnd)
     setData({
-      labels: newData.reduce(
-        (labels, currentData) => [...labels, currentData[0]],
-        []
-      ),
+      labels: newData.map((item) => item[0]),
       datasets: [
         {
-          data: newData.reduce(
-            (datas, currentData) => [...datas, currentData[1]],
-            []
-          ),
-          label: title,
-          backgroundColor: randomColorsArray(Object.values(newData).length)
+          data: newData.map((item) => item[1]),
+          label: 'Doanh số bán hàng',
+          // backgroundColor: randomColorsArray(newData.length),
+          backgroundColor: '#3b82f6'
+        },
+        role === 'vendor' && {
+          data: newData.map((item) => item[2]),
+          label: 'Chiết khấu',
+          // backgroundColor: randomColorsArray(newData.length),
+          backgroundColor: '#60a5fa'
         }
-      ]
+      ].filter(Boolean)
     })
   }
-
   useEffect(() => {
     init()
   }, [items, by, role, sliceEnd])
 
   return (
-    <div
-      style={{
-        boxShadow: '0 0 20px -4px rgba(0,0,0,.15)',
-        borderRadius: '0.25rem',
-        backgroundColor: '#fff',
-        width: '99%'
-      }}
-    >
+    <div className='bg-body box-shadow rounded w-100'>
       <h5
         style={{
           textAlign: 'start',
@@ -66,6 +69,7 @@ const BarChart = ({
       <Bar
         data={data}
         options={{
+          responsive: true,
           legend: { display: false },
           title: {
             display: true,
@@ -73,13 +77,35 @@ const BarChart = ({
           },
           scales: {
             x: {
-              display: false
+              display: false,
+              stacked: true
             },
             y: {
-              beginAtZero: true
-              // ticks: {
-              //   stepSize: 1
-              // }
+              beginAtZero: true,
+              stacked: true
+            }
+          },
+          elements: {
+            bar: {
+              // borderRadius: 2
+            }
+          },
+          plugins: {
+            crosshair: {
+              enabled: true,
+              mode: 'xy',
+              line: {
+                color: '#F66',
+                width: 1
+              },
+              sync: {
+                enabled: true,
+                group: 1,
+                suppressTooltips: false
+              },
+              zoom: {
+                enabled: true
+              }
             }
           }
         }}

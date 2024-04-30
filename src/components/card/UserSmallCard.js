@@ -5,7 +5,7 @@ const UserSmallCard = ({
   user = {},
   borderName = false,
   style = {},
-  link = `/user/${user._id}`
+  link = `/user/${user?._id}`
 }) => (
   <span
     className={`d-inline-flex align-items-center ${
@@ -14,26 +14,26 @@ const UserSmallCard = ({
     style={style}
   >
     <Link
-      className='text-reset text-decoration-none'
-      title={user.firstName + ' ' + user.lastName}
+      className='text-decoration-none'
+      title={user?.firstName + ' ' + user?.lastName}
       to={link}
     >
       <img
         loading='lazy'
-        src={`${IMG + user.avatar}`}
+        src={`${IMG + user?.avatar}`}
         className='small-card-img'
-        alt={user.firstName + ' ' + user.lastName}
+        alt={user?.firstName + ' ' + user?.lastName}
       />
     </Link>
 
     <Link
-      className='text-reset link-hover ms-2'
-      title={user.firstName + ' ' + user.lastName}
+      className='link-hover ms-2'
+      title={user?.firstName + ' ' + user?.lastName}
       to={link}
       style={style}
     >
       <span style={{ fontSize: '0.9rem' }}>
-        {user.firstName + ' ' + user.lastName}
+        {user?.firstName + ' ' + user?.lastName}
       </span>
     </Link>
   </span>

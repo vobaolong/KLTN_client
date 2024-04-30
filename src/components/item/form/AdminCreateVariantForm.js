@@ -59,7 +59,7 @@ const AdminCreateVariantForm = () => {
     createVariant(_id, accessToken, newVariant)
       .then((data) => {
         if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        else toast.success(t('toastSuccess.variant.create'))
         setIsLoading(false)
       })
       .catch((error) => {

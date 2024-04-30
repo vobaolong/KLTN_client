@@ -147,17 +147,17 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
           message={t('confirmDialog')}
         />
       )}
-      {!isLoading && pagination.size === 0 ? (
-        <div className='d-flex justify-content-center mt-5 text-primary text-center'>
-          <h5>{t('productDetail.noProduct')}</h5>
-        </div>
-      ) : (
-        <div>
-          <div className='p-3 box-shadow bg-body rounded-2'>
-            <div className='option-wrap'>
-              <SearchInput onChange={handleChangeKeyword} />
-            </div>
 
+      <div>
+        <div className='p-3 box-shadow bg-body rounded-2'>
+          <div className='option-wrap'>
+            <SearchInput onChange={handleChangeKeyword} />
+          </div>
+          {!isLoading && pagination.size === 0 ? (
+            <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+              <h5>{t('productDetail.noProduct')}</h5>
+            </div>
+          ) : (
             <div className='table-scroll my-2'>
               <table className='table align-middle table-hover table-sm text-center'>
                 <thead>
@@ -311,22 +311,22 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                 </tbody>
               </table>
             </div>
-            <div className='d-flex justify-content-between align-items-center px-4'>
-              <ShowResult
-                limit={filter.limit}
-                size={pagination.size}
-                pageCurrent={pagination.pageCurrent}
+          )}
+          <div className='d-flex justify-content-between align-items-center px-4'>
+            <ShowResult
+              limit={filter.limit}
+              size={pagination.size}
+              pageCurrent={pagination.pageCurrent}
+            />
+            {pagination.size !== 0 && (
+              <Pagination
+                pagination={pagination}
+                onChangePage={handleChangePage}
               />
-              {pagination.size !== 0 && (
-                <Pagination
-                  pagination={pagination}
-                  onChangePage={handleChangePage}
-                />
-              )}
-            </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

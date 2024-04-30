@@ -71,7 +71,6 @@ const Input = ({
       >
         {label} {required && <span style={{ color: 'red' }}>*</span>}
       </label>
-      <span className='cus-input-group-bar'></span>
       <small className='invalid-feedback text-start'>{feedback}</small>
       {type === 'password' && (
         <i

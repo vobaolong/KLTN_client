@@ -73,7 +73,7 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          toast.success(data.success)
+          toast.success(t('toastSuccess.level.edit'))
           if (onRun) onRun()
         }
         setIsLoading(false)

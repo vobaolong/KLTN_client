@@ -24,7 +24,9 @@ const FollowingPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-light fa-box me-2'></i>
+              <i
+                className={` ${flag ? 'fa-solid' : 'fa-light'} fa-box me-2`}
+              ></i>
               <span className='res-hide'>{t('favProduct')}</span>
             </span>
           </li>
@@ -33,7 +35,9 @@ const FollowingPage = () => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <i className='fa-light fa-store me-2'></i>
+              <i
+                className={` ${flag ? 'fa-light' : 'fa-solid'} fa-store me-2`}
+              ></i>
               <span className='res-hide'>{t('favStore')}</span>
             </span>
           </li>

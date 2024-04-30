@@ -165,7 +165,7 @@ const MultiCategorySelector = ({
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
 
-        <div className='d-flex border p-1 mt-2 rounded-2 bg-body-secondary'>
+        <div className='d-flex border p-1 mt-2 rounded-2 bg-value'>
           <div
             className='list-group m-1'
             style={{

@@ -21,8 +21,8 @@ const ValueSelectorItem = ({
   useEffect(() => {
     if (defaultValue)
       setSelectedValue(() => {
-        const temp = listValues.map((value) => value._id)
-        return defaultValue.find((value) => temp.indexOf(value._id) !== -1)
+        const temp = listValues.map((value) => value?._id)
+        return defaultValue.find((value) => temp.indexOf(value?._id) !== -1)
       })
   }, [defaultValue])
 
@@ -34,11 +34,13 @@ const ValueSelectorItem = ({
   }
 
   return (
-    <div
-      className='position-relative mt-1 mb-1 d-flex align-items-center'
-      style={{ marginTop: '3px', marginBottom: '1px' }}
-    >
-      <label className='label-variant'>{values[0].variantId.name}</label>
+    <div className='position-relative my-1 d-flex align-items-start justify-content-center'>
+      <span
+        style={{ fontSize: '.875rem' }}
+        className='label-variant text-secondary me-2 w-25'
+      >
+        {values[0].variantId.name}
+      </span>
       <div className='button-container'>
         {values.map((value, index) => (
           <button

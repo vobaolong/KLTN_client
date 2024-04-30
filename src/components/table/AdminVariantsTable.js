@@ -18,7 +18,7 @@ import { toast } from 'react-toastify'
 const AdminVariantsTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
   const [deletedVariant, setDeletedVariant] = useState({})
@@ -88,7 +88,7 @@ const AdminVariantsTable = ({ heading = false }) => {
 
   const handleDelete = (variant) => {
     setDeletedVariant(variant)
-    setIsConfirming(true)
+    setIsConfirmingDelete(true)
   }
 
   const handleRestore = (variant) => {
@@ -133,12 +133,12 @@ const AdminVariantsTable = ({ heading = false }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
+      {isConfirmingDelete && (
         <ConfirmDialog
           title={t('variantDetail.del')}
           color='danger'
           onSubmit={onSubmitDelete}
-          onClose={() => setIsConfirming(false)}
+          onClose={() => setIsConfirmingDelete(false)}
         />
       )}
       {isConfirmingRestore && (
@@ -197,9 +197,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                   />
                 </th>
                 <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('action')}
-                  </span>
+                  <span style={{ fontWeight: '400' }}>{t('action')}</span>
                 </th>
               </tr>
             </thead>
@@ -211,7 +209,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <span style={{ fontSize: '.9rem' }}>{variant.name}</span>
+                    <span>{variant.name}</span>
                   </td>
                   <td>
                     {variant.categoryIds.map((category, index) => (
@@ -229,7 +227,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                     {variant.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
 
-                  <td className='text-nowrap py-1'>
+                  <td className='text-nowrap'>
                     <Link
                       type='button'
                       className='btn btn-sm btn-outline-secondary ripple me-2 my-1'

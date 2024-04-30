@@ -24,13 +24,13 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('vendor', data.store)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.store.updateCarousel'))
         }
         setIsLoading(false)
       })
       .catch((error) => {
         setIsLoading(false)
-        toast.error(error)
+        console.log('Something went wrong')
       })
   }
 
@@ -45,13 +45,13 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('vendor', data.store)
-          toast.success(data.success)
+          toast.success(t('toastSuccess.store.removeCarousel'))
         }
         setIsLoading(false)
       })
       .catch((error) => {
         setIsLoading(false)
-        toast.error(error)
+        console.log('Something went wrong')
       })
   }
 
@@ -60,7 +60,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title='Remove featured photo'
+          title={t('dialog.removeFeatured')}
           onSubmit={onRemoveSubmit}
           message={t('message.delete')}
           color='danger'

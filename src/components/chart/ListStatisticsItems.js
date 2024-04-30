@@ -19,22 +19,11 @@ import StoreSmallCard from '../card/StoreSmallCard'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { useTranslation } from 'react-i18next'
 import Loading from '../ui/Loading'
-const groupByFunc = {
-  order: groupByDate,
-  product: groupBySold,
-  user: groupByJoined,
-  store: groupByJoined
-}
+import { formatPrice } from '../../helper/formatPrice'
 
-const titles = {
-  order: 'Sales statistics by orders',
-  product: 'Sales statistics by products',
-  user: 'Statistics of new users',
-  store: 'Statistics of new stores'
-}
-
-const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
+const ListStatisticsItems = ({ by = '', storeId = '' }) => {
   const { t } = useTranslation()
+  const [totalRevenue, setTotalRevenue] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
   const [items, setItems] = useState({
@@ -52,11 +41,38 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
   const [options, setOptions] = useState({
     flag: 'order',
     by: 'hours',
-    sliceEnd: 5,
+    sliceEnd: 6,
     type: 'line'
   })
 
+  const titles = {
+    order: t('admin.adDashboard.salesStatisticsByOrders'),
+    product: t('admin.adDashboard.statisticsByProducts'),
+    user: t('admin.adDashboard.statisticsNewUser'),
+    store: t('admin.adDashboard.statisticsNewStore')
+  }
+
+  const groupByFunc = {
+    order: groupByDate,
+    product: groupBySold,
+    user: groupByJoined,
+    store: groupByJoined
+  }
+
   const { _id, accessToken } = getToken()
+
+  const calculateTotalRevenue = (orders) => {
+    return orders.reduce((totalRevenue, order) => {
+      if (order.status === 'Delivered') {
+        const amount =
+          by === 'admin'
+            ? order.amountToZenpii.$numberDecimal
+            : order.amountToStore.$numberDecimal
+        return totalRevenue + parseFloat(amount)
+      }
+      return totalRevenue
+    }, 0)
+  }
 
   const adminInit = async () => {
     setIsLoading(true)
@@ -82,7 +98,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
       const userData = await listUserForAdmin(_id, accessToken, {
         search: '',
         sortBy: 'point',
-        role: 'user',
+        by: 'user',
         order: 'desc',
         limit: 1000,
         page: 1
@@ -113,6 +129,9 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         user: userData.size,
         store: storeData.size
       })
+
+      const totalRevenue = calculateTotalRevenue(orderData.orders)
+      setTotalRevenue(totalRevenue)
     } catch (e) {
       console.error('Something went wrong')
     }
@@ -161,10 +180,12 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         order: orderData.size,
         product: productData.size
       })
+
+      const totalRevenue = calculateTotalRevenue(orderData.orders)
+      setTotalRevenue(totalRevenue)
     } catch (e) {
       console.error('Something went wrong')
     }
-
     setIsLoading(false)
   }
 
@@ -172,18 +193,35 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
     if (by === 'admin') adminInit()
     else vendorInit()
   }, [by, storeId])
-
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
       <div className='container-fluid px-2'>
         <div className='row'>
-          <div className='col-md-3 col-6'>
+          <div className='col-md-4 col-12'>
+            <div className='rounded-2 bg-body text-center box-shadow py-3 mb-2 d-md-grid d-sm-flex gap-2 text-dark-emphasis align-items-center justify-content-center'>
+              <span className=''>
+                <i className='bg-primary-rgba fa-light fw-normal fa-wallet fs-4 p-3 rounded-circle text-primary'></i>
+              </span>
+              <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                {formatPrice(totalRevenue)}
+                <sup>₫</sup>
+              </span>
+              <span
+                style={{ fontSize: '1rem' }}
+                className='res-hide-md text-secondary'
+              >
+                {t('admin.adDashboard.totalRevenue')}
+              </span>
+            </div>
+          </div>
+
+          <div className='col-md-2 col-6'>
             <button
               type='button'
-              className={`btn ${
-                options.flag === 'order' ? 'btn-danger' : 'btn-outline-danger'
-              } btn-lg ripple w-100 py-4 mb-2`}
+              className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                options.flag === 'order' ? 'border-danger' : 'border-0 '
+              }`}
               onClick={() =>
                 setOptions({
                   ...options,
@@ -191,19 +229,31 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 })
               }
             >
-              <i className='fa-solid fa-clipboard'></i>
-              <span className='ms-3 res-hide'>{sizes.order}</span>
-              <span className='ms-1 res-hide-lg'>{t('admin.orders')}</span>
+              <span>
+                <i
+                  className={`text-center d-inline-block bg-danger-rgba fs-4 p-3 rounded-circle text-danger ${
+                    options.flag === 'order' ? 'fa-solid' : 'fa-light fw-normal'
+                  } fa-file-invoice`}
+                ></i>
+              </span>
+
+              <span style={{ fontSize: '1.3rem' }} className='res-hide fw-bold'>
+                {sizes.order}
+              </span>
+              <span
+                style={{ fontSize: '1rem' }}
+                className='res-hide-md text-secondary'
+              >
+                {t('admin.orders')}
+              </span>
             </button>
           </div>
-          <div className='col-md-3 col-6'>
+          <div className='col-md-2 col-6'>
             <button
               type='button'
-              className={`btn ${
-                options.flag === 'product'
-                  ? 'btn-success'
-                  : 'btn-outline-success'
-              } btn-lg ripple w-100 py-4 mb-2`}
+              className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                options.flag === 'product' ? 'border-success' : 'border-0'
+              }`}
               onClick={() =>
                 setOptions({
                   ...options,
@@ -211,21 +261,34 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                 })
               }
             >
-              <i className='fa-solid fa-box'></i>
-              <span className='ms-3 res-hide'>{sizes.product}</span>
-              <span className='ms-1 res-hide-lg'>{t('admin.products')}</span>
+              <span>
+                <i
+                  className={`text-center d-inline-block bg-success-rgba fs-4 p-3 rounded-circle text-success ${
+                    options.flag === 'product'
+                      ? 'fa-solid'
+                      : 'fa-light fw-normal'
+                  } fa-box`}
+                ></i>
+              </span>
+              <span style={{ fontSize: '1.3rem' }} className='res-hide fw-bold'>
+                {sizes.product}
+              </span>
+              <span
+                style={{ fontSize: '1rem' }}
+                className='res-hide-md text-secondary'
+              >
+                {t('admin.products')}
+              </span>
             </button>
           </div>
           {by === 'admin' && (
             <>
-              <div className='col-md-3 col-6'>
+              <div className='col-md-2 col-6'>
                 <button
                   type='button'
-                  className={`btn ${
-                    options.flag === 'user'
-                      ? 'btn-primary'
-                      : 'btn-outline-primary'
-                  } btn-lg ripple w-100 py-4 mb-2`}
+                  className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                    options.flag === 'user' ? 'border-primary' : 'border-0 '
+                  }`}
                   onClick={() =>
                     setOptions({
                       ...options,
@@ -233,20 +296,36 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     })
                   }
                 >
-                  <i className='fa-solid fa-user-group'></i>
-                  <span className='ms-3 res-hide'>{sizes.user}</span>
-                  <span className='ms-1 res-hide-lg'>{t('admin.users')}</span>
+                  <span>
+                    <i
+                      className={`text-center d-inline-block bg-primary-rgba fs-4 p-3 rounded-circle text-primary ${
+                        options.flag === 'user'
+                          ? 'fa-solid'
+                          : 'fa-light fw-normal'
+                      } fa-user`}
+                    ></i>
+                  </span>
+                  <span
+                    style={{ fontSize: '1.3rem' }}
+                    className='res-hide fw-bold'
+                  >
+                    {sizes.user}
+                  </span>
+                  <span
+                    style={{ fontSize: '1rem' }}
+                    className='res-hide-md text-secondary'
+                  >
+                    {t('admin.users')}
+                  </span>
                 </button>
               </div>
 
-              <div className='col-md-3 col-6'>
+              <div className='col-md-2 col-6'>
                 <button
                   type='button'
-                  className={`btn ${
-                    options.flag === 'store'
-                      ? 'btn-golden'
-                      : 'btn-outline-golden'
-                  } btn-lg ripple w-100 py-4 mb-2`}
+                  className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                    options.flag === 'store' ? 'border-warning' : 'border-0 '
+                  }`}
                   onClick={() =>
                     setOptions({
                       ...options,
@@ -254,9 +333,27 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                     })
                   }
                 >
-                  <i className='fa-solid fa-store'></i>
-                  <span className='ms-3 res-hide'>{sizes.store}</span>
-                  <span className='ms-1 res-hide-lg'>{t('admin.stores')}</span>
+                  <span>
+                    <i
+                      className={`text-center d-inline-block bg-warning-rgba fs-4 p-3 rounded-circle text-warning ${
+                        options.flag === 'store'
+                          ? 'fa-solid'
+                          : 'fa-light fw-normal'
+                      } fa-store`}
+                    ></i>
+                  </span>
+                  <span
+                    style={{ fontSize: '1.3rem' }}
+                    className='res-hide fw-bold'
+                  >
+                    {sizes.store}
+                  </span>
+                  <span
+                    style={{ fontSize: '1rem' }}
+                    className='res-hide-md text-secondary'
+                  >
+                    {t('admin.stores')}
+                  </span>
                 </button>
               </div>
             </>
@@ -264,9 +361,9 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
         </div>
       </div>
 
-      <div className='container-fluid px-2 mt-3'>
+      <div className='mt-3'>
         <div className='row'>
-          <div className='col-xl-8 col-lg-6 position-relative'>
+          <div className='col-xl-8 col-lg-6 position-relative mb-2'>
             <form
               style={{ right: '2%', top: '1%' }}
               className='d-flex justify-content-end me-2 position-absolute'
@@ -335,7 +432,6 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                         sliceEnd: value
                       })
                     }
-                    // label={t('admin.adDashboard.statisticsBy')}
                     borderBtn={false}
                   />
                 </div>
@@ -366,7 +462,6 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                       type: value
                     })
                   }
-                  // label={t('admin.adDashboard.chartType')}
                   borderBtn={false}
                 />
               </div>
@@ -381,6 +476,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   title={titles[options.flag]}
                   sliceEnd={options.sliceEnd}
                   value={options.flag}
+                  role={by}
                 />
               )}
               {options.type === 'bar' && (
@@ -391,6 +487,7 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
                   title={titles[options.flag]}
                   sliceEnd={options.sliceEnd}
                   value={options.flag}
+                  role={by}
                 />
               )}
               {/* {options.type === 'doughnut' && (
@@ -405,111 +502,122 @@ const ListStatisticsItems = ({ by = 'admin', storeId = '' }) => {
             </div>
           </div>
 
-          <div className='col-xl-4 col-lg-6 bg-body rounded-1 box-shadow p-2'>
-            <h5 className='text-start mt-2'>
-              {options.flag === 'user' && t('topUser')}
-              {options.flag === 'store' && t('topShop')}
-              {options.flag === 'product' && t('topProduct')}
-              {options.flag === 'order' && t('orderRecent')}
-            </h5>
-            <div className='table-scroll'>
-              <table className='table align-middle table-hover table-sm text-center'>
-                <thead>
-                  <tr>
-                    <th scope='col'></th>
-                    <th
-                      scope='col'
-                      className='text-start  border-end-0'
-                      style={{ fontSize: '.9rem' }}
-                    >
-                      {options.flag === 'user' && t('userDetail.name')}
-                      {options.flag === 'store' && t('storeDetail.storeName')}
-                      {options.flag === 'product' && t('productDetail.name')}
-                      {options.flag === 'order' && t('orderDetail.id')}
-                    </th>
-                    <th
-                      scope='col'
-                      className='text-end'
-                      style={{ fontSize: '.9rem' }}
-                    >
-                      {options.flag === 'user' && t('point')}
-                      {options.flag === 'store' && t('point')}
-                      {options.flag === 'product' && t('productDetail.sold')}
-                      {options.flag === 'order' && t('orderDetail.date')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(options.flag === 'order'
-                    ? items[options.flag].slice(-6).reverse()
-                    : items[options.flag].slice(0, 6)
-                  ).map((item, index) => (
-                    <tr key={index}>
-                      <th scope='row'>{index + 1} </th>
-                      <td
-                        className='text-start border-end-0'
-                        style={{
-                          whiteSpace: 'normal'
-                        }}
-                      >
-                        {options.flag === 'user' && (
-                          <UserSmallCard user={item} />
-                        )}
-                        {options.flag === 'store' && (
-                          <StoreSmallCard store={item} />
-                        )}
-                        {options.flag === 'product' && (
-                          <ProductSmallCard product={item} rating={true} />
-                        )}
-                        {options.flag === 'order' && (
-                          <Link
-                            className='link-hover'
-                            style={{ fontSize: '.875rem' }}
-                            to={`/${by}/${
-                              by === 'admin' ? 'order' : 'orders'
-                            }/detail/${item._id}${
-                              by !== 'admin' ? `/${storeId}` : ''
-                            }`}
-                          >
-                            {item._id}
-                          </Link>
-                        )}
-                      </td>
-                      <td
-                        className='text-end'
-                        style={{
-                          whiteSpace: 'normal'
-                        }}
-                      >
-                        {options.flag === 'user' && item.point}
-                        {options.flag === 'store' && item.point}
-                        {options.flag === 'product' && item.sold}
-                        {options.flag === 'order' && (
-                          <span style={{ fontSize: '.875rem' }}>
-                            {humanReadableDate(item.createdAt)}
-                          </span>
-                        )}
-                      </td>
+          <div className='col-xl-4 col-lg-6 ps-md-0'>
+            <div className='bg-body box-shadow p-2 rounded-2'>
+              <h5 className='text-start mt-2'>
+                {options.flag === 'user' && t('topUser')}
+                {options.flag === 'store' && t('topShop')}
+                {options.flag === 'product' && t('topProduct')}
+                {options.flag === 'order' && t('orderRecent')}
+              </h5>
+              <div className='table-scroll'>
+                <table className='table align-middle table-hover table-sm text-start'>
+                  <thead>
+                    <tr>
+                      <th scope='col'>#</th>
+                      <th scope='col'>
+                        <small>
+                          {options.flag === 'user' && t('userDetail.name')}
+                          {options.flag === 'store' &&
+                            t('storeDetail.storeName')}
+                          {options.flag === 'product' &&
+                            t('productDetail.name')}
+                          {options.flag === 'order' && t('orderDetail.id')}
+                        </small>
+                      </th>
+                      <th scope='col'>
+                        <small>
+                          {options.flag === 'user' && t('point')}
+                          {options.flag === 'store' && t('point')}
+                          {options.flag === 'product' &&
+                            t('productDetail.sold')}
+                          {options.flag === 'order' && t('orderDetail.date')}
+                        </small>
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className='d-flex justify-content-start my-2'>
-              <Link
-                to={`/${by}/${
-                  by === 'admin' ? options.flag : options.flag + 's/' + storeId
-                }`}
-                className='link-hover'
-              >
-                <span className='me-2 res-hide'>
-                  {options.flag === 'user' && t('goToUserManager')}
-                  {options.flag === 'store' && t('goToShopManager')}
-                  {options.flag === 'product' && t('goToProductManager')}
-                  {options.flag === 'order' && t('goToOrderManager')}
-                </span>
-                <i className='fa-solid fa-external-link-alt'></i>
-              </Link>
+                  </thead>
+                  <tbody>
+                    {(options.flag === 'order'
+                      ? items[options.flag].slice(-6).reverse()
+                      : items[options.flag].slice(0, 6)
+                    ).map((item, index) => (
+                      <tr key={index}>
+                        <th scope='row'>{index + 1} </th>
+                        <td
+                          style={{
+                            whiteSpace: 'nowrap'
+                          }}
+                        >
+                          {options.flag === 'user' && (
+                            <small>
+                              <UserSmallCard user={item} />
+                            </small>
+                          )}
+                          {options.flag === 'store' && (
+                            <small>
+                              <StoreSmallCard store={item} />
+                            </small>
+                          )}
+                          {options.flag === 'product' && (
+                            <small
+                              style={{
+                                whiteSpace: 'normal',
+                                minWidth: '400px',
+                                width: 'fit-content'
+                              }}
+                            >
+                              <ProductSmallCard product={item} rating={true} />
+                            </small>
+                          )}
+                          {options.flag === 'order' && (
+                            <Link
+                              className='link-hover'
+                              style={{ fontSize: '.875rem' }}
+                              to={`/${by}/${
+                                by === 'admin' ? 'order' : 'orders'
+                              }/detail/${item._id}${
+                                by !== 'admin' ? `/${storeId}` : ''
+                              }`}
+                            >
+                              <small>{item._id}</small>
+                            </Link>
+                          )}
+                        </td>
+                        <td
+                          style={{
+                            whiteSpace: 'nowrap'
+                          }}
+                        >
+                          {options.flag === 'user' && item.point}
+                          {options.flag === 'store' && item.point}
+                          {options.flag === 'product' && item.sold}
+                          {options.flag === 'order' && (
+                            <small>{humanReadableDate(item.createdAt)}</small>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className='d-flex justify-content-end my-2'>
+                <Link
+                  to={`/${by}/${
+                    by === 'admin'
+                      ? options.flag
+                      : options.flag + 's/' + storeId
+                  }`}
+                  className='link-hover'
+                >
+                  <span className='me-2'>
+                    {options.flag === 'user' && t('goToUserManager')}
+                    {options.flag === 'store' && t('goToShopManager')}
+                    {options.flag === 'product' && t('goToProductManager')}
+                    {options.flag === 'order' && t('goToOrderManager')}
+                  </span>
+                  <i className='fa-light fa-arrow-up-right-from-square'></i>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

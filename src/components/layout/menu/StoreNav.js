@@ -108,7 +108,7 @@ const StoreNav = ({ store = {} }) => {
               className='btn-close text-reset'
               data-bs-dismiss='offcanvas'
               aria-label='Close'
-            ></button>{' '}
+            ></button>
           </div>
 
           <div className='offcanvas-body'>

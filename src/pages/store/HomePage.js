@@ -6,19 +6,29 @@ import Error from '../../components/ui/Error'
 import MainLayout from '../../components/layout/MainLayout'
 import { useTranslation } from 'react-i18next'
 import MetaData from '../../components/layout/meta/MetaData'
+import Skeleton from 'react-loading-skeleton'
 
 const HomePage = () => {
   const { t } = useTranslation()
   const store = useSelector((state) => state.store.store)
+  const storeNameOrSkeleton =
+    store.name !== undefined ? store.name : <Skeleton width={200} height={20} />
 
   const paths = [
     { name: t('breadcrumbs.home'), url: '/' },
-    { name: `${store.name}`, url: `/store/${store._id}` }
+    {
+      name: storeNameOrSkeleton,
+      url: `/store/${store._id}`
+    }
   ]
-
+  console.log(store)
   return (
     <>
-      <MetaData title={`${store.name} | Zenpii Việt Nam`} />
+      <MetaData
+        title={`${
+          store.name !== undefined ? store.name : ''
+        } | Zenpii Việt Nam`}
+      />
       {typeof store.isActive === 'boolean' && !store.isActive ? (
         <MainLayout>
           <Error msg={t('toastError.storeBanned')} />

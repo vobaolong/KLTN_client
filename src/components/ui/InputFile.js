@@ -56,7 +56,15 @@ const InputFile = ({
         {...getRootProps()}
       >
         <input {...getInputProps()} />
-        <div className={`${size === 'avatar' ? 'cus-avatar' : 'cus-cover'}`}>
+        <div
+          className={`${
+            size === 'avatar'
+              ? 'cus-avatar'
+              : size === 'featured'
+              ? 'cus-featured'
+              : 'cus-cover'
+          }`}
+        >
           {src && (
             <img
               loading='lazy'

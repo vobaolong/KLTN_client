@@ -9,7 +9,7 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
+const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -75,7 +75,7 @@ const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
             name: ''
           })
           if (onRun) onRun()
-          toast.success(t('toastSuccess.addValueVariant.addValue'))
+          toast.success(t('toastSuccess.variantValue.add'))
         }
         setIsLoading(false)
       })
@@ -126,4 +126,4 @@ const AddValueVariantForm = ({ variantId = '', variantName = '', onRun }) => {
   )
 }
 
-export default AddValueVariantForm
+export default AddVariantValueForm

@@ -12,28 +12,44 @@ export const groupByDate = (items, by, role) => {
   if (by === 'year') formatFunc = formatYear
 
   return items
-    .map((item) => {
-      return {
-        amount:
-          role === 'admin'
-            ? item.amountToZenpii.$numberDecimal
-            : item.amountToStore.$numberDecimal,
-        createdAt: formatFunc(item.createdAt)
+    ?.map((item) => {
+      if (role === 'admin') {
+        return {
+          amount: parseFloat(item.amountToZenpii.$numberDecimal),
+          createdAt: formatFunc(item.createdAt)
+        }
+      } else {
+        return {
+          amountToStore: parseFloat(item.amountToStore.$numberDecimal),
+          amountToZenpii: parseFloat(item.amountToZenpii.$numberDecimal),
+          createdAt: formatFunc(item.createdAt)
+        }
       }
     })
-    .reduce((acc, value) => {
+    ?.reduce((acc, value) => {
       let i = 0
       let flag = false
 
       while (i < acc.length) {
         if (acc[i][0] === value.createdAt) {
-          acc[i][1] = parseFloat(acc[i][1]) + parseFloat(value.amount)
+          if (role === 'admin') {
+            acc[i][1] += value.amount
+          } else {
+            acc[i][1] += value.amountToStore
+            acc[i][2] += value.amountToZenpii
+          }
           flag = true
           i = acc.length
         } else i++
       }
 
-      if (!flag) acc.push([value.createdAt, value.amount])
+      if (!flag) {
+        if (role === 'admin') {
+          acc.push([value.createdAt, value.amount])
+        } else {
+          acc.push([value.createdAt, value.amountToStore, value.amountToZenpii])
+        }
+      }
       return acc
     }, [])
 }

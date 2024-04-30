@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
@@ -7,11 +7,13 @@ import { getStoreLevel } from '../../apis/level'
 import StoreFollowLabel from '../label/StoreFollowLabel'
 import StarRating from '../label/StarRating'
 import FollowStoreButton from '../button/FollowStoreButton'
-import defaultImage from '../../assets/default.png'
+import Skeleton from 'react-loading-skeleton'
+
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const StoreCard = ({ store = {}, onRun }) => {
   const [storeValue, setStoreValue] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
   const init = async () => {
     let newStore = store
@@ -37,6 +39,7 @@ const StoreCard = ({ store = {}, onRun }) => {
     }
 
     setStoreValue(newStore)
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -63,6 +66,21 @@ const StoreCard = ({ store = {}, onRun }) => {
     })
   }
 
+  if (isLoading) {
+    return (
+      <div className='card border-0 m-auto'>
+        <div className='card-img-top cus-card-img-top'>
+          <Skeleton height={200} />
+        </div>
+        <div className='card-body border-top border-value'>
+          <Skeleton height={20} width={100} />
+          <Skeleton height={15} />
+          <Skeleton height={37} />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='card border-0 m-auto'>
       <Link
@@ -73,7 +91,7 @@ const StoreCard = ({ store = {}, onRun }) => {
         <div className='card-img-top cus-card-img-top'>
           <img
             loading='lazy'
-            src={storeValue.avatar ? IMG + storeValue.avatar : defaultImage}
+            src={IMG + storeValue.avatar}
             className='cus-card-img'
             alt={storeValue.name}
           />
@@ -83,7 +101,11 @@ const StoreCard = ({ store = {}, onRun }) => {
       <div className='card-body border-top border-value'>
         <small className='card-subtitle'>
           <div className='d-flex justify-content-between align-items-center'>
-            <StarRating stars={store.rating} />
+            {storeValue.rating ? (
+              <StarRating stars={storeValue.rating} />
+            ) : (
+              <Skeleton width={80} />
+            )}
             <span className=''>
               <StoreFollowLabel
                 numberOfFollowers={storeValue.numberOfFollowers}
@@ -111,8 +133,8 @@ const StoreCard = ({ store = {}, onRun }) => {
 
         {getToken() && (
           <FollowStoreButton
-            storeId={store._id}
-            isFollowing={store.isFollowing}
+            storeId={storeValue._id}
+            isFollowing={storeValue.isFollowing}
             className='w-100 mt-1'
             onRun={(store) => onHandleRun(store)}
           />

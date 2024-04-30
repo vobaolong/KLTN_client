@@ -63,12 +63,12 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
             image: '',
             isValidImage: true
           })
-          toast.success(data.success)
+          toast.success(t('toastSuccess.store.addCarousel'))
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.log('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -89,7 +89,7 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
         <div className='col-12'>
           <InputFile
             label=''
-            size='cover'
+            size='featured'
             value={featuredImage.image}
             defaultSrc={featuredImage.image}
             isValid={featuredImage.isValidImage}

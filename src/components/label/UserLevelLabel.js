@@ -8,7 +8,7 @@ const UserLevelLabel = ({ level = {}, detail = true }) => {
         className='badge cus-tooltip rounded-1'
         style={{ backgroundColor: level.color, color: 'high-muted-color' }}
       >
-        <i className='fa-solid fa-shield-alt'></i>
+        <i className='fa-solid fa-shield-halved'></i>
         {detail && <span className='ms-1'>{level.name}</span>}
       </span>
       {!detail ? (

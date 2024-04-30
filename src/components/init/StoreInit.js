@@ -8,9 +8,9 @@ import { getStore } from '../../apis/store'
 import { getStoreLevel } from '../../apis/level'
 import { countOrder } from '../../apis/order'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
-import Loading from '../ui/Loading'
 import Error from '../ui/Error'
-
+import Skeleton from 'react-loading-skeleton'
+import Loading from '../ui/Loading'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const StoreInit = ({ store, actions }) => {
@@ -22,7 +22,6 @@ const StoreInit = ({ store, actions }) => {
 
   const init = () => {
     setIsLoading(true)
-    setError('')
     getStore(storeId)
       .then(async (data) => {
         if (data.error) {
@@ -30,28 +29,24 @@ const StoreInit = ({ store, actions }) => {
           setIsLoading(false)
         } else {
           const newStore = data.store
-          //get level
           try {
             const res = await getStoreLevel(storeId)
             newStore.level = res.level
           } catch {
             newStore.level = {}
           }
-          //get count followers
           try {
             const res = await getNumberOfFollowers(storeId)
             newStore.numberOfFollowers = res.count
           } catch {
             newStore.numberOfFollowers = 0
           }
-          //check follow
           try {
             const res = await checkFollowingStore(_id, accessToken, storeId)
             newStore.isFollowing = res.success ? true : false
           } catch {
             newStore.isFollowing = false
           }
-          //get count orders
           try {
             const res1 = await countOrder('Delivered', '', storeId)
             const res2 = await countOrder('Cancelled', '', storeId)
@@ -67,7 +62,7 @@ const StoreInit = ({ store, actions }) => {
         }
       })
       .catch((error) => {
-        setError(error)
+        setError('Something went wrong')
         setIsLoading(false)
       })
   }
@@ -79,6 +74,7 @@ const StoreInit = ({ store, actions }) => {
   return isLoading ? (
     <div className='cus-position-relative-loading'>
       <Loading size='small' />
+      {/* <Skeleton width={200} height={35} /> */}
     </div>
   ) : (
     <div
@@ -91,7 +87,7 @@ const StoreInit = ({ store, actions }) => {
         className='your-store-img'
         alt='Store avatar'
       />
-      <span className='your-store-name unselect'>
+      <span className='your-store-name unselect res-hide-md'>
         {store.name}
         {error && <Error msg={error} />}
       </span>

@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { formatMonth } from '../../helper/humanReadable'
 import { listSellingProductsByStore } from '../../apis/product'
 import { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 const StoreLevelInfo = ({ store = {} }) => {
   const { t } = useTranslation()
   const percent = Math.round(
     (store?.numberOfSuccessfulOrders /
       (store?.numberOfSuccessfulOrders + store?.numberOfFailedOrders)) *
-      100 || 100
+      100
   )
-  const [numberOfProducts, setNumberOfProducts] = useState(0)
   const [initialNumberOfProducts, setInitialNumberOfProducts] = useState(0)
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const StoreLevelInfo = ({ store = {} }) => {
           if (initialNumberOfProducts === 0) {
             setInitialNumberOfProducts(newNumberOfProducts)
           }
-          setNumberOfProducts(newNumberOfProducts)
         }
       } catch (error) {
         console.error('Something went wrong:', error)
@@ -54,7 +53,7 @@ const StoreLevelInfo = ({ store = {} }) => {
       <div className='p-2'>
         <div className='row mb-2 gap-md-3 gap-sm-1'>
           <div className='row'>
-            <div className='col-xl-6 col-md-12'>
+            <div className='col-md-6 col-sm-12'>
               <Paragraph
                 label={
                   <span>
@@ -65,16 +64,20 @@ const StoreLevelInfo = ({ store = {} }) => {
                 colon
                 time={store.numberOfReviews}
                 value={
-                  <span className='text-primary'>
-                    {store.rating === 0 && store.numberOfReviews === 0
-                      ? '4'
-                      : store.rating}{' '}
-                    / 5 <i className='fa-solid fa-star text-warning'></i>
-                  </span>
+                  store.rating ? (
+                    <span className='text-primary'>
+                      {store.rating === 0 && store.numberOfReviews === 0
+                        ? '4'
+                        : store.rating}{' '}
+                      / 5 <i className='fa-solid fa-star text-warning'></i>
+                    </span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
                 }
               />
             </div>
-            <div className='col-xl-6 col-md-12'>
+            <div className='col-md-6 col-sm-12'>
               <Paragraph
                 label={
                   <span>
@@ -84,15 +87,17 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  <span className='text-primary'>
-                    {formatMonth(store.createdAt)}
-                  </span>
+                  store.createdAt ? (
+                    <span className='text-primary'>
+                      {formatMonth(store.createdAt)}
+                    </span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
                 }
               />
             </div>
-          </div>
-          <div className='row'>
-            <div className='col-lg-6 col-md-12'>
+            <div className='col-md-6 col-sm-12'>
               <Paragraph
                 label={
                   <span>
@@ -102,13 +107,17 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  <span className='text-primary'>
-                    {store.numberOfFollowers}
-                  </span>
+                  store.numberOfFollowers ? (
+                    <span className='text-primary'>
+                      {store.numberOfFollowers}
+                    </span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
                 }
               />
             </div>
-            <div className='col-lg-6 col-md-12'>
+            <div className='col-md-6 col-sm-12'>
               <Paragraph
                 label={
                   <span>
@@ -117,23 +126,35 @@ const StoreLevelInfo = ({ store = {} }) => {
                   </span>
                 }
                 colon
-                value={<span className='text-primary'>{percent} %</span>}
+                value={
+                  percent > 0 ? (
+                    <span className='text-primary'>{percent} %</span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
+                }
               />
             </div>
-          </div>
-          <div className='row'>
-            <Paragraph
-              label={
-                <span>
-                  <i className='fa-light fa-box me-2 text-secondary'></i>
-                  {t('storeDetail.numberOfProduct')}
-                </span>
-              }
-              colon
-              value={
-                <span className='text-primary'>{initialNumberOfProducts}</span>
-              }
-            />
+            <div className='col-md-6 col-sm-12'>
+              <Paragraph
+                label={
+                  <span>
+                    <i className='fa-light fa-box me-2 text-secondary'></i>
+                    {t('storeDetail.numberOfProduct')}
+                  </span>
+                }
+                colon
+                value={
+                  initialNumberOfProducts ? (
+                    <span className='text-primary'>
+                      {initialNumberOfProducts}
+                    </span>
+                  ) : (
+                    <Skeleton width={50} height={20} />
+                  )
+                }
+              />
+            </div>
           </div>
         </div>
       </div>

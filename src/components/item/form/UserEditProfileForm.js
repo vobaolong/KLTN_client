@@ -14,8 +14,7 @@ const UserEditProfileForm = ({
   email = '',
   phone = '',
   id_card = '',
-  googleId = false,
-  facebookId = false
+  googleId = false
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -98,7 +97,7 @@ const UserEditProfileForm = ({
 
   const onSubmit = () => {
     let user = { firstName: profile.firstName, lastName: profile.lastName }
-    if (!googleId && !facebookId && profile.email) user.email = profile.email
+    if (!googleId && profile.email) user.email = profile.email
     if (profile.phone) user.phone = profile.phone
     if (profile.id_card) user.id_card = profile.id_card
 
@@ -162,7 +161,7 @@ const UserEditProfileForm = ({
           />
         </div>
 
-        {!googleId && !facebookId && (
+        {!googleId && (
           <div className='col-12'>
             <Input
               type='text'

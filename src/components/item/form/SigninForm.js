@@ -8,6 +8,7 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+// import SocialForm from './SocialForm'
 
 const SigninForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
