@@ -87,7 +87,9 @@ const AdminUsersTable = ({ heading = false }) => {
       {heading && <h5 className='text-start'>{t('title.userInSystem')}</h5>}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <SearchInput onChange={handleChangeKeyword} />
+        <div className='mb-3'>
+          <SearchInput onChange={handleChangeKeyword} />
+        </div>
         <div className='table-scroll my-2'>
           <table className='table align-middle table-hover table-sm text-start'>
             <thead>

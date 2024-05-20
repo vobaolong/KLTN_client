@@ -234,31 +234,6 @@ export const vendorUpdateStatusOrder = async (
   }
 }
 
-export const adminUpdateStatusOrder = async (
-  userId,
-  token,
-  status,
-  orderId
-) => {
-  try {
-    const res = await fetch(
-      `${API}/order/update/for/admin/${orderId}/${userId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(status)
-      }
-    )
-    return await res.json()
-  } catch (error) {
-    return console.log(error)
-  }
-}
-
 export const countOrder = async (status, userId, storeId) => {
   try {
     const res = await fetch(

@@ -25,16 +25,19 @@ import { humanReadableDate } from '../../helper/humanReadable'
 const AdminUserLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
-  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
+  const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [editedLevel, setEditedLevel] = useState({})
   const [deletedLevel, setDeletedLevel] = useState({})
   const [restoredLevel, setRestoredLevel] = useState({})
   const [levels, setLevels] = useState([])
+  const { _id, accessToken } = getToken()
+
   const [pagination, setPagination] = useState({
     size: 0
   })
+
   const [filter, setFilter] = useState({
     search: '',
     sortBy: 'point',
@@ -43,9 +46,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
     page: 1
   })
 
-  const { _id, accessToken } = getToken()
-
-  const init = () => {
+  useEffect(() => {
     setIsLoading(true)
     listUserLevels(_id, accessToken, filter)
       .then((data) => {
@@ -64,10 +65,6 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         console.error('Something went wrong')
         setIsLoading(false)
       })
-  }
-
-  useEffect(() => {
-    init()
   }, [filter, run])
 
   const handleChangeKeyword = (keyword) => {
@@ -99,7 +96,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
 
   const handleDeleteLevel = (level) => {
     setDeletedLevel(level)
-    setIsConfirming(true)
+    setIsConfirmingDelete(true)
   }
 
   const handleRestoreLevel = (level) => {
@@ -144,7 +141,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
+      {isConfirmingDelete && (
         <ConfirmDialog
           title={t('levelDetail.delete')}
           message={
@@ -155,7 +152,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
           }
           color='danger'
           onSubmit={onSubmitDelete}
-          onClose={() => setIsConfirming(false)}
+          onClose={() => setIsConfirmingDelete(false)}
         />
       )}
       {isConfirmingRestore && (
@@ -178,7 +175,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <AdminCreateUserLevelItem onRun={() => setRun(!run)} />
         </div>
@@ -266,7 +263,8 @@ const AdminUserLevelsTable = ({ heading = false }) => {
                       onClick={() => handleEditLevel(level)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-duotone fa-pen-to-square'></i>
+                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                      <span className='res-hide'>{t('button.edit')}</span>
                     </button>
 
                     {!level.isDeleted ? (
@@ -276,7 +274,8 @@ const AdminUserLevelsTable = ({ heading = false }) => {
                         onClick={() => handleDeleteLevel(level)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     ) : (
                       <button
@@ -285,7 +284,8 @@ const AdminUserLevelsTable = ({ heading = false }) => {
                         onClick={() => handleRestoreLevel(level)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
+                        <span className='res-hide'>{t('button.restore')}</span>
                       </button>
                     )}
                   </td>

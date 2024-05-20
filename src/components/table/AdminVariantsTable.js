@@ -14,6 +14,7 @@ import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
 const AdminVariantsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -21,6 +22,7 @@ const AdminVariantsTable = ({ heading = false }) => {
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
+  const [error, setError] = useState('')
   const [deletedVariant, setDeletedVariant] = useState({})
   const [restoredVariant, setRestoredVariant] = useState({})
   const [variants, setVariants] = useState([])
@@ -38,11 +40,12 @@ const AdminVariantsTable = ({ heading = false }) => {
 
   const { _id, accessToken } = getToken()
 
-  const init = () => {
+  useEffect(() => {
+    let isMounted = true
     setIsLoading(true)
     listVariants(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setVariants(data.variants)
           setPagination({
@@ -51,16 +54,12 @@ const AdminVariantsTable = ({ heading = false }) => {
             pageCount: data.filter.pageCount
           })
         }
-        setIsLoading(false)
+        if (isMounted) setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
-        setIsLoading(false)
+        setError(`Error occurred: ${error.message}`)
+        if (isMounted) setIsLoading(false)
       })
-  }
-
-  useEffect(() => {
-    init()
   }, [filter, run])
 
   const handleChangeKeyword = (keyword) => {
@@ -100,7 +99,7 @@ const AdminVariantsTable = ({ heading = false }) => {
     setIsLoading(true)
     deleteVariant(_id, accessToken, deletedVariant._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.variant.delete'))
           setRun(!run)
@@ -108,7 +107,7 @@ const AdminVariantsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -117,7 +116,7 @@ const AdminVariantsTable = ({ heading = false }) => {
     setIsLoading(true)
     restoreVariant(_id, accessToken, restoredVariant._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.variant.restore'))
           setRun(!run)
@@ -125,7 +124,7 @@ const AdminVariantsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -133,6 +132,7 @@ const AdminVariantsTable = ({ heading = false }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirmingDelete && (
         <ConfirmDialog
           title={t('variantDetail.del')}
@@ -152,15 +152,15 @@ const AdminVariantsTable = ({ heading = false }) => {
       {heading && <h5 className='text-start'>{t('title.productVariants')}</h5>}
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <Link
             type='button'
             className='btn btn-primary ripple text-nowrap rounded-1'
             to='/admin/variant/create'
           >
-            <i className='fa-solid fa-plus'></i>
-            <span className='ms-1 res-hide'>{t('variantDetail.add')}</span>
+            <i className='fa-light fa-plus'></i>
+            <span className='ms-2 res-hide'>{t('variantDetail.add')}</span>
           </Link>
         </div>
 
@@ -169,7 +169,7 @@ const AdminVariantsTable = ({ heading = false }) => {
             <thead>
               <tr>
                 <th scope='col' className='text-center'></th>
-                <th scope='col' className=''>
+                <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -178,7 +178,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col' className=''>
+                <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
@@ -197,7 +197,7 @@ const AdminVariantsTable = ({ heading = false }) => {
                   />
                 </th>
                 <th scope='col'>
-                  <span style={{ fontWeight: '400' }}>{t('action')}</span>
+                  <span>{t('action')}</span>
                 </th>
               </tr>
             </thead>
@@ -234,7 +234,8 @@ const AdminVariantsTable = ({ heading = false }) => {
                       to={`/admin/variant/values/${variant._id}`}
                       title={t('button.detail')}
                     >
-                      <i className='fa-solid fa-circle-info'></i>
+                      <i className='d-none res-dis-sm fa-solid fa-circle-info'></i>
+                      <span className='res-hide'>{t('button.detail')}</span>
                     </Link>
 
                     <Link
@@ -243,7 +244,8 @@ const AdminVariantsTable = ({ heading = false }) => {
                       to={`/admin/variant/edit/${variant._id}`}
                       title={t('button.edit')}
                     >
-                      <i className='fa-duotone fa-pen-to-square'></i>
+                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                      <span className='res-hide'>{t('button.edit')}</span>
                     </Link>
 
                     {!variant.isDeleted ? (
@@ -253,16 +255,18 @@ const AdminVariantsTable = ({ heading = false }) => {
                         onClick={() => handleDelete(variant)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     ) : (
                       <button
                         type='button'
-                        className='btn btn-outline-success'
+                        className='btn btn-sm btn-outline-success'
                         onClick={() => handleRestore(variant)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
+                        <span className='res-hide'>{t('button.restore')}</span>
                       </button>
                     )}
                   </td>

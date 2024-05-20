@@ -26,8 +26,13 @@ import DropDownMenu from '../../ui/DropDownMenu'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-const IMG = process.env.REACT_APP_STATIC_URL
+import defaultImg from '../../../assets/default.webp'
 
+import socketIO from 'socket.io-client'
+const ENDPOINT = process.env.REACT_APP_SOCKET_URL || ''
+const socketId = socketIO(ENDPOINT, { transports: ['websocket'] })
+
+const IMG = process.env.REACT_APP_STATIC_URL
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 
 const CheckoutForm = ({
@@ -40,6 +45,8 @@ const CheckoutForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
+  const [deliveries, setDeliveries] = useState([])
+  const [order, setOrder] = useState({})
   const [updateDispatch] = useUpdateDispatch()
   const history = useHistory()
   const {
@@ -49,8 +56,6 @@ const CheckoutForm = ({
     addresses,
     level: userLevel
   } = useSelector((state) => state.account.user)
-  const [deliveries, setDeliveries] = useState([])
-  const [order, setOrder] = useState({})
 
   const init = async () => {
     try {
@@ -218,6 +223,10 @@ const CheckoutForm = ({
         if (data.error) toast.error(data.error)
         else {
           updateDispatch('account', data.user)
+          socketId.emit('notification', {
+            title: 'New order',
+            message: `Đặt hàng thành công`
+          })
           history.push('/account/purchase')
           toast.success(t('toastSuccess.order.create'))
         }
@@ -288,7 +297,6 @@ const CheckoutForm = ({
       })
     }
   }
-  console.log(items)
   const handlePayPalApprove = (data, actions) => {
     return actions.order.capture().then(function (details) {
       const { _id, accessToken } = getToken()
@@ -320,7 +328,6 @@ const CheckoutForm = ({
         isPaidBefore: true
       }
 
-      setError('')
       setIsLoading(true)
       createOrder(_id, accessToken, cartId, orderBody)
         .then((data) => {
@@ -332,10 +339,7 @@ const CheckoutForm = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
-          setTimeout(() => {
-            setError('')
-          }, 3000)
+          setError(`Server Error: ${error}`)
           setIsLoading(false)
         })
     })
@@ -352,379 +356,384 @@ const CheckoutForm = ({
           message={t('confirmDialog')}
         />
       )}
+      <div className='container-fluid'>
+        <form className='rounded-1 row border' onSubmit={handleSubmit}>
+          <div className='col-12 bg-primary rounded-top-1 p-2 px-3'>
+            <Logo navFor='user' width='130px' />
+          </div>
 
-      <form className='rounded-1 row' onSubmit={handleSubmit}>
-        <div className='col-12 bg-primary rounded-top-1 p-2 px-3'>
-          <Logo width='150px' />
-        </div>
-
-        <div className='col-xl-7 bg-value col-md-6'>
-          <div className='row my-2 p-3 box-shadow bg-body rounded-1 ms-0'>
-            <span style={{ fontSize: '1.2rem' }} className='fw-semibold col-12'>
-              {t('orderDetail.userReceiver')}
-            </span>
-            <hr className='my-2' />
-            <div className='col-6 d-flex justify-content-between align-items-end'>
-              <div className='flex-grow-1'>
-                <Input
-                  type='text'
-                  label={t('userDetail.firstName')}
-                  value={order.firstName}
-                  isValid={order.isValidFirstName}
-                  feedback={t('userDetail.validFirstName')}
-                  validator='name'
-                  required={true}
-                  onChange={(value) =>
-                    handleChange('firstName', 'isValidFirstName', value)
-                  }
-                  onValidate={(flag) =>
-                    handleValidate('isValidFirstName', flag)
-                  }
-                />
-              </div>
-            </div>
-            <div className='col-6 d-flex justify-content-between align-items-end'>
-              <div className='flex-grow-1'>
-                <Input
-                  type='text'
-                  label={t('userDetail.lastName')}
-                  ZX
-                  value={order.lastName}
-                  isValid={order.isValidLastName}
-                  feedback={t('userDetail.validLastName')}
-                  validator='name'
-                  required={true}
-                  onChange={(value) =>
-                    handleChange('lastName', 'isValidLastName', value)
-                  }
-                  onValidate={(flag) => handleValidate('isValidLastName', flag)}
-                />
-              </div>
-
-              <div className='d-inline-block position-relative ms-4'>
-                <div className='d-inline-block cus-tooltip'>
-                  <button
-                    className='btn btn-outline-primary ripple rounded-1'
-                    type='button'
-                    disabled={!!!firstName || !!!lastName}
-                    onClick={() =>
-                      setOrder({
-                        ...order,
-                        firstName: firstName,
-                        lastName: lastName,
-                        isValidFirstName: true,
-                        isValidLastName: true
-                      })
+          <div className='col-xl-7 col-md-6'>
+            <div className='row my-2 p-3 border bg-body rounded-1 ms-0'>
+              <span className='fw-semibold col-12 fs-12'>
+                {t('orderDetail.userReceiver')}
+              </span>
+              <hr className='my-2' />
+              <div className='col-6 d-flex justify-content-between align-items-end'>
+                <div className='flex-grow-1'>
+                  <Input
+                    type='text'
+                    label={t('userDetail.firstName')}
+                    value={order.firstName}
+                    isValid={order.isValidFirstName}
+                    feedback={t('userDetail.validFirstName')}
+                    validator='name'
+                    required={true}
+                    onChange={(value) =>
+                      handleChange('firstName', 'isValidFirstName', value)
                     }
-                  >
-                    <i className='fa-solid fa-user-large'></i>
-                  </button>
-                </div>
-                <small className='cus-tooltip-msg'>
-                  {t('orderDetail.useRegisterLastName')}
-                </small>
-              </div>
-            </div>
-            <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
-              <div className='flex-grow-1'>
-                <Input
-                  type='text'
-                  label={t('userDetail.phone')}
-                  value={order.phone}
-                  isValid={order.isValidPhone}
-                  feedback={t('userDetail.phoneValid')}
-                  validator='phone'
-                  required={true}
-                  onChange={(value) =>
-                    handleChange('phone', 'isValidPhone', value)
-                  }
-                  onValidate={(flag) => handleValidate('isValidPhone', flag)}
-                />
-              </div>
-
-              <div className='d-inline-block position-relative ms-4'>
-                <div className='d-inline-block cus-tooltip'>
-                  <button
-                    className='btn btn-outline-primary ripple rounded-1'
-                    type='button'
-                    disabled={!!!phone}
-                    onClick={() =>
-                      setOrder({
-                        ...order,
-                        phone: phone,
-                        isValidPhone: true
-                      })
+                    onValidate={(flag) =>
+                      handleValidate('isValidFirstName', flag)
                     }
-                  >
-                    <i className='fa-solid fa-phone'></i>
-                  </button>
-                </div>
-                <small className='cus-tooltip-msg'>
-                  {t('orderDetail.useRegisterPhone')}
-                </small>
-              </div>
-            </div>
-
-            <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
-              <div className='flex-grow-1'>
-                <DropDownMenu
-                  borderBtn={false}
-                  required={true}
-                  listItem={addresses?.map((a, i) => {
-                    const newA = {
-                      value: a,
-                      label: a
-                    }
-                    return newA
-                  })}
-                  value={order.address}
-                  setValue={(address) =>
-                    setOrder({
-                      ...order,
-                      address: address
-                    })
-                  }
-                  size='lg'
-                  label={t('userDetail.address')}
-                />
-
-                {addresses?.length <= 0 && (
-                  <small
-                    style={{
-                      marginTop: '-20px',
-                      display: 'block'
-                    }}
-                  >
-                    <Error msg='No address to choose, please add your address first!' />
-                  </small>
-                )}
-              </div>
-              <div className='mb-2 ms-4 position-relative'>
-                <div className='d-inline-block cus-tooltip'>
-                  <UserAddAddressItem
-                    count={addresses?.length}
-                    detail={false}
                   />
                 </div>
               </div>
-            </div>
-          </div>
-          <div className='row my-2 p-3 box-shadow bg-body rounded-1 ms-0'>
-            <span style={{ fontSize: '1.2rem' }} className='fw-semibold col-12'>
-              {t('orderDetail.deliveryUnit')}
-            </span>
-            <hr className='my-2' />
-            <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
-              {deliveries?.length > 0 && (
-                <DropDownMenu
-                  borderBtn={false}
-                  listItem={deliveries?.map((d, i) => {
-                    const newD = {
-                      value: d,
-                      label:
-                        d.name +
-                        ' (' +
-                        formatPrice(d.price.$numberDecimal) +
-                        '₫) - ' +
-                        d.description
+              <div className='col-6 d-flex justify-content-between align-items-end'>
+                <div className='flex-grow-1'>
+                  <Input
+                    type='text'
+                    label={t('userDetail.lastName')}
+                    ZX
+                    value={order.lastName}
+                    isValid={order.isValidLastName}
+                    feedback={t('userDetail.validLastName')}
+                    validator='name'
+                    required={true}
+                    onChange={(value) =>
+                      handleChange('lastName', 'isValidLastName', value)
                     }
-                    return newD
-                  })}
-                  required={true}
-                  value={order.delivery}
-                  setValue={(delivery) => {
-                    const { deliveryPrice, amountFromUser2 } = totalDelivery(
-                      delivery,
-                      userLevel
-                    )
-                    setOrder({
-                      ...order,
-                      delivery,
-                      deliveryId: delivery._id,
-                      deliveryPrice,
-                      amountFromUser2,
-                      amountFromUser: order.amountFromUser1 + amountFromUser2,
-                      amountToZenpii:
-                        order.amountFromUser1 +
-                        amountFromUser2 -
-                        order.amountToStore
-                    })
-                  }}
-                  size='lg'
-                  label={t('deliveryDetail.deliveryUnit')}
-                />
-              )}
-              <div className='d-inline-block position-relative ms-4 mb-2'>
-                <div className='d-inline-block'>
-                  <span className='btn btn-outline-primary default rounded-1'>
-                    <i className='fa-solid fa-truck'></i>
-                  </span>
+                    onValidate={(flag) =>
+                      handleValidate('isValidLastName', flag)
+                    }
+                  />
+                </div>
+
+                <div className='d-inline-block position-relative ms-4'>
+                  <div className='d-inline-block cus-tooltip'>
+                    <button
+                      className='btn btn-primary ripple rounded-1'
+                      type='button'
+                      disabled={!!!firstName || !!!lastName}
+                      onClick={() =>
+                        setOrder({
+                          ...order,
+                          firstName: firstName,
+                          lastName: lastName,
+                          isValidFirstName: true,
+                          isValidLastName: true
+                        })
+                      }
+                    >
+                      <i className='fa-light fa-user-large'></i>
+                    </button>
+                  </div>
+                  <small className='cus-tooltip-msg'>
+                    {t('orderDetail.useRegisterLastName')}
+                  </small>
+                </div>
+              </div>
+              <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
+                <div className='flex-grow-1'>
+                  <Input
+                    type='text'
+                    label={t('userDetail.phone')}
+                    value={order.phone}
+                    isValid={order.isValidPhone}
+                    feedback={t('userDetail.phoneValid')}
+                    validator='phone'
+                    required={true}
+                    onChange={(value) =>
+                      handleChange('phone', 'isValidPhone', value)
+                    }
+                    onValidate={(flag) => handleValidate('isValidPhone', flag)}
+                  />
+                </div>
+
+                <div className='d-inline-block position-relative ms-4'>
+                  <div className='d-inline-block cus-tooltip'>
+                    <button
+                      className='btn btn-primary ripple rounded-1'
+                      type='button'
+                      disabled={!!!phone}
+                      onClick={() =>
+                        setOrder({
+                          ...order,
+                          phone: phone,
+                          isValidPhone: true
+                        })
+                      }
+                    >
+                      <i className='fa-light fa-phone'></i>
+                    </button>
+                  </div>
+                  <small className='cus-tooltip-msg'>
+                    {t('orderDetail.useRegisterPhone')}
+                  </small>
+                </div>
+              </div>
+
+              <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
+                <div className='flex-grow-1'>
+                  <DropDownMenu
+                    borderBtn={false}
+                    required={true}
+                    listItem={addresses?.map((a, i) => {
+                      const newA = {
+                        value: a,
+                        label: a
+                      }
+                      return newA
+                    })}
+                    value={order.address}
+                    setValue={(address) =>
+                      setOrder({
+                        ...order,
+                        address: address
+                      })
+                    }
+                    size='lg'
+                    label={t('userDetail.address')}
+                  />
+
+                  {addresses?.length <= 0 && (
+                    <small
+                      style={{
+                        marginTop: '-20px',
+                        display: 'block'
+                      }}
+                    >
+                      <Error msg='No address to choose, please add your address first!' />
+                    </small>
+                  )}
+                </div>
+                <div className='mb-2 ms-4 position-relative'>
+                  <div className='d-inline-block cus-tooltip'>
+                    <UserAddAddressItem
+                      count={addresses?.length}
+                      detail={false}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='row my-2 p-3 border bg-body rounded-1 ms-0'>
+              <span
+                style={{ fontSize: '1.2rem' }}
+                className='fw-semibold col-12'
+              >
+                {t('orderDetail.deliveryUnit')}
+              </span>
+              <hr className='my-2' />
+              <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
+                {deliveries?.length > 0 && (
+                  <DropDownMenu
+                    borderBtn={false}
+                    listItem={deliveries?.map((d, i) => {
+                      const newD = {
+                        value: d,
+                        label:
+                          d.name +
+                          ' (' +
+                          formatPrice(d.price.$numberDecimal) +
+                          '₫) - ' +
+                          d.description
+                      }
+                      return newD
+                    })}
+                    required={true}
+                    value={order.delivery}
+                    setValue={(delivery) => {
+                      const { deliveryPrice, amountFromUser2 } = totalDelivery(
+                        delivery,
+                        userLevel
+                      )
+                      setOrder({
+                        ...order,
+                        delivery,
+                        deliveryId: delivery._id,
+                        deliveryPrice,
+                        amountFromUser2,
+                        amountFromUser: order.amountFromUser1 + amountFromUser2,
+                        amountToZenpii:
+                          order.amountFromUser1 +
+                          amountFromUser2 -
+                          order.amountToStore
+                      })
+                    }}
+                    size='lg'
+                    label={t('deliveryDetail.deliveryUnit')}
+                  />
+                )}
+                <div className='d-inline-block position-relative ms-4 mb-2'>
+                  <div className='d-inline-block'>
+                    <span className='btn btn-primary default rounded-1'>
+                      <i className='fa-light fa-truck'></i>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className='col-xl-5 bg-value col-md-6'>
-          <div className='my-2 p-3 box-shadow bg-body rounded-1'>
-            <span
-              style={{ fontSize: '1.2rem' }}
-              className='fw-semibold px-2 col-12'
-            >
-              {t('cartDetail.yourOrder')}
-            </span>
-            <hr className='my-2' />
-            <dl className='row px-2'>
-              {items.map((item) => (
-                <>
-                  <dt className='col-8 text-secondary fw-normal d-flex align-items-start gap-1 mb-1'>
-                    <img
-                      src={IMG + item.productId?.listImages[0]}
-                      alt=''
-                      style={{ width: '20%' }}
-                      className='rounded-2'
-                    />
-                    <small className='product-name'>
-                      {item.productId?.name}
-                    </small>
-                    <span className='text-nowrap'>x {item.count}</span>
+          <div className='col-xl-5 col-md-6'>
+            <div className='my-2 p-3 border bg-body rounded-1'>
+              <span
+                style={{ fontSize: '1.2rem' }}
+                className='fw-semibold px-2 col-12'
+              >
+                {t('cartDetail.yourOrder')}
+              </span>
+              <hr className='my-2' />
+              <dl className='row px-2'>
+                {items.map((item) => (
+                  <>
+                    <dt className='col-8 text-secondary fw-normal d-flex align-items-start gap-1 mb-1'>
+                      <img
+                        src={IMG + item.productId?.listImages[0] ?? defaultImg}
+                        alt=''
+                        className='rounded-2 border w-20'
+                      />
+                      <small className='product-name'>
+                        {item.productId?.name}
+                      </small>
+                      <span className='text-nowrap'>x {item.count}</span>
+                    </dt>
+                    <dd className='col-4'>
+                      <dl className='row'>
+                        <dd className='col-12 text-end'>
+                          <span className='fs-6'>
+                            {formatPrice(
+                              item.productId?.salePrice?.$numberDecimal *
+                                item.count
+                            )}
+                            <sup>₫</sup>
+                          </span>
+                        </dd>
+                      </dl>
+                    </dd>
+                  </>
+                ))}
+
+                <dt className='col-7 text-secondary fw-normal'>
+                  {t('cartDetail.subTotal')}
+                </dt>
+                <dd className='col-5'>
+                  <dl className='row'>
+                    <dd className='col-12 text-end'>
+                      <span className='fs-6'>
+                        {formatPrice(order.totalSalePrice)}
+                        <sup>₫</sup>
+                      </span>
+                    </dd>
+                  </dl>
+                </dd>
+                {order.totalSalePrice - order.amountFromUser1 > 0 && (
+                  <dt className='col-7 text-secondary fw-normal'>
+                    {t('cartDetail.zenpiiVoucherApplied')}
                   </dt>
-                  <dd className='col-4'>
+                )}
+                {order.totalSalePrice - order.amountFromUser1 > 0 && (
+                  <dd className='col-5'>
                     <dl className='row'>
                       <dd className='col-12 text-end'>
                         <span className='fs-6'>
+                          -{' '}
                           {formatPrice(
-                            item.productId?.salePrice?.$numberDecimal *
-                              item.count
+                            order.totalSalePrice - order.amountFromUser1
                           )}
                           <sup>₫</sup>
                         </span>
                       </dd>
                     </dl>
                   </dd>
-                </>
-              ))}
-
-              <dt className='col-7 text-secondary fw-normal'>
-                {t('cartDetail.subTotal')}
-              </dt>
-              <dd className='col-5'>
-                <dl className='row'>
-                  <dd className='col-12 text-end'>
-                    <span className='fs-6'>
-                      {formatPrice(order.totalSalePrice)}
-                      <sup>₫</sup>
-                    </span>
-                  </dd>
-                </dl>
-              </dd>
-              {order.totalSalePrice - order.amountFromUser1 > 0 && (
+                )}
                 <dt className='col-7 text-secondary fw-normal'>
-                  {t('cartDetail.zenpiiVoucherApplied')}
+                  {t('cartDetail.shippingFee')}
                 </dt>
-              )}
-              {order.totalSalePrice - order.amountFromUser1 > 0 && (
                 <dd className='col-5'>
                   <dl className='row'>
                     <dd className='col-12 text-end'>
                       <span className='fs-6'>
-                        -{' '}
-                        {formatPrice(
-                          order.totalSalePrice - order.amountFromUser1
-                        )}
+                        {formatPrice(order.deliveryPrice)}
                         <sup>₫</sup>
                       </span>
                     </dd>
                   </dl>
                 </dd>
-              )}
-              <dt className='col-7 text-secondary fw-normal'>
-                {t('cartDetail.shippingFee')}
-              </dt>
-              <dd className='col-5'>
-                <dl className='row'>
-                  <dd className='col-12 text-end'>
-                    <span className='fs-6'>
-                      {formatPrice(order.deliveryPrice)}
-                      <sup>₫</sup>
-                    </span>
+                {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                  <dt className='col-7 text-secondary fw-normal'>
+                    {t('cartDetail.discountShippingFee')}
+                  </dt>
+                )}
+                {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                  <dd className='col-5'>
+                    <dl className='row'>
+                      <dd className='col-12 text-end'>
+                        <span className='fs-6'>
+                          -{' '}
+                          {formatPrice(
+                            order.deliveryPrice - order.amountFromUser2
+                          )}
+                          <sup>₫</sup>
+                        </span>
+                      </dd>
+                    </dl>
                   </dd>
-                </dl>
-              </dd>
-              {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                )}
+
                 <dt className='col-7 text-secondary fw-normal'>
-                  {t('cartDetail.discountShippingFee')}
+                  {t('cartDetail.total')}
                 </dt>
-              )}
-              {order.deliveryPrice - order.amountFromUser2 > 0 && (
                 <dd className='col-5'>
                   <dl className='row'>
-                    <dd className='col-12 text-end'>
-                      <span className='fs-6'>
-                        -{' '}
-                        {formatPrice(
-                          order.deliveryPrice - order.amountFromUser2
-                        )}
-                        <sup>₫</sup>
-                      </span>
-                    </dd>
+                    <span className='col-12 text-primary fw-bold fs-6 text-end'>
+                      {formatPrice(order.amountFromUser)}
+                      <sup>₫</sup>
+                    </span>
                   </dl>
                 </dd>
+              </dl>
+
+              {error && (
+                <div className='my-1'>
+                  <Error msg={error} />
+                </div>
               )}
 
-              <dt className='col-7 text-secondary fw-normal'>
-                {t('cartDetail.total')}
-              </dt>
-              <dd className='col-5'>
-                <dl className='row'>
-                  <span className='col-12 text-primary fw-bold fs-6 text-end'>
-                    {formatPrice(order.amountFromUser)}
-                    <sup>₫</sup>
-                  </span>
-                </dl>
-              </dd>
-            </dl>
+              <div className='mt-2'>
+                <button
+                  type='submit'
+                  className='btn btn-primary btn-lg ripple w-100 mb-1'
+                  onClick={handleSubmit}
+                  disabled={!order.address || !order.phone}
+                >
+                  {t('orderDetail.cod')}
+                </button>
 
-            {error && (
-              <div className='my-1'>
-                <Error msg={error} />
-              </div>
-            )}
-
-            <div className='mt-2'>
-              <button
-                type='submit'
-                className='btn btn-primary btn-lg ripple w-100 mb-1'
-                onClick={handleSubmit}
-                disabled={!order.address || !order.phone}
-              >
-                {t('orderDetail.cod')}
-              </button>
-
-              <div style={{ position: 'relative', zIndex: '1' }}>
-                <PayPalButton
-                  options={{
-                    clientId: CLIENT_ID
-                  }}
-                  style={{
-                    layout: 'horizontal',
-                    tagline: 'false'
-                  }}
-                  createOrder={(data, actions) =>
-                    handlePayPalCreateOrder(data, actions)
-                  }
-                  onApprove={(data, actions) =>
-                    handlePayPalApprove(data, actions)
-                  }
-                  onError={(err) => setError(String(err).slice(0, 300))}
-                  onCancel={() => setIsLoading(false)}
-                  disabled={paypalDisabled}
-                />
+                <div style={{ position: 'relative', zIndex: '1' }}>
+                  <PayPalButton
+                    options={{
+                      clientId: CLIENT_ID
+                    }}
+                    style={{
+                      layout: 'horizontal',
+                      tagline: 'false'
+                    }}
+                    createOrder={(data, actions) =>
+                      handlePayPalCreateOrder(data, actions)
+                    }
+                    onApprove={(data, actions) =>
+                      handlePayPalApprove(data, actions)
+                    }
+                    onError={(err) => setError(String(err).slice(0, 300))}
+                    onCancel={() => setIsLoading(false)}
+                    disabled={paypalDisabled}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 }

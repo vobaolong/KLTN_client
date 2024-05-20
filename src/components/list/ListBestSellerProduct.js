@@ -47,7 +47,11 @@ const settings = {
   ]
 }
 
-const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
+const ListBestSellerProducts = ({
+  sortBy = '',
+  heading = '',
+  categoryId = ''
+}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState([])
 
@@ -59,7 +63,7 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
       categoryId,
       minPrice: '',
       maxPrice: '',
-      sortBy: 'sold',
+      sortBy: sortBy,
       order: 'desc',
       limit: 20,
       page: 1
@@ -81,7 +85,7 @@ const ListBestSellerProducts = ({ heading = '', categoryId = '' }) => {
 
   return (
     <div className='position-relative bg-body box-shadow rounded-2 p-3'>
-      {heading && <h5 style={{ color: 'var(--muted-color)' }}>{heading}</h5>}
+      {heading && <h5 className='text-dark-emphasis'>{heading}</h5>}
       {isLoading && <Loading />}
       <div className='slider-container'>
         <Slider {...settings}>

@@ -15,7 +15,6 @@ import OrderStatusLabel from '../label/OrderStatusLabel'
 import Paragraph from '../ui/Paragraph'
 import ListOrderItems from '../list/ListOrderItems'
 import VendorUpdateOrderStatus from '../button/VendorUpdateOrderStatus'
-import AdminUpdateOrderStatus from '../button/AdminUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -38,7 +37,6 @@ const OrderDetailInfo = ({
   const { level: userLevel } = useSelector((state) => state.account.user)
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     if (by === 'store')
       getOrderByStore(_id, accessToken, orderId, storeId)
@@ -93,8 +91,8 @@ const OrderDetailInfo = ({
   }, [orderId, storeId, by, run, userLevel])
 
   const totalOrderSalePrice = items.reduce((total, item) => {
-    if (item.productId && item.productId.salePrice) {
-      return total + item.productId.salePrice.$numberDecimal * item.count
+    if (item.productId?.salePrice) {
+      return total + item.productId?.salePrice.$numberDecimal * item.count
     }
     return total
   }, 0)
@@ -109,269 +107,261 @@ const OrderDetailInfo = ({
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      <div className='d-flex flex-wrap justify-content-start align-items-center pb-2'>
-        <h5 className='mx-1 orderID text-uppercase pe-3 border-end'>
-          {t('orderDetail.id')} #{order._id}
-        </h5>
+      {error ? (
+        <Error msg={error} />
+      ) : (
+        <>
+          <div className='d-flex flex-wrap justify-content-start align-items-center pb-2'>
+            <h5 className='mx-1 orderID text-uppercase pe-3 border-end'>
+              {t('orderDetail.id')} #{order._id}
+            </h5>
 
-        {(!isEditable ||
-          (isEditable &&
-            by === 'store' &&
-            order.status !== 'Not processed' &&
-            order.status !== 'Processing') ||
-          (isEditable && by === 'admin' && order.status !== 'Shipped')) && (
-          <span className='fs-6 mb-2 ms-3 status'>
-            <OrderStatusLabel status={order.status} />
-            <span className='d-inline-block position-relative'>
-              <i
-                style={{ cursor: 'help' }}
-                className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
-              ></i>
-              <small className='cus-tooltip-msg'>
-                {t('orderDetail.lastUpdateTime')}{' '}
-                {humanReadableDate(order.updatedAt)}
-              </small>
-            </span>
-          </span>
-        )}
-        {by === 'user' && order.status === 'Not processed' && (
-          <div className='ms-4 mb-2'>
-            <UserCancelOrderButton
-              orderId={order._id}
-              status={order.status}
-              detail={true}
-              createdAt={order.createdAt}
-              onRun={() => setRun(!run)}
-            />
-          </div>
-        )}
-        {isEditable &&
-          by === 'store' &&
-          (order.status === 'Not processed' ||
-            order.status === 'Processing') && (
-            <div className='mx-4 mb-2'>
-              <VendorUpdateOrderStatus
-                storeId={storeId}
-                orderId={orderId}
-                status={order.status}
-                onRun={() => setRun(!run)}
-              />
-            </div>
-          )}
-
-        {isEditable && by === 'admin' && order.status === 'Shipped' && (
-          <div className='mx-4 mb-2'>
-            <AdminUpdateOrderStatus
-              storeId={storeId}
-              orderId={orderId}
-              status={order.status}
-              onRun={() => setRun(!run)}
-            />
-          </div>
-        )}
-      </div>
-      {error && <Error msg={error} />}
-
-      <div className='container-fluid mb-3'>
-        <div className='row py-2 border rounded-1'>
-          <div className='col-sm-6'>
-            <Paragraph
-              label={t('orderDetail.date')}
-              colon
-              value={humanReadableDate(order.createdAt)}
-            />
-          </div>
-          <div className='col-sm-6'>
-            <Paragraph
-              label={t('orderDetail.store')}
-              colon
-              value={
-                <Link
-                  className='link-hover'
-                  title=''
-                  to={`/store/${order.storeId?._id}`}
-                >
-                  {order.storeId?.name}
-                </Link>
-              }
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className='container-fluid mb-3'>
-        <div className='row py-2 border rounded-1'>
-          <div className='col-sm-6 border-end'>
-            <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
-              Địa Chỉ Người Gửi
-            </p>
-            <div>
-              <Paragraph value={order.storeId?.name} />
-              <Paragraph value={order.storeId?.address} />
-            </div>
-          </div>
-          <div className='col-sm-6'>
-            <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
-              {t('orderDetail.userReceiver')}
-            </p>
-            <div>
-              <Paragraph value={`${order.firstName} ${order.lastName}`} />
-              <Paragraph value={order.phone} />
-              <Paragraph value={order.address} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='container-fluid mb-3'>
-        <div className='row py-2 border rounded-1'>
-          <div className='border-bottom pb-2'>
-            <p style={{ fontWeight: '500' }}>{t('orderDetail.ship_payment')}</p>
-          </div>
-          <div>
-            <Paragraph
-              label={t('orderDetail.deliveryUnit')}
-              colon
-              value={order.deliveryId?.name}
-            />
-            <Paragraph
-              label={t('orderDetail.deliveryId')}
-              colon
-              value={order.deliveryId?._id.toUpperCase()}
-            />
-            <Paragraph
-              label={t('orderDetail.paymentMethod')}
-              colon
-              value={
-                order.isPaidBefore
-                  ? t('orderDetail.onlinePayment')
-                  : t('orderDetail.cod')
-              }
-            />
-          </div>
-        </div>
-      </div>
-      <div className='container-fluid mb-3'>
-        <div className='row py-2 border rounded-1'>
-          <div className='border-bottom pb-2'>
-            <p style={{ fontWeight: '500' }}>{t('orderDetail.listProducts')}</p>
-          </div>
-          <ListOrderItems
-            orderId={orderId}
-            storeId={storeId}
-            by={by}
-            status={order.status}
-          />
-          <div className='d-flex justify-content-end border-top flex-column align-items-end'>
-            {by === 'user' && getToken().role === 'user' && (
-              <table className='col-4 text-start table-sm'>
-                <tbody>
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      {t('cartDetail.subTotal')}
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        {formatPrice(totalOrderSalePrice)}
-                        <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
-                  {saleFromSystem !== 0 && (
-                    <tr className='border-bottom'>
-                      <th
-                        style={{
-                          fontSize: '0.9rem',
-                          fontWeight: '500',
-                          backgroundColor: 'transparent'
-                        }}
-                        scope='col'
-                      >
-                        {t('cartDetail.zenpiiVoucherApplied')}
-                      </th>
-                      <td className='text-end'>
-                        <span style={{ fontSize: '0.9rem' }}>
-                          -{formatPrice(saleFromSystem)}
-                          <sup>₫</sup>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
-                  <tr className='border-bottom'>
-                    <th
-                      style={{
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        backgroundColor: 'transparent'
-                      }}
-                      scope='col'
-                    >
-                      {t('cartDetail.shippingFee')}
-                    </th>
-                    <td className='text-end'>
-                      <span style={{ fontSize: '0.9rem' }}>
-                        {formatPrice(order.deliveryId?.price?.$numberDecimal)}
-                        <sup>₫</sup>
-                      </span>
-                    </td>
-                  </tr>
-                  {saleFromShipping !== 0 && (
-                    <tr className='border-bottom'>
-                      <th
-                        style={{
-                          fontSize: '0.9rem',
-                          fontWeight: '500',
-                          backgroundColor: 'transparent'
-                        }}
-                        scope='col'
-                      >
-                        {t('cartDetail.discountShippingFee')}
-                      </th>
-                      <td className='text-end'>
-                        <span style={{ fontSize: '0.9rem' }}>
-                          -{formatPrice(saleFromShipping)}
-                          <sup>₫</sup>
-                        </span>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            )}
-            <span
-              className={` ${
-                getToken().role === 'user' ? 'col-4' : 'col-3'
-              } justify-content-between gap-3 align-items-center d-flex pt-2`}
-            >
-              <b className='text-muted'>{t('cartDetail.total')}:</b>
-              <span
-                style={{ fontSize: '1.4rem' }}
-                className='text-primary fw-bold'
-              >
-                {formatPrice(order.amountFromUser?.$numberDecimal)}
-                <sup>₫</sup>
-                {by !== 'user' && (
-                  <span
-                    title={t('orderDetail.includedDiscount')}
-                    className='d-inline-block position-relative ms-3'
-                  >
-                    <i
-                      style={{ fontSize: '15px', cursor: 'help' }}
-                      className='fa-solid fa-circle-info ms-1 border rounded-circle text-secondary opacity-50'
-                    ></i>
-                  </span>
-                )}
+            {(!isEditable ||
+              (isEditable &&
+                by === 'store' &&
+                order.status !== 'Not processed' &&
+                order.status !== 'Processing' &&
+                order.status !== 'Shipped')) && (
+              <span className='fs-6 mb-2 ms-3 status'>
+                <OrderStatusLabel status={order.status} />
+                <span className='d-inline-block position-relative'>
+                  <i
+                    style={{ cursor: 'help' }}
+                    className='fa-solid fa-circle-info ms-1 border rounded-circle cus-tooltip text-muted opacity-50'
+                  ></i>
+                  <small className='cus-tooltip-msg'>
+                    {t('orderDetail.lastUpdateTime')}{' '}
+                    {humanReadableDate(order.updatedAt)}
+                  </small>
+                </span>
               </span>
-            </span>
+            )}
+            {by === 'user' && order.status === 'Not processed' && (
+              <div className='ms-4 mb-2'>
+                <UserCancelOrderButton
+                  orderId={order._id}
+                  status={order.status}
+                  detail={true}
+                  createdAt={order.createdAt}
+                  onRun={() => setRun(!run)}
+                />
+              </div>
+            )}
+            {isEditable &&
+              by === 'store' &&
+              (order.status === 'Not processed' ||
+                order.status === 'Processing' ||
+                order.status === 'Shipped') && (
+                <div className='mx-4 mb-2'>
+                  <VendorUpdateOrderStatus
+                    storeId={storeId}
+                    orderId={orderId}
+                    status={order.status}
+                    onRun={() => setRun(!run)}
+                  />
+                </div>
+              )}
           </div>
-        </div>
-      </div>
+
+          <div className='container-fluid mb-3'>
+            <div className='row py-2 border rounded-1'>
+              <div className='col-sm-6'>
+                <Paragraph
+                  label={t('orderDetail.date')}
+                  colon
+                  value={humanReadableDate(order.createdAt)}
+                />
+              </div>
+              <div className='col-sm-6'>
+                <Paragraph
+                  label={t('orderDetail.store')}
+                  colon
+                  value={
+                    <Link
+                      className='link-hover'
+                      title=''
+                      to={`/store/${order.storeId?._id}`}
+                    >
+                      {order.storeId?.name}
+                    </Link>
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className='container-fluid mb-3'>
+            <div className='row py-2 border rounded-1'>
+              <div className='col-sm-6 border-end'>
+                <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
+                  Địa Chỉ Người Gửi
+                </p>
+                <div>
+                  <Paragraph value={order.storeId?.name} />
+                  <Paragraph value={order.storeId?.address} />
+                </div>
+              </div>
+              <div className='col-sm-6'>
+                <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
+                  {t('orderDetail.userReceiver')}
+                </p>
+                <div>
+                  <Paragraph value={`${order.firstName} ${order.lastName}`} />
+                  <Paragraph value={order.phone} />
+                  <Paragraph value={order.address} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='container-fluid mb-3'>
+            <div className='row py-2 border rounded-1'>
+              <div className='border-bottom pb-2'>
+                <p style={{ fontWeight: '500' }}>
+                  {t('orderDetail.ship_payment')}
+                </p>
+              </div>
+              <div>
+                <Paragraph
+                  label={t('orderDetail.deliveryUnit')}
+                  colon
+                  value={order.deliveryId?.name}
+                />
+                <Paragraph
+                  label={t('orderDetail.deliveryId')}
+                  colon
+                  value={order.deliveryId?._id.toUpperCase()}
+                />
+                <Paragraph
+                  label={t('orderDetail.paymentMethod')}
+                  colon
+                  value={
+                    order.isPaidBefore
+                      ? t('orderDetail.onlinePayment')
+                      : t('orderDetail.cod')
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className='container-fluid mb-3'>
+            <div className='row py-2 border rounded-1'>
+              <div className='border-bottom pb-2'>
+                <p className='fw-normal'>{t('orderDetail.listProducts')}</p>
+              </div>
+              <ListOrderItems
+                orderId={orderId}
+                storeId={storeId}
+                by={by}
+                status={order.status}
+              />
+              <div className='d-flex justify-content-end border-top flex-column align-items-end'>
+                {by === 'user' && getToken().role === 'user' && (
+                  <table className='col-4 text-start table-sm'>
+                    <tbody>
+                      <tr className='border-bottom'>
+                        <th scope='col' className='transparent fw-normal'>
+                          {t('cartDetail.subTotal')}
+                        </th>
+                        <td className='text-end'>
+                          <span style={{ fontSize: '0.9rem' }}>
+                            {formatPrice(totalOrderSalePrice)}
+                            <sup>₫</sup>
+                          </span>
+                        </td>
+                      </tr>
+                      {saleFromSystem !== 0 && (
+                        <tr className='border-bottom'>
+                          <th
+                            style={{
+                              fontSize: '0.9rem',
+                              fontWeight: '500',
+                              backgroundColor: 'transparent'
+                            }}
+                            scope='col'
+                          >
+                            {t('cartDetail.zenpiiVoucherApplied')}
+                          </th>
+                          <td className='text-end'>
+                            <span style={{ fontSize: '0.9rem' }}>
+                              -{formatPrice(saleFromSystem)}
+                              <sup>₫</sup>
+                            </span>
+                          </td>
+                        </tr>
+                      )}
+                      <tr className='border-bottom'>
+                        <th
+                          style={{
+                            fontSize: '0.9rem',
+                            fontWeight: '500',
+                            backgroundColor: 'transparent'
+                          }}
+                          scope='col'
+                        >
+                          {t('cartDetail.shippingFee')}
+                        </th>
+                        <td className='text-end'>
+                          <span style={{ fontSize: '0.9rem' }}>
+                            {formatPrice(
+                              order.deliveryId?.price?.$numberDecimal
+                            )}
+                            <sup>₫</sup>
+                          </span>
+                        </td>
+                      </tr>
+                      {saleFromShipping !== 0 && (
+                        <tr className='border-bottom'>
+                          <th
+                            style={{
+                              fontSize: '0.9rem',
+                              fontWeight: '500',
+                              backgroundColor: 'transparent'
+                            }}
+                            scope='col'
+                          >
+                            {t('cartDetail.discountShippingFee')}
+                          </th>
+                          <td className='text-end'>
+                            <span style={{ fontSize: '0.9rem' }}>
+                              -{formatPrice(saleFromShipping)}
+                              <sup>₫</sup>
+                            </span>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                )}
+                <span
+                  className={` ${
+                    getToken().role === 'user' ? 'col-4' : 'col-3'
+                  } justify-content-between gap-3 align-items-center d-flex pt-2`}
+                >
+                  <b className='text-muted'>{t('cartDetail.total')}:</b>
+                  <span
+                    style={{ fontSize: '1.4rem' }}
+                    className='text-primary fw-bold'
+                  >
+                    {formatPrice(order.amountFromUser?.$numberDecimal)}
+                    <sup>₫</sup>
+                    {by !== 'user' && (
+                      <span
+                        title={t('orderDetail.includedDiscount')}
+                        className='d-inline-block position-relative ms-3'
+                      >
+                        <i
+                          style={{ fontSize: '15px', cursor: 'help' }}
+                          className='fa-solid fa-circle-info ms-1 border rounded-circle text-secondary opacity-50'
+                        ></i>
+                      </span>
+                    )}
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

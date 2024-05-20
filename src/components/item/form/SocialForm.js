@@ -1,15 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { authSocial, setToken } from '../../../apis/auth'
 import { GoogleLogin } from 'react-google-login'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
+import { gapi } from 'gapi-script'
 // import { GoogleLogin } from '@react-oauth/google'
 
 const SocialForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const history = useHistory()
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        scope: 'email'
+      })
+    }
+
+    gapi.load('client:auth2', start)
+  }, [])
+
   const onSuccess = (res) => {
     if (!res.profileObj && !res.accessToken) {
       setIsLoading(false)
@@ -40,7 +53,7 @@ const SocialForm = () => {
         }
       })
       .catch((error) => {
-        console.log('Server error!')
+        setError('Server error!')
         setIsLoading(false)
       })
   }
@@ -68,7 +81,7 @@ const SocialForm = () => {
         onSuccess={onSuccess}
         onFailure={onFailure}
         onRequest={onRequest}
-        cookiePolicy={'single_host_origin'}
+        // cookiePolicy={'single_host_origin'}
         render={(renderProps) => (
           <button
             type='button'

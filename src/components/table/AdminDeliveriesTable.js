@@ -21,11 +21,13 @@ import ShowResult from '../ui/ShowResult'
 import { formatPrice } from '../../helper/formatPrice'
 import { toast } from 'react-toastify'
 import { humanReadableDate } from '../../helper/humanReadable'
+import Error from '../ui/Error'
 
 const AdminDeliveriesTable = ({ heading = false }) => {
   const { t } = useTranslation()
   const [run, setRun] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [editedDelivery, setEditedDelivery] = useState({})
@@ -45,11 +47,12 @@ const AdminDeliveriesTable = ({ heading = false }) => {
 
   const { _id, accessToken } = getToken()
 
-  const init = () => {
+  useEffect(() => {
+    setError('')
     setIsLoading(true)
     listDeliveries(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setDeliveries(data.deliveries)
           setPagination({
@@ -61,13 +64,9 @@ const AdminDeliveriesTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
-  }
-
-  useEffect(() => {
-    init()
   }, [filter, run])
 
   const handleChangeKeyword = (keyword) => {
@@ -111,7 +110,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
     setIsLoading(true)
     deleteDelivery(_id, accessToken, deletedDelivery._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.deliveryUnit.delete'))
           setRun(!run)
@@ -119,7 +118,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -128,7 +127,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
     setIsLoading(true)
     restoreDelivery(_id, accessToken, restoredDelivery._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.deliveryUnit.restore'))
           setRun(!run)
@@ -136,7 +135,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -144,6 +143,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.deleteDelivery')}
@@ -167,7 +167,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <AdminCreateDeliveryItem onRun={() => setRun(!run)} />
         </div>
@@ -176,7 +176,9 @@ const AdminDeliveriesTable = ({ heading = false }) => {
           <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
-                <th scope='col' className='text-center'></th>
+                <th scope='col' className='text-center'>
+                  #
+                </th>
                 <th scope='col'>
                   <SortByButton
                     currentOrder={filter.order}
@@ -196,9 +198,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
                   />
                 </th>
                 <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('deliveryDetail.description')}
-                  </span>
+                  <span>{t('deliveryDetail.description')}</span>
                 </th>
                 <th scope='col'>
                   <SortByButton
@@ -218,11 +218,7 @@ const AdminDeliveriesTable = ({ heading = false }) => {
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
-                <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('action')}
-                  </span>
-                </th>
+                <th scope='col'>{t('action')}</th>
               </tr>
             </thead>
             <tbody>
@@ -265,7 +261,8 @@ const AdminDeliveriesTable = ({ heading = false }) => {
                       onClick={() => handleEditCommission(delivery)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-duotone fa-pen-to-square'></i>
+                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                      <span className='res-hide'>{t('button.edit')}</span>
                     </button>
 
                     {!delivery.isDeleted ? (
@@ -275,7 +272,8 @@ const AdminDeliveriesTable = ({ heading = false }) => {
                         onClick={() => handleDeleteCommission(delivery)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     ) : (
                       <button
@@ -284,7 +282,8 @@ const AdminDeliveriesTable = ({ heading = false }) => {
                         onClick={() => handleRestoreCommission(delivery)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
+                        <span className='res-hide'>{t('button.restore')}</span>
                       </button>
                     )}
                   </td>

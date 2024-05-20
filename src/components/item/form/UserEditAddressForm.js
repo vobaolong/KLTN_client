@@ -15,9 +15,9 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const [isConfirming, setIsConfirming] = useState(false)
   const [address, setAddress] = useState({
     street: oldAddress.split(', ')[0],
-    ward: oldAddress.split(', ')[1],
+    commune: oldAddress.split(', ')[1],
     district: oldAddress.split(', ')[2],
-    city: oldAddress.split(', ')[3]
+    province: oldAddress.split(', ')[3]
   })
 
   const [updateDispatch] = useUpdateDispatch()
@@ -26,13 +26,13 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   useEffect(() => {
     setAddress({
       street: oldAddress.split(', ')[0],
-      ward: oldAddress.split(', ')[1],
+      commune: oldAddress.split(', ')[1],
       district: oldAddress.split(', ')[2],
-      city: oldAddress.split(', ')[3],
+      province: oldAddress.split(', ')[3],
       isValidStreet: true,
-      isValidWard: true,
+      isValidCommune: true,
       isValidDistrict: true,
-      isValidCity: true
+      isValidProvince: true
     })
   }, [oldAddress, index])
 
@@ -54,27 +54,33 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const { street, ward, district, city } = address
-    if (!street || !ward || !district || !city) {
+    const { street, commune, district, province } = address
+    if (!street || !commune || !district || !province) {
       setAddress({
         ...address,
         isValidStreet: regexTest('address', street),
-        isValidWard: regexTest('address', ward),
+        isValidCommune: regexTest('address', commune),
         isValidDistrict: regexTest('address', district),
-        isValidCity: regexTest('address', city)
+        isValidProvince: regexTest('address', province)
       })
       return
     }
 
-    const { isValidStreet, isValidWard, isValidDistrict, isValidCity } = address
-    if (!isValidStreet || !isValidWard || !isValidDistrict || !isValidCity)
+    const { isValidStreet, isValidCommune, isValidDistrict, isValidProvince } =
+      address
+    if (
+      !isValidStreet ||
+      !isValidCommune ||
+      !isValidDistrict ||
+      !isValidProvince
+    )
       return
 
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
-    const addressString = `${address.street}, ${address.ward}, ${address.district}, ${address.city}`
+    const addressString = `${address.street}, ${address.commune}, ${address.district}, ${address.province}`
 
     setIsLoading(true)
     updateAddress(_id, accessToken, index, { address: addressString })
@@ -121,14 +127,16 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('addressForm.ward')}
+            label={t('addressForm.commune')}
             required={true}
-            value={address.ward}
-            isValid={address.isValidWard}
-            feedback={t('addressFormValid.wardValid')}
+            value={address.commune}
+            isValid={address.isValidCommune}
+            feedback={t('addressFormValid.communeValid')}
             validator='address'
-            onChange={(value) => handleChange('ward', 'isValidWard', value)}
-            onValidate={(flag) => handleValidate('isValidWard', flag)}
+            onChange={(value) =>
+              handleChange('commune', 'isValidCommune', value)
+            }
+            onValidate={(flag) => handleValidate('isValidCommune', flag)}
           />
         </div>
         <div className='col-12'>
@@ -150,14 +158,16 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label={t('addressForm.city')}
+            label={t('addressForm.province')}
             required={true}
-            value={address.city}
-            isValid={address.isValidCity}
-            feedback={t('addressFormValid.cityValid')}
+            value={address.province}
+            isValid={address.isValidProvince}
+            feedback={t('addressFormValid.provinceValid')}
             validator='address'
-            onChange={(value) => handleChange('city', 'isValidCity', value)}
-            onValidate={(flag) => handleValidate('isValidCity', flag)}
+            onChange={(value) =>
+              handleChange('province', 'isValidProvince', value)
+            }
+            onValidate={(flag) => handleValidate('isValidProvince', flag)}
           />
         </div>
 

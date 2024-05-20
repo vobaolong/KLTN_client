@@ -1,6 +1,5 @@
 const API = process.env.REACT_APP_API_URL
 
-//localStorage token
 export const setToken = (data, next) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('jwt', JSON.stringify(data))

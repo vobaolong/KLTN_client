@@ -10,7 +10,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar'>
-      <div className='d-flex justify-content-center align-items-center res-hide-lg border-bottom pb-2'>
+      <div className='d-flex justify-content-center align-items-center res-hide pb-2'>
         <span className='cus-sidebar-item--db d-flex align-items-end gap-1'>
           <img
             loading='lazy'
@@ -36,8 +36,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
           ></i>
         </span>
       </div>
+      <hr className='res-hide' />
       <ul
-        className={`pt-2 nav nav-pills flex-column mb-auto justify-content-around ${
+        className={`nav nav-pills flex-column mb-auto justify-content-around gap-1 ${
           isCollapsed ? 'text-center' : ''
         }`}
       >
@@ -49,9 +50,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === store._id ? 'fa-solid' : 'fa-light'
-              }  fa-chart-line`}
+              className={`${path === store._id ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center fa-chart-line`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
@@ -69,9 +70,8 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === 'profile' ? 'fa-solid' : 'fa-light'
-              }  fa-store`}
+              className={`${path === 'profile' ? 'fa-solid' : 'fa-light'}
+							 ${!isCollapsed ? 'w-10' : ''} text-center fa-store`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
@@ -89,9 +89,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === 'products' ? 'fa-solid' : 'fa-light'
-              }  fa-box`}
+              className={`${path === 'products' ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center fa-box`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
@@ -109,9 +109,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === 'staffs' ? 'fa-solid' : 'fa-light'
-              }  fa-user-group`}
+              className={`${path === 'staffs' ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center  fa-user-group`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
@@ -129,9 +129,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === 'orders' ? 'fa-solid' : 'fa-light'
-              }  fa-receipt`}
+              className={`${path === 'orders' ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center fa-receipt`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>
@@ -149,9 +149,9 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${
-                path === 'wallet' ? 'fa-solid' : 'fa-light'
-              }  fa-wallet`}
+              className={`${path === 'wallet' ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center fa-wallet`}
             ></i>
             {!isCollapsed && (
               <span className='ms-3 res-hide-xl'>{t('wallet')}</span>

@@ -27,8 +27,8 @@ const ConfirmDialog = ({
                 onClick={onClose}
               ></button>
             </div>
-            <div className='modal-body'>
-              <span style={{ fontSize: '0.9rem' }}>{message}</span>
+            <div className='modal-body text-start'>
+              <span className='text-dark-emphasis'>{message}</span>
             </div>
             <div className='modal-footer'>
               <button

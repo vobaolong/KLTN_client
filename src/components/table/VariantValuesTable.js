@@ -16,6 +16,8 @@ import AdminEditVariantValueForm from '../item/form/AdminEditVariantValueForm'
 import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { humanReadableDate } from '../../helper/humanReadable'
+import Error from '../ui/Error'
 
 const VariantValuesTable = ({
   heading = true,
@@ -23,11 +25,11 @@ const VariantValuesTable = ({
   isActive = false
 }) => {
   const { t } = useTranslation()
-
   const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
+  const [error, setError] = useState('')
   const [deletedVariantValue, setDeletedVariantValue] = useState({})
   const [restoredVariantValue, setRestoredVariantValue] = useState({})
   const [editedVariantValue, setEditedVariantValue] = useState({})
@@ -35,26 +37,27 @@ const VariantValuesTable = ({
   const [variant, setVariant] = useState({})
   const { _id, accessToken } = getToken()
 
-  const init = () => {
+  useEffect(() => {
     setIsLoading(true)
     if (!isActive) {
       listVariantValues(_id, accessToken, variantId)
         .then((data) => {
-          if (data.error) toast.error(data.error)
-          else {
+          if (data.error) {
+            setError(data.error)
+          } else {
             setVariantValues(data.variantValues)
             setVariant(data.variant)
           }
           setIsLoading(false)
         })
         .catch((error) => {
-          toast.error(error)
+          setError(`Error occurred: ${error.message}`)
           setIsLoading(false)
         })
     } else {
       listActiveVariantValues(variantId)
         .then((data) => {
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else {
             setVariantValues(data.variantValues)
             setVariant(data.variant)
@@ -62,19 +65,15 @@ const VariantValuesTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          toast.error(error)
+          setError(`Error occurred: ${error.message}`)
           setIsLoading(false)
         })
     }
-  }
-
-  useEffect(() => {
-    init()
   }, [variantId, run])
 
   const handleDelete = (variantValue) => {
     setDeletedVariantValue(variantValue)
-    setIsConfirming(true)
+    setIsConfirmingDelete(true)
   }
 
   const handleRestore = (variantValue) => {
@@ -86,7 +85,7 @@ const VariantValuesTable = ({
     setIsLoading(true)
     deleteVariantValue(_id, accessToken, deletedVariantValue._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.variantValue.delete'))
           setRun(!run)
@@ -94,17 +93,16 @@ const VariantValuesTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
 
-  console.log(variant)
   const onSubmitRestore = () => {
     setIsLoading(true)
     restoreVariantValue(_id, accessToken, restoredVariantValue._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.variantValue.restore'))
           setRun(!run)
@@ -112,7 +110,7 @@ const VariantValuesTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -120,12 +118,13 @@ const VariantValuesTable = ({
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
+      {error && <Error msg={error} />}
+      {isConfirmingDelete && (
         <ConfirmDialog
           title={t('dialog.deleteValue')}
           color='danger'
           onSubmit={onSubmitDelete}
-          onClose={() => setIsConfirming(false)}
+          onClose={() => setIsConfirmingDelete(false)}
         />
       )}
       {isConfirmingRestore && (
@@ -136,100 +135,106 @@ const VariantValuesTable = ({
         />
       )}
 
-      {heading && (
-        <h5 className='text-start'>
-          Values of <span className='text-primary'>{variant?.name}</span>
-        </h5>
-      )}
-
       {isLoading && <Loading />}
-
-      <div className='d-flex justify-content-between align-items-end'>
-        <AddVariantValueItem
-          variantId={variantId}
-          variantName={variant?.name}
-          onRun={() => setRun(!run)}
-        />
-        <span className='text-nowrap res-hide'>
-          {variantValues.length || 0} {t('result')}
-        </span>
-      </div>
-
-      <div className='table-scroll my-2'>
-        <table className='table align-middle table-hover table-sm text-center'>
-          <thead>
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'>Name</th>
-              {!isActive && (
-                <Fragment>
-                  <th scope='col'>Status</th>
-                  <th scope='col'></th>
-                </Fragment>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {variantValues.map((value, index) => (
-              <tr key={index}>
-                <th scope='row'>{index + 1}</th>
-                <td>{value.name}</td>
+      <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
+          {heading && (
+            <h5 className='text-start'>
+              {t('variantDetail.value.valueOf')}{' '}
+              <span className='text-primary'>{variant?.name}</span>
+            </h5>
+          )}
+          <AddVariantValueItem
+            variantId={variantId}
+            variantName={variant?.name}
+            onRun={() => setRun(!run)}
+          />
+        </div>
+        <div className='table-scroll my-2'>
+          <table className='table align-middle table-hover table-sm text-start'>
+            <thead>
+              <tr>
+                <th scope='col' className='text-center'>
+                  #
+                </th>
+                <th scope='col'>{t('variantDetail.value.name')}</th>
                 {!isActive && (
                   <Fragment>
-                    <td>
-                      {value.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
-                    </td>
-                    <td className='text-nowrap'>
-                      <button
-                        type='button'
-                        className='btn btn-primary ripple me-2 rounded-1'
-                        data-bs-toggle='modal'
-                        data-bs-target='#edit-variant-value-form'
-                        onClick={() => setEditedVariantValue(value)}
-                      >
-                        <i className='fa-solid fa-pen'></i>
-                        <span className='ms-2 res-hide'>
-                          {t('button.edit')}
-                        </span>
-                      </button>
-
-                      {!value.isDeleted ? (
-                        <button
-                          type='button'
-                          className='btn btn-outline-danger ripple rounded-1'
-                          onClick={() => handleDelete(value)}
-                        >
-                          <i className='fa-solid fa-trash-alt'></i>
-                          <span className='ms-2 res-hide'>
-                            {t('button.delete')}
-                          </span>
-                        </button>
-                      ) : (
-                        <button
-                          type='button'
-                          className='btn btn-outline-success ripple'
-                          onClick={() => handleRestore(value)}
-                        >
-                          <i className='fa-solid fa-trash-can-arrow-up'></i>
-                          <span className='ms-2 res-hide'>
-                            {t('button.restore')}
-                          </span>
-                        </button>
-                      )}
-                    </td>
+                    <th scope='col'>{t('status.status')}</th>
+                    <th scope='col'>{t('createdAt')}</th>
+                    <th scope='col'>
+                      <span>{t('action')}</span>
+                    </th>
                   </Fragment>
                 )}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {variantValues.map((value, index) => (
+                <tr key={index}>
+                  <th scope='row' className='text-center'>
+                    {index + 1}
+                  </th>
+                  <td>{value.name}</td>
+                  {!isActive && (
+                    <Fragment>
+                      <td style={{ fontSize: '0.9rem' }}>
+                        {value.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
+                      </td>
+                      <td>{humanReadableDate(value.createdAt)}</td>
+                      <td className='text-nowrap'>
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
+                          data-bs-toggle='modal'
+                          data-bs-target='#edit-variant-value-form'
+                          onClick={() => setEditedVariantValue(value)}
+                        >
+                          <i className='fa-duotone fa-pen-to-square res-dis-sm d-none'></i>
+                          <span className='res-hide'>{t('button.edit')}</span>
+                        </button>
+
+                        {!value.isDeleted ? (
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-outline-danger ripple rounded-1'
+                            onClick={() => handleDelete(value)}
+                          >
+                            <i className='fa-solid res-dis-sm d-none fa-trash-alt res-hide'></i>
+                            <span className='res-hide'>
+                              {t('button.delete')}
+                            </span>
+                          </button>
+                        ) : (
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-outline-success ripple'
+                            onClick={() => handleRestore(value)}
+                          >
+                            <i className='fa-solid fa-trash-can-arrow-up res-dis-sm d-none'></i>
+                            <span className='res-hide'>
+                              {t('button.restore')}
+                            </span>
+                          </button>
+                        )}
+                      </td>
+                    </Fragment>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className='d-flex justify-content-between align-items-center px-4'>
+          <small>Showing {variantValues.length || 0} value</small>
+        </div>
       </div>
 
       {!isActive && (
         <Modal
           id='edit-variant-value-form'
           hasCloseBtn={false}
-          title='Edit value'
+          title={t('variantDetail.value.edit')}
         >
           <AdminEditVariantValueForm
             oldVariantValue={editedVariantValue}

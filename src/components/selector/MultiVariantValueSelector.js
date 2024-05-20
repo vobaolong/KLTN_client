@@ -116,9 +116,9 @@ const MultiVariantValueSelector = ({
               </span>
             ))
           ) : (
-            <span className='text-danger'>
+            <small className='text-danger'>
               {t('productDetail.noValuesSelected')}
-            </span>
+            </small>
           )}
 
           <div

@@ -12,16 +12,14 @@ const AdminLayout = ({ user = {}, children = null, paths = {} }) => {
   return (
     <MainLayout container='container-xxl' navFor='admin'>
       <div className='row'>
-        <div
-          className={`col-md-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}
-        >
+        <div className={`col-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}>
           <AdminSideBar
             user={user}
             isCollapsed={isCollapsed}
             onToggle={toggleSidebar}
           />
         </div>
-        <div className={`col-md-${isCollapsed ? '11' : '10'}`}>
+        <div className={`mt-4 col-${isCollapsed ? '11' : '10'}`}>
           <Breadcrumb paths={paths} />
           {children}
         </div>

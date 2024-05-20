@@ -14,6 +14,7 @@ import Error from '../ui/Error'
 import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import { formatDate } from '../../helper/humanReadable'
 
 const UserStoresTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -35,7 +36,6 @@ const UserStoresTable = ({ heading = false }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
     setIsLoading(true)
     listStoresByUser(_id, accessToken, filter)
       .then((data) => {
@@ -89,7 +89,7 @@ const UserStoresTable = ({ heading = false }) => {
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <div className='ms-2'>
             <Link
@@ -97,7 +97,7 @@ const UserStoresTable = ({ heading = false }) => {
               className='btn btn-primary ripple text-nowrap rounded-1'
               to='/account/store/create'
             >
-              <i className='fa-solid fa-plus'></i>
+              <i className='fa-light fa-plus'></i>
               <span className='ms-2 res-hide'>{t('createStore')}</span>
             </Link>
           </div>
@@ -137,12 +137,7 @@ const UserStoresTable = ({ heading = false }) => {
                     />
                   </th>
                   <th scope='col'>
-                    <span
-                      style={{ fontWeight: '400', fontSize: '.9rem' }}
-                      className='text-secondary'
-                    >
-                      {t('storeDetail.address')}
-                    </span>
+                    <span>{t('storeDetail.address')}</span>
                   </th>
                   <th scope='col'>
                     <SortByButton
@@ -168,8 +163,17 @@ const UserStoresTable = ({ heading = false }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-
-                  <th scope='col'></th>
+                  <th scope='col'>
+                    <SortByButton
+                      currentSortBy={filter.sortBy}
+                      title={t('joined')}
+                      sortBy='createdAt'
+                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                    />
+                  </th>
+                  <th scope='col'>
+                    <span>{t('action')}</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -201,13 +205,19 @@ const UserStoresTable = ({ heading = false }) => {
                       <StoreStatusLabel isOpen={store.isOpen} />
                     </td>
                     <td>
+                      <span>{formatDate(store.createdAt)}</span>
+                    </td>
+                    <td>
                       <Link
                         type='button'
                         className='btn btn-sm btn-outline-secondary ripple rounded-1'
                         to={`/vendor/${store._id}`}
                         title={t('admin.adDashboard.dashboard')}
                       >
-                        <i className='fa-solid fa-eye'></i>
+                        <i className='res-dis-sm d-none fa-solid fa-eye'></i>
+                        <span className='res-hide'>
+                          {t('admin.adDashboard.dashboard')}
+                        </span>
                       </Link>
                     </td>
                   </tr>

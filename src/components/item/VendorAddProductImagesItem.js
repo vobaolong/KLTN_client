@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
 import VendorAddProductImageForm from './form/VendorAddProductImageForm'
-import addImg from '../../assets/new.svg'
 
 const VendorAddProductImagesItem = ({
   count = 8,
@@ -17,13 +16,14 @@ const VendorAddProductImagesItem = ({
         <button
           type='button'
           disabled={count >= 7 ? true : false}
-          className='btn btn-primary ripple text-nowrap rounded-1'
+          className='btn add-value-btn ripple text-nowrap rounded-1'
           data-bs-toggle='modal'
           data-bs-target='#add-product-image-form'
         >
-          <img style={{ width: '30px' }} src={addImg} alt='' />
-          <span className='res-hide ms-2'>{t('button.addImg')}</span>
-          <span>{` (${count}/7)`}</span>
+          <small>
+            <i class='fa-light fa-plus me-1'></i>
+            {t('button.addImg')} {` (${count}/7)`}
+          </small>
         </button>
         {count < 8 && (
           <Modal

@@ -5,7 +5,7 @@ import { getToken } from '../../apis/auth'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
 import { getStoreLevel } from '../../apis/level'
 import FollowStoreButton from '../button/FollowStoreButton'
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/default.webp'
 import Skeleton from 'react-loading-skeleton'
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -74,7 +74,7 @@ const StoreCardSmall = ({ isLoading = false, store = {}, onRun }) => {
           <div className='card-img-top cus-card-img-top-small'>
             <img
               loading='lazy'
-              src={storeValue.avatar ? IMG + storeValue.avatar : defaultImage}
+              src={IMG + storeValue.avatar ?? defaultImage}
               className='cus-card-img-small'
               alt={storeValue.name}
             />

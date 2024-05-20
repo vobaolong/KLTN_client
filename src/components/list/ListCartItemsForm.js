@@ -28,6 +28,7 @@ const IMG = process.env.REACT_APP_STATIC_URL
 const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
   const { t } = useTranslation()
   const [run, setRun] = useState(false)
+  const [error, setError] = useState('false')
   const [items, setItems] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -42,10 +43,11 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
     amountFromUser1: 0
   })
   const init = () => {
+    setError('')
     setIsLoading(true)
     listItemsByCart(_id, accessToken, cartId)
       .then(async (data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setItems(data.items)
           const { totalPrice, totalSalePrice, amountFromUser1 } = totalProducts(
@@ -61,7 +63,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Server Error ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -77,10 +79,11 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     deleteFromCart(_id, accessToken, deleteItem._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.cart.delete'))
           updateDispatch('account', data.user)
@@ -88,18 +91,25 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Server Error ${error.message}`)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   const handleUpdate = (value, item) => {
+    setError('')
     setIsLoading(true)
     updateCartItem(_id, accessToken, { count: value }, item._id)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
         } else {
           toast.success(t('toastSuccess.cart.update'))
           updateDispatch('account', data.user)
@@ -109,15 +119,22 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           }
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Server Error ${error.message}`)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.removeProductFromCart')}
@@ -133,6 +150,19 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
           key={index}
           className={`d-flex py-2 align-items-center gap-2 item${
             index === items.length - 1 ? ' last-item' : ''
+          }
+					${
+            !item.productId?.isActive ||
+            (item.productId?.isActive && !item.productId?.isSelling) ||
+            (item.productId?.isActive &&
+              item.productId?.isSelling &&
+              item.productId?.quantity <= 0) ||
+            (item.productId?.isActive &&
+              item.productId?.isSelling &&
+              item.productId?.quantity > 0 &&
+              item.productId?.quantity < item.count)
+              ? 'opacity-50'
+              : ''
           }`}
         >
           <div className='d-flex py-1 justify-content-around align-items-start w-auto'>
@@ -191,16 +221,14 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
 
             <div className='d-inline-flex flex-lg-row flex-md-column flex-sm-row gap-2 justify-content-center align-items-center res-price'>
               <del className='text-secondary text-end'>
-                {item.productId?.price &&
-                  formatPrice(item.productId?.price.$numberDecimal)}
+                {formatPrice(item.productId?.price?.$numberDecimal)}
                 <sup>₫</sup>
               </del>
               <span
                 style={{ fontWeight: '500' }}
                 className='text-black text-start'
               >
-                {item.productId.salePrice &&
-                  formatPrice(item.productId.salePrice.$numberDecimal)}
+                {formatPrice(item.productId?.salePrice?.$numberDecimal)}
                 <sup>₫</sup>
               </span>
             </div>
@@ -243,17 +271,17 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                   />
                 )}
               {!item.productId?.isActive && (
-                <Error msg='The product is banned by Zenpii!' />
+                <Error msg={t('toastError.productBanned')} />
               )}
 
               {item.productId?.isActive && !item.productId?.isSelling && (
-                <Error msg='The product is out of business, please delete it from your cart, you can continue with others!' />
+                <Error msg={t('toastError.outOfBusiness')} />
               )}
 
               {item.productId?.isActive &&
                 item.productId?.isSelling &&
                 item.productId?.quantity <= 0 && (
-                  <Error msg='The product is sold out, please delete it from your cart, you can continue with others!' />
+                  <Error msg={t('toastError.soldOut')} />
                 )}
 
               {item.productId?.isActive &&
@@ -261,7 +289,9 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 item.productId?.quantity > 0 &&
                 item.productId?.quantity < item.count && (
                   <Error
-                    msg={`Only ${item.productId.quantity} products left, please update the count!`}
+                    msg={`${t('productDetail.only')} ${
+                      item.productId.quantity
+                    } ${t('toastError.productLeft')}`}
                   />
                 )}
             </div>
@@ -281,7 +311,8 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 onClick={() => handleDelete(item)}
                 title={t('button.delete')}
               >
-                <i className='fa-solid fa-trash-alt'></i>
+                <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                <span className='res-hide'>{t('button.delete')}</span>
               </button>
             </div>
           </div>
@@ -291,21 +322,20 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
       {items.reduce(
         (prev, item) =>
           prev &&
-          item.productId &&
-          item.productId.isActive &&
-          item.productId.isSelling &&
-          item.productId.quantity > 0 &&
-          item.productId.quantity >= item.count,
+          item.productId?.isActive &&
+          item.productId?.isSelling &&
+          item.productId?.quantity > 0 &&
+          item.productId?.quantity >= item.count,
         true
       ) && (
-        <div className='d-flex flex-wrap justify-content-end align-items-center mt-1 pt-1 border-top res-flex-justify-between'>
+        <div className='d-flex flex-wrap justify-content-end align-items-center mt-1 pt-3 border-top'>
           {!showCheckoutFlag && (
-            <div className='me-4 d-flex flex-column'>
+            <div className='me-4 d-flex flex-column fs-9 gap-1'>
               <div className='d-flex justify-content-between gap-4'>
                 <span className='text-secondary'>
                   {t('cartDetail.subTotal')}:{' '}
                 </span>
-                <span className='fs-6'>
+                <span>
                   {formatPrice(totals.totalSalePrice)}
                   <sup>₫</sup>
                 </span>
@@ -316,7 +346,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                     {t('cartDetail.zenpiiDiscount')} (
                     {level?.discount?.$numberDecimal}%):{' '}
                   </span>
-                  <span className='fs-6'>
+                  <span>
                     -{' '}
                     {formatPrice(
                       (totals.totalSalePrice *
@@ -331,7 +361,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
                 <span className='text-secondary'>
                   {t('cartDetail.totalPrice')}:{' '}
                 </span>
-                <span className='fs-6'>
+                <span>
                   {formatPrice(totals.amountFromUser1)}
                   <sup>₫</sup>
                 </span>

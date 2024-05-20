@@ -9,11 +9,11 @@ const StoreProfileInfo = ({
   const { t } = useTranslation()
   return (
     <div className='container-fluid'>
-      <div className='row p-2 box-shadow rounded-1 bg-body'>
+      <div className='row p-3 py-4 box-shadow rounded-1 bg-body'>
         {showProfile && <h5>{t('storeDetail.profile')}</h5>}
         <div className='col-12'>
           <p className='text-justify' style={{ fontSize: '0.9rem' }}>
-            <i className='fa-solid fa-quote-left text-muted me-1'></i>
+            <i className='fa-light fa-quote-right text-muted me-1'></i>
             {t('storeDetail.bio')}: {store.bio}
           </p>
           {showProfile && (

@@ -38,7 +38,6 @@ const VendorInit = ({ store, actions }) => {
         } else {
           const newStore = data.store
 
-          //get level
           try {
             const res = await getStoreLevel(storeId)
             newStore.level = res.level
@@ -46,7 +45,6 @@ const VendorInit = ({ store, actions }) => {
             newStore.level = {}
           }
 
-          //get count followers
           try {
             const res = await getNumberOfFollowers(storeId)
             newStore.numberOfFollowers = res.count
@@ -54,7 +52,6 @@ const VendorInit = ({ store, actions }) => {
             newStore.numberOfFollowers = 0
           }
 
-          //get count orders
           try {
             const res1 = await countOrder('Delivered', '', storeId)
             const res2 = await countOrder('Cancelled', '', storeId)
@@ -96,10 +93,7 @@ const VendorInit = ({ store, actions }) => {
       ) : (
         <div className='your-store-wrap'>
           <div className='your-store'>
-            <div
-              type='button'
-              className='your-store-card btn lang text-white ripple'
-            >
+            <div type='button' className='your-store-card btn lang ripple'>
               <img
                 loading='lazy'
                 src={`${IMG + store.avatar}`}
@@ -118,7 +112,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/profile/${storeId}`}
               >
-                {/* <i className='fa-solid fa-store'></i> */}
+                {/* <i className='fa-light fa-store'></i> */}
                 {t('storeDetail.profile')}
               </Link>
 
@@ -126,7 +120,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to={`/vendor/orders/${storeId}`}
               >
-                {/* <i className='fa-solid fa-clipboard'></i> */}
+                {/* <i className='fa-light fa-clipboard'></i> */}
                 {t('storeDetail.orders')}
               </Link>
 
@@ -134,7 +128,7 @@ const VendorInit = ({ store, actions }) => {
                 className='list-group-item your-store-options-item ripple'
                 to='/account/store'
               >
-                {/* <i className='fa-solid fa-angle-left'></i> */}
+                {/* <i className='fa-light fa-angle-left'></i> */}
                 {t('button.back')}
               </Link>
             </ul>

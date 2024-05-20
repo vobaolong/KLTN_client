@@ -22,10 +22,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
   return (
     <div className='container-fluid'>
       <div className='row py-2 border rounded-2 bg-body'>
-        <div
-          style={{ fontSize: '1.1rem', fontWeight: '500' }}
-          className='col-12 border-bottom pb-2'
-        >
+        <div className='col-12 border-bottom pb-2 fs-12 fw-normal'>
           {t('userDetail.profile')}
         </div>
         <div className='col-12 mt-2'>
@@ -76,13 +73,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                   </span>
                 }
                 colon
-                value={
-                  user.email ? (
-                    hideLastDigits(user.email, 3, 1) || '-'
-                  ) : (
-                    <Skeleton width={200} height={25} />
-                  )
-                }
+                value={user.email ? hideLastDigits(user.email, 3, 1) : '-'}
               />
               <EmailActiveButton
                 email={user.email}
@@ -103,13 +94,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                 </span>
               }
               colon
-              value={
-                user.phone ? (
-                  user.phone || '-'
-                ) : (
-                  <Skeleton width={200} height={25} />
-                )
-              }
+              value={user.phone ? user.phone : '-'}
             />
           </div>
         ) : (
@@ -123,13 +108,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
                   </span>
                 }
                 colon
-                value={
-                  user.phone ? (
-                    hideLastDigits(user.phone, 8, 0) || '-'
-                  ) : (
-                    <Skeleton width={120} height={25} />
-                  )
-                }
+                value={user.phone ? hideLastDigits(user.phone, 8, 0) : '-'}
               />
             </div>
 
@@ -151,13 +130,7 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
               </span>
             }
             colon
-            value={
-              user.id_card ? (
-                hideLastDigits(user.id_card, 8, 0) || '-'
-              ) : (
-                <Skeleton width={120} height={25} />
-              )
-            }
+            value={user.id_card ? hideLastDigits(user.id_card, 8, 0) : '-'}
           />
         </div>
 

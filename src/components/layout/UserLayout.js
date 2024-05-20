@@ -6,8 +6,8 @@ import UserLevelInfo from '../info/UserLevelInfo'
 
 const UserLayout = ({ user = {}, children = null }) => (
   <MainLayout>
-    <div className='user-layout' style={{ margin: '0 auto' }}>
-      <div className='position-relative shadow'>
+    <div className='res-mx--12-md pt-4'>
+      <div className='position-relative bg-body rounded-2 p-2 box-shadow'>
         <Cover cover={user.cover} alt={user.firstName + ' ' + user.lastName} />
         <div className='avatar-absolute avatar-absolute--store'>
           <Avatar
@@ -17,15 +17,19 @@ const UserLayout = ({ user = {}, children = null }) => (
             alt={user.firstName + ' ' + user.lastName}
           />
         </div>
-        <div className='level-group-absolute level-group-absolute--small res-hide'>
+        <div className='level-group-absolute res-hide bg-white w-50 h-100'>
           <UserLevelInfo user={user} />
         </div>
+      </div>
+
+      <div className='mt-2 d-none res-dis'>
+        <UserLevelInfo user={user} />
       </div>
     </div>
 
     <UserNav user={user} />
 
-    <div className='user-page-main mt-3'>{children}</div>
+    {/* <div className='user-page-main mt-3'>{children}</div> */}
   </MainLayout>
 )
 

@@ -5,17 +5,15 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-
   const [newValue, setNewValue] = useState({
     _id: oldVariantValue._id,
     name: oldVariantValue.name,
@@ -68,27 +66,18 @@ const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
   }
 
   const onSubmit = () => {
-    setError('')
-    setSuccess('')
     setIsLoading(true)
     updateVariantValue(_id, accessToken, newValue._id, newValue)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
           if (onRun) onRun()
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
-        setTimeout(() => {
-          setError('')
-          setSuccess('')
-        }, 3000)
       })
       .catch((error) => {
-        setError('Sever error')
-        setTimeout(() => {
-          setError('')
-        }, 3000)
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -110,11 +99,12 @@ const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
         <div className='col-12'>
           <Input
             type='text'
-            label='Value'
+            label={t('variantDetail.value.name')}
             value={newValue.name}
             isValid={newValue.isValidName}
             feedback='Please provide a valid value.'
             validator='anything'
+            required={true}
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
@@ -123,12 +113,6 @@ const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
         {error && (
           <div className='col-12'>
             <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
           </div>
         )}
 

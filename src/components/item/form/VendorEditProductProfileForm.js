@@ -10,12 +10,28 @@ import CategorySelector from '../../selector/CategorySelector'
 import VariantSelector from '../../selector/VariantSelector'
 import { t } from 'i18next'
 import { toast } from 'react-toastify'
+import { Link, useHistory } from 'react-router-dom'
 
 const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
+  const [isConfirmingBack, setIsConfirmingBack] = useState(false)
+  const [isConfirmingUpdate, setIsConfirmingUpdate] = useState(false)
   const [newProduct, setNewProduct] = useState({})
   const { _id, accessToken } = getToken()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const history = useHistory()
+
+  useEffect(() => {
+    const checkScroll = () => {
+      const isBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
+      setIsScrolled(!isBottom)
+    }
+    window.addEventListener('scroll', checkScroll)
+    return () => {
+      window.removeEventListener('scroll', checkScroll)
+    }
+  }, [])
 
   useEffect(() => {
     setNewProduct({
@@ -49,6 +65,15 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       ...newProduct,
       [isValidName]: flag
     })
+  }
+  const handleBackClick = (e) => {
+    e.preventDefault()
+    setIsConfirmingBack(true)
+  }
+
+  const handleConfirmBack = () => {
+    setIsConfirmingBack(false)
+    history.push(`/vendor/products/${storeId}`)
   }
 
   const handleSubmit = (e) => {
@@ -91,7 +116,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     )
       return
 
-    setIsConfirming(true)
+    setIsConfirmingUpdate(true)
   }
 
   const onSubmit = () => {
@@ -120,142 +145,165 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
+      {isConfirmingBack && (
+        <ConfirmDialog
+          title={t('dialog.cancelUpdate')}
+          onSubmit={handleConfirmBack}
+          onClose={() => setIsConfirmingBack(false)}
+        />
+      )}
+      {isConfirmingUpdate && (
         <ConfirmDialog
           title={t('productDetail.editProInfo')}
           onSubmit={onSubmit}
-          onClose={() => setIsConfirming(false)}
+          onClose={() => setIsConfirmingUpdate(false)}
         />
       )}
 
-      <form className='row mb-2' onSubmit={handleSubmit}>
-        <div className='col-12'>
-          <h5 className='fw-bold'>{t('productDetail.editProInfo')}</h5>
-        </div>
+      <form className='mb-2' onSubmit={handleSubmit}>
+        <div className='bg-body box-shadow rounded-2 p-3 row'>
+          <div className='col-12'>
+            <h5 className='fw-bold'>{t('productDetail.editProInfo')}</h5>
+          </div>
 
-        <div className='col-12 px-4'>
-          <Input
-            type='text'
-            label={t('productDetail.name')}
-            value={newProduct.name}
-            isValid={newProduct.isValidName}
-            feedback={t('productValid.validName')}
-            required={true}
-            validator='anything'
-            onChange={(value) => handleChange('name', 'isValidName', value)}
-            onValidate={(flag) => handleValidate('isValidName', flag)}
-          />
-        </div>
+          <div className='col-12 px-4 mt-3'>
+            <Input
+              type='text'
+              label={t('productDetail.name')}
+              value={newProduct.name}
+              isValid={newProduct.isValidName}
+              feedback={t('productValid.validName')}
+              required={true}
+              validator='anything'
+              onChange={(value) => handleChange('name', 'isValidName', value)}
+              onValidate={(flag) => handleValidate('isValidName', flag)}
+            />
+          </div>
 
-        <div className='col-12 px-4'>
-          <TextArea
-            type='text'
-            label={t('productDetail.description')}
-            value={newProduct.description}
-            isValid={newProduct.isValidDescription}
-            feedback='Please provide a valid product description.'
-            required={true}
-            validator='bio'
-            onChange={(value) =>
-              handleChange('description', 'isValidDescription', value)
-            }
-            onValidate={(flag) => handleValidate('isValidDescription', flag)}
-          />
-        </div>
+          <div className='col-12 px-4 mt-3'>
+            <TextArea
+              type='text'
+              label={t('productDetail.description')}
+              value={newProduct.description}
+              isValid={newProduct.isValidDescription}
+              feedback='Please provide a valid product description.'
+              required={true}
+              validator='bio'
+              onChange={(value) =>
+                handleChange('description', 'isValidDescription', value)
+              }
+              onValidate={(flag) => handleValidate('isValidDescription', flag)}
+            />
+          </div>
 
-        <div className='col-md-6 col-sm-12 px-4'>
-          <Input
-            type='number'
-            label={`${t('productDetail.price')} (₫)`}
-            value={newProduct.price}
-            isValid={newProduct.isValidPrice}
-            feedback='Please provide a valid product price.'
-            required={true}
-            validator='positive|zero'
-            onChange={(value) => handleChange('price', 'isValidPrice', value)}
-            onValidate={(flag) => handleValidate('isValidPrice', flag)}
-          />
-        </div>
+          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={`${t('productDetail.price')} (₫)`}
+              value={newProduct.price}
+              isValid={newProduct.isValidPrice}
+              feedback='Please provide a valid product price.'
+              required={true}
+              validator='positive|zero'
+              onChange={(value) => handleChange('price', 'isValidPrice', value)}
+              onValidate={(flag) => handleValidate('isValidPrice', flag)}
+            />
+          </div>
 
-        <div className='col-md-6 col-sm-12 px-4'>
-          <Input
-            type='number'
-            label={`${t('productDetail.salePrice')} (₫)`}
-            value={newProduct.salePrice}
-            isValid={newProduct.isValidSalePrice}
-            feedback='Please provide a valid product sale price.'
-            required={true}
-            validator='positive|zero'
-            onChange={(value) =>
-              handleChange('salePrice', 'isValidSalePrice', value)
-            }
-            onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
-          />
-        </div>
+          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={`${t('productDetail.salePrice')} (₫)`}
+              value={newProduct.salePrice}
+              isValid={newProduct.isValidSalePrice}
+              feedback='Please provide a valid product sale price.'
+              required={true}
+              validator='positive|zero'
+              onChange={(value) =>
+                handleChange('salePrice', 'isValidSalePrice', value)
+              }
+              onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
+            />
+          </div>
 
-        <div className='col-12 px-4'>
-          <Input
-            type='number'
-            label={t('productDetail.quantity')}
-            value={newProduct.quantity}
-            isValid={newProduct.isValidQuantity}
-            feedback='Please provide a valid product quantity.'
-            required={true}
-            validator='positive|zero'
-            onChange={(value) =>
-              handleChange('quantity', 'isValidQuantity', value)
-            }
-            onValidate={(flag) => handleValidate('isValidQuantity', flag)}
-          />
-        </div>
+          <div className='col-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={t('productDetail.quantity')}
+              value={newProduct.quantity}
+              isValid={newProduct.isValidQuantity}
+              feedback='Please provide a valid product quantity.'
+              required={true}
+              validator='positive|zero'
+              onChange={(value) =>
+                handleChange('quantity', 'isValidQuantity', value)
+              }
+              onValidate={(flag) => handleValidate('isValidQuantity', flag)}
+            />
+          </div>
 
-        <div className='col-12 mt-3 px-4'>
-          <p className=''>
-            {t('productDetail.chooseCategory')}
-            <small className='text-danger'> *</small>
-          </p>
-          <CategorySelector
-            label={t('productDetail.selectedCategory')}
-            defaultValue={newProduct.defaultCategory}
-            isActive={true}
-            isRequired={true}
-            onSet={(category) =>
-              setNewProduct({
-                ...newProduct,
-                categoryId: category._id
-              })
-            }
-          />
-        </div>
+          <div className='col-12 mt-3 px-4 mt-3'>
+            <p className=''>
+              {t('productDetail.chooseCategory')}
+              <small className='text-danger'> *</small>
+            </p>
+            <CategorySelector
+              label={t('productDetail.selectedCategory')}
+              defaultValue={newProduct.defaultCategory}
+              isActive={true}
+              isRequired={true}
+              onSet={(category) =>
+                setNewProduct({
+                  ...newProduct,
+                  categoryId: category._id
+                })
+              }
+            />
+          </div>
 
-        <div className='col-12 mt-3 px-4'>
-          <p className='px-2'>
-            {t('productDetail.chooseStyles')}{' '}
-            <small className='text-muted'>
-              {t('productDetail.chooseCateFirst')}
-            </small>
-          </p>
-          <VariantSelector
-            label='Chosen variants'
-            defaultValue={newProduct.defaultVariantValues}
-            categoryId={newProduct.categoryId}
-            onSet={(variantValues) => {
-              setNewProduct({
-                ...newProduct,
-                variantValueIds: variantValues.map((value) => value._id)
-              })
-            }}
-          />
+          <div className='col-12 mt-3 px-4 mt-3'>
+            <p className='px-2'>
+              {t('productDetail.chooseStyles')}{' '}
+              <small className='text-muted'>
+                {t('productDetail.chooseCateFirst')}
+              </small>
+            </p>
+            <VariantSelector
+              label='Chosen variants'
+              defaultValue={newProduct.defaultVariantValues}
+              categoryId={newProduct.categoryId}
+              onSet={(variantValues) => {
+                setNewProduct({
+                  ...newProduct,
+                  variantValueIds: variantValues.map((value) => value._id)
+                })
+              }}
+            />
+          </div>
         </div>
-        <div className='col-12 px-4 pb-3 d-flex justify-content-end align-items-center mt-4'>
-          <button
-            type='submit'
-            className='btn btn-primary ripple res-w-100-md rounded-1'
-            onClick={handleSubmit}
-            style={{ width: '30%' }}
-          >
-            {t('button.save')}
-          </button>
+        <div
+          className={`bg-body ${
+            isScrolled ? 'shadow' : 'box-shadow'
+          } rounded-1 row px-4 my-3 p-3`}
+          style={{ position: 'sticky', bottom: '0' }}
+        >
+          <div className='d-flex justify-content-between align-items-center'>
+            <Link
+              to={`/vendor/products/${storeId}`}
+              className='text-decoration-none cus-link-hover'
+              onClick={handleBackClick}
+            >
+              <i className='fa-solid fa-angle-left'></i> {t('button.back')}
+            </Link>
+            <button
+              type='submit'
+              className='btn btn-primary ripple res-w-100-md rounded-1'
+              onClick={handleSubmit}
+              style={{ width: '200px' }}
+            >
+              {t('button.save')}
+            </button>
+          </div>
         </div>
       </form>
     </div>

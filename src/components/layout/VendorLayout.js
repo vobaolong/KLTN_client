@@ -10,6 +10,7 @@ const VendorLayout = ({
   paths = {}
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(false)
+
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed)
   }
@@ -27,7 +28,7 @@ const VendorLayout = ({
             onToggle={toggleSidebar}
           />
         </div>
-        <div className={`col-md-${isCollapsed ? '11' : '10'}`}>
+        <div className={`mt-4 col-md-${isCollapsed ? '10' : '9'}`}>
           <Breadcrumb paths={paths} />
           {children}
         </div>

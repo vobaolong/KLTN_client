@@ -12,8 +12,7 @@ import Error from '../ui/Error'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import Loading from '../ui/Loading'
-import defaultImage from '../../assets/default.png'
-import Skeleton from 'react-loading-skeleton'
+import defaultImage from '../../assets/default.webp'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -24,47 +23,54 @@ const AccountInit = ({ user, actions }) => {
   const { firstName, lastName, avatar } = user
   const history = useHistory()
   const { _id, accessToken, refreshToken, role } = getToken()
-  const init = () => {
-    setError('')
-    getUserProfile(_id, accessToken)
-      .then(async (data) => {
-        if (data.error) {
-          setError(data.error)
-        } else {
-          const newUser = data.user
-          try {
-            const res = await getUserLevel(_id)
-            newUser.level = res.level
-          } catch {
-            newUser.level = {}
-          }
-          try {
-            const res = await getCartCount(_id, accessToken)
-            newUser.cartCount = res.count
-          } catch {
-            newUser.cartCount = 0
-          }
-          try {
-            const res1 = await countOrder('Delivered', _id, '')
-            const res2 = await countOrder('Cancelled', _id, '')
-            newUser.numberOfSuccessfulOrders = res1.count
-            newUser.numberOfFailedOrders = res2.count
-          } catch {
-            newUser.numberOfSuccessfulOrders = 0
-            newUser.numberOfFailedOrders = 0
-          }
-          actions(newUser)
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        setError('Something went wrong')
-        setIsLoading(false)
-      })
-  }
 
   useEffect(() => {
+    let isMounted = true
+    const init = () => {
+      setIsLoading(true)
+      getUserProfile(_id, accessToken)
+        .then(async (data) => {
+          if (!isMounted) return
+          if (data.error) {
+            setError(data.error)
+            setIsLoading(false)
+          } else {
+            const newUser = data.user
+            try {
+              const res = await getUserLevel(_id)
+              newUser.level = res.level
+            } catch {
+              newUser.level = {}
+            }
+            try {
+              const res = await getCartCount(_id, accessToken)
+              newUser.cartCount = res.count
+            } catch {
+              newUser.cartCount = 0
+            }
+            try {
+              const res1 = await countOrder('Delivered', _id, '')
+              const res2 = await countOrder('Cancelled', _id, '')
+              newUser.numberOfSuccessfulOrders = res1.count
+              newUser.numberOfFailedOrders = res2.count
+            } catch {
+              newUser.numberOfSuccessfulOrders = 0
+              newUser.numberOfFailedOrders = 0
+            }
+            actions(newUser)
+            setIsLoading(false)
+          }
+        })
+        .catch((error) => {
+          if (!isMounted) return
+          setError(`Error occurred: ${error.message}`)
+          setIsLoading(false)
+        })
+    }
     if (!firstName && !lastName && !avatar) init()
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   const handleSignout = () => {
@@ -97,23 +103,14 @@ const AccountInit = ({ user, actions }) => {
       <div className='your-account'>
         <div
           type='button'
-          className='your-account-card btn lang ripple rounded-1 text-white'
+          className={`your-account-card btn lang ripple rounded-1 inherit`}
         >
-          {avatar ? (
-            <img
-              loading='lazy'
-              src={avatar ? `${IMG + avatar}` : defaultImage}
-              className='your-account-img'
-              alt=''
-            />
-          ) : (
-            <Skeleton
-              className='text-center'
-              circle={true}
-              width={25}
-              height={25}
-            />
-          )}
+          <img
+            loading='lazy'
+            src={IMG + avatar ?? defaultImage}
+            className='your-account-img'
+            alt=''
+          />
           <span className='your-account-name unselect res-hide-xl'>
             {t('userDetail.account')}
             {error && <Error msg={error} />}
@@ -122,7 +119,7 @@ const AccountInit = ({ user, actions }) => {
 
         <ul className='list-group your-account-options'>
           <Link
-            className='list-group-item your-account-options-item ripple '
+            className='list-group-item your-account-options-item ripple'
             to='/account/profile'
           >
             {t('userDetail.myAccount')}

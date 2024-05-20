@@ -14,6 +14,8 @@ import SortByButton from './sub/SortByButton'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
+import Error from '../ui/Error'
+import Alert from '../ui/Alert'
 
 const StoreStaffsTable = ({
   heading = false,
@@ -23,6 +25,7 @@ const StoreStaffsTable = ({
 }) => {
   const { t } = useTranslation()
   const [deletedStaff, setDeletedStaff] = useState({})
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const { _id: userId, accessToken } = getToken()
@@ -31,6 +34,7 @@ const StoreStaffsTable = ({
   const [pagination, setPagination] = useState({
     size: 0
   })
+  const [alerts, setAlerts] = useState(true)
   const [filter, setFilter] = useState({
     search: '',
     limit: 6,
@@ -106,24 +110,41 @@ const StoreStaffsTable = ({
 
   const onDeleteSubmitStaff = () => {
     const staff = deletedStaff._id
+    setError('')
     setIsLoading(true)
     deleteStaff(userId, accessToken, staff, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('vendor', data.store)
           toast.success(t('toastSuccess.staff.removeStaff'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError(`Server Error ${error.message}`)
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
-  console.log(listStaffs)
+
   return (
     <div className='position-relative'>
+      {alerts ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Danh sách nhân viên'
+          alert=' Mục này chứa các'
+          msg2='nhân viên của cửa hàng.'
+          onClose={() => setAlerts(false)}
+        />
+      ) : null}
+
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
@@ -136,8 +157,9 @@ const StoreStaffsTable = ({
       )}
 
       {heading && <h5 className='text-start'>{t('staffDetail.staffList')}</h5>}
+      {error && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           {pagination.size !== 0 && (
             <SearchInput onChange={handleChangeKeyword} />
           )}
@@ -230,10 +252,8 @@ const StoreStaffsTable = ({
                           onClick={() => handleDeleteStaff(staff)}
                           title={t('button.delete')}
                         >
-                          <i className='fa-solid fa-user-minus'></i>
-                          {/* <span className='ms-2 res-hide'>
-                            {t('button.delete')}
-                          </span> */}
+                          <i className='d-none res-dis-sm fa-solid fa-user-minus'></i>
+                          <span className='res-hide'>{t('button.delete')}</span>
                         </button>
                       </td>
                     )}

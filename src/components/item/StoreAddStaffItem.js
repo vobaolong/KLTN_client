@@ -12,7 +12,7 @@ const StoreAddStaffItem = ({ storeId = '', owner = {}, staffs = [] }) => {
         data-bs-toggle='modal'
         data-bs-target='#add-staff-form'
       >
-        <i className='fa-solid fa-plus'></i>
+        <i className='fa-light fa-plus'></i>
         <span className='ms-2 res-hide'>{t('staffDetail.add')}</span>
       </button>
 

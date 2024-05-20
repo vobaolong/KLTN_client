@@ -7,7 +7,9 @@ import { useState } from 'react'
 const OrderPage = () => {
   const user = useSelector((state) => state.account.user)
   const { t } = useTranslation()
-  const [selectedStatus, setSelectedStatus] = useState('Shipped')
+  const [selectedStatus, setSelectedStatus] = useState(
+    'Not processed|Processing|Shipped|Delivered|Cancelled'
+  )
 
   const orderStatus = [
     {
@@ -46,15 +48,7 @@ const OrderPage = () => {
         ))}
       </div>
 
-      <AdminOrdersTable
-        heading={false}
-        isEditable={
-          selectedStatus === 'Not processed' ||
-          selectedStatus === 'Processing' ||
-          selectedStatus === 'Shipped'
-        }
-        status={selectedStatus}
-      />
+      <AdminOrdersTable heading={false} status={selectedStatus} />
     </AdminLayout>
   )
 }

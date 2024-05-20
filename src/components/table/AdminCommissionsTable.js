@@ -175,7 +175,7 @@ const AdminCommissionTable = ({ heading = false }) => {
       {heading && <h5 className='text-start'>{t('admin.commissions')}</h5>}
       {isLoading && <Loading />}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <AdminCreateCommissionItem onRun={() => setRun(!run)} />
         </div>
@@ -270,7 +270,8 @@ const AdminCommissionTable = ({ heading = false }) => {
                       onClick={() => handleEditCommission(commission)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-duotone fa-pen-to-square'></i>
+                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                      <span className='res-hide'>{t('button.edit')}</span>
                     </button>
 
                     {!commission.isDeleted ? (
@@ -280,7 +281,8 @@ const AdminCommissionTable = ({ heading = false }) => {
                         onClick={() => handleDeleteCommission(commission)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     ) : (
                       <button
@@ -289,7 +291,8 @@ const AdminCommissionTable = ({ heading = false }) => {
                         onClick={() => handleRestoreCommission(commission)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
+                        <span className='res-hide'>{t('button.restore')}</span>
                       </button>
                     )}
                   </td>

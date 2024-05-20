@@ -5,11 +5,13 @@ import { cancelStaff } from '../../apis/store'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import Error from '../ui/Error'
 import { toast } from 'react-toastify'
 
 const CancelStaffsButton = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
+  const [error, setError] = useState(false)
   const { _id, accessToken } = getToken()
   const history = useHistory()
 
@@ -22,14 +24,15 @@ const CancelStaffsButton = ({ storeId = '' }) => {
     cancelStaff(_id, accessToken, storeId)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
           setIsLoading(false)
         } else {
+          toast.success(t('Rời thành công'))
           history.go(0)
         }
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -37,6 +40,7 @@ const CancelStaffsButton = ({ storeId = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('staffDetail.leave')}
@@ -52,10 +56,7 @@ const CancelStaffsButton = ({ storeId = '' }) => {
         style={{ width: 'max-content' }}
         onClick={handleCancelStaff}
       >
-        <i
-          className='fa-solid fa-ban
-'
-        ></i>
+        <i className='fa-solid fa-ban'></i>
         <span className='ms-2 res-hide'>{t('staffDetail.leave')}</span>
       </button>
     </div>

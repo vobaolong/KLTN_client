@@ -19,15 +19,13 @@ import { useTranslation } from 'react-i18next'
 import ProductSmallCard from '../card/ProductSmallCard'
 import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
-// import VariantValueSelector from '../selector/VariantValueSelector'
+import Error from '../ui/Error'
+import Alert from '../ui/Alert'
 
-const StoreProductsTable = ({
-  storeId = '',
-  heading = false,
-  isSelling = true
-}) => {
+const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
   const { t } = useTranslation()
   const [run, setRun] = useState('')
+  const [error, setError] = useState('')
   const { _id, accessToken } = getToken()
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -36,21 +34,38 @@ const StoreProductsTable = ({
   const [pagination, setPagination] = useState({
     size: 0
   })
+  const [alerts, setAlerts] = useState({
+    isAllAlert: true,
+    isSellingAlert: true,
+    isHiddenAlert: true
+  })
 
   const [filter, setFilter] = useState({
     search: '',
     sortBy: 'sold',
-    isSelling,
     order: 'desc',
     limit: 8,
+    quantity: 0,
     page: 1
   })
 
   const init = () => {
+    setError('')
     setIsLoading(true)
-    listProductsForManager(_id, accessToken, filter, storeId)
+    let filterCopy = { ...filter }
+    switch (selectedOption) {
+      case 'selling':
+        filterCopy.isSelling = true
+        break
+      case 'hidden':
+        filterCopy.isSelling = false
+        break
+      default:
+        break
+    }
+    listProductsForManager(_id, accessToken, filterCopy, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setProducts(data.products)
           setPagination({
@@ -62,21 +77,20 @@ const StoreProductsTable = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.log(`Error occurred ${error.message}`)
         setIsLoading(false)
       })
   }
 
   useEffect(() => {
     init()
-  }, [filter, storeId, run])
+  }, [filter, storeId, run, selectedOption])
 
   useEffect(() => {
     setFilter({
-      ...filter,
-      isSelling
+      ...filter
     })
-  }, [isSelling])
+  }, [])
 
   const handleChangeKeyword = (keyword) => {
     setFilter({
@@ -107,6 +121,7 @@ const StoreProductsTable = ({
   }
 
   const onSubmit = () => {
+    setError('')
     if (!isConfirming) return
     setIsLoading(true)
     const value = { isSelling: !sellingProduct.isSelling }
@@ -114,28 +129,62 @@ const StoreProductsTable = ({
     showOrHide(_id, accessToken, value, storeId, sellingProduct._id)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
         } else {
           toast.success(t(`toastSuccess.product.${action}`))
           setRun(!run)
         }
         setIsLoading(false)
-        setIsConfirming(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        console.log(`Error occurred ${error}`)
         setIsLoading(false)
       })
   }
 
   return (
     <div className='position-relative'>
-      {heading && (
+      {/* {heading && (
         <h4 className='text-center text-uppercase mb-3'>
           {isSelling ? t('productDetail.show') : t('productDetail.hide')}
         </h4>
-      )}
+      )} */}
+
+      {alerts.isAllAlert && selectedOption === 'selling' ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Đang bán'
+          alert=' Mục này chứa các'
+          msg2='sản phẩm có thể bán.'
+          onClose={() => setAlerts((prev) => ({ ...prev, isAllAlert: false }))}
+        />
+      ) : null}
+
+      {alerts.isHiddenAlert && selectedOption === 'hidden' ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Đã ẩn'
+          alert='Mục này chứa các sản phẩm mà Nhà bán đã tắt toàn bộ lựa chọn'
+          msg2='Khách hàng không thể xem và đặt hàng.'
+          onClose={() =>
+            setAlerts((prev) => ({ ...prev, isHiddenAlert: false }))
+          }
+        />
+      ) : null}
+
+      {alerts.isSellingAlert && selectedOption === 'all' ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Tất cả'
+          alert='Mục này chứa các sản phẩm đang bán và đang ẩn'
+          msg2=''
+          onClose={() =>
+            setAlerts((prev) => ({ ...prev, isSellingAlert: false }))
+          }
+        />
+      ) : null}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={
@@ -149,20 +198,8 @@ const StoreProductsTable = ({
       )}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className='mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
-          {isSelling && (
-            <Link
-              type='button'
-              className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
-              to={`/vendor/products/addNew/${storeId}`}
-            >
-              <i className='fa-solid fa-plus'></i>
-              <span className='ms-2 res-hide'>
-                {t('productDetail.createProduct')}
-              </span>
-            </Link>
-          )}
         </div>
         {!isLoading && pagination.size === 0 ? (
           <div className='d-flex justify-content-center my-4 text-danger text-center'>
@@ -318,7 +355,7 @@ const StoreProductsTable = ({
                     </th>
 
                     <th scope='col'>
-                      <span style={{ fontWeight: '400' }}>{t('action')}</span>
+                      <span>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
@@ -450,7 +487,7 @@ const StoreProductsTable = ({
                         <div
                           className='d-flex flex-wrap justify-content-start align-items-center gap-1'
                           style={{
-                            maxWidth: '250px',
+                            width: '250px',
                             maxHeight: '120px',
                             overflow: 'auto'
                           }}
@@ -481,10 +518,19 @@ const StoreProductsTable = ({
                         <small>{humanReadableDate(product.createdAt)}</small>
                       </td>
                       <td>
-                        <div className='d-flex justify-content-center align-items-center'>
+                        <div className='d-flex justify-content-start align-items-center'>
+                          <Link
+                            type='button'
+                            className='btn btn-sm btn-outline-primary ripple rounded-1'
+                            to={`/vendor/products/edit/${product._id}/${storeId}`}
+                            title={t('button.edit')}
+                          >
+                            <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                            <span className='res-hide'>{t('button.edit')}</span>
+                          </Link>
                           <button
                             type='button'
-                            className={`btn btn-sm rounded-1 ripple me-2 btn-outline-${
+                            className={`btn btn-sm rounded-1 ripple ms-2 btn-outline-${
                               !product.isSelling ? 'success' : 'secondary'
                             }`}
                             onClick={() => handleSellingProduct(product)}
@@ -495,19 +541,16 @@ const StoreProductsTable = ({
                             }
                           >
                             <i
-                              className={`fa-solid ${
+                              className={`d-none res-dis-sm fa-solid ${
                                 !product.isSelling ? 'fa-box' : 'fa-archive'
                               }`}
                             ></i>
+                            <span className='res-hide'>
+                              {!product.isSelling
+                                ? t('button.show')
+                                : t('button.hide')}
+                            </span>
                           </button>
-                          <Link
-                            type='button'
-                            className='btn btn-sm btn-outline-primary ripple rounded-1'
-                            to={`/vendor/products/edit/${product._id}/${storeId}`}
-                            title={t('button.edit')}
-                          >
-                            <i className='fa-duotone fa-pen-to-square'></i>
-                          </Link>
                         </div>
                       </td>
                     </tr>

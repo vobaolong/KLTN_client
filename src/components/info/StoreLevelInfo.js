@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Paragraph from '../ui/Paragraph'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Paragraph from '../ui/Paragraph'
+import Skeleton from 'react-loading-skeleton'
 import { formatMonth } from '../../helper/humanReadable'
 import { listSellingProductsByStore } from '../../apis/product'
-import { useEffect, useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
 
 const StoreLevelInfo = ({ store = {} }) => {
   const { t } = useTranslation()
-  const percent = Math.round(
+  const successRate = Math.round(
     (store?.numberOfSuccessfulOrders /
       (store?.numberOfSuccessfulOrders + store?.numberOfFailedOrders)) *
       100
@@ -16,6 +16,8 @@ const StoreLevelInfo = ({ store = {} }) => {
   const [initialNumberOfProducts, setInitialNumberOfProducts] = useState(0)
 
   useEffect(() => {
+    let isMounted = true
+
     const fetchData = async () => {
       try {
         const sortBy = ''
@@ -33,19 +35,23 @@ const StoreLevelInfo = ({ store = {} }) => {
           },
           store._id
         )
-        if (data.error) {
-          console.error('Error fetching products:', data.error)
-        } else {
+
+        if (isMounted && !data.error) {
           const newNumberOfProducts = data.products.length
           if (initialNumberOfProducts === 0) {
             setInitialNumberOfProducts(newNumberOfProducts)
           }
         }
       } catch (error) {
-        console.error('Something went wrong:', error)
+        console.error('Error fetching products:', error)
       }
     }
+
     fetchData()
+
+    return () => {
+      isMounted = false
+    }
   }, [store._id])
 
   return (
@@ -127,8 +133,8 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  percent > 0 ? (
-                    <span className='text-primary'>{percent} %</span>
+                  successRate > 0 ? (
+                    <span className='text-primary'>{successRate} %</span>
                   ) : (
                     <Skeleton height={20} />
                   )
@@ -150,7 +156,7 @@ const StoreLevelInfo = ({ store = {} }) => {
                       {initialNumberOfProducts}
                     </span>
                   ) : (
-                    <Skeleton width={50} height={20} />
+                    '0'
                   )
                 }
               />

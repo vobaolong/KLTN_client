@@ -14,9 +14,9 @@ import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
-import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
-const StoreOrdersTable = ({
+const VendorOrdersTable = ({
   heading = true,
   storeId = '',
   isEditable = false,
@@ -24,7 +24,8 @@ const StoreOrdersTable = ({
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-
+  const [error, setError] = useState('')
+  const [displayError, setDisplayError] = useState(false)
   const [orders, setOrders] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -34,17 +35,19 @@ const StoreOrdersTable = ({
     status,
     sortBy: 'createdAt',
     order: 'desc',
-    limit: 10,
+    limit: 7,
     page: 1
   })
 
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
+    let timerId = null
     listOrdersByStore(_id, accessToken, filter, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setOrders(data.orders)
           setPagination({
@@ -54,11 +57,16 @@ const StoreOrdersTable = ({
           })
         }
         setIsLoading(false)
+        if (timerId) clearTimeout(timerId)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError(`Something went wrong`)
         setIsLoading(false)
+        if (timerId) clearTimeout(timerId)
       })
+    timerId = setTimeout(() => {
+      if (error) setDisplayError(true)
+    }, 3000)
   }
 
   useEffect(() => {
@@ -121,6 +129,7 @@ const StoreOrdersTable = ({
         </>
       )}
       {isLoading && <Loading />}
+      {displayError && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         {!isLoading && pagination.size === 0 ? (
           <div className='my-4 text-danger text-center'>
@@ -235,7 +244,7 @@ const StoreOrdersTable = ({
                     </th>
 
                     <th scope='col'>
-                      <span style={{ fontWeight: '400' }}>{t('action')}</span>
+                      <span>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
@@ -300,7 +309,8 @@ const StoreOrdersTable = ({
                           to={`/vendor/orders/detail/${order._id}/${storeId}`}
                           title={t('button.detail')}
                         >
-                          <i className='fa-solid fa-eye'></i>
+                          <i className='res-dis-sm d-none fa-solid fa-eye'></i>
+                          <span className='res-hide'>{t('button.detail')}</span>
                         </Link>
                       </td>
                     </tr>
@@ -330,4 +340,4 @@ const StoreOrdersTable = ({
   )
 }
 
-export default StoreOrdersTable
+export default VendorOrdersTable

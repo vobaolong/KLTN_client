@@ -140,7 +140,6 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
   }
-  console.log(levels)
 
   return (
     <div className='position-relative'>
@@ -179,7 +178,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
       {isLoading && <Loading />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
           <AdminCreateStoreLevelItem onRun={() => setRun(!run)} />
         </div>
@@ -193,7 +192,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Store Level'
+                    title={t('levelDetail.name')}
                     sortBy='name'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -202,7 +201,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Floor point'
+                    title={t('levelDetail.floorPoint')}
                     sortBy='minPoint'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -211,7 +210,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Discount'
+                    title={t('levelDetail.discount')}
                     sortBy='discount'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -220,7 +219,7 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title='Status'
+                    title={t('status.status')}
                     sortBy='isDeleted'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -270,13 +269,14 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                   <td>
                     <button
                       type='button'
-                      className='btn btn-sm btn-primary ripple me-2 rounded-1 my-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
                       data-bs-toggle='modal'
                       data-bs-target='#edit-level-form'
                       onClick={() => handleEditLevel(level)}
                       title={t('button.edit')}
                     >
-                      <i className='fa-solid fa-pen'></i>
+                      <i className='d-none res-dis-sm fa-solid fa-pen'></i>
+                      <span className='res-hide'>{t('button.edit')}</span>
                     </button>
 
                     {!level.isDeleted ? (
@@ -286,7 +286,8 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                         onClick={() => handleDeleteLevel(level)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     ) : (
                       <button
@@ -295,7 +296,8 @@ const AdminStoreLevelsTable = ({ heading = false }) => {
                         onClick={() => handleRestoreLevel(level)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
+                        <span className='res-hide'>{t('button.restore')}</span>
                       </button>
                     )}
                   </td>

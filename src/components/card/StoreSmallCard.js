@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/default.webp'
 import Skeleton from 'react-loading-skeleton' // Import Skeleton
 const IMG = process.env.REACT_APP_STATIC_URL
 

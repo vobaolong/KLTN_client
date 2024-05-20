@@ -6,7 +6,7 @@ export const totalProducts = (items = [], userLevel = {}) => {
   totalPrice = items.reduce(
     (prev, item) =>
       prev +
-      parseFloat(item.productId.price?.$numberDecimal || 0) *
+      parseFloat(item.productId?.price?.$numberDecimal || 0) *
         parseFloat(item.count),
     0
   )
@@ -14,7 +14,7 @@ export const totalProducts = (items = [], userLevel = {}) => {
   totalSalePrice = items.reduce(
     (prev, item) =>
       prev +
-      parseFloat(item.productId.salePrice?.$numberDecimal || 0) *
+      parseFloat(item.productId?.salePrice?.$numberDecimal || 0) *
         parseFloat(item.count),
     0
   )

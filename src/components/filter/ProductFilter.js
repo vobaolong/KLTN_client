@@ -75,6 +75,7 @@ const ProductFilter = ({ filter, setFilter }) => {
             name='rating'
             id={`rating${i}`}
             checked={i !== 0 ? filter.rating === i : filter.rating === ''}
+            onChange={() => {}}
             onClick={() => {
               if (i === 0) handleFilter('rating', '')
               else handleFilter('rating', i)

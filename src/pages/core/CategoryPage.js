@@ -89,7 +89,7 @@ const CategoryPage = () => {
 
   return (
     <MainLayout>
-      <div className='position-relative'>
+      <div className='position-relative pt-4'>
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
         <MetaData title={`${category.name} | Zenpii Việt Nam`} />

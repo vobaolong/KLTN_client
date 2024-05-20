@@ -36,10 +36,11 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
-    setError('')
+    let isMounted = true
     setIsLoading(true)
     listOrdersByUser(_id, accessToken, filter)
       .then((data) => {
+        if (!isMounted) return
         if (data.error) setError(data.error)
         else {
           setOrders(data.orders)
@@ -52,13 +53,18 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        if (!isMounted) return
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
+    return () => {
+      isMounted = false
+    }
   }
 
   useEffect(() => {
-    init()
+    const cleanup = init()
+    return cleanup
   }, [filter])
 
   useEffect(() => {
@@ -130,15 +136,8 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
             <table className='table table-sm table-hover align-middle text-start'>
               <thead>
                 <tr>
-                  <th scope='col' className='text-center'></th>
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title={t('orderDetail.id')}
-                      sortBy='_id'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
+                  <th scope='col' className='text-center'>
+                    #
                   </th>
                   <th scope='col'>
                     <SortByButton
@@ -163,7 +162,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
                       title={t('orderDetail.store')}
-                      sortBy='orderId'
+                      sortBy='storeId'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
@@ -211,9 +210,6 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
                     <td>
-                      <small>{order._id}</small>
-                    </td>
-                    <td>
                       <small>{humanReadableDate(order.createdAt)}</small>
                     </td>
                     <td className='text-end'>
@@ -226,7 +222,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     <td className='hidden-avatar'>
                       <StoreSmallCard store={order.storeId} />
                     </td>
-                    <td className='text-end'>
+                    <td>
                       {order.deliveryId && (
                         <small>
                           {order.deliveryId.name}
@@ -249,11 +245,12 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     <td>
                       <Link
                         type='button'
-                        className='btn btn-sm btn-outline-secondary opacity-75 rounded-1'
+                        className='btn btn-sm btn-outline-primary rounded-1'
                         to={`/account/purchase/detail/${order._id}`}
                         title={t('button.view')}
                       >
-                        <i className='fa-solid fa-eye'></i>
+                        {/* <i className='fa-solid fa-eye'></i> */}
+                        {t('button.detail')}
                       </Link>
                     </td>
                   </tr>

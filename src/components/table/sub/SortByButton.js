@@ -29,7 +29,7 @@ const SortByButton = ({
   return (
     <div className='py-1'>
       <span
-        className='text-nowrap py-2 text-secondary pointer fw-normal'
+        className='text-nowrap py-2 text-muted pointer fw-normal'
         onClick={handleClick}
         style={{ fontSize: '0.9rem' }}
       >

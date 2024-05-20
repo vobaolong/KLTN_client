@@ -83,7 +83,7 @@ const FollowStoreButton = ({
         </span>
       ) : (
         <span>
-          <i className='fa-solid fa-plus'></i>
+          <i className='fa-light fa-plus'></i>
           <span className='ms-2 res-hide-md'>{t('storeDetail.follow')}</span>
         </span>
       )}

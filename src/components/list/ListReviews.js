@@ -81,7 +81,8 @@ const ListReviews = ({
     for (let i = 1; i <= 5; i++) {
       const ratingCount =
         ratingsCounts.find((item) => item.rating === i)?.count || 0
-      const percentage = (ratingCount / reviews.length) * 100
+      const percentage =
+        reviews.length > 0 ? (ratingCount / reviews.length) * 100 : 0
       render.push(
         <small className='d-flex align-items-center gap-2' key={i}>
           <StarRating stars={i} />
@@ -155,7 +156,7 @@ const ListReviews = ({
       {heading && <h5 className='my-2'>{heading}</h5>}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
-      <div className='bg-body rounded box-shadow p-3'>
+      <div className='bg-body rounded border p-3'>
         <div className='d-flex flex-column gap-1 pb-3 mb-4 border-bottom'>
           <h6>Tổng quan</h6>
           <div className='d-flex gap-2 align-items-center'>

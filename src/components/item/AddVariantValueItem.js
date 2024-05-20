@@ -23,8 +23,8 @@ const AddVariantValueItem = ({
         data-bs-toggle='modal'
         data-bs-target={`#add-variant-value-form-${variantId}`}
       >
-        <i className='fa-solid fa-plus'></i>
-        <span className='ms-2 res-hide'>{t('variantDetail.value.addBtn')}</span>
+        <i className='fa-light fa-plus'></i>
+        <span className='ms-2 res-hide'>{t('variantDetail.value.add')}</span>
       </button>
 
       <Modal

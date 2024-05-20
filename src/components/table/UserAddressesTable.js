@@ -10,7 +10,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
-const UserAddressesTable = ({ addresses = [], heading = true }) => {
+const UserAddressesTable = ({ addresses = [], heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [editAddress, setEditAddress] = useState({})
@@ -65,11 +65,8 @@ const UserAddressesTable = ({ addresses = [], heading = true }) => {
       )}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='text-end'>
-          {heading && (
-            <h5 className='text-start mb-0'>{t('userDetail.address')}</h5>
-          )}
-          <UserAddAddressItem count={addresses?.length || 0} />
+        <div className='text-end mb-3'>
+          <UserAddAddressItem heading={true} count={addresses?.length || 0} />
         </div>
         {!isLoading && addresses.length === 0 ? (
           <div className='d-flex justify-content-center mt-3 text-primary text-center'>
@@ -107,7 +104,8 @@ const UserAddressesTable = ({ addresses = [], heading = true }) => {
                         onClick={() => handleEditAddress(address, index)}
                         title={t('button.edit')}
                       >
-                        <i className='fa-duotone fa-pen-to-square'></i>
+                        <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                        <span className='res-hide'>{t('button.edit')}</span>
                       </button>
                       <button
                         type='button'
@@ -115,7 +113,8 @@ const UserAddressesTable = ({ addresses = [], heading = true }) => {
                         onClick={() => handleDeleteAddress(address, index)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
+                        <span className='res-hide'>{t('button.delete')}</span>
                       </button>
                     </td>
                   </tr>

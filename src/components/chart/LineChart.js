@@ -5,6 +5,7 @@ import { Line } from 'react-chartjs-2'
 import { Chart, registerables } from 'chart.js'
 import { useTranslation } from 'react-i18next'
 import CrosshairPlugin from 'chartjs-plugin-crosshair'
+
 const CustomCrosshairPlugin = function (plugin) {
   const originalAfterDraw = plugin.afterDraw
   plugin.afterDraw = function (chart, easing) {
@@ -14,6 +15,7 @@ const CustomCrosshairPlugin = function (plugin) {
   }
   return plugin
 }
+
 Chart.register(...registerables, CustomCrosshairPlugin(CrosshairPlugin))
 
 const LineChart = ({
@@ -30,23 +32,25 @@ const LineChart = ({
     datasets: []
   })
   const { t } = useTranslation()
-  const init = () => {
+
+  useEffect(() => {
     const newData = groupBy(items, by, role, sliceEnd)
 
     const datasets = [
       {
         data: newData?.map((item) => item[1]),
-        label: role === 'admin' ? title : 'Lợi nhuận',
+        label: title,
         fill: false,
         tension: 0.4,
         borderWidth: 2,
-        borderColor: '#1162D5',
-        pointHoverRadius: 3,
-        pointHoverBackgroundColor: '#1162D5'
+        borderColor: '#3b82f6',
+        backgroundColor: '#86d3ff',
+        pointHoverRadius: 4,
+        pointHoverBackgroundColor: '#3b82f6'
       }
     ]
 
-    if (role === 'vendor') {
+    if (role === 'vendor' && value === 'order') {
       datasets.push({
         data: newData?.map((item) => item[2]),
         label: 'Chiết khấu',
@@ -54,7 +58,8 @@ const LineChart = ({
         tension: 0.4,
         borderWidth: 2,
         borderColor: '#F66',
-        pointHoverRadius: 3,
+        backgroundColor: '#ffbbbb',
+        pointHoverRadius: 4,
         pointHoverBackgroundColor: '#F66'
       })
     }
@@ -63,28 +68,14 @@ const LineChart = ({
       labels: newData?.map((item) => item[0]),
       datasets
     })
-  }
-
-  useEffect(() => {
-    init()
   }, [items, by, role, sliceEnd])
 
   return (
-    <div
-      style={{ cursor: 'crosshair' }}
-      className='bg-body box-shadow rounded w-100'
-    >
-      <h5
-        style={{
-          textAlign: 'start',
-          padding: '10px 0 10px 10px',
-          borderBottom: '1px solid #ccc',
-          textTransform: 'capitalize'
-        }}
-      >
+    <div className='bg-body box-shadow rounded-1 w-100 crosshair'>
+      <h5 className='text-capitalize border-bottom p-3 text-start'>
         {value} {t('breadcrumbs.overview')}
       </h5>
-      <div className='px-3 py-2'>
+      <div className='p-3'>
         <Line
           data={data}
           options={{
@@ -125,13 +116,13 @@ const LineChart = ({
               },
               crosshair: {
                 enabled: true,
-                mode: 'xy',
                 line: {
-                  color: '#F66',
-                  width: 1
+                  color: '#ccc',
+                  width: 1,
+                  dashPattern: [5, 5]
                 },
                 sync: {
-                  enabled: true,
+                  enabled: false,
                   group: 1,
                   suppressTooltips: false
                 },

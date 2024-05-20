@@ -1,5 +1,5 @@
 import StoreCarouselUpload from './uploadButton/StoreCarouselUpload'
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/default.webp'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 

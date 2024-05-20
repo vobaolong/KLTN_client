@@ -13,6 +13,7 @@ const UserEditProfileItem = ({ user = {} }) => {
         data-bs-target='#profile-edit-form'
       >
         <i className='fa-duotone fa-pen-to-square'></i>
+        <span className='ms-2 res-hide'>{t('userDetail.editProfile')}</span>
       </button>
 
       <Modal

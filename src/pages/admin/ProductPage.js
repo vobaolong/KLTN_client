@@ -21,7 +21,11 @@ const ProductPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-regular fa-circle-check me-2'></i>
+              <i
+                className={`${
+                  flag ? 'fa-solid' : 'fa-light'
+                } fa-check-circle me-2`}
+              ></i>
               <span className='res-hide'>{t('title.listActiveProducts')}</span>
             </span>
           </li>
@@ -30,7 +34,9 @@ const ProductPage = () => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <i className='fa-solid fa-ban me-2'></i>
+              <i
+                className={`${flag ? 'fa-light' : 'fa-solid'} fa-ban me-2`}
+              ></i>
               <span className='res-hide'>{t('title.listBannedProducts')}</span>
             </span>
           </li>

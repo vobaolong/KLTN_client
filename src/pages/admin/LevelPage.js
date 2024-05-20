@@ -23,7 +23,11 @@ const LevelPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i className='fa-solid fa-user-group me-2'></i>
+              <i
+                className={`${
+                  flag ? 'fa-solid' : 'fa-light'
+                } fa-user-group me-2`}
+              ></i>
               <span className='res-hide'>
                 {t('levelDetail.userLevel.userLevel')}
               </span>
@@ -34,7 +38,9 @@ const LevelPage = () => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <i className='fa-solid fa-store me-2'></i>
+              <i
+                className={`${flag ? 'fa-light' : 'fa-solid'} fa-store me-2`}
+              ></i>
               <span className='res-hide'>
                 {t('levelDetail.storeLevel.storeLevel')}
               </span>

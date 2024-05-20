@@ -10,7 +10,7 @@ const MainLayout = ({
     <div className='main-layout'>
       <MainNav navFor={navFor} />
       <main className={`body ${container}`}>{children}</main>
-      {navFor !== 'admin' ? <Footer /> : <div className='mb-4'></div>}
+      {navFor !== 'user' ? <div className='mb-4'></div> : <Footer />}
     </div>
   )
 }

@@ -15,7 +15,7 @@ const CreateTransactionItemForUser = ({ eWallet = 0, onRun }) => {
           data-bs-target='#create-transaction-form-for-user'
         >
           <i className='fa-solid fa-money-bill-transfer'></i>
-          <span className='ms-2 res-hide'>{t('transactionDetail.draw')}</span>
+          <span className='ms-2'>{t('transactionDetail.draw')}</span>
         </button>
 
         {eWallet > 0 && (
@@ -28,7 +28,11 @@ const CreateTransactionItemForUser = ({ eWallet = 0, onRun }) => {
           </Modal>
         )}
       </div>
-      {eWallet <= 0 && <small className='cus-tooltip-msg'>{t('empty')}</small>}
+      {eWallet <= 0 && (
+        <small className='cus-tooltip-msg'>
+          {t('transactionDetail.empty')}
+        </small>
+      )}
     </div>
   )
 }

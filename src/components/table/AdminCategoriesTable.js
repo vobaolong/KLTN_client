@@ -180,7 +180,7 @@ const AdminCategoriesTable = ({ heading = false }) => {
         )} */}
       </div>
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='option-wrap d-flex align-items-center justify-content-between'>
+        <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
 
           <div className='d-flex gap-1'>
@@ -216,7 +216,7 @@ const AdminCategoriesTable = ({ heading = false }) => {
               className='btn btn-primary ripple text-nowrap rounded-1'
               to='/admin/category/create'
             >
-              <i className='fa-solid fa-plus'></i>
+              <i className='fa-light fa-plus'></i>
               <span className='ms-2 res-hide'>{t('categoryDetail.add')}</span>
             </Link>
           </div>
@@ -342,7 +342,8 @@ const AdminCategoriesTable = ({ heading = false }) => {
                       to={`/admin/category/edit/${category._id}`}
                       title={t('button.edit')}
                     >
-                      <i className='fa-duotone fa-pen-to-square'></i>
+                      {t('button.edit')}
+                      {/* <i className='fa-duotone fa-pen-to-square'></i> */}
                     </Link>
 
                     {!category.isDeleted ? (
@@ -352,7 +353,8 @@ const AdminCategoriesTable = ({ heading = false }) => {
                         onClick={() => handleDeleteCategory(category)}
                         title={t('button.delete')}
                       >
-                        <i className='fa-solid fa-trash-alt'></i>
+                        {/* <i className='fa-solid fa-trash-alt'></i> */}
+                        {t('button.delete')}
                       </button>
                     ) : (
                       <button
@@ -361,7 +363,8 @@ const AdminCategoriesTable = ({ heading = false }) => {
                         onClick={() => handleRestoreCategory(category)}
                         title={t('button.restore')}
                       >
-                        <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        {/* <i className='fa-solid fa-trash-can-arrow-up'></i> */}
+                        {t('button.restore')}
                       </button>
                     )}
                   </td>

@@ -29,7 +29,11 @@ const Modal = ({
                   <h3 className='text-primary'>Zenpii</h3>
                 )}
 
-                {subTitle && <p className='modal-title fw-light'>{subTitle}</p>}
+                {subTitle && (
+                  <p className='text-dark-emphasis modal-title fw-light'>
+                    {subTitle}
+                  </p>
+                )}
               </div>
               <button
                 type='button'

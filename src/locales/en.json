@@ -146,7 +146,11 @@
     }
   },
   "toastError": {
-    "storeBanned": "This store is temporarily banned!"
+    "storeBanned": "This store is temporarily banned!",
+    "soldOut": "The product is sold out, please delete it from your cart, you can continue with others!",
+    "outOfBusiness": "The product is out of business, please delete it from your cart, you can continue with others!",
+    "productBanned": "The product is banned by Zenpii!",
+    "productLeft": "products left, please update cart!"
   },
   "message": {
     "addStaff": "Are you sure to add this employee?",
@@ -199,7 +203,9 @@
     "banProduct": "Ban product",
     "removeProductFromCart": "Remove product from cart",
     "updateOrder": "Update order status",
-    "updateCategory": "Update category"
+    "updateCategory": "Update category",
+    "cancelUpdate": "Cancel Update",
+    "cancelCreate": "Cancel Create"
   },
   "pickColor": "Click to pick color",
   "levelDetail": {
@@ -270,6 +276,12 @@
   "similarProducts": "Similar Products",
   "sameShop": "From the same shop",
   "productDetail": {
+    "all": "All",
+    "selling": "Selling",
+    "hidden": "Hide",
+    "productImg": "Product Images",
+    "basicInfo": "Basic Information",
+    "detailInfo": "Detail Information",
     "estimatedDelivery": "Estimated Delivery",
     "offers": "Available Offers",
     "only": "Only",
@@ -299,6 +311,14 @@
     "edit": "Edit product",
     "thumbImg": "Thumbnail",
     "otherImg": "Other images",
+    "img": "Image",
+    "img1": "Image 1",
+    "img2": "Image 2",
+    "img3": "Image 3",
+    "img4": "Image 4",
+    "img5": "Image 5",
+    "img6": "Image 6",
+    "img7": "Image 7",
     "sold": "Sold",
     "sale": "OFF",
     "description": "Description",
@@ -369,7 +389,7 @@
   "topShop": "Outstanding Shops",
   "topUser": "Outstanding User",
   "topProduct": "Best-selling Product",
-  "store": "Store",
+  "store": "Shop",
   "searchHolder": "Search for products and shops",
   "userDetail": {
     "role": {
@@ -497,7 +517,7 @@
     "name": "Variant name",
     "validName": "Please provide a valid variant name!",
     "selectCategory": "Select category",
-    "required": "No categories selected",
+    "required": "No category selected",
     "value": {
       "addBtn": "Add variant value",
       "edit": "Edit variant value",
@@ -518,6 +538,9 @@
   },
 
   "storeDetail": {
+    "typeOfStall": "Type of Stall",
+    "basicInfo": "Basic Information",
+    "imgInfo": "Logo & Background Image",
     "messageClose": "This store is on vacation, can't order at this time!",
     "numberOfProduct": "Products",
     "followers": "Followers",
@@ -591,6 +614,7 @@
     "forgotPW": "Forgot Password",
     "sendEmail": "Send Email",
     "save": "Save",
+    "update": "Save",
     "back": "Back",
     "addImg": "Add Image",
     "more": "More",
@@ -631,7 +655,7 @@
     "id": "Order ID",
     "date": "Order placed",
     "total": "Total",
-    "store": "Store",
+    "store": "Shop",
     "deliveryUnit": "Delivery Unit",
     "payment": "Payment",
     "paymentMethod": "Payment Method",
@@ -674,15 +698,15 @@
   "search": "Search for...",
   "addressForm": {
     "street": "Street",
-    "ward": "Ward",
+    "commune": "Ward",
     "district": "District",
-    "city": "Province/City"
+    "province": "Province/Province"
   },
   "addressFormValid": {
     "streetValid": "Please provide a valid street address (',' is not allowed)!",
-    "wardValid": "Please provide a valid ward (','' is not allowed)!",
-    "districtValid": "Please provide a valid city/district (',' is not allowed)!",
-    "cityValid": "Please provide a valid province/city (',' is not allowed)!"
+    "communeValid": "Please provide a valid commune (','' is not allowed)!",
+    "districtValid": "Please provide a valid province/district (',' is not allowed)!",
+    "provinceValid": "Please provide a valid province/province (',' is not allowed)!"
   },
 
   "services": {
@@ -698,8 +722,8 @@
     "title": "Zenpii - Fast, Quality, Affordable",
     "p1": "Zenpii has it all",
     "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, Zenpii brings you an online shopping experience that starts with trust.",
-    "p2": "Overflowing with promotions and offers",
-    "small2": "Do you want to hunt for hot deals? Zenpii has daily hot deals for you! Are you a fan of brands? Official stores are waiting for you. No need to hunt for free shipping codes, because Zenpii has millions of products in the FreeShip+ program, with no limit on the number of orders, saving you precious time. ZenNOW package (Applicable for orders over 200k) saves you money to receive 100% free shipping within 2 hours & same day, applicable for 100% of products, 100% of cities and provinces in Vietnam."
+    "payment": "Payment",
+    "deliveryUnit": "Logistics"
   },
   "showMore": "Show more",
   "showLess": "Show less"

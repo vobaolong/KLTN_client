@@ -60,7 +60,7 @@ const SearchBar = () => {
       />
 
       <button
-        className='btn cus-outline text-white ripple rounded-end-1'
+        className='btn cus-outline inherit ripple rounded-end-1'
         type='submit'
         onClick={handleFormSubmit}
       >

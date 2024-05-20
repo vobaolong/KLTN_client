@@ -14,7 +14,7 @@ const Policy = () => {
       <header className='main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark bg-primary'>
         <div className='container-md d-flex justify-content-start text-white'>
           <Link
-            className='navbar-brand cus-navbar-brand me-4 ripple res-hide-md'
+            className='navbar-brand cus-navbar-brand me-2 ripple res-hide-md'
             to='/'
           >
             <Logo />
@@ -24,7 +24,7 @@ const Policy = () => {
           </h5>
         </div>
       </header>
-      <div className='body container-fluid'>
+      <div className='body container-fluid pt-4'>
         <h3 className='text-uppercase text-center'>Chính sách bảo mật</h3>
 
         <div className='text-justify mt-3'>

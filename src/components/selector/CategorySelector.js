@@ -146,7 +146,7 @@ const CategorySelector = ({
         <SearchInput onChange={handleChangeKeyword} />
 
         {isLoading && <Loading />}
-        <div className='d-flex box-shadow p-2 mt-2 bg-body'>
+        <div className='d-flex border rounded-1 p-2 mt-2 bg-body'>
           <div
             className='list-group m-1'
             style={{
@@ -156,9 +156,8 @@ const CategorySelector = ({
             }}
           >
             {lv1Categories?.map((category, index) => (
-              <div>
+              <div key={index}>
                 <button
-                  key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
                     category._id === lv2Filter.categoryId ? 'active' : ''
@@ -181,9 +180,8 @@ const CategorySelector = ({
             }}
           >
             {lv2Categories?.map((category, index) => (
-              <div>
+              <div key={index}>
                 <button
-                  key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action d-flex justify-content-between align-items-center  ${
                     category._id === lv3Filter.categoryId && 'active'
@@ -206,14 +204,11 @@ const CategorySelector = ({
             }}
           >
             {lv3Categories?.map((category, index) => (
-              <div>
+              <div key={index}>
                 <button
-                  key={index}
                   type='button'
                   className={`list-group-item ripple list-group-item-action ${
-                    selectedCategory && category._id === selectedCategory._id
-                      ? 'active'
-                      : ''
+                    category._id === selectedCategory?._id ? 'active' : ''
                   }`}
                   onClick={() => handleClick(null, null, category)}
                 >
@@ -229,11 +224,9 @@ const CategorySelector = ({
         <div className='col mt-2'>
           <div className='mt-4 position-relative'>
             <label
-              className='position-absolute text-muted'
+              className='position-absolute text-muted fs-9'
               style={{
-                fontSize: '0.8rem',
-                left: '12px',
-                top: '-18px'
+                top: '-20px'
               }}
             >
               {label}
@@ -248,7 +241,7 @@ const CategorySelector = ({
 
                   <button
                     type='button'
-                    className='btn btn-outline-danger btn-sm ripple position-absolute'
+                    className='btn btn-light btn-sm ripple position-absolute'
                     style={{
                       top: '50%',
                       transform: 'translateY(-50%)',
@@ -256,11 +249,11 @@ const CategorySelector = ({
                     }}
                     onClick={() => handleDelete()}
                   >
-                    <i className='fa-solid fa-xmark'></i>
+                    <i className='fa-solid fa-xmark text-danger'></i>
                   </button>
                 </div>
               ) : (
-                <span className={isRequired && 'text-danger'}>
+                <span className={isRequired ? 'text-danger' : ''}>
                   {t('variantDetail.required')}
                 </span>
               )}

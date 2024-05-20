@@ -12,7 +12,7 @@ const AdminCreateCommissionItem = ({ onRun = () => {} }) => {
         data-bs-toggle='modal'
         data-bs-target='#admin-create-commission-form'
       >
-        <i className='fa-solid fa-plus'></i>
+        <i className='fa-light fa-plus'></i>
         <span className='ms-2 res-hide'>{t('commissionDetail.add')}</span>
       </button>
 

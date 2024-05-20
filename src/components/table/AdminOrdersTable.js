@@ -122,7 +122,9 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
       {error && <Error msg={error} />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <SearchInput onChange={handleChangeKeyword} />
+        <div className='mb-3'>
+          <SearchInput onChange={handleChangeKeyword} />
+        </div>
         {!isLoading && pagination.size === 0 ? (
           <div className='my-4 text-danger text-center'>
             <h5>{t('orderDetail.noOrder')}</h5>
@@ -178,12 +180,13 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
+
                   <th scope='col' className='text-end'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
-                      title={t('orderDetail.commission')}
-                      sortBy='amountToZenpii'
+                      title={t('orderDetail.profit')}
+                      sortBy='amountToStore'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
@@ -191,8 +194,8 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
-                      title={t('orderDetail.profit')}
-                      sortBy='amountToStore'
+                      title={t('orderDetail.commission')}
+                      sortBy='amountToZenpii'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
@@ -224,7 +227,14 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     />
                   </th>
 
-                  <th scope='col'> </th>
+                  <th scope='col'>
+                    <span
+                      style={{ fontWeight: '400', fontSize: '.875rem' }}
+                      className='text-secondary'
+                    >
+                      {t('action')}
+                    </span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -233,11 +243,17 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                     <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
                     </th>
-                    <td>{order._id}</td>
-                    <td>{humanReadableDate(order.createdAt)}</td>
+                    <td>
+                      <small>{order._id}</small>
+                    </td>
+                    <td>
+                      <small>{humanReadableDate(order.createdAt)}</small>
+                    </td>
                     <td className='text-end'>
-                      {formatPrice(order.amountFromUser?.$numberDecimal)}
-                      <sup>₫</sup>
+                      <small className='text-nowrap'>
+                        {formatPrice(order.amountFromUser?.$numberDecimal)}
+                        <sup>₫</sup>
+                      </small>
                     </td>
                     <td>
                       <small className='hidden-avatar'>
@@ -250,27 +266,27 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       </small>
                     </td>
                     <td className='text-end'>
-                      <span className='text-nowrap'>
-                        {order.amountToZenpii &&
-                          formatPrice(order.amountToZenpii.$numberDecimal)}
-                        <sup>₫</sup>
-                      </span>
-                    </td>
-                    <td className='text-end'>
-                      <span className='text-nowrap'>
+                      <small className='text-nowrap'>
                         {order.amountToStore &&
                           formatPrice(order.amountToStore.$numberDecimal)}
                         <sup>₫</sup>
-                      </span>
+                      </small>
+                    </td>
+                    <td className='text-end'>
+                      <small className='text-nowrap'>
+                        {order.amountToZenpii &&
+                          formatPrice(order.amountToZenpii.$numberDecimal)}
+                        <sup>₫</sup>
+                      </small>
                     </td>
                     <td>
                       {order.deliveryId && (
-                        <span>
+                        <small>
                           <i>{order.deliveryId.name}</i>
                           <br />
                           {formatPrice(order.deliveryId.price.$numberDecimal)}
                           <sup>₫</sup>
-                        </span>
+                        </small>
                       )}
                     </td>
                     <td>
@@ -287,11 +303,12 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       <div className='position-relative d-inline-block'>
                         <Link
                           type='button'
-                          className='btn btn-sm btn-outline-secondary rounded-1 ripple'
+                          className='btn btn-sm btn-outline-primary rounded-1 ripple'
                           to={`/admin/order/detail/${order._id}`}
                           title={t('button.detail')}
                         >
-                          <i className='fa-solid fa-info-circle'></i>
+                          {/* <i className='fa-solid fa-info-circle'></i> */}
+                          {t('button.detail')}
                         </Link>
                       </div>
                     </td>

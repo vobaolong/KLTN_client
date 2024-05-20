@@ -103,7 +103,7 @@ const DetailPage = () => {
         {error ? (
           <Error msg={error} />
         ) : (
-          <div className=''>
+          <div className='pt-3'>
             <MetaData title={`${product.name} | Zenpii Việt Nam`} />
             <nav className='res-hide' aria-label='breadcrumb'>
               <ol className='breadcrumb'>
@@ -193,7 +193,7 @@ const DetailPage = () => {
                       )}
                     </span>
                   </div>
-                  <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded rounded-sm'>
+                  <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded-1'>
                     {isLoading ? (
                       <Skeleton width={100} />
                     ) : (
@@ -346,12 +346,10 @@ const DetailPage = () => {
                           className='btn-lg'
                         />
                       )}
-                      {product?.numberOfFollowers > 0 ? (
+                      {product?.numberOfFollowers > 0 && (
                         <span className='ms-2'>
                           {product?.numberOfFollowers} đã thích
                         </span>
-                      ) : (
-                        <Skeleton width={100} height={20} />
                       )}
                     </div>
                   </div>

@@ -13,6 +13,7 @@ import { groupByDate, groupByJoined, groupBySold } from '../../helper/groupBy'
 import { humanReadableDate } from '../../helper/humanReadable'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
+// import DoughnutChart from './DoughnutChart'
 import DropDownMenu from '../ui/DropDownMenu'
 import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
@@ -196,30 +197,27 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      <div className='container-fluid px-2'>
+      <div className='container-fluid px-0'>
         <div className='row'>
           <div className='col-md-4 col-12'>
-            <div className='rounded-2 bg-body text-center box-shadow py-3 mb-2 d-md-grid d-sm-flex gap-2 text-dark-emphasis align-items-center justify-content-center'>
-              <span className=''>
-                <i className='bg-primary-rgba fa-light fw-normal fa-wallet fs-4 p-3 rounded-circle text-primary'></i>
-              </span>
-              <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
-                {formatPrice(totalRevenue)}
-                <sup>₫</sup>
-              </span>
-              <span
-                style={{ fontSize: '1rem' }}
-                className='res-hide-md text-secondary'
-              >
-                {t('admin.adDashboard.totalRevenue')}
-              </span>
+            <div className='rounded-2 bg-body text-center box-shadow p-3 mb-2 d-flex gap-2 text-dark-emphasis align-items-start justify-content-between'>
+              <div className='d-flex flex-column align-items-start justify-content-start'>
+                <span style={{ fontSize: '1rem' }} className='text-secondary'>
+                  {t('admin.adDashboard.totalRevenue')}
+                </span>
+                <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                  {formatPrice(totalRevenue)}
+                  <sup>₫</sup>
+                </span>
+              </div>
+              <i className=' fa-light fw-normal fa-wallet fs-5 rounded-circle text-primary'></i>
             </div>
           </div>
 
           <div className='col-md-2 col-6'>
             <button
               type='button'
-              className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+              className={`rounded-2 w-100 bg-body text-center box-shadow p-3 mb-2 d-flex align-items-start justify-content-between gap-2 text-dark-emphasis border ${
                 options.flag === 'order' ? 'border-danger' : 'border-0 '
               }`}
               onClick={() =>
@@ -229,29 +227,27 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                 })
               }
             >
+              <div className='d-flex flex-column align-items-start justify-content-center'>
+                <span style={{ fontSize: '1rem' }} className='text-secondary'>
+                  {t('admin.orders')}
+                </span>
+                <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                  {sizes.order}
+                </span>
+              </div>
               <span>
                 <i
-                  className={`text-center d-inline-block bg-danger-rgba fs-4 p-3 rounded-circle text-danger ${
+                  className={`text-center  fs-5 rounded-circle text-danger ${
                     options.flag === 'order' ? 'fa-solid' : 'fa-light fw-normal'
-                  } fa-file-invoice`}
+                  } fa-receipt`}
                 ></i>
-              </span>
-
-              <span style={{ fontSize: '1.3rem' }} className='res-hide fw-bold'>
-                {sizes.order}
-              </span>
-              <span
-                style={{ fontSize: '1rem' }}
-                className='res-hide-md text-secondary'
-              >
-                {t('admin.orders')}
               </span>
             </button>
           </div>
           <div className='col-md-2 col-6'>
             <button
               type='button'
-              className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+              className={`rounded-2 w-100 bg-body box-shadow p-3 mb-2 d-flex align-items-start justify-content-between gap-2 text-dark-emphasis border ${
                 options.flag === 'product' ? 'border-success' : 'border-0'
               }`}
               onClick={() =>
@@ -261,23 +257,23 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                 })
               }
             >
+              <div className='d-flex flex-column align-items-start justify-content-center'>
+                <span style={{ fontSize: '1rem' }} className='text-secondary'>
+                  {t('admin.products')}
+                </span>
+                <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                  {sizes.product}
+                </span>
+              </div>
+
               <span>
                 <i
-                  className={`text-center d-inline-block bg-success-rgba fs-4 p-3 rounded-circle text-success ${
+                  className={`text-center  fs-5 rounded-circle text-success ${
                     options.flag === 'product'
                       ? 'fa-solid'
                       : 'fa-light fw-normal'
                   } fa-box`}
                 ></i>
-              </span>
-              <span style={{ fontSize: '1.3rem' }} className='res-hide fw-bold'>
-                {sizes.product}
-              </span>
-              <span
-                style={{ fontSize: '1rem' }}
-                className='res-hide-md text-secondary'
-              >
-                {t('admin.products')}
               </span>
             </button>
           </div>
@@ -286,7 +282,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
               <div className='col-md-2 col-6'>
                 <button
                   type='button'
-                  className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                  className={`rounded-2 w-100 bg-body text-center box-shadow p-3 mb-2 d-flex align-items-start justify-content-between gap-2 text-dark-emphasis border ${
                     options.flag === 'user' ? 'border-primary' : 'border-0 '
                   }`}
                   onClick={() =>
@@ -296,26 +292,25 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                     })
                   }
                 >
+                  <div className='d-flex flex-column align-items-start justify-content-center'>
+                    <span
+                      style={{ fontSize: '1rem' }}
+                      className='text-secondary'
+                    >
+                      {t('admin.users')}
+                    </span>
+                    <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                      {sizes.user}
+                    </span>
+                  </div>
                   <span>
                     <i
-                      className={`text-center d-inline-block bg-primary-rgba fs-4 p-3 rounded-circle text-primary ${
+                      className={`text-center  fs-5 rounded-circle text-primary ${
                         options.flag === 'user'
                           ? 'fa-solid'
                           : 'fa-light fw-normal'
                       } fa-user`}
                     ></i>
-                  </span>
-                  <span
-                    style={{ fontSize: '1.3rem' }}
-                    className='res-hide fw-bold'
-                  >
-                    {sizes.user}
-                  </span>
-                  <span
-                    style={{ fontSize: '1rem' }}
-                    className='res-hide-md text-secondary'
-                  >
-                    {t('admin.users')}
                   </span>
                 </button>
               </div>
@@ -323,7 +318,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
               <div className='col-md-2 col-6'>
                 <button
                   type='button'
-                  className={`rounded-2 w-100 bg-body text-center box-shadow py-3 mb-2 d-grid gap-2 text-dark-emphasis border ${
+                  className={`rounded-2 w-100 bg-body text-center box-shadow p-3 mb-2 d-flex align-items-start justify-content-between gap-2 text-dark-emphasis border ${
                     options.flag === 'store' ? 'border-warning' : 'border-0 '
                   }`}
                   onClick={() =>
@@ -333,26 +328,25 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                     })
                   }
                 >
+                  <div className='d-flex flex-column align-items-start justify-content-center'>
+                    <span
+                      style={{ fontSize: '1rem' }}
+                      className='text-secondary'
+                    >
+                      {t('admin.stores')}
+                    </span>
+                    <span style={{ fontSize: '1.3rem' }} className='fw-bold'>
+                      {sizes.store}
+                    </span>
+                  </div>
                   <span>
                     <i
-                      className={`text-center d-inline-block bg-warning-rgba fs-4 p-3 rounded-circle text-warning ${
+                      className={`text-center fs-5 rounded-circle text-warning ${
                         options.flag === 'store'
                           ? 'fa-solid'
                           : 'fa-light fw-normal'
                       } fa-store`}
                     ></i>
-                  </span>
-                  <span
-                    style={{ fontSize: '1.3rem' }}
-                    className='res-hide fw-bold'
-                  >
-                    {sizes.store}
-                  </span>
-                  <span
-                    style={{ fontSize: '1rem' }}
-                    className='res-hide-md text-secondary'
-                  >
-                    {t('admin.stores')}
                   </span>
                 </button>
               </div>
@@ -361,11 +355,11 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
         </div>
       </div>
 
-      <div className='mt-3'>
+      <div className='mt-2'>
         <div className='row'>
           <div className='col-xl-8 col-lg-6 position-relative mb-2'>
             <form
-              style={{ right: '2%', top: '1%' }}
+              style={{ right: '2%', top: '2%' }}
               className='d-flex justify-content-end me-2 position-absolute'
             >
               {options.flag !== 'product' ? (
@@ -503,8 +497,8 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
           </div>
 
           <div className='col-xl-4 col-lg-6 ps-md-0'>
-            <div className='bg-body box-shadow p-2 rounded-2'>
-              <h5 className='text-start mt-2'>
+            <div className='bg-body box-shadow p-2 rounded-1'>
+              <h5 className='text-start'>
                 {options.flag === 'user' && t('topUser')}
                 {options.flag === 'store' && t('topShop')}
                 {options.flag === 'product' && t('topProduct')}
@@ -516,30 +510,23 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                     <tr>
                       <th scope='col'>#</th>
                       <th scope='col'>
-                        <small>
-                          {options.flag === 'user' && t('userDetail.name')}
-                          {options.flag === 'store' &&
-                            t('storeDetail.storeName')}
-                          {options.flag === 'product' &&
-                            t('productDetail.name')}
-                          {options.flag === 'order' && t('orderDetail.id')}
-                        </small>
+                        {options.flag === 'user' && t('userDetail.name')}
+                        {options.flag === 'store' && t('storeDetail.storeName')}
+                        {options.flag === 'product' && t('productDetail.name')}
+                        {options.flag === 'order' && t('orderDetail.id')}
                       </th>
                       <th scope='col'>
-                        <small>
-                          {options.flag === 'user' && t('point')}
-                          {options.flag === 'store' && t('point')}
-                          {options.flag === 'product' &&
-                            t('productDetail.sold')}
-                          {options.flag === 'order' && t('orderDetail.date')}
-                        </small>
+                        {options.flag === 'user' && t('point')}
+                        {options.flag === 'store' && t('point')}
+                        {options.flag === 'product' && t('productDetail.sold')}
+                        {options.flag === 'order' && t('orderDetail.date')}
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {(options.flag === 'order'
-                      ? items[options.flag].slice(-6).reverse()
-                      : items[options.flag].slice(0, 6)
+                      ? items[options.flag].slice(-5).reverse()
+                      : items[options.flag].slice(0, 5)
                     ).map((item, index) => (
                       <tr key={index}>
                         <th scope='row'>{index + 1} </th>
@@ -600,7 +587,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
                   </tbody>
                 </table>
               </div>
-              <div className='d-flex justify-content-end my-2'>
+              <div className='d-flex justify-content-end mt-1'>
                 <Link
                   to={`/${by}/${
                     by === 'admin'

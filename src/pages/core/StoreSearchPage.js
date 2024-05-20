@@ -14,7 +14,6 @@ const StoreSearchPage = () => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-
   const keyword = new URLSearchParams(useLocation().search).get('keyword') || ''
   const [listStores, setListStores] = useState([])
   const [pagination, setPagination] = useState({
@@ -47,7 +46,7 @@ const StoreSearchPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(error)
+        setError(`Server Error ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -73,7 +72,7 @@ const StoreSearchPage = () => {
 
   return (
     <MainLayout>
-      <div className='position-relative'>
+      <div className='position-relative pt-4'>
         {isLoading && <Loading />}
         {error && <Error msg={error} />}
 

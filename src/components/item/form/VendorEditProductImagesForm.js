@@ -11,10 +11,7 @@ const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
           <h5 className='fw-bold'>{t('productDetail.editProImg')}</h5>
         </div>
         <div className='col-12 px-4 my-3 d-flex flex-wrap justify-content-start align-items-end'>
-          <div className='me-3'>
-            <p className='mb-1' style={{ fontSize: '0.9rem' }}>
-              {t('productDetail.thumbImg')}
-            </p>
+          <div className='d-grid me-3'>
             <Avatar
               avatar={product.listImages && product.listImages[0]}
               alt={product.name}
@@ -25,16 +22,14 @@ const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
               noRadius={true}
               onRun={onRun}
             />
+            <small className='mt-2 text-center'>
+              {t('productDetail.thumbImg')}
+            </small>
           </div>
           {product.listImages?.map((img, index) => {
             if (index === 0) return
             return (
-              <div key={index} className='d-inline-block me-3'>
-                {index === 1 && (
-                  <p className='mb-1' style={{ fontSize: '0.9rem' }}>
-                    {t('productDetail.otherImg')}
-                  </p>
-                )}
+              <div key={index} className='d-grid me-3'>
                 <Avatar
                   avatar={img}
                   alt={product.name}
@@ -45,11 +40,16 @@ const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
                   noRadius={true}
                   onRun={onRun}
                 />
+                {index >= 1 && (
+                  <small className='mt-2 text-center'>{`${t(
+                    'productDetail.img'
+                  )} ${index}`}</small>
+                )}
               </div>
             )
           })}
 
-          <div className='my-2'>
+          <div className='mb-4'>
             <VendorAddProductImagesItem
               count={product.listImages?.length}
               productId={product._id}

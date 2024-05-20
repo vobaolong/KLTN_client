@@ -28,7 +28,6 @@ const ListOrderItems = ({
 
   const init = () => {
     const { _id, accessToken } = getToken()
-    setError('')
     setIsLoading(true)
     if (by === 'store')
       listItemsByOrderByStore(_id, accessToken, orderId, storeId)
@@ -167,9 +166,9 @@ const ListOrderItems = ({
               {by === 'user' && status === 'Delivered' && (
                 <div className='d-flex justify-content-between align-items-center my-2'>
                   <ReviewItem
-                    orderId={item.orderId}
-                    storeId={item.productId.storeId._id}
-                    productId={item.productId._id}
+                    orderId={item?.orderId}
+                    storeId={item?.productId?.storeId?._id}
+                    productId={item?.productId?._id}
                     date={item?.updatedAt}
                   />
                 </div>

@@ -12,7 +12,7 @@ import FollowProductButton from '../button/FollowProductButton'
 import { useTranslation } from 'react-i18next'
 import { calcPercent } from '../../helper/calcPercent'
 import MallLabel from '../label/MallLabel'
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/default.webp'
 import Skeleton from 'react-loading-skeleton'
 
 const IMG = process.env.REACT_APP_STATIC_URL
@@ -102,11 +102,7 @@ const ProductCard = ({ product = {}, onRun }) => {
           style={{ position: 'relative' }}
         >
           <img
-            src={
-              productValue.listImages
-                ? IMG + productValue.listImages[0]
-                : defaultImage
-            }
+            src={IMG + productValue.listImages[0] ?? defaultImage}
             className='cus-card-img'
             alt={productValue.name}
             style={{

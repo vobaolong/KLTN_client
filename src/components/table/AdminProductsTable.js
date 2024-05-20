@@ -18,12 +18,14 @@ import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import ProductActiveLabel from '../label/ProductActiveLabel'
 import CategorySmallCard from '../card/CategorySmallCard'
+import Error from '../ui/Error'
 
 const AdminProductsTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [run, setRun] = useState('')
+  const [error, setError] = useState('')
   const [products, setProducts] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -40,29 +42,37 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
   const [activeProduct, setActiveProduct] = useState({})
   const { _id, accessToken } = getToken()
 
-  const init = () => {
-    setIsLoading(true)
-    listProductsForAdmin(_id, accessToken, filter)
-      .then((data) => {
-        if (data.error) toast.error(data.error)
-        else {
-          setProducts(data.products)
-          setPagination({
-            size: data.size,
-            pageCurrent: data.filter.pageCurrent,
-            pageCount: data.filter.pageCount
-          })
-        }
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        console.error('Something went wrong')
-        setIsLoading(false)
-      })
-  }
-
   useEffect(() => {
+    let isMounted = true
+
+    const init = () => {
+      setIsLoading(true)
+      listProductsForAdmin(_id, accessToken, filter)
+        .then((data) => {
+          if (data.error) setError(data.error)
+          else {
+            if (isMounted) {
+              setProducts(data.products)
+              setPagination({
+                size: data.size,
+                pageCurrent: data.filter.pageCurrent,
+                pageCount: data.filter.pageCount
+              })
+            }
+          }
+          if (isMounted) setIsLoading(false)
+        })
+        .catch((error) => {
+          setError(`Error occurred: ${error.message}`)
+          if (isMounted) setIsLoading(false)
+        })
+    }
+
     init()
+
+    return () => {
+      isMounted = false
+    }
   }, [filter, run])
 
   useEffect(() => {
@@ -134,6 +144,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
       )}
 
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={
@@ -150,7 +161,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
 
       <div>
         <div className='p-3 box-shadow bg-body rounded-2'>
-          <div className='option-wrap'>
+          <div className=' mb-3'>
             <SearchInput onChange={handleChangeKeyword} />
           </div>
           {!isLoading && pagination.size === 0 ? (
@@ -159,11 +170,11 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
             </div>
           ) : (
             <div className='table-scroll my-2'>
-              <table className='table align-middle table-hover table-sm text-center'>
+              <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
                   <tr>
                     <th scope='col'></th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -174,7 +185,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -185,7 +196,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                         }
                       />
                     </th>
-                    <th scope='col' className='text-start'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -220,7 +231,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                       />
                     </th>
 
-                    <th scope='col' className='text-end'>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -233,13 +244,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                     </th>
 
                     <th scope='col'>
-                      {' '}
-                      {/* <span
-                  style={{ fontWeight: '400', fontSize: '.875rem' }}
-                  className='text-secondary'
-                >
-                  {t('action')}
-                </span> */}
+                      <span>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
@@ -250,7 +255,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
                       <td
-                        className='text-start py-1'
+                        className='py-1'
                         style={{
                           whiteSpace: 'normal',
                           maxWidth: '400px'
@@ -258,12 +263,12 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                       >
                         <ProductSmallCard product={product} />
                       </td>
-                      <td className='text-start'>
+                      <td>
                         <small>
                           <StoreSmallCard store={product.storeId} />
                         </small>
                       </td>
-                      <td className='text-start'>
+                      <td>
                         <small className='badge border rounded-1 bg-value text-dark-emphasis'>
                           <CategorySmallCard
                             parent={false}
@@ -287,7 +292,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                       <td>
                         <button
                           type='button'
-                          className={`btn btn-sm rounded-1 ripple cus-tooltip ${
+                          className={`btn btn-sm rounded-1 ripple ${
                             !product.isActive
                               ? 'btn-outline-success'
                               : 'btn-outline-danger'
@@ -299,11 +304,18 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                               : t('button.ban')
                           }
                         >
-                          {!product.isActive ? (
-                            <i className='fa-regular fa-circle-check'></i>
-                          ) : (
-                            <i className='fa-solid fa-ban'></i>
-                          )}
+                          <i
+                            className={`d-none res-dis-sm${
+                              product.isActive
+                                ? 'fa-solid fa-ban'
+                                : 'fa-regular fa-circle-check'
+                            }`}
+                          ></i>
+                          <span className='res-hide'>
+                            {!product.isActive
+                              ? t('button.active')
+                              : t('button.ban')}
+                          </span>
                         </button>
                       </td>
                     </tr>

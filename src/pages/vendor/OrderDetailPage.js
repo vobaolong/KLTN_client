@@ -10,8 +10,7 @@ const OrderDetailPage = () => {
   const { orderId, storeId } = useParams()
   const { t } = useTranslation()
   const paths = [
-    { name: t('breadcrumbs.home'), url: '/' },
-    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.home'), url: `/vendor/${storeId}` },
     { name: t('breadcrumbs.order'), url: `/vendor/orders/${storeId}` },
     {
       name: t('breadcrumbs.orderDetail'),

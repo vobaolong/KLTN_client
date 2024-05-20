@@ -9,8 +9,7 @@ const WalletPage = () => {
   const { t } = useTranslation()
 
   const paths = [
-    { name: t('breadcrumbs.home'), url: '/' },
-    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
     { name: t('breadcrumbs.wallet'), url: `/vendor/wallet/${store._id}` }
   ]
   return (

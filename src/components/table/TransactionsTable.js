@@ -45,10 +45,12 @@ const TransactionsTable = ({
 
   const { _id: userId, accessToken } = getToken()
   const init = () => {
+    let isMounted = true
     setIsLoading(true)
     if (by === 'user')
       listTransactionsByUser(userId, accessToken, filter)
         .then((data) => {
+          if (!isMounted) return
           if (data.error) toast.error(data.error)
           else {
             setTransactions(data.transactions)
@@ -61,12 +63,14 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
+          if (!isMounted) return
           console.error('Something went wrong')
           setIsLoading(false)
         })
     else if (by === 'store')
       listTransactionsByStore(userId, accessToken, filter, storeId)
         .then((data) => {
+          if (!isMounted) return
           if (data.error) toast.error(data.error)
           else {
             setTransactions(data.transactions)
@@ -79,12 +83,14 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
+          if (!isMounted) return
           console.error('Something went wrong')
           setIsLoading(false)
         })
     else
       listTransactionsForAdmin(userId, accessToken, filter)
         .then((data) => {
+          if (!isMounted) return
           if (data.error) toast.error(data.error)
           else {
             setTransactions(data.transactions)
@@ -97,13 +103,18 @@ const TransactionsTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
+          if (!isMounted) return
           console.error('Something went wrong')
           setIsLoading(false)
         })
+    return () => {
+      isMounted = false
+    }
   }
 
   useEffect(() => {
-    init()
+    const cleanup = init()
+    return cleanup
   }, [storeId, by, filter, run])
 
   const handleChangePage = (newPage) => {
@@ -253,16 +264,16 @@ const TransactionsTable = ({
                       </td>
                     )}
                     <td>
-                      <span style={{ fontSize: '0.9rem' }}>
+                      <span>
                         <TransactionStatusLabel isUp={transaction.isUp} />
                       </span>
                     </td>
                     <td>
-                      <span style={{ fontSize: '0.9rem' }}>
+                      <span>
                         <SuccessLabel />
                       </span>
                     </td>
-                    <td>
+                    <td className='py-2'>
                       <small>{humanReadableDate(transaction.createdAt)}</small>
                     </td>
                   </tr>

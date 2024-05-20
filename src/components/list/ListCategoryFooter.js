@@ -8,27 +8,32 @@ const ListCategoryFooter = ({ category = {} }) => {
   const [categoryValue, setCategoryValue] = useState({})
   const [children, setChildren] = useState([])
 
-  const init = () => {
-    setCategoryValue(category)
-    listActiveCategories({
-      search: '',
-      categoryId: category._id,
-      sortBy: 'name',
-      order: 'asc',
-      limit: 20,
-      page: 1
-    })
-      .then((data) => {
-        if (data.error) return
-        else setChildren(data.categories)
-      })
-      .catch((error) => {
-        return
-      })
-  }
-
   useEffect(() => {
+    let isMounted = true
+    const init = () => {
+      setCategoryValue(category)
+      listActiveCategories({
+        search: '',
+        categoryId: category._id,
+        sortBy: 'name',
+        order: 'asc',
+        limit: 20,
+        page: 1
+      })
+        .then((data) => {
+          if (!isMounted) return
+          if (data.error) return
+          else setChildren(data.categories)
+        })
+        .catch((error) => {
+          if (!isMounted) return
+          return
+        })
+    }
     init()
+    return () => {
+      isMounted = false
+    }
   }, [category])
 
   return (

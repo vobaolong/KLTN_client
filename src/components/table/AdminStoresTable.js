@@ -18,12 +18,14 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import StoreActiveLabel from '../label/StoreActiveLabel'
+import Error from '../ui/Error'
 
 const AdminStoresTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [run, setRun] = useState('')
+  const [error, setError] = useState('')
   const [stores, setStores] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -46,7 +48,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
     setIsLoading(true)
     listStoresForAdmin(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setStores(data.stores)
           setPagination({
@@ -58,7 +60,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
@@ -111,7 +113,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
     activeOrInactive(_id, accessToken, value, activeStore._id)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
         } else {
           toast.success(active)
           setRun(!run)
@@ -119,12 +121,11 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError(`Error occurred: ${error.message}`)
         setIsLoading(false)
       })
   }
 
-  console.log(stores)
   return (
     <div className='position-relative'>
       {heading && (
@@ -134,6 +135,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
       )}
 
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={
@@ -154,7 +156,9 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
           </div>
         ) : (
           <>
-            <SearchInput onChange={handleChangeKeyword} />
+            <div className='mb-3'>
+              <SearchInput onChange={handleChangeKeyword} />
+            </div>
             <div className='table-scroll my-2'>
               <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
@@ -215,7 +219,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                     </th>
 
                     <th scope='col'>
-                      <span className='text-secondary'>{t('action')}</span>
+                      <span>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
@@ -289,11 +293,16 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                               : t('button.ban')
                           }
                         >
-                          <i
+                          <span
+                            className={`${store.isActive ? 'Kích hoạt' : ''} `}
+                          >
+                            {store.isActive ? 'Khoá' : 'Kích hoạt'}
+                          </span>
+                          {/* <i
                             className={`fa-solid ${
                               store.isActive ? 'fa-ban' : 'fa-circle-check'
                             } `}
-                          ></i>
+                          ></i> */}
                         </button>
                       </td>
                     </tr>

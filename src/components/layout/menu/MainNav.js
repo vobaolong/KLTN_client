@@ -35,7 +35,7 @@ const MainNav = ({ navFor = 'user' }) => {
   return (
     <header
       className={`d-flex flex-column align-items-center justify-content-center main-nav cus-nav navbar fixed-top navbar-expand-md navbar-dark box-shadow ${
-        getToken().role === 'admin' ? 'bg-primary' : 'bg-primary'
+        navFor !== 'user' ? 'bg-body text-dark' : 'bg-primary text-white'
       }`}
     >
       {isConfirming && (
@@ -55,14 +55,19 @@ const MainNav = ({ navFor = 'user' }) => {
         }`}
       >
         <Link className='me-4 res-hide-md' to='/'>
-          <Logo />
+          {navFor === 'user' ? (
+            <Logo navFor={navFor} />
+          ) : (
+            <Logo width='150px' navFor={navFor} />
+          )}
         </Link>
         {navFor === 'user' && <SearchBar />}
-        {/* {navFor !== 'user' && (
-          <h3 className='text-uppercase m-0'>
-            {navFor} <span className='res-hide'>dashboard</span>
-          </h3>
-        )} */}
+        {navFor === 'vendor' && (
+          <h3 className='text-uppercase m-0'>SELLER CENTER</h3>
+        )}
+        {navFor === 'user' && getToken().role === 'admin' && (
+          <h3 className='text-uppercase m-0'>ADMIN DASHBOARD</h3>
+        )}
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-1' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -83,7 +88,7 @@ const MainNav = ({ navFor = 'user' }) => {
               )}
               <li className='nav-item'>
                 <div className='cart-item-wrap position-relative'>
-                  <span className='rounded-circle  btn lang text-white'>
+                  <span className='rounded-circle btn lang inherit'>
                     <i className='fa-light fa-bell'></i>
                   </span>
                   {cartCount > 0 && (
@@ -101,7 +106,7 @@ const MainNav = ({ navFor = 'user' }) => {
                 <li className='nav-item'>
                   <div className='cart-item-wrap position-relative'>
                     <Link
-                      className='btn lang rounded-circle text-white ripple cus-tooltip rounded-1'
+                      className='btn lang rounded-circle ripple cus-tooltip rounded-1 inherit'
                       to='/cart'
                     >
                       <i className='fa-light fa-bag-shopping'></i>
@@ -121,7 +126,7 @@ const MainNav = ({ navFor = 'user' }) => {
               {navFor === 'user' && getToken().role === 'admin' && (
                 <li className='nav-item position-relative'>
                   <Link
-                    className='btn lang text-white ripple cus-tooltip rounded-1'
+                    className='btn lang rounded-circle ripple cus-tooltip rounded-1 inherit'
                     to='/admin/dashboard'
                   >
                     <i className='fa-light fa-chart-line'></i>
@@ -172,17 +177,12 @@ const MainNav = ({ navFor = 'user' }) => {
 
               <div className='offcanvas-body'>
                 <UserSmallCard user={user} link='/account/profile' />
-
+                <hr />
                 {navFor === 'vendor' && (
-                  <div className='mt-2'>
-                    <StoreSmallCard
-                      store={store}
-                      link={`/vendor/${store._id}`}
-                    />
-                  </div>
+                  <StoreSmallCard store={store} link={`/vendor/${store._id}`} />
                 )}
 
-                <ul className='navbar-nav justify-content-end flex-grow-1 mt-3'>
+                <ul className='navbar-nav justify-content-end flex-grow-1'>
                   <li className='nav-item p-2'>
                     <Link className='link-hover link-dark d-block' to='/'>
                       <i className='fa-light fa-home me-2'></i>
@@ -197,16 +197,22 @@ const MainNav = ({ navFor = 'user' }) => {
                         to='/account/store'
                       >
                         <i className='fa-light fa-store me-2'></i>
-                        {t('manageStore')}
+                        {t('myStore')}
                       </Link>
                     </li>
                   )}
 
                   {navFor === 'user' && getToken().role === 'user' && (
-                    <li className='nav-item p-2'>
-                      <Link className='link-hover link-dark d-block' to='/cart'>
+                    <li className='nav-item p-2 position-related'>
+                      <Link
+                        className='link-hover link-dark d-block '
+                        to='/cart'
+                      >
                         <i className='fa-light fa-bag-shopping me-2'></i>
                         {t('cart')}
+                        <sup className='ms-1 text-danger'>
+                          ({cartCount > 0 ? cartCount : ''})
+                        </sup>
                       </Link>
                     </li>
                   )}
@@ -230,6 +236,7 @@ const MainNav = ({ navFor = 'user' }) => {
                     <i className='fa-light fa-sign-out-alt me-2'></i>
                     {t('button.logout')}
                   </li>
+                  <Language vertical={false} />
                 </ul>
               </div>
             </div>

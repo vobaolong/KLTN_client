@@ -6,6 +6,7 @@ import ListHotStores from '../../components/list/ListHotStores'
 import { useTranslation } from 'react-i18next'
 import MetaData from '../../components/layout/meta/MetaData'
 import Offers from '../../components/ui/Offers'
+import ListBanner from '../../components/list/ListBanner'
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -13,15 +14,19 @@ const HomePage = () => {
   return (
     <MainLayout container='container-md' navFor='user'>
       <MetaData title={`Zenpii Việt Nam | Mua và Bán Trên Website`} />
-
+      <div className='mb-4 pt-4'>
+        <ListBanner />
+      </div>
       <div className='mb-4'>
         <ListCategories heading={t('categories')} />
       </div>
       <Offers />
       <div className='mb-4'>
-        <ListBestSellerProduct heading={t('bestSeller')} />
+        <ListBestSellerProduct heading={t('bestSeller')} sortBy='sold' />
       </div>
-
+      <div className='mb-4'>
+        <ListBestSellerProduct heading={t('newProduct')} sortBy='createdAt' />
+      </div>
       <div className='mb-4'>
         <ListHotStores heading={t('hotStore')} />
       </div>

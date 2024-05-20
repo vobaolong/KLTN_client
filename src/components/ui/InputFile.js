@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -15,7 +14,6 @@ const InputFile = ({
   required = false
 }) => {
   const [src, setSrc] = useState('')
-  const { t } = useTranslation()
   useEffect(() => {
     if (defaultSrc) setSrc(IMG + defaultSrc)
   }, [defaultSrc])
@@ -48,9 +46,6 @@ const InputFile = ({
         size === 'avatar' ? 'cus-avatar-wrap' : ''
       }`}
     >
-      <label className='cus-input-group-label cus-input-group-label--file text-muted'>
-        {label} {required && <span style={{ color: 'red' }}>*</span>}
-      </label>
       <div
         className={`${size === 'avatar' ? 'cus-avatar-box' : 'cus-cover-box'}`}
         {...getRootProps()}
@@ -71,7 +66,7 @@ const InputFile = ({
               type='file'
               src={src}
               className={size === 'avatar' ? 'cus-avatar-img' : 'cus-cover-img'}
-              style={{ borderRadius: `${noRadius ? '0' : '0.375rem'}` }}
+              style={{ borderRadius: `${noRadius ? '0' : '0.275rem'}` }}
               alt=''
             />
           )}
@@ -93,20 +88,18 @@ const InputFile = ({
             <label
               className={`${
                 size === 'avatar'
-                  ? 'cus-avatar-label rounded-2'
-                  : 'cus-cover-label rounded-2'
+                  ? 'cus-avatar-label rounded-1'
+                  : 'cus-cover-label rounded-1'
               }`}
-              style={{ borderRadius: `${noRadius ? '0' : '0.375rem'}` }}
+              style={{ borderRadius: `${noRadius ? '0' : '0.275rem'}` }}
             >
               {isDragActive ? (
                 <>
-                  <small>{t('dropHere')}</small>
-                  <i className='fa-light fa-cloud-check'></i>
+                  <i className='fa-light fa-cloud-check text-secondary'></i>
                 </>
               ) : (
                 <>
-                  <small>{t('dragNDrop')}</small>
-                  <i className='ms-2 fa-light fa-cloud-arrow-up'></i>
+                  <i className='fa-light fa-cloud-arrow-up text-primary-rgba'></i>
                   <small
                     className='invalid-feedback ms-2 mt-0'
                     style={{ width: 'unset' }}
@@ -119,6 +112,9 @@ const InputFile = ({
           )}
         </div>
       </div>
+      <label className='text-secondary mt-1 fs-9'>
+        {label} {required && <span className='text-danger'>*</span>}
+      </label>
     </div>
   )
 }

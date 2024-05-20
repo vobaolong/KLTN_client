@@ -11,8 +11,7 @@ const StaffsPage = () => {
   const [flag, toggleFlag] = useToggle(true)
   const { t } = useTranslation()
   const paths = [
-    { name: t('breadcrumbs.home'), url: '/' },
-    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
     { name: t('breadcrumbs.staff'), url: `/vendor/staffs/${store._id}` }
   ]
 
@@ -25,11 +24,6 @@ const StaffsPage = () => {
               className={`nav-link ${flag ? 'active' : ''}`}
               onClick={() => toggleFlag(true)}
             >
-              <i
-                className={`${
-                  flag ? 'fa-solid' : 'fa-light'
-                } fa-user-group me-2`}
-              ></i>
               <span className='res-hide'>{t('staffDetail.staffList')}</span>
             </span>
           </li>
@@ -38,11 +32,6 @@ const StaffsPage = () => {
               className={`nav-link ${!flag ? 'active' : ''}`}
               onClick={() => toggleFlag(false)}
             >
-              <i
-                className={`${
-                  flag ? 'fa-light' : 'fa-solid'
-                } fa-user-shield me-2`}
-              ></i>
               <span className='res-hide'>{t('staffDetail.owner')}</span>
             </span>
           </li>

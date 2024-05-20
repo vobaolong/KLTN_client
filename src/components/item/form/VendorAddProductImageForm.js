@@ -85,7 +85,7 @@ const VendorAddProductImageForm = ({ productId = '', storeId = '', onRun }) => {
       <form className='row mb-2' onSubmit={handleSubmit}>
         <div className='col-12 text-center'>
           <InputFile
-            label={t('productDetail.otherImg')}
+            label=''
             size='avatar'
             noRadius={false}
             value={newImage.image}

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { listActiveCategories } from '../../apis/category'
-import defaultImage from '../../assets/default.png'
+import defaultImage from '../../assets/default.webp'
 import Skeleton from 'react-loading-skeleton'
 
 const IMG = process.env.REACT_APP_STATIC_URL

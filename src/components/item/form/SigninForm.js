@@ -8,7 +8,7 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
-// import SocialForm from './SocialForm'
+import SocialForm from './SocialForm'
 
 const SigninForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
@@ -195,7 +195,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           </small>
         </div>
 
-        {/* <div className='col-12 mt-4 cus-decoration-paragraph'>
+        <div className='col-12 mt-4 cus-decoration-paragraph'>
           <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
             HOẶC
           </p>
@@ -203,12 +203,12 @@ const SigninForm = ({ onSwap = () => {} }) => {
 
         <div className='col-12 d-grid gap-2 mt-4'>
           <SocialForm />
-        </div> */}
+        </div>
 
         <div className='col-12 mt-4'>
           <small className='text-center d-block mx-4'>
             <span className='text-muted'>{t('signInForm.agreeBy')} </span>
-            <Link to='/legal/privacy' target='_blank'>
+            <Link className='text-primary' to='/legal/privacy' target='_blank'>
               {t('footer.policy')}
             </Link>
           </small>

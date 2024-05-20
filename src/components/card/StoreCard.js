@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
@@ -14,8 +14,12 @@ const IMG = process.env.REACT_APP_STATIC_URL
 const StoreCard = ({ store = {}, onRun }) => {
   const [storeValue, setStoreValue] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const isMounted = useRef(true)
 
   const init = async () => {
+    if (!isMounted.current) {
+      return
+    }
     let newStore = store
 
     try {
@@ -38,12 +42,17 @@ const StoreCard = ({ store = {}, onRun }) => {
       newStore.isFollowing = false
     }
 
-    setStoreValue(newStore)
-    setIsLoading(false)
+    if (isMounted.current) {
+      setStoreValue(newStore)
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
     init()
+    return () => {
+      isMounted.current = false
+    }
   }, [store])
 
   const onHandleRun = async (newStore) => {

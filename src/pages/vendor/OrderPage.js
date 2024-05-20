@@ -23,8 +23,7 @@ const OrderPage = () => {
   ]
 
   const paths = [
-    { name: t('breadcrumbs.home'), url: '/' },
-    { name: t('breadcrumbs.myStore'), url: '/account/store' },
+    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
     { name: t('breadcrumbs.order'), url: `/vendor/orders/${store._id}` }
   ]
 

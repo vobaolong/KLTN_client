@@ -34,10 +34,10 @@ const ValueSelectorItem = ({
   }
 
   return (
-    <div className='position-relative my-1 d-flex align-items-start justify-content-center'>
+    <div className='position-relative my-1 d-grid align-items-start'>
       <span
         style={{ fontSize: '.875rem' }}
-        className='label-variant text-secondary me-2 w-25'
+        className='label-variant text-secondary me-2'
       >
         {values[0].variantId.name}
       </span>

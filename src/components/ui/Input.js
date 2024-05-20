@@ -74,7 +74,7 @@ const Input = ({
       <small className='invalid-feedback text-start'>{feedback}</small>
       {type === 'password' && (
         <i
-          className={`show-hide-password-icon fa-solid ${
+          className={`show-hide-password-icon text-dark-emphasis fa-solid ${
             showPasswordFlag ? 'fa-eye' : ' fa-eye-slash'
           }`}
           onClick={togglePasswordFlag}

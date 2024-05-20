@@ -22,7 +22,8 @@ const CartPage = () => {
   const [carts, setCarts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { cartCount } = useSelector((state) => state.account.user)
-  const init = () => {
+
+  useEffect(() => {
     setIsLoading(true)
     listCarts(_id, accessToken, { limit: '1000', page: '1' })
       .then((data) => {
@@ -34,14 +35,11 @@ const CartPage = () => {
         console.error('Something went wrong')
         setIsLoading(false)
       })
-  }
-  useEffect(() => {
-    init()
   }, [run, i18n.language])
 
   return (
     <MainLayout>
-      <div className='position-relative'>
+      <div className='position-relative pt-4'>
         {isLoading && <Loading />}
         <MetaData title={`${t('cart')}`} />
         {cartCount === 0 ? (
@@ -111,7 +109,7 @@ const CartPage = () => {
               </div>
             </div>
             {carts.map((cart, index) => (
-              <div className='accordion-item' key={index}>
+              <div className='accordion-item mb-2' key={index}>
                 <h2
                   className='accordion-header'
                   id={`panelsStayOpen-heading-${index}`}

@@ -15,7 +15,9 @@ import { toast } from 'react-toastify'
 const AdminEditCategoryForm = ({ categoryId = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isConfirmingBack, setIsConfirmingBack] = useState(false)
+  const [isConfirmingUpdate, setIsConfirmingUpdate] = useState(false)
   const [newCategory, setNewCategory] = useState({
     name: '',
     image: '',
@@ -25,8 +27,30 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
     isValidName: true,
     isValidImage: true
   })
+  useEffect(() => {
+    const checkScroll = () => {
+      const isBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight
+      setIsScrolled(!isBottom)
+    }
 
+    window.addEventListener('scroll', checkScroll)
+
+    return () => {
+      window.removeEventListener('scroll', checkScroll)
+    }
+  }, [])
   const { _id, accessToken } = getToken()
+
+  const handleBackClick = (e) => {
+    e.preventDefault()
+    setIsConfirmingBack(true)
+  }
+
+  const handleConfirmBack = () => {
+    setIsConfirmingBack(false)
+    window.history.back()
+  }
 
   const init = () => {
     setIsLoading(true)
@@ -89,7 +113,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
     const { isValidName, isValidImage } = newCategory
     if (!isValidName || !isValidImage) return
 
-    setIsConfirming(true)
+    setIsConfirmingUpdate(true)
   }
 
   const onSubmit = () => {
@@ -114,81 +138,100 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
   return (
     <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
+      {isConfirmingUpdate && (
         <ConfirmDialog
           title={t('dialog.updateCategory')}
           onSubmit={onSubmit}
           message={t('message.edit')}
-          onClose={() => setIsConfirming(false)}
+          onClose={() => setIsConfirmingUpdate(false)}
+        />
+      )}
+      {isConfirmingBack && (
+        <ConfirmDialog
+          title={t('dialog.cancelUpdate')}
+          onSubmit={handleConfirmBack}
+          message={t('confirmDialog')}
+          onClose={() => setIsConfirmingBack(false)}
         />
       )}
 
-      <form
-        className='border bg-body rounded-2 row mb-2'
-        onSubmit={handleSubmit}
-      >
-        <div className='col-12 bg-primary p-3 rounded-top-2'>
-          <h1 className='text-white fs-5 m-0'>{t('categoryDetail.edit')}</h1>
+      <form onSubmit={handleSubmit}>
+        <div className='row box-shadow bg-body rounded-1'>
+          <div className='col-12 bg-primary p-3 rounded-top-2'>
+            <span className='text-white fs-5 m-0'>
+              {t('categoryDetail.edit')}
+            </span>
+          </div>
+
+          <div className='col-12 mt-4 px-4'>
+            <CategorySelector
+              label={t('categoryDetail.chosenParentCategory')}
+              selected='parent'
+              isActive={false}
+              defaultValue={newCategory.defaultParentCategory}
+              onSet={(category) =>
+                setNewCategory({
+                  ...newCategory,
+                  categoryId: category._id
+                })
+              }
+            />
+          </div>
+
+          <div className='col-12 px-4 mt-2'>
+            <Input
+              type='text'
+              label={t('categoryDetail.name')}
+              value={newCategory.name}
+              isValid={newCategory.isValidName}
+              feedback={t('categoryValid.validName')}
+              validator='anything'
+              required={true}
+              onChange={(value) => handleChange('name', 'isValidName', value)}
+              onValidate={(flag) => handleValidate('isValidName', flag)}
+            />
+          </div>
+
+          <div className='col-12 px-4 mt-3'>
+            <InputFile
+              label={t('categoryDetail.img')}
+              size='avatar'
+              noRadius={true}
+              defaultSrc={newCategory.defaultSrc}
+              value={newCategory.image}
+              isValid={newCategory.isValidImage}
+              feedback={t('categoryValid.validImg')}
+              accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
+              onChange={(value) => handleChange('image', 'isValidImage', value)}
+              onValidate={(flag) => handleValidate('isValidImage', flag)}
+            />
+          </div>
         </div>
 
-        <div className='col-12 mt-4 px-4'>
-          <CategorySelector
-            label={t('categoryDetail.chosenParentCategory')}
-            selected='parent'
-            isActive={false}
-            defaultValue={newCategory.defaultParentCategory}
-            onSet={(category) =>
-              setNewCategory({
-                ...newCategory,
-                categoryId: category._id
-              })
-            }
-          />
-        </div>
-
-        <div className='col-12 px-4 mt-2'>
-          <Input
-            type='text'
-            label={t('categoryDetail.name')}
-            value={newCategory.name}
-            isValid={newCategory.isValidName}
-            feedback={t('categoryValid.validName')}
-            validator='anything'
-            required={true}
-            onChange={(value) => handleChange('name', 'isValidName', value)}
-            onValidate={(flag) => handleValidate('isValidName', flag)}
-          />
-        </div>
-
-        <div className='col-12 px-4 mt-2'>
-          <InputFile
-            label={t('categoryDetail.img')}
-            size='avatar'
-            noRadius={true}
-            defaultSrc={newCategory.defaultSrc}
-            value={newCategory.image}
-            isValid={newCategory.isValidImage}
-            feedback={t('categoryValid.validImg')}
-            accept='image/jpg, image/jpeg, image/png, image/gif, image/webp'
-            onChange={(value) => handleChange('image', 'isValidImage', value)}
-            onValidate={(flag) => handleValidate('isValidImage', flag)}
-          />
-        </div>
-        <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
-          <Link
-            to='/admin/category'
-            className='text-decoration-none cus-link-hover res-w-100-md my-2'
-          >
-            <i className='fa-solid fa-angle-left'></i> {t('button.back')}
-          </Link>
-          <button
-            type='submit'
-            className='btn btn-primary ripple res-w-100-md rounded-1'
-            onClick={handleSubmit}
-            style={{ width: '300px', maxWidth: '100%' }}
-          >
-            {t('button.save')}
-          </button>
+        <div
+          className={`bg-body ${
+            isScrolled ? 'shadow' : 'box-shadow'
+          } rounded-1 row px-4 my-3 p-3`}
+          style={{ position: 'sticky', bottom: '0' }}
+        >
+          <div className='d-flex justify-content-end align-items-center'>
+            <Link
+              to='/admin/category'
+              className='btn btn-outline-primary ripple res-w-100-md rounded-1 me-3'
+              style={{ width: '200px', maxWidth: '100%' }}
+              onClick={handleBackClick}
+            >
+              {t('button.cancel')}
+            </Link>
+            <button
+              type='submit'
+              className='btn btn-primary ripple res-w-100-md rounded-1'
+              onClick={handleSubmit}
+              style={{ width: '200px', maxWidth: '100%' }}
+            >
+              {t('button.save')}
+            </button>
+          </div>
         </div>
       </form>
     </div>

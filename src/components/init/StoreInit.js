@@ -9,7 +9,6 @@ import { getStoreLevel } from '../../apis/level'
 import { countOrder } from '../../apis/order'
 import { getNumberOfFollowers, checkFollowingStore } from '../../apis/follow'
 import Error from '../ui/Error'
-import Skeleton from 'react-loading-skeleton'
 import Loading from '../ui/Loading'
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -74,7 +73,6 @@ const StoreInit = ({ store, actions }) => {
   return isLoading ? (
     <div className='cus-position-relative-loading'>
       <Loading size='small' />
-      {/* <Skeleton width={200} height={35} /> */}
     </div>
   ) : (
     <div
