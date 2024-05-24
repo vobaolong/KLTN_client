@@ -117,8 +117,17 @@ const SigninForm = ({ onSwap = () => {} }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-
       <form className='mb-2 row' onSubmit={handleFormSubmit}>
+        <div className='col-12 d-grid gap-2 mt-4'>
+          <SocialForm />
+        </div>
+
+        <div className='col-12 mt-4 cus-decoration-paragraph'>
+          <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
+            HOẶC
+          </p>
+        </div>
+
         <div className='col-12'>
           <Input
             type='text'
@@ -193,16 +202,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
               {t('button.signUp')}
             </span>
           </small>
-        </div>
-
-        <div className='col-12 mt-4 cus-decoration-paragraph'>
-          <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
-            HOẶC
-          </p>
-        </div>
-
-        <div className='col-12 d-grid gap-2 mt-4'>
-          <SocialForm />
         </div>
 
         <div className='col-12 mt-4'>

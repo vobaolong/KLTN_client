@@ -4,7 +4,7 @@ import axios from 'axios'
 const apiUrl =
   'https://vietnam-administrative-division-json-server-swart.vercel.app'
 const apiEndpointDistrict = apiUrl + '/district/?idProvince='
-const apiEndpointCommune = apiUrl + '/commune/?idDistrict='
+const apiEndpointWard = apiUrl + '/ward/?idDistrict='
 
 async function getDistrict(idProvince) {
   const { data: districtList } = await axios.get(
@@ -13,16 +13,16 @@ async function getDistrict(idProvince) {
   return districtList
 }
 
-async function getCommune(idDistrict) {
-  const { data: communeList } = await axios.get(apiEndpointCommune + idDistrict)
-  return communeList
+async function getWard(idDistrict) {
+  const { data: wardList } = await axios.get(apiEndpointWard + idDistrict)
+  return wardList
 }
 
 const AddressSelector = ({ address, setAddress }) => {
   const [districtList, setDistrictList] = useState([])
-  const [communeList, setCommuneList] = useState([])
+  const [wardList, setWardList] = useState([])
   const [isLoadingDistrict, setIsLoadingDistrict] = useState(false)
-  const [isLoadingCommune, setIsLoadingCommune] = useState(false)
+  const [isLoadingWard, setIsLoadingWard] = useState(false)
 
   useEffect(() => {
     if (address.province) {
@@ -33,19 +33,19 @@ const AddressSelector = ({ address, setAddress }) => {
       })
     } else {
       setDistrictList([])
-      setCommuneList([])
+      setWardList([])
     }
   }, [address.province])
 
   useEffect(() => {
     if (address.district) {
-      setIsLoadingCommune(true)
-      getCommune(address.district).then((communes) => {
-        setCommuneList(communes)
-        setIsLoadingCommune(false)
+      setIsLoadingWard(true)
+      getWard(address.district).then((wards) => {
+        setWardList(wards)
+        setIsLoadingWard(false)
       })
     } else {
-      setCommuneList([])
+      setWardList([])
     }
   }, [address.district])
 
@@ -54,16 +54,16 @@ const AddressSelector = ({ address, setAddress }) => {
       ...address,
       province: selectedOption.value,
       district: '',
-      commune: ''
+      ward: ''
     })
   }
 
   const handleDistrictChange = (selectedOption) => {
-    setAddress({ ...address, district: selectedOption.value, commune: '' })
+    setAddress({ ...address, district: selectedOption.value, ward: '' })
   }
 
-  const handleCommuneChange = (selectedOption) => {
-    setAddress({ ...address, commune: selectedOption.value })
+  const handleWardChange = (selectedOption) => {
+    setAddress({ ...address, ward: selectedOption.value })
   }
 
   const provinceOptions = [
@@ -137,9 +137,9 @@ const AddressSelector = ({ address, setAddress }) => {
     label: district.name
   }))
 
-  const communeOptions = communeList.map((commune) => ({
-    value: commune.idCommune,
-    label: commune.name
+  const wardOptions = wardList.map((ward) => ({
+    value: ward.idWard,
+    label: ward.name
   }))
 
   return (
@@ -168,15 +168,13 @@ const AddressSelector = ({ address, setAddress }) => {
         />
       </div>
       <div className='col-12'>
-        <label htmlFor='commune'>Xã/Phường</label>
+        <label htmlFor='ward'>Xã/Phường</label>
         <select
-          id='commune'
-          options={communeOptions}
-          onChange={handleCommuneChange}
-          value={communeOptions.find(
-            (option) => option.value === address.commune
-          )}
-          isLoading={isLoadingCommune}
+          id='ward'
+          options={wardOptions}
+          onChange={handleWardChange}
+          value={wardOptions.find((option) => option.value === address.ward)}
+          isLoading={isLoadingWard}
         />
       </div>
     </div>

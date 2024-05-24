@@ -7,6 +7,7 @@
     "Delivered": "Delivered",
     "Cancelled": "Cancelled"
   },
+  "continueWithGoogle": "Continue with Google",
   "helmet": {
     "myPurchase": "My Order",
     "addressBook": "Address Book",
@@ -698,13 +699,13 @@
   "search": "Search for...",
   "addressForm": {
     "street": "Street",
-    "commune": "Ward",
+    "ward": "Ward",
     "district": "District",
     "province": "Province/Province"
   },
   "addressFormValid": {
     "streetValid": "Please provide a valid street address (',' is not allowed)!",
-    "communeValid": "Please provide a valid commune (','' is not allowed)!",
+    "wardValid": "Please provide a valid ward (','' is not allowed)!",
     "districtValid": "Please provide a valid province/district (',' is not allowed)!",
     "provinceValid": "Please provide a valid province/province (',' is not allowed)!"
   },

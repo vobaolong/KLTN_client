@@ -7,6 +7,7 @@
     "Delivered": "Hoàn thành",
     "Cancelled": "Đã huỷ"
   },
+  "continueWithGoogle": "Tiếp tục với Google",
   "helmet": {
     "myPurchase": "Đơn hàng của tôi",
     "addressBook": "Sổ địa chỉ",
@@ -710,14 +711,14 @@
     "street": "Địa chỉ cụ thể",
     "province": "Tỉnh/Thành phố",
     "district": "Quận/Huyện",
-    "commune": "Phường/Xã",
+    "ward": "Phường/Xã",
     "selectProvince": "Chọn Tỉnh/Thành phố",
     "selectDistrict": "Chọn Quận/Huyện",
-    "selectCommune": "Chọn Phường/Xã"
+    "selectWard": "Chọn Phường/Xã"
   },
   "addressFormValid": {
     "streetValid": "Vui lòng cung cấp số nhà/tên đường phù hợp (',' không được chấp nhận)!",
-    "communeValid": "Vui lòng cung cấp phường/xã phù hợp (',' không được chấp nhận)!",
+    "wardValid": "Vui lòng cung cấp phường/xã phù hợp (',' không được chấp nhận)!",
     "districtValid": "Vui lòng cung cấp quận/huyện phù hợp (','không được chấp nhận)!",
     "provinceValid": "Vui lòng cung cấp thành phố/tỉnh phù hợp (','không được chấp nhận)!",
     "allFields": "Vui lòng cung cấp đầy đủ thông tin địa chỉ!"

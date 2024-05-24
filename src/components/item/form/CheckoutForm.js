@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
 import { createOrder } from '../../../apis/order'
-import { listActiveDeliveries } from '../../../apis/delivery'
 import { getStoreLevel } from '../../../apis/level'
 import { getCommissionByStore } from '../../../apis/commission'
 import Loading from '../../ui/Loading'
@@ -29,11 +28,49 @@ import { toast } from 'react-toastify'
 import defaultImg from '../../../assets/default.webp'
 
 import socketIO from 'socket.io-client'
+import axios from 'axios'
 const ENDPOINT = process.env.REACT_APP_SOCKET_URL || ''
 const socketId = socketIO(ENDPOINT, { transports: ['websocket'] })
-
 const IMG = process.env.REACT_APP_STATIC_URL
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
+
+const apiEndpointFee =
+  'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee'
+const headers = {
+  Token: 'df39b10b-1767-11ef-bfe9-c2d25c6518ab',
+  shop_id: '5080978'
+}
+
+const calculateShippingFee = async ({
+  serviceId,
+  insuranceValue,
+  fromDistrictId,
+  toDistrictId,
+  toWardCode
+}) => {
+  try {
+    const response = await axios.post(
+      apiEndpointFee,
+      {
+        service_id: serviceId,
+        insurance_value: insuranceValue,
+        coupon: null,
+        from_district_id: fromDistrictId,
+        to_district_id: toDistrictId,
+        to_ward_code: toWardCode,
+        height: 15,
+        length: 15,
+        weight: 1000,
+        width: 15
+      },
+      { headers }
+    )
+    return response.data.data.total
+  } catch (error) {
+    console.error('Error calculating shipping fee:', error)
+    return 0
+  }
+}
 
 const CheckoutForm = ({
   cartId = '',
@@ -45,7 +82,6 @@ const CheckoutForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const [deliveries, setDeliveries] = useState([])
   const [order, setOrder] = useState({})
   const [updateDispatch] = useUpdateDispatch()
   const history = useHistory()
@@ -59,15 +95,9 @@ const CheckoutForm = ({
 
   const init = async () => {
     try {
-      const res = await listActiveDeliveries()
       const res1 = await getStoreLevel(storeId)
       const res2 = await getCommissionByStore(storeId)
 
-      setDeliveries(res.deliveries)
-      const { deliveryPrice, amountFromUser2 } = totalDelivery(
-        res.deliveries[0],
-        userLevel
-      )
       const { totalPrice, totalSalePrice, amountFromUser1 } = totalProducts(
         items,
         userLevel
@@ -78,6 +108,14 @@ const CheckoutForm = ({
         res2.commission
       )
 
+      const shippingFee = await calculateShippingFee({
+        serviceId: 53321,
+        insuranceValue: totalPrice,
+        fromDistrictId: 3695,
+        toDistrictId: 3440,
+        toWardCode: '13010'
+      })
+      const { amountFromUser2 } = totalDelivery(shippingFee, userLevel)
       setOrder({
         firstName,
         lastName,
@@ -87,9 +125,7 @@ const CheckoutForm = ({
         isValidLastName: true,
         isValidPhone: true,
         cartId,
-        delivery: res.deliveries[0],
-        deliveryId: res.deliveries[0]._id,
-        deliveryPrice,
+        deliveryPrice: shippingFee,
         amountFromUser2,
         totalPrice,
         totalSalePrice,
@@ -150,7 +186,6 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
-      deliveryId,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -160,7 +195,6 @@ const CheckoutForm = ({
 
     if (
       !cartId ||
-      !deliveryId ||
       !commissionId ||
       !firstName ||
       !lastName ||
@@ -195,7 +229,6 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
-      deliveryId,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -208,7 +241,6 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
-      deliveryId,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -241,7 +273,6 @@ const CheckoutForm = ({
   const handlePayPalCreateOrder = (data, actions) => {
     const {
       cartId,
-      deliveryId,
       commissionId,
       firstName,
       lastName,
@@ -255,7 +286,6 @@ const CheckoutForm = ({
 
     if (
       !cartId ||
-      !deliveryId ||
       !commissionId ||
       !firstName ||
       !lastName ||
@@ -306,7 +336,6 @@ const CheckoutForm = ({
         lastName,
         phone,
         address,
-        deliveryId,
         commissionId,
         amountFromUser,
         amountFromStore,
@@ -319,7 +348,6 @@ const CheckoutForm = ({
         lastName,
         phone,
         address,
-        deliveryId,
         commissionId,
         amountFromUser,
         amountFromStore,
@@ -515,7 +543,7 @@ const CheckoutForm = ({
                 </div>
               </div>
             </div>
-            <div className='row my-2 p-3 border bg-body rounded-1 ms-0'>
+            {/* <div className='row my-2 p-3 border bg-body rounded-1 ms-0'>
               <span
                 style={{ fontSize: '1.2rem' }}
                 className='fw-semibold col-12'
@@ -571,7 +599,7 @@ const CheckoutForm = ({
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className='col-xl-5 col-md-6'>

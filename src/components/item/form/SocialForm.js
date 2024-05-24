@@ -5,12 +5,14 @@ import { GoogleLogin } from 'react-google-login'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import { gapi } from 'gapi-script'
+import { useTranslation } from 'react-i18next'
 // import { GoogleLogin } from '@react-oauth/google'
 
 const SocialForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const history = useHistory()
+  const { t } = useTranslation()
 
   useEffect(() => {
     function start() {
@@ -94,7 +96,7 @@ const SocialForm = () => {
               src='https://img.icons8.com/color/48/000000/google-logo.png'
               alt=''
             />
-            Continue with Google
+            {t('continueWithGoogle')}
           </button>
         )}
       />

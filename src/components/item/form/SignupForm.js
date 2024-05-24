@@ -8,7 +8,7 @@ import Error from '../../ui/Error'
 import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
-// import SocialForm from './SocialForm'
+import SocialForm from './SocialForm'
 
 const SignupForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
@@ -123,6 +123,16 @@ const SignupForm = ({ onSwap = () => {} }) => {
       )}
 
       <form className='sign-up-form mb-2 row' onSubmit={handleSubmit}>
+        <div className='col-12 d-grid gap-2 mt-4'>
+          <SocialForm />
+        </div>
+
+        <div className='col-12 mt-4 cus-decoration-paragraph'>
+          <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
+            HOẶC
+          </p>
+        </div>
+
         <div className='col-6'>
           <Input
             type='text'
@@ -221,16 +231,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
             </span>
           </small>
         </div>
-
-        {/* <div className='col-12 mt-4 cus-decoration-paragraph'>
-          <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
-            HOẶC
-          </p>
-        </div>
-
-        <div className='col-12 d-grid gap-2 mt-4'>
-          <SocialForm />
-        </div> */}
       </form>
     </div>
   )
