@@ -116,6 +116,7 @@ const CheckoutForm = ({
 
   const init = async () => {
     try {
+      setIsLoading(true);
       const res1 = await getStoreLevel(storeId);
       const res2 = await getCommissionByStore(storeId);
       const res3 = await getAddressCache(encodeURIComponent(storeAddress));
@@ -161,6 +162,8 @@ const CheckoutForm = ({
       });
     } catch (e) {
       console.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
