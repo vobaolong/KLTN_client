@@ -143,7 +143,7 @@ const CheckoutForm = ({
       setOrder({
         firstName,
         lastName,
-        phone,
+        phone: order.phone ?? phone,
         address: order.address ?? addresses[0],
         isValidFirstName: true,
         isValidLastName: true,
