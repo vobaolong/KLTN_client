@@ -859,8 +859,8 @@ header {
 }
 
 .cus-input-group-input:disabled {
-	background-color: unset;
-	border: unset;
+	/* background-color: unset;
+	border: unset; */
 }
 
 .cus-input-group-input:focus~.cus-input-group-label,

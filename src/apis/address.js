@@ -11,6 +11,21 @@ export const getAddressCache = async (address) => {
     });
     return await res.json();
   } catch (error) {
-    return console.log(error);
+    return null;
+  }
+};
+
+export const getProvinces = async () => {
+  try {
+    const res = await fetch(`${API}/getProvinces`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return await res.json();
+  } catch (error) {
+    return [];
   }
 };

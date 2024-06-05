@@ -360,7 +360,8 @@
     "hightToLow": "Price: Hight to Low",
     "up": "up",
     "apply": "Apply",
-    "reset": "Clear all"
+    "reset": "Clear all",
+    "provinces":"Provinces"
   },
   "transactions": "Transactions in the system",
 

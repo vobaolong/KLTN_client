@@ -1,19 +1,21 @@
-const API = process.env.REACT_APP_API_URL
+import axios from "axios";
+import qs from "qs";
+const API = process.env.REACT_APP_API_URL;
 
 export const getProduct = async (productId) => {
   try {
     const res = await fetch(`${API}/product/${productId}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    return await res.json()
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const getProductByIdForManager = async (
   userId,
@@ -25,19 +27,19 @@ export const getProductByIdForManager = async (
     const res = await fetch(
       `${API}/product/for/manager/${productId}/${storeId}/${userId}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 //list product
 export const listActiveProducts = async (filter) => {
@@ -50,24 +52,26 @@ export const listActiveProducts = async (filter) => {
     rating,
     minPrice,
     maxPrice,
-    categoryId
-  } = filter
+    categoryId,
+    provinces,
+  } = filter;
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `${API}/active/products?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
+        params: {
+          provinces: provinces,
+        },
+        paramsSerializer: (params) => {
+          return qs.stringify(params, { encode: false });
+        },
       }
-    )
-    return await res.json()
+    );
+    return res.data;
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const listSellingProductsByStore = async (filter, storeId) => {
   const {
@@ -79,24 +83,24 @@ export const listSellingProductsByStore = async (filter, storeId) => {
     rating,
     minPrice,
     maxPrice,
-    categoryId
-  } = filter
+    categoryId,
+  } = filter;
   try {
     const res = await fetch(
       `${API}/selling/products/by/store/${storeId}?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const listProductsForManager = async (
   userId,
@@ -104,44 +108,44 @@ export const listProductsForManager = async (
   filter,
   storeId
 ) => {
-  const { search, sortBy, order, limit, page, isSelling } = filter
+  const { search, sortBy, order, limit, page, isSelling } = filter;
   try {
     const res = await fetch(
       `${API}/products/by/store/${storeId}/${userId}?search=${search}&isSelling=${isSelling}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const listProductsForAdmin = async (userId, token, filter) => {
-  const { search, sortBy, order, limit, page, isActive } = filter
+  const { search, sortBy, order, limit, page, isActive } = filter;
   try {
     const res = await fetch(
       `${API}/products/${userId}?search=${search}&isActive=${isActive}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 //sell-store product
 export const sellingProduct = async (
@@ -155,55 +159,55 @@ export const sellingProduct = async (
     const res = await fetch(
       `${API}/product/selling/${productId}/${storeId}/${userId}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(value)
+        body: JSON.stringify(value),
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 //activeProduct
 export const activeProduct = async (userId, token, value, productId) => {
   try {
     const res = await fetch(`${API}/product/active/${productId}/${userId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(value)
-    })
-    return await res.json()
+      body: JSON.stringify(value),
+    });
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 //crud
 export const createProduct = async (userId, token, product, storeId) => {
   try {
     const res = await fetch(`${API}/product/create/${storeId}/${userId}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: product
-    })
-    return await res.json()
+      body: product,
+    });
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const updateProduct = async (
   userId,
@@ -216,19 +220,19 @@ export const updateProduct = async (
     const res = await fetch(
       `${API}/product/update/${productId}/${storeId}/${userId}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: product
+        body: product,
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 //list listImages
 export const addListImages = async (
@@ -242,19 +246,19 @@ export const addListImages = async (
     const res = await fetch(
       `${API}/product/images/${productId}/${storeId}/${userId}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: photo
+        body: photo,
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const updateListImages = async (
   userId,
@@ -268,19 +272,19 @@ export const updateListImages = async (
     const res = await fetch(
       `${API}/product/images/${productId}/${storeId}/${userId}?index=${index}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: photo
+        body: photo,
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
 
 export const removeListImages = async (
   userId,
@@ -293,15 +297,15 @@ export const removeListImages = async (
     const res = await fetch(
       `${API}/product/images/${productId}/${storeId}/${userId}?index=${index}`,
       {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       }
-    )
-    return await res.json()
+    );
+    return await res.json();
   } catch (error) {
-    return console.log(error)
+    return console.log(error);
   }
-}
+};
