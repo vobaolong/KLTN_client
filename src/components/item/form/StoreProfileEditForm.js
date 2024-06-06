@@ -8,6 +8,8 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import AddressForm from './AddressForm'
+import { getAddressCache } from '../../../apis/address'
 
 const StoreEditProfileForm = ({
   name = '',
@@ -21,8 +23,17 @@ const StoreEditProfileForm = ({
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
   const { t } = useTranslation()
+  const [addressDetail, setAddressDetail] = useState(null)
+
+  const fetchAddress = async (address) => {
+    setIsLoading(true)
+    const res = await getAddressCache(encodeURIComponent(address))
+    setAddressDetail(res)
+    setIsLoading(false)
+  }
 
   useEffect(() => {
+    fetchAddress(address)
     setProfile({
       name: name,
       bio: bio,
@@ -59,7 +70,8 @@ const StoreEditProfileForm = ({
     let store = {
       name: profile.name,
       bio: profile.bio,
-      address: profile.address
+      address: profile.address,
+      addressDetail: addressDetail
     }
     setIsLoading(true)
     updateProfile(_id, accessToken, store, storeId)
@@ -117,20 +129,16 @@ const StoreEditProfileForm = ({
           />
         </div>
 
-        <div className='col-12'>
-          <Input
-            type='text'
-            label={t('storeDetail.pickupAddress')}
-            value={profile.address}
-            isValid={profile.isValidAddress}
-            feedback='Please provide a valid store address.'
-            required={true}
-            validator='address'
-            onChange={(value) =>
-              handleChange('address', 'isValidAddress', value)
-            }
-            onValidate={(flag) => handleValidate('isValidAddress', flag)}
-          />
+        <div className='col-12 mt-4'>
+          {addressDetail !== null && (
+            <AddressForm
+              addressDetail={addressDetail}
+              onChange={(value) => {
+                setAddressDetail({ ...addressDetail, ...value })
+                handleChange('address', 'isValidAddress', value.street)
+              }}
+            />
+          )}
         </div>
 
         <div className='col-12 d-grid mt-4'>

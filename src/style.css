@@ -859,8 +859,8 @@ header {
 }
 
 .cus-input-group-input:disabled {
-	background-color: unset;
-	border: unset;
+	/* background-color: unset;
+	border: unset; */
 }
 
 .cus-input-group-input:focus~.cus-input-group-label,
@@ -987,6 +987,7 @@ header {
 	position: relative !important;
 	min-height: 20px;
 }
+
 
 /* drop-down */
 .cus-dropdown {
@@ -2132,4 +2133,12 @@ input[type="checkbox"] {
 
 .select-item>option:hover {
 	background-color: #63a7ff !important;
+}
+
+.cus-notification {
+	background-color: #e4effe;
+}
+
+.cus-notification:hover {
+	background-color: #fbfdff;
 }

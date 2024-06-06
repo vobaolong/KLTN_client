@@ -219,23 +219,6 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             )}
           </Link>
         </li>
-        <li className='nav-item'>
-          <Link
-            to={`/admin/delivery`}
-            className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
-              path === 'delivery' ? 'active' : ''
-            }`}
-          >
-            <i
-              className={`${path === 'delivery' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-truck-fast `}
-            ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.deliveries')}</span>
-            )}
-          </Link>
-        </li>
       </ul>
     </div>
   )

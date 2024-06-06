@@ -6,11 +6,13 @@ import VariantValueSelector from '../../selector/VariantValueSelector'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const AddToCartForm = ({ product = {} }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [updateDispatch] = useUpdateDispatch()
+  const [error, setError] = useState('')
   const [cartItem, setCartItem] = useState({})
 
   useEffect(() => {
@@ -62,22 +64,29 @@ const AddToCartForm = ({ product = {} }) => {
   }
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
+    setError('')
     setIsLoading(true)
     addToCart(_id, accessToken, cartItem)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
         } else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.cart.add'))
         }
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setTimeout(() => {
           setCartItem({})
         }, 1000)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        setError('Server Error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
   }
@@ -94,6 +103,11 @@ const AddToCartForm = ({ product = {} }) => {
             onSet={(values) => handleSet(values)}
           />
         </div>
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
         <div
           className='col-md-12 d-grid mt-2'
           style={{ maxWidth: 'fit-content' }}

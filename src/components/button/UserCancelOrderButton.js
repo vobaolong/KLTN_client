@@ -6,6 +6,7 @@ import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { socketId } from '../..'
 
 const UserCancelOrderButton = ({
   orderId = '',
@@ -32,6 +33,11 @@ const UserCancelOrderButton = ({
         if (data.error) {
           toast.error(data.error)
         } else {
+          socketId.emit('notificationCancel', {
+            orderId: data.order._id,
+            from: _id,
+            to: data.order.storeId._id
+          })
           if (onRun) onRun()
           toast.success(t('toastSuccess.order.cancel'))
         }

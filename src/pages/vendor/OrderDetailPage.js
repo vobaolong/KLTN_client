@@ -35,10 +35,6 @@ const OrderDetailPage = () => {
             <i className='fa-solid fa-chevron-left me-2'></i>
             {t('button.back')}
           </Link>
-          <button className='btn btn-outline-primary p-1 px-2 rounded-1'>
-            <i className='fa-solid fa-print'></i>
-            <span className='ms-2'>Print Delivery Bill</span>
-          </button>
         </div>
       </div>
     </VendorLayout>

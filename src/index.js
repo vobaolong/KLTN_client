@@ -13,12 +13,18 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import socketIO from 'socket.io-client'
+import { getToken } from './apis/auth'
 const ENDPOINT = process.env.REACT_APP_SOCKET_URL || ''
-const socketId = socketIO(ENDPOINT, { transports: ['websocket'] })
+export const socketId = socketIO(ENDPOINT, { transports: ['websocket'] })
 
 function App() {
   useEffect(() => {
+    const jwt = getToken('jwt')
     socketId.on('connection', () => {})
+    if (jwt) {
+      const userId = jwt._id
+      socketId.emit('join', userId)
+    }
   }, [])
 
   return (

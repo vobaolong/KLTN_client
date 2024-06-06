@@ -13,8 +13,11 @@ import UserAddAddressItem from '../../item/UserAddAddressItem'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { regexTest } from '../../../helper/test'
 import { convertVNDtoUSD } from '../../../helper/formatPrice'
+import { PayPalButton } from 'react-paypal-button-v2'
+
+import vnpayImage from '../../../assets/vnpay-seeklogo.svg'
 import {
-  totalDelivery,
+  totalShippingFee,
   totalProducts,
   totalCommission
 } from '../../../helper/total'
@@ -22,33 +25,50 @@ import { formatPrice } from '../../../helper/formatPrice'
 import Logo from '../../layout/menu/Logo'
 import Input from '../../ui/Input'
 import DropDownMenu from '../../ui/DropDownMenu'
-import { PayPalButton } from 'react-paypal-button-v2'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import defaultImg from '../../../assets/default.webp'
 
-import socketIO from 'socket.io-client'
 import axios from 'axios'
-const ENDPOINT = process.env.REACT_APP_SOCKET_URL || ''
-const socketId = socketIO(ENDPOINT, { transports: ['websocket'] })
+import { getAddressCache } from '../../../apis/address'
+import { socketId } from '../../..'
+import { VNPay } from 'vnpay'
+import dateformat from 'dateformat'
+
 const IMG = process.env.REACT_APP_STATIC_URL
 const CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID
 
 const apiEndpointFee =
   'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee'
+
+const apiEndpointAvailableServices =
+  'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services'
+
 const headers = {
   Token: 'df39b10b-1767-11ef-bfe9-c2d25c6518ab',
   shop_id: '5080978'
 }
 
 const calculateShippingFee = async ({
-  serviceId,
   insuranceValue,
   fromDistrictId,
+  fromWardCode,
   toDistrictId,
   toWardCode
 }) => {
   try {
+    const res = await axios.post(
+      apiEndpointAvailableServices,
+      {
+        shop_id: 5080978,
+        from_district: fromDistrictId,
+        to_district: toDistrictId
+      },
+      { headers }
+    )
+
+    const serviceId = res.data.data?.[0].service_id ?? 100039
+
     const response = await axios.post(
       apiEndpointFee,
       {
@@ -56,6 +76,7 @@ const calculateShippingFee = async ({
         insurance_value: insuranceValue,
         coupon: null,
         from_district_id: fromDistrictId,
+        from_ward_code: fromWardCode,
         to_district_id: toDistrictId,
         to_ward_code: toWardCode,
         height: 15,
@@ -75,6 +96,7 @@ const calculateShippingFee = async ({
 const CheckoutForm = ({
   cartId = '',
   storeId = '',
+  storeAddress = '',
   userId = '',
   items = {}
 }) => {
@@ -95,8 +117,11 @@ const CheckoutForm = ({
 
   const init = async () => {
     try {
+      setIsLoading(true)
       const res1 = await getStoreLevel(storeId)
       const res2 = await getCommissionByStore(storeId)
+      const res3 = await getAddressCache(encodeURIComponent(storeAddress))
+      const res4 = await getAddressCache(encodeURIComponent(order.address))
 
       const { totalPrice, totalSalePrice, amountFromUser1 } = totalProducts(
         items,
@@ -108,36 +133,41 @@ const CheckoutForm = ({
         res2.commission
       )
 
-      const shippingFee = await calculateShippingFee({
-        serviceId: 53321,
+      const shippingFeeBeforeDiscount = await calculateShippingFee({
         insuranceValue: totalPrice,
-        fromDistrictId: 3695,
-        toDistrictId: 3440,
-        toWardCode: '13010'
+        fromDistrictId: res3.districtID ? Number(res3.districtID) : 1758,
+        fromWardCode: res3.wardID ?? '510813',
+        toDistrictId: res4.districtID ? Number(res4.districtID) : 3440,
+        toWardCode: res4.wardID ?? '13010'
       })
-      const { amountFromUser2 } = totalDelivery(shippingFee, userLevel)
+      const { shippingFee } = totalShippingFee(
+        shippingFeeBeforeDiscount,
+        userLevel
+      )
       setOrder({
         firstName,
         lastName,
-        phone,
-        address: addresses[0],
+        phone: order.phone ?? phone,
+        address: order.address ?? addresses[0],
         isValidFirstName: true,
         isValidLastName: true,
         isValidPhone: true,
         cartId,
-        deliveryPrice: shippingFee,
-        amountFromUser2,
+        shippingFeeBeforeDiscount,
+        shippingFee,
         totalPrice,
         totalSalePrice,
         amountFromUser1,
-        amountFromUser: amountFromUser1 + amountFromUser2,
+        amountFromUser: amountFromUser1 + shippingFee,
         amountFromStore,
         amountToStore,
         commissionId: res2.commission._id,
-        amountToZenpii: amountFromUser1 + amountFromUser2 - amountToStore
+        amountToZenpii: amountFromUser1 + shippingFee - amountToStore
       })
     } catch (e) {
-      console.error('Something went wrong')
+      setError('Server Error')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -152,7 +182,8 @@ const CheckoutForm = ({
     lastName,
     phone,
     addresses,
-    userLevel
+    userLevel,
+    order.address
   ])
   const [paypalDisabled, setPaypalDisabled] = useState(true)
 
@@ -186,6 +217,7 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
+      shippingFee,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -199,6 +231,7 @@ const CheckoutForm = ({
       !firstName ||
       !lastName ||
       !phone ||
+      !shippingFee ||
       !address ||
       !amountFromUser ||
       !amountFromStore ||
@@ -229,6 +262,7 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
+      shippingFee,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -241,6 +275,7 @@ const CheckoutForm = ({
       lastName,
       phone,
       address,
+      shippingFee,
       commissionId,
       amountFromUser,
       amountFromStore,
@@ -252,12 +287,13 @@ const CheckoutForm = ({
     setIsLoading(true)
     createOrder(_id, accessToken, cartId, orderBody)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('account', data.user)
-          socketId.emit('notification', {
-            title: 'New order',
-            message: `Đặt hàng thành công`
+          socketId.emit('notificationOrder', {
+            orderId: data.order._id,
+            from: _id,
+            to: storeId
           })
           history.push('/account/purchase')
           toast.success(t('toastSuccess.order.create'))
@@ -265,7 +301,7 @@ const CheckoutForm = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -277,6 +313,7 @@ const CheckoutForm = ({
       firstName,
       lastName,
       phone,
+      shippingFee,
       address,
       amountFromUser,
       amountFromStore,
@@ -290,6 +327,7 @@ const CheckoutForm = ({
       !firstName ||
       !lastName ||
       !phone ||
+      !shippingFee ||
       !address ||
       !amountFromUser ||
       !amountFromStore ||
@@ -335,6 +373,7 @@ const CheckoutForm = ({
         firstName,
         lastName,
         phone,
+        shippingFee,
         address,
         commissionId,
         amountFromUser,
@@ -348,6 +387,7 @@ const CheckoutForm = ({
         lastName,
         phone,
         address,
+        shippingFee,
         commissionId,
         amountFromUser,
         amountFromStore,
@@ -362,6 +402,11 @@ const CheckoutForm = ({
           if (data.error) setError(data.error)
           else {
             updateDispatch('account', data.user)
+            socketId.emit('notificationOrder', {
+              orderId: data.order._id,
+              from: _id,
+              to: storeId
+            })
             history.push('/account/purchase')
           }
           setIsLoading(false)
@@ -512,12 +557,12 @@ const CheckoutForm = ({
                       return newA
                     })}
                     value={order.address}
-                    setValue={(address) =>
+                    setValue={(address) => {
                       setOrder({
                         ...order,
                         address: address
                       })
-                    }
+                    }}
                     size='lg'
                     label={t('userDetail.address')}
                   />
@@ -529,7 +574,7 @@ const CheckoutForm = ({
                         display: 'block'
                       }}
                     >
-                      <Error msg='No address to choose, please add your address first!' />
+                      <Error msg='Vui lòng chọn địa chỉ nhận hàng' />
                     </small>
                   )}
                 </div>
@@ -544,60 +589,13 @@ const CheckoutForm = ({
               </div>
             </div>
             {/* <div className='row my-2 p-3 border bg-body rounded-1 ms-0'>
-              <span
-                style={{ fontSize: '1.2rem' }}
-                className='fw-semibold col-12'
-              >
-                {t('orderDetail.deliveryUnit')}
-              </span>
-              <hr className='my-2' />
-              <div className='col-12 mt-2 d-flex justify-content-between align-items-end'>
-                {deliveries?.length > 0 && (
-                  <DropDownMenu
-                    borderBtn={false}
-                    listItem={deliveries?.map((d, i) => {
-                      const newD = {
-                        value: d,
-                        label:
-                          d.name +
-                          ' (' +
-                          formatPrice(d.price.$numberDecimal) +
-                          '₫) - ' +
-                          d.description
-                      }
-                      return newD
-                    })}
-                    required={true}
-                    value={order.delivery}
-                    setValue={(delivery) => {
-                      const { deliveryPrice, amountFromUser2 } = totalDelivery(
-                        delivery,
-                        userLevel
-                      )
-                      setOrder({
-                        ...order,
-                        delivery,
-                        deliveryId: delivery._id,
-                        deliveryPrice,
-                        amountFromUser2,
-                        amountFromUser: order.amountFromUser1 + amountFromUser2,
-                        amountToZenpii:
-                          order.amountFromUser1 +
-                          amountFromUser2 -
-                          order.amountToStore
-                      })
-                    }}
-                    size='lg'
-                    label={t('deliveryDetail.deliveryUnit')}
-                  />
-                )}
-                <div className='d-inline-block position-relative ms-4 mb-2'>
-                  <div className='d-inline-block'>
-                    <span className='btn btn-primary default rounded-1'>
-                      <i className='fa-light fa-truck'></i>
-                    </span>
-                  </div>
-                </div>
+              <div className='col-10'>
+                <b>{t('orderDetail.deliveryUnit')}</b>
+                <span>: Giao hàng nhanh</span>
+              </div>
+              <div className='col-2'>
+                {formatPrice(order.shippingFee)}
+                <sup>₫</sup>
               </div>
             </div> */}
           </div>
@@ -648,7 +646,7 @@ const CheckoutForm = ({
                   <dl className='row'>
                     <dd className='col-12 text-end'>
                       <span className='fs-6'>
-                        {formatPrice(order.totalSalePrice)}
+                        {formatPrice(order.totalSalePrice ?? 0)}
                         <sup>₫</sup>
                       </span>
                     </dd>
@@ -666,7 +664,7 @@ const CheckoutForm = ({
                         <span className='fs-6'>
                           -{' '}
                           {formatPrice(
-                            order.totalSalePrice - order.amountFromUser1
+                            order.totalSalePrice - order.amountFromUser1 ?? 0
                           )}
                           <sup>₫</sup>
                         </span>
@@ -681,25 +679,26 @@ const CheckoutForm = ({
                   <dl className='row'>
                     <dd className='col-12 text-end'>
                       <span className='fs-6'>
-                        {formatPrice(order.deliveryPrice)}
+                        {formatPrice(order.shippingFeeBeforeDiscount ?? 0)}
                         <sup>₫</sup>
                       </span>
                     </dd>
                   </dl>
                 </dd>
-                {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                {order.shippingFeeBeforeDiscount - order.shippingFee > 0 && (
                   <dt className='col-7 text-secondary fw-normal'>
                     {t('cartDetail.discountShippingFee')}
                   </dt>
                 )}
-                {order.deliveryPrice - order.amountFromUser2 > 0 && (
+                {order.shippingFeeBeforeDiscount - order.shippingFee > 0 && (
                   <dd className='col-5'>
                     <dl className='row'>
                       <dd className='col-12 text-end'>
                         <span className='fs-6'>
                           -{' '}
                           {formatPrice(
-                            order.deliveryPrice - order.amountFromUser2
+                            order.shippingFeeBeforeDiscount -
+                              order.shippingFee ?? 0
                           )}
                           <sup>₫</sup>
                         </span>
@@ -714,7 +713,7 @@ const CheckoutForm = ({
                 <dd className='col-5'>
                   <dl className='row'>
                     <span className='col-12 text-primary fw-bold fs-6 text-end'>
-                      {formatPrice(order.amountFromUser)}
+                      {formatPrice(order.amountFromUser ?? 0)}
                       <sup>₫</sup>
                     </span>
                   </dl>
@@ -756,6 +755,71 @@ const CheckoutForm = ({
                     onCancel={() => setIsLoading(false)}
                     disabled={paypalDisabled}
                   />
+                </div>
+
+                <div style={{ position: 'relative', zIndex: '1' }}>
+                  <button
+                    type='button'
+                    className='btn btn-default hover:bg-blue-100 border-solid border border-blue-700 border-2 btn-lg ripple w-100 mb-1 p-0'
+                    disabled={!order.address || !order.phone}
+                    onClick={async () => {
+                      const {
+                        cartId,
+                        commissionId,
+                        firstName,
+                        lastName,
+                        phone,
+                        shippingFee,
+                        address,
+                        amountFromUser,
+                        amountFromStore,
+                        amountToStore,
+                        amountToZenpii
+                      } = order
+
+                      const vnpay = new VNPay({
+                        tmnCode: 'M81536UR',
+                        secureSecret: 'EU2OYS5JSUY59EUS9TSMOV1U9PI4L466',
+                        vnpayHost: 'https://sandbox.vnpayment.vn',
+                        testMode: true, // optional
+                        hashAlgorithm: 'SHA512' // optional
+                      })
+                      const date = new Date()
+                      const tnx = dateformat(date, 'HHmmss')
+                      const urlString = vnpay.buildPaymentUrl({
+                        vnp_Amount: order.amountFromUser,
+                        vnp_IpAddr: '192.168.0.1',
+                        vnp_ReturnUrl: `http://localhost:3000/cart?isOrder=true&cartId=${cartId}&storeId=${storeId}`,
+                        vnp_TxnRef: tnx,
+                        vnp_OrderInfo: `Thanh toan cho ma GD: ${tnx}`
+                      })
+
+                      const orderBody = {
+                        firstName,
+                        lastName,
+                        phone,
+                        address,
+                        commissionId,
+                        shippingFee,
+                        amountFromUser,
+                        amountFromStore,
+                        amountToStore,
+                        amountToZenpii,
+                        isPaidBefore: true
+                      }
+
+                      localStorage.setItem('order', JSON.stringify(orderBody))
+                      console.log(urlString)
+                      window.location.href = urlString
+                    }}
+                  >
+                    <img
+                      src={vnpayImage}
+                      alt='vn pay'
+                      width={100}
+                      height={50}
+                    />
+                  </button>
                 </div>
               </div>
             </div>

@@ -271,6 +271,7 @@
   "newProduct": "New Product",
   "hotStore": "Hot Store",
   "cart": "Shopping cart",
+  "notification": "Notification",
   "favProduct": "Favorite Product",
   "favStore": "Favorite Store",
   "product": "Product",
@@ -360,7 +361,8 @@
     "hightToLow": "Price: Hight to Low",
     "up": "up",
     "apply": "Apply",
-    "reset": "Clear all"
+    "reset": "Clear all",
+    "provinces": "Provinces"
   },
   "transactions": "Transactions in the system",
 

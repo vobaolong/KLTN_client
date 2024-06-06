@@ -12,6 +12,7 @@ import UserSmallCard from '../../card/UserSmallCard'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import StoreSmallCard from '../../card/StoreSmallCard'
 import { useTranslation } from 'react-i18next'
+import BellButton from './BellButton'
 
 const MainNav = ({ navFor = 'user' }) => {
   const { t } = useTranslation()
@@ -86,21 +87,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   <VendorInit />
                 </li>
               )}
-              <li className='nav-item'>
-                <div className='cart-item-wrap position-relative'>
-                  <span className='rounded-circle btn lang inherit'>
-                    <i className='fa-light fa-bell'></i>
-                  </span>
-                  {cartCount > 0 && (
-                    <span
-                      style={{ top: '20%', left: '80%' }}
-                      className='position-absolute translate-middle badge rounded-pill bg-danger'
-                    >
-                      {cartCount < 100 ? cartCount : '99+'}
-                    </span>
-                  )}
-                </div>
-              </li>
+              <BellButton />
 
               {navFor === 'user' && getToken().role === 'user' && (
                 <li className='nav-item'>
@@ -211,7 +198,7 @@ const MainNav = ({ navFor = 'user' }) => {
                         <i className='fa-light fa-bag-shopping me-2'></i>
                         {t('cart')}
                         <sup className='ms-1 text-danger'>
-                          ({cartCount > 0 ? cartCount : ''})
+                          ({cartCount > 0 ? cartCount : '0'})
                         </sup>
                       </Link>
                     </li>

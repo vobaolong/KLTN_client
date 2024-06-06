@@ -25,7 +25,13 @@ import { toast } from 'react-toastify'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
+const ListCartItems = ({
+  cartId = '',
+  storeId = '',
+  userId = '',
+  storeAddress = '',
+  onRun
+}) => {
   const { t } = useTranslation()
   const [run, setRun] = useState(false)
   const [error, setError] = useState('false')
@@ -392,6 +398,7 @@ const ListCartItems = ({ cartId = '', storeId = '', userId = '', onRun }) => {
             cartId={cartId}
             userId={userId}
             storeId={storeId}
+            storeAddress={storeAddress}
             items={items}
           />
         </div>

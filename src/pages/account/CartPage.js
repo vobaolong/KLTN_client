@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import { useTranslation } from 'react-i18next'
 import { listCarts } from '../../apis/cart'
@@ -14,6 +14,16 @@ import { useSelector } from 'react-redux'
 import i18n from '../../i18n/i18n'
 import { toast } from 'react-toastify'
 import MetaData from '../../components/layout/meta/MetaData'
+import { useHistory, useLocation } from 'react-router-dom'
+import { createOrder } from '../../apis/order'
+import useUpdateDispatch from '../../hooks/useUpdateDispatch'
+import { socketId } from '../..'
+
+function useQuery() {
+  const { search } = useLocation()
+
+  return React.useMemo(() => new URLSearchParams(search), [search])
+}
 
 const CartPage = () => {
   const { _id, accessToken } = getToken()
@@ -22,6 +32,10 @@ const CartPage = () => {
   const [carts, setCarts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { cartCount } = useSelector((state) => state.account.user)
+  const [updateDispatch] = useUpdateDispatch()
+  let query = useQuery()
+
+  const history = useHistory()
 
   useEffect(() => {
     setIsLoading(true)
@@ -36,6 +50,40 @@ const CartPage = () => {
         setIsLoading(false)
       })
   }, [run, i18n.language])
+
+  useEffect(() => {
+    const isOrder = query.get('isOrder')
+    const cartId = query.get('cartId')
+    const storeId = query.get('storeId')
+
+    if (isOrder && cartId && storeId) {
+      const orderString = localStorage.getItem('order')
+      const orderBody = JSON.parse(orderString)
+
+      createOrder(_id, accessToken, cartId, orderBody)
+        .then((data) => {
+          if (data.error) toast.error(data.error)
+          else {
+            updateDispatch('account', data.user)
+            socketId.emit('notificationOrder', {
+              orderId: data.order._id,
+              from: _id,
+              to: storeId
+            })
+            history.push('/account/purchase')
+            toast.success(t('toastSuccess.order.create'))
+          }
+          setIsLoading(false)
+        })
+        .catch((error) => {
+          console.log('Some thing went wrong')
+          setIsLoading(false)
+        })
+        .finally(() => {
+          localStorage.removeItem('order')
+        })
+    }
+  }, [query])
 
   return (
     <MainLayout>
@@ -55,9 +103,7 @@ const CartPage = () => {
               <span className='text-danger'>{t('cartDetail.empty')}</span>
               <span class>{t('cartDetail.emptyRefer')}</span>
             </div>
-            <h6 className='mt-2'>
-              {t('product')} {t('bestSeller')}
-            </h6>
+            <h6 className='mt-2'>{t('bestSeller')}</h6>
             <ListBestSellerProducts />
           </div>
         ) : (
@@ -147,6 +193,7 @@ const CartPage = () => {
                       <ListCartItemsForm
                         cartId={cart._id}
                         storeId={cart.storeId._id}
+                        storeAddress={cart.storeId.address}
                         userId={cart.userId._id}
                         onRun={() => setRun(!run)}
                       />

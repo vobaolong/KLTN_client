@@ -1,3 +1,5 @@
+import axios from 'axios'
+import qs from 'qs'
 const API = process.env.REACT_APP_API_URL
 
 export const getProduct = async (productId) => {
@@ -50,20 +52,22 @@ export const listActiveProducts = async (filter) => {
     rating,
     minPrice,
     maxPrice,
-    categoryId
+    categoryId,
+    provinces
   } = filter
   try {
-    const res = await fetch(
+    const res = await axios.get(
       `${API}/active/products?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
+        params: {
+          provinces: provinces
+        },
+        paramsSerializer: (params) => {
+          return qs.stringify(params, { encode: false })
         }
       }
     )
-    return await res.json()
+    return res.data
   } catch (error) {
     return console.log(error)
   }

@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
+import { getProvinces } from '../../apis/address'
 
 const ProductFilter = ({ filter, setFilter }) => {
+  const [provinces, setProvinces] = useState([])
+  const [provincesChecked, setProvincesChecked] = useState([])
   const { t } = useTranslation()
   const [price, setPrice] = useState({
     min: 0,
@@ -23,7 +26,9 @@ const ProductFilter = ({ filter, setFilter }) => {
     setFilter({ ...filter, [name]: value, order: newOrder })
 
     const searchParams = new URLSearchParams(location.search)
-    searchParams.set(name, value)
+    if (name !== 'provinces') {
+      searchParams.set(name, value)
+    }
 
     if (name === 'sortBy' && value === 'salePrice') {
       searchParams.set('order', newOrder)
@@ -57,6 +62,7 @@ const ProductFilter = ({ filter, setFilter }) => {
       min: 0,
       max: ''
     })
+    setProvincesChecked([])
     const searchParams = new URLSearchParams(location.search)
     searchParams.delete('rating')
     searchParams.delete('minPrice')
@@ -94,6 +100,33 @@ const ProductFilter = ({ filter, setFilter }) => {
       )
     return render
   }
+
+  const handleSelectProvince = (value) => {
+    if (value === null) {
+      if (provincesChecked.length !== 0) {
+        setProvincesChecked(() => [])
+        handleFilter('provinces', null)
+      }
+      return
+    }
+    if (provincesChecked.includes(value)) {
+      const newProvincesChecked = provincesChecked.filter((v) => v !== value)
+      setProvincesChecked(() => [...newProvincesChecked])
+      handleFilter('provinces', newProvincesChecked)
+    } else {
+      provincesChecked.push(value)
+      setProvincesChecked(() => [...provincesChecked])
+      handleFilter('provinces', provincesChecked)
+    }
+  }
+
+  const fetchProvinces = async () => {
+    const provincesRes = await getProvinces()
+    setProvinces(provincesRes)
+  }
+  useEffect(() => {
+    fetchProvinces()
+  }, [])
 
   return (
     <div style={{ width: '100%' }}>
@@ -190,6 +223,49 @@ const ProductFilter = ({ filter, setFilter }) => {
             </form>
           </div>
           <hr />
+          <p>{t('filters.provinces')}</p>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              margin: '10px 0px'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                gap: '20px'
+              }}
+            >
+              <input
+                type='checkbox'
+                checked={provincesChecked.length === 0}
+                onChange={() => {
+                  handleSelectProvince(null)
+                }}
+              />
+              <p>{t('filters.all')}</p>
+            </div>
+            {provinces.map((value) => (
+              <div
+                key={value}
+                style={{
+                  display: 'flex',
+                  gap: '20px'
+                }}
+              >
+                <input
+                  type='checkbox'
+                  checked={provincesChecked.includes(value)}
+                  onChange={() => {
+                    handleSelectProvince(value)
+                  }}
+                />
+                <p>{value}</p>
+              </div>
+            ))}
+          </div>
           <button
             className='btn btn-primary w-100 mb-2 rounded-1 ripple'
             onClick={(event) => handleResetFilter(event)}

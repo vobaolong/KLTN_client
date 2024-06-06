@@ -14,6 +14,7 @@ import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import AddressForm from './AddressForm'
 
 const CreateStoreForm = () => {
   const { t } = useTranslation()
@@ -24,6 +25,7 @@ const CreateStoreForm = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [listActiveCommissions, setListActiveCommissions] = useState([])
+  const [addressDetail, setAddressDetail] = useState({})
   const [store, setStore] = useState({
     name: '',
     bio: '',
@@ -133,6 +135,7 @@ const CreateStoreForm = () => {
     formData.set('commissionId', store.commissionId)
     formData.set('avatar', store.avatar)
     formData.set('cover', store.cover)
+    formData.set('addressDetail', JSON.stringify(addressDetail))
 
     setIsLoading(true)
     createStore(_id, accessToken, formData)
@@ -239,21 +242,13 @@ const CreateStoreForm = () => {
             />
           </div>
 
-          <div className='col-12 px-4 mt-2 mb-4'>
-            <Input
-              type='text'
-              label={t('storeDetail.pickupAddress')}
-              value={store.address}
-              isValid={store.isValidAddress}
-              feedback={t('storeDetailValid.addressValid')}
-              validator='address'
-              required={true}
-              onChange={(value) =>
-                handleChange('address', 'isValidAddress', value)
-              }
-              onValidate={(flag) => handleValidate('isValidAddress', flag)}
-            />
-          </div>
+          <div style={{ marginTop: '20px' }}></div>
+          <AddressForm
+            onChange={(value) => {
+              setAddressDetail({ ...value })
+              handleChange('address', 'isValidAddress', value.street)
+            }}
+          />
         </div>
 
         <div className='box-shadow rounded-1 row mb-2 bg-body p-2 mt-3'>

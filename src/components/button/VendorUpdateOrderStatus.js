@@ -6,14 +6,16 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import DropDownMenu from '../ui/DropDownMenu'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import Error from '../ui/Error'
 
-const VendorUpdateOrderStatusButton = ({
+const VendorUpdateOrderStatus = ({
   storeId = '',
   orderId = '',
   status = '',
   onRun
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
   const [statusValue, setStatusValue] = useState(status)
   const { _id, accessToken } = getToken()
@@ -29,12 +31,17 @@ const VendorUpdateOrderStatusButton = ({
   }
 
   const onSubmit = () => {
+    setError('')
+
     setIsLoading(true)
     const value = { status: statusValue }
     vendorUpdateStatusOrder(_id, accessToken, value, orderId, storeId)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           toast.success(t('toastSuccess.order.update'))
         }
@@ -42,14 +49,18 @@ const VendorUpdateOrderStatusButton = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('dialog.updateOrder')}
@@ -76,4 +87,4 @@ const VendorUpdateOrderStatusButton = ({
   )
 }
 
-export default VendorUpdateOrderStatusButton
+export default VendorUpdateOrderStatus

@@ -27,13 +27,12 @@ export const totalProducts = (items = [], userLevel = {}) => {
   return { totalPrice, totalSalePrice, amountFromUser1 }
 }
 
-export const totalDelivery = (delivery = {}, userLevel = {}) => {
-  // const deliveryPrice = parseFloat(delivery?.price?.$numberDecimal || 0)
-  const amountFromUser2 =
+export const totalShippingFee = (delivery = {}, userLevel = {}) => {
+  const shippingFee =
     (delivery * (100 - parseFloat(userLevel.discount?.$numberDecimal || 0))) /
       100 || delivery
 
-  return { delivery, amountFromUser2 }
+  return { delivery, shippingFee }
 }
 
 export const totalCommission = (

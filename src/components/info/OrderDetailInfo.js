@@ -18,7 +18,7 @@ import VendorUpdateOrderStatus from '../button/VendorUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { totalDelivery, totalProducts } from '../../helper/total'
+import { totalProducts } from '../../helper/total'
 import { useSelector } from 'react-redux'
 
 const OrderDetailInfo = ({
@@ -37,6 +37,7 @@ const OrderDetailInfo = ({
   const { level: userLevel } = useSelector((state) => state.account.user)
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     if (by === 'store')
       getOrderByStore(_id, accessToken, orderId, storeId)
@@ -46,18 +47,20 @@ const OrderDetailInfo = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Server Error')
           setIsLoading(false)
         })
     else if (by === 'admin')
       getOrderForAdmin(_id, accessToken, orderId)
         .then((data) => {
           if (data.error) setError(data.error)
-          else setOrder(data.order)
+          else {
+            setOrder(data.order)
+          }
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Server Error')
           setIsLoading(false)
         })
     else {
@@ -70,7 +73,7 @@ const OrderDetailInfo = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Server Error')
           setIsLoading(false)
         })
       listItemsByOrder(_id, accessToken, orderId)
@@ -80,7 +83,7 @@ const OrderDetailInfo = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(error)
+          setError('Server Error')
           setIsLoading(false)
         })
     }
@@ -99,10 +102,6 @@ const OrderDetailInfo = ({
 
   const saleFromSystem =
     totalOrderSalePrice - totalProducts(items, userLevel).amountFromUser1
-
-  const saleFromShipping =
-    order.deliveryId?.price?.$numberDecimal -
-    totalDelivery(order.deliveryId, userLevel).amountFromUser2
 
   return (
     <div className='position-relative'>
@@ -224,12 +223,7 @@ const OrderDetailInfo = ({
                 <Paragraph
                   label={t('orderDetail.deliveryUnit')}
                   colon
-                  value={order.deliveryId?.name}
-                />
-                <Paragraph
-                  label={t('orderDetail.deliveryId')}
-                  colon
-                  value={order.deliveryId?._id.toUpperCase()}
+                  value={'Giao hàng nhanh'}
                 />
                 <Paragraph
                   label={t('orderDetail.paymentMethod')}
@@ -302,33 +296,11 @@ const OrderDetailInfo = ({
                         </th>
                         <td className='text-end'>
                           <span style={{ fontSize: '0.9rem' }}>
-                            {formatPrice(
-                              order.deliveryId?.price?.$numberDecimal
-                            )}
+                            {formatPrice(order.shippingFee?.$numberDecimal)}
                             <sup>₫</sup>
                           </span>
                         </td>
                       </tr>
-                      {saleFromShipping !== 0 && (
-                        <tr className='border-bottom'>
-                          <th
-                            style={{
-                              fontSize: '0.9rem',
-                              fontWeight: '500',
-                              backgroundColor: 'transparent'
-                            }}
-                            scope='col'
-                          >
-                            {t('cartDetail.discountShippingFee')}
-                          </th>
-                          <td className='text-end'>
-                            <span style={{ fontSize: '0.9rem' }}>
-                              -{formatPrice(saleFromShipping)}
-                              <sup>₫</sup>
-                            </span>
-                          </td>
-                        </tr>
-                      )}
                     </tbody>
                   </table>
                 )}

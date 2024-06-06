@@ -284,9 +284,9 @@ const VendorOrdersTable = ({
                       </td>
                       <td>
                         <small>
-                          <i>{order.deliveryId?.name}</i>
+                          <i>Giao hàng nhanh</i>
                           <br />
-                          {formatPrice(order.deliveryId?.price?.$numberDecimal)}
+                          {formatPrice(order.shippingFee?.$numberDecimal)}
                           <sup>₫</sup>
                         </small>
                       </td>

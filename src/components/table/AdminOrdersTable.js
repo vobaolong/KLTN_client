@@ -280,14 +280,12 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       </small>
                     </td>
                     <td>
-                      {order.deliveryId && (
-                        <small>
-                          <i>{order.deliveryId.name}</i>
-                          <br />
-                          {formatPrice(order.deliveryId.price.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
-                      )}
+                      <small>
+                        <i>Giao hàng nhanh</i>
+                        <br />
+                        {formatPrice(order.shippingFee?.$numberDecimal)}
+                        <sup>₫</sup>
+                      </small>
                     </td>
                     <td>
                       <span style={{ fontSize: '1rem' }}>

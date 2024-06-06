@@ -21,7 +21,7 @@ const HomePage = () => {
       url: `/store/${store._id}`
     }
   ]
-  console.log(store)
+
   return (
     <>
       <MetaData

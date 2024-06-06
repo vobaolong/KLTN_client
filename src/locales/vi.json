@@ -282,6 +282,7 @@
   "newProduct": "Sản Phẩm Mới",
   "hotStore": "Shop Nổi Bật",
   "cart": "Giỏ hàng",
+  "notification": "Thông báo",
   "favProduct": "Sản phẩm yêu thích",
   "favStore": "Shop yêu thích",
   "product": "Sản Phẩm",
@@ -370,7 +371,8 @@
     "hightToLow": "Giá: Cao tới thấp",
     "up": "trở lên",
     "apply": "Áp dụng",
-    "reset": "Xoá tất cả"
+    "reset": "Xoá tất cả",
+    "provinces": "Tỉnh thành"
   },
   "transactions": "Giao dịch trong hệ thống",
 
@@ -471,7 +473,7 @@
     "feeValid": "Vui lòng cung cấp tên phí chiết khấu phù hợp (>=0)!"
   },
   "deliveryDetail": {
-    "deliveryUnit": "Vận chuyển",
+    "deliveryUnit": "Đơn vị vận chuyển",
     "name": "Tên ĐVVC",
     "description": "Mô tả",
     "fee": "Phí",
@@ -667,7 +669,7 @@
     "date": "Ngày đặt hàng",
     "total": "Tổng",
     "store": "Shop",
-    "deliveryUnit": "Vận chuyển",
+    "deliveryUnit": "Đơn vị vận chuyển",
     "payment": "Thanh toán",
     "paymentMethod": "Thanh toán",
     "lastUpdateTime": "Cập nhật lần cuối",

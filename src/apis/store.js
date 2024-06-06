@@ -315,3 +315,38 @@ export const activeStore = async (userId, token, value, storeId) => {
     return console.log(error)
   }
 }
+
+//address
+export const addAddress = async (userId, token, address) => {
+  try {
+    const res = await fetch(`${API}/user/address/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(address)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
+export const updateAddress = async (userId, token, index, address) => {
+  try {
+    const res = await fetch(`${API}/user/address/${userId}?index=${index}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(address)
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}

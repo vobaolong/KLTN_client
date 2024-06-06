@@ -21,7 +21,6 @@ import AdminCreateVariantPage from './admin/CreateVariantPage'
 import AdminEditVariantPage from './admin/EditVariantPage'
 import AdminVariantValuesPage from './admin/VariantValuePage'
 import AdminProductPage from './admin/ProductPage'
-import AdminDeliveryPage from './admin/DeliveryPage'
 import AdminOrderPage from './admin/OrderPage'
 import AdminOrderDetailPage from './admin/OrderDetailPage'
 import AdminTransactionPage from './admin/TransactionPage'
@@ -119,11 +118,6 @@ const Routes = () => {
           component={AdminVariantValuesPage}
         />
         <AdminRoute path='/admin/product' exact component={AdminProductPage} />
-        <AdminRoute
-          path='/admin/delivery'
-          exact
-          component={AdminDeliveryPage}
-        />
         <AdminRoute path='/admin/order' exact component={AdminOrderPage} />
         <AdminRoute
           path='/admin/order/detail/:orderId'

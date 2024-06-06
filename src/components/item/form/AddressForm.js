@@ -1,14 +1,9 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { getToken } from '../../../apis/auth'
-import { addAddress } from '../../../apis/user'
-import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
-import Loading from '../../ui/Loading'
-import Input from '../../ui/Input'
-import ConfirmDialog from '../../ui/ConfirmDialog'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
+import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
+import Input from '../../ui/Input'
+import axios from 'axios'
 
 const apiEndpointProvince =
   'https://online-gateway.ghn.vn/shiip/public-api/master-data/province'
@@ -41,45 +36,53 @@ async function getWards(districtId) {
   return wardList.data
 }
 
-const UserAddAddressForm = () => {
+const AddressForm = ({ addressDetail, onChange }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-  const [isConfirming, setIsConfirming] = useState(false)
   const [address, setAddress] = useState({
-    province: '',
-    provinceName: '',
-    district: '',
-    districtName: '',
-    ward: '',
-    wardName: '',
-    street: '',
-    isValidStreet: true
+    province: addressDetail?.provinceID ?? '',
+    provinceName: addressDetail?.provinceName ?? '',
+    district: addressDetail?.districtID ?? '',
+    districtName: addressDetail?.districtName ?? '',
+    ward: addressDetail?.wardID ?? '',
+    wardName: addressDetail?.wardName ?? '',
+    street: addressDetail?.address?.split(', ')[0] ?? ''
   })
   const [provinces, setProvinces] = useState([])
   const [districts, setDistricts] = useState([])
   const [wards, setWards] = useState([])
-  const [isLoadingDistrict, setIsLoadingDistrict] = useState(false)
-  const [isLoadingWard, setIsLoadingWard] = useState(false)
 
-  const [updateDispatch] = useUpdateDispatch()
-  const { _id, accessToken } = getToken()
+  const fetchProvinces = async () => {
+    try {
+      setIsLoading(true)
+      const { data } = await axios.get(apiEndpointProvince, {
+        headers: {
+          Token: 'df39b10b-1767-11ef-bfe9-c2d25c6518ab'
+        }
+      })
+      setProvinces(data.data)
+    } catch (error) {
+      console.error('Error fetching provinces:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const fetchDistricts = async () => {
+    if (addressDetail?.provinceID) {
+      const districts = await getDistricts(addressDetail?.provinceID)
+      setDistricts(districts)
+    }
+    if (addressDetail?.districtID) {
+      const wards = await getWards(addressDetail?.districtID)
+      setWards(wards)
+    }
+  }
 
   useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const { data } = await axios.get(apiEndpointProvince, {
-          headers: {
-            Token: 'df39b10b-1767-11ef-bfe9-c2d25c6518ab'
-          }
-        })
-        setProvinces(data.data)
-      } catch (error) {
-        console.error('Error fetching provinces:', error)
-      }
-    }
-
     fetchProvinces()
+    fetchDistricts()
   }, [])
 
   const handleProvinceChange = async (e) => {
@@ -95,10 +98,15 @@ const UserAddAddressForm = () => {
       wardName: ''
     })
     if (value) {
-      setIsLoadingDistrict(true)
-      const districts = await getDistricts(value)
-      setDistricts(districts)
-      setIsLoadingDistrict(false)
+      try {
+        setIsLoading(true)
+        const districts = await getDistricts(value)
+        setDistricts(districts)
+      } catch (error) {
+        setError(error)
+      } finally {
+        setIsLoading(false)
+      }
     } else {
       setDistricts([])
       setWards([])
@@ -116,10 +124,15 @@ const UserAddAddressForm = () => {
       wardName: ''
     })
     if (value) {
-      setIsLoadingWard(true)
-      const wards = await getWards(value)
-      setWards(wards)
-      setIsLoadingWard(false)
+      try {
+        setIsLoading(true)
+        const wards = await getWards(value)
+        setWards(wards)
+      } catch (error) {
+        setError(error)
+      } finally {
+        setIsLoading(false)
+      }
     } else {
       setWards([])
     }
@@ -131,85 +144,23 @@ const UserAddAddressForm = () => {
     setAddress({ ...address, ward: value, wardName: name })
   }
 
-  const handleChange = (name, isValidName, value) => {
-    setAddress({
-      ...address,
-      [name]: value,
-      [isValidName]: true
-    })
-  }
+  const handleChange = (value) => {
+    if (address.provinceName && address.districtName && address.wardName) {
+      setAddress((prev) => ({
+        ...prev,
+        street: value
+      }))
 
-  const handleValidate = (isValidName, flag) => {
-    setAddress({
-      ...address,
-      [isValidName]: flag
-    })
-  }
+      const addressString = `${value}, ${address.wardName}, ${address.districtName}, ${address.provinceName}`
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    const { provinceName, districtName, wardName, street } = address
-    if (!provinceName || !districtName || !wardName || !street) {
-      setError(t('addressFormValid.allFields'))
-      return
+      onChange({ ...address, street: addressString })
     }
-    setIsConfirming(true)
-  }
-
-  const onSubmit = () => {
-    const addressString = `${address.street}, ${address.wardName}, ${address.districtName}, ${address.provinceName}`
-    const addressData = {
-      provinceID: address.province,
-      provinceName: address.provinceName,
-      districtID: address.district,
-      districtName: address.districtName,
-      wardID: address.ward,
-      wardName: address.wardName,
-      address: addressString
-    }
-
-    setError('')
-    setIsLoading(true)
-    addAddress(_id, accessToken, addressData)
-      .then((data) => {
-        if (data.error) setError(data.error)
-        else {
-          updateDispatch('account', data.user)
-          setAddress({
-            province: '',
-            provinceName: '',
-            district: '',
-            districtName: '',
-            ward: '',
-            wardName: '',
-            street: '',
-            isValidStreet: true
-          })
-          toast.success(t('toastSuccess.address.add'))
-        }
-        setIsLoading(false)
-        setTimeout(() => setError(''), 3000)
-      })
-      .catch(() => {
-        setError('Server Error')
-        setIsLoading(false)
-        setTimeout(() => setError(''), 3000)
-      })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
-      {isConfirming && (
-        <ConfirmDialog
-          title={t('userDetail.addAddress')}
-          onSubmit={onSubmit}
-          message={t('confirmDialog')}
-          onClose={() => setIsConfirming(false)}
-        />
-      )}
-      <form className='row mb-2 text-start gap-3' onSubmit={handleSubmit}>
+      <div className='row mb-2 text-start gap-3'>
         <div className='col-12 d-flex justify-content-between align-items-center'>
           <label className='col-3 me-3' htmlFor='province'>
             {t('addressForm.province')}
@@ -247,7 +198,6 @@ const UserAddAddressForm = () => {
               </option>
             ))}
           </select>
-          {isLoadingDistrict && <Loading />}
         </div>
 
         <div className='col-12 d-flex justify-content-between align-items-center'>
@@ -268,24 +218,27 @@ const UserAddAddressForm = () => {
               </option>
             ))}
           </select>
-          {isLoadingWard && <Loading />}
         </div>
 
         <div className='col-12'>
           <Input
+            isDisabled={
+              !(
+                address.districtName &&
+                address.provinceName &&
+                address.wardName
+              )
+            }
             type='text'
             name='street'
             label={t('addressForm.street')}
             value={address.street}
-            onHandleChange={handleChange}
-            onHandleValidate={handleValidate}
             isValid={address.isValidStreet}
             required
             maxLength='100'
             feedback={t('addressFormValid.streetValid')}
             validator='address'
-            onChange={(value) => handleChange('street', 'isValidStreet', value)}
-            onValidate={(flag) => handleValidate('isValidStreet', flag)}
+            onChange={(value) => handleChange(value)}
           />
         </div>
         {error && (
@@ -293,18 +246,9 @@ const UserAddAddressForm = () => {
             <Error msg={error} />
           </div>
         )}
-        <div className='col-12 d-grid mt-4'>
-          <button
-            type='submit'
-            className='btn btn-primary ripple rounded-1'
-            onClick={handleSubmit}
-          >
-            {t('button.submit')}
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   )
 }
 
-export default UserAddAddressForm
+export default AddressForm

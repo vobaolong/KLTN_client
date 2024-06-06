@@ -166,7 +166,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
                   </th>
-                  <th scope='col'>
+                  {/* <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
                       currentSortBy={filter.sortBy}
@@ -174,7 +174,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       sortBy='deliveryId'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
-                  </th>
+                  </th> */}
                   <th scope='col'>
                     <SortByButton
                       currentOrder={filter.order}
@@ -222,7 +222,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                     <td className='hidden-avatar'>
                       <StoreSmallCard store={order.storeId} />
                     </td>
-                    <td>
+                    {/* <td>
                       {order.deliveryId && (
                         <small>
                           {order.deliveryId.name}
@@ -231,7 +231,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                           <sup>₫</sup>
                         </small>
                       )}
-                    </td>
+                    </td> */}
                     <td>
                       <span style={{ fontSize: '0.9rem' }}>
                         <OrderPaymentLabel isPaidBefore={order.isPaidBefore} />

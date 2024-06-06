@@ -1,29 +1,35 @@
 import { useState } from 'react'
 import { getToken } from '../../apis/auth'
-import { deleteAddresses } from '../../apis/user'
+import { deleteAddresses, updateAddress } from '../../apis/user'
 import useUpdateDispatch from '../../hooks/useUpdateDispatch'
-import UserEditAddressForm from '../item/form/UserEditAddressForm'
+import AddressForm from '../item/form/AddressForm'
 import UserAddAddressItem from '../item/UserAddAddressItem'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { getAddressCache } from '../../apis/address'
 
 const UserAddressesTable = ({ addresses = [], heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingFetchData, setIsLoadingFetchData] = useState(false)
   const [editAddress, setEditAddress] = useState({})
+  const [addressDetail, setAddressDetail] = useState(null)
+  const [newAddressDetail, setNewAddressDetail] = useState(null)
   const [deleteAddress, setDeleteAddress] = useState({})
   const [isConfirming, setIsConfirming] = useState(false)
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
+  const [isConfirmingEdit, setIsConfirmingEdit] = useState(false)
 
-  const handleEditAddress = (address, index) => {
-    setEditAddress({
+  const handleEditAddress = async (address, index) => {
+    await fetchAddress(address)
+    setEditAddress(() => ({
       index: index,
       address: address
-    })
+    }))
   }
 
   const handleDeleteAddress = (address, index) => {
@@ -49,6 +55,48 @@ const UserAddressesTable = ({ addresses = [], heading = false }) => {
         console.log('Some thing went wrong')
         setIsLoading(false)
       })
+  }
+
+  const handleSelectAddress = (address, addressDetail1) => {
+    setNewAddressDetail(() => ({ ...addressDetail1 }))
+    setEditAddress({
+      ...editAddress,
+      address: address
+    })
+  }
+
+  const onSubmitEdit = (index) => {
+    setIsLoading(true)
+    updateAddress(_id, accessToken, index, {
+      address: editAddress.address,
+      addressDetail: newAddressDetail
+    })
+      .then((data) => {
+        if (data.error) toast.error(data.error)
+        else {
+          updateDispatch('account', data.user)
+          toast.success(t('toastSuccess.address.update'))
+        }
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        console.log('Some thing went wrong')
+        setIsLoading(false)
+      })
+  }
+
+  const handleSubmit = () => {
+    setIsConfirmingEdit(true)
+  }
+
+  const fetchAddress = async (address) => {
+    setAddressDetail(null)
+    setIsLoadingFetchData(true)
+    const res = await getAddressCache(address)
+    if (res.error !== 'not found') {
+      setAddressDetail(res)
+    }
+    setIsLoadingFetchData(false)
   }
 
   return (
@@ -128,10 +176,35 @@ const UserAddressesTable = ({ addresses = [], heading = false }) => {
           hasCloseBtn={false}
           title={t('userDetail.editAddress')}
         >
-          <UserEditAddressForm
-            oldAddress={editAddress.address}
-            index={editAddress.index}
-          />
+          {isLoadingFetchData && <Loading />}
+          {addressDetail !== null && (
+            <>
+              <AddressForm
+                addressDetail={addressDetail}
+                onChange={(value) => {
+                  handleSelectAddress(value.street, value)
+                }}
+              />
+              <div className='col-12 d-grid mt-4'>
+                <button
+                  type='submit'
+                  className='btn btn-primary ripple rounded-1'
+                  onClick={handleSubmit}
+                >
+                  {t('button.save')}
+                </button>
+              </div>
+              {isConfirmingEdit && (
+                <ConfirmDialog
+                  title={t('userDetail.editAddress')}
+                  onSubmit={() => onSubmitEdit(editAddress.index)}
+                  onClose={() => {
+                    setIsConfirmingEdit(false)
+                  }}
+                />
+              )}
+            </>
+          )}
         </Modal>
         {addresses?.length !== 0 && (
           <span className='text-nowrap'>

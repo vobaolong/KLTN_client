@@ -133,11 +133,7 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  successRate > 0 ? (
-                    <span className='text-primary'>{successRate} %</span>
-                  ) : (
-                    <Skeleton height={20} />
-                  )
+                  <span className='text-primary'>{successRate || 100} %</span>
                 }
               />
             </div>

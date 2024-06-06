@@ -27,9 +27,9 @@ const HomePage = () => {
       <div className='mb-4'>
         <ListBestSellerProduct heading={t('newProduct')} sortBy='createdAt' />
       </div>
-      <div className='mb-4'>
+      {/* <div className='mb-4'>
         <ListHotStores heading={t('hotStore')} />
-      </div>
+      </div> */}
     </MainLayout>
   )
 }
