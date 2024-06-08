@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import Error from '../ui/Error'
+import { formatDate, humanReadableDate } from '../../helper/humanReadable'
 
 const AdminVariantsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -197,6 +198,15 @@ const AdminVariantsTable = ({ heading = false }) => {
                   />
                 </th>
                 <th scope='col'>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('variantDetail.createdAt')}
+                    sortBy='createdAt'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
+                </th>
+                <th scope='col'>
                   <span>{t('action')}</span>
                 </th>
               </tr>
@@ -212,21 +222,29 @@ const AdminVariantsTable = ({ heading = false }) => {
                     <span>{variant.name}</span>
                   </td>
                   <td>
-                    {variant.categoryIds.map((category, index) => (
-                      <div
-                        className='hidden-avatar badge bg-value text-dark-emphasis border rounded-1 fw-normal'
-                        style={{ fontSize: '0.875rem' }}
-                        key={index}
-                      >
-                        <CategorySmallCard category={category} />
-                      </div>
-                    ))}
+                    <div
+                      style={{
+                        height: '100%',
+                        maxHeight: '200px',
+                        overflow: 'auto'
+                      }}
+                      className='d-flex flex-column gap-2 my-2'
+                    >
+                      {variant.categoryIds.map((category, index) => (
+                        <div
+                          className='hidden-avatar fs-9 badge bg-value text-dark-emphasis border rounded-1 fw-normal text-start'
+                          key={index}
+                        >
+                          <CategorySmallCard category={category} />
+                        </div>
+                      ))}
+                    </div>
                   </td>
 
                   <td>
                     {variant.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
-
+                  <td>{humanReadableDate(variant.createdAt)}</td>
                   <td className='text-nowrap'>
                     <Link
                       type='button'

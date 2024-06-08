@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { getProductByIdForManager } from '../../../apis/product'
 import Loading from '../../ui/Loading'
-import VendorEditProductProfileForm from './VendorEditProductProfileForm'
-import VendorEditProductImagesForm from './VendorEditProductImagesForm'
+import SellerEditProductProfileForm from './SellerEditProductProfileForm'
+import SellerEditProductImagesForm from './SellerEditProductImagesForm'
 import { toast } from 'react-toastify'
 
-const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
+const SellerEditProductForm = ({ storeId = '', productId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [run, setRun] = useState(false)
   const [product, setProduct] = useState({})
@@ -31,7 +31,7 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
     <div className='container-fluid position-relative'>
       {isLoading && <Loading />}
       <div className='row bg-body box-shadow rounded-2 p-3 mb-3'>
-        <VendorEditProductImagesForm
+        <SellerEditProductImagesForm
           product={product}
           storeId={storeId}
           onRun={() => setRun(!run)}
@@ -39,10 +39,10 @@ const VendorEditProductForm = ({ storeId = '', productId = '' }) => {
       </div>
 
       <div className='row mb-3'>
-        <VendorEditProductProfileForm product={product} storeId={storeId} />
+        <SellerEditProductProfileForm product={product} storeId={storeId} />
       </div>
     </div>
   )
 }
 
-export default VendorEditProductForm
+export default SellerEditProductForm

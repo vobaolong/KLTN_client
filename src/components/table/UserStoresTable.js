@@ -115,7 +115,7 @@ const UserStoresTable = ({ heading = false }) => {
                   <th scope='col' className='text-center'>
                     <SortByButton
                       currentSortBy={filter.sortBy}
-                      title=''
+                      title='#'
                       sortBy='point'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
@@ -135,9 +135,6 @@ const UserStoresTable = ({ heading = false }) => {
                       sortBy='name'
                       onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                     />
-                  </th>
-                  <th scope='col'>
-                    <span>{t('storeDetail.address')}</span>
                   </th>
                   <th scope='col'>
                     <SortByButton
@@ -192,7 +189,6 @@ const UserStoresTable = ({ heading = false }) => {
                         <StoreSmallCard store={store} />
                       </small>
                     </td>
-                    <th>{store.address}</th>
                     <td>
                       <ManagerRoleLabel
                         role={_id === store.ownerId._id ? 'owner' : 'staff'}
@@ -210,8 +206,8 @@ const UserStoresTable = ({ heading = false }) => {
                     <td>
                       <Link
                         type='button'
-                        className='btn btn-sm btn-outline-secondary ripple rounded-1'
-                        to={`/vendor/${store._id}`}
+                        className='btn btn-sm btn-outline-primary ripple rounded-1'
+                        to={`/seller/${store._id}`}
                         title={t('admin.adDashboard.dashboard')}
                       >
                         <i className='res-dis-sm d-none fa-solid fa-eye'></i>

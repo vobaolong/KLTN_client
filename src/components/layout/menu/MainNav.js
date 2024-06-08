@@ -6,7 +6,7 @@ import Logo from './Logo'
 import SearchBar from './SearchBar'
 import Language from '../../ui/Language'
 import SigninItem from '../../item/SigninItem'
-import VendorInit from '../../init/VendorInit'
+import SellerInit from '../../init/SellerInit'
 import AccountInit from '../../init/AccountInit'
 import UserSmallCard from '../../card/UserSmallCard'
 import ConfirmDialog from '../../ui/ConfirmDialog'
@@ -18,7 +18,7 @@ const MainNav = ({ navFor = 'user' }) => {
   const { t } = useTranslation()
   const { cartCount } = useSelector((state) => state.account.user)
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const [isConfirming, setIsConfirming] = useState(false)
   const history = useHistory()
   const { refreshToken } = getToken()
@@ -50,7 +50,7 @@ const MainNav = ({ navFor = 'user' }) => {
 
       <div
         className={`${
-          navFor === 'vendor' || getToken().role === 'admin'
+          navFor === 'seller' || getToken().role === 'admin'
             ? 'container-xxl'
             : 'container-md'
         }`}
@@ -62,13 +62,17 @@ const MainNav = ({ navFor = 'user' }) => {
             <Logo width='150px' navFor={navFor} />
           )}
         </Link>
+
         {navFor === 'user' && <SearchBar />}
-        {navFor === 'vendor' && (
+
+        {navFor === 'seller' && (
           <h3 className='text-uppercase m-0'>SELLER CENTER</h3>
         )}
+
         {navFor === 'user' && getToken().role === 'admin' && (
           <h3 className='text-uppercase m-0'>ADMIN DASHBOARD</h3>
         )}
+
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-1' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -79,15 +83,18 @@ const MainNav = ({ navFor = 'user' }) => {
             </li>
           </ul>
         ) : (
-          <>
-            <ul className='nav cus-sub-nav ms-4 d-flex justify-content-end res-hide-md'>
+          <div className='d-flex justify-content-end'>
+            <div className='footer-links mx-2'>
+              <BellButton navFor={navFor} />
+            </div>
+            <ul className='nav cus-sub-nav d-flex justify-content-end res-hide-md'>
               <Language />
-              {navFor === 'vendor' && (
+
+              {navFor === 'seller' && (
                 <li className='nav-item'>
-                  <VendorInit />
+                  <SellerInit />
                 </li>
               )}
-              <BellButton />
 
               {navFor === 'user' && getToken().role === 'user' && (
                 <li className='nav-item'>
@@ -145,7 +152,7 @@ const MainNav = ({ navFor = 'user' }) => {
               aria-labelledby='offcanvasNavbarMainNavLabel'
               style={{ flexGrow: 'unset', width: 'unset' }}
             >
-              <div className='offcanvas-header bg-primary'>
+              <div className='offcanvas-header bg-primary-rgba'>
                 <h5
                   className='offcanvas-title me-5'
                   id='offcanvasNavbarMainNavLabel'
@@ -156,7 +163,7 @@ const MainNav = ({ navFor = 'user' }) => {
                 </h5>
                 <button
                   type='button'
-                  className='btn-close btn-close-white'
+                  className='btn-close btn-close-black'
                   data-bs-dismiss='offcanvas'
                   aria-label='Close'
                 ></button>
@@ -165,8 +172,8 @@ const MainNav = ({ navFor = 'user' }) => {
               <div className='offcanvas-body'>
                 <UserSmallCard user={user} link='/account/profile' />
                 <hr />
-                {navFor === 'vendor' && (
-                  <StoreSmallCard store={store} link={`/vendor/${store._id}`} />
+                {navFor === 'seller' && (
+                  <StoreSmallCard store={store} link={`/seller/${store._id}`} />
                 )}
 
                 <ul className='navbar-nav justify-content-end flex-grow-1'>
@@ -227,7 +234,7 @@ const MainNav = ({ navFor = 'user' }) => {
                 </ul>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </header>

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import VendorLayout from '../../components/layout/VendorLayout'
+import SellerLayout from '../../components/layout/SellerLayout'
 import StoreProductsTable from '../../components/table/StoreProductsTable'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -8,12 +8,12 @@ import { useState } from 'react'
 const ProductsPage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const paths = [
-    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
+    { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
     {
       name: t('breadcrumbs.listProduct'),
-      url: `/vendor/products/${store._id}`
+      url: `/seller/products/${store._id}`
     }
   ]
   const [selectedOption, setSelectedOption] = useState('all')
@@ -22,13 +22,13 @@ const ProductsPage = () => {
   }
 
   return (
-    <VendorLayout user={user} store={store} paths={paths}>
+    <SellerLayout user={user} store={store} paths={paths}>
       <div className='d-flex align-items-start justify-content-between mb-3'>
         <h4>Danh sách sản phẩm</h4>
         <Link
           type='button'
           className='btn btn-primary ripple text-nowrap rounded-1 ms-2'
-          to={`/vendor/products/addNew/${store._id}`}
+          to={`/seller/products/addNew/${store._id}`}
         >
           <i className='fa-light fa-plus me-1'></i>
           <span>{t('productDetail.createProduct')}</span>
@@ -87,7 +87,7 @@ const ProductsPage = () => {
       </div>
 
       <StoreProductsTable storeId={store._id} selectedOption={selectedOption} />
-    </VendorLayout>
+    </SellerLayout>
   )
 }
 

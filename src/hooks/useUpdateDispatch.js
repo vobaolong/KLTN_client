@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import { useSelector, useDispatch } from 'react-redux'
 import { addAccount } from '../actions/account'
-import { addVendor } from '../actions/vendor'
+import { addSeller } from '../actions/seller'
 import { addUser } from '../actions/user'
 import { addStore } from '../actions/store'
 import { addProduct } from '../actions/product'
@@ -13,7 +13,7 @@ import { getToken } from '../apis/auth'
 
 const useUpdateDispatch = () => {
   const account = useSelector((state) => state.account.user)
-  const vendor = useSelector((state) => state.vendor.store)
+  const seller = useSelector((state) => state.seller.store)
   const user = useSelector((state) => state.user.user)
   const store = useSelector((state) => state.store.store)
   const { _id, accessToken } = getToken()
@@ -53,13 +53,13 @@ const useUpdateDispatch = () => {
         return dispatch(addAccount(data))
       }
 
-      case 'vendor': {
+      case 'seller': {
         //get level
         try {
           const res = await getStoreLevel(data._id)
           data.level = res.level
         } catch {
-          data.level = vendor.level
+          data.level = seller.level
         }
 
         //get count followers
@@ -67,7 +67,7 @@ const useUpdateDispatch = () => {
           const res = await getNumberOfFollowers(data._id)
           data.numberOfFollowers = res.count
         } catch {
-          data.numberOfFollowers = vendor.numberOfFollowers
+          data.numberOfFollowers = seller.numberOfFollowers
         }
 
         //get count orders
@@ -77,11 +77,11 @@ const useUpdateDispatch = () => {
           data.numberOfSuccessfulOrders = res1.count
           data.numberOfFailedOrders = res2.count
         } catch {
-          data.numberOfSuccessfulOrders = vendor.numberOfSuccessfulOrders
-          data.numberOfFailedOrders = vendor.numberOfFailedOrders
+          data.numberOfSuccessfulOrders = seller.numberOfSuccessfulOrders
+          data.numberOfFailedOrders = seller.numberOfFailedOrders
         }
 
-        return dispatch(addVendor(data))
+        return dispatch(addSeller(data))
       }
 
       case 'user': {

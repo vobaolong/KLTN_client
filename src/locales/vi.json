@@ -372,7 +372,7 @@
     "up": "trở lên",
     "apply": "Áp dụng",
     "reset": "Xoá tất cả",
-    "provinces": "Tỉnh thành"
+    "shippedFrom": "Nơi bán"
   },
   "transactions": "Giao dịch trong hệ thống",
 
@@ -405,6 +405,8 @@
   "store": "Shop",
   "searchHolder": "Tìm sản phẩm và tên shop",
   "userDetail": {
+    "nonEditEmail": "Email liên kết không thể chỉnh sửa",
+    "sentVerifyEmailSuccess": "Gửi xác thực thành công",
     "role": {
       "admin": "Quản trị viên",
       "user": "Người dùng"
@@ -419,7 +421,7 @@
     "myAccount": "Tài khoản của tôi",
     "myPurchase": "Đơn mua",
     "profile": "Thông tin tài khoản",
-    "editProfile": "Chỉnh sửa thông tin",
+    "editProfile": "Chỉnh sửa",
     "address": "Địa chỉ của tôi",
     "addAddress": "Thêm địa chỉ mới",
     "delAddress": "Xoá địa chỉ",
@@ -532,6 +534,7 @@
     "validName": "Vui lòng cung cấp tên phân loại phù hợp!",
     "selectCategory": "Chọn ngành hàng",
     "required": "Chưa chọn ngành hàng",
+    "createdAt": "Ngày tạo",
     "value": {
       "name": "Tên thuộc tính",
       "add": "Thêm thuộc tính",
@@ -569,7 +572,7 @@
     "addFeaturedImg": "Thêm hình ảnh nổi bật",
     "limitFeatured": "Tối đa 6 hình ảnh nổi bật",
     "bio": "Giới thiệu",
-    "editProfile": "Chỉnh sửa thông tin",
+    "editProfile": "Chỉnh sửa",
     "products": "Sản phẩm",
     "storeName": "Tên shop",
     "name": "Tên",
@@ -678,6 +681,7 @@
     "cod": "Thanh toán khi nhận hàng",
     "onlinePayment": "Thanh toán trực tuyến",
     "userReceiver": "Địa chỉ người nhận",
+    "senderAddress": "Địa chỉ người gửi",
     "deliveryId": "Mã vận đơn",
     "note": "*Ghi chú: Các sản phẩm đôi khi sẽ khác so với đơn đặt hàng ban đầu của bạn, vì chúng có thể đã được cập nhật",
     "ship_payment": "Thông tin Vận chuyển & Thanh toán",
@@ -742,5 +746,10 @@
     "deliveryUnit": "Đơn vị vận chuyển"
   },
   "showMore": "Xem thêm",
-  "showLess": "Thu gọn"
+  "showLess": "Thu gọn",
+  "notAvailable": "Tính năng này hiện chưa có!",
+  "or": "Hoặc",
+  "noneNotification": "Không có thông báo mới",
+  "deleteAll": "Xóa tất cả",
+  "newNotification": "Thông báo mới nhận"
 }

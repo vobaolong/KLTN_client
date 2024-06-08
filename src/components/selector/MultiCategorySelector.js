@@ -260,7 +260,10 @@ const MultiCategorySelector = ({
               {label}
             </label>
 
-            <div className='form-control border bg-light-subtle'>
+            <div
+              style={{ height: '100%', maxHeight: '300px', overflow: 'auto' }}
+              className='form-control border bg-light-subtle d-flex flex-column gap-3'
+            >
               {selectedCategories ? (
                 selectedCategories.map((category, index) => (
                   <span

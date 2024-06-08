@@ -1,22 +1,22 @@
 import { useSelector } from 'react-redux'
 import useToggle from '../../hooks/useToggle'
-import VendorLayout from '../../components/layout/VendorLayout'
+import SellerLayout from '../../components/layout/SellerLayout'
 import StoreOwnerTable from '../../components/table/StoreOwnerTable'
 import StoreStaffsTable from '../../components/table/StoreStaffsTable'
 import { useTranslation } from 'react-i18next'
 
 const StaffsPage = () => {
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const [flag, toggleFlag] = useToggle(true)
   const { t } = useTranslation()
   const paths = [
-    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
-    { name: t('breadcrumbs.staff'), url: `/vendor/staffs/${store._id}` }
+    { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
+    { name: t('breadcrumbs.staff'), url: `/seller/staffs/${store._id}` }
   ]
 
   return (
-    <VendorLayout user={user} store={store} paths={paths}>
+    <SellerLayout user={user} store={store} paths={paths}>
       <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
           <li className='nav-item col-6 text-center pointer'>
@@ -46,7 +46,7 @@ const StaffsPage = () => {
       ) : (
         <StoreOwnerTable ownerId={store.ownerId} />
       )}
-    </VendorLayout>
+    </SellerLayout>
   )
 }
 

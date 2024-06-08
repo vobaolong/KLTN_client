@@ -12,10 +12,12 @@ import CategorySelector from '../../selector/CategorySelector'
 import VariantSelector from '../../selector/VariantSelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
-const VendorCreateProductForm = ({ storeId = '' }) => {
+const SellerCreateProductForm = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [error, setError] = useState('')
   const [isConfirmingBack, setIsConfirmingBack] = useState(false)
   const [isConfirmingCreate, setIsConfirmingCreate] = useState(false)
   const { t } = useTranslation()
@@ -158,19 +160,26 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
     if (newProduct.image5) formData.set('image5', newProduct.image5)
     if (newProduct.image6) formData.set('image6', newProduct.image6)
 
+    setError('')
     setIsLoading(true)
     createProduct(_id, accessToken, formData, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.product.create'))
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -403,9 +412,9 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
                   feedback={t('productValid.priceValid')}
                   validator='positive|zero'
                   required={true}
-                  onChange={(value) =>
+                  onChange={(value) => {
                     handleChange('price', 'isValidPrice', value)
-                  }
+                  }}
                   onValidate={(flag) => handleValidate('isValidPrice', flag)}
                 />
               </div>
@@ -466,6 +475,11 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
           </div>
         </div>
 
+        {error && (
+          <div className='col-12 p-2 text-center'>
+            <Error msg={error} />
+          </div>
+        )}
         <div
           className={`bg-body ${
             isScrolled ? 'shadow' : 'box-shadow'
@@ -474,7 +488,7 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
         >
           <div className='d-flex justify-content-end gap-4 align-items-center'>
             <Link
-              to={`/vendor/products/${storeId}`}
+              to={`/seller/products/${storeId}`}
               className='btn btn-outline-primary ripple rounded-1'
               onClick={handleBackClick}
             >
@@ -495,4 +509,4 @@ const VendorCreateProductForm = ({ storeId = '' }) => {
   )
 }
 
-export default VendorCreateProductForm
+export default SellerCreateProductForm

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import useUpdateDispatch from '../../hooks/useUpdateDispatch'
-import VendorLayout from '../../components/layout/VendorLayout'
+import SellerLayout from '../../components/layout/SellerLayout'
 import Cover from '../../components/image/Cover'
 import Avatar from '../../components/image/Avatar'
 import Carousel from '../../components/image/Carousel'
@@ -16,21 +16,21 @@ import StoreActiveLabel from '../../components/label/StoreActiveLabel'
 const ProfilePage = () => {
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const [updateDispatch] = useUpdateDispatch()
   const onHandleRun = (newStore) => {
-    updateDispatch('vendor', newStore)
+    updateDispatch('seller', newStore)
   }
 
   const paths = [
-    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
-    { name: t('breadcrumbs.shopProfile'), url: `/vendor/profile/${store._id}` }
+    { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
+    { name: t('breadcrumbs.shopProfile'), url: `/seller/profile/${store._id}` }
   ]
 
   return (
-    <VendorLayout user={user} store={store} paths={paths}>
+    <SellerLayout user={user} store={store} paths={paths}>
       <div className='res-mx--12-md'>
-        <div className='position-relative bg-white p-2 rounded-2 shadow'>
+        <div className='position-relative bg-white p-2 rounded-2 box-shadow'>
           <Cover
             cover={store.cover}
             alt={store.name}
@@ -116,7 +116,7 @@ const ProfilePage = () => {
           />
         </div>
       </div>
-    </VendorLayout>
+    </SellerLayout>
   )
 }
 

@@ -9,15 +9,30 @@ import TextArea from '../../ui/TextArea'
 import RatingInput from '../../ui/RatingInput'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
-const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
+const ReviewForm = ({
+  storeId = '',
+  orderId = '',
+  productId = '',
+  productName = '',
+  productImage = [],
+  productVariant = '',
+  productVariantValue = '',
+  onRun
+}) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
+  const [error, setError] = useState('')
   const [review, setReview] = useState({
     storeId,
     orderId,
     productId,
+    productName,
+    productImage,
+    productVariant,
+    productVariantValue,
     rating: 4,
     content: '',
     isValidRating: true,
@@ -72,19 +87,26 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     reviewProduct(_id, accessToken, review)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.review.add'))
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -100,8 +122,23 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
         />
       )}
 
+      {error && <Error msg={error} />}
+
       <form className='row mb-2' onSubmit={handleSubmit}>
         <div className='col-12'>
+          <div className='d-flex'>
+            <img
+              className='w-15 rounded-1 me-2'
+              alt='review.productName'
+              src={review.productImage}
+            />
+            <div className='d-grid'>
+              <span>{review.productName}</span>
+              <small>
+                {review.productVariant}: {review.productVariantValue}
+              </small>
+            </div>
+          </div>
           <RatingInput
             label={t('reviewDetail.productQuality')}
             value={review.rating}
@@ -126,7 +163,7 @@ const ReviewForm = ({ storeId = '', orderId = '', productId = '', onRun }) => {
           />
         </div>
 
-        <div className='col-12 d-grid mt-4'>
+        <div className='col-sm-12 col-md-6 ms-auto d-grid mt-4'>
           <button
             type='submit'
             className='btn btn-primary ripple rounded-1'

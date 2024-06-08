@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import logoSmall from '../../../assets/logoSmall.png'
 import { useSelector } from 'react-redux'
 
-const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
+const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
   const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
-  const vendor = useSelector((state) => state.account.user)
+  const seller = useSelector((state) => state.account.user)
 
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar'>
@@ -20,7 +20,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
           />
           {!isCollapsed && (
             <span className='p-0 m-0 text-dark-emphasis text-uppercase fw-bold'>
-              {`${vendor.firstName} ${vendor.lastName}`}
+              {`${seller.firstName} ${seller.lastName}`}
             </span>
           )}
         </span>
@@ -44,7 +44,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
       >
         <li className='nav-item'>
           <Link
-            to={`/vendor/${store._id}`}
+            to={`/seller/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === store._id ? 'active' : ''
             }`}
@@ -64,7 +64,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/profile/${store._id}`}
+            to={`/seller/profile/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === 'profile' ? 'active' : ''
             }`}
@@ -83,7 +83,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/products/${store._id}`}
+            to={`/seller/products/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === 'products' ? 'active' : ''
             }`}
@@ -103,7 +103,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/staffs/${store._id}`}
+            to={`/seller/staffs/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === 'staffs' ? 'active' : ''
             }`}
@@ -123,7 +123,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/orders/${store._id}`}
+            to={`/seller/orders/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === 'orders' ? 'active' : ''
             }`}
@@ -143,7 +143,7 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/vendor/wallet/${store._id}`}
+            to={`/seller/wallet/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
               path === 'wallet' ? 'active' : ''
             }`}
@@ -163,4 +163,4 @@ const VendorSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
   )
 }
 
-export default VendorSideBar
+export default SellerSideBar

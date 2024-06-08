@@ -116,7 +116,7 @@ const StoreStaffsTable = ({
       .then((data) => {
         if (data.error) setError(data.error)
         else {
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.staff.removeStaff'))
         }
         setIsLoading(false)

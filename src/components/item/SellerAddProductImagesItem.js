@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
-import VendorAddProductImageForm from './form/VendorAddProductImageForm'
+import SellerAddProductImageForm from './form/SellerAddProductImageForm'
 
-const VendorAddProductImagesItem = ({
+const SellerAddProductImagesItem = ({
   count = 8,
   productId = '',
   storeId = '',
@@ -31,7 +31,7 @@ const VendorAddProductImagesItem = ({
             hasCloseBtn={false}
             title={t('productDetail.addImg')}
           >
-            <VendorAddProductImageForm
+            <SellerAddProductImageForm
               storeId={storeId}
               productId={productId}
               onRun={onRun}
@@ -46,4 +46,4 @@ const VendorAddProductImagesItem = ({
   )
 }
 
-export default VendorAddProductImagesItem
+export default SellerAddProductImagesItem

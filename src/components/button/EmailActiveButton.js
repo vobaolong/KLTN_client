@@ -4,6 +4,7 @@ import { sendConfirmationEmail } from '../../apis/auth'
 import Loading from '../ui/Loading'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
 const EmailActiveButton = ({
   email = '',
@@ -12,21 +13,29 @@ const EmailActiveButton = ({
   facebookId = ''
 }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const { t } = useTranslation()
   const handleSendEmail = () => {
+    setError('')
     setIsLoading(true)
     const { _id, accessToken } = getToken()
 
     sendConfirmationEmail(_id, accessToken)
       .then((data) => {
-        if (data.error) toast.error(data.error)
-        else toast.success(data.success)
+        if (data.error) setError(data.error)
+        else toast.success(t('userDetail.sentVerifyEmailSuccess'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Something went wrong')
+        setError('Server error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -64,7 +73,7 @@ const EmailActiveButton = ({
             linked
           </span>
           <small className='cus-tooltip-msg'>
-            Linked email is non editable
+            {t('userDetail.nonEditEmail')}
           </small>
         </div>
       )}
@@ -80,6 +89,11 @@ const EmailActiveButton = ({
             {t('verifyNow')}!
           </button>
           <small className='cus-tooltip-msg'>{t('confirmEmail')}</small>
+          {error && (
+            <span>
+              <Error msg={error} />
+            </span>
+          )}
         </div>
       )}
     </div>

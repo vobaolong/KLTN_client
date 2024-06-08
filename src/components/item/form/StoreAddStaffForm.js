@@ -109,7 +109,7 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
         if (data.error) toast.error(data.error)
         else {
           setListRight([])
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.staff.addStaff'))
         }
         setIsLoading(false)

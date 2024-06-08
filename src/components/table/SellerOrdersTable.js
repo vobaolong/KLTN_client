@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 
-const VendorOrdersTable = ({
+const SellerOrdersTable = ({
   heading = true,
   storeId = '',
   isEditable = false,
@@ -306,7 +306,7 @@ const VendorOrdersTable = ({
                         <Link
                           type='button'
                           className='btn btn-sm btn-outline-secondary rounded-1 ripple cus-tooltip'
-                          to={`/vendor/orders/detail/${order._id}/${storeId}`}
+                          to={`/seller/orders/detail/${order._id}/${storeId}`}
                           title={t('button.detail')}
                         >
                           <i className='res-dis-sm d-none fa-solid fa-eye'></i>
@@ -340,4 +340,4 @@ const VendorOrdersTable = ({
   )
 }
 
-export default VendorOrdersTable
+export default SellerOrdersTable

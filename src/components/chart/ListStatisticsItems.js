@@ -139,7 +139,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
     setIsLoading(false)
   }
 
-  const vendorInit = async () => {
+  const sellerInit = async () => {
     setIsLoading(true)
     try {
       const orderData = await listOrdersByStore(
@@ -192,7 +192,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
 
   useEffect(() => {
     if (by === 'admin') adminInit()
-    else vendorInit()
+    else sellerInit()
   }, [by, storeId])
   return (
     <div className='position-relative'>

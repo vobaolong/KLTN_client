@@ -77,7 +77,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
         }
       })
       .catch((error) => {
-        console.log('Server error!')
+        setError('Server error')
         setIsLoading(false)
       })
   }
@@ -97,7 +97,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
     if (!isValidUsername) return
 
     if (regexTest('phone', username)) {
-      setError('This feature is not available yet!')
+      setError(t('notAvailable'))
     } else {
       setIsLoading(true)
 
@@ -108,7 +108,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server error')
           setIsLoading(false)
         })
     }
@@ -118,16 +118,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
     <div className='position-relative'>
       {isLoading && <Loading />}
       <form className='mb-2 row' onSubmit={handleFormSubmit}>
-        <div className='col-12 d-grid gap-2 mt-4'>
-          <SocialForm />
-        </div>
-
-        <div className='col-12 mt-4 cus-decoration-paragraph'>
-          <p className='text-center text-muted cus-decoration-paragraph-p unselect'>
-            HOẶC
-          </p>
-        </div>
-
         <div className='col-12'>
           <Input
             type='text'
@@ -182,6 +172,14 @@ const SigninForm = ({ onSwap = () => {} }) => {
           </button>
         </div>
 
+        <div className='col-12 mt-4 cus-decoration-paragraph'>
+          <p className='text-center text-muted cus-decoration-paragraph-p unselect text-uppercase'>
+            {t('or')}
+          </p>
+        </div>
+        <div className='col-12 d-grid gap-2 mt-4'>
+          <SocialForm />
+        </div>
         <div className='col-12 mt-4'>
           <small className='text-center d-block text-muted'>
             {t('button.forgotPW')}?{' '}

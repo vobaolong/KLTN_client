@@ -15,7 +15,7 @@ const ProductFilter = ({ filter, setFilter }) => {
   })
   const history = useHistory()
   const location = useLocation()
-
+  const [displayLimit, setDisplayLimit] = useState(5)
   const handleFilter = (name, value, order = 'desc') => {
     let newOrder = order
     if (value === 'asc' || value === 'desc') {
@@ -173,9 +173,13 @@ const ProductFilter = ({ filter, setFilter }) => {
         aria-labelledby='offcanvasFilterLabel'
       >
         <div className='offcanvas-header'>
-          <h2 className='offcanvas-title' id='offcanvasFilterLabel'>
+          <i className='fa-light fa-filter me-2'></i>
+          <h5
+            className='offcanvas-title text-uppercase fw-bold'
+            id='offcanvasFilterLabel'
+          >
             {t('filters.filter')}
-          </h2>
+          </h5>
           <button
             type='button'
             className='btn-close text-reset'
@@ -184,9 +188,38 @@ const ProductFilter = ({ filter, setFilter }) => {
           ></button>
         </div>
         <div className='offcanvas-body'>
-          <div className='mb-4'>
-            <h6>{t('filters.rating')}</h6>
-            {renderFilterRating()}
+          <div className='d-flex flex-column gap-2'>
+            <p>{t('filters.shippedFrom')}</p>
+            <div className='d-flex gap-3'>
+              <input
+                type='checkbox'
+                checked={provincesChecked.length === 0}
+                onChange={() => {
+                  handleSelectProvince(null)
+                }}
+              />
+              <p>{t('filters.all')}</p>
+            </div>
+            {provinces.slice(0, displayLimit).map((value) => (
+              <div key={value} className='d-flex gap-3'>
+                <input
+                  type='checkbox'
+                  checked={provincesChecked.includes(value)}
+                  onChange={() => {
+                    handleSelectProvince(value)
+                  }}
+                />
+                <p>{value}</p>
+              </div>
+            ))}
+            {provinces.length > displayLimit && (
+              <button
+                className='btn text-start fs-9'
+                onClick={() => setDisplayLimit(provinces.length)}
+              >
+                Thêm <i className='fa-light fa-angle-down'> </i>
+              </button>
+            )}
           </div>
           <hr />
           <div className='mb-2'>
@@ -214,7 +247,7 @@ const ProductFilter = ({ filter, setFilter }) => {
               </div>
               <div className='col-sm-12'>
                 <button
-                  className='btn btn-outline-primary w-100 mt-3 rounded-1 ripple'
+                  className='btn btn-primary w-100 mt-3 rounded-1 ripple'
                   onClick={applyPriceFilter}
                 >
                   {t('filters.apply')}
@@ -223,49 +256,11 @@ const ProductFilter = ({ filter, setFilter }) => {
             </form>
           </div>
           <hr />
-          <p>{t('filters.provinces')}</p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '12px',
-              margin: '10px 0px'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                gap: '20px'
-              }}
-            >
-              <input
-                type='checkbox'
-                checked={provincesChecked.length === 0}
-                onChange={() => {
-                  handleSelectProvince(null)
-                }}
-              />
-              <p>{t('filters.all')}</p>
-            </div>
-            {provinces.map((value) => (
-              <div
-                key={value}
-                style={{
-                  display: 'flex',
-                  gap: '20px'
-                }}
-              >
-                <input
-                  type='checkbox'
-                  checked={provincesChecked.includes(value)}
-                  onChange={() => {
-                    handleSelectProvince(value)
-                  }}
-                />
-                <p>{value}</p>
-              </div>
-            ))}
+          <div className='mb-4'>
+            <h6>{t('filters.rating')}</h6>
+            {renderFilterRating()}
           </div>
+          <hr />
           <button
             className='btn btn-primary w-100 mb-2 rounded-1 ripple'
             onClick={(event) => handleResetFilter(event)}

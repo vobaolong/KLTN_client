@@ -522,7 +522,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                           <Link
                             type='button'
                             className='btn btn-sm btn-outline-primary ripple rounded-1'
-                            to={`/vendor/products/edit/${product._id}/${storeId}`}
+                            to={`/seller/products/edit/${product._id}/${storeId}`}
                             title={t('button.edit')}
                           >
                             <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>

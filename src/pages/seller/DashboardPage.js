@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux'
-import VendorLayout from '../../components/layout/VendorLayout'
+import SellerLayout from '../../components/layout/SellerLayout'
 import ListStatisticsItems from '../../components/chart/ListStatisticsItems'
 
 const DashboardPage = () => {
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
 
   return (
-    <VendorLayout user={user} store={store}>
-      <ListStatisticsItems by='vendor' storeId={store._id} />
-    </VendorLayout>
+    <SellerLayout user={user} store={store}>
+      <ListStatisticsItems by='seller' storeId={store._id} />
+    </SellerLayout>
   )
 }
 

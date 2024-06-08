@@ -113,13 +113,9 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  store.numberOfFollowers ? (
-                    <span className='text-primary'>
-                      {store.numberOfFollowers}
-                    </span>
-                  ) : (
-                    <Skeleton height={20} />
-                  )
+                  <span className='text-primary'>
+                    {store.numberOfFollowers || 0}
+                  </span>
                 }
               />
             </div>
@@ -147,13 +143,9 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  initialNumberOfProducts ? (
-                    <span className='text-primary'>
-                      {initialNumberOfProducts}
-                    </span>
-                  ) : (
-                    '0'
-                  )
+                  <span className='text-primary'>
+                    {initialNumberOfProducts || 0}
+                  </span>
                 }
               />
             </div>

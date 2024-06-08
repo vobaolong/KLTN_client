@@ -83,11 +83,10 @@ const SocialForm = () => {
         onSuccess={onSuccess}
         onFailure={onFailure}
         onRequest={onRequest}
-        // cookiePolicy={'single_host_origin'}
         render={(renderProps) => (
           <button
             type='button'
-            className='btn btn--with-img btn-outline-primary ripple fw-bold'
+            className=' rounded-1 btn btn--with-img btn-outline-primary ripple fw-bold'
             onClick={renderProps.onClick}
           >
             <img

@@ -32,7 +32,7 @@ const BarChart = ({
           label: title,
           backgroundColor: '#3b82f6'
         },
-        role === 'vendor' && {
+        role === 'seller' && {
           data: newData.map((item) => item[2]),
           label: 'Chiết khấu',
           backgroundColor: '#ffbbbb'

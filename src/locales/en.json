@@ -362,7 +362,7 @@
     "up": "up",
     "apply": "Apply",
     "reset": "Clear all",
-    "provinces": "Provinces"
+    "shippedFrom": "Shipped From"
   },
   "transactions": "Transactions in the system",
 
@@ -395,6 +395,8 @@
   "store": "Shop",
   "searchHolder": "Search for products and shops",
   "userDetail": {
+    "nonEditEmail": "Linked email is non editable",
+    "sentVerifyEmailSuccess": "Sent Verify Email Successfully",
     "role": {
       "admin": "Admin",
       "user": "User"
@@ -521,6 +523,7 @@
     "validName": "Please provide a valid variant name!",
     "selectCategory": "Select category",
     "required": "No category selected",
+    "createdAt": "Created At",
     "value": {
       "addBtn": "Add variant value",
       "edit": "Edit variant value",
@@ -668,6 +671,7 @@
     "cod": "Cash on Delivery",
     "onlinePayment": "Online Payment",
     "userReceiver": "Delivery Address",
+    "senderAddress": "Sender's Address",
     "deliveryId": "Tracking number",
     "note": "*Note: The products will sometimes differ from your original order, as it may have been updated",
     "ship_payment": "Shipping & Payment Info",
@@ -729,5 +733,10 @@
     "deliveryUnit": "Logistics"
   },
   "showMore": "Show more",
-  "showLess": "Show less"
+  "showLess": "Show less",
+  "notAvailable": "This feature is not available yet!",
+  "or": "Or",
+  "noneNotification": "No new notifications",
+  "deleteAll": "Delete all",
+  "newNotification": "New Notification"
 }

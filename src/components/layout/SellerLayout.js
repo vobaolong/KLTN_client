@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import MainLayout from './MainLayout'
-import VendorSideBar from './menu/VendorSideBar'
+import SellerSideBar from './menu/SellerSideBar'
 import Breadcrumb from '../ui/Breadcrumb'
 
-const VendorLayout = ({
+const SellerLayout = ({
   user = {},
   store = {},
   children = null,
@@ -16,12 +16,12 @@ const VendorLayout = ({
   }
 
   return (
-    <MainLayout container='container-xxl' navFor='vendor'>
+    <MainLayout container='container-xxl' navFor='seller'>
       <div className='row'>
         <div
           className={`col-md-${isCollapsed ? '1' : '2'} res-sticky-top-md p-0`}
         >
-          <VendorSideBar
+          <SellerSideBar
             user={user}
             store={store}
             isCollapsed={isCollapsed}
@@ -36,4 +36,4 @@ const VendorLayout = ({
     </MainLayout>
   )
 }
-export default VendorLayout
+export default SellerLayout

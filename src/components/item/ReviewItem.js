@@ -13,6 +13,10 @@ const ReviewItem = ({
   orderId = '',
   storeId = '',
   productId = '',
+  productName = '',
+  productImage = [],
+  productVariant = '',
+  productVariantValue = '',
   detail = true,
   date = ''
 }) => {
@@ -75,6 +79,10 @@ const ReviewItem = ({
                   orderId={orderId}
                   storeId={storeId}
                   productId={productId}
+                  productName={productName}
+                  productImage={productImage}
+                  productVariant={productVariant}
+                  productVariantValue={productVariantValue}
                   onRun={() => setIsReviewed(true)}
                 />
               </Modal>

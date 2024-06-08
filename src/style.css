@@ -553,7 +553,6 @@ header {
 	margin-left: 6px;
 }
 
-/* sticky-sidebar */
 .sticky-sidebar {
 	position: sticky;
 	top: calc(var(--header-height));
@@ -1703,8 +1702,8 @@ header {
 	margin-top: -1rem;
 }
 
-/* cus-avatar-vendor */
-.cus-avatar-vendor-box {
+/* cus-avatar-seller */
+.cus-avatar-seller-box {
 	position: absolute;
 	top: 72%;
 	left: 72%;
@@ -1713,14 +1712,14 @@ header {
 	margin: 0 auto;
 }
 
-.cus-avatar-vendor {
+.cus-avatar-seller {
 	position: relative;
 	padding-bottom: 100%;
 	height: 0;
 	/* overflow: hidden; */
 }
 
-.cus-avatar-vendor-img {
+.cus-avatar-seller-img {
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -77,7 +77,7 @@ const ListOrderItems = ({
       <div className='flex-column d-flex  justify-content-between'>
         {items.map((item, index) => (
           <div key={index} className='list-item-container'>
-            <div className='d-flex align-items-center res-flex-column'>
+            <div className='d-flex align-items-center'>
               <div
                 className='border rounded-1'
                 style={{
@@ -169,6 +169,14 @@ const ListOrderItems = ({
                     orderId={item?.orderId}
                     storeId={item?.productId?.storeId?._id}
                     productId={item?.productId?._id}
+                    productName={item?.productId?.name}
+                    productImage={IMG + item.productId?.listImages[0]}
+                    productVariant={item.variantValueIds?.map(
+                      (value, index) => value.variantId?.name
+                    )}
+                    productVariantValue={item.variantValueIds?.map(
+                      (value, index) => value.name
+                    )}
                     date={item?.updatedAt}
                   />
                 </div>

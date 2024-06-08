@@ -1,9 +1,9 @@
 /* eslint-disable array-callback-return */
 import { t } from 'i18next'
 import Avatar from '../../image/Avatar'
-import VendorAddProductImagesItem from '../../item/VendorAddProductImagesItem'
+import SellerAddProductImagesItem from '../../item/SellerAddProductImagesItem'
 
-const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
+const SellerEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
   return (
     <div className='position-relative'>
       <form className='row' onSubmit={(e) => e.preventDefault()}>
@@ -50,7 +50,7 @@ const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
           })}
 
           <div className='mb-4'>
-            <VendorAddProductImagesItem
+            <SellerAddProductImagesItem
               count={product.listImages?.length}
               productId={product._id}
               storeId={storeId}
@@ -63,4 +63,4 @@ const VendorEditProductImagesForm = ({ product = {}, storeId = '', onRun }) => {
   )
 }
 
-export default VendorEditProductImagesForm
+export default SellerEditProductImagesForm

@@ -1,26 +1,26 @@
 import { useSelector } from 'react-redux'
-import VendorLayout from '../../components/layout/VendorLayout'
+import SellerLayout from '../../components/layout/SellerLayout'
 import TransactionsTable from '../../components/table/TransactionsTable'
 import { useTranslation } from 'react-i18next'
 
 const WalletPage = () => {
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const { t } = useTranslation()
 
   const paths = [
-    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
-    { name: t('breadcrumbs.wallet'), url: `/vendor/wallet/${store._id}` }
+    { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
+    { name: t('breadcrumbs.wallet'), url: `/seller/wallet/${store._id}` }
   ]
   return (
-    <VendorLayout user={user} store={store} paths={paths}>
+    <SellerLayout user={user} store={store} paths={paths}>
       <TransactionsTable
         storeId={store._id}
         owner={store.ownerId}
         eWallet={store.e_wallet ? store.e_wallet.$numberDecimal : 0}
         by='store'
       />
-    </VendorLayout>
+    </SellerLayout>
   )
 }
 

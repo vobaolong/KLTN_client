@@ -2,7 +2,7 @@
 import { useState, useEffect, Fragment } from 'react'
 import { Link, useParams, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addVendor } from '../../actions/vendor'
+import { addSeller } from '../../actions/seller'
 import { getToken } from '../../apis/auth'
 import { getStoreProfile } from '../../apis/store'
 import { getStoreLevel } from '../../apis/level'
@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
-const VendorInit = ({ store, actions }) => {
+const SellerInit = ({ store, actions }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [redirect, setRedirect] = useState(false)
@@ -67,7 +67,7 @@ const VendorInit = ({ store, actions }) => {
         }
       })
       .catch((error) => {
-        setError(error)
+        setError('Server error')
         setIsLoading(false)
       })
   }
@@ -110,7 +110,7 @@ const VendorInit = ({ store, actions }) => {
             <ul className='list-group your-store-options'>
               <Link
                 className='list-group-item your-store-options-item ripple'
-                to={`/vendor/profile/${storeId}`}
+                to={`/seller/profile/${storeId}`}
               >
                 {/* <i className='fa-light fa-store'></i> */}
                 {t('storeDetail.profile')}
@@ -118,7 +118,7 @@ const VendorInit = ({ store, actions }) => {
 
               <Link
                 className='list-group-item your-store-options-item ripple'
-                to={`/vendor/orders/${storeId}`}
+                to={`/seller/orders/${storeId}`}
               >
                 {/* <i className='fa-light fa-clipboard'></i> */}
                 {t('storeDetail.orders')}
@@ -140,11 +140,11 @@ const VendorInit = ({ store, actions }) => {
 }
 
 function mapStateToProps(state) {
-  return { store: state.vendor.store }
+  return { store: state.seller.store }
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: (store) => dispatch(addVendor(store)) }
+  return { actions: (store) => dispatch(addSeller(store)) }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VendorInit)
+export default connect(mapStateToProps, mapDispatchToProps)(SellerInit)

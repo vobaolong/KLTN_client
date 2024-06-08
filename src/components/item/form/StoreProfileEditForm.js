@@ -79,7 +79,7 @@ const StoreEditProfileForm = ({
         if (data.error) toast.error(data.error)
         else {
           toast.success(t('toastSuccess.store.update'))
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
         }
         setIsLoading(false)
       })

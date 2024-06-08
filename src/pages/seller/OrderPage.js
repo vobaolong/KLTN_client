@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux'
-import VendorLayout from '../../components/layout/VendorLayout'
-import VendorOrdersTable from '../../components/table/VendorOrdersTable'
+import SellerLayout from '../../components/layout/SellerLayout'
+import SellerOrdersTable from '../../components/table/SellerOrdersTable'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 const OrderPage = () => {
   const user = useSelector((state) => state.account.user)
-  const store = useSelector((state) => state.vendor.store)
+  const store = useSelector((state) => state.seller.store)
   const { t } = useTranslation()
   const [selectedStatus, setSelectedStatus] = useState('Not processed')
 
@@ -23,8 +23,8 @@ const OrderPage = () => {
   ]
 
   const paths = [
-    { name: t('breadcrumbs.home'), url: `/vendor/${store._id}` },
-    { name: t('breadcrumbs.order'), url: `/vendor/orders/${store._id}` }
+    { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
+    { name: t('breadcrumbs.order'), url: `/seller/orders/${store._id}` }
   ]
 
   const handleStatusChange = (status) => {
@@ -32,12 +32,12 @@ const OrderPage = () => {
   }
 
   return (
-    <VendorLayout user={user} store={store} paths={paths}>
+    <SellerLayout user={user} store={store} paths={paths}>
       <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
-              className={`nav-link ${
+              className={`nav-link h-100 ${
                 selectedStatus === status.value ? `active` : ``
               }`}
               onClick={() => handleStatusChange(status.value)}
@@ -47,7 +47,7 @@ const OrderPage = () => {
           </li>
         ))}
       </div>
-      <VendorOrdersTable
+      <SellerOrdersTable
         heading={false}
         storeId={store._id}
         isEditable={
@@ -57,7 +57,7 @@ const OrderPage = () => {
         }
         status={selectedStatus}
       />
-    </VendorLayout>
+    </SellerLayout>
   )
 }
 

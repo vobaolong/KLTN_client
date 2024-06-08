@@ -27,5 +27,6 @@ export const numberTest = (name, value) => {
     oneTo5: value !== '' && value >= 1 && value <= 5
   }
 
-  return numberValidator[name]
+  const names = name.split('|')
+  return names.some((n) => numberValidator[n])
 }

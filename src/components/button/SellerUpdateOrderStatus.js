@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
-import { vendorUpdateStatusOrder } from '../../apis/order'
+import { sellerUpdateStatusOrder } from '../../apis/order'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import DropDownMenu from '../ui/DropDownMenu'
@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import Error from '../ui/Error'
 
-const VendorUpdateOrderStatus = ({
+const SellerUpdateOrderStatus = ({
   storeId = '',
   orderId = '',
   status = '',
@@ -35,7 +35,7 @@ const VendorUpdateOrderStatus = ({
 
     setIsLoading(true)
     const value = { status: statusValue }
-    vendorUpdateStatusOrder(_id, accessToken, value, orderId, storeId)
+    sellerUpdateStatusOrder(_id, accessToken, value, orderId, storeId)
       .then((data) => {
         if (data.error) {
           setError(data.error)
@@ -87,4 +87,4 @@ const VendorUpdateOrderStatus = ({
   )
 }
 
-export default VendorUpdateOrderStatus
+export default SellerUpdateOrderStatus

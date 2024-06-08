@@ -8,13 +8,14 @@ import {
 import { socketId } from '../../..'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { humanReadableDate } from '../../../helper/humanReadable'
 import { useTranslation } from 'react-i18next'
+import { timeAgo } from '../../../helper/calcTime'
 
-const BellButton = () => {
+const BellButton = ({ navFor = 'user' }) => {
   const { t } = useTranslation()
   const [list, setList] = useState([])
   const user = useSelector((state) => state.account.user)
+  const store = useSelector((state) => state.seller.store)
   const [notificationCount, setNotificationCount] = useState(list.length)
 
   const handleDelete = async () => {
@@ -48,7 +49,6 @@ const BellButton = () => {
     }
   }
 
-  console.log(list)
   useEffect(() => {
     fetchNotifications(user._id)
   }, [user])
@@ -67,6 +67,7 @@ const BellButton = () => {
         minWidth: '400px'
       }}
     >
+      <div className='text-secondary p-2 px-3'>{t('newNotification')}</div>
       <div
         style={{
           height: '300px',
@@ -75,14 +76,18 @@ const BellButton = () => {
       >
         {list.map((l) => (
           <Link
-            to={`/account/purchase/detail/${l.orderId}`}
+            to={`${
+              navFor === 'user'
+                ? '/account/purchase/detail/' + l.orderId
+                : '/seller/orders/detail/' + l.orderId + '/' + store._id
+            }`}
             key={l._id}
-            style={{ fontSize: '13px' }}
+            style={{ fontSize: '14px' }}
             className='cus-notification nolink cus-dropdown w-100 px-3 py-2'
           >
             {l.message}{' '}
             <span className='fw-bold text-uppercase'>{l.orderId}</span>{' '}
-            <p>{humanReadableDate(l.createdAt)}</p>
+            <p>{timeAgo(l.createdAt)}</p>
           </Link>
         ))}
         {list.length === 0 && (
@@ -93,7 +98,7 @@ const BellButton = () => {
               paddingTop: '120px'
             }}
           >
-            Không có thông báo mới
+            {t('noneNotification')}
           </p>
         )}
       </div>
@@ -105,7 +110,7 @@ const BellButton = () => {
               className='btn rounded-0 w-100 btn-primary'
               onClick={handleDelete}
             >
-              Xóa tất cả
+              {t('deleteAll')}
             </button>
           </div>
         </>

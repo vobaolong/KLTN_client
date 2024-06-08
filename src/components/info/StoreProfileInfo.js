@@ -11,15 +11,22 @@ const StoreProfileInfo = ({
     <div className='container-fluid'>
       <div className='row p-3 py-4 box-shadow rounded-1 bg-body'>
         {showProfile && <h5>{t('storeDetail.profile')}</h5>}
+        <hr />
         <div className='col-12'>
-          <p className='text-justify' style={{ fontSize: '0.9rem' }}>
-            <i className='fa-light fa-quote-right text-muted me-1'></i>
-            {t('storeDetail.bio')}: {store.bio}
+          <p className='text-justify fs-9'>
+            <i className='fa-solid fa-quote-right text-muted me-1'></i>
+            <span className='text-dark-emphasis fw-bolder'>
+              {t('storeDetail.bio')}
+            </span>
+            : {store.bio}
           </p>
           {showProfile && (
-            <p className='text-justify mt-2' style={{ fontSize: '0.9rem' }}>
-              <i className='fa-light fa-location-dot text-muted me-1'></i>
-              {t('storeDetail.address')}: {store.address}
+            <p className='text-justify mt-2 fs-9'>
+              <i className='fa-solid fa-location-dot text-muted me-1'></i>
+              <span className='text-dark-emphasis fw-bolder'>
+                {t('storeDetail.address')}
+              </span>{' '}
+              : {store.address}
             </p>
           )}
         </div>

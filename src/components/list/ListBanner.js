@@ -4,9 +4,9 @@ import banner2 from '../../assets/2.jpg'
 import banner3 from '../../assets/3.webp'
 const ListBanner = () => {
   const settings = {
-    // className: 'center',
-    // autoplay: true,
-    // autoplaySpeed: 6000,
+    className: 'center',
+    autoplay: true,
+    autoplaySpeed: 6000,
     infinite: true,
     slidesToShow: 2,
     slidesToScroll: 2,

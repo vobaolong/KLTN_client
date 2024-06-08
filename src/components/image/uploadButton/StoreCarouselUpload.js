@@ -23,7 +23,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.store.updateCarousel'))
         }
         setIsLoading(false)
@@ -44,7 +44,7 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.store.removeCarousel'))
         }
         setIsLoading(false)

@@ -67,7 +67,7 @@ const calculateShippingFee = async ({
       { headers }
     )
 
-    const serviceId = res.data.data?.[0].service_id ?? 100039
+    const serviceId = res.data.data?.[0].service_id ?? 53321
 
     const response = await axios.post(
       apiEndpointFee,
@@ -135,10 +135,9 @@ const CheckoutForm = ({
 
       const shippingFeeBeforeDiscount = await calculateShippingFee({
         insuranceValue: totalPrice,
-        fromDistrictId: res3.districtID ? Number(res3.districtID) : 1758,
-        fromWardCode: res3.wardID ?? '510813',
-        toDistrictId: res4.districtID ? Number(res4.districtID) : 3440,
-        toWardCode: res4.wardID ?? '13010'
+        fromDistrictId: res3.districtID ? Number(res3.districtID) : 3440,
+        toDistrictId: res4.districtID ? Number(res4.districtID) : 3695,
+        toWardCode: res4.wardID ?? '90758'
       })
       const { shippingFee } = totalShippingFee(
         shippingFeeBeforeDiscount,

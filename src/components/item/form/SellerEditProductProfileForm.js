@@ -12,7 +12,7 @@ import { t } from 'i18next'
 import { toast } from 'react-toastify'
 import { Link, useHistory } from 'react-router-dom'
 
-const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
+const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirmingBack, setIsConfirmingBack] = useState(false)
   const [isConfirmingUpdate, setIsConfirmingUpdate] = useState(false)
@@ -73,7 +73,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
 
   const handleConfirmBack = () => {
     setIsConfirmingBack(false)
-    history.push(`/vendor/products/${storeId}`)
+    history.push(`/seller/products/${storeId}`)
   }
 
   const handleSubmit = (e) => {
@@ -289,7 +289,7 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         >
           <div className='d-flex justify-content-between align-items-center'>
             <Link
-              to={`/vendor/products/${storeId}`}
+              to={`/seller/products/${storeId}`}
               className='text-decoration-none cus-link-hover'
               onClick={handleBackClick}
             >
@@ -310,4 +310,4 @@ const VendorEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   )
 }
 
-export default VendorEditProductProfileForm
+export default SellerEditProductProfileForm

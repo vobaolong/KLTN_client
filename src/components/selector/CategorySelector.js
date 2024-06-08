@@ -232,7 +232,10 @@ const CategorySelector = ({
               {label}
             </label>
 
-            <div className='form-control border bg-light-subtle'>
+            <div
+              style={{ height: '100%', maxHeight: '300px', overflow: 'auto' }}
+              className='form-control border bg-light-subtle d-flex flex-column gap-3'
+            >
               {selectedCategory ? (
                 <div className='position-relative'>
                   <div className='me-5'>
@@ -241,7 +244,7 @@ const CategorySelector = ({
 
                   <button
                     type='button'
-                    className='btn btn-light btn-sm ripple position-absolute'
+                    className='btn btn-outline-danger btn-sm ripple position-absolute'
                     style={{
                       top: '50%',
                       transform: 'translateY(-50%)',

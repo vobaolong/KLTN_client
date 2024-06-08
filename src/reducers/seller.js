@@ -2,9 +2,9 @@ const initialState = {
   store: {}
 }
 
-const vendorReducer = (state = initialState, action) => {
+const sellerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_VENDOR': {
+    case 'ADD_SELLER': {
       const store = action.payload
       return {
         ...state,
@@ -18,4 +18,4 @@ const vendorReducer = (state = initialState, action) => {
   }
 }
 
-export default vendorReducer
+export default sellerReducer

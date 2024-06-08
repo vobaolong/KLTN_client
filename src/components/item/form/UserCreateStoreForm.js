@@ -144,7 +144,7 @@ const CreateStoreForm = () => {
           setError(data.error)
           setIsLoading(false)
         } else {
-          history.push(`/vendor/${data.storeId}`)
+          history.push(`/seller/${data.storeId}`)
           toast.success(t('toastSuccess.store.create'))
         }
       })

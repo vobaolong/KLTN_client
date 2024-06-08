@@ -208,7 +208,7 @@ export const userCancelOrder = async (userId, token, status, orderId) => {
   }
 }
 
-export const vendorUpdateStatusOrder = async (
+export const sellerUpdateStatusOrder = async (
   userId,
   token,
   status,

@@ -58,7 +58,7 @@ const StoreAddFeaturedImageForm = ({ storeId = '' }) => {
       .then((data) => {
         if (data.error) toast.error(data.error)
         else {
-          updateDispatch('vendor', data.store)
+          updateDispatch('seller', data.store)
           setFeaturedImage({
             image: '',
             isValidImage: true

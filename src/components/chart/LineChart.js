@@ -50,7 +50,7 @@ const LineChart = ({
       }
     ]
 
-    if (role === 'vendor' && value === 'order') {
+    if (role === 'seller' && value === 'order') {
       datasets.push({
         data: newData?.map((item) => item[2]),
         label: 'Chiết khấu',

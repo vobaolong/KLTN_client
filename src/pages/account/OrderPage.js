@@ -39,7 +39,7 @@ const OrderPage = () => {
         {orderStatus.map((status) => (
           <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
-              className={`nav-link text-dark-emphasis ${
+              className={`nav-link h-100 text-dark-emphasis ${
                 selectedStatus === status.value ? `active` : ``
               }`}
               onClick={() => handleStatusChange(status.value)}

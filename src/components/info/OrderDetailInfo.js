@@ -14,7 +14,7 @@ import Error from '../ui/Error'
 import OrderStatusLabel from '../label/OrderStatusLabel'
 import Paragraph from '../ui/Paragraph'
 import ListOrderItems from '../list/ListOrderItems'
-import VendorUpdateOrderStatus from '../button/VendorUpdateOrderStatus'
+import SellerUpdateOrderStatus from '../button/SellerUpdateOrderStatus'
 import UserCancelOrderButton from '../button/UserCancelOrderButton'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -91,7 +91,7 @@ const OrderDetailInfo = ({
 
   useEffect(() => {
     init()
-  }, [orderId, storeId, by, run, userLevel])
+  }, [orderId, storeId, by, run])
 
   const totalOrderSalePrice = items.reduce((total, item) => {
     if (item.productId?.salePrice) {
@@ -100,7 +100,7 @@ const OrderDetailInfo = ({
     return total
   }, 0)
 
-  const saleFromSystem =
+  const saleFromZenpii =
     totalOrderSalePrice - totalProducts(items, userLevel).amountFromUser1
 
   return (
@@ -152,7 +152,7 @@ const OrderDetailInfo = ({
                 order.status === 'Processing' ||
                 order.status === 'Shipped') && (
                 <div className='mx-4 mb-2'>
-                  <VendorUpdateOrderStatus
+                  <SellerUpdateOrderStatus
                     storeId={storeId}
                     orderId={orderId}
                     status={order.status}
@@ -191,9 +191,9 @@ const OrderDetailInfo = ({
 
           <div className='container-fluid mb-3'>
             <div className='row py-2 border rounded-1'>
-              <div className='col-sm-6 border-end'>
+              <div className='col-sm-6'>
                 <p className='border-bottom pb-2' style={{ fontWeight: '500' }}>
-                  Địa Chỉ Người Gửi
+                  {t('orderDetail.senderAddress')}
                 </p>
                 <div>
                   <Paragraph value={order.storeId?.name} />
@@ -250,85 +250,61 @@ const OrderDetailInfo = ({
               />
               <div className='d-flex justify-content-end border-top flex-column align-items-end'>
                 {by === 'user' && getToken().role === 'user' && (
-                  <table className='col-4 text-start table-sm'>
-                    <tbody>
-                      <tr className='border-bottom'>
-                        <th scope='col' className='transparent fw-normal'>
-                          {t('cartDetail.subTotal')}
-                        </th>
-                        <td className='text-end'>
-                          <span style={{ fontSize: '0.9rem' }}>
-                            {formatPrice(totalOrderSalePrice)}
+                  <div className='d-flex flex-column text-start text-nowrap fs-9'>
+                    <div className='row gap-3 border-bottom py-2'>
+                      <div className='col fw-normal'>
+                        {t('cartDetail.subTotal')}
+                      </div>
+                      <div className='col text-end'>
+                        <span>
+                          {formatPrice(totalOrderSalePrice)}
+                          <sup>₫</sup>
+                        </span>
+                      </div>
+                    </div>
+                    {saleFromZenpii !== 0 && (
+                      <div className='row gap-3 border-bottom py-2'>
+                        <div className='col'>
+                          {t('cartDetail.zenpiiVoucherApplied')}
+                        </div>
+                        <div className='col text-end'>
+                          <span>
+                            -{formatPrice(saleFromZenpii)}
                             <sup>₫</sup>
                           </span>
-                        </td>
-                      </tr>
-                      {saleFromSystem !== 0 && (
-                        <tr className='border-bottom'>
-                          <th
-                            style={{
-                              fontSize: '0.9rem',
-                              fontWeight: '500',
-                              backgroundColor: 'transparent'
-                            }}
-                            scope='col'
-                          >
-                            {t('cartDetail.zenpiiVoucherApplied')}
-                          </th>
-                          <td className='text-end'>
-                            <span style={{ fontSize: '0.9rem' }}>
-                              -{formatPrice(saleFromSystem)}
-                              <sup>₫</sup>
-                            </span>
-                          </td>
-                        </tr>
-                      )}
-                      <tr className='border-bottom'>
-                        <th
-                          style={{
-                            fontSize: '0.9rem',
-                            fontWeight: '500',
-                            backgroundColor: 'transparent'
-                          }}
-                          scope='col'
-                        >
-                          {t('cartDetail.shippingFee')}
-                        </th>
-                        <td className='text-end'>
-                          <span style={{ fontSize: '0.9rem' }}>
-                            {formatPrice(order.shippingFee?.$numberDecimal)}
-                            <sup>₫</sup>
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                )}
-                <span
-                  className={` ${
-                    getToken().role === 'user' ? 'col-4' : 'col-3'
-                  } justify-content-between gap-3 align-items-center d-flex pt-2`}
-                >
-                  <b className='text-muted'>{t('cartDetail.total')}:</b>
-                  <span
-                    style={{ fontSize: '1.4rem' }}
-                    className='text-primary fw-bold'
-                  >
-                    {formatPrice(order.amountFromUser?.$numberDecimal)}
-                    <sup>₫</sup>
-                    {by !== 'user' && (
-                      <span
-                        title={t('orderDetail.includedDiscount')}
-                        className='d-inline-block position-relative ms-3'
-                      >
-                        <i
-                          style={{ fontSize: '15px', cursor: 'help' }}
-                          className='fa-solid fa-circle-info ms-1 border rounded-circle text-secondary opacity-50'
-                        ></i>
-                      </span>
+                        </div>
+                      </div>
                     )}
-                  </span>
-                </span>
+                    <div className='row gap-3 border-bottom py-2'>
+                      <div className='col'>{t('cartDetail.shippingFee')}</div>
+                      <div className='col text-end'>
+                        <span>
+                          {formatPrice(order.shippingFee?.$numberDecimal)}
+                          <sup>₫</sup>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div className='row gap-3 py-2 d-flex align-items-center text-nowrap'>
+                  <div className='col'>{t('cartDetail.total')}:</div>
+                  <div className='col text-end'>
+                    <span className='text-primary fw-bold fs-12 d-flex'>
+                      {formatPrice(order.amountFromUser?.$numberDecimal)} ₫
+                      {by !== 'user' && (
+                        <span
+                          title={t('orderDetail.includedDiscount')}
+                          className='d-inline-block position-relative ms-3'
+                        >
+                          <i
+                            style={{ fontSize: '15px', cursor: 'help' }}
+                            className='fa-solid fa-circle-info ms-1 border rounded-circle text-secondary opacity-50'
+                          ></i>
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

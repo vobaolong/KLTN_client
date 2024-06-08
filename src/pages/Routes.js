@@ -36,16 +36,16 @@ import AccountVerifyEmailPage from './account/VerifyEmailPage'
 import AccountChangePasswordPage from './account/ChangePasswordPage'
 import AccountCartPage from './account/CartPage'
 import AccountOrderDetailPage from './account/OrderDetailPage'
-//vendor
-import VendorProfilePage from './vendor/ProfilePage'
-import VendorDashboardPage from './vendor/DashboardPage'
-import VendorProductsPage from './vendor/ProductsPage'
-import VendorOrderPage from './vendor/OrderPage'
-import VendorOrderDetailPage from './vendor/OrderDetailPage'
-import VendorStaffsPage from './vendor/StaffsPage'
-import VendorWalletPage from './vendor/WalletPage'
-import VendorCreateProductPage from './vendor/CreateProductPage'
-import VendorEditProductPage from './vendor/EditProductPage'
+//seller
+import SellerProfilePage from './seller/ProfilePage'
+import SellerDashboardPage from './seller/DashboardPage'
+import SellerProductsPage from './seller/ProductsPage'
+import SellerOrderPage from './seller/OrderPage'
+import SellerOrderDetailPage from './seller/OrderDetailPage'
+import SellerStaffsPage from './seller/StaffsPage'
+import SellerWalletPage from './seller/WalletPage'
+import SellerCreateProductPage from './seller/CreateProductPage'
+import SellerEditProductPage from './seller/EditProductPage'
 //user
 import UserHomePage from './user/UserHomePage'
 import UserAboutPage from './user/UserAboutPage'
@@ -183,51 +183,51 @@ const Routes = () => {
           component={AccountChangePasswordPage}
         />
 
-        {/* vendor */}
+        {/* seller */}
         <PrivateRoute
-          path='/vendor/:storeId'
+          path='/seller/:storeId'
           exact
-          component={VendorDashboardPage}
+          component={SellerDashboardPage}
         />
         <PrivateRoute
-          path='/vendor/profile/:storeId'
+          path='/seller/profile/:storeId'
           exact
-          component={VendorProfilePage}
+          component={SellerProfilePage}
         />
         <PrivateRoute
-          path='/vendor/products/:storeId'
+          path='/seller/products/:storeId'
           exact
-          component={VendorProductsPage}
+          component={SellerProductsPage}
         />
         <PrivateRoute
-          path='/vendor/products/addNew/:storeId'
+          path='/seller/products/addNew/:storeId'
           exact
-          component={VendorCreateProductPage}
+          component={SellerCreateProductPage}
         />
         <PrivateRoute
-          path='/vendor/products/edit/:productId/:storeId'
+          path='/seller/products/edit/:productId/:storeId'
           exact
-          component={VendorEditProductPage}
+          component={SellerEditProductPage}
         />
         <PrivateRoute
-          path='/vendor/orders/:storeId'
+          path='/seller/orders/:storeId'
           exact
-          component={VendorOrderPage}
+          component={SellerOrderPage}
         />
         <PrivateRoute
-          path='/vendor/orders/detail/:orderId/:storeId'
+          path='/seller/orders/detail/:orderId/:storeId'
           exact
-          component={VendorOrderDetailPage}
+          component={SellerOrderDetailPage}
         />
         <PrivateRoute
-          path='/vendor/staffs/:storeId'
+          path='/seller/staffs/:storeId'
           exact
-          component={VendorStaffsPage}
+          component={SellerStaffsPage}
         />
         <PrivateRoute
-          path='/vendor/Wallet/:storeId'
+          path='/seller/Wallet/:storeId'
           exact
-          component={VendorWalletPage}
+          component={SellerWalletPage}
         />
 
         {/* user */}
