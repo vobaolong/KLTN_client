@@ -2,7 +2,6 @@
 import MainLayout from '../../components/layout/MainLayout'
 import ListCategories from '../../components/list/ListCategories'
 import ListBestSellerProduct from '../../components/list/ListBestSellerProduct'
-import ListHotStores from '../../components/list/ListHotStores'
 import { useTranslation } from 'react-i18next'
 import MetaData from '../../components/layout/meta/MetaData'
 import Offers from '../../components/ui/Offers'
@@ -27,9 +26,6 @@ const HomePage = () => {
       <div className='mb-4'>
         <ListBestSellerProduct heading={t('newProduct')} sortBy='createdAt' />
       </div>
-      {/* <div className='mb-4'>
-        <ListHotStores heading={t('hotStore')} />
-      </div> */}
     </MainLayout>
   )
 }

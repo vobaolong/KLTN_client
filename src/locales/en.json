@@ -1,4 +1,12 @@
 {
+  "alert": {
+    "listStaff": "List staff",
+    "thisSectionContains": " This section contains",
+    "theShopStaffs.": "the shop's staffs.",
+    "theOwner": "The owner",
+    "thisSectionContainsInfo": " This section contains",
+    "theShopOwner": "shop owner information."
+  },
   "createdAt": "Created At",
   "orderStatus": {
     "Not processed": "Not processed",
@@ -63,7 +71,8 @@
     },
     "withDraw": "Withdraw successfully",
     "userDetail": {
-      "updateProfile": "Update profile successfully"
+      "updateProfile": "Update profile successfully",
+      "updateCover": "Update cover successfully"
     },
     "signIn": "Sign in successfully",
     "signUp": "Sign up successfully",
@@ -274,6 +283,8 @@
   "notification": "Notification",
   "favProduct": "Favorite Product",
   "favStore": "Favorite Store",
+  "noFavProduct": "No Product",
+  "noFavStore": "No Shop",
   "product": "Product",
   "similarProducts": "Similar Products",
   "sameShop": "From the same shop",
@@ -345,7 +356,8 @@
     "validDescription": "Please provide a valid product description!",
     "quantityValid": "Please provide a valid product quantity!",
     "priceValid": "Please provide a valid product price!",
-    "salePriceValid": "Please provide a valid product sale price!"
+    "salePriceValid": "Please provide a valid product sale price!",
+    "salePriceCannotBeGreaterThan": "Sale price cannot be greater than the price"
   },
 
   "filters": {
@@ -728,7 +740,7 @@
     "policy": "Policy",
     "title": "Zenpii - Fast, Quality, Affordable",
     "p1": "Zenpii has it all",
-    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, along with ZenNOW's super-fast delivery service, Zenpii brings you an online shopping experience that starts with trust.",
+    "small1": "With millions of products from trusted brands and stores, thousands of items ranging from smartphones to fresh fruits and vegetables, Zenpii brings you an online shopping experience that starts with trust.",
     "payment": "Payment",
     "deliveryUnit": "Logistics"
   },

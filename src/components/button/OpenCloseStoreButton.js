@@ -5,8 +5,10 @@ import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import Error from '../ui/Error'
 
 const OpenCloseStoreButton = ({ storeId = '', isOpen = true, onRun }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [openFlag, setOpenFlag] = useState(isOpen)
@@ -22,12 +24,16 @@ const OpenCloseStoreButton = ({ storeId = '', isOpen = true, onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     const value = { isOpen: !openFlag }
     openStore(_id, accessToken, value, storeId)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           setOpenFlag(!openFlag)
           if (onRun) onRun(data.store)
@@ -42,14 +48,19 @@ const OpenCloseStoreButton = ({ storeId = '', isOpen = true, onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading size='small' />}
+      {error && <Error msg={error} />}
+
       {isConfirming && (
         <ConfirmDialog
           title={openFlag ? t('title.closeStore') : t('title.openStore')}

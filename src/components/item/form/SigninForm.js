@@ -5,16 +5,15 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import SocialForm from './SocialForm'
 
 const SigninForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
+  const history = useHistory()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [account, setAccount] = useState({
     username: '',
@@ -22,8 +21,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
     isValidUsername: true,
     isValidPassword: true
   })
-
-  const history = useHistory()
 
   const handleChange = (name, isValidName, value) => {
     setAccount({
@@ -62,10 +59,11 @@ const SigninForm = ({ onSwap = () => {} }) => {
     regexTest('phone', username) && (user.phone = username)
 
     setIsLoading(true)
+    setError('')
     signin(user)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
           setIsLoading(false)
         } else {
           const { accessToken, refreshToken, _id, role } = data
@@ -104,12 +102,16 @@ const SigninForm = ({ onSwap = () => {} }) => {
       forgotPassword({ email: username })
         .then((data) => {
           if (data.error) setError(data.error)
-          else setSuccess(data.success)
+          else toast.success(data.success)
           setIsLoading(false)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         })
         .catch((error) => {
           setError('Server error')
           setIsLoading(false)
+          setTimeout(() => setError(''), 3000)
         })
     }
   }
@@ -149,12 +151,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
             onValidate={(flag) => handleValidate('isValidPassword', flag)}
           />
         </div>
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
-          </div>
-        )}
 
         {error && (
           <div className='col-12'>

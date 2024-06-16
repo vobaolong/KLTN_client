@@ -143,6 +143,8 @@ const CheckoutForm = ({
         shippingFeeBeforeDiscount,
         userLevel
       )
+      const amountFromUser = amountFromUser1 + shippingFee
+
       setOrder({
         firstName,
         lastName,
@@ -157,11 +159,11 @@ const CheckoutForm = ({
         totalPrice,
         totalSalePrice,
         amountFromUser1,
-        amountFromUser: amountFromUser1 + shippingFee,
+        amountFromUser: amountFromUser,
         amountFromStore,
         amountToStore,
         commissionId: res2.commission._id,
-        amountToZenpii: amountFromUser1 + shippingFee - amountToStore
+        amountToZenpii: amountFromUser - amountToStore
       })
     } catch (e) {
       setError('Server Error')
@@ -253,7 +255,7 @@ const CheckoutForm = ({
       return
     setIsConfirming(true)
   }
-
+  console.log(order)
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
     const {
@@ -286,8 +288,12 @@ const CheckoutForm = ({
     setIsLoading(true)
     createOrder(_id, accessToken, cartId, orderBody)
       .then((data) => {
-        if (data.error) setError(data.error)
-        else {
+        if (data.error) {
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
+        } else {
           updateDispatch('account', data.user)
           socketId.emit('notificationOrder', {
             orderId: data.order._id,
@@ -302,6 +308,9 @@ const CheckoutForm = ({
       .catch((error) => {
         setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -411,7 +420,7 @@ const CheckoutForm = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(`Server Error: ${error}`)
+          setError(`Server Error`)
           setIsLoading(false)
         })
     })
@@ -808,7 +817,6 @@ const CheckoutForm = ({
                       }
 
                       localStorage.setItem('order', JSON.stringify(orderBody))
-                      console.log(urlString)
                       window.location.href = urlString
                     }}
                   >

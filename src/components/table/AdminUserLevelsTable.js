@@ -21,9 +21,11 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import { humanReadableDate } from '../../helper/humanReadable'
+import Error from '../ui/Error'
 
 const AdminUserLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [run, setRun] = useState(false)
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
@@ -47,10 +49,11 @@ const AdminUserLevelsTable = ({ heading = false }) => {
   })
 
   useEffect(() => {
+    setError('')
     setIsLoading(true)
     listUserLevels(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setLevels(data.levels)
           setPagination({
@@ -62,7 +65,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }, [filter, run])
@@ -105,36 +108,50 @@ const AdminUserLevelsTable = ({ heading = false }) => {
   }
 
   const onSubmitDelete = () => {
+    setError('')
     setIsLoading(true)
     deleteUserLevel(_id, accessToken, deletedLevel._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.level.delete'))
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
+    setError('')
     setIsLoading(true)
     restoreUserLevel(_id, accessToken, restoredLevel._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.level.restore'))
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -173,6 +190,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
         <h5 className='text-start'>{t('levelDetail.userLevel.userLevel')}</h5>
       )}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className=' d-flex align-items-center justify-content-between mb-3'>

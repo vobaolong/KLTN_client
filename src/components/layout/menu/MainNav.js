@@ -20,8 +20,8 @@ const MainNav = ({ navFor = 'user' }) => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.seller.store)
   const [isConfirming, setIsConfirming] = useState(false)
-  const history = useHistory()
   const { refreshToken } = getToken()
+  const history = useHistory()
 
   const handleSignout = () => {
     setIsConfirming(true)
@@ -65,14 +65,12 @@ const MainNav = ({ navFor = 'user' }) => {
 
         {navFor === 'user' && <SearchBar />}
 
-        {navFor === 'seller' && (
-          <h3 className='text-uppercase m-0'>SELLER CENTER</h3>
+        {navFor !== 'user' && (
+          <h2 className='text-uppercase m-0'>{navFor} dashboard</h2>
         )}
-
-        {navFor === 'user' && getToken().role === 'admin' && (
-          <h3 className='text-uppercase m-0'>ADMIN DASHBOARD</h3>
-        )}
-
+        <span className='res-dis-md d-none footer-links text-end'>
+          <BellButton navFor={navFor} />
+        </span>
         {!getToken() ? (
           <ul className='nav cus-sub-nav ms-1' style={{ minWidth: 'unset' }}>
             <li className='nav-item'>
@@ -84,12 +82,9 @@ const MainNav = ({ navFor = 'user' }) => {
           </ul>
         ) : (
           <div className='d-flex justify-content-end'>
-            <div className='footer-links mx-2'>
-              <BellButton navFor={navFor} />
-            </div>
-            <ul className='nav cus-sub-nav d-flex justify-content-end res-hide-md'>
+            <ul className='nav cus-sub-nav d-flex justify-content-end res-hide-md gap-1'>
               <Language />
-
+              <BellButton navFor={navFor} />
               {navFor === 'seller' && (
                 <li className='nav-item'>
                   <SellerInit />
@@ -158,7 +153,7 @@ const MainNav = ({ navFor = 'user' }) => {
                   id='offcanvasNavbarMainNavLabel'
                 >
                   <Link className='text-decoration-none' to='/'>
-                    <Logo />
+                    <Logo width='120px' />
                   </Link>
                 </h5>
                 <button

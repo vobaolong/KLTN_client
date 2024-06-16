@@ -11,6 +11,7 @@ import { formatPrice } from '../../helper/formatPrice'
 import Loading from '../ui/Loading'
 import Pagination from '../ui/Pagination'
 import SortByButton from './sub/SortByButton'
+import Error from '../ui/Error'
 import TransactionStatusLabel from '../label/TransactionStatusLabel'
 import EWalletInfo from '../info/EWalletInfo'
 import CreateTransactionItem from '../item/CreateTransactionItem'
@@ -20,7 +21,7 @@ import UserSmallCard from '../card/UserSmallCard'
 import { useTranslation } from 'react-i18next'
 import SuccessLabel from '../label/SuccessLabel'
 import ShowResult from '../ui/ShowResult'
-import { toast } from 'react-toastify'
+import boxImg from '../../assets/box.svg'
 
 const TransactionsTable = ({
   storeId = '',
@@ -32,6 +33,7 @@ const TransactionsTable = ({
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [run, setRun] = useState(false)
+  const [error, setError] = useState('')
   const [transactions, setTransactions] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
@@ -46,12 +48,13 @@ const TransactionsTable = ({
   const { _id: userId, accessToken } = getToken()
   const init = () => {
     let isMounted = true
+    setError('')
     setIsLoading(true)
     if (by === 'user')
       listTransactionsByUser(userId, accessToken, filter)
         .then((data) => {
           if (!isMounted) return
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else {
             setTransactions(data.transactions)
             setPagination({
@@ -64,14 +67,14 @@ const TransactionsTable = ({
         })
         .catch((error) => {
           if (!isMounted) return
-          console.error('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     else if (by === 'store')
       listTransactionsByStore(userId, accessToken, filter, storeId)
         .then((data) => {
           if (!isMounted) return
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else {
             setTransactions(data.transactions)
             setPagination({
@@ -84,14 +87,14 @@ const TransactionsTable = ({
         })
         .catch((error) => {
           if (!isMounted) return
-          console.error('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     else
       listTransactionsForAdmin(userId, accessToken, filter)
         .then((data) => {
           if (!isMounted) return
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else {
             setTransactions(data.transactions)
             setPagination({
@@ -104,7 +107,7 @@ const TransactionsTable = ({
         })
         .catch((error) => {
           if (!isMounted) return
-          console.error('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     return () => {
@@ -140,6 +143,8 @@ const TransactionsTable = ({
         </h5>
       )}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='d-flex align-items-center justify-content-between mb-2'>
           {by === 'store' && (
@@ -170,7 +175,8 @@ const TransactionsTable = ({
           )}
         </div>
         {!isLoading && pagination.size === 0 ? (
-          <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+          <div className='m-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
             <h5>{t('transactionDetail.noTransaction')}</h5>
           </div>
         ) : (

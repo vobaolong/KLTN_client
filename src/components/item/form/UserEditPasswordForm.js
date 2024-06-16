@@ -5,16 +5,15 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const UserEditPasswordForm = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [account, setAccount] = useState({
     currentPassword: '',
@@ -65,7 +64,6 @@ const UserEditPasswordForm = () => {
     }
 
     setError('')
-    setSuccess('')
     setIsLoading(true)
     updatePassword(_id, accessToken, user)
       .then((data) => {
@@ -77,12 +75,11 @@ const UserEditPasswordForm = () => {
             isValidCurrentPassword: true,
             isValidNewPassword: true
           })
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
         setTimeout(() => {
           setError('')
-          setSuccess('')
         }, 3000)
       })
       .catch((error) => {
@@ -141,12 +138,6 @@ const UserEditPasswordForm = () => {
         {error && (
           <div className='col-12'>
             <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
           </div>
         )}
 

@@ -2,56 +2,59 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../../apis/auth'
 import {
-  listCommissions,
-  deleteCommission,
-  restoreCommission
-} from '../../apis/commission'
+  listStoreLevels,
+  deleteStoreLevel,
+  restoreStoreLevel
+} from '../../apis/level'
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
 import SortByButton from './sub/SortByButton'
-import StoreCommissionLabel from '../label/StoreCommissionLabel'
+import StoreLevelLabel from '../label/StoreLevelLabel'
 import DeletedLabel from '../label/DeletedLabel'
-import ActiveLabel from '../label/ActiveLabel'
-import AdminCreateCommissionItem from '../item/AdminCreateCommissionItem'
-import AdminEditCommissionForm from '../item/form/AdminEditCommissionForm'
+import AdminCreateStoreLevelItem from '../item/AdminCreateStoreLevelItem'
+import AdminEditStoreLevelForm from '../item/form/AdminEditStoreLevelForm'
 import Modal from '../ui/Modal'
 import Loading from '../ui/Loading'
 import ConfirmDialog from '../ui/ConfirmDialog'
+import ActiveLabel from '../label/ActiveLabel'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import { humanReadableDate } from '../../helper/humanReadable'
+import Error from '../ui/Error'
 
-const AdminCommissionTable = ({ heading = false }) => {
+const AdminStoreLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
   const [run, setRun] = useState(false)
-  const [editedCommission, setEditedCommission] = useState({})
-  const [deletedCommission, setDeletedCommission] = useState({})
-  const [restoredCommission, setRestoredCommission] = useState({})
-  const [commissions, setCommissions] = useState([])
+  const [editedLevel, setEditedLevel] = useState({})
+  const [deletedLevel, setDeletedLevel] = useState({})
+  const [restoredLevel, setRestoredLevel] = useState({})
+  const [levels, setLevels] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'name',
+    sortBy: 'point',
     order: 'asc',
-    limit: 10,
+    limit: 6,
     page: 1
   })
 
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
-    listCommissions(_id, accessToken, filter)
+    listStoreLevels(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
-          setCommissions(data.commissions)
+          setLevels(data.levels)
           setPagination({
             size: data.size,
             pageCurrent: data.filter.pageCurrent,
@@ -61,7 +64,7 @@ const AdminCommissionTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -93,50 +96,64 @@ const AdminCommissionTable = ({ heading = false }) => {
     })
   }
 
-  const handleEditCommission = (commission) => {
-    setEditedCommission(commission)
+  const handleEditLevel = (level) => {
+    setEditedLevel(level)
   }
 
-  const handleDeleteCommission = (commission) => {
-    setDeletedCommission(commission)
+  const handleDeleteLevel = (level) => {
+    setDeletedLevel(level)
     setIsConfirming(true)
   }
 
-  const handleRestoreCommission = (commission) => {
-    setRestoredCommission(commission)
+  const handleRestoreLevel = (level) => {
+    setRestoredLevel(level)
     setIsConfirmingRestore(true)
   }
 
   const onSubmitDelete = () => {
+    setError('')
     setIsLoading(true)
-    deleteCommission(_id, accessToken, deletedCommission._id)
+    deleteStoreLevel(_id, accessToken, deletedLevel._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
-          toast.success(t('toastSuccess.commission.delete'))
+          toast.success(t('toastSuccess.level.delete'))
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
+    setError('')
     setIsLoading(true)
-    restoreCommission(_id, accessToken, restoredCommission._id)
+    restoreStoreLevel(_id, accessToken, restoredLevel._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
-          toast.success(t('toastSuccess.commission.restore'))
+          toast.success(t('toastSuccess.level.restore'))
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
   }
@@ -146,11 +163,11 @@ const AdminCommissionTable = ({ heading = false }) => {
       {isLoading && <Loading />}
       {isConfirming && (
         <ConfirmDialog
-          title={t('dialog.deleteCommission')}
+          title={t('dialog.deleteLevel')}
           message={
             <span>
-              {t('message.delete')}
-              <StoreCommissionLabel commission={deletedCommission} />
+              {t('message.deleteLevel')}
+              <StoreLevelLabel level={deletedLevel} />
             </span>
           }
           color='danger'
@@ -160,11 +177,11 @@ const AdminCommissionTable = ({ heading = false }) => {
       )}
       {isConfirmingRestore && (
         <ConfirmDialog
-          title={t('dialog.restoreCommission')}
+          title={t('dialog.restoreLevel')}
           message={
             <span>
-              {t('message.restore')}
-              <StoreCommissionLabel commission={restoredCommission} />
+              {t('message.restoreLevel')}
+              <StoreLevelLabel level={restoredLevel} />
             </span>
           }
           onSubmit={onSubmitRestore}
@@ -172,16 +189,20 @@ const AdminCommissionTable = ({ heading = false }) => {
         />
       )}
 
-      {heading && <h5 className='text-start'>{t('admin.commissions')}</h5>}
+      {heading && (
+        <h5 className='text-start'>{t('levelDetail.storeLevel.storeLevel')}</h5>
+      )}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />
-          <AdminCreateCommissionItem onRun={() => setRun(!run)} />
+          <AdminCreateStoreLevelItem onRun={() => setRun(!run)} />
         </div>
 
         <div className='table-scroll my-2'>
-          <table className='table table-hover table-sm align-middle text-start'>
+          <table className='table align-middle table-hover table-sm text-start'>
             <thead>
               <tr>
                 <th scope='col' className='text-center'></th>
@@ -189,7 +210,7 @@ const AdminCommissionTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title={t('commissionDetail.name')}
+                    title={t('levelDetail.name')}
                     sortBy='name'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
@@ -198,15 +219,19 @@ const AdminCommissionTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title={t('commissionDetail.fee')}
-                    sortBy='fee'
+                    title={t('levelDetail.floorPoint')}
+                    sortBy='minPoint'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
                 <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('commissionDetail.description')}
-                  </span>
+                  <SortByButton
+                    currentOrder={filter.order}
+                    currentSortBy={filter.sortBy}
+                    title={t('levelDetail.discount')}
+                    sortBy='discount'
+                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
+                  />
                 </th>
                 <th scope='col'>
                   <SortByButton
@@ -221,64 +246,62 @@ const AdminCommissionTable = ({ heading = false }) => {
                   <SortByButton
                     currentOrder={filter.order}
                     currentSortBy={filter.sortBy}
-                    title={t('createdAt')}
+                    title={t('levelDetail.createdAt')}
                     sortBy='createdAt'
                     onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
                   />
                 </th>
                 <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.9rem' }}>
+                  <span
+                    style={{ fontWeight: '400', fontSize: '.875rem' }}
+                    className='text-secondary'
+                  >
                     {t('action')}
                   </span>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {commissions.map((commission, index) => (
+              {levels.map((level, index) => (
                 <tr key={index}>
                   <th scope='row' className='text-center'>
                     {index + 1 + (filter.page - 1) * filter.limit}
                   </th>
                   <td>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      <StoreCommissionLabel commission={commission} />
-                    </span>
+                    <StoreLevelLabel level={level} />
                   </td>
+                  <td>{level.minPoint}</td>
+                  <td>{level.discount && level.discount.$numberDecimal}%</td>
                   <td>
-                    <small>{commission.fee?.$numberDecimal}%</small>
+                    {level.isDeleted ? (
+                      <span>
+                        <DeletedLabel />
+                      </span>
+                    ) : (
+                      <span>
+                        <ActiveLabel />
+                      </span>
+                    )}
                   </td>
-                  <td
-                    style={{
-                      width: '300px',
-                      overflow: 'auto'
-                    }}
-                  >
-                    <small>{commission.description}</small>
-                  </td>
+                  <td>{humanReadableDate(level.createdAt)}</td>
                   <td>
-                    {commission.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
-                  </td>
-                  <td>
-                    <small>{humanReadableDate(commission.createdAt)}</small>
-                  </td>
-                  <td className='py-1'>
                     <button
                       type='button'
-                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
+                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
                       data-bs-toggle='modal'
-                      data-bs-target='#edit-commission-form'
-                      onClick={() => handleEditCommission(commission)}
+                      data-bs-target='#edit-level-form'
+                      onClick={() => handleEditLevel(level)}
                       title={t('button.edit')}
                     >
-                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
+                      <i className='d-none res-dis-sm fa-solid fa-pen'></i>
                       <span className='res-hide'>{t('button.edit')}</span>
                     </button>
 
-                    {!commission.isDeleted ? (
+                    {!level.isDeleted ? (
                       <button
                         type='button'
                         className='btn btn-sm btn-outline-danger ripple rounded-1'
-                        onClick={() => handleDeleteCommission(commission)}
+                        onClick={() => handleDeleteLevel(level)}
                         title={t('button.delete')}
                       >
                         <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
@@ -288,7 +311,7 @@ const AdminCommissionTable = ({ heading = false }) => {
                       <button
                         type='button'
                         className='btn btn-sm btn-outline-success ripple'
-                        onClick={() => handleRestoreCommission(commission)}
+                        onClick={() => handleRestoreLevel(level)}
                         title={t('button.restore')}
                       >
                         <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
@@ -303,16 +326,16 @@ const AdminCommissionTable = ({ heading = false }) => {
         </div>
 
         <Modal
-          id='edit-commission-form'
+          id='edit-level-form'
           hasCloseBtn={false}
-          title={t('commissionDetail.edit')}
+          title={t('levelDetail.edit')}
         >
-          <AdminEditCommissionForm
-            oldCommission={editedCommission}
+          <AdminEditStoreLevelForm
+            oldLevel={editedLevel}
             onRun={() => setRun(!run)}
           />
         </Modal>
-        <div className='d-flex align-items-center justify-content-between px-4'>
+        <div className='d-flex justify-content-between align-items-center px-4'>
           <ShowResult
             limit={filter.limit}
             size={pagination.size}
@@ -330,4 +353,4 @@ const AdminCommissionTable = ({ heading = false }) => {
   )
 }
 
-export default AdminCommissionTable
+export default AdminStoreLevelsTable

@@ -6,6 +6,7 @@ import Cover from '../../components/image/Cover'
 import Avatar from '../../components/image/Avatar'
 import MetaData from '../../components/layout/meta/MetaData'
 import { useTranslation } from 'react-i18next'
+import UserRankInfo from '../../components/info/UserRankInfo'
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.account.user)
@@ -49,6 +50,10 @@ const ProfilePage = () => {
 
         <div className='mt-2'>
           <UserProfileInfo user={user} isEditable={true} />
+        </div>
+
+        <div className='mt-2'>
+          <UserRankInfo user={user} />
         </div>
       </div>
     </AccountLayout>

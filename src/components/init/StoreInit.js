@@ -61,7 +61,7 @@ const StoreInit = ({ store, actions }) => {
         }
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }

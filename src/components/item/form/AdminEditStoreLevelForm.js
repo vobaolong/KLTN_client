@@ -5,15 +5,14 @@ import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 
 const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [level, setLevel] = useState({
     name: oldLevel.name,
     minPoint: oldLevel.minPoint,
@@ -81,18 +80,16 @@ const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
 
   const onSubmit = () => {
     setError('')
-    setSuccess('')
     setIsLoading(true)
     updateStoreLevel(_id, accessToken, oldLevel._id, level)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
-          setSuccess(data.success)
+          toast.success(data.success)
           if (onRun) onRun()
         }
         setIsLoading(false)
         setTimeout(() => {
-          setSuccess('')
           setError('')
         }, 3000)
       })
@@ -182,12 +179,6 @@ const AdminEditStoreLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
         {error && (
           <div className='col-12'>
             <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
           </div>
         )}
 

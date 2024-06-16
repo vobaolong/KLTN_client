@@ -3,55 +3,53 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addUser } from '../../actions/user'
-import { getUser } from '../../apis/user'
+import Loading from '../ui/Loading'
+import Error from '../ui/Error'
 import { getUserLevel } from '../../apis/level'
 import { countOrder } from '../../apis/order'
-import Loading from '../ui/Loading'
-import { toast } from 'react-toastify'
+import { getUser } from '../../apis/user'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const UserInit = ({ user, actions }) => {
   const [isLoading, setIsLoading] = useState(false)
   const { userId } = useParams()
+  const [error, setError] = useState('')
 
-  const init = () => {
+  const init = async () => {
+    setError('')
     setIsLoading(true)
-    getUser(userId)
-      .then(async (data) => {
-        if (data.error) {
-          toast.error(data.error)
-          setIsLoading(false)
-        } else {
-          const newUser = data.user
-
-          //get level
-          try {
-            const res = await getUserLevel(userId)
-            newUser.level = res.level
-          } catch {
-            newUser.level = {}
-          }
-
-          //get count orders
-          try {
-            const res1 = await countOrder('Delivered', userId, '')
-            const res2 = await countOrder('Cancelled', userId, '')
-            newUser.numberOfSuccessfulOrders = res1.count
-            newUser.numberOfFailedOrders = res2.count
-          } catch {
-            newUser.numberOfSuccessfulOrders = 0
-            newUser.numberOfFailedOrders = 0
-          }
-
-          actions(newUser)
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        console.log('Some thing went wrong')
+    try {
+      const data = await getUser(userId)
+      if (data.error) {
+        setError(data.error)
         setIsLoading(false)
-      })
+      } else {
+        const newUser = data.user
+        try {
+          const res = await getUserLevel(userId)
+          newUser.level = res.level
+        } catch {
+          newUser.level = {}
+        }
+
+        try {
+          const res1 = await countOrder('Delivered', userId, '')
+          const res2 = await countOrder('Cancelled', userId, '')
+          newUser.numberOfSuccessfulOrders = res1.count
+          newUser.numberOfFailedOrders = res2.count
+        } catch {
+          newUser.numberOfSuccessfulOrders = 0
+          newUser.numberOfFailedOrders = 0
+        }
+
+        actions(newUser)
+        setIsLoading(false)
+      }
+    } catch (error) {
+      setError('Server Error')
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -75,6 +73,7 @@ const UserInit = ({ user, actions }) => {
       />
       <span className='your-store-name unselect'>
         {user.firstName + ' ' + user.lastName}
+        {error && <Error msg={error} />}
       </span>
     </div>
   )

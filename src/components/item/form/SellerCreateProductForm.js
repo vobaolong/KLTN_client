@@ -139,6 +139,10 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
       !isValidSalePrice
     )
       return
+    if (parseFloat(salePrice) > parseFloat(price)) {
+      setError(t('productValid.salePriceCannotBeGreaterThan'))
+      return
+    }
     setIsConfirmingCreate(true)
   }
 

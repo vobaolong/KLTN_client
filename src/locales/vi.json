@@ -1,4 +1,12 @@
 {
+  "alert": {
+    "listStaff": "Danh sách nhân viên",
+    "thisSectionContains": " Mục này chứa các",
+    "theShopStaffs.": "nhân viên của cửa hàng.",
+    "theOwner": "Người sở hữu",
+    "thisSectionContainsInfo": " Mục này chứa thông tin",
+    "theShopOwner": "chủ cửa hàng."
+  },
   "createdAt": "Ngày tạo",
   "orderStatus": {
     "Not processed": "Chưa xử lý",
@@ -63,7 +71,8 @@
     },
     "withDraw": "Rút tiền thành công",
     "userDetail": {
-      "updateProfile": "Cập nhật thông tin thành công"
+      "updateProfile": "Cập nhật thông tin thành công",
+      "updateCover": "Cập nhật ảnh bìa thành công"
     },
     "signIn": "Đăng nhập thành công",
     "signUp": "Đăng ký thành công",
@@ -285,6 +294,8 @@
   "notification": "Thông báo",
   "favProduct": "Sản phẩm yêu thích",
   "favStore": "Shop yêu thích",
+  "noFavProduct": "Không có sản phẩm",
+  "noFavStore": "Không có shop",
   "product": "Sản Phẩm",
   "similarProducts": "Sản Phẩm Tương Tự",
   "sameShop": "Các Sản Phẩm Khác Của Shop",
@@ -356,7 +367,8 @@
     "validDescription": "Vui lòng cung cấp mô tả sản phẩm phù hợp!",
     "quantityValid": "Vui lòng cung cấp số lượng sản phẩm phù hợp!",
     "priceValid": "Vui lòng cung cấp giá sản phẩm phù hợp!",
-    "salePriceValid": "Vui lòng cung cấp giá giảm sản phẩm phù hợp!"
+    "salePriceValid": "Vui lòng cung cấp giá giảm sản phẩm phù hợp!",
+    "salePriceCannotBeGreaterThan": "Giá giảm lớn hơn giá gốc"
   },
   "filters": {
     "filter": "Bộ lọc tìm kiếm",
@@ -450,7 +462,7 @@
     "idCardValid": "Vui lòng cung cấp số thẻ hợp lệ!"
   },
   "transactionDetail": {
-    "noTransaction": "Không có giao dịch nào",
+    "noTransaction": "Không có giao dịch",
     "draw": "Rút tiền",
     "empty": "Ví rỗng",
     "type": "Loại",
@@ -592,7 +604,7 @@
     "allProduct": "Tất cả sản phẩm",
     "rating": "Đánh giá",
     "about": "Thông tin",
-    "noStores": "Không có shop!",
+    "noStores": "Không có shop",
     "createStore": "Tạo một shop trực tuyến miễn phí",
     "pickupAddress": "Địa chỉ lấy hàng",
     "avatar": "Ảnh nền",
@@ -688,11 +700,11 @@
     "listProducts": "Danh sách sản phẩm"
   },
   "reviewDetail": {
-    "delete": "Xoá Đánh Giá",
-    "edit": "Chỉnh Sửa Đánh Giá",
+    "delete": "Xoá đánh giá",
+    "edit": "Chỉnh sửa đánh giá",
     "content": "Nội dung",
     "isValid": "Vui lòng đánh giá phù hợp!",
-    "noReview": "Không có đánh giá!",
+    "noReview": "Không có đánh giá",
     "ratingBy": "Đánh giá trước ",
     "cannotReview": "Bạn sẽ không thể đánh giá đơn hàng sau",
     "productQuality": "Chất lượng sản phẩm",
@@ -707,8 +719,8 @@
   "confirmEmail": "Nhấn để xác thực Email",
   "role": "Vai trò",
   "joined": "Tham gia",
-  "visitMyPage": "Đến Kênh Của Tôi",
-  "editCover": "Chỉnh Sửa Ảnh Bìa",
+  "visitMyPage": "Đến kênh của tôi",
+  "editCover": "Chỉnh sửa ảnh bìa",
   "processingOrders": "Đơn hàng đang thực hiện",
   "processedOrders": "Đơn hàng đã hoàn thành",
   "result": "Kết quả",
@@ -741,7 +753,7 @@
     "policy": "Chính sách bảo mật",
     "title": "Zenpii - Thật nhanh, thật chất lượng, thật rẻ",
     "p1": "Zenpii có tất cả",
-    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, shop uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm, kèm theo dịch vụ giao hàng siêu tốc ZenNOW,Zenpii mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
+    "small1": "Với hàng triệu sản phẩm từ các thương hiệu, shop uy tín, hàng nghìn loại mặt hàng từ Điện thoại smartphone đến mỹ phẩm,Zenpii mang đến cho bạn một trải nghiệm mua sắm online bắt đầu bằng chữ tín.",
     "payment": "Thanh toán",
     "deliveryUnit": "Đơn vị vận chuyển"
   },
@@ -751,5 +763,9 @@
   "or": "Hoặc",
   "noneNotification": "Không có thông báo mới",
   "deleteAll": "Xóa tất cả",
-  "newNotification": "Thông báo mới nhận"
+  "newNotification": "Thông báo mới nhận",
+  "Bronze": "Đồng",
+  "Silver": "Bạc",
+  "Gold": "Vàng",
+  "Diamond": "Kim Cương"
 }

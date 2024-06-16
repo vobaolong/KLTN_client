@@ -143,14 +143,20 @@ const CreateStoreForm = () => {
         if (data.error) {
           setError(data.error)
           setIsLoading(false)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
-          history.push(`/seller/${data.storeId}`)
           toast.success(t('toastSuccess.store.create'))
+          history.push(`/seller/${data.storeId}`)
         }
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -241,14 +247,14 @@ const CreateStoreForm = () => {
               onValidate={(flag) => handleValidate('isValidBio', flag)}
             />
           </div>
-
-          <div style={{ marginTop: '20px' }}></div>
-          <AddressForm
-            onChange={(value) => {
-              setAddressDetail({ ...value })
-              handleChange('address', 'isValidAddress', value.street)
-            }}
-          />
+          <div className='col-12 px-4 mt-2'>
+            <AddressForm
+              onChange={(value) => {
+                setAddressDetail({ ...value })
+                handleChange('address', 'isValidAddress', value.street)
+              }}
+            />
+          </div>
         </div>
 
         <div className='box-shadow rounded-1 row mb-2 bg-body p-2 mt-3'>

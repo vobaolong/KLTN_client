@@ -15,6 +15,7 @@ import OrderPaymentLabel from '../label/OrderPaymentLabel'
 import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import noItem from '../../assets/noItem.png'
 
 const UserOrdersTable = ({ heading = true, status = '' }) => {
   const { t } = useTranslation()
@@ -54,7 +55,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
       })
       .catch((error) => {
         if (!isMounted) return
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
       })
     return () => {
@@ -128,7 +129,8 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
       <div className='p-3 box-shadow bg-body rounded-1'>
         <SearchInput onChange={handleChangeKeyword} />
         {!isLoading && pagination.size === 0 ? (
-          <div className='d-flex justify-content-center mt-3 text-primary text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={noItem} alt='noItem' width={'100px'} />
             <h5>{t('orderDetail.noOrder')}</h5>
           </div>
         ) : (

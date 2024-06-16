@@ -10,8 +10,10 @@ import { humanReadableDate } from '../../helper/humanReadable'
 import { useTranslation } from 'react-i18next'
 import { calcTime } from '../../helper/calcTime'
 import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
+  const [error, setError] = useState('')
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -22,11 +24,15 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
 
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
+    setError('')
     setIsLoading(true)
     removeReview(_id, accessToken, review._id)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else if (onRun) {
           onRun()
           toast.success(t('toastSuccess.review.delete'))
@@ -34,7 +40,10 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
   const hoursDifference = calcTime(review?.orderId?.updatedAt)
@@ -43,6 +52,7 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   return (
     <div className='row py-2 border-bottom position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title={t('reviewDetail.delete')}

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { getListStores } from '../../apis/store'
 import Loading from '../ui/Loading'
 import StoreCard from '../card/StoreCard'
-import { toast } from 'react-toastify'
 import Slider from 'react-slick'
+import Error from '../ui/Error'
 
 const ListHotStores = ({ heading = '' }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [stores, setStores] = useState([])
   const settings = {
@@ -48,6 +49,7 @@ const ListHotStores = ({ heading = '' }) => {
     ]
   }
   const init = () => {
+    setError('')
     setIsLoading(true)
     getListStores({
       search: '',
@@ -59,12 +61,12 @@ const ListHotStores = ({ heading = '' }) => {
       page: 1
     })
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else setStores(data.stores)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -77,6 +79,7 @@ const ListHotStores = ({ heading = '' }) => {
     <div className='position-relative bg-body box-shadow rounded-3 p-3'>
       {heading && <h5>{heading}</h5>}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       <div className='slider-container'>
         <Slider {...settings}>
           {stores?.map((store, index) => (

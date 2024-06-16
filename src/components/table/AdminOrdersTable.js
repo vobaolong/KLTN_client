@@ -16,7 +16,7 @@ import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
-import { toast } from 'react-toastify'
+import noItem from '../../assets/noItem.png'
 
 const AdminOrdersTable = ({ heading = true, status = '' }) => {
   const { t } = useTranslation()
@@ -38,10 +38,11 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     listOrdersForAdmin(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setOrders(data.orders)
           setPagination({
@@ -53,7 +54,7 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -126,7 +127,8 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
         {!isLoading && pagination.size === 0 ? (
-          <div className='my-4 text-danger text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={noItem} alt='noItem' width={'100px'} />
             <h5>{t('orderDetail.noOrder')}</h5>
           </div>
         ) : (

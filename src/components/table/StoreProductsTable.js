@@ -21,6 +21,7 @@ import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 import Alert from '../ui/Alert'
+import boxImg from '../../assets/box.svg'
 
 const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
   const { t } = useTranslation()
@@ -77,7 +78,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log(`Error occurred ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -130,6 +131,9 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           toast.success(t(`toastSuccess.product.${action}`))
           setRun(!run)
@@ -137,19 +141,16 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log(`Error occurred ${error}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
-      {/* {heading && (
-        <h4 className='text-center text-uppercase mb-3'>
-          {isSelling ? t('productDetail.show') : t('productDetail.hide')}
-        </h4>
-      )} */}
-
       {alerts.isAllAlert && selectedOption === 'selling' ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
@@ -202,7 +203,8 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
           <SearchInput onChange={handleChangeKeyword} />
         </div>
         {!isLoading && pagination.size === 0 ? (
-          <div className='d-flex justify-content-center my-4 text-danger text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
             <h5>{t('productDetail.noProduct')}</h5>
           </div>
         ) : (
@@ -234,35 +236,6 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
-                    {/* <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title='Thumb'
-                      sortBy='listImages'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title='Images'
-                      sortBy='listImages'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th>
-
-                  <th scope='col'>
-                    <SortByButton
-                      currentOrder={filter.order}
-                      currentSortBy={filter.sortBy}
-                      title='Description'
-                      sortBy='description'
-                      onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                    />
-                  </th> */}
 
                     <th scope='col' className='text-end'>
                       <SortByButton
@@ -275,6 +248,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col' className='text-end'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -286,6 +260,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -297,6 +272,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -320,6 +296,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -331,6 +308,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -342,6 +320,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                         }
                       />
                     </th>
+
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -365,6 +344,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                       <th scope='row'>
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
+
                       <td
                         style={{
                           whiteSpace: 'normal',
@@ -376,6 +356,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                           <ProductSmallCard product={product} />
                         </small>
                       </td>
+
                       <td>
                         <small className='badge border rounded-1 bg-value text-dark-emphasis'>
                           <CategorySmallCard
@@ -384,103 +365,19 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                           />
                         </small>
                       </td>
-                      {/* <td>
-                  <div
-                    className='align-items-center d-flex mx-auto my-1'
-                    style={{
-                      position: 'relative',
-                      width: '80px',
-                      height: '80px'
-                    }}
-                  >
-                    <img loading='lazy'
-
-                      src={IMG + product.listImages[0]}
-                      alt={product.name}
-                      style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        top: '0',
-                        left: '0',
-                        justifyContent: 'flex-start',
-                        objectFit: 'contain',
-                        borderRadius: '3px',
-                        boxShadow:
-                          'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
-                      }}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div
-                    className='d-flex flex-wrap align-items-center'
-                    style={{
-                      width: '250px',
-                      height: '180px',
-                      overflow: 'auto',
-                      gap: '3px'
-                    }}
-                  >
-                    {product.listImages.length > 1 ? (
-                      product.listImages.map((image, index) => {
-                        return (
-                          <div
-                            className='position-relative mx-auto'
-                            key={index}
-                            style={{
-                              paddingBottom: '72px',
-                              width: '72px',
-                              height: '0'
-                            }}
-                          >
-                            <img loading='lazy'
-
-                              className='position-absolute'
-                              src={IMG + image}
-                              alt='Images'
-                              style={{
-                                width: '100%',
-                                height: '100%',
-                                top: '0',
-                                left: '0',
-                                justifyContent: 'flex-start',
-                                objectFit: 'cover',
-                                borderRadius: '3px',
-                                boxShadow:
-                                  'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
-                              }}
-                            />
-                          </div>
-                        )
-                      })
-                    ) : (
-                      <small className='mx-auto'>No images</small>
-                    )}
-                  </div>
-                </td>
-                <td style={{ whiteSpace: 'normal' }}>
-                  <div
-                    style={{
-                      width: '300px',
-                      maxHeight: '170px',
-                      overflow: 'auto',
-                      textAlign: 'justify'
-                    }}
-                  >
-                    <small>{product.description}</small>
-                  </div>
-                </td> */}
 
                       <td className='text-end'>
                         {formatPrice(product.price?.$numberDecimal)}
                         <sup>₫</sup>
                       </td>
+
                       <td className='text-end'>
                         {formatPrice(product.salePrice?.$numberDecimal)}
                         <sup>₫</sup>
                       </td>
+
                       <td>{product.quantity}</td>
+
                       <td>{product.sold}</td>
 
                       <td style={{ whiteSpace: 'normal' }}>
@@ -503,20 +400,24 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                           )}
                         </div>
                       </td>
+
                       <td>
                         <small>
                           <i className='fa-solid fa-star text-warning me-1'></i>
                           {product.rating}
                         </small>
                       </td>
+
                       <td>
                         <span style={{ fontSize: '0.9rem' }}>
                           <ProductActiveLabel isActive={product.isActive} />
                         </span>
                       </td>
+
                       <td>
                         <small>{humanReadableDate(product.createdAt)}</small>
                       </td>
+
                       <td>
                         <div className='d-flex justify-content-start align-items-center'>
                           <Link

@@ -11,7 +11,6 @@ import StoreSmallCard from '../../components/card/StoreSmallCard'
 import ListCartItemsForm from '../../components/list/ListCartItemsForm'
 import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
 import { useSelector } from 'react-redux'
-import i18n from '../../i18n/i18n'
 import { toast } from 'react-toastify'
 import MetaData from '../../components/layout/meta/MetaData'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -28,6 +27,7 @@ function useQuery() {
 const CartPage = () => {
   const { _id, accessToken } = getToken()
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [run, setRun] = useState(false)
   const [carts, setCarts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -39,17 +39,18 @@ const CartPage = () => {
 
   useEffect(() => {
     setIsLoading(true)
+    setError('')
     listCarts(_id, accessToken, { limit: '1000', page: '1' })
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else setCarts(data.carts)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server error')
         setIsLoading(false)
       })
-  }, [run, i18n.language])
+  }, [run])
 
   useEffect(() => {
     const isOrder = query.get('isOrder')
@@ -62,7 +63,7 @@ const CartPage = () => {
 
       createOrder(_id, accessToken, cartId, orderBody)
         .then((data) => {
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else {
             updateDispatch('account', data.user)
             socketId.emit('notificationOrder', {
@@ -76,7 +77,7 @@ const CartPage = () => {
           setIsLoading(false)
         })
         .catch((error) => {
-          console.log('Some thing went wrong')
+          setError('Server error')
           setIsLoading(false)
         })
         .finally(() => {
@@ -89,6 +90,8 @@ const CartPage = () => {
     <MainLayout>
       <div className='position-relative pt-4'>
         {isLoading && <Loading />}
+        {error && <Error msg={error} />}
+
         <MetaData title={`${t('cart')}`} />
         {cartCount === 0 ? (
           <div className=''>

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import AdminLayout from '../../components/layout/AdminLayout'
-import AdminCommissionsTable from '../../components/table/AdminCommissionsTable'
+import AdminCommissionTable from '../../components/table/AdminCommissionTable'
 import { useTranslation } from 'react-i18next'
 
 const CommissionPage = () => {
@@ -13,7 +13,7 @@ const CommissionPage = () => {
   ]
   return (
     <AdminLayout user={user} paths={paths}>
-      <AdminCommissionsTable />
+      <AdminCommissionTable />
     </AdminLayout>
   )
 }

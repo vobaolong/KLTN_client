@@ -6,9 +6,11 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const { _id, accessToken } = getToken()
@@ -18,19 +20,27 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
     if (e.target.files[0] == null) return
     const formData = new FormData()
     formData.set('photo', e.target.files[0])
+
+    setError('')
     setIsLoading(true)
     updateFeaturedImage(_id, accessToken, formData, index, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.store.updateCarousel'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
         setIsLoading(false)
-        console.log('Something went wrong')
+        setError('Server Error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -39,19 +49,26 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
   }
 
   const onRemoveSubmit = () => {
+    setError('')
     setIsLoading(true)
     removeFeaturedImage(_id, accessToken, index, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.store.removeCarousel'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
         setIsLoading(false)
-        console.log('Something went wrong')
+        setError('Server Error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -94,6 +111,12 @@ const StoreCarouselUpload = ({ storeId = '', index = 0 }) => {
               <span className='ms-2 res-hide-md'>{t('button.delete')}</span>
             </label>
           </div>
+
+          {error && (
+            <div className='bg-body mt-1 px-1 rounded'>
+              <Error msg={error} />
+            </div>
+          )}
         </div>
       </div>
     </>

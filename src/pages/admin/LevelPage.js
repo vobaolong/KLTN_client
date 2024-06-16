@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import useToggle from '../../hooks/useToggle'
 import AdminLayout from '../../components/layout/AdminLayout'
 import AdminUserLevelsTable from '../../components/table/AdminUserLevelsTable'
-import AdminStoreLevelTable from '../../components/table/AdminStoreLevelTable'
+import AdminStoreLevelsTable from '../../components/table/AdminStoreLevelsTable'
 import { useTranslation } from 'react-i18next'
 
 const LevelPage = () => {
@@ -48,7 +48,7 @@ const LevelPage = () => {
           </li>
         </ul>
       </div>
-      {flag ? <AdminUserLevelsTable /> : <AdminStoreLevelTable />}
+      {flag ? <AdminUserLevelsTable /> : <AdminStoreLevelsTable />}
     </AdminLayout>
   )
 }

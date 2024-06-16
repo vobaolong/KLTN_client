@@ -3,14 +3,15 @@ import { useState, useEffect } from 'react'
 import { listSellingProductsByStore } from '../../apis/product'
 import Loading from '../ui/Loading'
 import ProductCard from '../card/ProductCard'
-import { toast } from 'react-toastify'
 import Slider from 'react-slick'
+import Error from '../ui/Error'
 
 const ListProductsByStore = ({
   heading = '',
   storeId = '',
   sortBy = 'sold'
 }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState([])
 
@@ -56,6 +57,7 @@ const ListProductsByStore = ({
   }
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     listSellingProductsByStore(
       {
@@ -72,12 +74,12 @@ const ListProductsByStore = ({
       storeId
     )
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else setProducts(data.products)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -90,6 +92,8 @@ const ListProductsByStore = ({
     <div className='position-relative bg-body box-shadow rounded-2 p-3'>
       {heading && <h5 style={{ color: 'var(--muted-color)' }}>{heading}</h5>}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       <div className='slider-container'>
         <Slider {...settings}>
           {products?.map((product, index) => (

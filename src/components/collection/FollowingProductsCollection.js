@@ -8,6 +8,7 @@ import Error from '../ui/Error'
 import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import boxImg from '../../assets/box.svg'
 
 const FollowingProductsCollection = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -46,7 +47,7 @@ const FollowingProductsCollection = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -68,28 +69,37 @@ const FollowingProductsCollection = ({ heading = false }) => {
       {error && <Error msg={error} />}
       {heading && <h4 className='text-center'>{t('favProduct')}</h4>}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='container-fluid p-0 mt-3'>
-          <div className='row'>
-            {listProducts?.map((product, index) => (
-              <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
-                <ProductCard product={product} onRun={() => setRun(!run)} />
-              </div>
-            ))}
+        {!isLoading && pagination.size === 0 ? (
+          <div className='m-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
+            <h5>{t('noFavProduct')}</h5>
           </div>
-        </div>
-        <div className='d-flex justify-content-between align-items-center px-4'>
-          <ShowResult
-            limit={filter.limit}
-            size={pagination.size}
-            pageCurrent={pagination.pageCurrent}
-          />
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
-        </div>
+        ) : (
+          <>
+            <div className='container-fluid p-0 mt-3'>
+              <div className='row'>
+                {listProducts?.map((product, index) => (
+                  <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
+                    <ProductCard product={product} onRun={() => setRun(!run)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className='d-flex justify-content-between align-items-center px-4'>
+              <ShowResult
+                limit={filter.limit}
+                size={pagination.size}
+                pageCurrent={pagination.pageCurrent}
+              />
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

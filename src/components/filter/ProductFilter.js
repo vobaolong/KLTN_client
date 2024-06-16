@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import StarRating from '../label/StarRating'
 import Input from '../ui/Input'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +16,7 @@ const ProductFilter = ({ filter, setFilter }) => {
   const history = useHistory()
   const location = useLocation()
   const [displayLimit, setDisplayLimit] = useState(5)
+
   const handleFilter = (name, value, order = 'desc') => {
     let newOrder = order
     if (value === 'asc' || value === 'desc') {
@@ -38,11 +39,20 @@ const ProductFilter = ({ filter, setFilter }) => {
     history.push(`${location.pathname}?${searchParams.toString()}`)
   }
 
+  const typingTimeoutRef = useRef(null)
+
   const handleSetPrice = (name1, name2, value) => {
     setPrice({
       ...price,
       [name1]: value
     })
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current)
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      handleFilter(name2, value)
+    }, 600)
   }
 
   const applyPriceFilter = (event) => {

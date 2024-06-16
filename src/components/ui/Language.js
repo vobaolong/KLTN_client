@@ -57,7 +57,7 @@ const Language = ({ vertical = true }) => {
           </div>
         </div>
       ) : (
-        <div className='d-flex align-items-center justify-content-between mt-2 gap-32'>
+        <div className='d-flex align-items-center justify-content-between mt-2 gap-2'>
           <button
             className={`btn rounded-1 btn-with-img ${
               activeLang === 'en' ? 'btn-value' : 'btn-outline-value'

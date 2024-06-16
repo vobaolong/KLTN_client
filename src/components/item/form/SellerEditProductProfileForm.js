@@ -11,6 +11,7 @@ import VariantSelector from '../../selector/VariantSelector'
 import { t } from 'i18next'
 import { toast } from 'react-toastify'
 import { Link, useHistory } from 'react-router-dom'
+import Error from '../../ui/Error'
 
 const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +20,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [newProduct, setNewProduct] = useState({})
   const { _id, accessToken } = getToken()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [error, setError] = useState('')
   const history = useHistory()
 
   useEffect(() => {
@@ -115,7 +117,10 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       !isValidSalePrice
     )
       return
-
+    if (parseFloat(salePrice) > parseFloat(price)) {
+      setError(t('productValid.salePriceCannotBeGreaterThan'))
+      return
+    }
     setIsConfirmingUpdate(true)
   }
 
@@ -130,15 +135,22 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     if (newProduct.variantValueIds && newProduct.variantValueIds.length > 0)
       formData.set('variantValueIds', newProduct.variantValueIds.join('|'))
     setIsLoading(true)
+    setError('')
     updateProduct(_id, accessToken, formData, product._id, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else toast.success(t('toastSuccess.product.edit'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Sever Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -166,7 +178,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             <h5 className='fw-bold'>{t('productDetail.editProInfo')}</h5>
           </div>
 
-          <div className='col-12 px-4 mt-3'>
+          <div className='col-12'>
             <Input
               type='text'
               label={t('productDetail.name')}
@@ -180,69 +192,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             />
           </div>
 
-          <div className='col-12 px-4 mt-3'>
-            <TextArea
-              type='text'
-              label={t('productDetail.description')}
-              value={newProduct.description}
-              isValid={newProduct.isValidDescription}
-              feedback='Please provide a valid product description.'
-              required={true}
-              validator='bio'
-              onChange={(value) =>
-                handleChange('description', 'isValidDescription', value)
-              }
-              onValidate={(flag) => handleValidate('isValidDescription', flag)}
-            />
-          </div>
-
-          <div className='col-md-6 col-sm-12 px-4 mt-3'>
-            <Input
-              type='number'
-              label={`${t('productDetail.price')} (₫)`}
-              value={newProduct.price}
-              isValid={newProduct.isValidPrice}
-              feedback='Please provide a valid product price.'
-              required={true}
-              validator='positive|zero'
-              onChange={(value) => handleChange('price', 'isValidPrice', value)}
-              onValidate={(flag) => handleValidate('isValidPrice', flag)}
-            />
-          </div>
-
-          <div className='col-md-6 col-sm-12 px-4 mt-3'>
-            <Input
-              type='number'
-              label={`${t('productDetail.salePrice')} (₫)`}
-              value={newProduct.salePrice}
-              isValid={newProduct.isValidSalePrice}
-              feedback='Please provide a valid product sale price.'
-              required={true}
-              validator='positive|zero'
-              onChange={(value) =>
-                handleChange('salePrice', 'isValidSalePrice', value)
-              }
-              onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
-            />
-          </div>
-
-          <div className='col-12 px-4 mt-3'>
-            <Input
-              type='number'
-              label={t('productDetail.quantity')}
-              value={newProduct.quantity}
-              isValid={newProduct.isValidQuantity}
-              feedback='Please provide a valid product quantity.'
-              required={true}
-              validator='positive|zero'
-              onChange={(value) =>
-                handleChange('quantity', 'isValidQuantity', value)
-              }
-              onValidate={(flag) => handleValidate('isValidQuantity', flag)}
-            />
-          </div>
-
-          <div className='col-12 mt-3 px-4 mt-3'>
+          <div className='col-12 mt-3'>
             <p className=''>
               {t('productDetail.chooseCategory')}
               <small className='text-danger'> *</small>
@@ -258,6 +208,68 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
                   categoryId: category._id
                 })
               }
+            />
+          </div>
+
+          <div className='col-12 mt-3'>
+            <TextArea
+              type='text'
+              label={t('productDetail.description')}
+              value={newProduct.description}
+              isValid={newProduct.isValidDescription}
+              feedback={t('productValid.validDescription')}
+              required={true}
+              validator='bio'
+              onChange={(value) =>
+                handleChange('description', 'isValidDescription', value)
+              }
+              onValidate={(flag) => handleValidate('isValidDescription', flag)}
+            />
+          </div>
+
+          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={`${t('productDetail.price')} (₫)`}
+              value={newProduct.price}
+              isValid={newProduct.isValidPrice}
+              feedback={t('productValid.priceValid')}
+              required={true}
+              validator='positive|zero'
+              onChange={(value) => handleChange('price', 'isValidPrice', value)}
+              onValidate={(flag) => handleValidate('isValidPrice', flag)}
+            />
+          </div>
+
+          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={`${t('productDetail.salePrice')} (₫)`}
+              value={newProduct.salePrice}
+              isValid={newProduct.isValidSalePrice}
+              feedback={t('productValid.salePriceValid')}
+              required={true}
+              validator='positive|zero'
+              onChange={(value) =>
+                handleChange('salePrice', 'isValidSalePrice', value)
+              }
+              onValidate={(flag) => handleValidate('isValidSalePrice', flag)}
+            />
+          </div>
+
+          <div className='col-12 px-4 mt-3'>
+            <Input
+              type='number'
+              label={t('productDetail.quantity')}
+              value={newProduct.quantity}
+              isValid={newProduct.isValidQuantity}
+              feedback={t('productValid.quantityValid')}
+              required={true}
+              validator='positive|zero'
+              onChange={(value) =>
+                handleChange('quantity', 'isValidQuantity', value)
+              }
+              onValidate={(flag) => handleValidate('isValidQuantity', flag)}
             />
           </div>
 
@@ -280,6 +292,11 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
               }}
             />
           </div>
+          {error && (
+            <div className='col-12 px-4'>
+              <Error msg={error} />
+            </div>
+          )}
         </div>
         <div
           className={`bg-body ${
@@ -299,7 +316,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
               type='submit'
               className='btn btn-primary ripple res-w-100-md rounded-1'
               onClick={handleSubmit}
-              style={{ width: '200px' }}
+              style={{ maxWidth: '200px', width: '100%' }}
             >
               {t('button.save')}
             </button>

@@ -21,7 +21,7 @@ const ReviewAndRatingPage = () => {
     <StoreLayout store={store} paths={paths}>
       <div style={{ margin: '0 auto' }}>
         <div className='mt-4'>
-          <ListReviews storeId={store._id} heading={false} />
+          <ListReviews storeId={store._id} />
         </div>
       </div>
     </StoreLayout>

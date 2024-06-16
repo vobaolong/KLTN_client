@@ -13,9 +13,9 @@ const StoreOwnerTable = ({ heading = false, ownerId = {} }) => {
       {alerts ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
-          msg1='Người sở hữu'
-          alert=' Mục này chứa thông tin'
-          msg2='chủ cửa hàng.'
+          msg1={`${t('alert.theOwner')}`}
+          alert={`${t('alert.thisSectionContainsInfo')}`}
+          msg2={`${t('alert.theShopOwner')}`}
           onClose={() => setAlerts(false)}
         />
       ) : null}

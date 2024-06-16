@@ -56,9 +56,9 @@ const BellButton = ({ navFor = 'user' }) => {
   useEffect(() => {
     socketId.on('notification', (id) => {
       fetchNotifications(id)
+      console.log(id)
     })
   }, [])
-
   const popoverClickRootClose = (
     <Popover
       id='popover-trigger-click-root-close'
@@ -119,7 +119,7 @@ const BellButton = ({ navFor = 'user' }) => {
   )
 
   return (
-    <li className='nav-item' onClick={handleClick}>
+    <div onClick={handleClick}>
       <OverlayTrigger
         trigger='click'
         rootClose
@@ -127,7 +127,7 @@ const BellButton = ({ navFor = 'user' }) => {
         overlay={popoverClickRootClose}
       >
         <div className='cart-item-wrap position-relative'>
-          <span className='rounded-circle btn lang inherit cus-tooltip ripple'>
+          <span className='rounded-circle btn inherit cus-tooltip ripple mx-2'>
             <i className='fa-light fa-bell'></i>
           </span>
           {notificationCount > 0 && (
@@ -141,7 +141,7 @@ const BellButton = ({ navFor = 'user' }) => {
           <small className='cus-tooltip-msg'>{t('notification')}</small>
         </div>
       </OverlayTrigger>
-    </li>
+    </div>
   )
 }
 

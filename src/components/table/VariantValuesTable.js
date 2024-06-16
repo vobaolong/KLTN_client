@@ -51,7 +51,7 @@ const VariantValuesTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(`Error occurred: ${error.message}`)
+          setError('Server Error')
           setIsLoading(false)
         })
     } else {
@@ -65,7 +65,7 @@ const VariantValuesTable = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError(`Error occurred: ${error.message}`)
+          setError('Server Error')
           setIsLoading(false)
         })
     }
@@ -91,10 +91,16 @@ const VariantValuesTable = ({
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -108,10 +114,16 @@ const VariantValuesTable = ({
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

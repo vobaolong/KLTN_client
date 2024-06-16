@@ -8,6 +8,7 @@ import StoreCard from '../card/StoreCard'
 import Pagination from '../ui/Pagination'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
+import boxImg from '../../assets/box.svg'
 
 const FollowingStoresCollection = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -69,28 +70,37 @@ const FollowingStoresCollection = ({ heading = false }) => {
 
       {heading && <h4 className='text-center'>{t('favStore')}</h4>}
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='container-fluid p-0 mt-3'>
-          <div className='row'>
-            {listStores?.map((store, index) => (
-              <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
-                <StoreCard store={store} onRun={() => setRun(!run)} />
-              </div>
-            ))}
+        {!isLoading && pagination.size === 0 ? (
+          <div className='m-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
+            <h5>{t('noFavStore')}</h5>
           </div>
-        </div>
-        <div className='d-flex justify-content-between align-items-center px-4'>
-          <ShowResult
-            limit={filter.limit}
-            size={pagination.size}
-            pageCurrent={pagination.pageCurrent}
-          />
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
-        </div>
+        ) : (
+          <>
+            <div className='container-fluid p-0 mt-3'>
+              <div className='row'>
+                {listStores?.map((store, index) => (
+                  <div className='col-lg-3 col-sm-4 col-6 mb-4' key={index}>
+                    <StoreCard store={store} onRun={() => setRun(!run)} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className='d-flex justify-content-between align-items-center px-4'>
+              <ShowResult
+                limit={filter.limit}
+                size={pagination.size}
+                pageCurrent={pagination.pageCurrent}
+              />
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

@@ -46,7 +46,7 @@ const StoreSearchPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Server Error ${error.message}`)
+        setError(`Server Error`)
         setIsLoading(false)
       })
   }

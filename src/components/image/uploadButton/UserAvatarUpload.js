@@ -22,6 +22,9 @@ const UserAvatarUpload = () => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.addAvatar'))
@@ -29,8 +32,11 @@ const UserAvatarUpload = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

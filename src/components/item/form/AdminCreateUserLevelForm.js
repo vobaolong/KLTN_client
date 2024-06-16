@@ -8,10 +8,11 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import ColorPickerInput from '../../ui/ColorPickerInput'
+import Error from '../../ui/Error'
 
 const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
   const { t } = useTranslation()
-
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
@@ -68,10 +69,11 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     createUserLevel(_id, accessToken, level)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success('toastSuccess.level.create')
           setLevel({
@@ -85,10 +87,16 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Sever error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -160,6 +168,13 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
             }
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
+
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

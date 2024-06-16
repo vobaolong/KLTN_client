@@ -6,6 +6,7 @@ import { updateVariant, getVariantById } from '../../../apis/variant'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
+import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +14,7 @@ import { toast } from 'react-toastify'
 
 const AdminEditVariantForm = ({ variantId = '' }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
@@ -26,11 +28,12 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     getVariantById(_id, accessToken, variantId)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
         } else {
           setNewVariant({
             name: data.variant.name,
@@ -44,7 +47,7 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -87,16 +90,23 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     updateVariant(_id, accessToken, variantId, newVariant)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else toast.success(t('toastSuccess.variant.update'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Sever Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -150,6 +160,12 @@ const AdminEditVariantForm = ({ variantId = '' }) => {
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12 px-4'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 px-4 pb-3 d-flex justify-content-between align-items-center mt-4 res-flex-reverse-md'>
           <Link

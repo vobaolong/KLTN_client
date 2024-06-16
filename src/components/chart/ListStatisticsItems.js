@@ -13,7 +13,8 @@ import { groupByDate, groupByJoined, groupBySold } from '../../helper/groupBy'
 import { humanReadableDate } from '../../helper/humanReadable'
 import LineChart from './LineChart'
 import BarChart from './BarChart'
-// import DoughnutChart from './DoughnutChart'
+import Error from '../ui/Error'
+
 import DropDownMenu from '../ui/DropDownMenu'
 import UserSmallCard from '../card/UserSmallCard'
 import StoreSmallCard from '../card/StoreSmallCard'
@@ -24,6 +25,7 @@ import { formatPrice } from '../../helper/formatPrice'
 
 const ListStatisticsItems = ({ by = '', storeId = '' }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -76,6 +78,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
   }
 
   const adminInit = async () => {
+    setError('')
     setIsLoading(true)
     try {
       const orderData = await listOrdersForAdmin(_id, accessToken, {
@@ -134,12 +137,13 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
       const totalRevenue = calculateTotalRevenue(orderData.orders)
       setTotalRevenue(totalRevenue)
     } catch (e) {
-      console.error('Something went wrong')
+      setError('Server Error')
     }
     setIsLoading(false)
   }
 
   const sellerInit = async () => {
+    setError('')
     setIsLoading(true)
     try {
       const orderData = await listOrdersByStore(
@@ -185,7 +189,7 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
       const totalRevenue = calculateTotalRevenue(orderData.orders)
       setTotalRevenue(totalRevenue)
     } catch (e) {
-      console.error('Something went wrong')
+      setError('Server Error')
     }
     setIsLoading(false)
   }
@@ -197,6 +201,8 @@ const ListStatisticsItems = ({ by = '', storeId = '' }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       <div className='container-fluid px-0'>
         <div className='row'>
           <div className='col-md-4 col-12'>

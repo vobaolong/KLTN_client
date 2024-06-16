@@ -9,10 +9,13 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import MultiCategorySelector from '../../selector/MultiCategorySelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const AdminCreateVariantForm = () => {
   const { t } = useTranslation()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [error, setError] = useState('')
+
   const [isConfirmingBack, setIsConfirmingBack] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -73,15 +76,23 @@ const AdminCreateVariantForm = () => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     createVariant(_id, accessToken, newVariant)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else toast.success(t('toastSuccess.variant.create'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Sever Error')
+        setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -143,6 +154,12 @@ const AdminCreateVariantForm = () => {
             />
           </div>
         </div>
+
+        {error && (
+          <div className='col-12 px-4'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div
           className={`bg-body ${

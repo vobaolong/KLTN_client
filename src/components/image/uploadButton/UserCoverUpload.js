@@ -5,8 +5,10 @@ import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const UserCoverUpload = () => {
+  const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [updateDispatch] = useUpdateDispatch()
@@ -21,15 +23,21 @@ const UserCoverUpload = () => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
-          toast.success('Cập nhật ảnh bìa thành công')
+          toast.success(t('userDetail.updateCover'))
           updateDispatch('account', data.user)
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

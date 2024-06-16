@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import AddressForm from './AddressForm'
 import { getAddressCache } from '../../../apis/address'
+import Error from '../../ui/Error'
 
 const StoreEditProfileForm = ({
   name = '',
@@ -20,6 +21,7 @@ const StoreEditProfileForm = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [profile, setProfile] = useState({})
+  const [error, setError] = useState('')
   const [updateDispatch] = useUpdateDispatch()
   const { _id, accessToken } = getToken()
   const { t } = useTranslation()
@@ -73,19 +75,26 @@ const StoreEditProfileForm = ({
       address: profile.address,
       addressDetail: addressDetail
     }
+    setError('')
     setIsLoading(true)
     updateProfile(_id, accessToken, store, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.store.update'))
           updateDispatch('seller', data.store)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -140,6 +149,12 @@ const StoreEditProfileForm = ({
             />
           )}
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

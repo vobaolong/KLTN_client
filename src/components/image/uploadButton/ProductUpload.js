@@ -3,11 +3,12 @@ import { getToken } from '../../../apis/auth'
 import { updateListImages, removeListImages } from '../../../apis/product'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
-import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import Error from '../../ui/Error'
 
 const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
   const { t } = useTranslation()
   const { _id, accessToken } = getToken()
@@ -16,18 +17,26 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
     if (e.target.files[0] == null) return
     const formData = new FormData()
     formData.set('photo', e.target.files[0])
+
+    setError('')
     setIsLoading(true)
     updateListImages(_id, accessToken, formData, index, productId, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
         setIsLoading(false)
-        console.error('Something went wrong')
+        setError('Server Error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -36,16 +45,23 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
   }
 
   const onRemoveSubmit = () => {
+    setError('')
     setIsLoading(true)
     removeListImages(_id, accessToken, index, productId, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         setIsLoading(false)
         if (onRun) onRun()
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -75,6 +91,11 @@ const ProductUpload = ({ storeId = '', productId = '', index = 0, onRun }) => {
 
       <label className='cus-avatar-icon'>
         <i className='fa-solid fa-camera'></i>
+        {error && (
+          <span>
+            <Error msg={error} />
+          </span>
+        )}
         <input
           className='visually-hidden'
           type='file'

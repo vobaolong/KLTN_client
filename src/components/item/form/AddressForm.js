@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Loading from '../../ui/Loading'
@@ -163,7 +164,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
       <div className='row mb-2 text-start gap-3'>
         <div className='col-12 d-flex justify-content-between align-items-center'>
           <label className='col-3 me-3' htmlFor='province'>
-            {t('addressForm.province')}
+            {t('addressForm.province')} <span className='text-danger'>*</span>
           </label>
           <select
             className='flex-grow-1 border rounded-1 px-2 py-1 select-item'
@@ -182,7 +183,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
 
         <div className='col-12 d-flex justify-content-between align-items-center'>
           <label className='col-3 me-3' htmlFor='district'>
-            {t('addressForm.district')}
+            {t('addressForm.district')} <span className='text-danger'>*</span>
           </label>
           <select
             className='flex-grow-1 border rounded-1 px-2 py-1 select-item'
@@ -202,7 +203,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
 
         <div className='col-12 d-flex justify-content-between align-items-center'>
           <label className='col-3 me-3' htmlFor='ward'>
-            {t('addressForm.ward')}
+            {t('addressForm.ward')} <span className='text-danger'>*</span>
           </label>
           <select
             className='flex-grow-1 border rounded-1 px-2 py-1 select-item'

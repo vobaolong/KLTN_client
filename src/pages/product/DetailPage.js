@@ -30,6 +30,7 @@ import returnImg from '../../assets/return.svg'
 import checkImg from '../../assets/package.svg'
 import { formatDate, formatOnlyDate } from '../../helper/humanReadable'
 import Skeleton from 'react-loading-skeleton'
+import Loading from '../../components/ui/Loading'
 
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -40,6 +41,7 @@ const DetailPage = () => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     getProduct(productId)
       .then(async (data) => {
@@ -72,7 +74,7 @@ const DetailPage = () => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -99,7 +101,7 @@ const DetailPage = () => {
   return (
     <MainLayout>
       <div className='position-relative'>
-        {/* {isLoading && <Loading />} */}
+        {isLoading && <Loading />}
         {error ? (
           <Error msg={error} />
         ) : (
@@ -455,10 +457,7 @@ const DetailPage = () => {
                           aria-labelledby='reviews-tab'
                         >
                           <div id='reviews'>
-                            <ListReviews
-                              heading={t('productDetail.productReview')}
-                              productId={product._id}
-                            />
+                            <ListReviews productId={product._id} />
                           </div>
                         </div>
                       </div>

@@ -2,7 +2,6 @@ import { refreshTokenApi, getToken } from './auth'
 const API = process.env.REACT_APP_API_URL
 const jwt = require('jsonwebtoken')
 
-//user
 export const getUser = async (userId) => {
   try {
     const res = await fetch(`${API}/user/${userId}`, {
@@ -18,7 +17,6 @@ export const getUser = async (userId) => {
   }
 }
 
-//list user
 export const getListUsers = async (filter) => {
   const { search, sortBy, order, limit, page, role } = filter
 
@@ -60,15 +58,12 @@ export const listUserForAdmin = async (userId, token, filter) => {
   }
 }
 
-// profile
 export const getUserProfile = async (userId, token) => {
-  //user validate
   const { refreshToken, _id, role } = getToken()
   const decoded = jwt.decode(token)
   const timeout = (decoded.exp - 60) * 1000 - Date.now().valueOf()
   setTimeout(() => refreshTokenApi(refreshToken, _id, role), timeout)
 
-  // getuser
   return fetch(`${API}/user/profile/${userId}`, {
     method: 'GET',
     headers: {
@@ -99,7 +94,6 @@ export const updateProfile = async (userId, token, user) => {
   }
 }
 
-//avatar
 export const updateAvatar = async (userId, token, photo) => {
   try {
     const res = await fetch(`${API}/user/avatar/${userId}`, {
@@ -117,7 +111,6 @@ export const updateAvatar = async (userId, token, photo) => {
   }
 }
 
-//cover
 export const updateCover = async (userId, token, photo) => {
   try {
     const res = await fetch(`${API}/user/cover/${userId}`, {
@@ -135,7 +128,6 @@ export const updateCover = async (userId, token, photo) => {
   }
 }
 
-//password
 export const updatePassword = async (userId, token, user) => {
   try {
     const res = await fetch(`${API}/user/password/${userId}`, {
@@ -154,7 +146,6 @@ export const updatePassword = async (userId, token, user) => {
   }
 }
 
-//address
 export const addAddress = async (userId, token, address) => {
   try {
     const res = await fetch(`${API}/user/address/${userId}`, {

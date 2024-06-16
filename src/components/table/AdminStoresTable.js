@@ -60,7 +60,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -114,6 +114,9 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           toast.success(active)
           setRun(!run)
@@ -121,8 +124,11 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

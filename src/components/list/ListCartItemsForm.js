@@ -69,7 +69,7 @@ const ListCartItems = ({
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Server Error ${error.message}`)
+        setError(`Server Error`)
         setIsLoading(false)
       })
   }
@@ -102,7 +102,7 @@ const ListCartItems = ({
         }, 3000)
       })
       .catch((error) => {
-        setError(`Server Error ${error.message}`)
+        setError(`Server Error`)
         setTimeout(() => {
           setError('')
         }, 3000)
@@ -130,7 +130,7 @@ const ListCartItems = ({
         }, 3000)
       })
       .catch((error) => {
-        setError(`Server Error ${error.message}`)
+        setError(`Server Error`)
         setTimeout(() => {
           setError('')
         }, 3000)

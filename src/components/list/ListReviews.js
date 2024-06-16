@@ -7,13 +7,9 @@ import Pagination from '../ui/Pagination'
 import ReviewInfo from '../info/ReviewInfo'
 import StarRating from '../label/StarRating'
 import { useTranslation } from 'react-i18next'
+import boxImg from '../../assets/box.svg'
 
-const ListReviews = ({
-  productId = '',
-  storeId = '',
-  userId = '',
-  heading = ''
-}) => {
+const ListReviews = ({ productId = '', storeId = '', userId = '' }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -76,27 +72,6 @@ const ListReviews = ({
       page: newPage
     })
   }
-  const renderRating = () => {
-    const render = []
-    for (let i = 1; i <= 5; i++) {
-      const ratingCount =
-        ratingsCounts.find((item) => item.rating === i)?.count || 0
-      const percentage =
-        reviews.length > 0 ? (ratingCount / reviews.length) * 100 : 0
-      render.push(
-        <small className='d-flex align-items-center gap-2' key={i}>
-          <StarRating stars={i} />
-          <progress
-            className='custom-progress'
-            value={percentage}
-            max={100}
-          ></progress>
-          <span>{ratingCount}</span>
-        </small>
-      )
-    }
-    return render
-  }
 
   const renderFilterRating = () => {
     const render = []
@@ -148,30 +123,12 @@ const ListReviews = ({
     const count = reviews.filter((review) => review.rating === i).length
     ratingsCounts.push({ rating: i, count: count })
   }
-  const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0)
-  const averageRating = (totalRating / reviews.length).toFixed(1)
 
   return (
     <div className='position-relative'>
-      {heading && <h5 className='my-2'>{heading}</h5>}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       <div className='bg-body rounded border p-3'>
-        <div className='d-flex flex-column gap-1 pb-3 mb-4 border-bottom'>
-          <h6>Tổng quan</h6>
-          <div className='d-flex gap-2 align-items-center'>
-            <span style={{ fontSize: '1.7rem', fontWeight: '600' }}>
-              {(averageRating >= 0 && averageRating) || 0}
-            </span>
-            <StarRating stars={averageRating} />
-          </div>
-          <span className='text-secondary' style={{ fontSize: '.9rem' }}>
-            ({reviews?.length} đánh giá)
-          </span>
-          <div className='d-flex flex-column-reverse flex-wrap justify-content-start align-items-start'>
-            {renderRating()}
-          </div>
-        </div>
         <span>Lọc theo</span>
         <div className='d-flex justify-content-between align-items-end p-2 rounded-1 border-bottom'>
           <div className='d-flex flex-wrap justify-content-start align-items-center'>
@@ -213,9 +170,10 @@ const ListReviews = ({
             </div>
           </>
         ) : (
-          <h6 className='text-center text-danger mt-2'>
-            {t('reviewDetail.noReview')}
-          </h6>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
+            <h6>{t('reviewDetail.noReview')}</h6>
+          </div>
         )}
       </div>
     </div>

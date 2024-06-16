@@ -10,10 +10,12 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { getAddressCache } from '../../apis/address'
+import Error from '../ui/Error'
 
 const UserAddressesTable = ({ addresses = [], heading = false }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [isLoadingFetchData, setIsLoadingFetchData] = useState(false)
   const [editAddress, setEditAddress] = useState({})
   const [addressDetail, setAddressDetail] = useState(null)
@@ -41,19 +43,26 @@ const UserAddressesTable = ({ addresses = [], heading = false }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     deleteAddresses(_id, accessToken, deleteAddress.index)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.address.delete'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -66,22 +75,29 @@ const UserAddressesTable = ({ addresses = [], heading = false }) => {
   }
 
   const onSubmitEdit = (index) => {
+    setError('')
     setIsLoading(true)
     updateAddress(_id, accessToken, index, {
       address: editAddress.address,
       addressDetail: newAddressDetail
     })
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.address.update'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -102,6 +118,8 @@ const UserAddressesTable = ({ addresses = [], heading = false }) => {
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       {isConfirming && (
         <ConfirmDialog
           title={t('userDetail.delAddress')}

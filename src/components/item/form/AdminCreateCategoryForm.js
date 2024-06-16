@@ -10,9 +10,11 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const AdminCreateCategoryForm = () => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -88,16 +90,23 @@ const AdminCreateCategoryForm = () => {
     if (newCategory.categoryId)
       formData.set('categoryId', newCategory.categoryId)
     if (newCategory.image) formData.set('image', newCategory.image)
+    setError('')
     setIsLoading(true)
     createCategory(_id, accessToken, formData)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else toast.success(t('toastSuccess.category.create'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Sever Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -170,7 +179,11 @@ const AdminCreateCategoryForm = () => {
             />
           </div>
         </div>
-
+        {error && (
+          <div className='col-12 px-4'>
+            <Error msg={error} />
+          </div>
+        )}
         <div
           className={`bg-body ${
             isScrolled ? 'shadow' : 'box-shadow'

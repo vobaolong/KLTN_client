@@ -30,7 +30,7 @@ const StoreLevelInfo = ({ store = {} }) => {
             maxPrice: '',
             sortBy,
             order: 'desc',
-            limit: 10,
+            limit: 100,
             page: 1
           },
           store._id

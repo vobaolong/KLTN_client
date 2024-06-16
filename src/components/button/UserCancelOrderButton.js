@@ -7,6 +7,7 @@ import ConfirmDialog from '../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { socketId } from '../..'
+import Error from '../ui/Error'
 
 const UserCancelOrderButton = ({
   orderId = '',
@@ -16,6 +17,7 @@ const UserCancelOrderButton = ({
   onRun
 }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
@@ -26,32 +28,40 @@ const UserCancelOrderButton = ({
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     const value = { status: 'Cancelled' }
     userCancelOrder(_id, accessToken, value, orderId)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           socketId.emit('notificationCancel', {
             orderId: data.order._id,
             from: _id,
             to: data.order.storeId._id
           })
-          if (onRun) onRun()
           toast.success(t('toastSuccess.order.cancel'))
+          if (onRun) onRun()
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {isConfirming && (
         <ConfirmDialog
           title='Cancel Order'

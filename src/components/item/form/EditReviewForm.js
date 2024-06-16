@@ -6,15 +6,16 @@ import { numberTest, regexTest } from '../../../helper/test'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import TextArea from '../../ui/TextArea'
+import Error from '../../ui/Error'
 import RatingInput from '../../ui/RatingInput'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
 const EditReviewForm = ({ oldReview = {}, onRun }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
-
   const [newReview, setNewReview] = useState({
     rating: 1,
     content: '',
@@ -64,10 +65,11 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     editReview(_id, accessToken, newReview, oldReview._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           if (onRun) {
             onRun()
@@ -75,10 +77,16 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
           }
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -119,6 +127,12 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
             onValidate={(flag) => handleValidate('isValidContent', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

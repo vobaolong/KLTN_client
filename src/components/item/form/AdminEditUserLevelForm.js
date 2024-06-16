@@ -3,6 +3,7 @@ import { getToken } from '../../../apis/auth'
 import { updateUserLevel } from '../../../apis/level'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
+import Error from '../../ui/Error'
 import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +11,7 @@ import { toast } from 'react-toastify'
 
 const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
   const { t } = useTranslation()
   const [level, setLevel] = useState({})
@@ -68,19 +70,26 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     updateUserLevel(_id, accessToken, oldLevel._id, level)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.level.edit'))
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Sever error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -157,6 +166,12 @@ const AdminEditUserLevelForm = ({ oldLevel = '', onRun = () => {} }) => {
             onValidate={(flag) => handleValidate('isValidDiscount', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

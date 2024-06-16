@@ -10,8 +10,10 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [filter, setFilter] = useState({})
@@ -103,26 +105,35 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
 
   const onSubmit = () => {
     const staffs = listRight.map((r) => r._id)
+    setError('')
     setIsLoading(true)
     addStaffs(_id, accessToken, staffs, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setListRight([])
           updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.staff.addStaff'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       {isConfirming && (
         <ConfirmDialog
           title={t('staffDetail.add')}

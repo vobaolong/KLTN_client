@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import Error from '../ui/Error'
-import { formatDate, humanReadableDate } from '../../helper/humanReadable'
+import { humanReadableDate } from '../../helper/humanReadable'
 
 const AdminVariantsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -58,7 +58,7 @@ const AdminVariantsTable = ({ heading = false }) => {
         if (isMounted) setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         if (isMounted) setIsLoading(false)
       })
   }, [filter, run])
@@ -106,10 +106,16 @@ const AdminVariantsTable = ({ heading = false }) => {
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -125,7 +131,7 @@ const AdminVariantsTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
       })
   }

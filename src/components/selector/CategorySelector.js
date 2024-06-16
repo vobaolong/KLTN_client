@@ -5,8 +5,8 @@ import { listCategories, listActiveCategories } from '../../apis/category'
 import SearchInput from '../ui/SearchInput'
 import CategorySmallCard from '../card/CategorySmallCard'
 import Loading from '../ui/Loading'
-import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import Error from '../ui/Error'
 
 const CategorySelector = ({
   defaultValue = '',
@@ -18,6 +18,7 @@ const CategorySelector = ({
   isRequired = false
 }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [lv1Categories, setLv1Categories] = useState([])
   const [lv2Categories, setLv2Categories] = useState([])
@@ -50,28 +51,29 @@ const CategorySelector = ({
   const [selectedCategory, setSelectedCategory] = useState(defaultValue)
 
   const loadCategories = (filter, setCategories) => {
+    setError('')
     setIsLoading(true)
     if (isActive) {
       listActiveCategories(filter)
         .then((data) => {
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else setCategories(data.categories)
           setIsLoading(false)
         })
         .catch((error) => {
-          console.error('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     } else {
       const { _id, accessToken } = getToken()
       listCategories(_id, accessToken, filter)
         .then((data) => {
-          if (data.error) toast.error(data.error)
+          if (data.error) setError(data.error)
           else setCategories(data.categories)
           setIsLoading(false)
         })
         .catch((error) => {
-          console.error('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     }
@@ -146,6 +148,7 @@ const CategorySelector = ({
         <SearchInput onChange={handleChangeKeyword} />
 
         {isLoading && <Loading />}
+        {error && <Error msg={error} />}
         <div className='d-flex border rounded-1 p-2 mt-2 bg-body'>
           <div
             className='list-group m-1'

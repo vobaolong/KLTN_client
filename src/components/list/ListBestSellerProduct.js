@@ -3,9 +3,9 @@ import { useState, useEffect, memo } from 'react'
 import { listActiveProducts } from '../../apis/product'
 import Loading from '../ui/Loading'
 import ProductCard from '../card/ProductCard'
-import { toast } from 'react-toastify'
 import Slider from 'react-slick'
 import { shallowEqual } from 'react-redux'
+import Error from '../ui/Error'
 
 const ProductCardMemo = memo(ProductCard)
 const settings = {
@@ -52,6 +52,7 @@ const ListBestSellerProducts = ({
   heading = '',
   categoryId = ''
 }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState([])
 
@@ -69,12 +70,12 @@ const ListBestSellerProducts = ({
       page: 1
     })
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else setProducts(data.products)
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -87,6 +88,8 @@ const ListBestSellerProducts = ({
     <div className='position-relative bg-body box-shadow rounded-2 p-3'>
       {heading && <h5 className='text-dark-emphasis'>{heading}</h5>}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
+
       <div className='slider-container'>
         <Slider {...settings}>
           {products?.map((product, index) => (

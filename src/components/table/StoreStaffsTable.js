@@ -125,7 +125,7 @@ const StoreStaffsTable = ({
         }, 3000)
       })
       .catch((error) => {
-        setError(`Server Error ${error.message}`)
+        setError(`Server Error`)
         setIsLoading(false)
         setTimeout(() => {
           setError('')
@@ -138,9 +138,9 @@ const StoreStaffsTable = ({
       {alerts ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
-          msg1='Danh sách nhân viên'
-          alert=' Mục này chứa các'
-          msg2='nhân viên của cửa hàng.'
+          msg1={`${t('alert.listStaff')}`}
+          alert={`${t('alert.thisSectionContains')}`}
+          msg2={`${t('alert.theShopStaffs.')}`}
           onClose={() => setAlerts(false)}
         />
       ) : null}

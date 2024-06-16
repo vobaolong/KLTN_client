@@ -75,10 +75,16 @@ const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
           toast.success(data.success)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

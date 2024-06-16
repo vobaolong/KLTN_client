@@ -19,6 +19,7 @@ import { toast } from 'react-toastify'
 import ProductActiveLabel from '../label/ProductActiveLabel'
 import CategorySmallCard from '../card/CategorySmallCard'
 import Error from '../ui/Error'
+import boxImg from '../../assets/box.svg'
 
 const AdminProductsTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
@@ -63,7 +64,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
           if (isMounted) setIsLoading(false)
         })
         .catch((error) => {
-          setError(`Error occurred: ${error.message}`)
+          setError('Server Error')
           if (isMounted) setIsLoading(false)
         })
     }
@@ -111,6 +112,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     const value = { isActive: !activeProduct.isActive }
     const isActive = activeProduct.isActive
@@ -120,7 +122,10 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
     activeOrInactive(_id, accessToken, value, activeProduct._id)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           toast.success(isActive)
           setRun(!run)
@@ -128,8 +133,11 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -165,7 +173,8 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
             <SearchInput onChange={handleChangeKeyword} />
           </div>
           {!isLoading && pagination.size === 0 ? (
-            <div className='d-flex justify-content-center mt-5 text-primary text-center'>
+            <div className='my-4 text-center'>
+              <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
               <h5>{t('productDetail.noProduct')}</h5>
             </div>
           ) : (

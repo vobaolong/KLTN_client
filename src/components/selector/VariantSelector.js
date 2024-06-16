@@ -4,24 +4,29 @@ import { listVariantByCategory } from '../../apis/variant'
 import Loading from '../ui/Loading'
 import MultiVariantValueSelector from '../selector/MultiVariantValueSelector'
 import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
 const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [variants, setVariants] = useState([])
   const [selectedVariantValues, setSelectedVariantValues] = useState([])
 
   const init = () => {
     setIsLoading(true)
+    setError('')
     listVariantByCategory(categoryId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setVariants(data.variants)
+          if (data.variants.length <= 0)
+            toast.success('This category does not have styles.')
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -79,6 +84,11 @@ const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
   return (
     <div className='row position-relative'>
       {isLoading && <Loading />}
+      {error && (
+        <span className='ms-2'>
+          <Error msg={error} />
+        </span>
+      )}
       {variants.map((variant, index) => (
         <div className='col mt-2' key={index}>
           <MultiVariantValueSelector

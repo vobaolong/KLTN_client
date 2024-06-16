@@ -8,9 +8,11 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
 
@@ -65,10 +67,11 @@ const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     createVariantValue(_id, accessToken, newValue)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setNewValue({
             ...newValue,
@@ -78,9 +81,15 @@ const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
           toast.success(t('toastSuccess.variantValue.add'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
+        setError('Sever error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
   }
@@ -111,6 +120,12 @@ const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

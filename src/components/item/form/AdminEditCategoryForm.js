@@ -11,9 +11,11 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import CategorySelector from '../../selector/CategorySelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const AdminEditCategoryForm = ({ categoryId = '' }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isConfirmingBack, setIsConfirmingBack] = useState(false)
@@ -53,10 +55,11 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
   }
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     getCategoryById(categoryId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else
           setNewCategory({
             name: data.category.name,
@@ -74,7 +77,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -122,16 +125,23 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
     if (newCategory.image) formData.set('image', newCategory.image)
     if (newCategory.categoryId)
       formData.set('categoryId', newCategory.categoryId)
+    setError('')
     setIsLoading(true)
     updateCategory(_id, accessToken, categoryId, formData)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else toast.success(t('toastSuccess.category.update'))
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Sever error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -207,7 +217,11 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             />
           </div>
         </div>
-
+        {error && (
+          <div className='col-12 px-4'>
+            <Error msg={error} />
+          </div>
+        )}
         <div
           className={`bg-body ${
             isScrolled ? 'shadow' : 'box-shadow'

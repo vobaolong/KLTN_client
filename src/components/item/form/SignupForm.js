@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { signup } from '../../../apis/auth'
@@ -5,17 +6,16 @@ import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
 import Error from '../../ui/Error'
-import Success from '../../ui/Success'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import SocialForm from './SocialForm'
+import { toast } from 'react-toastify'
 
 const SignupForm = ({ onSwap = () => {} }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
 
   const [account, setAccount] = useState({
     firstName: '',
@@ -30,7 +30,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
 
   const handleChange = (name, isValidName, value) => {
     setError('')
-    setSuccess('')
     setAccount({
       ...account,
       [name]: value,
@@ -40,7 +39,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
 
   const handleValidate = (isValidName, flag) => {
     setError('')
-    setSuccess('')
     setAccount({
       ...account,
       [isValidName]: flag
@@ -80,7 +78,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
 
     setIsLoading(true)
     setError('')
-    setSuccess('')
     signup(user)
       .then((data) => {
         if (data.error) {
@@ -93,12 +90,12 @@ const SignupForm = ({ onSwap = () => {} }) => {
             username: '',
             password: ''
           })
-          setSuccess(data.success)
+          toast.success(data.success)
         }
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Server error!')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -191,12 +188,6 @@ const SignupForm = ({ onSwap = () => {} }) => {
         {error && (
           <div className='col-12'>
             <Error msg={error} />
-          </div>
-        )}
-
-        {success && (
-          <div className='col-12'>
-            <Success msg={success} />
           </div>
         )}
 

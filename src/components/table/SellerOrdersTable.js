@@ -15,6 +15,7 @@ import SearchInput from '../ui/SearchInput'
 import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
+import noItem from '../../assets/noItem.png'
 
 const SellerOrdersTable = ({
   heading = true,
@@ -60,7 +61,7 @@ const SellerOrdersTable = ({
         if (timerId) clearTimeout(timerId)
       })
       .catch((error) => {
-        setError(`Something went wrong`)
+        setError('Server Error')
         setIsLoading(false)
         if (timerId) clearTimeout(timerId)
       })
@@ -129,10 +130,12 @@ const SellerOrdersTable = ({
         </>
       )}
       {isLoading && <Loading />}
+      {error && <Error msg={error} />}
       {displayError && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         {!isLoading && pagination.size === 0 ? (
-          <div className='my-4 text-danger text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={noItem} alt='noItem' width={'100px'} />
             <h5>{t('orderDetail.noOrder')}</h5>
           </div>
         ) : (

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
-import StoreEditProfileForm from './form/StoreProfileEditForm'
+import StoreEditProfileForm from './form/StoreEditProfileForm'
 
 const StoreEditProfileItem = ({ store = {} }) => {
   const { t } = useTranslation()

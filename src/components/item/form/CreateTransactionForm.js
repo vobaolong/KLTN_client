@@ -8,9 +8,11 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [updateDispatch] = useUpdateDispatch()
@@ -69,10 +71,11 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     createTransactionByStore(userId, accessToken, transaction, storeId)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setTransaction({
             ...transaction,
@@ -86,10 +89,16 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
           if (onRun) onRun()
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -138,6 +147,13 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
             }
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
+
         <div className='col-12 d-grid mt-4'>
           <button
             type='submit'

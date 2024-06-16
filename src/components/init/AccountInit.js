@@ -63,7 +63,7 @@ const AccountInit = ({ user, actions }) => {
         })
         .catch((error) => {
           if (!isMounted) return
-          setError(`Error occurred: ${error.message}`)
+          setError('Server Error')
           setIsLoading(false)
         })
     }

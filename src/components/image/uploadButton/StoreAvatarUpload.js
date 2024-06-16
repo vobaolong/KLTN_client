@@ -20,12 +20,15 @@ const StoreAvatarUpload = ({ storeId = '' }) => {
 
     const formData = new FormData()
     formData.set('photo', e.target.files[0])
-
+    setError('')
     setIsLoading(true)
     updateAvatar(_id, accessToken, formData, storeId)
       .then((data) => {
         if (data.error) {
           setError(data.error)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           updateDispatch('seller', data.store)
           toast.success(t('toastSuccess.addAvatar'))
@@ -35,6 +38,9 @@ const StoreAvatarUpload = ({ storeId = '' }) => {
       .catch((error) => {
         setError(error)
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 

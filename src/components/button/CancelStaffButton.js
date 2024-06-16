@@ -20,20 +20,27 @@ const CancelStaffsButton = ({ storeId = '' }) => {
   }
 
   const onSubmit = () => {
+    setError('')
     setIsLoading(true)
     cancelStaff(_id, accessToken, storeId)
       .then((data) => {
         if (data.error) {
           setError(data.error)
           setIsLoading(false)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         } else {
           toast.success(t('Rời thành công'))
           history.go(0)
         }
       })
       .catch((error) => {
-        setError(`Error occurred: ${error.message}`)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
   const { t } = useTranslation()

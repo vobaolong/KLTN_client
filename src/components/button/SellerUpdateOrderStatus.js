@@ -7,6 +7,7 @@ import DropDownMenu from '../ui/DropDownMenu'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import Error from '../ui/Error'
+import { socketId } from '../..'
 
 const SellerUpdateOrderStatus = ({
   storeId = '',
@@ -32,7 +33,6 @@ const SellerUpdateOrderStatus = ({
 
   const onSubmit = () => {
     setError('')
-
     setIsLoading(true)
     const value = { status: statusValue }
     sellerUpdateStatusOrder(_id, accessToken, value, orderId, storeId)
@@ -43,8 +43,16 @@ const SellerUpdateOrderStatus = ({
             setError('')
           }, 3000)
         } else {
+          if (statusValue === 'Delivered') {
+            socketId.emit('notificationDelivered', {
+              orderId: data.order._id,
+              from: _id,
+              to: data.order.userId._id ?? data.order.userId
+            })
+          }
           toast.success(t('toastSuccess.order.update'))
         }
+
         if (onRun) onRun()
         setIsLoading(false)
       })

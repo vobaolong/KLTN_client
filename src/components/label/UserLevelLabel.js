@@ -5,14 +5,14 @@ const UserLevelLabel = ({ level = {}, detail = true }) => {
   return (
     <span className='position-relative d-inline-block'>
       <span
-        className='badge cus-tooltip rounded-1'
+        className='badge cus-tooltip rounded-1 unselect'
         style={{ backgroundColor: level.color, color: 'high-muted-color' }}
       >
         <i className='fa-solid fa-shield-halved'></i>
-        {detail && <span className='ms-1'>{level.name}</span>}
+        {detail && <span className='ms-1 fw-normal'>{t(`${level.name}`)}</span>}
       </span>
       {!detail ? (
-        <small className='cus-tooltip-msg'>{level.name}</small>
+        <small className='cus-tooltip-msg'>{t(`${level.name}`)}</small>
       ) : (
         <small className='cus-tooltip-msg'>
           {t('userLabel.pointFloor')}: {level.minPoint} -{' '}

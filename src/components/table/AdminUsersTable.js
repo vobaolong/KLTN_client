@@ -11,10 +11,11 @@ import Loading from '../ui/Loading'
 import { useTranslation } from 'react-i18next'
 import VerifyLabel from '../label/VerifyLabel'
 import ShowResult from '../ui/ShowResult'
-import { toast } from 'react-toastify'
+import Error from '../ui/Error'
 
 const AdminUsersTable = ({ heading = false }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])
   const [pagination, setPagination] = useState({
@@ -32,11 +33,12 @@ const AdminUsersTable = ({ heading = false }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     listUserForAdmin(_id, accessToken, filter)
       .then((data) => {
         if (data.error) {
-          toast.error(data.error)
+          setError(data.error)
           setIsLoading(false)
         } else {
           setUsers(data.users)
@@ -49,7 +51,7 @@ const AdminUsersTable = ({ heading = false }) => {
         }
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -85,6 +87,7 @@ const AdminUsersTable = ({ heading = false }) => {
     <div className='position-relative'>
       {isLoading && <Loading />}
       {heading && <h5 className='text-start'>{t('title.userInSystem')}</h5>}
+      {error && <Error msg={error} />}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className='mb-3'>

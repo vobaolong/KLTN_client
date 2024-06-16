@@ -7,6 +7,7 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const UserEditProfileForm = ({
   firstName = '',
@@ -17,6 +18,7 @@ const UserEditProfileForm = ({
   googleId = false
 }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [profile, setProfile] = useState({})
@@ -101,19 +103,26 @@ const UserEditProfileForm = ({
     if (profile.phone) user.phone = profile.phone
     if (profile.id_card) user.id_card = profile.id_card
 
+    setError('')
     setIsLoading(true)
     updateProfile(_id, accessToken, user)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.userDetail.updateProfile'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.error('Something went wrong')
         setIsLoading(false)
+        setError('Server error')
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -206,6 +215,12 @@ const UserEditProfileForm = ({
             onValidate={(flag) => handleValidate('isValidIdCard', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

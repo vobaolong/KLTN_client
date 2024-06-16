@@ -29,6 +29,9 @@ const FollowStoreButton = ({
         .then((data) => {
           if (data.error) {
             setError(data.error)
+            setTimeout(() => {
+              setError('')
+            }, 3000)
           } else {
             setFollowingFlag(true)
             if (onRun) {
@@ -40,14 +43,20 @@ const FollowStoreButton = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         })
     } else {
       unfollowStore(_id, accessToken, storeId)
         .then((data) => {
           if (data.error) {
             setError(data.error)
+            setTimeout(() => {
+              setError('')
+            }, 3000)
           } else {
             setFollowingFlag(false)
             if (onRun) {
@@ -59,8 +68,11 @@ const FollowStoreButton = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
         })
     }
   }

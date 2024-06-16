@@ -8,9 +8,11 @@ import Loading from '../../ui/Loading'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
 const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [address, setAddress] = useState({
@@ -77,19 +79,26 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
   const onSubmit = () => {
     const addressString = `${address.street}, ${address.ward}, ${address.district}, ${address.province}`
 
+    setError('')
     setIsLoading(true)
     updateAddress(_id, accessToken, index, { address: addressString })
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           updateDispatch('account', data.user)
           toast.success(t('toastSuccess.address.update'))
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Sever error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -163,6 +172,12 @@ const UserEditAddressForm = ({ oldAddress = '', index = null }) => {
             onValidate={(flag) => handleValidate('isValidProvince', flag)}
           />
         </div>
+
+        {error && (
+          <div className='col-12'>
+            <Error msg={error} />
+          </div>
+        )}
 
         <div className='col-12 d-grid mt-4'>
           <button

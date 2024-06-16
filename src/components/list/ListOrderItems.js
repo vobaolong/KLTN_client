@@ -37,7 +37,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     else if (by === 'admin')
@@ -48,7 +48,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
     else
@@ -59,7 +59,7 @@ const ListOrderItems = ({
           setIsLoading(false)
         })
         .catch((error) => {
-          setError('Something went wrong')
+          setError('Server Error')
           setIsLoading(false)
         })
   }

@@ -21,11 +21,13 @@ import { toast } from 'react-toastify'
 import CategorySelector from '../selector/CategorySelector'
 import { humanReadableDate } from '../../helper/humanReadable'
 import Modal from '../ui/Modal'
+import Error from '../ui/Error'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const AdminCategoriesTable = ({ heading = false }) => {
   const { t } = useTranslation()
+  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [isConfirmingRestore, setIsConfirmingRestore] = useState(false)
@@ -49,10 +51,11 @@ const AdminCategoriesTable = ({ heading = false }) => {
   const { _id, accessToken } = getToken()
 
   const init = () => {
+    setError('')
     setIsLoading(true)
     listCategories(_id, accessToken, filter)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           setCategories(data.categories)
           setPagination({
@@ -64,7 +67,7 @@ const AdminCategoriesTable = ({ heading = false }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
@@ -107,37 +110,50 @@ const AdminCategoriesTable = ({ heading = false }) => {
   }
 
   const onSubmitDelete = () => {
+    setError('')
     setIsLoading(true)
     deleteCategory(_id, accessToken, deletedCategory._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.category.delete'))
-
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
   const onSubmitRestore = () => {
+    setError('')
     setIsLoading(true)
     restoreCategory(_id, accessToken, restoredCategory._id)
       .then((data) => {
-        if (data.error) toast.error(data.error)
+        if (data.error) setError(data.error)
         else {
           toast.success(t('toastSuccess.category.restore'))
           setRun(!run)
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
-        console.log('Some thing went wrong')
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
   }
 
@@ -173,12 +189,9 @@ const AdminCategoriesTable = ({ heading = false }) => {
       )}
       <div className='mb-2'>
         {heading && <h5 className='text-start'>{t('admin.categories')}</h5>}
-        {/* {flag && (
-          <div className='mb-3'>
-            <CategorySelector isActive={true} isSelected={false} />
-          </div>
-        )} */}
       </div>
+      {error && <Error msg={error} />}
+
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className=' d-flex align-items-center justify-content-between mb-3'>
           <SearchInput onChange={handleChangeKeyword} />

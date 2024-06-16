@@ -7,6 +7,7 @@ import masterCard from '../../../assets/mastercard.svg'
 import cod from '../../../assets/cod.svg'
 import paypal from '../../../assets/paypal.svg'
 import visa from '../../../assets/visa.svg'
+import vnpay from '../../../assets/vnpay.svg'
 
 const Footer = () => {
   const { t } = useTranslation()
@@ -97,6 +98,13 @@ const Footer = () => {
                   className='w-100 p-1 rounded-1 bg-body'
                   src={visa}
                   alt='visa'
+                />
+              </span>
+              <span style={{ width: '40px', height: '40px' }}>
+                <img
+                  className='w-100 p-1 rounded-1 bg-body'
+                  src={vnpay}
+                  alt='vnpay'
                 />
               </span>
             </div>

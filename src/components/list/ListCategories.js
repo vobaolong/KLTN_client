@@ -60,7 +60,7 @@ const ListCategories = ({ heading = '', categoryId = null }) => {
         setIsLoading(false)
       })
       .catch((error) => {
-        setError('Something went wrong')
+        setError('Server Error')
         setIsLoading(false)
       })
   }
