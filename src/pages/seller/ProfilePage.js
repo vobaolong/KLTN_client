@@ -100,7 +100,7 @@ const ProfilePage = () => {
               </small>
             </div>
           </div>
-          <div className='position-relative ms-2'>
+          <div className='position-relative ms-3'>
             <OpenCloseStoreButton
               storeId={store._id}
               isOpen={store.isOpen}

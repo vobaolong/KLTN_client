@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Paragraph from '../ui/Paragraph'
 import Skeleton from 'react-loading-skeleton'
 import { formatMonth } from '../../helper/humanReadable'
-import { listSellingProductsByStore } from '../../apis/product'
+import Modal from '../ui/Modal'
+import ListReport from '../item/form/ListReport'
 
 const StoreLevelInfo = ({ store = {} }) => {
   const { t } = useTranslation()
@@ -13,53 +14,18 @@ const StoreLevelInfo = ({ store = {} }) => {
       (store?.numberOfSuccessfulOrders + store?.numberOfFailedOrders)) *
       100
   )
-  const [initialNumberOfProducts, setInitialNumberOfProducts] = useState(0)
+  const [showMenu, setShowMenu] = useState(false)
 
-  useEffect(() => {
-    let isMounted = true
-
-    const fetchData = async () => {
-      try {
-        const sortBy = ''
-        const data = await listSellingProductsByStore(
-          {
-            search: '',
-            rating: '',
-            categoryId: '',
-            minPrice: '',
-            maxPrice: '',
-            sortBy,
-            order: 'desc',
-            limit: 100,
-            page: 1
-          },
-          store._id
-        )
-
-        if (isMounted && !data.error) {
-          const newNumberOfProducts = data.products.length
-          if (initialNumberOfProducts === 0) {
-            setInitialNumberOfProducts(newNumberOfProducts)
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error)
-      }
-    }
-
-    fetchData()
-
-    return () => {
-      isMounted = false
-    }
-  }, [store._id])
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu)
+  }
 
   return (
     <div className='container-fluid'>
       <div className='p-2'>
         <div className='row mb-2 gap-md-3 gap-sm-1'>
-          <div className='row'>
-            <div className='col-md-6 col-sm-12'>
+          <div className='row col-11 py-lg-3'>
+            <div className='col-md-6 col-sm-12 mt-lg-2'>
               <Paragraph
                 label={
                   <span>
@@ -83,7 +49,7 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
               />
             </div>
-            <div className='col-md-6 col-sm-12'>
+            <div className='col-md-6 col-sm-12 mt-lg-2'>
               <Paragraph
                 label={
                   <span>
@@ -103,7 +69,7 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
               />
             </div>
-            <div className='col-md-6 col-sm-12'>
+            <div className='col-md-6 col-sm-12 mt-lg-2'>
               <Paragraph
                 label={
                   <span>
@@ -113,13 +79,17 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  <span className='text-primary'>
-                    {store.numberOfFollowers || 0}
-                  </span>
+                  store.numberOfFollowers ? (
+                    <span className='text-primary'>
+                      {store.numberOfFollowers}
+                    </span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
                 }
               />
             </div>
-            <div className='col-md-6 col-sm-12'>
+            <div className='col-md-6 col-sm-12 mt-lg-2'>
               <Paragraph
                 label={
                   <span>
@@ -129,25 +99,40 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  <span className='text-primary'>{successRate || 100} %</span>
+                  successRate ? (
+                    <span className='text-primary'>{successRate}%</span>
+                  ) : (
+                    <Skeleton height={20} />
+                  )
                 }
               />
             </div>
-            <div className='col-md-6 col-sm-12'>
-              <Paragraph
-                label={
-                  <span>
-                    <i className='fa-light fa-box me-2 text-secondary'></i>
-                    {t('storeDetail.numberOfProduct')}
-                  </span>
-                }
-                colon
-                value={
-                  <span className='text-primary'>
-                    {initialNumberOfProducts || 0}
-                  </span>
-                }
-              />
+          </div>
+          <div className='col-1 d-flex justify-content-end'>
+            <div className='menu-container'>
+              <button className='btn menu-button' onClick={handleMenuToggle}>
+                <i className='fa fa-ellipsis-v'></i>
+              </button>
+              {showMenu && (
+                <div className='menu d-inline-block'>
+                  <button
+                    type='button'
+                    data-bs-target='#report'
+                    data-bs-toggle='modal'
+                    className='btn--with-img menu-item'
+                  >
+                    <i className='fa-light fa-circle-info me-2'></i>
+                    {t('report')}
+                  </button>
+                  <Modal
+                    hasCloseBtn={false}
+                    title={t('dialog.report')}
+                    id='report'
+                  >
+                    <ListReport />
+                  </Modal>
+                </div>
+              )}
             </div>
           </div>
         </div>

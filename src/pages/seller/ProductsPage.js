@@ -46,22 +46,6 @@ const ProductsPage = () => {
             </span>
           </li>
 
-          {/* <li className='nav-item col-3 text-center pointer'>
-            <span
-              className={`nav-link ${
-                selectedOption === 'outofstock' ? 'active' : ''
-              }`}
-              onClick={() => handleOptionClick('outofstock')}
-            >
-              <i
-                className={`${
-                  selectedOption === 'outofstock' ? 'fa-light' : 'fa-solid'
-                } fa-archive me-2`}
-              ></i>
-              <span >{t('productDetail.outOfStock')}</span>
-            </span>
-          </li> */}
-
           <li className='nav-item col-3 text-center pointer'>
             <span
               className={`nav-link ${
@@ -81,6 +65,17 @@ const ProductsPage = () => {
               onClick={() => handleOptionClick('hidden')}
             >
               <span>{t('productDetail.hidden')}</span>
+            </span>
+          </li>
+          {/* thêm đoạn này */}
+          <li className='nav-item col-3 text-center pointer'>
+            <span
+              className={`nav-link ${
+                selectedOption === 'outOfStock' ? 'active' : ''
+              }`}
+              onClick={() => handleOptionClick('outOfStock')}
+            >
+              <span>{t('productDetail.outOfStock')}</span>
             </span>
           </li>
         </ul>

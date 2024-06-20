@@ -123,6 +123,20 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
         </div>
 
         <div className='col-12'>
+          <Input
+            type='number'
+            label={`${t('commissionDetail.fee')} (%)`}
+            value={commission.fee}
+            isValid={commission.isValidFee}
+            feedback={t('commissionDetail.feeValid')}
+            validator='zeroTo100'
+            required={true}
+            onChange={(value) => handleChange('fee', 'isValidFee', value)}
+            onValidate={(flag) => handleValidate('isValidFee', flag)}
+          />
+        </div>
+
+        <div className='col-12'>
           <TextArea
             type='text'
             label={t('commissionDetail.description')}
@@ -138,30 +152,16 @@ const AdminCreateCommissionForm = ({ onRun = () => {} }) => {
           />
         </div>
 
-        <div className='col-12'>
-          <Input
-            type='number'
-            label={`${t('commissionDetail.fee')} (%)`}
-            value={commission.fee}
-            isValid={commission.isValidFee}
-            feedback={t('commissionDetail.feeValid')}
-            validator='zeroTo100'
-            required={true}
-            onChange={(value) => handleChange('fee', 'isValidFee', value)}
-            onValidate={(flag) => handleValidate('isValidFee', flag)}
-          />
-        </div>
-
         {error && (
           <div className='col-12'>
             <Error msg={error} />
           </div>
         )}
 
-        <div className='col-12 d-grid mt-4'>
+        <div className='col-12 d-flex justify-content-end mt-4'>
           <button
             type='submit'
-            className='btn btn-primary ripple rounded-1'
+            className='btn btn-primary ripple rounded-1 w-50'
             onClick={handleSubmit}
           >
             {t('button.submit')}

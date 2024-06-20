@@ -11,7 +11,7 @@ const AccountSideBar = ({ user = {}, isCollapsed, onToggle }) => {
         <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar mt-md-4 mt-sm-0'>
           <ul className='nav nav-pills flex-column mb-auto justify-content-around gap-1'>
             <div className='res-hide-lg text-wrap d-flex gap-2 align-items-center'>
-              <Avatar avatar={user.avatar} size='small' />
+              <Avatar name=' ' avatar={user.avatar} size='small' />
               <div>
                 <small className='fw-light'>Tài khoản của</small>
                 <p>{user.firstName + ' ' + user.lastName}</p>

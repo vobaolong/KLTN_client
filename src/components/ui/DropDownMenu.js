@@ -67,7 +67,9 @@ const DropDownMenu = ({
             onMouseDown={() => handleSelect(item)}
           >
             {item?.icon}
-            <span className={item?.icon && 'res-hide'}>{item?.label}</span>
+            <span className={`${item?.icon && 'res-hide'} flex-nowrap`}>
+              {item?.label}
+            </span>
           </li>
         ))}
       </ul>

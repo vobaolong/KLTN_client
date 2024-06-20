@@ -46,7 +46,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
     sortBy: 'sold',
     order: 'desc',
     limit: 8,
-    quantity: 0,
+    quantity: -1,
     page: 1
   })
 
@@ -60,6 +60,9 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         break
       case 'hidden':
         filterCopy.isSelling = false
+        break
+      case 'outOfStock':
+        filterCopy.quantity = 0
         break
       default:
         break
@@ -151,6 +154,18 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
 
   return (
     <div className='position-relative'>
+      {alerts.isSellingAlert && selectedOption === 'all' ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Tất cả'
+          alert='Mục này chứa các sản phẩm đang bán và đang ẩn'
+          msg2=''
+          onClose={() =>
+            setAlerts((prev) => ({ ...prev, isSellingAlert: false }))
+          }
+        />
+      ) : null}
+
       {alerts.isAllAlert && selectedOption === 'selling' ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
@@ -173,14 +188,14 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         />
       ) : null}
 
-      {alerts.isSellingAlert && selectedOption === 'all' ? (
+      {alerts.isHiddenAlert && selectedOption === 'outOfStock' ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
-          msg1='Tất cả'
-          alert='Mục này chứa các sản phẩm đang bán và đang ẩn'
-          msg2=''
+          msg1='Hết hàng'
+          alert='Mục này chứa các sản phẩm đã hết hàng'
+          msg2='Khách hàng không thể xem và đặt hàng.'
           onClose={() =>
-            setAlerts((prev) => ({ ...prev, isSellingAlert: false }))
+            setAlerts((prev) => ({ ...prev, isHiddenAlert: false }))
           }
         />
       ) : null}

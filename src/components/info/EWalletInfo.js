@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { formatPrice } from '../../helper/formatPrice'
 import { useState } from 'react'
 
-const EWalletInfo = ({ eWallet = 0 }) => {
+const EWalletInfo = ({ eWallet = 0, onReload }) => {
   const { t } = useTranslation()
   const [hide, setHide] = useState(false)
   const handleHide = () => {
@@ -26,6 +26,9 @@ const EWalletInfo = ({ eWallet = 0 }) => {
           <i className='fa-solid fa-eye-slash'></i>
         )}
       </span>
+      <button onClick={onReload} className='btn ms-2'>
+        <i className='fa-solid fa-rotate'></i>
+      </button>
     </div>
   )
 }

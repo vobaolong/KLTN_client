@@ -135,10 +135,12 @@ const StoreEditProfileForm = ({
             validator='bio'
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
+            row={5}
           />
         </div>
 
         <div className='col-12 mt-4'>
+          <span>{t('storeDetail.pickupAddress')}</span>
           {addressDetail !== null && (
             <AddressForm
               addressDetail={addressDetail}

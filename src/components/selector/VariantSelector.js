@@ -5,8 +5,10 @@ import Loading from '../ui/Loading'
 import MultiVariantValueSelector from '../selector/MultiVariantValueSelector'
 import { toast } from 'react-toastify'
 import Error from '../ui/Error'
+import { useTranslation } from 'react-i18next'
 
 const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
+  const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [variants, setVariants] = useState([])
@@ -21,7 +23,7 @@ const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
         else {
           setVariants(data.variants)
           if (data.variants.length <= 0)
-            toast.success('This category does not have styles.')
+            toast.success(t('toastSuccess.variant.none'))
         }
         setIsLoading(false)
       })

@@ -1,22 +1,28 @@
 import { useState } from 'react'
 import { getToken } from '../../../apis/auth'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
-import { createTransactionByUser } from '../../../apis/transaction'
+import { createTransactionByStore } from '../../../apis/transaction'
 import { regexTest, numberTest } from '../../../helper/test'
 import Input from '../../ui/Input'
 import Loading from '../../ui/Loading'
-import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import Error from '../../ui/Error'
 
-const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
+const CreateWithDrawTransactionForm = ({
+  eWallet = 0,
+  storeId = '',
+  onRun
+}) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [updateDispatch] = useUpdateDispatch()
+
   const { _id: userId, accessToken } = getToken()
+
   const [transaction, setTransaction] = useState({
     isUp: 'false',
     amount: 100000,
@@ -49,10 +55,9 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     const { amount, currentPassword } = transaction
 
-    if (!userId || !amount || !currentPassword) {
+    if (!userId || !storeId || !amount || !currentPassword) {
       setTransaction({
         ...transaction,
         isValidAmount:
@@ -65,13 +70,14 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
 
     if (!transaction.isValidAmount || !transaction.isValidCurrentPassword)
       return
+
     setIsConfirming(true)
   }
 
   const onSubmit = () => {
     setError('')
     setIsLoading(true)
-    createTransactionByUser(userId, accessToken, transaction)
+    createTransactionByStore(userId, accessToken, transaction, storeId)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
@@ -82,8 +88,8 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
             isValidAmount: true,
             isValidCurrentPassword: true
           })
-          updateDispatch('account', data.user)
-          toast.success(t('toastSuccess.withDraw'))
+          updateDispatch('seller', data.store)
+          toast.success(t('toastSuccess.withdraw'))
           if (onRun) onRun()
         }
         setIsLoading(false)
@@ -117,11 +123,11 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         <div className='col-12'>
           <Input
             type='number'
-            label={t('transactionDetail.amount')}
+            label={`${t('transactionDetail.amount')} (₫)`}
             value={transaction.amount}
             isValid={transaction.isValidAmount}
-            feedback={t('transactionDetail.amountValid')}
             required={true}
+            feedback={t('transactionDetail.amountValid')}
             validator='positive'
             onChange={(value) => handleChange('amount', 'isValidAmount', value)}
             onValidate={(flag) => handleValidate('isValidAmount', flag)}
@@ -133,9 +139,9 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
             type='password'
             label={t('transactionDetail.currentPw')}
             value={transaction.currentPassword}
+            required={true}
             isValid={transaction.isValidCurrentPassword}
             feedback={t('transactionDetail.currentPwValid')}
-            required={true}
             validator='password'
             onChange={(value) =>
               handleChange('currentPassword', 'isValidCurrentPassword', value)
@@ -166,4 +172,4 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
   )
 }
 
-export default CreateTransactionFormForUser
+export default CreateWithDrawTransactionForm

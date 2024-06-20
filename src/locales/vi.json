@@ -20,7 +20,7 @@
     "myPurchase": "Đơn hàng của tôi",
     "addressBook": "Sổ địa chỉ",
     "listFavorites": "Danh sách yêu thích",
-    "myWallet": "Ví của tôi",
+    "myWallet": "Số dư TK Zenpii",
     "myStore": "Shop của tôi"
   },
   "breadcrumbs": {
@@ -37,7 +37,7 @@
     "home": "Trang chủ",
     "myPurchase": "Đơn hàng của tôi",
     "addressBook": "Sổ địa chỉ",
-    "myWallet": "Ví của tôi",
+    "myWallet": "Số dư TK Zenpii",
     "myStore": "Shop của tôi",
     "createStore": "Mở 1 shop mới",
     "collection": "Tất cả sản phẩm",
@@ -55,14 +55,15 @@
     "staff": "Nhân viên",
     "order": "Đơn hàng",
     "orderDetail": "Chi tiết đơn hàng",
-    "wallet": "Ví",
+    "wallet": "Số dư TK Zenpii",
     "transactions": "Giao dịch"
   },
   "toastSuccess": {
     "variant": {
       "create": "Thêm phân loại thành công",
       "update": "Chỉnh sửa phân loại thành công",
-      "delete": "Xoá phân loại thành công"
+      "delete": "Xoá phân loại thành công",
+      "none": "Ngành hàng này chưa có phân loại"
     },
     "review": {
       "add": "Đánh giá sản phẩm thành công",
@@ -72,7 +73,8 @@
     "withDraw": "Rút tiền thành công",
     "userDetail": {
       "updateProfile": "Cập nhật thông tin thành công",
-      "updateCover": "Cập nhật ảnh bìa thành công"
+      "updateCover": "Cập nhật ảnh bìa thành công",
+      "updatePassword": "Cập nhật mật khẩu thành công"
     },
     "signIn": "Đăng nhập thành công",
     "signUp": "Đăng ký thành công",
@@ -87,7 +89,7 @@
     "variantValue": {
       "add": "Thêm giá trị thành công",
       "delete": "Xoá giá trị thành công",
-      "edit": "Cập nhật giá trị thành công",
+      "update": "Cập nhật giá trị thành công",
       "restore": "Khôi phục giá trị thành công"
     },
     "followStore": {
@@ -174,6 +176,7 @@
     "edit": "Bạn có chắc chắn cập nhật "
   },
   "title": {
+    "createTransaction": "Tiến hành giao dich",
     "showProduct": "Hiển thị sản phẩm",
     "hideProduct": "Ẩn sản phẩm",
     "openStore": "Tắt Chế độ Tạm nghỉ",
@@ -192,6 +195,7 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
+    "report": "Báo cáo",
     "removeFeatured": "Xoá ảnh nổi bật",
     "removeImg": "Xoá hình ảnh",
     "logOut": "Đăng xuất",
@@ -303,6 +307,7 @@
     "all": "Tất cả",
     "selling": "Đang bán",
     "hidden": "Đã ẩn",
+    "outOfStock": "Hết hàng",
     "productImg": "Hình ảnh sản phẩm",
     "basicInfo": "Thông tin cơ bản",
     "detailInfo": "Thông tin chi tiết",
@@ -444,7 +449,7 @@
     "currentPw": "Mật khẩu hiện tại",
     "newPw": "Mật khẩu mới",
     "pwValid": "Vui lòng cung cấp mật khẩu hợp lệ!",
-    "wallet": "Ví của tôi",
+    "wallet": "Số dư TK Zenpii",
     "transaction": "Mã giao dịch",
     "by": "Người thực hiện",
     "in": "Nạp",
@@ -464,7 +469,8 @@
   "transactionDetail": {
     "noTransaction": "Không có giao dịch",
     "draw": "Rút tiền",
-    "empty": "Ví rỗng",
+    "deposit": "Nạp tiền",
+    "empty": "Không có số dư",
     "type": "Loại",
     "createdAt": "Ngày thực hiện",
     "amount": "Số tiền",
@@ -563,9 +569,10 @@
     "delete": "Xoá nhân viên",
     "add": "Thêm nhân viên",
     "leave": "Rời shop",
-    "noStaff": "Không có nhân viên!"
+    "noStaff": "Không có nhân viên"
   },
   "storeDetail": {
+    "contractNPoint": " Hợp đồng đăng ký và hạng mức",
     "typeOfStall": "Loại hình cửa hàng",
     "basicInfo": "Thông tin cơ bản",
     "imgInfo": "Logo và ảnh bìa",
@@ -609,7 +616,8 @@
     "pickupAddress": "Địa chỉ lấy hàng",
     "avatar": "Ảnh nền",
     "cover": "Ảnh bìa",
-    "contactPerson": "Người liên hệ"
+    "contactPerson": "Người liên hệ",
+    "point": "Điểm"
   },
   "storeDetailValid": {
     "addressValid": "Vui lòng cung cấp địa chỉ phù hợp!",
@@ -620,7 +628,7 @@
     "featuredValid": "Vui lòng cung cấp ảnh nổi bật phù hợp!"
   },
   "favorite": "Yêu thích",
-  "wallet": "Ví",
+  "wallet": "Số dư TK Zenpii",
   "myBalance": "Số dư của tôi",
   "dropHere": "Thả ảnh vào đây...",
   "dragNDrop": "Kéo/Thả ảnh vào đây hoặc nhấn để chọn",
@@ -767,5 +775,6 @@
   "Bronze": "Đồng",
   "Silver": "Bạc",
   "Gold": "Vàng",
-  "Diamond": "Kim Cương"
+  "Diamond": "Kim Cương",
+  "report": "Tố cáo"
 }

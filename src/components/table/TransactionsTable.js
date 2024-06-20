@@ -28,7 +28,8 @@ const TransactionsTable = ({
   by = 'admin',
   owner = {},
   eWallet = 0,
-  heading = false
+  heading = false,
+  onReloadWallet
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -38,6 +39,9 @@ const TransactionsTable = ({
   const [pagination, setPagination] = useState({
     size: 0
   })
+
+  const { _id: userId, accessToken } = getToken()
+
   const [filter, setFilter] = useState({
     sortBy: 'createdAt',
     order: 'desc',
@@ -45,7 +49,6 @@ const TransactionsTable = ({
     page: 1
   })
 
-  const { _id: userId, accessToken } = getToken()
   const init = () => {
     let isMounted = true
     setError('')
@@ -65,6 +68,7 @@ const TransactionsTable = ({
           }
           setIsLoading(false)
         })
+
         .catch((error) => {
           if (!isMounted) return
           setError('Server Error')
@@ -135,6 +139,13 @@ const TransactionsTable = ({
     })
   }
 
+  const handleReload = () => {
+    setRun(!run)
+    if (onReloadWallet) {
+      onReloadWallet()
+    }
+  }
+
   return (
     <div className='position-relative'>
       {heading && (
@@ -149,7 +160,7 @@ const TransactionsTable = ({
         <div className='d-flex align-items-center justify-content-between mb-2'>
           {by === 'store' && (
             <>
-              <EWalletInfo eWallet={eWallet} />
+              <EWalletInfo eWallet={eWallet} onReload={handleReload} />
               {owner && userId === owner._id && (
                 <div className='ms-3'>
                   <CreateTransactionItem
@@ -257,7 +268,10 @@ const TransactionsTable = ({
                     <td className='text-end'>
                       <small>
                         {formatPrice(transaction.amount?.$numberDecimal)}
-                        <sup>₫</sup>
+                        <sup>₫</sup>{' '}
+                        <small className='text-warning'>
+                          {transaction.amount.$numberDecimal > 0 ? '' : '(COD)'}
+                        </small>
                       </small>
                     </td>
                     {by === 'admin' && (

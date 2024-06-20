@@ -102,7 +102,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
       forgotPassword({ email: username })
         .then((data) => {
           if (data.error) setError(data.error)
-          else toast.success(data.success)
+          else toast.success(t('toastSuccess.signIn'))
           setIsLoading(false)
           setTimeout(() => {
             setError('')

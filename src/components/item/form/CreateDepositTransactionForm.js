@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import Error from '../../ui/Error'
 
-const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
+const CreateDepositTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -20,8 +20,8 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   const { _id: userId, accessToken } = getToken()
 
   const [transaction, setTransaction] = useState({
-    isUp: 'false',
-    amount: 100000,
+    isUp: 'true',
+    amount: 10000000,
     currentPassword: '',
     isValidAmount: true,
     isValidCurrentPassword: true
@@ -38,9 +38,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   const handleValidate = (isValidName, flag) => {
     if (isValidName === 'isValidAmount') {
       setTransaction({
-        ...transaction,
-        isValidAmount:
-          flag && parseFloat(transaction.amount) <= parseFloat(eWallet)
+        ...transaction
       })
     } else
       setTransaction({
@@ -108,7 +106,7 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title='Create transaction'
+          title={t('title.createTransaction')}
           onSubmit={onSubmit}
           message={t('confirmDialog')}
           onClose={() => setIsConfirming(false)}
@@ -168,4 +166,4 @@ const CreateTransactionForm = ({ eWallet = 0, storeId = '', onRun }) => {
   )
 }
 
-export default CreateTransactionForm
+export default CreateDepositTransactionForm

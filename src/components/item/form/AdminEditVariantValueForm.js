@@ -72,7 +72,7 @@ const AdminEditValueStyleForm = ({ oldVariantValue = {}, onRun }) => {
         if (data.error) setError(data.error)
         else {
           if (onRun) onRun()
-          toast.success(data.success)
+          toast.success(t('toastSuccess.updateVariantValue'))
         }
         setIsLoading(false)
         setTimeout(() => {

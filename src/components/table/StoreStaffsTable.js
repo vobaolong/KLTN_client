@@ -16,6 +16,7 @@ import { toast } from 'react-toastify'
 import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 import Alert from '../ui/Alert'
+import boxImg from '../../assets/box.svg'
 
 const StoreStaffsTable = ({
   heading = false,
@@ -160,9 +161,7 @@ const StoreStaffsTable = ({
       {error && <Error msg={error} />}
       <div className='p-3 box-shadow bg-body rounded-2'>
         <div className=' d-flex align-items-center justify-content-between mb-3'>
-          {pagination.size !== 0 && (
-            <SearchInput onChange={handleChangeKeyword} />
-          )}
+          <SearchInput onChange={handleChangeKeyword} />
           {ownerId && userId === ownerId._id ? (
             <StoreAddStaffItem
               storeId={storeId}
@@ -175,7 +174,8 @@ const StoreStaffsTable = ({
         </div>
 
         {!isLoading && pagination.size === 0 ? (
-          <div className='my-4 text-danger text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
             <h5>{t('staffDetail.noStaff')}</h5>
           </div>
         ) : (

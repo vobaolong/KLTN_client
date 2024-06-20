@@ -9,8 +9,7 @@ import Error from '../ui/Error'
 const EmailActiveButton = ({
   email = '',
   isEmailActive = false,
-  googleId = '',
-  facebookId = ''
+  googleId = ''
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -51,7 +50,7 @@ const EmailActiveButton = ({
         </div>
       )}
 
-      {(googleId || facebookId) && (
+      {googleId && (
         <div className='position-relative d-inline-block'>
           <span className='badge bg-primary d-inline-flex align-items-end cus-tooltip'>
             {googleId && (
@@ -59,14 +58,6 @@ const EmailActiveButton = ({
                 loading='lazy'
                 className='social-img rounded-circle me-1 social-img--small'
                 src='https://img.icons8.com/color/48/000000/google-logo.png'
-                alt=''
-              />
-            )}
-            {facebookId && (
-              <img
-                loading='lazy'
-                className='social-img rounded-circle me-1 social-img--small'
-                src='https://img.icons8.com/color/48/000000/facebook-new.png'
                 alt=''
               />
             )}

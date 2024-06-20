@@ -75,7 +75,7 @@ const UserEditPasswordForm = () => {
             isValidCurrentPassword: true,
             isValidNewPassword: true
           })
-          toast.success(data.success)
+          toast.success(t('toastSuccess.userDetail.updatePassword'))
         }
         setIsLoading(false)
         setTimeout(() => {

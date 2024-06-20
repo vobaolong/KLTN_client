@@ -62,7 +62,8 @@
     "variant": {
       "create": "Create variant successfully",
       "update": "Update variant successfully",
-      "delete": "Delete variant successfully"
+      "delete": "Delete variant successfully",
+      "none": "This category does not have variants"
     },
     "review": {
       "add": "Rating successfully",
@@ -72,7 +73,8 @@
     "withDraw": "Withdraw successfully",
     "userDetail": {
       "updateProfile": "Update profile successfully",
-      "updateCover": "Update cover successfully"
+      "updateCover": "Update cover successfully",
+      "updatePassword": "Update password successfully"
     },
     "signIn": "Sign in successfully",
     "signUp": "Sign up successfully",
@@ -88,7 +90,7 @@
     "variantValue": {
       "add": "Add value successfully",
       "delete": "Delete value successfully",
-      "edit": "Update value successfully",
+      "update": "Update value successfully",
       "restore": "Restore value successfully"
     },
     "followStore": {
@@ -170,6 +172,7 @@
     "edit": "Are you sure to edit "
   },
   "title": {
+    "createTransaction": "Create transaction",
     "openStore": "Turn off vacation mode",
     "closeStore": "Turn on vacation mode",
     "productVariants": "Product Variants",
@@ -186,6 +189,7 @@
     "userInSystem": "Users in the system"
   },
   "dialog": {
+    "report": "Report",
     "removeImg": "Remove Image",
     "logOut": "Log Out",
     "closeStore": "Turn on vacation mode",
@@ -292,6 +296,7 @@
     "all": "All",
     "selling": "Selling",
     "hidden": "Hide",
+    "outOfStock": "Out Of Stock",
     "productImg": "Product Images",
     "basicInfo": "Basic Information",
     "detailInfo": "Detail Information",
@@ -552,7 +557,7 @@
     "delete": "Delete Staff",
     "add": "Add Staff",
     "leave": "Leave store",
-    "noStaff": "No Staff!"
+    "noStaff": "No Staff"
   },
 
   "storeDetail": {
@@ -750,5 +755,10 @@
   "or": "Or",
   "noneNotification": "No new notifications",
   "deleteAll": "Delete all",
-  "newNotification": "New Notification"
+  "newNotification": "New Notification",
+  "Bronze": "Bronze",
+  "Silver": "Silver",
+  "Gold": "Gold",
+  "Diamond": "Diamond",
+  "report": "Report"
 }

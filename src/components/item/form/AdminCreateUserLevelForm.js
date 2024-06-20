@@ -75,7 +75,7 @@ const AdminCreateUserLevelForm = ({ onRun = () => {} }) => {
       .then((data) => {
         if (data.error) setError(data.error)
         else {
-          toast.success('toastSuccess.level.create')
+          toast.success(t('toastSuccess.level.create'))
           setLevel({
             name: '',
             minPoint: 0,

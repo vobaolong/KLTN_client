@@ -96,18 +96,17 @@ const CartPage = () => {
         {cartCount === 0 ? (
           <div className=''>
             <h5>{t('cart')}</h5>
-            <div className='bg-white pb-3 rounded-3 align-items-center justify-content-center d-flex flex-column gap-2'>
+            <div className='bg-white pb-3 mb-3 box-shadow rounded-2 align-items-center justify-content-center d-flex flex-column gap-2'>
               <img
                 loading='lazy'
                 src={cartEmpty}
-                style={{ width: '300px' }}
+                style={{ width: '200px' }}
                 alt=''
               />
               <span className='text-danger'>{t('cartDetail.empty')}</span>
               <span class>{t('cartDetail.emptyRefer')}</span>
             </div>
-            <h6 className='mt-2'>{t('bestSeller')}</h6>
-            <ListBestSellerProducts />
+            <ListBestSellerProducts heading={t('bestSeller')} />
           </div>
         ) : (
           <div className='accordion' id='accordionPanelsStayOpen'>

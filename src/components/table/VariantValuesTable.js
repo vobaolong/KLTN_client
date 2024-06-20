@@ -238,7 +238,9 @@ const VariantValuesTable = ({
           </table>
         </div>
         <div className='d-flex justify-content-between align-items-center px-4'>
-          <small>Showing {variantValues.length || 0} value</small>
+          <small>
+            {t('showing')} {variantValues.length || 0} {t('result')}
+          </small>
         </div>
       </div>
 

@@ -116,6 +116,7 @@ const OrderDetailInfo = ({
             </h5>
 
             {(!isEditable ||
+              by === 'admin' ||
               (isEditable &&
                 by === 'store' &&
                 order.status !== 'Not processed' &&

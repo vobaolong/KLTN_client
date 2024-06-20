@@ -25,7 +25,7 @@ const AboutPage = () => {
           <StoreLevelInfo store={store} />
         </div>
         <div className='mb-1'>
-          <StoreProfileInfo store={store} />
+          <StoreProfileInfo store={store} showProfile={false} />
         </div>
       </div>
     </StoreLayout>

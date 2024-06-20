@@ -295,7 +295,7 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                       <td>
                         <ProductActiveLabel isActive={product.isActive} />
                       </td>
-                      <td className='text-end'>
+                      <td>
                         <small>{humanReadableDate(product.createdAt)}</small>
                       </td>
                       <td>

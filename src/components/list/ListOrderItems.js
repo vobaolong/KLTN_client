@@ -108,13 +108,19 @@ const ListOrderItems = ({
                 className='flex-grow-1 ms-3 align-items-start'
                 style={{ flexDirection: 'column-reverse', width: '50%' }}
               >
-                <Link
-                  className='text-reset text-decoration-none link-hover d-block mt-1'
-                  to={`/product/${item.productId?._id}`}
-                  title={item.productId?.name}
-                >
-                  <p>{item.productId?.name}</p>
-                </Link>
+                {item.productId.quantity > 0 ? (
+                  <Link
+                    className='text-reset text-decoration-none link-hover d-block mt-1'
+                    to={`/product/${item.productId?._id}`}
+                    title={item.productId?.name}
+                  >
+                    <p>{item.productId?.name}</p>
+                  </Link>
+                ) : (
+                  <p className='text-reset text-decoration-none disable d-block mt-1'>
+                    {item.productId?.name}
+                  </p>
+                )}
 
                 <div className='mt-1'>
                   {item.variantValueIds?.map((value, index) => (

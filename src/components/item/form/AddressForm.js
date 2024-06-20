@@ -163,7 +163,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
       {isLoading && <Loading />}
       <div className='row mb-2 text-start gap-3'>
         <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-3 me-3' htmlFor='province'>
+          <label className='col-4 me-3' htmlFor='province'>
             {t('addressForm.province')} <span className='text-danger'>*</span>
           </label>
           <select
@@ -182,7 +182,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
         </div>
 
         <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-3 me-3' htmlFor='district'>
+          <label className='col-4 me-3' htmlFor='district'>
             {t('addressForm.district')} <span className='text-danger'>*</span>
           </label>
           <select
@@ -202,7 +202,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
         </div>
 
         <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-3 me-3' htmlFor='ward'>
+          <label className='col-4 me-3' htmlFor='ward'>
             {t('addressForm.ward')} <span className='text-danger'>*</span>
           </label>
           <select
