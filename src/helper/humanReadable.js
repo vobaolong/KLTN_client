@@ -1,18 +1,3 @@
-const months = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07',
-  '08',
-  '09',
-  '10',
-  '11',
-  '12'
-]
-
 export const humanReadableDate = (date) => {
   date = new Date(date)
   const hours = ('0' + date.getHours()).slice(-2)
@@ -72,7 +57,7 @@ export const formatTime = (date) => {
     'h ' +
     date.getDate() +
     '/' +
-    months[date.getMonth()] +
+    date.getMonth() +
     '/' +
     date.getFullYear()
   )

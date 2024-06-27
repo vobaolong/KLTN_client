@@ -311,15 +311,16 @@ const ListCartItems = ({
                 )}
                 <sup>₫</sup>
               </span>
-              <button
-                type='button'
-                className='btn btn-sm btn-outline-danger ripple rounded-1'
-                onClick={() => handleDelete(item)}
-                title={t('button.delete')}
-              >
-                <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
-                <span className='res-hide'>{t('button.delete')}</span>
-              </button>
+              <div className='d-inline-block position-relative'>
+                <button
+                  type='button'
+                  className='btn btn-sm btn-outline-danger ripple rounded-1 cus-tooltip'
+                  onClick={() => handleDelete(item)}
+                >
+                  <i className='fa-solid fa-trash-alt'></i>
+                </button>
+                <span className='cus-tooltip-msg'>{t('button.delete')}</span>
+              </div>
             </div>
           </div>
         </div>

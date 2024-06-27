@@ -251,48 +251,55 @@ const AdminVariantsTable = ({ heading = false }) => {
                     {variant.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
                   </td>
                   <td>{humanReadableDate(variant.createdAt)}</td>
-                  <td className='text-nowrap'>
-                    <Link
-                      type='button'
-                      className='btn btn-sm btn-outline-secondary ripple me-2 my-1'
-                      to={`/admin/variant/values/${variant._id}`}
-                      title={t('button.detail')}
-                    >
-                      <i className='d-none res-dis-sm fa-solid fa-circle-info'></i>
-                      <span className='res-hide'>{t('button.detail')}</span>
-                    </Link>
-
-                    <Link
-                      type='button'
-                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
-                      to={`/admin/variant/edit/${variant._id}`}
-                      title={t('button.edit')}
-                    >
-                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
-                      <span className='res-hide'>{t('button.edit')}</span>
-                    </Link>
-
-                    {!variant.isDeleted ? (
-                      <button
+                  <td className='text-nowrap my-1'>
+                    <div className='position-relative d-inline-block'>
+                      <Link
                         type='button'
-                        className='btn btn-sm btn-outline-danger ripple rounded-1'
-                        onClick={() => handleDelete(variant)}
-                        title={t('button.delete')}
+                        className='btn btn-sm btn-outline-secondary ripple me-2 cus-tooltip'
+                        to={`/admin/variant/values/${variant._id}`}
                       >
-                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
-                        <span className='res-hide'>{t('button.delete')}</span>
-                      </button>
-                    ) : (
-                      <button
+                        <i className='fa-solid fa-circle-info'></i>
+                      </Link>
+                      <span className='cus-tooltip-msg'>
+                        {t('button.detail')}
+                      </span>
+                    </div>
+                    <div className='position-relative d-inline-block'>
+                      <Link
                         type='button'
-                        className='btn btn-sm btn-outline-success'
-                        onClick={() => handleRestore(variant)}
-                        title={t('button.restore')}
+                        className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 cus-tooltip'
+                        to={`/admin/variant/edit/${variant._id}`}
                       >
-                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
-                        <span className='res-hide'>{t('button.restore')}</span>
-                      </button>
-                    )}
+                        <i className='fa-duotone fa-pen-to-square'></i>
+                      </Link>
+                      <span className='cus-tooltip-msg'>
+                        {t('button.edit')}
+                      </span>
+                    </div>
+                    <div className='position-relative d-inline-block'>
+                      {!variant.isDeleted ? (
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-danger ripple rounded-1 cus-tooltip'
+                          onClick={() => handleDelete(variant)}
+                        >
+                          <i className='fa-solid fa-trash-alt'></i>
+                        </button>
+                      ) : (
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-success ripple rounded-1 cus-tooltip'
+                          onClick={() => handleRestore(variant)}
+                        >
+                          <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        </button>
+                      )}{' '}
+                      <span className=' cus-tooltip-msg'>
+                        {!variant.isDeleted
+                          ? t('button.delete')
+                          : t('button.restore')}
+                      </span>
+                    </div>
                   </td>
                 </tr>
               ))}

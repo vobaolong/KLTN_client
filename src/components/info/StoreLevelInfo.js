@@ -7,18 +7,28 @@ import { formatMonth } from '../../helper/humanReadable'
 import Modal from '../ui/Modal'
 import ListReport from '../item/form/ListReport'
 
+const storeReasons = [
+  { value: 'prohibited', label: 'Sản phẩm cấm' },
+  { value: 'fraud', label: 'Người dùng có dấu hiệu lừa đảo' },
+  { value: 'fake', label: 'Hàng giả, hàng nhái' }
+]
+
 const StoreLevelInfo = ({ store = {} }) => {
   const { t } = useTranslation()
-  const successRate = Math.round(
-    (store?.numberOfSuccessfulOrders /
-      (store?.numberOfSuccessfulOrders + store?.numberOfFailedOrders)) *
-      100
-  )
+  const totalOrders =
+    store?.numberOfSuccessfulOrders + store?.numberOfFailedOrders
+
+  const successRate =
+    totalOrders > 0
+      ? Math.round((store?.numberOfSuccessfulOrders / totalOrders) * 100) || 100
+      : 100
+
   const [showMenu, setShowMenu] = useState(false)
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu)
   }
+  console.log(successRate)
 
   return (
     <div className='container-fluid'>
@@ -79,7 +89,8 @@ const StoreLevelInfo = ({ store = {} }) => {
                 }
                 colon
                 value={
-                  store.numberOfFollowers ? (
+                  store.numberOfFollowers !== null &&
+                  store.numberOfFollowers !== undefined ? (
                     <span className='text-primary'>
                       {store.numberOfFollowers}
                     </span>
@@ -129,7 +140,7 @@ const StoreLevelInfo = ({ store = {} }) => {
                     title={t('dialog.report')}
                     id='report'
                   >
-                    <ListReport />
+                    <ListReport reasons={storeReasons} />
                   </Modal>
                 </div>
               )}

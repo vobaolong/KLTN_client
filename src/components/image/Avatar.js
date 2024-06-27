@@ -3,7 +3,6 @@ import defaultImage from '../../assets/default.webp'
 import ProductUpload from './uploadButton/ProductUpload'
 import UserAvatarUpload from './uploadButton/UserAvatarUpload'
 import StoreAvatarUpload from './uploadButton/StoreAvatarUpload'
-import Skeleton from 'react-loading-skeleton'
 const IMG = process.env.REACT_APP_STATIC_URL
 
 const Avatar = ({
@@ -60,7 +59,7 @@ const Avatar = ({
               borderName && 'bg-value box-shadow'
             }`}
           >
-            {name ? name : <Skeleton width={100} />}
+            {name}
           </h6>
           <small className='cus-shop-status'>{status}</small>
         </div>

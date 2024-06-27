@@ -299,33 +299,30 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
                         <small>{humanReadableDate(product.createdAt)}</small>
                       </td>
                       <td>
-                        <button
-                          type='button'
-                          className={`btn btn-sm rounded-1 ripple ${
-                            !product.isActive
-                              ? 'btn-outline-success'
-                              : 'btn-outline-danger'
-                          }`}
-                          onClick={() => handleActiveProduct(product)}
-                          title={
-                            !product.isActive
-                              ? t('button.active')
-                              : t('button.ban')
-                          }
-                        >
-                          <i
-                            className={`d-none res-dis-sm${
-                              product.isActive
-                                ? 'fa-solid fa-ban'
-                                : 'fa-regular fa-circle-check'
+                        <div className='position-relative d-inline-block'>
+                          <button
+                            type='button'
+                            className={`btn btn-sm rounded-1 ripple cus-tooltip ${
+                              !product.isActive
+                                ? 'btn-outline-success'
+                                : 'btn-outline-danger'
                             }`}
-                          ></i>
-                          <span className='res-hide'>
+                            onClick={() => handleActiveProduct(product)}
+                          >
+                            <i
+                              className={`${
+                                product.isActive
+                                  ? 'fa-solid fa-ban'
+                                  : 'fa-regular fa-circle-check'
+                              }`}
+                            ></i>
+                          </button>
+                          <span className='cus-tooltip-msg'>
                             {!product.isActive
                               ? t('button.active')
                               : t('button.ban')}
                           </span>
-                        </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import Error from '../ui/Error'
 import { toast } from 'react-toastify'
 
-const CancelStaffsButton = ({ storeId = '' }) => {
+const CancelStaffButton = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState(false)
@@ -60,7 +60,6 @@ const CancelStaffsButton = ({ storeId = '' }) => {
       <button
         type='button'
         className='btn btn-outline-danger rounded-1 ripple'
-        style={{ width: 'max-content' }}
         onClick={handleCancelStaff}
       >
         <i className='fa-solid fa-ban'></i>
@@ -69,4 +68,4 @@ const CancelStaffsButton = ({ storeId = '' }) => {
     </div>
   )
 }
-export default CancelStaffsButton
+export default CancelStaffButton

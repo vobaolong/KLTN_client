@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import UserLevelLabel from '../label/UserLevelLabel'
+import LevelLabel from '../label/LevelLabel'
 import Paragraph from '../ui/Paragraph'
 import { formatDate } from '../../helper/humanReadable'
 import UserRoleLabel from '../label/UserRoleLabel'
@@ -43,7 +43,7 @@ const UserLevelInfo = ({ user = {}, border = true }) => {
               colon
               value={
                 <span>
-                  <UserLevelLabel level={user.level} />
+                  <LevelLabel level={user.level} />
                 </span>
               }
             />

@@ -20,6 +20,16 @@ const ProductsPage = () => {
   const handleOptionClick = (option) => {
     setSelectedOption(option)
   }
+  const productStatus = [
+    {
+      label: t('productDetail.all'),
+      value: 'all'
+    },
+    { label: t('productDetail.selling'), value: 'selling' },
+    { label: t('productDetail.hidden'), value: 'hidden' },
+    { label: t('productDetail.outOfStock'), value: 'outOfStock' },
+    { label: t('status.infringing'), value: 'infringing' }
+  ]
 
   return (
     <SellerLayout user={user} store={store} paths={paths}>
@@ -35,50 +45,19 @@ const ProductsPage = () => {
         </Link>
       </div>
 
-      <div className='mb-2 bg-body rounded-top-1 box-shadow'>
-        <ul className='nav nav-tabs'>
-          <li className='nav-item col-3 text-center pointer'>
+      <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
+        {productStatus.map((status) => (
+          <li className='nav-item col-2 text-center pointer' key={status.value}>
             <span
-              className={`nav-link ${selectedOption === 'all' ? 'active' : ''}`}
-              onClick={() => handleOptionClick('all')}
-            >
-              <span>{t('productDetail.all')}</span>
-            </span>
-          </li>
-
-          <li className='nav-item col-3 text-center pointer'>
-            <span
-              className={`nav-link ${
-                selectedOption === 'selling' ? 'active' : ''
+              className={`nav-link h-100 ${
+                selectedOption === status.value ? `active` : ``
               }`}
-              onClick={() => handleOptionClick('selling')}
+              onClick={() => handleOptionClick(status.value)}
             >
-              <span>{t('productDetail.selling')}</span>
+              {status.label}
             </span>
           </li>
-
-          <li className='nav-item col-3 text-center pointer'>
-            <span
-              className={`nav-link ${
-                selectedOption === 'hidden' ? 'active' : ''
-              }`}
-              onClick={() => handleOptionClick('hidden')}
-            >
-              <span>{t('productDetail.hidden')}</span>
-            </span>
-          </li>
-          {/* thêm đoạn này */}
-          <li className='nav-item col-3 text-center pointer'>
-            <span
-              className={`nav-link ${
-                selectedOption === 'outOfStock' ? 'active' : ''
-              }`}
-              onClick={() => handleOptionClick('outOfStock')}
-            >
-              <span>{t('productDetail.outOfStock')}</span>
-            </span>
-          </li>
-        </ul>
+        ))}
       </div>
 
       <StoreProductsTable storeId={store._id} selectedOption={selectedOption} />

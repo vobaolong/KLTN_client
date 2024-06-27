@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { timeAgo } from '../../../helper/calcTime'
+import { humanReadableDate } from '../../../helper/humanReadable'
 
 const BellButton = ({ navFor = 'user' }) => {
   const { t } = useTranslation()
@@ -27,10 +28,14 @@ const BellButton = ({ navFor = 'user' }) => {
     }
   }
 
-  const handleClick = async () => {
+  const handleNotificationClick = async (notificationId) => {
     try {
       await updateRead(user._id)
-      setNotificationCount(0)
+      setList((prevList) =>
+        prevList.map((n) =>
+          n._id === notificationId ? { ...n, isRead: true } : n
+        )
+      )
     } catch (error) {
       console.log(error)
     }
@@ -56,15 +61,15 @@ const BellButton = ({ navFor = 'user' }) => {
   useEffect(() => {
     socketId.on('notification', (id) => {
       fetchNotifications(id)
-      console.log(id)
     })
   }, [])
+
   const popoverClickRootClose = (
     <Popover
       id='popover-trigger-click-root-close'
       style={{
         borderRadius: '5px',
-        minWidth: '400px'
+        minWidth: '420px'
       }}
     >
       <div className='text-secondary p-2 px-3'>{t('newNotification')}</div>
@@ -76,6 +81,7 @@ const BellButton = ({ navFor = 'user' }) => {
       >
         {list.map((l) => (
           <Link
+            onClick={() => handleNotificationClick(l._id)}
             to={`${
               navFor === 'user'
                 ? '/account/purchase/detail/' + l.orderId
@@ -83,23 +89,20 @@ const BellButton = ({ navFor = 'user' }) => {
             }`}
             key={l._id}
             style={{ fontSize: '14px' }}
-            className='cus-notification nolink cus-dropdown w-100 px-3 py-2'
+            className={`${
+              l.isRead ? 'cus-notification-is-read' : 'cus-notification'
+            } nolink cus-dropdown w-100 px-3 py-2`}
           >
             {l.message}{' '}
-            <span className='fw-bold text-uppercase'>{l.orderId}</span>{' '}
-            <p>{timeAgo(l.createdAt)}</p>
+            <span className='fw-bold text-uppercase'>{l.orderId}</span>
+            <p className='d-flex justify-content-between'>
+              <span>{timeAgo(l.createdAt)}</span>
+              <span>{humanReadableDate(l.createdAt)}</span>
+            </p>
           </Link>
         ))}
         {list.length === 0 && (
-          <p
-            style={{
-              textAlign: 'center',
-              marginTop: '60px',
-              paddingTop: '120px'
-            }}
-          >
-            {t('noneNotification')}
-          </p>
+          <p className='text-center mt-5 pt-5'>{t('noneNotification')}</p>
         )}
       </div>
       {list.length !== 0 && (
@@ -119,7 +122,7 @@ const BellButton = ({ navFor = 'user' }) => {
   )
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={() => setNotificationCount(0)}>
       <OverlayTrigger
         trigger='click'
         rootClose
@@ -127,8 +130,8 @@ const BellButton = ({ navFor = 'user' }) => {
         overlay={popoverClickRootClose}
       >
         <div className='cart-item-wrap position-relative'>
-          <span className='rounded-circle btn inherit cus-tooltip ripple mx-2'>
-            <i className='fa-light fa-bell'></i>
+          <span className='rounded-circle btn inherit cus-tooltip ripple mx-2 bell'>
+            <i className='fa-solid fa-bell'></i>
           </span>
           {notificationCount > 0 && (
             <span

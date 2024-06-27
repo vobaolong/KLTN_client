@@ -21,10 +21,12 @@ const SellerEditProductForm = ({ storeId = '', productId = '' }) => {
         if (data.error) setError(data.error)
         else setProduct(data.product)
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
       .catch((error) => {
         setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }, [productId, storeId, run])
 

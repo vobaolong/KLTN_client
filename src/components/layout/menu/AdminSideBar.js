@@ -1,45 +1,15 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import logoSmall from '../../../assets/logoSmall.png'
-import { useSelector } from 'react-redux'
 
 const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
   const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
-  const admin = useSelector((state) => state.account.user)
 
   return (
     <div
       className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar
       '
     >
-      <div className='d-flex justify-content-center align-items-center py-2'>
-        <span className='cus-sidebar-item--db d-flex align-items-end gap-1'>
-          <img
-            loading='lazy'
-            src={logoSmall}
-            style={{ width: '30px' }}
-            alt=''
-          />
-          {!isCollapsed && (
-            <span className='p-0 m-0 text-muted text-uppercase fw-bold res-hide'>
-              {`${admin.firstName} ${admin.lastName}`}
-            </span>
-          )}
-        </span>
-        <span
-          className='res-hide border-0 position-absolute pointer fs-5 rounded-circle'
-          style={{ right: '-10px' }}
-          onClick={onToggle}
-        >
-          <i
-            className={`text-body-tertiary fs-5 fa-solid fa-circle-chevron-${
-              isCollapsed ? 'right' : 'left'
-            }`}
-          ></i>
-        </span>
-      </div>
-      <hr />
       <ul
         className={`nav nav-pills flex-column mb-auto justify-content-around gap-1 ${
           isCollapsed ? 'text-center' : ''

@@ -98,7 +98,7 @@ const MainNav = ({ navFor = 'user' }) => {
                       className='btn lang rounded-circle ripple cus-tooltip rounded-1 inherit'
                       to='/cart'
                     >
-                      <i className='fa-light fa-bag-shopping'></i>
+                      <i className='fa-solid fa-bag-shopping'></i>
                     </Link>
                     {cartCount > 0 && (
                       <span
@@ -171,33 +171,33 @@ const MainNav = ({ navFor = 'user' }) => {
                   <StoreSmallCard store={store} link={`/seller/${store._id}`} />
                 )}
 
-                <ul className='navbar-nav justify-content-end flex-grow-1'>
-                  <li className='nav-item p-2'>
+                <ul className='navbar-nav justify-content-end flex-grow-1 gap-2 mt-2'>
+                  <li className='nav-item bg-value rounded-1 p-2'>
                     <Link className='link-hover link-dark d-block' to='/'>
-                      <i className='fa-light fa-home me-2'></i>
+                      <i className='text-primary fs-9 fa-light fa-home me-2'></i>
                       {t('home')}
                     </Link>
                   </li>
 
                   {getToken().role === 'user' && (
-                    <li className='nav-item p-2'>
+                    <li className='nav-item bg-value rounded-1 p-2'>
                       <Link
                         className='link-hover link-dark d-block'
                         to='/account/store'
                       >
-                        <i className='fa-light fa-store me-2'></i>
+                        <i className='text-primary fs-9 fa-light fa-store me-2'></i>
                         {t('myStore')}
                       </Link>
                     </li>
                   )}
 
                   {navFor === 'user' && getToken().role === 'user' && (
-                    <li className='nav-item p-2 position-related'>
+                    <li className='nav-item bg-value rounded-1 p-2 position-related'>
                       <Link
                         className='link-hover link-dark d-block '
                         to='/cart'
                       >
-                        <i className='fa-light fa-bag-shopping me-2'></i>
+                        <i className='text-primary fs-9 fa-light fa-bag-shopping me-2'></i>
                         {t('cart')}
                         <sup className='ms-1 text-danger'>
                           ({cartCount > 0 ? cartCount : '0'})
@@ -207,24 +207,25 @@ const MainNav = ({ navFor = 'user' }) => {
                   )}
 
                   {navFor === 'user' && getToken().role === 'admin' && (
-                    <li className='nav-item p-2'>
+                    <li className='nav-item bg-value rounded-1 p-2'>
                       <Link
                         className='link-hover link-dark d-block'
                         to='/admin/dashboard'
                       >
-                        <i className='fa-light fa-chart-line me-2'></i>
+                        <i className='text-primary fs-9 fa-light fa-chart-line me-2'></i>
                         {t('admin.adDashboard.dashboard')}
                       </Link>
                     </li>
                   )}
-
+                  <hr className='my-1' />
                   <li
-                    className='nav-item p-2 link-hover link-dark'
+                    className='nav-item bg-value rounded-1 p-2 link-hover link-dark'
                     onClick={handleSignout}
                   >
-                    <i className='fa-light fa-sign-out-alt me-2'></i>
-                    {t('button.logout')}
+                    <i className='text-primary fs-9 fa-light fa-sign-out-alt me-2'></i>
+                    <span className='text-danger'>{t('button.logout')}</span>
                   </li>
+                  <hr className='my-1' />
                   <Language vertical={false} />
                 </ul>
               </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { getToken } from '../../../apis/auth'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import { createTransactionByUser } from '../../../apis/transaction'
@@ -9,6 +9,7 @@ import Error from '../../ui/Error'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
 
 const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
   const { t } = useTranslation()
@@ -17,6 +18,9 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
   const [isConfirming, setIsConfirming] = useState(false)
   const [updateDispatch] = useUpdateDispatch()
   const { _id: userId, accessToken } = getToken()
+  const user = useSelector((state) => state.account.user)
+  const isGoogleUser = user && user.googleId
+
   const [transaction, setTransaction] = useState({
     isUp: 'false',
     amount: 100000,
@@ -24,6 +28,14 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
     isValidAmount: true,
     isValidCurrentPassword: true
   })
+
+  const isMounted = useRef(true)
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   const handleChange = (name, isValidName, value) => {
     setTransaction({
@@ -40,11 +52,12 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         isValidAmount:
           flag && parseFloat(transaction.amount) <= parseFloat(eWallet)
       })
-    } else
+    } else {
       setTransaction({
         ...transaction,
         [isValidName]: flag
       })
+    }
   }
 
   const handleSubmit = (e) => {
@@ -52,19 +65,26 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
 
     const { amount, currentPassword } = transaction
 
-    if (!userId || !amount || !currentPassword) {
+    if (!userId || !amount || (!isGoogleUser && !currentPassword)) {
       setTransaction({
         ...transaction,
         isValidAmount:
           numberTest('positive', amount) &&
           parseFloat(transaction.amount) <= parseFloat(eWallet),
-        isValidCurrentPassword: regexTest('password', currentPassword)
+        isValidCurrentPassword: isGoogleUser
+          ? true
+          : regexTest('password', currentPassword)
       })
       return
     }
 
-    if (!transaction.isValidAmount || !transaction.isValidCurrentPassword)
+    if (
+      !transaction.isValidAmount ||
+      (!isGoogleUser && !transaction.isValidCurrentPassword)
+    ) {
       return
+    }
+
     setIsConfirming(true)
   }
 
@@ -73,6 +93,7 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
     setIsLoading(true)
     createTransactionByUser(userId, accessToken, transaction)
       .then((data) => {
+        if (!isMounted.current) return
         if (data.error) setError(data.error)
         else {
           setTransaction({
@@ -92,6 +113,7 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
         }, 3000)
       })
       .catch((error) => {
+        if (!isMounted.current) return
         setError('Server error')
         setIsLoading(false)
         setTimeout(() => {
@@ -128,23 +150,25 @@ const CreateTransactionFormForUser = ({ eWallet = 0, onRun }) => {
           />
         </div>
 
-        <div className='col-12'>
-          <Input
-            type='password'
-            label={t('transactionDetail.currentPw')}
-            value={transaction.currentPassword}
-            isValid={transaction.isValidCurrentPassword}
-            feedback={t('transactionDetail.currentPwValid')}
-            required={true}
-            validator='password'
-            onChange={(value) =>
-              handleChange('currentPassword', 'isValidCurrentPassword', value)
-            }
-            onValidate={(flag) =>
-              handleValidate('isValidCurrentPassword', flag)
-            }
-          />
-        </div>
+        {!isGoogleUser && (
+          <div className='col-12'>
+            <Input
+              type='password'
+              label={t('transactionDetail.currentPw')}
+              value={transaction.currentPassword}
+              isValid={transaction.isValidCurrentPassword}
+              feedback={t('transactionDetail.currentPwValid')}
+              required={true}
+              validator='password'
+              onChange={(value) =>
+                handleChange('currentPassword', 'isValidCurrentPassword', value)
+              }
+              onValidate={(flag) =>
+                handleValidate('isValidCurrentPassword', flag)
+              }
+            />
+          </div>
+        )}
 
         {error && (
           <div className='col-12'>

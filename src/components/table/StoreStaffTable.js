@@ -18,7 +18,7 @@ import Error from '../ui/Error'
 import Alert from '../ui/Alert'
 import boxImg from '../../assets/box.svg'
 
-const StoreStaffsTable = ({
+const StoreStaffTable = ({
   heading = false,
   staffIds = [],
   ownerId = {},
@@ -31,7 +31,7 @@ const StoreStaffsTable = ({
   const [isConfirming, setIsConfirming] = useState(false)
   const { _id: userId, accessToken } = getToken()
   const [updateDispatch] = useUpdateDispatch()
-  const [listStaffs, setListStaffs] = useState([])
+  const [listStaff, setListStaff] = useState([])
   const [pagination, setPagination] = useState({
     size: 0
   })
@@ -46,7 +46,7 @@ const StoreStaffsTable = ({
 
   useEffect(() => {
     if (!staffIds || staffIds.length <= 0) {
-      setListStaffs([])
+      setListStaff([])
       setPagination({
         ...pagination,
         size: 0
@@ -72,8 +72,8 @@ const StoreStaffsTable = ({
       skip = (pageCount - 1) * limit
     }
 
-    const newListStaffs = filterList.slice(skip, skip + limit)
-    setListStaffs(newListStaffs)
+    const newListStaff = filterList.slice(skip, skip + limit)
+    setListStaff(newListStaff)
     setPagination({
       size,
       pageCurrent,
@@ -141,7 +141,7 @@ const StoreStaffsTable = ({
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
           msg1={`${t('alert.listStaff')}`}
           alert={`${t('alert.thisSectionContains')}`}
-          msg2={`${t('alert.theShopStaffs.')}`}
+          msg2={`${t('alert.theShopStaff.')}`}
           onClose={() => setAlerts(false)}
         />
       ) : null}
@@ -166,7 +166,7 @@ const StoreStaffsTable = ({
             <StoreAddStaffItem
               storeId={storeId}
               owner={ownerId}
-              staffs={staffIds}
+              staff={staffIds}
             />
           ) : (
             <CancelStaffButton storeId={storeId} />
@@ -180,7 +180,7 @@ const StoreStaffsTable = ({
           </div>
         ) : (
           <div className='table-scroll my-2'>
-            <table className='store-staffs-table table align-middle align-items-center table-hover table-sm text-start'>
+            <table className='store-staff-table table align-middle align-items-center table-hover table-sm text-start'>
               <thead>
                 <tr>
                   <th scope='col' className='text-center'>
@@ -233,7 +233,7 @@ const StoreStaffsTable = ({
                 </tr>
               </thead>
               <tbody>
-                {listStaffs?.map((staff, index) => (
+                {listStaff?.map((staff, index) => (
                   <tr key={index}>
                     <th scope='row' className='text-center'>
                       {index + 1 + (filter.page - 1) * filter.limit}
@@ -246,15 +246,18 @@ const StoreStaffsTable = ({
                     <td>{staff.phone || '-'}</td>
                     {ownerId && userId === ownerId._id && (
                       <td>
-                        <button
-                          type='button'
-                          className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
-                          onClick={() => handleDeleteStaff(staff)}
-                          title={t('button.delete')}
-                        >
-                          <i className='d-none res-dis-sm fa-solid fa-user-minus'></i>
-                          <span className='res-hide'>{t('button.delete')}</span>
-                        </button>
+                        <div className='position-relative d-inline-block'>
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
+                            onClick={() => handleDeleteStaff(staff)}
+                          >
+                            <i className='fa-solid fa-user-xmark'></i>
+                          </button>
+                          <span className='cus-tooltip-msg'>
+                            {t('button.delete')}
+                          </span>
+                        </div>
                       </td>
                     )}
                   </tr>
@@ -283,7 +286,7 @@ const StoreStaffsTable = ({
   )
 }
 
-export default StoreStaffsTable
+export default StoreStaffTable
 
 const compareFunc = (sortBy, order) => {
   return (a, b) => {

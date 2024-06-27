@@ -33,6 +33,34 @@ export const updateRead = async (userId) => {
   }
 }
 
+export const sendBanStoreEmail = async (userId) => {
+  try {
+    const res = await fetch(`${API}/send-ban-store/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const sendActiveStoreEmail = async (userId) => {
+  try {
+    const res = await fetch(`${API}/send-active-store/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const deleteNotifications = async (userId) => {
   try {
     const res = await fetch(`${API}/notification/${userId}`, {

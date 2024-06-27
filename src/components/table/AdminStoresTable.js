@@ -19,6 +19,11 @@ import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import StoreActiveLabel from '../label/StoreActiveLabel'
 import Error from '../ui/Error'
+import {
+  sendActiveStoreEmail,
+  sendBanStoreEmail
+} from '../../apis/notification'
+import boxImg from '../../assets/box.svg'
 
 const AdminStoresTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
@@ -103,7 +108,6 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
     setActiveStore(store)
     setIsConfirming(true)
   }
-
   const onSubmit = () => {
     setIsLoading(true)
     const value = { isActive: !activeStore.isActive }
@@ -114,13 +118,19 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         } else {
           toast.success(active)
           setRun(!run)
+          const storeId = stores.map((store) => store.ownerId?._id)
+          if (!activeStore.isActive) {
+            sendActiveStoreEmail(storeId)
+          } else {
+            sendBanStoreEmail(storeId)
+          }
         }
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
       .catch((error) => {
@@ -156,15 +166,16 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
       )}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
+        <div className='mb-3'>
+          <SearchInput onChange={handleChangeKeyword} />
+        </div>
         {!isLoading && pagination.size === 0 ? (
-          <div className='my-4 text-danger text-center'>
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='boxImg' width={'80px'} />
             <h5>{t('storeDetail.noStores')}</h5>
           </div>
         ) : (
           <>
-            <div className='mb-3'>
-              <SearchInput onChange={handleChangeKeyword} />
-            </div>
             <div className='table-scroll my-2'>
               <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
@@ -285,31 +296,30 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
                         <small>{humanReadableDate(store.createdAt)}</small>
                       </td>
                       <td>
-                        <button
-                          type='button'
-                          className={`btn btn-sm rounded-1 ${
-                            !store.isActive
-                              ? 'btn-outline-success'
-                              : 'btn-outline-danger'
-                          } ripple cus-tooltip`}
-                          onClick={() => handleActiveStore(store)}
-                          title={
-                            !store.isActive
-                              ? t('button.active')
-                              : t('button.ban')
-                          }
-                        >
-                          <span
-                            className={`${store.isActive ? 'Kích hoạt' : ''} `}
+                        <div className='position-relative d-inline-block'>
+                          <button
+                            type='button'
+                            className={`btn btn-sm rounded-1 ripple cus-tooltip ${
+                              !store.isActive
+                                ? 'btn-outline-success'
+                                : 'btn-outline-danger'
+                            }`}
+                            onClick={() => handleActiveStore(store)}
                           >
-                            {store.isActive ? 'Khoá' : 'Kích hoạt'}
+                            <span>
+                              {store.isActive ? (
+                                <i className='fa-solid fa-ban'></i>
+                              ) : (
+                                <i className='fa-regular fa-circle-check'></i>
+                              )}
+                            </span>
+                          </button>
+                          <span className='cus-tooltip-msg'>
+                            {!store.isActive
+                              ? t('button.active')
+                              : t('button.ban')}
                           </span>
-                          {/* <i
-                            className={`fa-solid ${
-                              store.isActive ? 'fa-ban' : 'fa-circle-check'
-                            } `}
-                          ></i> */}
-                        </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

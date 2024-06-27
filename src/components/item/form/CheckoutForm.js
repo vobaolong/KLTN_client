@@ -255,7 +255,7 @@ const CheckoutForm = ({
       return
     setIsConfirming(true)
   }
-  console.log(order)
+
   const onSubmit = () => {
     const { _id, accessToken } = getToken()
     const {

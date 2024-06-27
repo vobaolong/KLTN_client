@@ -9,7 +9,7 @@ import {
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
 import SortByButton from './sub/SortByButton'
-import UserLevelLabel from '../label/UserLevelLabel'
+import LevelLabel from '../label/LevelLabel'
 import DeletedLabel from '../label/DeletedLabel'
 import AdminCreateUserLevelItem from '../item/AdminCreateUserLevelItem'
 import AdminEditUserLevelForm from '../item/form/AdminEditUserLevelForm'
@@ -22,6 +22,7 @@ import ShowResult from '../ui/ShowResult'
 import { toast } from 'react-toastify'
 import { humanReadableDate } from '../../helper/humanReadable'
 import Error from '../ui/Error'
+import boxImg from '../../assets/box.svg'
 
 const AdminUserLevelsTable = ({ heading = false }) => {
   const { t } = useTranslation()
@@ -164,7 +165,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
           message={
             <span>
               {t('message.delete')}
-              <UserLevelLabel level={deletedLevel} />
+              <LevelLabel level={deletedLevel} />
             </span>
           }
           color='danger'
@@ -178,7 +179,7 @@ const AdminUserLevelsTable = ({ heading = false }) => {
           message={
             <span>
               {t('message.restore')}
-              <UserLevelLabel level={restoredLevel} />
+              <LevelLabel level={restoredLevel} />
             </span>
           }
           onSubmit={onSubmitRestore}
@@ -197,142 +198,163 @@ const AdminUserLevelsTable = ({ heading = false }) => {
           <SearchInput onChange={handleChangeKeyword} />
           <AdminCreateUserLevelItem onRun={() => setRun(!run)} />
         </div>
+        {!isLoading && pagination.size === 0 ? (
+          <div className='my-4 text-center'>
+            <img className='mb-3' src={boxImg} alt='noItem' width={'100px'} />
+            <h5>{t('levelDetail.none')}</h5>
+          </div>
+        ) : (
+          <>
+            <div className='table-scroll my-2'>
+              <table className='table align-middle table-hover table-sm text-start'>
+                <thead>
+                  <tr>
+                    <th scope='col' className='text-center'></th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('levelDetail.name')}
+                        sortBy='name'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('levelDetail.floorPoint')}
+                        sortBy='minPoint'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('levelDetail.discount')}
+                        sortBy='discount'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('status.status')}
+                        sortBy='isDeleted'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('levelDetail.createdAt')}
+                        sortBy='createdAt'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
+                    <th scope='col'>{t('action')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {levels.map((level, index) => (
+                    <tr key={index}>
+                      <th scope='row' className='text-center'>
+                        {index + 1 + (filter.page - 1) * filter.limit}
+                      </th>
+                      <td>
+                        <LevelLabel level={level} />
+                      </td>
+                      <td>{level.minPoint}</td>
+                      <td>
+                        {level.discount && level.discount.$numberDecimal}%
+                      </td>
+                      <td>
+                        {level.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
+                      </td>
+                      <td>{humanReadableDate(level.createdAt)}</td>
+                      <td>
+                        <div className='position-relative d-inline-block'>
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1 cus-tooltip'
+                            data-bs-toggle='modal'
+                            data-bs-target='#edit-level-form'
+                            onClick={() => handleEditLevel(level)}
+                            title={t('button.edit')}
+                          >
+                            <i className='fa-duotone fa-pen-to-square'></i>
+                          </button>
+                          <span className='cus-tooltip-msg'>
+                            {t('button.edit')}
+                          </span>
+                        </div>
+                        <div className='position-relative d-inline-block'>
+                          {!level.isDeleted ? (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-outline-danger ripple cus-tooltip rounded-1 my-1'
+                              onClick={() => handleDeleteLevel(level)}
+                            >
+                              <i className='fa-solid fa-trash-alt'></i>
+                            </button>
+                          ) : (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-outline-success ripple cus-tooltip rounded-1 my-1'
+                              onClick={() => handleRestoreLevel(level)}
+                            >
+                              <i className='fa-solid fa-trash-can-arrow-up'></i>
+                            </button>
+                          )}
+                          <span className='cus-tooltip-msg'>
+                            {!level.isDeleted
+                              ? t('button.delete')
+                              : t('button.restore')}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-        <div className='table-scroll my-2'>
-          <table className='table align-middle table-hover table-sm text-start'>
-            <thead>
-              <tr>
-                <th scope='col' className='text-center'></th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('levelDetail.name')}
-                    sortBy='name'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('levelDetail.floorPoint')}
-                    sortBy='minPoint'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('levelDetail.discount')}
-                    sortBy='discount'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('status.status')}
-                    sortBy='isDeleted'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <SortByButton
-                    currentOrder={filter.order}
-                    currentSortBy={filter.sortBy}
-                    title={t('levelDetail.createdAt')}
-                    sortBy='createdAt'
-                    onSet={(order, sortBy) => handleSetSortBy(order, sortBy)}
-                  />
-                </th>
-                <th scope='col'>
-                  <span style={{ fontWeight: '400', fontSize: '.875rem' }}>
-                    {t('action')}
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {levels.map((level, index) => (
-                <tr key={index}>
-                  <th scope='row' className='text-center'>
-                    {index + 1 + (filter.page - 1) * filter.limit}
-                  </th>
-                  <td>
-                    <span style={{ fontSize: '.9rem' }}>
-                      <UserLevelLabel level={level} />
-                    </span>
-                  </td>
-                  <td>{level.minPoint}</td>
-                  <td>{level.discount && level.discount.$numberDecimal}%</td>
-                  <td>
-                    {level.isDeleted ? <DeletedLabel /> : <ActiveLabel />}
-                  </td>
-                  <td>{humanReadableDate(level.createdAt)}</td>
-                  <td>
-                    <button
-                      type='button'
-                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
-                      data-bs-toggle='modal'
-                      data-bs-target='#edit-level-form'
-                      onClick={() => handleEditLevel(level)}
-                      title={t('button.edit')}
-                    >
-                      <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
-                      <span className='res-hide'>{t('button.edit')}</span>
-                    </button>
+            <Modal id='edit-level-form' hasCloseBtn={false} title='Edit Level'>
+              <AdminEditUserLevelForm
+                oldLevel={editedLevel}
+                onRun={() => setRun(!run)}
+              />
+            </Modal>
 
-                    {!level.isDeleted ? (
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-outline-danger ripple cus-tooltip rounded-1 my-1'
-                        onClick={() => handleDeleteLevel(level)}
-                        title={t('button.delete')}
-                      >
-                        <i className='d-none res-dis-sm fa-solid fa-trash-alt'></i>
-                        <span className='res-hide'>{t('button.delete')}</span>
-                      </button>
-                    ) : (
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-outline-success ripple cus-tooltip'
-                        onClick={() => handleRestoreLevel(level)}
-                        title={t('button.restore')}
-                      >
-                        <i className='d-none res-dis-sm fa-solid fa-trash-can-arrow-up'></i>
-                        <span className='res-hide'>{t('button.restore')}</span>
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            <div className='d-flex align-items-center justify-content-between px-3'>
+              <ShowResult
+                limit={filter.limit}
+                size={pagination.size}
+                pageCurrent={pagination.pageCurrent}
+              />
 
-        <Modal id='edit-level-form' hasCloseBtn={false} title='Edit Level'>
-          <AdminEditUserLevelForm
-            oldLevel={editedLevel}
-            onRun={() => setRun(!run)}
-          />
-        </Modal>
-        <div className='d-flex align-items-center justify-content-between px-3'>
-          <ShowResult
-            limit={filter.limit}
-            size={pagination.size}
-            pageCurrent={pagination.pageCurrent}
-          />
-
-          {pagination.size !== 0 && (
-            <Pagination
-              pagination={pagination}
-              onChangePage={handleChangePage}
-            />
-          )}
-        </div>
+              {pagination.size !== 0 && (
+                <Pagination
+                  pagination={pagination}
+                  onChangePage={handleChangePage}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

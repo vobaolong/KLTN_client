@@ -20,7 +20,7 @@ const AccountInit = ({ user, actions }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-  const { firstName, lastName, avatar } = user
+  const { email, firstName, lastName, avatar } = user
   const history = useHistory()
   const { _id, accessToken, refreshToken, role } = getToken()
 
@@ -67,7 +67,7 @@ const AccountInit = ({ user, actions }) => {
           setIsLoading(false)
         })
     }
-    if (!firstName && !lastName && !avatar) init()
+    if (!email && !firstName && !lastName && !avatar) init()
     return () => {
       isMounted = false
     }
@@ -117,35 +117,55 @@ const AccountInit = ({ user, actions }) => {
           </span>
         </div>
 
-        <ul className='list-group your-account-options'>
+        <ul className='list-group your-account-options p-3 bg-white'>
+          <div className='d-flex align-items-start default'>
+            <img
+              loading='lazy'
+              src={IMG + avatar ?? defaultImage}
+              className='your-account-img'
+              style={{ width: '35px', height: '35px' }}
+              alt=''
+            />
+            <span className='ms-2 d-flex flex-column'>
+              <span className='text-primary fw-bold'>
+                {firstName} {lastName}
+              </span>
+              <small className='text-secondary'>{email}</small>
+            </span>
+          </div>
+          <hr className='my-2' />
           <Link
-            className='list-group-item your-account-options-item ripple'
+            className='list-group-item rounded-1 bg-value border-0 your-account-options-item ripple mt-2'
             to='/account/profile'
           >
+            <i className='fa-light fw-normal fa-user text-primary fs-9'></i>
             {t('userDetail.myAccount')}
           </Link>
           {role === 'user' && (
             <Link
-              className='list-group-item your-account-options-item ripple '
+              className='list-group-item rounded-1 bg-value border-0 mt-2 your-account-options-item ripple'
               to='/account/store'
             >
+              <i className='fa-light fw-normal fa-store text-primary fs-9'></i>
               {t('myStore')}
             </Link>
           )}
           {role === 'user' && (
             <Link
-              className='list-group-item your-account-options-item ripple '
+              className='list-group-item rounded-1 bg-value border-0 mt-2 your-account-options-item ripple '
               to='/account/purchase'
             >
+              <i className='fa-light fw-normal fa-receipt text-primary fs-9'></i>
               {t('userDetail.myPurchase')}
             </Link>
           )}
-
+          <hr className='my-2' />
           <li
-            className='list-group-item your-account-options-item ripple '
+            className='list-group-item rounded-1 bg-value border-0 mt-2 your-account-options-item ripple '
             onClick={handleSignout}
           >
-            {t('button.logout')}
+            <i className='fa-light fw-normal fa-arrow-right-from-bracket text-primary fs-9'></i>
+            <span className='text-danger'>{t('button.logout')}</span>
           </li>
         </ul>
       </div>

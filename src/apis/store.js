@@ -229,17 +229,17 @@ export const removeFeaturedImage = async (userId, token, index, storeId) => {
   }
 }
 
-//staffs
-export const addStaffs = async (userId, token, staffs, storeId) => {
+//staff
+export const addStaff = async (userId, token, staff, storeId) => {
   try {
-    const res = await fetch(`${API}/store/staffs/${storeId}/${userId}`, {
+    const res = await fetch(`${API}/store/staff/${storeId}/${userId}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({ staffs })
+      body: JSON.stringify({ staff })
     })
     return await res.json()
   } catch (error) {

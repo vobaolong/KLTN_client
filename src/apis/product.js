@@ -108,10 +108,11 @@ export const listProductsForManager = async (
   filter,
   storeId
 ) => {
-  const { search, sortBy, order, limit, page, isSelling, quantity } = filter
+  const { search, sortBy, order, limit, page, isSelling, quantity, isActive } =
+    filter
   try {
     const res = await fetch(
-      `${API}/products/by/store/${storeId}/${userId}?search=${search}&isSelling=${isSelling}&quantity=${quantity}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
+      `${API}/products/by/store/${storeId}/${userId}?search=${search}&isSelling=${isSelling}&isActive=${isActive}&quantity=${quantity}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
         method: 'GET',
         headers: {

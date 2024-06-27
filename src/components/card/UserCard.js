@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { getUserLevel } from '../../apis/level'
 import { Link } from 'react-router-dom'
 import UserRoleLabel from '../label/UserRoleLabel'
-import UserLevelLabel from '../label/UserLevelLabel'
+import LevelLabel from '../label/LevelLabel'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -48,7 +48,7 @@ const UserCard = ({ user = {} }) => {
             </span>
 
             <span className=''>
-              <UserLevelLabel level={userValue.level} detail={false} />
+              <LevelLabel level={userValue.level} detail={false} />
             </span>
           </div>
         </small>

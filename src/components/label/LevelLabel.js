@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-const UserLevelLabel = ({ level = {}, detail = true }) => {
+const LevelLabel = ({ level = {}, detail = true }) => {
   const { t } = useTranslation()
   return (
     <span className='position-relative d-inline-block'>
@@ -9,7 +9,7 @@ const UserLevelLabel = ({ level = {}, detail = true }) => {
         style={{ backgroundColor: level.color, color: 'high-muted-color' }}
       >
         <i className='fa-solid fa-shield-halved'></i>
-        {detail && <span className='ms-1 fw-normal'>{t(`${level.name}`)}</span>}
+        {detail && <span className='ms-1'>{t(`${level.name}`)}</span>}
       </span>
       {!detail ? (
         <small className='cus-tooltip-msg'>{t(`${level.name}`)}</small>
@@ -24,4 +24,4 @@ const UserLevelLabel = ({ level = {}, detail = true }) => {
   )
 }
 
-export default UserLevelLabel
+export default LevelLabel

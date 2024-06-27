@@ -2,7 +2,7 @@
   "alert": {
     "listStaff": "List staff",
     "thisSectionContains": " This section contains",
-    "theShopStaffs.": "the shop's staffs.",
+    "theShopStaff.": "the shop's staff.",
     "theOwner": "The owner",
     "thisSectionContainsInfo": " This section contains",
     "theShopOwner": "shop owner information."
@@ -53,7 +53,7 @@
     "product": "Products",
     "addProduct": "Add New Product",
     "updateProduct": "Edit Product",
-    "staff": "Staffs",
+    "staff": "Staff",
     "order": "Orders",
     "orderDetail": "Order Detail",
     "wallet": "E-Wallet"
@@ -241,7 +241,8 @@
     "validColor": "Please provide a valid color!",
     "validDiscount": "Please provide a valid floor point (0% - 100%)!",
     "validFloorPoint": "Please provide a valid floor point (>=0)!",
-    "validName": "Please provide a valid level name!"
+    "validName": "Please provide a valid level name!",
+    "none": "No level yet"
   },
   "action": "Option",
   "showing": "Showing",
@@ -293,6 +294,7 @@
   "similarProducts": "Similar Products",
   "sameShop": "From the same shop",
   "productDetail": {
+    "export": "Export to Excel",
     "all": "All",
     "selling": "Selling",
     "hidden": "Hide",
@@ -479,7 +481,8 @@
     "name": "Commission Name",
     "validName": "Please provide a valid commission name!",
     "validDescription": "Please provide a valid commission description!",
-    "feeValid": "'Please provide a valid fee (>=0)!"
+    "feeValid": "'Please provide a valid fee (>=0)",
+    "none": "No commission yet"
   },
   "deliveryDetail": {
     "deliveryUnit": "Delivery Unit",
@@ -494,6 +497,7 @@
     "feeValid": "Please provide a valid fee (>0₫)"
   },
   "status": {
+    "infringing": "Infringing",
     "success": "Success",
     "status": "Status",
     "active": "Active",
@@ -584,7 +588,7 @@
     "storeName": "Store Name",
     "name": "Name",
     "profile": "Shop Profile",
-    "staffs": "Staffs",
+    "staff": "Staff",
     "orders": "Orders",
     "role": "Role",
     "commissions": "Commissions",
@@ -647,7 +651,8 @@
     "clickToClose": "Click to close store",
     "clickToOpen": "Click to open store",
     "addFeaturedImg": "Add Featured Image",
-    "addLevel": "Add Level"
+    "addLevel": "Add Level",
+    "add": "Add"
   },
   "signInForm": {
     "comeBack": "Welcome back!",

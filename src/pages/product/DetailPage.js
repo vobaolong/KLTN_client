@@ -31,7 +31,15 @@ import checkImg from '../../assets/package.svg'
 import { formatDate, formatOnlyDate } from '../../helper/humanReadable'
 import Skeleton from 'react-loading-skeleton'
 import Loading from '../../components/ui/Loading'
+import notFound from '../../assets/notFound.png'
+import Modal from '../../components/ui/Modal'
+import ListReport from '../../components/item/form/ListReport'
 
+const productReasons = [
+  { value: 'fake', label: 'Sản phẩm giả mạo và bản quyền' },
+  { value: 'prohibited', label: 'Những sản phẩm bị cấm' },
+  { value: 'stolen', label: 'Đồ đánh cắp' }
+]
 const DetailPage = () => {
   const { t } = useTranslation()
   const { productId } = useParams()
@@ -39,6 +47,11 @@ const DetailPage = () => {
   const [product, setProduct] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
+
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu)
+  }
 
   const init = () => {
     setError('')
@@ -103,7 +116,10 @@ const DetailPage = () => {
       <div className='position-relative'>
         {isLoading && <Loading />}
         {error ? (
-          <Error msg={error} />
+          <div className='pt-4 d-flex flex-column align-items-center'>
+            <img width={400} src={notFound} alt='product not found' />
+            <Error msg={error} />
+          </div>
         ) : (
           <div className='pt-3'>
             <MetaData title={`${product.name} | Zenpii Việt Nam`} />
@@ -165,16 +181,41 @@ const DetailPage = () => {
                   )}
                 </div>
                 <div className='col-lg-7 col-md-6 ps-4'>
-                  <small className='text-primary'>
+                  <div className='d-flex justify-content-between'>
                     <StoreSmallCard
                       isLoading={isLoading}
                       store={product.storeId}
                     />
-                  </small>
-                  <h5
-                    style={{ fontSize: '1.25rem' }}
-                    className='product-name text-dark'
-                  >
+                    <div className='menu-container'>
+                      <button
+                        className='btn menu-button'
+                        onClick={handleMenuToggle}
+                      >
+                        <i className='fa fa-ellipsis-v'></i>
+                      </button>
+                      {showMenu && (
+                        <div className='menu d-inline-block'>
+                          <button
+                            type='button'
+                            data-bs-target='#report'
+                            data-bs-toggle='modal'
+                            className='btn--with-img menu-item'
+                          >
+                            <i className='fa-light fa-circle-info me-2'></i>
+                            {t('report')}
+                          </button>
+                          <Modal
+                            hasCloseBtn={false}
+                            title={t('dialog.report')}
+                            id='report'
+                          >
+                            <ListReport reasons={productReasons} />
+                          </Modal>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <h5 className='product-name text-dark-emphasis fs-12 mt-2'>
                     {isLoading ? <Skeleton height={30} /> : product.name}
                   </h5>
                   <div className='d-flex'>

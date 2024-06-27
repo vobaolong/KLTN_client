@@ -95,7 +95,7 @@ const DropDownMenu = ({
           {selectedItem?.icon && (
             <span className='me-2'>{selectedItem.icon}</span>
           )}
-          <span className={`${selectedItem?.icon && 'res-hide'}`}>
+          <span className={`${selectedItem?.icon && 'res-hide'} text-nowrap`}>
             {selectedItem?.label}
           </span>
         </span>

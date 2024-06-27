@@ -13,7 +13,7 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => {
         <div className='cus-tooltip'>
           <button
             type='button'
-            className='btn btn-outline-primary ripple text-nowrap rounded-1'
+            className='btn btn-outline-success ripple text-nowrap rounded-1'
             data-bs-toggle='modal'
             data-bs-target='#create-deposit-transaction-form'
           >
@@ -41,9 +41,9 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => {
           <button
             type='button'
             disabled={eWallet <= 0 ? true : false}
-            className='btn btn-outline-primary ripple text-nowrap rounded-1'
+            className='btn btn-outline-danger ripple text-nowrap rounded-1'
             data-bs-toggle='modal'
-            data-bs-target='#create-widthdraw-transaction-form'
+            data-bs-target='#create-withdraw-transaction-form'
           >
             <i className='fa-solid fa-file-export'></i>
             <span className='ms-2'>{t('transactionDetail.draw')}</span>
@@ -51,7 +51,7 @@ const CreateTransactionItem = ({ eWallet = 0, storeId = '', onRun }) => {
 
           {eWallet > 0 && (
             <Modal
-              id='create-widthdraw-transaction-form'
+              id='create-withdraw-transaction-form'
               hasCloseBtn={false}
               title={t('transactionDetail.draw')}
             >

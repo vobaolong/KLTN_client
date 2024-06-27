@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import Modal from '../ui/Modal'
 import StoreAddStaffForm from './form/StoreAddStaffForm'
 
-const StoreAddStaffItem = ({ storeId = '', owner = {}, staffs = [] }) => {
+const StoreAddStaffItem = ({ storeId = '', owner = {}, staff = [] }) => {
   const { t } = useTranslation()
   return (
     <div className='d-inline-block'>
@@ -21,7 +21,7 @@ const StoreAddStaffItem = ({ storeId = '', owner = {}, staffs = [] }) => {
         hasCloseBtn={false}
         title={t('staffDetail.add')}
       >
-        <StoreAddStaffForm storeId={storeId} owner={owner} staffs={staffs} />
+        <StoreAddStaffForm storeId={storeId} owner={owner} staff={staff} />
       </Modal>
     </div>
   )

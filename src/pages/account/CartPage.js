@@ -116,41 +116,22 @@ const CartPage = () => {
             >
               <div className='bg-white rounded-1 row p-1'>
                 <div className='col-5'>
-                  <div className='custom-checkbox ms-1'>
-                    <input type='checkbox' id='myCheckbox' />
-                    <label
-                      style={{ fontSize: '0.9rem' }}
-                      htmlFor='myCheckbox'
-                      className='ms-2 text-secondary'
-                    >
-                      {t('cartDetail.all')} ({cartCount}{' '}
-                      {t('cartDetail.products')})
-                    </label>
-                  </div>
+                  <label className='text-secondary fs-9'>
+                    {t('cartDetail.all')} ({cartCount}{' '}
+                    {t('cartDetail.products')})
+                  </label>
                 </div>
                 <div className='col-7 d-flex'>
-                  <div
-                    style={{ fontSize: '0.9rem' }}
-                    className='col-5 text-secondary text-center'
-                  >
+                  <div className='col-5 text-secondary text-center fs-9'>
                     {t('cartDetail.unitPrice')}
                   </div>
-                  <div
-                    style={{ fontSize: '0.9rem' }}
-                    className='col-3 text-secondary text-center'
-                  >
+                  <div className='col-3 text-secondary text-center fs-9'>
                     {t('cartDetail.quantity')}
                   </div>
-                  <div
-                    style={{ fontSize: '0.9rem' }}
-                    className='col-3 text-secondary text-center'
-                  >
+                  <div className='col-3 text-secondary text-center fs-9'>
                     {t('cartDetail.total')}
                   </div>
-                  <div
-                    style={{ fontSize: '0.9rem' }}
-                    className='col-1 text-secondary text-center'
-                  >
+                  <div className='col-1 text-secondary text-center fs-9'>
                     <i className='fa-regular fa-trash-can pointer'></i>
                   </div>
                 </div>

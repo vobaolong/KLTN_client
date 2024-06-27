@@ -245,15 +245,18 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
                       </span>
                     </td>
                     <td>
-                      <Link
-                        type='button'
-                        className='btn btn-sm btn-outline-primary rounded-1'
-                        to={`/account/purchase/detail/${order._id}`}
-                        title={t('button.view')}
-                      >
-                        {/* <i className='fa-solid fa-eye'></i> */}
-                        {t('button.detail')}
-                      </Link>
+                      <div className='position-relative d-inline-block'>
+                        <Link
+                          type='button'
+                          className='btn btn-sm btn-outline-secondary rounded-1 cus-tooltip'
+                          to={`/account/purchase/detail/${order._id}`}
+                        >
+                          <i className='fa-solid fa-circle-info'></i>
+                        </Link>
+                        <span className='cus-tooltip-msg'>
+                          {t('button.detail')}
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 ))}

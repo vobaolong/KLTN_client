@@ -2,17 +2,17 @@ import { useSelector } from 'react-redux'
 import useToggle from '../../hooks/useToggle'
 import SellerLayout from '../../components/layout/SellerLayout'
 import StoreOwnerTable from '../../components/table/StoreOwnerTable'
-import StoreStaffsTable from '../../components/table/StoreStaffsTable'
+import StoreStaffTable from '../../components/table/StoreStaffTable'
 import { useTranslation } from 'react-i18next'
 
-const StaffsPage = () => {
+const StaffPage = () => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.seller.store)
   const [flag, toggleFlag] = useToggle(true)
   const { t } = useTranslation()
   const paths = [
     { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
-    { name: t('breadcrumbs.staff'), url: `/seller/staffs/${store._id}` }
+    { name: t('breadcrumbs.staff'), url: `/seller/staff/${store._id}` }
   ]
 
   return (
@@ -38,7 +38,7 @@ const StaffsPage = () => {
         </ul>
       </div>
       {flag ? (
-        <StoreStaffsTable
+        <StoreStaffTable
           staffIds={store.staffIds}
           ownerId={store.ownerId}
           storeId={store._id}
@@ -50,4 +50,4 @@ const StaffsPage = () => {
   )
 }
 
-export default StaffsPage
+export default StaffPage

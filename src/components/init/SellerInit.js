@@ -11,6 +11,7 @@ import { countOrder } from '../../apis/order'
 import Loading from '../ui/Loading'
 import Error from '../ui/Error'
 import { useTranslation } from 'react-i18next'
+import defaultImage from '../../assets/default.webp'
 
 const IMG = process.env.REACT_APP_STATIC_URL
 
@@ -75,7 +76,7 @@ const SellerInit = ({ store, actions }) => {
   useEffect(() => {
     if (!store || store._id !== storeId) init()
   }, [storeId])
-
+  console.log(store)
   return (
     <Fragment>
       {redirect && (
@@ -107,28 +108,49 @@ const SellerInit = ({ store, actions }) => {
               </span>
             </div>
 
-            <ul className='list-group your-store-options'>
+            <ul
+              className='list-group your-store-options p-3 bg-white fw-normal'
+              style={{
+                left: '10%'
+              }}
+            >
+              <div className='d-flex align-items-start default'>
+                <img
+                  loading='lazy'
+                  src={IMG + store.avatar ?? defaultImage}
+                  className='your-account-img'
+                  style={{ width: '35px', height: '35px' }}
+                  alt=''
+                />
+                <span className='ms-2 d-flex flex-column'>
+                  <span className='text-primary fw-bold'>{store.name}</span>
+                  <small className='text-secondary'>
+                    {store.ownerId?.email}
+                  </small>
+                </span>
+              </div>
+              <hr className='my-2' />
               <Link
-                className='list-group-item your-store-options-item ripple'
+                className='list-group-item your-store-options-item ripple rounded-1 bg-value border-0'
                 to={`/seller/profile/${storeId}`}
               >
-                {/* <i className='fa-light fa-store'></i> */}
+                <i className='fw-normal text-primary fs-9 fa-light fa-store'></i>
                 {t('storeDetail.profile')}
               </Link>
 
               <Link
-                className='list-group-item your-store-options-item ripple'
+                className='list-group-item your-store-options-item ripple rounded-1 bg-value border-0 mt-2'
                 to={`/seller/orders/${storeId}`}
               >
-                {/* <i className='fa-light fa-clipboard'></i> */}
+                <i className='fw-normal text-primary fs-9 fa-light fa-receipt'></i>
                 {t('storeDetail.orders')}
               </Link>
-
+              <hr className='my-2' />
               <Link
-                className='list-group-item your-store-options-item ripple'
+                className='list-group-item your-store-options-item ripple rounded-1 bg-value border-0 mt-2'
                 to='/account/store'
               >
-                {/* <i className='fa-light fa-angle-left'></i> */}
+                <i className='fw-normal text-primary fs-9 fa-light fa-angle-left'></i>
                 {t('button.back')}
               </Link>
             </ul>

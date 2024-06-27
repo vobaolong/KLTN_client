@@ -6,7 +6,7 @@ import {
   listProductsForManager,
   sellingProduct as showOrHide
 } from '../../apis/product'
-import { humanReadableDate } from '../../helper/humanReadable'
+import { formatDate, humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
 import Pagination from '../ui/Pagination'
 import SearchInput from '../ui/SearchInput'
@@ -22,6 +22,7 @@ import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 import Alert from '../ui/Alert'
 import boxImg from '../../assets/box.svg'
+import * as XLSX from 'xlsx'
 
 const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
   const { t } = useTranslation()
@@ -29,6 +30,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
   const [error, setError] = useState('')
   const { _id, accessToken } = getToken()
   const [products, setProducts] = useState([])
+  const [allProducts, setAllProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [sellingProduct, setSellingProduct] = useState({})
@@ -38,7 +40,9 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
   const [alerts, setAlerts] = useState({
     isAllAlert: true,
     isSellingAlert: true,
-    isHiddenAlert: true
+    isHiddenAlert: true,
+    isOutOfStockAlert: true,
+    isInfringingAlert: true
   })
 
   const [filter, setFilter] = useState({
@@ -64,6 +68,9 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
       case 'outOfStock':
         filterCopy.quantity = 0
         break
+      case 'infringing':
+        filterCopy.isActive = false
+        break
       default:
         break
     }
@@ -86,6 +93,19 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
       })
   }
 
+  const exportFilter = { ...filter, limit: 1000 }
+  useEffect(() => {
+    listProductsForManager(_id, accessToken, exportFilter, storeId)
+      .then((data) => {
+        if (data.error) setError(data.error)
+        else {
+          setAllProducts(data.products)
+        }
+      })
+      .catch((error) => {
+        setError('Server Error')
+      })
+  })
   useEffect(() => {
     init()
   }, [filter, storeId, run, selectedOption])
@@ -134,13 +154,13 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         } else {
           toast.success(t(`toastSuccess.product.${action}`))
           setRun(!run)
         }
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
       .catch((error) => {
@@ -151,6 +171,30 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         }, 3000)
       })
   }
+  const exportToXLSX = () => {
+    const filteredProducts = allProducts.map((product, index) => ({
+      No: index + 1,
+      Id: product._id,
+      ProductName: product.name,
+      Price: `${formatPrice(product.price?.$numberDecimal)} đ`,
+      SalePrice: `${formatPrice(product.salePrice?.$numberDecimal)} đ`,
+      Quantity: product.quantity,
+      Sold: product.sold,
+      Category: product.categoryId?.name,
+      VariantValue: product.variantValueIds
+        .map((value) => value.name)
+        .join(', '),
+      Rating: product.rating,
+      Active: product.isActive,
+      Selling: product.isSelling,
+      CreatedAt: formatDate(product.createdAt)
+    }))
+
+    const worksheet = XLSX.utils.json_to_sheet(filteredProducts)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Products')
+    XLSX.writeFile(workbook, 'Products.xlsx')
+  }
 
   return (
     <div className='position-relative'>
@@ -158,8 +202,8 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
           msg1='Tất cả'
-          alert='Mục này chứa các sản phẩm đang bán và đang ẩn'
-          msg2=''
+          alert='Mục này chứa '
+          msg2='tất cả sản phẩm'
           onClose={() =>
             setAlerts((prev) => ({ ...prev, isSellingAlert: false }))
           }
@@ -188,14 +232,25 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
         />
       ) : null}
 
-      {alerts.isHiddenAlert && selectedOption === 'outOfStock' ? (
+      {alerts.isOutOfStockAlert && selectedOption === 'outOfStock' ? (
         <Alert
           icon={<i className='text-primary fa-solid fa-circle-info'></i>}
           msg1='Hết hàng'
           alert='Mục này chứa các sản phẩm đã hết hàng'
           msg2='Khách hàng không thể xem và đặt hàng.'
           onClose={() =>
-            setAlerts((prev) => ({ ...prev, isHiddenAlert: false }))
+            setAlerts((prev) => ({ ...prev, isOutOfStockAlert: false }))
+          }
+        />
+      ) : null}
+      {alerts.isInfringingAlert && selectedOption === 'infringing' ? (
+        <Alert
+          icon={<i className='text-primary fa-solid fa-circle-info'></i>}
+          msg1='Vi phạm'
+          alert='Mục này chứa các sản phẩm bị tạm khoá'
+          msg2='Khách hàng không thể xem và đặt hàng.'
+          onClose={() =>
+            setAlerts((prev) => ({ ...prev, isInfringingAlert: false }))
           }
         />
       ) : null}
@@ -214,8 +269,18 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
       )}
 
       <div className='p-3 box-shadow bg-body rounded-2'>
-        <div className='mb-3'>
+        <div className='mb-3 d-flex justify-content-between'>
           <SearchInput onChange={handleChangeKeyword} />
+          {selectedOption === 'all' && (
+            <button
+              type='button'
+              className='btn btn-sm btn-success ripple'
+              onClick={exportToXLSX}
+            >
+              <i className='fa-solid fa-file-excel me-2'></i>
+              {t('productDetail.export')}
+            </button>
+          )}
         </div>
         {!isLoading && pagination.size === 0 ? (
           <div className='my-4 text-center'>
@@ -435,38 +500,38 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
 
                       <td>
                         <div className='d-flex justify-content-start align-items-center'>
-                          <Link
-                            type='button'
-                            className='btn btn-sm btn-outline-primary ripple rounded-1'
-                            to={`/seller/products/edit/${product._id}/${storeId}`}
-                            title={t('button.edit')}
-                          >
-                            <i className='d-none res-dis-sm fa-duotone fa-pen-to-square'></i>
-                            <span className='res-hide'>{t('button.edit')}</span>
-                          </Link>
-                          <button
-                            type='button'
-                            className={`btn btn-sm rounded-1 ripple ms-2 btn-outline-${
-                              !product.isSelling ? 'success' : 'secondary'
-                            }`}
-                            onClick={() => handleSellingProduct(product)}
-                            title={
-                              !product.isSelling
-                                ? t('button.show')
-                                : t('button.hide')
-                            }
-                          >
-                            <i
-                              className={`d-none res-dis-sm fa-solid ${
-                                !product.isSelling ? 'fa-box' : 'fa-archive'
+                          <div className='position-relative d-inline-block'>
+                            <Link
+                              type='button'
+                              className='btn btn-sm btn-outline-primary ripple rounded-1 cus-tooltip'
+                              to={`/seller/products/edit/${product._id}/${storeId}`}
+                            >
+                              <i className='fa-duotone fa-pen-to-square'></i>
+                            </Link>
+                            <span className='cus-tooltip-msg'>
+                              {t('button.edit')}
+                            </span>
+                          </div>
+                          <div className='position-relative d-inline-block'>
+                            <button
+                              type='button'
+                              className={`btn btn-sm rounded-1 ripple ms-2 cus-tooltip btn-outline-${
+                                !product.isSelling ? 'success' : 'secondary'
                               }`}
-                            ></i>
-                            <span className='res-hide'>
+                              onClick={() => handleSellingProduct(product)}
+                            >
+                              <i
+                                className={`fa-solid ${
+                                  !product.isSelling ? 'fa-box' : 'fa-archive'
+                                }`}
+                              ></i>
+                            </button>
+                            <span className='cus-tooltip-msg'>
                               {!product.isSelling
                                 ? t('button.show')
                                 : t('button.hide')}
                             </span>
-                          </button>
+                          </div>
                         </div>
                       </td>
                     </tr>

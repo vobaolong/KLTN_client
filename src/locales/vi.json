@@ -2,7 +2,7 @@
   "alert": {
     "listStaff": "Danh sách nhân viên",
     "thisSectionContains": " Mục này chứa các",
-    "theShopStaffs.": "nhân viên của cửa hàng.",
+    "theShopStaff.": "nhân viên của cửa hàng.",
     "theOwner": "Người sở hữu",
     "thisSectionContainsInfo": " Mục này chứa thông tin",
     "theShopOwner": "chủ cửa hàng."
@@ -56,7 +56,8 @@
     "order": "Đơn hàng",
     "orderDetail": "Chi tiết đơn hàng",
     "wallet": "Số dư TK Zenpii",
-    "transactions": "Giao dịch"
+    "transactions": "Giao dịch",
+    "product": "Sản Phẩm"
   },
   "toastSuccess": {
     "variant": {
@@ -249,7 +250,8 @@
     "validColor": "Vui lòng cung cấp màu phù hợp!",
     "validDiscount": "Vui lòng cung cấp giảm giá phù hợp (0% - 100%)!",
     "validFloorPoint": "Vui lòng cung cấp điểm sàn phù hợp (>=0)!",
-    "validName": "Vui lòng cung cấp tên hạng mức phù hợp!"
+    "validName": "Vui lòng cung cấp tên hạng mức phù hợp!",
+    "none": "Chưa có hạng mức"
   },
   "action": "Lựa chọn",
   "showing": "Hiển thị",
@@ -304,6 +306,7 @@
   "similarProducts": "Sản Phẩm Tương Tự",
   "sameShop": "Các Sản Phẩm Khác Của Shop",
   "productDetail": {
+    "export": "Xuất Excel",
     "all": "Tất cả",
     "selling": "Đang bán",
     "hidden": "Đã ẩn",
@@ -490,7 +493,8 @@
     "name": "Loại chiết khấu",
     "validName": "Vui lòng cung cấp tên chiết khấu phù hợp!",
     "validDescription": "Vui lòng cung cấp mô tả phù hợp!!",
-    "feeValid": "Vui lòng cung cấp tên phí chiết khấu phù hợp (>=0)!"
+    "feeValid": "Vui lòng cung cấp tên phí chiết khấu phù hợp (>=0)",
+    "none": "Chưa có chiết khấu"
   },
   "deliveryDetail": {
     "deliveryUnit": "Đơn vị vận chuyển",
@@ -505,6 +509,7 @@
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
+    "infringing": "Vi phạm",
     "success": "Hoàn thành",
     "status": "Trạng thái",
     "unActive": "Khoá",
@@ -596,7 +601,7 @@
     "storeName": "Tên shop",
     "name": "Tên",
     "profile": "Thông tin shop",
-    "staffs": "Nhân viên",
+    "staff": "Nhân viên",
     "orders": "Đơn hàng",
     "role": "Vai trò",
     "commissions": "Chiết khấu",
@@ -659,8 +664,9 @@
     "active": "Kích hoạt",
     "clickToClose": "Nhấn để đóng shop",
     "clickToOpen": "Nhấn để mở shop",
-    "addFeaturedImg": "Thêm hình ảnh nổi bật (Banner)",
-    "addLevel": "Thêm hạng mức"
+    "addFeaturedImg": "Thêm hình ảnh nổi bật",
+    "addLevel": "Thêm hạng mức",
+    "add": "Thêm"
   },
   "signInForm": {
     "comeBack": "Chào mừng đã quay lại!",

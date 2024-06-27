@@ -40,15 +40,18 @@ const Language = ({ vertical = true }) => {
                 className='fa-solid fa-angle-down ms-1'
               ></i>
             </div>
-            <ul className='list-group your-account-options z-10'>
+            <ul
+              style={{ width: 'unset', left: '10%' }}
+              className='list-group your-account-options z-10 p-2 bg-white'
+            >
               <li
-                className='list-group-item your-account-options-item ripple'
+                className='list-group-item rounded-1 bg-value border-0 your-account-options-item ripple'
                 onClick={() => changeLanguage('vi')}
               >
                 Tiếng Việt
               </li>
               <li
-                className='list-group-item your-account-options-item ripple'
+                className='list-group-item rounded-1 bg-value border-0 your-account-options-item ripple mt-2'
                 onClick={() => changeLanguage('en')}
               >
                 English
@@ -57,7 +60,7 @@ const Language = ({ vertical = true }) => {
           </div>
         </div>
       ) : (
-        <div className='d-flex align-items-center justify-content-between mt-2 gap-2'>
+        <div className='d-flex align-items-center justify-content-between gap-2'>
           <button
             className={`btn rounded-1 btn-with-img ${
               activeLang === 'en' ? 'btn-value' : 'btn-outline-value'

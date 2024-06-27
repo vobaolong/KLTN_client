@@ -28,8 +28,7 @@ const TransactionsTable = ({
   by = 'admin',
   owner = {},
   eWallet = 0,
-  heading = false,
-  onReloadWallet
+  heading = false
 }) => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
@@ -139,13 +138,6 @@ const TransactionsTable = ({
     })
   }
 
-  const handleReload = () => {
-    setRun(!run)
-    if (onReloadWallet) {
-      onReloadWallet()
-    }
-  }
-
   return (
     <div className='position-relative'>
       {heading && (
@@ -160,7 +152,7 @@ const TransactionsTable = ({
         <div className='d-flex align-items-center justify-content-between mb-2'>
           {by === 'store' && (
             <>
-              <EWalletInfo eWallet={eWallet} onReload={handleReload} />
+              <EWalletInfo eWallet={eWallet} />
               {owner && userId === owner._id && (
                 <div className='ms-3'>
                   <CreateTransactionItem

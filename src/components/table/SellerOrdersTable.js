@@ -132,7 +132,9 @@ const SellerOrdersTable = ({
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       {displayError && <Error msg={error} />}
+
       <div className='p-3 box-shadow bg-body rounded-2'>
+        <SearchInput onChange={handleChangeKeyword} />
         {!isLoading && pagination.size === 0 ? (
           <div className='my-4 text-center'>
             <img className='mb-3' src={noItem} alt='noItem' width={'100px'} />
@@ -140,7 +142,6 @@ const SellerOrdersTable = ({
           </div>
         ) : (
           <>
-            <SearchInput onChange={handleChangeKeyword} />
             <div className='table-scroll my-2'>
               <table className='table align-middle table-hover table-sm text-start'>
                 <thead>
@@ -306,15 +307,19 @@ const SellerOrdersTable = ({
                         </span>
                       </td>
                       <td>
-                        <Link
-                          type='button'
-                          className='btn btn-sm btn-outline-secondary rounded-1 ripple cus-tooltip'
-                          to={`/seller/orders/detail/${order._id}/${storeId}`}
-                          title={t('button.detail')}
-                        >
-                          <i className='res-dis-sm d-none fa-solid fa-eye'></i>
-                          <span className='res-hide'>{t('button.detail')}</span>
-                        </Link>
+                        {' '}
+                        <div className='position-relative d-inline-block'>
+                          <Link
+                            type='button'
+                            className='btn btn-sm btn-outline-secondary rounded-1 ripple cus-tooltip'
+                            to={`/seller/orders/detail/${order._id}/${storeId}`}
+                          >
+                            <i className='fa-solid fa-circle-info'></i>
+                          </Link>
+                          <span className='cus-tooltip-msg'>
+                            {t('button.detail')}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   ))}

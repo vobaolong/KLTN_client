@@ -201,7 +201,7 @@ const AdminCategoriesTable = ({ heading = false }) => {
               <div className='position-relative d-inline-block'>
                 <button
                   type='button'
-                  className='btn btn-primary ripple cus-tooltip rounded-1'
+                  className='btn btn-outline-primary ripple cus-tooltip rounded-1'
                   data-bs-toggle='modal'
                   data-bs-target='#admin-category-tree'
                 >
@@ -349,37 +349,46 @@ const AdminCategoriesTable = ({ heading = false }) => {
                   </td>
                   <td>{humanReadableDate(category.createdAt)}</td>
                   <td>
-                    <Link
-                      type='button'
-                      className='btn btn-sm btn-outline-primary ripple me-2 rounded-1'
-                      to={`/admin/category/edit/${category._id}`}
-                      title={t('button.edit')}
-                    >
-                      {t('button.edit')}
-                      {/* <i className='fa-duotone fa-pen-to-square'></i> */}
-                    </Link>
+                    <div className='position-relative d-inline-block'>
+                      <Link
+                        type='button'
+                        className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 cus-tooltip'
+                        to={`/admin/category/edit/${category._id}`}
+                        title={t('button.edit')}
+                      >
+                        <i className='fa-duotone fa-pen-to-square'></i>
+                      </Link>
+                      <span className='cus-tooltip-msg'>
+                        {t('button.edit')}
+                      </span>
+                    </div>
 
-                    {!category.isDeleted ? (
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
-                        onClick={() => handleDeleteCategory(category)}
-                        title={t('button.delete')}
-                      >
-                        {/* <i className='fa-solid fa-trash-alt'></i> */}
-                        {t('button.delete')}
-                      </button>
-                    ) : (
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-outline-success ripple cus-tooltip'
-                        onClick={() => handleRestoreCategory(category)}
-                        title={t('button.restore')}
-                      >
-                        {/* <i className='fa-solid fa-trash-can-arrow-up'></i> */}
-                        {t('button.restore')}
-                      </button>
-                    )}
+                    <div className='position-relative d-inline-block'>
+                      {!category.isDeleted ? (
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-danger rounded-1 ripple cus-tooltip'
+                          onClick={() => handleDeleteCategory(category)}
+                          title={t('button.delete')}
+                        >
+                          <i className='fa-solid fa-trash-alt'></i>
+                        </button>
+                      ) : (
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-outline-success ripple cus-tooltip'
+                          onClick={() => handleRestoreCategory(category)}
+                          title={t('button.restore')}
+                        >
+                          <i className='fa-solid fa-trash-can-arrow-up'></i>
+                        </button>
+                      )}
+                      <span className='cus-tooltip-msg'>
+                        {!category.isDeleted
+                          ? t('button.delete')
+                          : t('button.restore')}
+                      </span>
+                    </div>
                   </td>
                 </tr>
               ))}

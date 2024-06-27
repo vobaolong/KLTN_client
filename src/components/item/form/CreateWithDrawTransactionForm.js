@@ -25,7 +25,7 @@ const CreateWithDrawTransactionForm = ({
 
   const [transaction, setTransaction] = useState({
     isUp: 'false',
-    amount: 100000,
+    amount: 1000000,
     currentPassword: '',
     isValidAmount: true,
     isValidCurrentPassword: true

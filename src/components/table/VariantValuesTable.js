@@ -195,40 +195,44 @@ const VariantValuesTable = ({
                       </td>
                       <td>{humanReadableDate(value.createdAt)}</td>
                       <td className='text-nowrap'>
-                        <button
-                          type='button'
-                          className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 my-1'
-                          data-bs-toggle='modal'
-                          data-bs-target='#edit-variant-value-form'
-                          onClick={() => setEditedVariantValue(value)}
-                        >
-                          <i className='fa-duotone fa-pen-to-square res-dis-sm d-none'></i>
-                          <span className='res-hide'>{t('button.edit')}</span>
-                        </button>
-
-                        {!value.isDeleted ? (
+                        <div className='position-relative d-inline-block'>
                           <button
                             type='button'
-                            className='btn btn-sm btn-outline-danger ripple rounded-1'
-                            onClick={() => handleDelete(value)}
+                            className='btn btn-sm btn-outline-primary ripple me-2 rounded-1 cus-tooltip'
+                            data-bs-toggle='modal'
+                            data-bs-target='#edit-variant-value-form'
+                            onClick={() => setEditedVariantValue(value)}
                           >
-                            <i className='fa-solid res-dis-sm d-none fa-trash-alt res-hide'></i>
-                            <span className='res-hide'>
-                              {t('button.delete')}
-                            </span>
+                            <i className='fa-duotone fa-pen-to-square'></i>
                           </button>
-                        ) : (
-                          <button
-                            type='button'
-                            className='btn btn-sm btn-outline-success ripple'
-                            onClick={() => handleRestore(value)}
-                          >
-                            <i className='fa-solid fa-trash-can-arrow-up res-dis-sm d-none'></i>
-                            <span className='res-hide'>
-                              {t('button.restore')}
-                            </span>
-                          </button>
-                        )}
+                          <span className='cus-tooltip-msg'>
+                            {t('button.edit')}
+                          </span>
+                        </div>
+                        <div className='position-relative d-inline-block'>
+                          {!value.isDeleted ? (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-outline-danger ripple rounded-1 cus-tooltip'
+                              onClick={() => handleDelete(value)}
+                            >
+                              <i className='fa-solid fa-trash-alt '></i>
+                            </button>
+                          ) : (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-outline-success ripple'
+                              onClick={() => handleRestore(value)}
+                            >
+                              <i className='fa-solid fa-trash-can-arrow-up'></i>
+                            </button>
+                          )}
+                          <span className='cus-tooltip-msg'>
+                            {!value.isDeleted
+                              ? t('button.delete')
+                              : t('button.restore')}
+                          </span>
+                        </div>
                       </td>
                     </Fragment>
                   )}

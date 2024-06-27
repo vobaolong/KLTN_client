@@ -42,7 +42,7 @@ import SellerDashboardPage from './seller/DashboardPage'
 import SellerProductsPage from './seller/ProductsPage'
 import SellerOrderPage from './seller/OrderPage'
 import SellerOrderDetailPage from './seller/OrderDetailPage'
-import SellerStaffsPage from './seller/StaffsPage'
+import SellerStaffPage from './seller/StaffPage'
 import SellerWalletPage from './seller/WalletPage'
 import SellerCreateProductPage from './seller/CreateProductPage'
 import SellerEditProductPage from './seller/EditProductPage'
@@ -220,9 +220,9 @@ const Routes = () => {
           component={SellerOrderDetailPage}
         />
         <PrivateRoute
-          path='/seller/staffs/:storeId'
+          path='/seller/staff/:storeId'
           exact
-          component={SellerStaffsPage}
+          component={SellerStaffPage}
         />
         <PrivateRoute
           path='/seller/Wallet/:storeId'

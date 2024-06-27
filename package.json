@@ -29,7 +29,6 @@
     "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
     "react-i18next": "^14.0.5",
-    "react-image-magnify": "^2.7.4",
     "react-loading-skeleton": "^3.4.0",
     "react-paypal-button-v2": "^2.6.3",
     "react-redux": "^7.2.5",

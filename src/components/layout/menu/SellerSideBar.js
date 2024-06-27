@@ -1,42 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import logoSmall from '../../../assets/logoSmall.png'
-import { useSelector } from 'react-redux'
 
 const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
   const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
-  const seller = useSelector((state) => state.account.user)
 
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar'>
-      <div className='d-flex justify-content-center align-items-center res-hide pb-2'>
-        <span className='cus-sidebar-item--db d-flex align-items-end gap-1'>
-          <img
-            loading='lazy'
-            src={logoSmall}
-            style={{ width: '30px' }}
-            alt=''
-          />
-          {!isCollapsed && (
-            <span className='p-0 m-0 text-dark-emphasis text-uppercase fw-bold'>
-              {`${seller.firstName} ${seller.lastName}`}
-            </span>
-          )}
-        </span>
-        <span
-          className='res-hide border-0 position-absolute pointer fs-5 rounded-circle'
-          style={{ right: '-10px' }}
-          onClick={onToggle}
-        >
-          <i
-            className={`text-body-tertiary fs-5 fa-solid fa-circle-chevron-${
-              isCollapsed ? 'right' : 'left'
-            }`}
-          ></i>
-        </span>
-      </div>
-      <hr className='res-hide' />
       <ul
         className={`nav nav-pills flex-column mb-auto justify-content-around gap-1 ${
           isCollapsed ? 'text-center' : ''
@@ -103,20 +73,18 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
 
         <li className='nav-item'>
           <Link
-            to={`/seller/staffs/${store._id}`}
+            to={`/seller/staff/${store._id}`}
             className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
-              path === 'staffs' ? 'active' : ''
+              path === 'staff' ? 'active' : ''
             }`}
           >
             <i
-              className={`${path === 'staffs' ? 'fa-solid' : 'fa-light'} ${
+              className={`${path === 'staff' ? 'fa-solid' : 'fa-light'} ${
                 !isCollapsed ? 'w-10' : ''
               } text-center  fa-user-group`}
             ></i>
             {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>
-                {t('storeDetail.staffs')}
-              </span>
+              <span className='ms-3 res-hide-xl'>{t('storeDetail.staff')}</span>
             )}
           </Link>
         </li>

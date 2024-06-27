@@ -303,13 +303,15 @@ const AdminOrdersTable = ({ heading = true, status = '' }) => {
                       <div className='position-relative d-inline-block'>
                         <Link
                           type='button'
-                          className='btn btn-sm btn-outline-primary rounded-1 ripple'
+                          className='btn btn-sm btn-outline-secondary rounded-1 ripple cus-tooltip'
                           to={`/admin/order/detail/${order._id}`}
                           title={t('button.detail')}
                         >
-                          {/* <i className='fa-solid fa-info-circle'></i> */}
-                          {t('button.detail')}
+                          <i className='fa-solid fa-info-circle'></i>
                         </Link>
+                        <span className='cus-tooltip-msg'>
+                          {t('button.detail')}
+                        </span>
                       </div>
                     </td>
                   </tr>

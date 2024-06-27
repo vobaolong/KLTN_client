@@ -21,7 +21,7 @@ const SellerAddProductImagesItem = ({
           data-bs-target='#add-product-image-form'
         >
           <small>
-            <i class='fa-light fa-plus me-1'></i>
+            <i className='fa-light fa-plus me-1'></i>
             {t('button.addImg')} {` (${count}/7)`}
           </small>
         </button>

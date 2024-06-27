@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { getToken } from '../../../apis/auth'
 import { getListUsers } from '../../../apis/user'
-import { addStaffs } from '../../../apis/store'
+import { addStaff } from '../../../apis/store'
 import useUpdateDispatch from '../../../hooks/useUpdateDispatch'
 import UserSmallCard from '../../card/UserSmallCard'
 import SearchInput from '../../ui/SearchInput'
@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import Error from '../../ui/Error'
 
-const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
+const StoreAddStaffForm = ({ storeId = '', owner = {}, staff = [] }) => {
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
@@ -55,20 +55,20 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
       limit: 3,
       page: 1
     })
-  }, [storeId, owner, staffs])
+  }, [storeId, owner, staff])
 
   useEffect(() => {
     init()
   }, [filter])
 
   useEffect(() => {
-    const listCurrentStaffs = staffs.map((s) => s._id)
+    const listCurrentStaff = staff.map((s) => s._id)
     const listCurrentRight = listRight.map((r) => r._id)
     setListLeft(
       listUsers.filter(
         (u) =>
           u._id !== owner._id &&
-          listCurrentStaffs.indexOf(u._id) === -1 &&
+          listCurrentStaff.indexOf(u._id) === -1 &&
           listCurrentRight.indexOf(u._id) === -1
       )
     )
@@ -104,10 +104,10 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
   }
 
   const onSubmit = () => {
-    const staffs = listRight.map((r) => r._id)
+    const staff = listRight.map((r) => r._id)
     setError('')
     setIsLoading(true)
-    addStaffs(_id, accessToken, staffs, storeId)
+    addStaff(_id, accessToken, staff, storeId)
       .then((data) => {
         if (data.error) setError(data.error)
         else {
@@ -160,13 +160,16 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
                     <div className='mb-2'>
                       <UserSmallCard user={user} />
                     </div>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm ripple rounded-1'
-                      onClick={() => handleAddBtn(user)}
-                    >
-                      <i className='fa-solid fa-user-plus'></i>
-                    </button>
+                    <div className='position-relative d-inline-block'>
+                      <button
+                        type='button'
+                        className='btn btn-primary btn-sm ripple rounded-1 cus-tooltip'
+                        onClick={() => handleAddBtn(user)}
+                      >
+                        <i className='fa-solid fa-user-plus'></i>
+                      </button>
+                      <span className='cus-tooltip-msg'>{t('button.add')}</span>
+                    </div>
                   </div>
                 ))}
             </div>
@@ -223,4 +226,4 @@ const StoreAddStaffsForm = ({ storeId = '', owner = {}, staffs = [] }) => {
   )
 }
 
-export default StoreAddStaffsForm
+export default StoreAddStaffForm
