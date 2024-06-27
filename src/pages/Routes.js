@@ -24,6 +24,7 @@ import AdminProductPage from './admin/ProductPage'
 import AdminOrderPage from './admin/OrderPage'
 import AdminOrderDetailPage from './admin/OrderDetailPage'
 import AdminTransactionPage from './admin/TransactionPage'
+import AdminReportPage from './admin/ReportPage'
 //account
 import AccountProfilePage from './account/ProfilePage'
 import AccountAddressesPage from './account/AddressesPage'
@@ -84,6 +85,7 @@ const Routes = () => {
           exact
           component={AdminCommissionPage}
         />
+        <AdminRoute path='/admin/report' exact component={AdminReportPage} />
         <AdminRoute path='/admin/user' exact component={AdminUserPage} />
         <AdminRoute path='/admin/store' exact component={AdminStorePage} />
         <AdminRoute

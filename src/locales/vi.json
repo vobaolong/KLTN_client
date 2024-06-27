@@ -24,6 +24,7 @@
     "myStore": "Shop của tôi"
   },
   "breadcrumbs": {
+    "report": "Báo cáo",
     "delivery": "Vận chuyển",
     "level": "Hạng mức",
     "store": "Shop",
@@ -177,6 +178,8 @@
     "edit": "Bạn có chắc chắn cập nhật "
   },
   "title": {
+    "listReportShop": "Danh sách báo cáo shop",
+    "listReportProduct": "Danh sách báo cáo sản phẩm",
     "createTransaction": "Tiến hành giao dich",
     "showProduct": "Hiển thị sản phẩm",
     "hideProduct": "Ẩn sản phẩm",
@@ -288,7 +291,8 @@
     "commissions": "Chiết khấu",
     "deliveries": "Vận chuyển",
     "setting": "Cài đặt",
-    "language": "Ngôn ngữ"
+    "language": "Ngôn ngữ",
+    "reports": "Báo cáo"
   },
   "order": "Đơn hàng",
   "home": "Trang chủ",
@@ -305,6 +309,14 @@
   "product": "Sản Phẩm",
   "similarProducts": "Sản Phẩm Tương Tự",
   "sameShop": "Các Sản Phẩm Khác Của Shop",
+  "reportDetail": {
+    "none": "Chưa có báo cáo",
+    "userId": "Id người báo cáo",
+    "objectId": "Tên đối tượng",
+    "reason": "Lý do",
+    "createAt": "Ngày tạo"
+  },
+
   "productDetail": {
     "export": "Xuất Excel",
     "all": "Tất cả",

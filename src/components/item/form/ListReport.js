@@ -3,16 +3,23 @@ import { useTranslation } from 'react-i18next'
 
 const ListReport = ({ onSubmit, reasons }) => {
   const [selectedReason, setSelectedReason] = useState('')
+  const [otherReason, setOtherReason] = useState('')
   const { t } = useTranslation()
 
   const handleReasonChange = (event) => {
     setSelectedReason(event.target.value)
   }
 
+  const handleOtherReasonChange = (event) => {
+    setOtherReason(event.target.value)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     if (selectedReason) {
-      onSubmit(selectedReason)
+      const reasonToSubmit =
+        selectedReason === 'other' ? otherReason : selectedReason
+      onSubmit(reasonToSubmit)
     } else {
       alert('Please select a reason for reporting.')
     }
@@ -38,6 +45,29 @@ const ListReport = ({ onSubmit, reasons }) => {
             </label>
           </div>
         ))}
+        <div className='form-check'>
+          <input
+            className='form-check-input pointer'
+            type='radio'
+            name='reportReason'
+            id='other'
+            value='other'
+            checked={selectedReason === 'other'}
+            onChange={handleReasonChange}
+          />
+          <label className='form-check-label' htmlFor='other'>
+            Khác
+          </label>
+        </div>
+        {selectedReason === 'other' && (
+          <input
+            type='text'
+            className='form-control mt-2'
+            placeholder='Nhập lý do khác'
+            value={otherReason}
+            onChange={handleOtherReasonChange}
+          />
+        )}
       </div>
       <div className='d-flex justify-content-end'>
         <button

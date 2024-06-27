@@ -189,6 +189,24 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             )}
           </Link>
         </li>
+        {/* mới thêm phần này */}
+        <li className='nav-item'>
+          <Link
+            to={`/admin/report`}
+            className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
+              path === 'report' ? 'active' : ''
+            }`}
+          >
+            <i
+              className={`${path === 'report' ? 'fa-solid' : 'fa-light'} ${
+                !isCollapsed ? 'w-10' : ''
+              } text-center fa-triangle-exclamation`}
+            ></i>
+            {!isCollapsed && (
+              <span className='ms-3 res-hide-lg'>{t('admin.reports')}</span>
+            )}
+          </Link>
+        </li>
       </ul>
     </div>
   )
