@@ -241,6 +241,7 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
                   feedback={t('productValid.validName')}
                   validator='anything'
                   required={true}
+                  placeholder='Ví dụ: Bàn Chải Điện P/S S100 PRO Trắng Răng Công Nghệ Sóng Âm Đen Nhám Chải Sạch Mảng Bám Tới 10X 1 Bộ'
                   onChange={(value) =>
                     handleChange('name', 'isValidName', value)
                   }
@@ -375,6 +376,36 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
                   isValid={newProduct.isValidDescription}
                   required={true}
                   feedback={t('productValid.validDescription')}
+                  placeholder='Ví dụ:
+									Đặc điểm nổi trội:
+
+									- Công nghệ sóng âm tiên tiến tạo nên các hạt siêu bọt - Microbubble, sạch hiệu quả mà vẫn dịu nhẹ cho nướu
+
+									- Gấp 100 lần nhịp chải so với việc chải răng thông thường
+
+									- Cơ chế chải răng thông minh, giúp chải răng đúng và đủ 2 phút theo khuyến nghị của nha sĩ
+
+									- 3 chế độ chải răng linh hoạt: Sạch Sâu, Chăm Sóc Nướu, Trắng răng
+
+									- 30 ngày sử dụng chỉ với 1 lần sạc. Cổng sạc USB tiện lợi, dễ dàng cắm sạc ở bất cứ đâu
+
+									- 100% chống nước - đạt tiêu chuẩn IPX7
+
+									-----------------------------------------------------
+
+									Hướng dẫn sử dụng:
+
+									1. Gắn đầu chải khớp với phần thân chải
+
+									2. Đặt đầu chải nghiêng gốc 45 độ so với viền nướu và chọn chế độ chải
+
+									3. Chải trong 2 phút. Sau mỗi 30 giây, bàn chải sẽ tạm ngừng rung để bạn di chuyển sang vị trí khác trong khoang miệng
+
+									xuất xứ : Trung Quốc
+									-----------------------------------------------------
+									Thông tin bảo hành:
+
+									Bảo hành 1 đổi 1 trong vòng 30 ngày sử dụng kể từ ngày mua hàng. '
                   validator='bio'
                   onChange={(value) =>
                     handleChange('description', 'isValidDescription', value)

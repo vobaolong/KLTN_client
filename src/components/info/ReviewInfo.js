@@ -11,12 +11,18 @@ import { useTranslation } from 'react-i18next'
 import { calcTime } from '../../helper/calcTime'
 import { toast } from 'react-toastify'
 import Error from '../ui/Error'
+import Modal from '../ui/Modal'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   const [error, setError] = useState('')
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
+
+  const handleMenuToggle = () => {
+    setShowMenu(!showMenu)
+  }
   const handleRemove = () => {
     if (!isReviewAllowed) return
     setIsConfirming(true)
@@ -97,18 +103,26 @@ const ReviewInfo = ({ review = {}, about = true, onRun }) => {
       </div>
       {getToken()?._id === review.userId?._id && isReviewAllowed && (
         <div className='col-2 d-flex justify-content-end align-items-end flex-wrap px-1 mt-1'>
-          <EditReviewItem oldReview={review} onRun={onRun} />
-          <div className='d-inline-block position-relative ms-1'>
-            <button
-              type='button'
-              className='btn btn-outline-danger rounded-1 btn-sm ripple cus-tooltip'
-              onClick={handleRemove}
-            >
-              <i className='fa-solid fa-trash-alt'></i>
-            </button>
-            <small className='cus-tooltip-msg'>
-              {t('reviewDetail.delete')}
-            </small>
+          <div className='d-flex justify-content-between'>
+            <div className='menu-container'>
+              <button className='btn menu-button' onClick={handleMenuToggle}>
+                <i className='fa fa-ellipsis-v'></i>
+              </button>
+              {showMenu && (
+                <div className='menu d-flex flex-column gap-2 align-item-start p-2'>
+                  <EditReviewItem oldReview={review} onRun={onRun} />
+                  <hr className='m-0' />
+                  <button
+                    type='button'
+                    className='btn rounded-1 btn-sm ripple rm-review w-100 text-start'
+                    onClick={handleRemove}
+                  >
+                    <i className='fa-solid fa-trash-alt me-2'></i>
+                    {t('reviewDetail.delete')}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

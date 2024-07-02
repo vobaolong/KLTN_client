@@ -164,6 +164,7 @@
     }
   },
   "toastError": {
+    "storeClosing": "Shop này đang tạm nghỉ, bạn không thể mua hàng thời điểm này",
     "storeBanned": "Shop này bị tạm khoá!",
     "soldOut": "Sản phẩm đã bán hết, vui lòng xóa khỏi giỏ hàng, bạn có thể tiếp tục với những sản phẩm khác!",
     "outOfBusiness": "Sản phẩm đã ngừng kinh doanh, vui lòng xóa khỏi giỏ hàng của bạn, bạn có thể tiếp tục với những sản phẩm khác!",
@@ -311,7 +312,7 @@
   "sameShop": "Các Sản Phẩm Khác Của Shop",
   "reportDetail": {
     "none": "Chưa có báo cáo",
-    "userId": "Id người báo cáo",
+    "userId": "Email người báo cáo",
     "objectId": "Tên đối tượng",
     "reason": "Lý do",
     "createAt": "Ngày tạo"
@@ -460,7 +461,7 @@
     "editAddress": "Sửa địa chỉ",
     "limit10Addresses": "Tối đa 10 địa chỉ",
     "noAddress": "Không có địa chỉ!",
-    "changePassword": "Thay đổi mật khẩu",
+    "changePassword": "Đổi mật khẩu",
     "currentPw": "Mật khẩu hiện tại",
     "newPw": "Mật khẩu mới",
     "pwValid": "Vui lòng cung cấp mật khẩu hợp lệ!",
@@ -589,6 +590,7 @@
     "noStaff": "Không có nhân viên"
   },
   "storeDetail": {
+    "manage": "Quản lý",
     "contractNPoint": " Hợp đồng đăng ký và hạng mức",
     "typeOfStall": "Loại hình cửa hàng",
     "basicInfo": "Thông tin cơ bản",
@@ -600,7 +602,6 @@
     "vacationModeContent": "Kích hoạt Chế độ Tạm nghỉ để ngăn khách hàng đặt đơn hàng mới. Nhưng những đơn hàng đang tiến hành vẫn phải được xử lý.",
     "banned": "Shop đang tạm thời bị zenpi khóa, liên hệ để biết thêm chi tiết",
     "active": "Shop đang hoạt động",
-    "address": "Địa chỉ",
     "viewShop": "Xem shop",
     "staple": "Ngành hàng chủ lực",
     "activeStores": "Shop đang hoạt động",

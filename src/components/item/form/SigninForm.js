@@ -73,6 +73,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
             toast.success(t('toastSuccess.signIn'))
           })
         }
+        setTimeout(() => setError(''), 3000)
       })
       .catch((error) => {
         setError('Server error')
@@ -106,7 +107,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           setIsLoading(false)
           setTimeout(() => {
             setError('')
-          }, 3000)
+          }, 5000)
         })
         .catch((error) => {
           setError('Server error')
@@ -129,6 +130,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
             feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
             required={true}
+            placeholder='Ví dụ: example@gmail.com'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
             }
@@ -136,7 +138,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <Input
             type='password'
             label={t('signInForm.passwordLabel')}
@@ -195,15 +197,6 @@ const SigninForm = ({ onSwap = () => {} }) => {
             >
               {t('button.signUp')}
             </span>
-          </small>
-        </div>
-
-        <div className='col-12 mt-4'>
-          <small className='text-center d-block mx-4'>
-            <span className='text-muted'>{t('signInForm.agreeBy')} </span>
-            <Link className='text-primary' to='/legal/privacy' target='_blank'>
-              {t('footer.policy')}
-            </Link>
           </small>
         </div>
       </form>

@@ -21,7 +21,7 @@ import AddToCartForm from '../../components/item/form/AddToCartForm'
 import SalePercentLabel from '../../components/label/SalePercentLabel'
 import ListProductsByStore from '../../components/list/ListProductsByStore'
 import FollowProductButton from '../../components/button/FollowProductButton'
-import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
+import ListBestSellerProduct from '../../components/list/ListBestSellerProduct'
 import { calcPercent } from '../../helper/calcPercent'
 import StoreCardSmall from '../../components/card/StoreCardSmall'
 import MetaData from '../../components/layout/meta/MetaData'
@@ -34,6 +34,7 @@ import Loading from '../../components/ui/Loading'
 import notFound from '../../assets/notFound.png'
 import Modal from '../../components/ui/Modal'
 import ListReport from '../../components/item/form/ListReport'
+import { useSelector } from 'react-redux'
 
 const productReasons = [
   { value: 'fake', label: 'Sản phẩm giả mạo và bản quyền' },
@@ -48,6 +49,7 @@ const DetailPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const user = useSelector((state) => state.account.user)
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu)
@@ -194,14 +196,14 @@ const DetailPage = () => {
                         <i className='fa fa-ellipsis-v'></i>
                       </button>
                       {showMenu && (
-                        <div className='menu d-inline-block'>
+                        <div className='menu d-inline-block '>
                           <button
                             type='button'
                             data-bs-target='#report'
                             data-bs-toggle='modal'
-                            className='btn--with-img menu-item'
+                            className='btn--with-img menu-item text-dark-emphasis'
                           >
-                            <i className='fa-light fa-circle-info me-2'></i>
+                            <i className='fa-solid fa-circle-info me-2'></i>
                             {t('report')}
                           </button>
                           <Modal
@@ -209,7 +211,11 @@ const DetailPage = () => {
                             title={t('dialog.report')}
                             id='report'
                           >
-                            <ListReport reasons={productReasons} />
+                            <ListReport
+                              reasons={productReasons}
+                              productId={product._id}
+                              userId={user._id}
+                            />
                           </Modal>
                         </div>
                       )}
@@ -271,8 +277,12 @@ const DetailPage = () => {
                         {!product.storeId?.isOpen && (
                           <Error msg={t('storeDetail.messageClose')} />
                         )}
-                        {product.quantity <= 0 && (
+                        {product.quantity <= 0 ? (
                           <Error msg={t('productDetail.soldOut')} />
+                        ) : (
+                          <small className='text-secondary'>
+                            {product.quantity} sản phẩm có sẵn
+                          </small>
                         )}
                         {!getToken() && (
                           <SigninButton
@@ -292,9 +302,7 @@ const DetailPage = () => {
                       <Skeleton height={30} count={3} />
                     ) : (
                       <div className='text-dark-emphasis d-grid mt-3 gap-2'>
-                        <b style={{ fontSize: '0.9rem' }}>
-                          {t('productDetail.offers')} (3)
-                        </b>
+                        <b className='fs-9s'>{t('productDetail.offers')} (3)</b>
                         <div className=' d-grid gap-1'>
                           <span className='d-flex align-items-center'>
                             <img
@@ -303,9 +311,7 @@ const DetailPage = () => {
                               style={{ width: '25px' }}
                               alt='refundImg'
                             />
-                            <span style={{ fontSize: '.9rem' }}>
-                              {t('services.refund')}
-                            </span>
+                            <span className='fs-9'>{t('services.refund')}</span>
                           </span>
                           <hr className='my-0 opacity-100' />
                           <span className='d-flex align-items-center'>
@@ -315,9 +321,7 @@ const DetailPage = () => {
                               style={{ width: '25px' }}
                               alt='returnImg'
                             />
-                            <span style={{ fontSize: '.9rem' }}>
-                              {t('services.return')}
-                            </span>
+                            <span className='fs-9'>{t('services.return')}</span>
                           </span>
                           <hr className='my-0 opacity-100' />
                           <span className='d-flex align-items-center'>
@@ -327,7 +331,7 @@ const DetailPage = () => {
                               style={{ width: '25px' }}
                               alt='checkImg'
                             />
-                            <span style={{ fontSize: '.9rem' }}>
+                            <span className='fs-9'>
                               {t('services.checkPackage')}
                             </span>
                           </span>
@@ -343,10 +347,7 @@ const DetailPage = () => {
                       >
                         <span className='d-flex align-items-center gap-2'>
                           <i className='fa-solid fa-truck me-2'></i>
-                          <span
-                            className='d-grid gap-1'
-                            style={{ fontSize: '0.9rem' }}
-                          >
+                          <span className='d-grid gap-1 fs-9'>
                             <span className='text-dark-emphasis fw-bold'>
                               {t('productDetail.estimatedDelivery')}
                             </span>
@@ -436,7 +437,7 @@ const DetailPage = () => {
                           </a>
                         </li>
                       </ul>
-                      <div className='tab-content py-2' id='myTabContent'>
+                      <div className='tab-content p-3' id='myTabContent'>
                         <div
                           className='tab-pane fade show active'
                           id='details'
@@ -448,18 +449,15 @@ const DetailPage = () => {
                               ...descriptionStyle,
                               position: 'relative',
                               paddingBottom: '2rem',
-                              marginTop: '2rem'
+                              marginTop: '1rem'
                             }}
                           >
                             {isLoading ? (
                               <Skeleton height={400} />
                             ) : (
                               <span
-                                style={{
-                                  whiteSpace: 'pre-line',
-                                  textAlign: 'justify',
-                                  fontSize: '0.9rem'
-                                }}
+                                style={{ whiteSpace: 'pre-line' }}
+                                className='fs-9 text-justify'
                               >
                                 {product.description}
                               </span>
@@ -516,7 +514,7 @@ const DetailPage = () => {
               </div>
               <div className='row mt-3'>
                 {product.categoryId && (
-                  <ListBestSellerProducts
+                  <ListBestSellerProduct
                     heading={t('similarProducts')}
                     categoryId={product.categoryId._id}
                   />

@@ -458,6 +458,7 @@ const CheckoutForm = ({
                     isValid={order.isValidFirstName}
                     feedback={t('userDetail.validFirstName')}
                     validator='name'
+                    placeholder='Ví dụ: Nguyen Van'
                     required={true}
                     onChange={(value) =>
                       handleChange('firstName', 'isValidFirstName', value)
@@ -478,6 +479,7 @@ const CheckoutForm = ({
                     isValid={order.isValidLastName}
                     feedback={t('userDetail.validLastName')}
                     validator='name'
+                    placeholder='Ví dụ: A'
                     required={true}
                     onChange={(value) =>
                       handleChange('lastName', 'isValidLastName', value)
@@ -521,6 +523,7 @@ const CheckoutForm = ({
                     isValid={order.isValidPhone}
                     feedback={t('userDetail.phoneValid')}
                     validator='phone'
+                    placeholder='Ví dụ: 098***3433'
                     required={true}
                     onChange={(value) =>
                       handleChange('phone', 'isValidPhone', value)

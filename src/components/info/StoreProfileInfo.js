@@ -32,9 +32,9 @@ const StoreProfileInfo = ({
           </p>
           {showProfile && (
             <p className='text-justify fs-9'>
-              <i className='fa-solid fa-location-dot text-muted me-1'></i>
+              <i className='fa-solid fa-location-arrow text-muted me-1'></i>
               <span className='text-dark-emphasis fw-bolder'>
-                {t('storeDetail.address')}
+                {t('storeDetail.pickupAddress')}
               </span>
               : {store.address}
             </p>

@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
 import useToggle from '../../hooks/useToggle'
 import AdminLayout from '../../components/layout/AdminLayout'
-import AdminProductsTable from '../../components/table/AdminProductsTable'
 import { useTranslation } from 'react-i18next'
-import AdminReportTable from '../../components/table/AdminReportTable'
+import AdminReportsTable from '../../components/table/AdminReportsTable'
 
 const ReportPage = () => {
   const { t } = useTranslation()
@@ -41,7 +40,7 @@ const ReportPage = () => {
           </li>
         </ul>
       </div>
-      <AdminReportTable isStore={flag} />
+      <AdminReportsTable isStore={flag} />
     </AdminLayout>
   )
 }

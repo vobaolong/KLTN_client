@@ -23,7 +23,7 @@ const VariantSelector = ({ defaultValue = '', categoryId = '', onSet }) => {
         else {
           setVariants(data.variants)
           if (data.variants.length <= 0)
-            toast.success(t('toastSuccess.variant.none'))
+            setError(t('toastSuccess.variant.none'))
         }
         setIsLoading(false)
       })

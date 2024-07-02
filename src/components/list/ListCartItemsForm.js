@@ -248,9 +248,7 @@ const ListCartItems = ({
                       listItem={
                         item.productId?.quantity &&
                         Array.from(
-                          {
-                            length: item.productId?.quantity
-                          },
+                          { length: Math.min(item.productId?.quantity, 5) },
                           (_, i) => {
                             return {
                               value: i + 1,

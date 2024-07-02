@@ -14,7 +14,8 @@ const Input = ({
   accept = '*/*',
   feedback = 'Please provide a valid value',
   min = 0,
-  required = false
+  required = false,
+  placeholder = ''
 }) => {
   const [tempValue, setTempValue] = useState('')
   const [showPasswordFlag, togglePasswordFlag] = useToggle(true)
@@ -56,6 +57,7 @@ const Input = ({
         required={required}
         disabled={isDisabled}
         accept={accept}
+        placeholder={placeholder}
         className={`cus-input-group-input form-control
 				${isValid ? '' : 'is-invalid'}
 				${type === 'password' ? 'cus-input-group-input--password' : ''}

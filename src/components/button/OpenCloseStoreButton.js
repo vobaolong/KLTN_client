@@ -64,7 +64,6 @@ const OpenCloseStoreButton = ({ storeId = '', isOpen = true, onRun }) => {
       {isConfirming && (
         <ConfirmDialog
           title={openFlag ? t('title.closeStore') : t('title.openStore')}
-          color={openFlag ? 'warning' : 'primary'}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
           message={t('confirmDialog')}

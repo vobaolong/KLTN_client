@@ -301,7 +301,12 @@ input:focus {
 }
 
 .text-primary-rgba {
-  color: #86bbff;
+  color: #9dc3ff !important;
+  font-weight: 600;
+}
+.text-primary-rgba:hover {
+  color: var(--primary-color-dark) !important;
+  font-weight: 600;
 }
 
 .btn-primary {
@@ -312,6 +317,17 @@ input:focus {
 .btn-success {
   border-color: var(--success-color);
   background-color: var(--success-color);
+}
+
+.add-to-cart-btn {
+  background-color: var(--bg-primary-rgba);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.add-to-cart-btn:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff !important;
 }
 
 .add-to-cart-btn:disabled {
@@ -930,10 +946,9 @@ header {
   position: absolute;
   color: var(--muted-color);
   pointer-events: none;
-  left: 13px;
-  top: 8px;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  left: 1px;
+  top: -25px;
+  font-size: 0.9rem;
 }
 
 .cus-input-group-label.cus-input-group-label--file {
@@ -941,28 +956,9 @@ header {
   color: var(--primary-color);
   font-size: 0.8rem;
 }
-
-.cus-input-group-input:disabled {
-  /* background-color: unset;
-	border: unset; */
+.cus-input-group-input::placeholder {
+  font-size: 14px;
 }
-
-.cus-input-group-input:focus ~ .cus-input-group-label,
-.cus-input-group-input:disabled ~ .cus-input-group-label {
-  top: -16px;
-  color: var(--primary-color);
-  font-size: 0.8rem;
-}
-
-.cus-input-group-input:valid ~ .cus-input-group-label {
-  top: -20px;
-  font-size: 0.8rem;
-}
-
-/* .cus-input-group-input:focus~.cus-input-group-bar::before,
-.cus-input-group-input:valid~.cus-input-group-bar::before {
-	width: 100%;
-} */
 
 .cus-input-group-input--password,
 .cus-input-group-input--password.is-invalid {
@@ -1087,9 +1083,9 @@ header {
   position: absolute;
   color: var(--muted-color);
   pointer-events: none;
-  left: 10px;
-  top: -18px;
-  font-size: 0.8rem;
+  left: 1px;
+  top: -25px;
+  font-size: 0.9rem;
 }
 
 .cus-dropdown i {
@@ -1905,7 +1901,14 @@ textarea {
   color: #ffd700 !important;
   transition: color 0.3s ease-in;
 }
-
+.rm-review {
+  color: #ff6363;
+  font-weight: 500;
+}
+.rm-review:hover {
+  color: #ff0000;
+  font-weight: 500;
+}
 .offcanvas-start {
   width: 300px !important;
 }

@@ -1,6 +1,6 @@
 import Paragraph from '../ui/Paragraph'
 import EmailActiveButton from '../button/EmailActiveButton'
-// import PhoneActiveButton from '../button/PhoneActiveButton'
+import PhoneActiveButton from '../button/PhoneActiveButton'
 import UserEditProfileItem from '../item/UserEditProfileItem'
 import UserEditPasswordItem from '../item/UserEditPasswordItem'
 import { useTranslation } from 'react-i18next'
@@ -98,27 +98,22 @@ const UserProfileInfo = ({ user = {}, isEditable = false }) => {
             />
           </div>
         ) : (
-          <>
-            <div className='col-12'>
-              <Paragraph
-                label={
-                  <span>
-                    <i className='fa-light fa-phone	me-2 text-secondary'></i>
-                    {t('userDetail.phone')}
-                  </span>
-                }
-                colon
-                value={user.phone ? hideLastDigits(user.phone, 8, 0) : '-'}
-              />
-            </div>
-
-            {/* <div className='col-sm-6 mt-2'>
-              <PhoneActiveButton
-                phone={user.phone}
-                isPhoneActive={user.isPhoneActive}
-              />
-            </div> */}
-          </>
+          <div className='col-12 d-flex'>
+            <Paragraph
+              label={
+                <span>
+                  <i className='fa-light fa-phone	me-2 text-secondary'></i>
+                  {t('userDetail.phone')}
+                </span>
+              }
+              colon
+              value={user.phone ? hideLastDigits(user.phone, 8, 0) : '-'}
+            />
+            <PhoneActiveButton
+              phone={user.phone}
+              isPhoneActive={user.isPhoneActive}
+            />
+          </div>
         )}
 
         <div className='col-12'>

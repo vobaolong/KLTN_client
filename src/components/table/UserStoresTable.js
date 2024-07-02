@@ -223,11 +223,11 @@ const UserStoresTable = ({ heading = false }) => {
                           type='button'
                           className='btn btn-sm btn-outline-primary ripple rounded-1'
                           to={`/seller/${store._id}`}
-                          title={t('admin.adDashboard.dashboard')}
+                          title={t('storeDetail.manage')}
                         >
-                          <i className='res-dis-sm d-none fa-solid fa-eye'></i>
+                          <i className='fa-solid fa-eye me-2'></i>
                           <span className='res-hide'>
-                            {t('admin.adDashboard.dashboard')}
+                            {t('storeDetail.manage')}
                           </span>
                         </Link>
                       </td>

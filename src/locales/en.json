@@ -565,6 +565,7 @@
   },
 
   "storeDetail": {
+    "manage": "Manage",
     "typeOfStall": "Type of Stall",
     "basicInfo": "Basic Information",
     "imgInfo": "Logo & Background Image",
@@ -611,6 +612,7 @@
     "contactPerson": "Contact person"
   },
   "storeDetailValid": {
+    "storeClosing": "This store is closed, can't order in this time",
     "addressValid": "Please provide a valid pickup address!",
     "validName": "Please provide a valid store name!",
     "bioValid": "Please provide a valid store bio!",

@@ -1,6 +1,5 @@
 const API = process.env.REACT_APP_API_URL
 
-// profile
 export const getStoreProfile = async (userId, token, storeId) => {
   try {
     const res = await fetch(`${API}/store/profile/${storeId}/${userId}`, {
@@ -50,7 +49,6 @@ export const getStore = async (storeId) => {
   }
 }
 
-// list store
 export const getListStores = async (filter) => {
   const { search, sortBy, sortMoreBy, order, limit, page, isActive } = filter
   try {
@@ -110,7 +108,6 @@ export const listStoresForAdmin = async (userId, token, filter) => {
   }
 }
 
-//create store
 export const createStore = async (userId, token, store) => {
   try {
     const res = await fetch(`${API}/store/create/${userId}`, {
@@ -127,7 +124,6 @@ export const createStore = async (userId, token, store) => {
   }
 }
 
-// avatar
 export const updateAvatar = async (userId, token, photo, storeId) => {
   try {
     const res = await fetch(`${API}/store/avatar/${storeId}/${userId}`, {
@@ -145,7 +141,6 @@ export const updateAvatar = async (userId, token, photo, storeId) => {
   }
 }
 
-//cover
 export const updateCover = async (userId, token, photo, storeId) => {
   try {
     const res = await fetch(`${API}/store/cover/${storeId}/${userId}`, {
@@ -163,7 +158,6 @@ export const updateCover = async (userId, token, photo, storeId) => {
   }
 }
 
-//featured images
 export const addFeaturedImage = async (userId, token, photo, storeId) => {
   try {
     const res = await fetch(
@@ -229,7 +223,6 @@ export const removeFeaturedImage = async (userId, token, index, storeId) => {
   }
 }
 
-//staff
 export const addStaff = async (userId, token, staff, storeId) => {
   try {
     const res = await fetch(`${API}/store/staff/${storeId}/${userId}`, {
@@ -280,7 +273,6 @@ export const cancelStaff = async (userId, token, storeId) => {
   }
 }
 
-//openStore
 export const openStore = async (userId, token, value, storeId) => {
   try {
     const res = await fetch(`${API}/store/open/${storeId}/${userId}`, {
@@ -298,7 +290,6 @@ export const openStore = async (userId, token, value, storeId) => {
   }
 }
 
-//activeStore
 export const activeStore = async (userId, token, value, storeId) => {
   try {
     const res = await fetch(`${API}/store/active/${storeId}/${userId}`, {
@@ -316,7 +307,6 @@ export const activeStore = async (userId, token, value, storeId) => {
   }
 }
 
-//address
 export const addAddress = async (userId, token, address) => {
   try {
     const res = await fetch(`${API}/user/address/${userId}`, {

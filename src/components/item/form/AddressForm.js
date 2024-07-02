@@ -162,62 +162,71 @@ const AddressForm = ({ addressDetail, onChange }) => {
     <div className='position-relative'>
       {isLoading && <Loading />}
       <div className='row mb-2 text-start gap-3'>
-        <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-4 me-3' htmlFor='province'>
+        <div className='col-12 d-flex flex-column justify-content-between align-items-center'>
+          <label className='col-12 mb-1' htmlFor='province'>
             {t('addressForm.province')} <span className='text-danger'>*</span>
           </label>
           <select
-            className='flex-grow-1 border rounded-1 px-2 py-1 select-item'
+            className='col-12 border rounded-1 px-2 py-1 select-item text-dark-emphasis'
             id='province'
             onChange={handleProvinceChange}
             value={address.province}
           >
             <option value=''>{t('addressForm.selectProvince')}</option>
-            {provinces.map((province) => (
-              <option key={province.ProvinceID} value={province.ProvinceID}>
-                {province.ProvinceName}
-              </option>
-            ))}
+            {provinces
+              .slice()
+              .sort((a, b) => a.ProvinceName.localeCompare(b.ProvinceName))
+              .map((province) => (
+                <option key={province.ProvinceID} value={province.ProvinceID}>
+                  {province.ProvinceName}
+                </option>
+              ))}
           </select>
         </div>
 
-        <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-4 me-3' htmlFor='district'>
+        <div className='col-12 d-flex flex-column justify-content-between align-items-center'>
+          <label className='col-12 mb-1' htmlFor='district'>
             {t('addressForm.district')} <span className='text-danger'>*</span>
           </label>
           <select
-            className='flex-grow-1 border rounded-1 px-2 py-1 select-item'
+            className='col-12 border rounded-1 px-2 py-1 select-item text-dark-emphasis'
             id='district'
             onChange={handleDistrictChange}
             value={address.district}
             disabled={!address.province}
           >
             <option value=''>{t('addressForm.selectDistrict')}</option>
-            {districts.map((district) => (
-              <option key={district.DistrictID} value={district.DistrictID}>
-                {district.DistrictName}
-              </option>
-            ))}
+            {districts
+              .slice()
+              .sort((a, b) => a.DistrictName.localeCompare(b.DistrictName))
+              .map((district) => (
+                <option key={district.DistrictID} value={district.DistrictID}>
+                  {district.DistrictName}
+                </option>
+              ))}
           </select>
         </div>
 
-        <div className='col-12 d-flex justify-content-between align-items-center'>
-          <label className='col-4 me-3' htmlFor='ward'>
+        <div className='col-12 d-flex flex-column justify-content-between align-items-center'>
+          <label className='col-12 mb-1' htmlFor='ward'>
             {t('addressForm.ward')} <span className='text-danger'>*</span>
           </label>
           <select
-            className='flex-grow-1 border rounded-1 px-2 py-1 select-item'
+            className='col-12 border rounded-1 px-2 py-1 select-item text-dark-emphasis'
             id='ward'
             onChange={handleWardChange}
             value={address.ward}
             disabled={!address.district}
           >
             <option value=''>{t('addressForm.selectWard')}</option>
-            {wards.map((ward) => (
-              <option key={ward.WardCode} value={ward.WardCode}>
-                {ward.WardName}
-              </option>
-            ))}
+            {wards
+              .slice()
+              .sort((a, b) => a.WardName.localeCompare(b.WardName))
+              .map((ward) => (
+                <option key={ward.WardCode} value={ward.WardCode}>
+                  {ward.WardName}
+                </option>
+              ))}
           </select>
         </div>
 
@@ -240,6 +249,7 @@ const AddressForm = ({ addressDetail, onChange }) => {
             feedback={t('addressFormValid.streetValid')}
             validator='address'
             onChange={(value) => handleChange(value)}
+            placeholder='Ví dụ: Số 58 Đường số 1'
           />
         </div>
         {error && (

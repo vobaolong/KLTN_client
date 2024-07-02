@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { reportByUser } from '../../../apis/report'
+import { socketId } from '../../..'
 
-const ListReport = ({ onSubmit, reasons }) => {
+const ListReport = ({ reasons, productId, userId }) => {
   const [selectedReason, setSelectedReason] = useState('')
   const [otherReason, setOtherReason] = useState('')
   const { t } = useTranslation()
@@ -14,14 +16,28 @@ const ListReport = ({ onSubmit, reasons }) => {
     setOtherReason(event.target.value)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     if (selectedReason) {
       const reasonToSubmit =
         selectedReason === 'other' ? otherReason : selectedReason
-      onSubmit(reasonToSubmit)
+      try {
+        await reportByUser({
+          objectId: productId,
+          reportBy: userId,
+          reason: reasonToSubmit,
+          isStore: false
+        })
+        socketId.emit('notificationReport', {
+          orderId: '',
+          from: userId,
+          to: process.env.ADMIN_ID
+        })
+      } catch (error) {
+        console.error('Error reporting:', error)
+      }
     } else {
-      alert('Please select a reason for reporting.')
+      console.error('Please select a reason for reporting.')
     }
   }
 

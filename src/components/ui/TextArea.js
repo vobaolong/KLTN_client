@@ -10,7 +10,8 @@ const TextArea = ({
   isDisabled = false,
   feedback = 'Please provide a valid value',
   required = false,
-  row = 8
+  row = 8,
+  placeholder = ''
 }) => {
   const onHandleChange = (e) => {
     onChange(e.target.value)
@@ -33,6 +34,7 @@ const TextArea = ({
         className={`cus-input-group-input form-control ${
           !isValid ? 'is-invalid' : ''
         }`}
+        placeholder={placeholder}
         onChange={onHandleChange}
         onBlur={onHandleBlur}
         value={value}

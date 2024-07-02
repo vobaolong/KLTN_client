@@ -117,21 +117,22 @@ const StoreEditProfileForm = ({
             label={t('storeDetail.storeName')}
             value={profile.name}
             isValid={profile.isValidName}
-            feedback='Please provide a valid store name.'
+            feedback={t('storeDetailValid.validName')}
             validator='name'
             required={true}
+            placeholder='Ví dụ: Cửa hàng giày ABC'
             onChange={(value) => handleChange('name', 'isValidName', value)}
             onValidate={(flag) => handleValidate('isValidName', flag)}
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <TextArea
             type='text'
             label={t('storeDetail.bio')}
             value={profile.bio}
             isValid={profile.isValidBio}
-            feedback='Please provide a valid store bio.'
+            feedback={t('storeDetailValid.bioValid')}
             validator='bio'
             onChange={(value) => handleChange('bio', 'isValidBio', value)}
             onValidate={(flag) => handleValidate('isValidBio', flag)}
@@ -139,8 +140,7 @@ const StoreEditProfileForm = ({
           />
         </div>
 
-        <div className='col-12 mt-4'>
-          <span>{t('storeDetail.pickupAddress')}</span>
+        <div className='col-12 mt-3'>
           {addressDetail !== null && (
             <AddressForm
               addressDetail={addressDetail}

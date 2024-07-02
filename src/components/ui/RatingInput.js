@@ -13,7 +13,7 @@ const RatingInput = ({
   const { t } = useTranslation()
 
   return (
-    <div className='mt-4 d-flex gap-2 align-items-center'>
+    <div className='mt-3 d-flex gap-2 align-items-center'>
       <span style={{ fontSize: '0.9rem' }} className='text-dark-emphasis'>
         {label}
       </span>

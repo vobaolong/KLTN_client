@@ -9,7 +9,7 @@ import Loading from '../../components/ui/Loading'
 import MainLayout from '../../components/layout/MainLayout'
 import StoreSmallCard from '../../components/card/StoreSmallCard'
 import ListCartItemsForm from '../../components/list/ListCartItemsForm'
-import ListBestSellerProducts from '../../components/list/ListBestSellerProduct'
+import ListBestSellerProduct from '../../components/list/ListBestSellerProduct'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import MetaData from '../../components/layout/meta/MetaData'
@@ -44,11 +44,13 @@ const CartPage = () => {
       .then((data) => {
         if (data.error) setError(data.error)
         else setCarts(data.carts)
+        setTimeout(() => setError(''), 3000)
         setIsLoading(false)
       })
       .catch((error) => {
         setError('Server error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }, [run])
 
@@ -75,9 +77,11 @@ const CartPage = () => {
             toast.success(t('toastSuccess.order.create'))
           }
           setIsLoading(false)
+          setTimeout(() => setError(''), 3000)
         })
         .catch((error) => {
           setError('Server error')
+          setTimeout(() => setError(''), 3000)
           setIsLoading(false)
         })
         .finally(() => {
@@ -106,7 +110,7 @@ const CartPage = () => {
               <span className='text-danger'>{t('cartDetail.empty')}</span>
               <span class>{t('cartDetail.emptyRefer')}</span>
             </div>
-            <ListBestSellerProducts heading={t('bestSeller')} />
+            <ListBestSellerProduct sortBy='sold' heading={t('bestSeller')} />
           </div>
         ) : (
           <div className='accordion' id='accordionPanelsStayOpen'>
@@ -169,7 +173,7 @@ const CartPage = () => {
                     )}
 
                     {cart.storeId?.isActive && !cart.storeId?.isOpen && (
-                      <Error msg="This store is closed, can't order in this time!" />
+                      <Error msg={t('toastError.storeClosing')} />
                     )}
 
                     {cart.storeId?.isActive && cart.storeId?.isOpen && (

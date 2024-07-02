@@ -113,7 +113,7 @@ const EditReviewForm = ({ oldReview = {}, onRun }) => {
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <TextArea
             type='text'
             label={t('reviewDetail.content')}

@@ -12,7 +12,8 @@ const UserEditPasswordItem = () => {
         data-bs-toggle='modal'
         data-bs-target='#password-edit-form'
       >
-        <i className='fa-solid fa-key'></i>
+        <i class='fa-solid fa-lock me-2'></i>
+        {t('userDetail.changePassword')}
       </button>
 
       <Modal

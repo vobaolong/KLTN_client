@@ -17,7 +17,7 @@ const Policy = () => {
             className='navbar-brand cus-navbar-brand me-2 ripple res-hide-md'
             to='/'
           >
-            <Logo />
+            <Logo navFor='user' />
           </Link>
           <h5 className='font-weight-light m-0 ms-2 border-start px-3'>
             Trung tâm trợ giúp Zenpii

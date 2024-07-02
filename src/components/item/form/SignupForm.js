@@ -126,6 +126,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             value={account.firstName}
             isValid={account.isValidFirstName}
             feedback={t('userDetail.validFirstName')}
+            placeholder='Nguyen Van'
             required={true}
             validator='name'
             onChange={(value) =>
@@ -143,6 +144,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             isValid={account.isValidLastName}
             feedback={t('userDetail.validLastName')}
             validator='name'
+            placeholder='A'
             required={true}
             onChange={(value) =>
               handleChange('lastName', 'isValidLastName', value)
@@ -151,7 +153,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <Input
             type='text'
             label={t('signInForm.emailLabel')}
@@ -160,6 +162,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             feedback={t('signInForm.emailFeedback')}
             validator='email|phone'
             required={true}
+            placeholder='Ví dụ: example@gmail.com hoặc 098***3434'
             onChange={(value) =>
               handleChange('username', 'isValidUsername', value)
             }
@@ -167,7 +170,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <Input
             type='password'
             label={t('signInForm.passwordLabel')}
@@ -185,7 +188,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
         </div>
 
         {error && (
-          <div className='col-12'>
+          <div className='col-12 mt-3'>
             <Error msg={error} />
           </div>
         )}
@@ -219,6 +222,14 @@ const SignupForm = ({ onSwap = () => {} }) => {
             >
               {t('button.signIn')}
             </span>
+          </small>
+        </div>
+        <div className='col-12 mt-4'>
+          <small className='text-center d-block mx-4'>
+            <span className='text-muted'>{t('signInForm.agreeBy')} </span>
+            <Link className='text-primary' to='/legal/privacy' target='_blank'>
+              {t('footer.policy')}
+            </Link>
           </small>
         </div>
       </form>

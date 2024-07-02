@@ -228,6 +228,7 @@ const CreateStoreForm = () => {
               isValid={store.isValidName}
               feedback={t('storeDetailValid.validName')}
               validator='name'
+              placeholder='Ví dụ: Cửa hàng giày ABC'
               required={true}
               onChange={(value) => handleChange('name', 'isValidName', value)}
               onValidate={(flag) => handleValidate('isValidName', flag)}
@@ -242,6 +243,9 @@ const CreateStoreForm = () => {
               isValid={store.isValidBio}
               feedback={t('storeDetailValid.bioValid')}
               validator='bio'
+              placeholder='Ví dụ: Chào mừng bạn đến với Cửa hàng giày ABC!
+							Chúng tôi tự hào là địa chỉ tin cậy cho những tín đồ yêu giày, mang đến những mẫu giày thời trang, chất lượng và phong cách. Với sự đa dạng về kiểu dáng và màu sắc, chúng tôi cam kết mang lại sự thoải mái và tự tin cho từng bước chân của bạn. Hãy đến và trải nghiệm sự khác biệt tại Cửa hàng giày ABC – nơi phong cách gặp gỡ chất lượng!
+							Cảm ơn bạn đã tin tưởng và ủng hộ chúng tôi!'
               required={true}
               onChange={(value) => handleChange('bio', 'isValidBio', value)}
               onValidate={(flag) => handleValidate('isValidBio', flag)}

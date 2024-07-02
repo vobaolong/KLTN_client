@@ -114,7 +114,7 @@ const AddToCartForm = ({ product = {} }) => {
         >
           <button
             type='submit'
-            className='btn add-to-cart-btn rounded-1 btn-outline-primary ripple d-flex align-items-center justify-content-center bg-primary-rgba'
+            className='btn add-to-cart-btn rounded-1 ripple d-flex align-items-center justify-content-center'
             onClick={handleSubmit}
           >
             <i className='fa-solid fa-cart-plus'></i>

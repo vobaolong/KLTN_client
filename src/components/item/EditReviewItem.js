@@ -5,14 +5,15 @@ import EditReviewForm from './form/EditReviewForm'
 const EditReviewItem = ({ oldReview = {}, onRun }) => {
   const { t } = useTranslation()
   return (
-    <div className='position-relative d-inline-block'>
+    <div className='d-inline-block '>
       <button
         type='button'
         data-bs-target={`#review-edit-form-${oldReview._id}`}
         data-bs-toggle='modal'
-        className='btn btn-primary btn-sm ripple cus-tooltip'
+        className='btn btn-sm ripple text-primary-rgba'
       >
-        <i className='fa-solid fa-pen'></i>
+        <i className='fa-duotone fa-pen-to-square me-2'></i>
+        {t('reviewDetail.edit')}
       </button>
 
       <Modal
@@ -22,8 +23,6 @@ const EditReviewItem = ({ oldReview = {}, onRun }) => {
       >
         <EditReviewForm oldReview={oldReview} onRun={onRun} />
       </Modal>
-
-      <small className='cus-tooltip-msg'>{t('reviewDetail.edit')}</small>
     </div>
   )
 }

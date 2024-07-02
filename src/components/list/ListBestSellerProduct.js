@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, memo } from 'react'
+import { useState, useEffect, memo, useRef } from 'react'
 import { listActiveProducts } from '../../apis/product'
 import Loading from '../ui/Loading'
 import ProductCard from '../card/ProductCard'
@@ -47,7 +46,7 @@ const settings = {
   ]
 }
 
-const ListBestSellerProducts = ({
+const ListBestSellerProduct = ({
   sortBy = '',
   heading = '',
   categoryId = ''
@@ -55,6 +54,7 @@ const ListBestSellerProducts = ({
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState([])
+  const isMounted = useRef(true)
 
   const init = () => {
     setIsLoading(true)
@@ -70,18 +70,26 @@ const ListBestSellerProducts = ({
       page: 1
     })
       .then((data) => {
-        if (data.error) setError(data.error)
-        else setProducts(data.products)
-        setIsLoading(false)
+        if (isMounted.current) {
+          if (data.error) setError(data.error)
+          else setProducts(data.products)
+          setIsLoading(false)
+        }
       })
       .catch((error) => {
-        setError('Server Error')
-        setIsLoading(false)
+        if (isMounted.current) {
+          setError('Server Error')
+          setIsLoading(false)
+        }
       })
   }
 
   useEffect(() => {
+    isMounted.current = true
     init()
+    return () => {
+      isMounted.current = false
+    }
   }, [categoryId, shallowEqual(products)])
 
   return (
@@ -103,4 +111,4 @@ const ListBestSellerProducts = ({
   )
 }
 
-export default ListBestSellerProducts
+export default ListBestSellerProduct
