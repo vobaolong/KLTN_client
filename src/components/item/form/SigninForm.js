@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { signin, setToken, forgotPassword } from '../../../apis/auth'
 import { regexTest } from '../../../helper/test'
 import Input from '../../ui/Input'
@@ -78,6 +78,7 @@ const SigninForm = ({ onSwap = () => {} }) => {
       .catch((error) => {
         setError('Server error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }
 

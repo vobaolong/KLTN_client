@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { calcTime } from '../../helper/calcTime'
 import { toast } from 'react-toastify'
 import Error from '../ui/Error'
-import Modal from '../ui/Modal'
 
 const ReviewInfo = ({ review = {}, about = true, onRun }) => {
   const [error, setError] = useState('')

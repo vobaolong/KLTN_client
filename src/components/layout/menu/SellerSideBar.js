@@ -1,17 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
+const SellerSideBar = ({ user = {}, store = {} }) => {
   const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
 
   return (
     <div className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar'>
-      <ul
-        className={`nav nav-pills flex-column mb-auto justify-content-around gap-1 ${
-          isCollapsed ? 'text-center' : ''
-        }`}
-      >
+      <ul className='nav nav-pills flex-column mb-auto justify-content-around gap-1'>
         <li className='nav-item'>
           <Link
             to={`/seller/${store._id}`}
@@ -20,15 +16,13 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === store._id ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-chart-line`}
+              className={`${
+                path === store._id ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-chart-line`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>
-                {t('admin.adDashboard.overview')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-xl'>
+              {t('admin.adDashboard.overview')}
+            </span>
           </Link>
         </li>
 
@@ -40,14 +34,11 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'profile' ? 'fa-solid' : 'fa-light'}
-							 ${!isCollapsed ? 'w-10' : ''} text-center fa-store`}
+              className={`${
+                path === 'profile' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-store`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>
-                {t('storeDetail.profile')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.profile')}</span>
           </Link>
         </li>
 
@@ -59,15 +50,13 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'products' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-box`}
+              className={`${
+                path === 'products' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-box`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>
-                {t('storeDetail.products')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-xl'>
+              {t('storeDetail.products')}
+            </span>
           </Link>
         </li>
 
@@ -79,13 +68,11 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'staff' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center  fa-user-group`}
+              className={`${
+                path === 'staff' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center  fa-user-group`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>{t('storeDetail.staff')}</span>
-            )}
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.staff')}</span>
           </Link>
         </li>
 
@@ -97,15 +84,11 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'orders' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-receipt`}
+              className={`${
+                path === 'orders' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-receipt`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>
-                {t('storeDetail.orders')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-xl'>{t('storeDetail.orders')}</span>
           </Link>
         </li>
 
@@ -117,13 +100,11 @@ const SellerSideBar = ({ user = {}, store = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'wallet' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-wallet`}
+              className={`${
+                path === 'wallet' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-wallet`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-xl'>{t('wallet')}</span>
-            )}
+            <span className='ms-3 res-hide-xl'>{t('wallet')}</span>
           </Link>
         </li>
       </ul>

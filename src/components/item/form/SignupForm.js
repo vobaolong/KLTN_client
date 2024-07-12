@@ -15,7 +15,9 @@ const SignupForm = ({ onSwap = () => {} }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false)
   const [error, setError] = useState('')
-
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [isValidPasswordConfirmation, setIsValidPasswordConfirmation] =
+    useState(true)
   const [account, setAccount] = useState({
     firstName: '',
     lastName: '',
@@ -43,12 +45,28 @@ const SignupForm = ({ onSwap = () => {} }) => {
       [isValidName]: flag
     })
   }
+  const handleChangePasswordConfirmation = (value) => {
+    setPasswordConfirmation(value)
+  }
 
+  const handleValidatePasswordConfirmation = (flag) => {
+    setIsValidPasswordConfirmation(flag)
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const { firstName, lastName, username, password } = account
-    if (!firstName || !lastName || !username || !password) {
+    if (password !== passwordConfirmation) {
+      setError('Mật khẩu không khớp, vui lòng thử lại!')
+      return
+    }
+    if (
+      !firstName ||
+      !lastName ||
+      !username ||
+      !password ||
+      !passwordConfirmation
+    ) {
       setAccount({
         ...account,
         isValidFirstName: regexTest('name', firstName),
@@ -63,7 +81,9 @@ const SignupForm = ({ onSwap = () => {} }) => {
       !account.isValidFirstName ||
       !account.isValidLastName ||
       !account.isValidUsername ||
-      !account.isValidPassword
+      !account.isValidPassword ||
+      !isValidPasswordConfirmation ||
+      password !== passwordConfirmation
     )
       return
     setIsConfirming(true)
@@ -177,13 +197,26 @@ const SignupForm = ({ onSwap = () => {} }) => {
             hasEditBtn={true}
             value={account.password}
             isValid={account.isValidPassword}
-            feedback={t('signUpForm.passwordFeedback')}
+            feedback={t('passwordFeedback')}
             validator='password'
             required={true}
             onChange={(value) =>
               handleChange('password', 'isValidPassword', value)
             }
             onValidate={(flag) => handleValidate('isValidPassword', flag)}
+          />
+        </div>
+        <div className='col-12 mt-3'>
+          <Input
+            type='password'
+            label={t('confirmPw')}
+            value={passwordConfirmation}
+            isValid={isValidPasswordConfirmation}
+            feedback={t('passwordFeedback')}
+            validator='password'
+            required={true}
+            onChange={(value) => handleChangePasswordConfirmation(value)}
+            onValidate={(flag) => handleValidatePasswordConfirmation(flag)}
           />
         </div>
 
@@ -224,7 +257,7 @@ const SignupForm = ({ onSwap = () => {} }) => {
             </span>
           </small>
         </div>
-        <div className='col-12 mt-4'>
+        <div className='col-12 mt-1'>
           <small className='text-center d-block mx-4'>
             <span className='text-muted'>{t('signInForm.agreeBy')} </span>
             <Link className='text-primary' to='/legal/privacy' target='_blank'>

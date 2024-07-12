@@ -299,7 +299,7 @@ const UserAddAddressForm = () => {
             className='btn btn-primary ripple rounded-1'
             onClick={handleSubmit}
           >
-            {t('button.submit')}
+            {t('button.save')}
           </button>
         </div>
       </form>

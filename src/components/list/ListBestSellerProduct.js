@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, memo, useRef } from 'react'
 import { listActiveProducts } from '../../apis/product'
 import Loading from '../ui/Loading'

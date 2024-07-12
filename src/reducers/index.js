@@ -6,11 +6,11 @@ import storeReducer from './store'
 import productReducer from './product'
 
 const rootReducer = combineReducers({
-  account: accountReducer,
-  seller: sellerReducer,
   user: userReducer,
   store: storeReducer,
-  product: productReducer
+  seller: sellerReducer,
+  product: productReducer,
+  account: accountReducer
 })
 
 export default rootReducer

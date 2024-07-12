@@ -78,6 +78,7 @@
     },
     "signIn": "Sign in successfully",
     "signUp": "Sign up successfully",
+    "forgotPW": "Send email recover successfully",
     "lockStore": "Close store successfully",
     "unlockStore": "Open store successfully",
     "withdraw": "Withdraw successfully",
@@ -668,9 +669,7 @@
     "agreeBy": "By Signing in, you agree to"
   },
   "userLabel": { "pointFloor": "Floor point", "discount": "Discount" },
-  "signUpForm": {
-    "passwordFeedback": "Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &."
-  },
+  "passwordFeedback": "Password must contain at least 6 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character such as @, $, !, %, *, ?, &.",
   "seller": "Seller",
   "point": "Point",
   "success/failure": "Order Completion Rate",
@@ -767,5 +766,6 @@
   "Silver": "Silver",
   "Gold": "Gold",
   "Diamond": "Diamond",
-  "report": "Report"
+  "report": "Report",
+  "confirmPw": "Confirm Password"
 }

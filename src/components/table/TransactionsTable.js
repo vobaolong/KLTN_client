@@ -40,7 +40,6 @@ const TransactionsTable = ({
   })
 
   const { _id: userId, accessToken } = getToken()
-  console.log(userId)
   const [filter, setFilter] = useState({
     sortBy: 'createdAt',
     order: 'desc',

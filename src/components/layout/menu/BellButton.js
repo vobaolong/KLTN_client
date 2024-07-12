@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { timeAgo } from '../../../helper/calcTime'
 import { humanReadableDate } from '../../../helper/humanReadable'
 
-const BellButton = ({ navFor = 'user' }) => {
+const BellButton = ({ navFor = '' }) => {
   const { t } = useTranslation()
   const [list, setList] = useState([])
   const user = useSelector((state) => state.account.user)
@@ -63,7 +63,7 @@ const BellButton = ({ navFor = 'user' }) => {
       fetchNotifications(id)
     })
   }, [])
-
+  console.log(list)
   const popoverClickRootClose = (
     <Popover
       id='popover-trigger-click-root-close'
@@ -82,22 +82,25 @@ const BellButton = ({ navFor = 'user' }) => {
         {list.map((l) => (
           <Link
             onClick={() => handleNotificationClick(l._id)}
-            to={`${
+            to={
               navFor === 'user'
-                ? '/account/purchase/detail/' + l.orderId
-                : '/seller/orders/detail/' + l.orderId + '/' + store._id
-            }`}
+                ? `/account/purchase/detail/${l.objectId}`
+                : navFor === 'seller'
+                ? `/seller/orders/detail/${l.objectId}/${store._id}`
+                : navFor === 'admin'
+                ? '/admin/report'
+                : '#'
+            }
             key={l._id}
             style={{ fontSize: '14px' }}
             className={`${
               l.isRead ? 'cus-notification-is-read' : 'cus-notification'
             } nolink cus-dropdown w-100 px-3 py-2`}
           >
-            {l.message}{' '}
-            <span className='fw-bold text-uppercase'>{l.orderId}</span>
+            {l.message} <p>{l.objectId}</p>
             <p className='d-flex justify-content-between'>
               <span>{timeAgo(l.createdAt)}</span>
-              <span>{humanReadableDate(l.createdAt)}</span>
+              <small>{humanReadableDate(l.createdAt)}</small>
             </p>
           </Link>
         ))}

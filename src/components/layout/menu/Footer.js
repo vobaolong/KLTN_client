@@ -109,7 +109,7 @@ const Footer = () => {
               </span>
             </div>
           </div>
-          <div className='col-12'>
+          {/* <div className='col-12'>
             <hr />
             <h6 className='text-dark-emphasis fw-bold'>{t('categories')}</h6>
             <div className='footer-links row'>
@@ -119,7 +119,7 @@ const Footer = () => {
                 </span>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <hr />
       </div>

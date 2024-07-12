@@ -15,6 +15,9 @@ import ConfirmDialog from '../../ui/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import AddressForm from './AddressForm'
+import { sendCreateStoreEmail } from '../../../apis/notification'
+import { useSelector } from 'react-redux'
+import { socketId } from '../../..'
 
 const CreateStoreForm = () => {
   const { t } = useTranslation()
@@ -42,6 +45,7 @@ const CreateStoreForm = () => {
 
   const history = useHistory()
   const { _id, accessToken } = getToken()
+  const user = useSelector((state) => state.account.user)
 
   const init = () => {
     getListCommissions()
@@ -112,6 +116,10 @@ const CreateStoreForm = () => {
       !store.cover
     )
       return
+    if (store.name.toLowerCase().includes('zenpii')) {
+      setError('Tên gian hàng không được chứa tên sàn')
+      return
+    }
     setIsConfirming(true)
   }
 
@@ -147,6 +155,12 @@ const CreateStoreForm = () => {
             setError('')
           }, 3000)
         } else {
+          socketId.emit('notificationShopNew', {
+            orderId: '',
+            from: user._id,
+            to: process.env.ADMIN_ID
+          })
+          sendCreateStoreEmail(user._id, data.storeId)
           toast.success(t('toastSuccess.store.create'))
           history.push(`/seller/${data.storeId}`)
         }
@@ -216,7 +230,7 @@ const CreateStoreForm = () => {
           </div>
 
           {error && (
-            <div className='col-12'>
+            <div className='col-12 px-4'>
               <Error msg={error} />
             </div>
           )}

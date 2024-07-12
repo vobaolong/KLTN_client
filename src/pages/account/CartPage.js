@@ -69,7 +69,7 @@ const CartPage = () => {
           else {
             updateDispatch('account', data.user)
             socketId.emit('notificationOrder', {
-              orderId: data.order._id,
+              objectId: data.order?._id,
               from: _id,
               to: storeId
             })

@@ -23,7 +23,7 @@ const PhoneActiveItem = ({ phone = '', isPhoneActive = false }) => {
               onClick={() => {}}
             >
               <i className='fa-solid fa-sms me-2'></i>
-              verify now!
+              Xác thực ngay
             </button>
             <small className='cus-tooltip-msg'>
               Click to send confirmation sms

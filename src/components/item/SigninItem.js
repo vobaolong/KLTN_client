@@ -4,7 +4,7 @@ import SigninForm from './form/SigninForm'
 import useToggle from '../../hooks/useToggle'
 import { useTranslation } from 'react-i18next'
 
-const SigninButton = (className = '') => {
+const SigninButton = ({ className = '', title = '' }) => {
   const { t } = useTranslation()
   const [signinFlag, toggleSigninFlag] = useToggle(true)
 
@@ -17,7 +17,7 @@ const SigninButton = (className = '') => {
         data-bs-target='#signin-signup-form'
         onClick={() => toggleSigninFlag(true)}
       >
-        {t('button.signIn')}
+        {title}
       </button>
 
       <Modal

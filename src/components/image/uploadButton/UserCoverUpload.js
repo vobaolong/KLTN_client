@@ -27,7 +27,7 @@ const UserCoverUpload = () => {
             setError('')
           }, 3000)
         } else {
-          toast.success(t('userDetail.updateCover'))
+          toast.success(t('toastSuccess.userDetail.updateCover'))
           updateDispatch('account', data.user)
         }
         setIsLoading(false)

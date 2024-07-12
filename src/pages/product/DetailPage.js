@@ -37,9 +37,12 @@ import ListReport from '../../components/item/form/ListReport'
 import { useSelector } from 'react-redux'
 
 const productReasons = [
-  { value: 'fake', label: 'Sản phẩm giả mạo và bản quyền' },
-  { value: 'prohibited', label: 'Những sản phẩm bị cấm' },
-  { value: 'stolen', label: 'Đồ đánh cắp' }
+  {
+    value: 'Sản phẩm giả mạo và bản quyền',
+    label: 'Sản phẩm giả mạo và bản quyền'
+  },
+  { value: 'Những sản phẩm bị cấm', label: 'Những sản phẩm bị cấm' },
+  { value: 'Đồ đánh cắp', label: 'Đồ đánh cắp' }
 ]
 const DetailPage = () => {
   const { t } = useTranslation()
@@ -188,38 +191,41 @@ const DetailPage = () => {
                       isLoading={isLoading}
                       store={product.storeId}
                     />
-                    <div className='menu-container'>
-                      <button
-                        className='btn menu-button'
-                        onClick={handleMenuToggle}
-                      >
-                        <i className='fa fa-ellipsis-v'></i>
-                      </button>
-                      {showMenu && (
-                        <div className='menu d-inline-block '>
-                          <button
-                            type='button'
-                            data-bs-target='#report'
-                            data-bs-toggle='modal'
-                            className='btn--with-img menu-item text-dark-emphasis'
-                          >
-                            <i className='fa-solid fa-circle-info me-2'></i>
-                            {t('report')}
-                          </button>
-                          <Modal
-                            hasCloseBtn={false}
-                            title={t('dialog.report')}
-                            id='report'
-                          >
-                            <ListReport
-                              reasons={productReasons}
-                              productId={product._id}
-                              userId={user._id}
-                            />
-                          </Modal>
-                        </div>
-                      )}
-                    </div>
+                    {getToken() && getToken().role === 'user' && (
+                      <div className='menu-container'>
+                        <button
+                          className='btn menu-button'
+                          onClick={handleMenuToggle}
+                        >
+                          <i className='fa fa-ellipsis-v'></i>
+                        </button>
+                        {showMenu && (
+                          <div className='menu d-inline-block '>
+                            <button
+                              type='button'
+                              data-bs-target='#report'
+                              data-bs-toggle='modal'
+                              className='btn--with-img menu-item text-dark-emphasis'
+                            >
+                              <i className='fa-solid fa-circle-info me-2'></i>
+                              {t('report')}
+                            </button>
+                            <Modal
+                              hasCloseBtn={false}
+                              title={t('dialog.report')}
+                              id='report'
+                            >
+                              <ListReport
+                                reasons={productReasons}
+                                objectId={product._id}
+                                reportBy={user._id}
+                                isStore={false}
+                              />
+                            </Modal>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <h5 className='product-name text-dark-emphasis fs-12 mt-2'>
                     {isLoading ? <Skeleton height={30} /> : product.name}
@@ -277,6 +283,7 @@ const DetailPage = () => {
                         {!product.storeId?.isOpen && (
                           <Error msg={t('storeDetail.messageClose')} />
                         )}
+                        <br />
                         {product.quantity <= 0 ? (
                           <Error msg={t('productDetail.soldOut')} />
                         ) : (
@@ -285,10 +292,7 @@ const DetailPage = () => {
                           </small>
                         )}
                         {!getToken() && (
-                          <SigninButton
-                            className='w-100 btn-lg'
-                            title={t('button.signInToShopping')}
-                          />
+                          <SigninButton title={t('button.signInToShopping')} />
                         )}
                         {product.storeId?.isOpen &&
                           product.quantity > 0 &&
@@ -362,34 +366,38 @@ const DetailPage = () => {
                     )}
                     <hr />
                     <div className='d-flex align-items-center gap-2'>
-                      <div className='me-2 px-3 border-end'>
-                        <FacebookShareButton
-                          url={
-                            window.location.href
-                              ? 'https://hasaki.vn/san-pham/gel-rua-mat-la-roche-posay-cho-da-dau-nhay-cam-400ml-68810.html?gad_source=1&gclid=CjwKCAjw17qvBhBrEiwA1rU9wwx0pGlaJp9LXom7lUNIZFUsUSDTAe2iT_w7EfZcGZdnsMMcaIJROxoCL-oQAvD_BwE'
-                              : ''
-                          }
-                          quote={product.name}
-                        >
-                          <i className='fa-brands fa-facebook-f text-secondary'></i>
-                        </FacebookShareButton>
-                      </div>
-                      {getToken() && (
-                        <FollowProductButton
-                          productId={product._id}
-                          isFollowing={product.isFollowing}
-                          onRun={() =>
-                            setProduct({
-                              ...product,
-                              numberOfFollowers: product.isFollowing
-                                ? product.numberOfFollowers - 1
-                                : product.numberOfFollowers + 1,
-                              isFollowing: !product.isFollowing
-                            })
-                          }
-                          className='btn-lg'
-                        />
+                      {getToken() && getToken().role === 'user' && (
+                        <>
+                          <div className='me-2 px-3 border-end'>
+                            <FacebookShareButton
+                              url={
+                                window.location.href
+                                  ? 'https://hasaki.vn/san-pham/gel-rua-mat-la-roche-posay-cho-da-dau-nhay-cam-400ml-68810.html?gad_source=1&gclid=CjwKCAjw17qvBhBrEiwA1rU9wwx0pGlaJp9LXom7lUNIZFUsUSDTAe2iT_w7EfZcGZdnsMMcaIJROxoCL-oQAvD_BwE'
+                                  : ''
+                              }
+                              quote={product.name}
+                            >
+                              <i className='fa-brands fa-facebook-f text-secondary'></i>
+                            </FacebookShareButton>
+                          </div>
+
+                          <FollowProductButton
+                            productId={product._id}
+                            isFollowing={product.isFollowing}
+                            onRun={() =>
+                              setProduct({
+                                ...product,
+                                numberOfFollowers: product.isFollowing
+                                  ? product.numberOfFollowers - 1
+                                  : product.numberOfFollowers + 1,
+                                isFollowing: !product.isFollowing
+                              })
+                            }
+                            className='btn-lg'
+                          />
+                        </>
                       )}
+
                       {product?.numberOfFollowers > 0 && (
                         <span className='ms-2'>
                           {product?.numberOfFollowers} đã thích

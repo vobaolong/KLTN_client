@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 import boxImg from '../../assets/box.svg'
+import { Link } from 'react-router-dom'
 
 const AdminReportsTable = ({ heading = false, isStore = true }) => {
   const { t } = useTranslation()
@@ -21,7 +22,7 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
   })
   const [filter, setFilter] = useState({
     search: '',
-    sortBy: 'createAt',
+    sortBy: 'createdAt',
     isStore,
     order: 'desc',
     limit: 10,
@@ -35,7 +36,6 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
       setIsLoading(true)
       listReportsForAdmin(filter)
         .then((data) => {
-          console.log(data)
           if (data.error) setError(data.error)
           else {
             if (isMounted) {
@@ -109,6 +109,9 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
                   <tr>
                     <th scope='col'>#</th>
                     <th scope='col'>
+                      <span>{t('reportDetail.id')}</span>
+                    </th>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
@@ -133,7 +136,6 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
                     <th scope='col'>
                       <span>{t('reportDetail.reason')}</span>
                     </th>
-
                     <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -154,14 +156,28 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
                       <th scope='row' className='text-center'>
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
+                      <td>{report._id}</td>
                       <td>{report.objectId?.name}</td>
                       <td>{report.reportBy?.email}</td>
                       <td>{report.reason}</td>
                       <td>{humanReadableDate(report.createdAt)}</td>
                       <td>
-                        <button className='btn btn-sm btn-outline-primary rounded-1'>
-                          <i className='fa-solid fa-eye'></i>
-                        </button>
+                        <div className='position-relative d-inline-block'>
+                          <Link
+                            type='button'
+                            className='btn btn-sm btn-outline-primary rounded-1 cus-tooltip'
+                            to={`${
+                              report.isStore
+                                ? `/store/${report.objectId?._id}`
+                                : `/product/${report.objectId?._id}`
+                            }`}
+                          >
+                            <i className='fa-solid fa-eye'></i>
+                          </Link>
+                          <span className='cus-tooltip-msg'>
+                            {t('button.view')}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   ))}

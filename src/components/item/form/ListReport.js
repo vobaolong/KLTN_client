@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { reportByUser } from '../../../apis/report'
 import { socketId } from '../../..'
+import { toast } from 'react-toastify'
 
-const ListReport = ({ reasons, productId, userId }) => {
+const ListReport = ({ reasons, objectId, reportBy, isStore }) => {
   const [selectedReason, setSelectedReason] = useState('')
   const [otherReason, setOtherReason] = useState('')
   const { t } = useTranslation()
@@ -23,16 +24,17 @@ const ListReport = ({ reasons, productId, userId }) => {
         selectedReason === 'other' ? otherReason : selectedReason
       try {
         await reportByUser({
-          objectId: productId,
-          reportBy: userId,
+          objectId: objectId,
+          reportBy: reportBy,
           reason: reasonToSubmit,
-          isStore: false
+          isStore: isStore
         })
         socketId.emit('notificationReport', {
-          orderId: '',
-          from: userId,
+          objectId: objectId,
+          from: reportBy,
           to: process.env.ADMIN_ID
         })
+        toast.success('Report submitted successfully')
       } catch (error) {
         console.error('Error reporting:', error)
       }

@@ -17,7 +17,6 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
   const { t } = useTranslation()
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isConfirmingBack, setIsConfirmingBack] = useState(false)
   const [isConfirmingUpdate, setIsConfirmingUpdate] = useState(false)
   const [newCategory, setNewCategory] = useState({
@@ -29,25 +28,8 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
     isValidName: true,
     isValidImage: true
   })
-  useEffect(() => {
-    const checkScroll = () => {
-      const isBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight
-      setIsScrolled(!isBottom)
-    }
 
-    window.addEventListener('scroll', checkScroll)
-
-    return () => {
-      window.removeEventListener('scroll', checkScroll)
-    }
-  }, [])
   const { _id, accessToken } = getToken()
-
-  const handleBackClick = (e) => {
-    e.preventDefault()
-    setIsConfirmingBack(true)
-  }
 
   const handleConfirmBack = () => {
     setIsConfirmingBack(false)
@@ -173,7 +155,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             </span>
           </div>
 
-          <div className='col-12 mt-4 px-4'>
+          <div className='col-12 px-4 mt-4'>
             <CategorySelector
               label={t('categoryDetail.chosenParentCategory')}
               selected='parent'
@@ -188,7 +170,7 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             />
           </div>
 
-          <div className='col-12 px-4 mt-2'>
+          <div className='col-12 px-4 mt-4'>
             <Input
               type='text'
               label={t('categoryDetail.name')}
@@ -202,7 +184,10 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
             />
           </div>
 
-          <div className='col-12 px-4 mt-3'>
+          <span className='col-12 px-4 mt-4 fs-9'>
+            Ảnh bìa ngành hàng <sup className='text-danger'>*</sup>
+          </span>
+          <div className='col-12 px-4 mb-3'>
             <InputFile
               label={t('categoryDetail.img')}
               size='avatar'
@@ -223,19 +208,15 @@ const AdminEditCategoryForm = ({ categoryId = '' }) => {
           </div>
         )}
         <div
-          className={`bg-body ${
-            isScrolled ? 'shadow' : 'box-shadow'
-          } rounded-1 row px-4 my-3 p-3`}
+          className={`bg-body shadow rounded-1 row px-4 my-3 p-3`}
           style={{ position: 'sticky', bottom: '0' }}
         >
-          <div className='d-flex justify-content-end align-items-center'>
+          <div className='d-flex justify-content-between align-items-center'>
             <Link
               to='/admin/category'
-              className='btn btn-outline-primary ripple res-w-100-md rounded-1 me-3'
-              style={{ width: '200px', maxWidth: '100%' }}
-              onClick={handleBackClick}
+              className='text-decoration-none cus-link-hover res-w-100-md my-2'
             >
-              {t('button.cancel')}
+              <i class='fa-solid fa-angle-left'></i> {t('button.back')}
             </Link>
             <button
               type='submit'

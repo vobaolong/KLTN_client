@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
+const AdminSideBar = ({ user = {} }) => {
   const { t } = useTranslation()
   const path = useLocation().pathname.split('/')[2]
 
@@ -10,11 +10,7 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
       className='sticky-sidebar d-flex flex-column flex-shrink-0 p-2 box-shadow bg-body rounded-1 res-account-sidebar
       '
     >
-      <ul
-        className={`nav nav-pills flex-column mb-auto justify-content-around gap-1 ${
-          isCollapsed ? 'text-center' : ''
-        }`}
-      >
+      <ul className='nav nav-pills flex-column mb-auto justify-content-around gap-1'>
         <li className='nav-item'>
           <Link
             to={`/admin/dashboard`}
@@ -23,15 +19,13 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'dashboard' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-chart-line`}
+              className={`${
+                path === 'dashboard' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-chart-line`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>
-                {t('admin.adDashboard.dashboard')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-lg'>
+              {t('admin.adDashboard.dashboard')}
+            </span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -42,13 +36,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'user' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-user-group`}
+              className={`${
+                path === 'user' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-user-group`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.users')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.users')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -59,13 +51,12 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'store' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-store`}
+              className={`${
+                path === 'store' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-store`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.stores')}</span>
-            )}
+
+            <span className='ms-3 res-hide-lg'>{t('admin.stores')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -76,13 +67,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'order' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-receipt`}
+              className={`${
+                path === 'order' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-receipt`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.orders')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.orders')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -93,15 +82,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'transaction' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-money-bill-transfer`}
+              className={`${
+                path === 'transaction' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-money-bill-transfer`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>
-                {t('admin.transactions')}
-              </span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.transactions')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -112,13 +97,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'category' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-list`}
+              className={`${
+                path === 'category' ? 'fa-solid' : 'fa-light'
+              } 'w-10 text-center fa-list`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.categories')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.categories')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -129,13 +112,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'variant' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-palette`}
+              className={`${
+                path === 'variant' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-palette`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.variants')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.variants')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -146,13 +127,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'product' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-box`}
+              className={`${
+                path === 'product' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-box`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.products')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.products')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -163,13 +142,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'level' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-shield-alt`}
+              className={`${
+                path === 'level' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-shield-alt`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.levels')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.levels')}</span>
           </Link>
         </li>
         <li className='nav-item'>
@@ -180,16 +157,13 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'commission' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-percent`}
+              className={`${
+                path === 'commission' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-percent`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.commissions')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.commissions')}</span>
           </Link>
         </li>
-        {/* mới thêm phần này */}
         <li className='nav-item'>
           <Link
             to={`/admin/report`}
@@ -198,13 +172,11 @@ const AdminSideBar = ({ user = {}, isCollapsed, onToggle }) => {
             }`}
           >
             <i
-              className={`${path === 'report' ? 'fa-solid' : 'fa-light'} ${
-                !isCollapsed ? 'w-10' : ''
-              } text-center fa-triangle-exclamation`}
+              className={`${
+                path === 'report' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-triangle-exclamation`}
             ></i>
-            {!isCollapsed && (
-              <span className='ms-3 res-hide-lg'>{t('admin.reports')}</span>
-            )}
+            <span className='ms-3 res-hide-lg'>{t('admin.reports')}</span>
           </Link>
         </li>
       </ul>

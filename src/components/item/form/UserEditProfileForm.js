@@ -171,7 +171,7 @@ const UserEditProfileForm = ({
         </div>
 
         {!googleId && (
-          <div className='col-12'>
+          <div className='col-12 mt-3'>
             <Input
               type='text'
               label='Email'
@@ -186,7 +186,7 @@ const UserEditProfileForm = ({
           </div>
         )}
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <Input
             type='text'
             label={t('userDetail.phone')}
@@ -200,7 +200,7 @@ const UserEditProfileForm = ({
           />
         </div>
 
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <Input
             type='text'
             label='ID Card'
@@ -217,7 +217,7 @@ const UserEditProfileForm = ({
         </div>
 
         {error && (
-          <div className='col-12'>
+          <div className='col-12 mt-3'>
             <Error msg={error} />
           </div>
         )}

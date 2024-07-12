@@ -80,6 +80,7 @@
     },
     "signIn": "Đăng nhập thành công",
     "signUp": "Đăng ký thành công",
+    "forgotPW": "Gửi email khôi phục thành công",
     "lockStore": "Đóng shop thành công",
     "unlockStore": "Mở shop thành công",
     "withdraw": "Giao dịch thành công",
@@ -315,7 +316,8 @@
     "userId": "Email người báo cáo",
     "objectId": "Tên đối tượng",
     "reason": "Lý do",
-    "createAt": "Ngày tạo"
+    "createAt": "Ngày tạo",
+    "id": "Mã báo cáo"
   },
 
   "productDetail": {
@@ -595,7 +597,7 @@
     "typeOfStall": "Loại hình cửa hàng",
     "basicInfo": "Thông tin cơ bản",
     "imgInfo": "Logo và ảnh bìa",
-    "messageClose": "Cửa hàn đang tạm nghỉ, tạm thời không thể đặt hàng!",
+    "messageClose": "Cửa hàng đang tạm nghỉ, tạm thời không thể đặt hàng!",
     "numberOfProduct": "Sản phẩm",
     "followers": "Người theo dõi",
     "vacationMode": "Chế độ tạm nghỉ",
@@ -693,9 +695,7 @@
     "agreeBy": "Bằng việc đăng ký, bạn đã đồng ý với"
   },
   "userLabel": { "pointFloor": "Điểm sàn", "discount": "Giảm giá" },
-  "signUpForm": {
-    "passwordFeedback": "Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &!"
-  },
+  "passwordFeedback": "Mật khẩu chứa ít nhất 6 ký tự, bao gồm ít nhất 1 ký tự chữ hoa, 1 ký tự chữ thường, 1 ký tự chữ số và 1 ký tự đặc biệt như @, $, !, %, *, ?, &",
   "seller": "Người bán",
   "point": "Điểm",
   "success/failure": "Tỷ lệ hoàn thành",
@@ -795,5 +795,10 @@
   "Silver": "Bạc",
   "Gold": "Vàng",
   "Diamond": "Kim Cương",
-  "report": "Tố cáo"
+  "report": "Tố cáo",
+  "changePw": "Nhập mật khẩu mới",
+  "newPw": "Mật khẩu mới",
+  "recoverPw": "Khôi phục mật khẩu",
+  "confirmPw": "Xác nhận mật khẩu",
+  "backToLogin": "Quay lại đăng nhập"
 }

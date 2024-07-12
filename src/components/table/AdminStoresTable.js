@@ -114,6 +114,7 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
     const active = activeStore.isActive
       ? t('toastSuccess.store.ban')
       : t('toastSuccess.store.active')
+
     activeOrInactive(_id, accessToken, value, activeStore._id)
       .then((data) => {
         if (data.error) {
@@ -121,11 +122,11 @@ const AdminStoresTable = ({ heading = false, isActive = true }) => {
         } else {
           toast.success(active)
           setRun(!run)
-          const storeId = stores.map((store) => store.ownerId?._id)
+
           if (!activeStore.isActive) {
-            sendActiveStoreEmail(storeId)
+            sendActiveStoreEmail(activeStore.ownerId?._id, activeStore._id)
           } else {
-            sendBanStoreEmail(storeId)
+            sendBanStoreEmail(activeStore.ownerId?._id, activeStore._id)
           }
         }
         setTimeout(() => {

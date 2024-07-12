@@ -33,9 +33,35 @@ export const updateRead = async (userId) => {
   }
 }
 
-export const sendBanStoreEmail = async (userId) => {
+export const sendBanStoreEmail = async (userId, storeId) => {
   try {
-    const res = await fetch(`${API}/send-ban-store/${userId}`, {
+    const res = await fetch(`${API}/send-ban-store/${userId}/${storeId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const sendCreateStoreEmail = async (userId, storeId) => {
+  try {
+    const res = await fetch(`${API}/send-create-store/${userId}/${storeId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const sendActiveStoreEmail = async (userId, storeId) => {
+  try {
+    const res = await fetch(`${API}/send-active-store/${userId}/${storeId}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json'
@@ -47,9 +73,9 @@ export const sendBanStoreEmail = async (userId) => {
   }
 }
 
-export const sendActiveStoreEmail = async (userId) => {
+export const sendActiveProductEmail = async (userId) => {
   try {
-    const res = await fetch(`${API}/send-active-store/${userId}`, {
+    const res = await fetch(`${API}/send-active-product/${userId}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json'
@@ -61,6 +87,19 @@ export const sendActiveStoreEmail = async (userId) => {
   }
 }
 
+export const sendBanProductEmail = async (userId) => {
+  try {
+    const res = await fetch(`${API}/send-ban-product/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
 export const deleteNotifications = async (userId) => {
   try {
     const res = await fetch(`${API}/notification/${userId}`, {

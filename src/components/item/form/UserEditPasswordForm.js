@@ -97,7 +97,7 @@ const UserEditPasswordForm = () => {
 
       {isConfirming && (
         <ConfirmDialog
-          title={t('changePassword')}
+          title={t('userDetail.changePassword')}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
         />
@@ -127,7 +127,7 @@ const UserEditPasswordForm = () => {
             label={t('userDetail.newPw')}
             value={account.newPassword}
             isValid={account.isValidNewPassword}
-            feedback={t('signUpForm.passwordFeedback')}
+            feedback={t('passwordFeedback')}
             onChange={(value) =>
               handleChange('newPassword', 'isValidNewPassword', value)
             }

@@ -76,7 +76,7 @@ const SellerInit = ({ store, actions }) => {
   useEffect(() => {
     if (!store || store._id !== storeId) init()
   }, [storeId])
-  console.log(store)
+
   return (
     <Fragment>
       {redirect && (

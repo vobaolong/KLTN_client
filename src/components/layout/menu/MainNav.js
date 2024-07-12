@@ -77,7 +77,7 @@ const MainNav = ({ navFor = 'user' }) => {
               <Language />
             </li>
             <li className='nav-item'>
-              <SigninItem />
+              <SigninItem title={t('button.signIn')} />
             </li>
           </ul>
         ) : (

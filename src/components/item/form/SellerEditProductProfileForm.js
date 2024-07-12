@@ -227,7 +227,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             />
           </div>
 
-          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+          <div className='col-md-6 col-sm-12 mt-3'>
             <Input
               type='number'
               label={`${t('productDetail.price')} (₫)`}
@@ -241,7 +241,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             />
           </div>
 
-          <div className='col-md-6 col-sm-12 px-4 mt-3'>
+          <div className='col-md-6 col-sm-12 mt-3'>
             <Input
               type='number'
               label={`${t('productDetail.salePrice')} (₫)`}
@@ -257,7 +257,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
             />
           </div>
 
-          <div className='col-12 px-4 mt-3'>
+          <div className='col-12 mt-3'>
             <Input
               type='number'
               label={t('productDetail.quantity')}

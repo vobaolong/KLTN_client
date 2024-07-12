@@ -20,6 +20,10 @@ import ProductActiveLabel from '../label/ProductActiveLabel'
 import CategorySmallCard from '../card/CategorySmallCard'
 import Error from '../ui/Error'
 import boxImg from '../../assets/box.svg'
+import {
+  sendActiveProductEmail,
+  sendBanProductEmail
+} from '../../apis/notification'
 
 const AdminProductsTable = ({ heading = false, isActive = true }) => {
   const { t } = useTranslation()
@@ -123,13 +127,19 @@ const AdminProductsTable = ({ heading = false, isActive = true }) => {
       .then((data) => {
         if (data.error) {
           setError(data.error)
-          setTimeout(() => {
-            setError('')
-          }, 3000)
         } else {
           toast.success(isActive)
           setRun(!run)
+          console.log('activeProduct:', activeProduct)
+          if (!activeProduct.isActive) {
+            sendActiveProductEmail(activeProduct.storeId?.ownerId)
+          } else {
+            sendBanProductEmail(activeProduct.storeId?.ownerId)
+          }
         }
+        setTimeout(() => {
+          setError('')
+        }, 3000)
         setIsLoading(false)
       })
       .catch((error) => {

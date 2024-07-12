@@ -45,7 +45,7 @@ const SellerUpdateOrderStatus = ({
         } else {
           if (statusValue === 'Delivered') {
             socketId.emit('notificationDelivered', {
-              orderId: data.order._id,
+              objectId: data.order._id,
               from: _id,
               to: data.order.userId._id ?? data.order.userId
             })

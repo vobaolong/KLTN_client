@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { listVariantByCategory } from '../../apis/variant'
 import Loading from '../ui/Loading'
 import MultiVariantValueSelector from '../selector/MultiVariantValueSelector'
-import { toast } from 'react-toastify'
 import Error from '../ui/Error'
 import { useTranslation } from 'react-i18next'
 
