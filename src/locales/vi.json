@@ -524,6 +524,7 @@
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
+    "return": "Trả hàng/Hoàn tiền",
     "infringing": "Vi phạm",
     "success": "Hoàn thành",
     "status": "Trạng thái",

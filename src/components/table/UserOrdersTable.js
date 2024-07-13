@@ -52,11 +52,17 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
           })
         }
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
       .catch((error) => {
         if (!isMounted) return
         setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => {
+          setError('')
+        }, 3000)
       })
     return () => {
       isMounted = false

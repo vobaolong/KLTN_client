@@ -44,10 +44,16 @@ const OrderDetailInfo = ({
         .then((data) => {
           if (data.error) setError(data.error)
           else setOrder(data.order)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
         .catch((error) => {
           setError('Server Error')
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
     else if (by === 'admin')
@@ -57,10 +63,16 @@ const OrderDetailInfo = ({
           else {
             setOrder(data.order)
           }
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
         .catch((error) => {
           setError('Server Error')
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
     else {
@@ -70,20 +82,32 @@ const OrderDetailInfo = ({
           else {
             setOrder(data.order)
           }
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
         .catch((error) => {
           setError('Server Error')
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
       listItemsByOrder(_id, accessToken, orderId)
         .then((data) => {
           if (data.error) setError(data.error)
           else setItems(data.items)
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
         .catch((error) => {
           setError('Server Error')
+          setTimeout(() => {
+            setError('')
+          }, 3000)
           setIsLoading(false)
         })
     }
@@ -114,7 +138,6 @@ const OrderDetailInfo = ({
             <h5 className='mx-1 orderID text-uppercase pe-3 border-end'>
               {t('orderDetail.id')} #{order._id}
             </h5>
-
             {(!isEditable ||
               by === 'admin' ||
               (isEditable &&

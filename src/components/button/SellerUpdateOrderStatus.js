@@ -65,6 +65,26 @@ const SellerUpdateOrderStatus = ({
       })
   }
 
+  // Determine the list of statuses to display based on current statusValue
+  const getStatusOptions = () => {
+    const options = [
+      { label: t('status.notProcessed'), value: 'Not processed' },
+      { label: t('status.processing'), value: 'Processing' },
+      { label: t('status.shipped'), value: 'Shipped' },
+      { label: t('status.delivered'), value: 'Delivered' },
+      { label: t('status.cancel'), value: 'Cancelled' }
+    ]
+    if (statusValue === 'Processing') {
+      return options.filter((option) => option.value !== 'Not processed')
+    } else if (statusValue === 'Shipped' || statusValue === 'Delivered') {
+      return options.filter(
+        (option) =>
+          option.value !== 'Not processed' && option.value !== 'Processing'
+      )
+    }
+    return options
+  }
+
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -79,13 +99,7 @@ const SellerUpdateOrderStatus = ({
       )}
 
       <DropDownMenu
-        listItem={[
-          { label: t('status.notProcessed'), value: 'Not processed' },
-          { label: t('status.processing'), value: 'Processing' },
-          { label: t('status.shipped'), value: 'Shipped' },
-          { label: t('status.delivered'), value: 'Delivered' },
-          { label: t('status.cancel'), value: 'Cancelled' }
-        ]}
+        listItem={getStatusOptions()}
         size='lg'
         value={statusValue}
         setValue={(value) => handleUpdate(value)}
