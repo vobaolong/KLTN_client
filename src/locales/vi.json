@@ -701,6 +701,7 @@
   "point": "Điểm",
   "success/failure": "Tỷ lệ hoàn thành",
   "orderDetail": {
+    "return": "Yêu cầu Trả hàng/Hoàn tiền",
     "useRegisterFirstName": "Sử dụng họ đã đăng ký",
     "useRegisterLastName": "Sử dụng tên đã đăng ký",
     "useRegisterPhone": "Sử dụng điện thoại đã đăng ký",

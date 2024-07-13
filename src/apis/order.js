@@ -16,6 +16,22 @@ export const getOrderByUser = async (userId, token, orderId) => {
   }
 }
 
+export const createReturnOrder = async (userId, token, orderId) => {
+  try {
+    const res = await fetch(`${API}/order/return/${orderId}/${userId}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}
+
 export const getOrderByStore = async (userId, token, orderId, storeId) => {
   try {
     const res = await fetch(

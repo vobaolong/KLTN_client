@@ -184,6 +184,9 @@ const OrderDetailInfo = ({
                   />
                 </div>
               )}
+            <button className='ms-auto btn btn-outline-primary rounded-1 ripple'>
+              {t('orderDetail.return')}
+            </button>
           </div>
 
           <div className='container-fluid mb-3'>
