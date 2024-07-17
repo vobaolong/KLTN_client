@@ -42,7 +42,7 @@
     "redux": "^4.1.1",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.7.5",
-    "vnpay": "^1.5.0",
+    "vnpay": "^1.5.2",
     "web-vitals": "^1.1.2",
     "xlsx": "^0.18.5",
     "zustand": "^3.5.12"

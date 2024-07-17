@@ -42,7 +42,7 @@ const DropDownMenu = ({
 
   return (
     <div
-      className={`cus-dropdown ${size === 'lg' && 'w-100'} ${
+      className={`cus-dropdown ${size === 'lg' && 'w-120'} ${
         label && 'cus-dropdown--has-label'
       }`}
     >

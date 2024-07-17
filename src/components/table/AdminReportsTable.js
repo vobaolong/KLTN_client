@@ -112,10 +112,13 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
                       <span>{t('reportDetail.id')}</span>
                     </th>
                     <th scope='col'>
+                      <span>{t('reportDetail.objectId')}</span>
+                    </th>
+                    <th scope='col'>
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
-                        title={t('reportDetail.objectId')}
+                        title={t('reportDetail.objectName')}
                         sortBy='objectId'
                         onSet={(order, sortBy) =>
                           handleSetSortBy(order, sortBy)
@@ -157,6 +160,7 @@ const AdminReportsTable = ({ heading = false, isStore = true }) => {
                         {index + 1 + (filter.page - 1) * filter.limit}
                       </th>
                       <td>{report._id}</td>
+                      <td>{report.objectId?._id}</td>
                       <td>{report.objectId?.name}</td>
                       <td>{report.reportBy?.email}</td>
                       <td>{report.reason}</td>

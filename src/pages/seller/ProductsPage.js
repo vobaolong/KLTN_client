@@ -47,7 +47,10 @@ const ProductsPage = () => {
 
       <div className='nav nav-tabs bg-body rounded-top-1 box-shadow mb-2'>
         {productStatus.map((status) => (
-          <li className='nav-item col-2 text-center pointer' key={status.value}>
+          <li
+            className='nav-item flex-grow-1 text-center pointer'
+            key={status.value}
+          >
             <span
               className={`nav-link h-100 ${
                 selectedOption === status.value ? `active` : ``

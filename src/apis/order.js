@@ -16,7 +16,7 @@ export const getOrderByUser = async (userId, token, orderId) => {
   }
 }
 
-export const createReturnOrder = async (userId, token, orderId) => {
+export const createReturnRequest = async (userId, token, orderId, reason) => {
   try {
     const res = await fetch(`${API}/order/return/${orderId}/${userId}`, {
       method: 'POST',
@@ -24,7 +24,8 @@ export const createReturnOrder = async (userId, token, orderId) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({ reason })
     })
     return await res.json()
   } catch (error) {
@@ -183,6 +184,25 @@ export const listOrdersByStore = async (userId, token, filter, storeId) => {
     return console.log(error)
   }
 }
+export const listReturnByStore = async (userId, token, filter, storeId) => {
+  const { search, sortBy, order, limit, page, status } = filter
+  try {
+    const res = await fetch(
+      `${API}/order/return/by/store/${storeId}/${userId}?search=${search}&status=${status}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}
 
 export const listOrdersForAdmin = async (userId, token, filter) => {
   const { search, sortBy, order, limit, page, status } = filter
@@ -250,6 +270,39 @@ export const sellerUpdateStatusOrder = async (
   }
 }
 
+export const sellerUpdateReturnStatusOrder = async (
+  userId,
+  token,
+  status,
+  orderId,
+  storeId
+) => {
+  try {
+    const res = await fetch(
+      `${API}/order/return/${orderId}/${storeId}/${userId}/approve`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ status })
+      }
+    )
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      throw new Error(data.error || `HTTP error! status: ${res.status}`)
+    }
+
+    return data
+  } catch (error) {
+    console.error('Error in sellerUpdateReturnStatusOrder:', error)
+    throw error
+  }
+}
 export const countOrder = async (status, userId, storeId) => {
   try {
     const res = await fetch(

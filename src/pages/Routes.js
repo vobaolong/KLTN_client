@@ -42,6 +42,7 @@ import SellerProfilePage from './seller/ProfilePage'
 import SellerDashboardPage from './seller/DashboardPage'
 import SellerProductsPage from './seller/ProductsPage'
 import SellerOrderPage from './seller/OrderPage'
+import SellerReturnPage from './seller/ReturnPage'
 import SellerOrderDetailPage from './seller/OrderDetailPage'
 import SellerStaffPage from './seller/StaffPage'
 import SellerWalletPage from './seller/WalletPage'
@@ -211,10 +212,20 @@ const Routes = () => {
           exact
           component={SellerEditProductPage}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path='/seller/orders/:storeId'
           exact
           component={SellerOrderPage}
+        /> */}
+        <PrivateRoute
+          exact
+          path='/seller/orders/:storeId/:status?'
+          component={SellerOrderPage}
+        />
+        <PrivateRoute
+          path='/seller/return/:storeId'
+          exact
+          component={SellerReturnPage}
         />
         <PrivateRoute
           path='/seller/orders/detail/:orderId/:storeId'

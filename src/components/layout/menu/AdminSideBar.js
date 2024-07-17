@@ -99,7 +99,7 @@ const AdminSideBar = ({ user = {} }) => {
             <i
               className={`${
                 path === 'category' ? 'fa-solid' : 'fa-light'
-              } 'w-10 text-center fa-list`}
+              } w-10 text-center fa-list`}
             ></i>
             <span className='ms-3 res-hide-lg'>{t('admin.categories')}</span>
           </Link>

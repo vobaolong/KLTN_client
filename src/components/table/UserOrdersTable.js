@@ -109,7 +109,7 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
       {heading && (
         <>
           {status ===
-            'Not processed|Processing|Shipped|Delivered|Cancelled' && (
+            'Not processed|Processing|Shipped|Delivered|Cancelled|Returned' && (
             <h5 className='text-start'>{t('title.allOrders')}</h5>
           )}
           {status === 'Not processed' && (
@@ -126,6 +126,9 @@ const UserOrdersTable = ({ heading = true, status = '' }) => {
           )}
           {status === 'Cancelled' && (
             <h5 className='text-start'>{t('title.cancelledOrders')}</h5>
+          )}
+          {status === 'Returned' && (
+            <h5 className='text-start'>{t('title.ReturnOrders')}</h5>
           )}
         </>
       )}

@@ -92,6 +92,24 @@ const SellerSideBar = ({ user = {}, store = {} }) => {
           </Link>
         </li>
 
+        <li className='nav-item w-100'>
+          <Link
+            to={`/seller/return/${store._id}`}
+            className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
+              path === 'return' ? 'active' : ''
+            }`}
+          >
+            <i
+              className={`${
+                path === 'return' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-arrow-rotate-left`}
+            ></i>
+            <span className='ms-3 res-hide-xl'>
+              {t('storeDetail.requestReturn')}
+            </span>
+          </Link>
+        </li>
+
         <li className='nav-item'>
           <Link
             to={`/seller/wallet/${store._id}`}

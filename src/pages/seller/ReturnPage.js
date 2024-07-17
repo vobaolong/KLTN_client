@@ -1,37 +1,28 @@
 import { useSelector } from 'react-redux'
 import SellerLayout from '../../components/layout/SellerLayout'
-import SellerOrdersTable from '../../components/table/SellerOrdersTable'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-const OrderPage = () => {
-  const history = useHistory()
+import SellerReturnTable from '../../components/table/SellerReturnTable'
+
+const ReturnPage = () => {
   const user = useSelector((state) => state.account.user)
   const store = useSelector((state) => state.seller.store)
   const { t } = useTranslation()
-  const [selectedStatus, setSelectedStatus] = useState('Not processed')
+  const [selectedStatus, setSelectedStatus] = useState('Pending')
 
   const orderStatus = [
-    {
-      label: t('status.all'),
-      value: 'Not processed|Processing|Shipped|Delivered|Cancelled|Returned'
-    },
-    { label: t('status.notProcessed'), value: 'Not processed' },
-    { label: t('status.processing'), value: 'Processing' },
-    { label: t('status.shipped'), value: 'Shipped' },
-    { label: t('status.delivered'), value: 'Delivered' },
-    { label: t('status.cancelled'), value: 'Cancelled' },
-    { label: t('status.returned'), value: 'Returned' }
+    { label: t('status.pending'), value: 'Pending' },
+    { label: t('status.rejected'), value: 'Rejected' },
+    { label: t('status.approved'), value: 'Approved' }
   ]
 
   const paths = [
     { name: t('breadcrumbs.home'), url: `/seller/${store._id}` },
-    { name: t('breadcrumbs.order'), url: `/seller/orders/${store._id}` }
+    { name: t('breadcrumbs.orderReturn'), url: `/seller/return/${store._id}` }
   ]
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status)
-    history.push(`/seller/orders/${store._id}/${status}`)
   }
 
   return (
@@ -53,18 +44,14 @@ const OrderPage = () => {
           </li>
         ))}
       </div>
-      <SellerOrdersTable
+      <SellerReturnTable
         heading={false}
         storeId={store._id}
-        isEditable={
-          selectedStatus === 'Not processed' ||
-          selectedStatus === 'Processing' ||
-          selectedStatus === 'Shipped'
-        }
+        isEditable={selectedStatus === 'Pending'}
         status={selectedStatus}
       />
     </SellerLayout>
   )
 }
 
-export default OrderPage
+export default ReturnPage

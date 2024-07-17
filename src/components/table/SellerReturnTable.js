@@ -2,13 +2,16 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../apis/auth'
-import { listOrdersByStore } from '../../apis/order'
+import {
+  listReturnByStore,
+  sellerUpdateReturnStatusOrder
+} from '../../apis/order'
 import { humanReadableDate } from '../../helper/humanReadable'
 import { formatPrice } from '../../helper/formatPrice'
 import Pagination from '../ui/Pagination'
 import Loading from '../ui/Loading'
 import SortByButton from './sub/SortByButton'
-import OrderStatusLabel from '../label/OrderStatusLabel'
+import OrderReturnStatusLabel from '../label/OrderReturnStatusLabel'
 import OrderPaymentLabel from '../label/OrderPaymentLabel'
 import UserSmallCard from '../card/UserSmallCard'
 import SearchInput from '../ui/SearchInput'
@@ -17,8 +20,7 @@ import ShowResult from '../ui/ShowResult'
 import Error from '../ui/Error'
 import noItem from '../../assets/noItem.png'
 
-const SellerOrdersTable = ({
-  heading = true,
+const SellerReturnTable = ({
   storeId = '',
   isEditable = false,
   status = ''
@@ -46,8 +48,9 @@ const SellerOrdersTable = ({
     setError('')
     setIsLoading(true)
     let timerId = null
-    listOrdersByStore(_id, accessToken, filter, storeId)
+    listReturnByStore(_id, accessToken, filter, storeId)
       .then((data) => {
+        console.log(data)
         if (data.error) setError(data.error)
         else {
           setOrders(data.orders)
@@ -104,34 +107,38 @@ const SellerOrdersTable = ({
     })
   }
 
+  //
+  const handleUpdateStatus = async (orderId, status) => {
+    try {
+      setIsLoading(true)
+      setError('')
+      setDisplayError(false)
+
+      const result = await sellerUpdateReturnStatusOrder(
+        _id,
+        accessToken,
+        status,
+        orderId,
+        storeId
+      )
+
+      if (result.success) {
+        init()
+      } else {
+        throw new Error(result.error || 'Failed to update status')
+      }
+    } catch (error) {
+      console.error('Error updating status:', error)
+      setError(`Failed to update status: ${error.message}`)
+      setDisplayError(true)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  //
+
   return (
     <div className='position-relative'>
-      {heading && (
-        <>
-          {status ===
-            'Not processed|Processing|Shipped|Delivered|Cancelled|Returned' && (
-            <h5 className='text-start'>{t('title.allOrders')}</h5>
-          )}
-          {status === 'Not processed' && (
-            <h5 className='text-start'>{t('title.notProcessedOrders')}</h5>
-          )}
-          {status === 'Processing' && (
-            <h5 className='text-start'>{t('title.processingOrders')}</h5>
-          )}
-          {status === 'Shipped' && (
-            <h5 className='text-start'>{t('title.shippedOrders')}</h5>
-          )}
-          {status === 'Delivered' && (
-            <h5 className='text-start'>{t('title.deliveredOrders')}</h5>
-          )}
-          {status === 'Cancelled' && (
-            <h5 className='text-start'>{t('title.cancelledOrders')}</h5>
-          )}
-          {status === 'Returned' && (
-            <h5 className='text-start'>{t('title.returnedOrders')}</h5>
-          )}
-        </>
-      )}
       {isLoading && <Loading />}
       {error && <Error msg={error} />}
       {displayError && <Error msg={error} />}
@@ -198,39 +205,6 @@ const SellerOrdersTable = ({
                       <SortByButton
                         currentOrder={filter.order}
                         currentSortBy={filter.sortBy}
-                        title={t('orderDetail.commission')}
-                        sortBy='amountToZenpii'
-                        onSet={(order, sortBy) =>
-                          handleSetSortBy(order, sortBy)
-                        }
-                      />
-                    </th>
-                    <th scope='col'>
-                      <SortByButton
-                        currentOrder={filter.order}
-                        currentSortBy={filter.sortBy}
-                        title={t('orderDetail.profit')}
-                        sortBy='amountToStore'
-                        onSet={(order, sortBy) =>
-                          handleSetSortBy(order, sortBy)
-                        }
-                      />
-                    </th>
-                    <th scope='col'>
-                      <SortByButton
-                        currentOrder={filter.order}
-                        currentSortBy={filter.sortBy}
-                        title={t('orderDetail.deliveryUnit')}
-                        sortBy='deliveryId'
-                        onSet={(order, sortBy) =>
-                          handleSetSortBy(order, sortBy)
-                        }
-                      />
-                    </th>
-                    <th scope='col'>
-                      <SortByButton
-                        currentOrder={filter.order}
-                        currentSortBy={filter.sortBy}
                         title={t('orderDetail.paymentMethod')}
                         sortBy='isPaidBefore'
                         onSet={(order, sortBy) =>
@@ -249,14 +223,27 @@ const SellerOrdersTable = ({
                         }
                       />
                     </th>
-
+                    <th scope='col'>
+                      <span>{t('orderDetail.reason')}</span>
+                    </th>
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('orderDetail.date')}
+                        sortBy='createdAt'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
                     <th scope='col'>
                       <span>{t('action')}</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((order, index) => (
+                  {orders?.map((order, index) => (
                     <tr key={index}>
                       <th scope='row' className='text-center'>
                         {index + 1 + (filter.page - 1) * filter.limit}
@@ -276,27 +263,6 @@ const SellerOrdersTable = ({
                       <td className='hidden-avatar'>
                         <UserSmallCard user={order.userId} />
                       </td>
-                      <td className='text-end'>
-                        <small className='text-nowrap'>
-                          {formatPrice(order.amountToZenpii?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
-                      </td>
-                      <td className='text-end'>
-                        <small className='text-nowrap'>
-                          {formatPrice(order.amountToStore?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
-                        <br />
-                      </td>
-                      <td>
-                        <small>
-                          <i>Giao hàng nhanh</i>
-                          <br />
-                          {formatPrice(order.shippingFee?.$numberDecimal)}
-                          <sup>₫</sup>
-                        </small>
-                      </td>
                       <td>
                         <span>
                           <OrderPaymentLabel
@@ -306,23 +272,44 @@ const SellerOrdersTable = ({
                       </td>
                       <td>
                         <span>
-                          <OrderStatusLabel status={order.status} />
+                          <OrderReturnStatusLabel
+                            status={order.returnRequests?.status}
+                          />
                         </span>
                       </td>
                       <td>
-                        {' '}
-                        <div className='position-relative d-inline-block'>
-                          <Link
-                            type='button'
-                            className='btn btn-sm btn-outline-secondary rounded-1 ripple cus-tooltip'
-                            to={`/seller/orders/detail/${order._id}/${storeId}`}
+                        <span>{order.returnRequests?.reason}</span>
+                      </td>
+                      <td>
+                        <small>
+                          {humanReadableDate(order.returnRequests?.createdAt)}
+                        </small>
+                      </td>
+                      <td>
+                        <>
+                          <button
+                            className='btn btn-success rounded-1 btn-sm'
+                            onClick={() =>
+                              handleUpdateStatus(order._id, 'Approved')
+                            }
+                            disabled={
+                              order.returnRequests?.status === 'Approved'
+                            }
                           >
-                            <i className='fa-solid fa-circle-info'></i>
-                          </Link>
-                          <span className='cus-tooltip-msg'>
-                            {t('button.detail')}
-                          </span>
-                        </div>
+                            {t('button.approve')}
+                          </button>
+                          <button
+                            className='btn btn-outline-danger rounded-1 btn-sm ms-2'
+                            onClick={() =>
+                              handleUpdateStatus(order._id, 'Rejected')
+                            }
+                            disabled={
+                              order.returnRequests?.status === 'Rejected'
+                            }
+                          >
+                            {t('button.reject')}
+                          </button>
+                        </>
                       </td>
                     </tr>
                   ))}
@@ -351,4 +338,4 @@ const SellerOrdersTable = ({
   )
 }
 
-export default SellerOrdersTable
+export default SellerReturnTable

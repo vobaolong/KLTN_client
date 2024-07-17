@@ -13,7 +13,11 @@
     "Processing": "Đang xử lý",
     "Shipped": "Chờ giao",
     "Delivered": "Hoàn thành",
-    "Cancelled": "Đã huỷ"
+    "Cancelled": "Đã huỷ",
+    "Pending": "Chưa giải quyết",
+    "Rejected": "Từ chối",
+    "Approved": "Phê duyệt",
+    "Returned": "Trả hàng"
   },
   "continueWithGoogle": "Tiếp tục với Google",
   "helmet": {
@@ -24,6 +28,7 @@
     "myStore": "Shop của tôi"
   },
   "breadcrumbs": {
+    "orderReturn": "Yêu cầu trả hàng",
     "report": "Báo cáo",
     "delivery": "Vận chuyển",
     "level": "Hạng mức",
@@ -314,7 +319,8 @@
   "reportDetail": {
     "none": "Chưa có báo cáo",
     "userId": "Email người báo cáo",
-    "objectId": "Tên đối tượng",
+    "objectName": "Tên đối tượng",
+    "objectId": "Mã đối tượng",
     "reason": "Lý do",
     "createAt": "Ngày tạo",
     "id": "Mã báo cáo"
@@ -524,7 +530,10 @@
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
-    "return": "Trả hàng/Hoàn tiền",
+    "approved": "Phê duyệt",
+    "rejected": "Từ chối",
+    "pending": "Chưa giải quyết",
+    "returned": "Trả hàng/Hoàn tiền",
     "infringing": "Vi phạm",
     "success": "Hoàn thành",
     "status": "Trạng thái",
@@ -594,6 +603,7 @@
   },
   "storeDetail": {
     "manage": "Quản lý",
+    "requestReturn": "Yêu cầu hoàn đơn",
     "contractNPoint": " Hợp đồng đăng ký và hạng mức",
     "typeOfStall": "Loại hình cửa hàng",
     "basicInfo": "Thông tin cơ bản",
@@ -655,6 +665,8 @@
   "dragNDrop": "Kéo/Thả ảnh vào đây hoặc nhấn để chọn",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
+    "approve": "Phê duyệt",
+    "reject": "Từ chối",
     "detail": "Chi tiết",
     "view": "Xem",
     "restore": "Khôi phục",
@@ -701,6 +713,9 @@
   "point": "Điểm",
   "success/failure": "Tỷ lệ hoàn thành",
   "orderDetail": {
+    "sentReturn": "Yêu cầu đã được gửi",
+    "returnRequestDate": "Ngày yêu cầu",
+    "reason": "Lý do trả hàng",
     "return": "Yêu cầu Trả hàng/Hoàn tiền",
     "useRegisterFirstName": "Sử dụng họ đã đăng ký",
     "useRegisterLastName": "Sử dụng tên đã đăng ký",

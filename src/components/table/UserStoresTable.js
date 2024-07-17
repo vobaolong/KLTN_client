@@ -50,10 +50,12 @@ const UserStoresTable = ({ heading = false }) => {
           })
         }
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
       .catch((error) => {
-        setError(error)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }
 

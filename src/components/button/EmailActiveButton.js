@@ -76,7 +76,7 @@ const EmailActiveButton = ({
             className='btn btn-warning btn-sm text-white cus-tooltip ripple'
             onClick={handleSendEmail}
           >
-            <i className='fa-regular fa-paper-plane me-2'></i>
+            <i className='fa-solid fa-envelope me-2'></i>
             {t('verifyNow')}!
           </button>
           <small className='cus-tooltip-msg'>{t('confirmEmail')}</small>

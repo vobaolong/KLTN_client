@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { getToken } from '../../apis/auth'
 import {
   getOrderByUser,
@@ -20,7 +20,25 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { totalProducts } from '../../helper/total'
 import { useSelector } from 'react-redux'
-
+import Modal from '../ui/Modal'
+import ReturnOrderForm from '../item/form/ReturnOrderForm'
+import { calcTime } from '../../helper/calcTime'
+const returnReasons = [
+  {
+    value: 'Hàng lỗi, không hoạt động',
+    label: 'Hàng lỗi, không hoạt động'
+  },
+  { value: 'Hàng hết hạn sử dụng', label: 'Hàng hết hạn sử dụng' },
+  { value: 'Khác với mô tả', label: 'Khác với mô tả' },
+  { value: 'Đã qua sử dụng', label: 'Đã qua sử dụng' },
+  { value: 'Hàng giả, hàng nhái', label: 'Hàng giả, hàng nhái' },
+  {
+    value:
+      'Hàng nguyên vẹn nhưng không còn nhu cầu (sẽ trả nguyên seal, tem, hộp sản phẩm',
+    label:
+      'Hàng nguyên vẹn nhưng không còn nhu cầu (sẽ trả nguyên seal, tem, hộp sản phẩm)'
+  }
+]
 const OrderDetailInfo = ({
   orderId = '',
   storeId = '',
@@ -35,8 +53,9 @@ const OrderDetailInfo = ({
   const { _id, accessToken } = getToken()
   const [items, setItems] = useState([])
   const { level: userLevel } = useSelector((state) => state.account.user)
+  const [reload, setReload] = useState(0)
 
-  const init = () => {
+  const init = useCallback(() => {
     setError('')
     setIsLoading(true)
     if (by === 'store')
@@ -111,12 +130,14 @@ const OrderDetailInfo = ({
           setIsLoading(false)
         })
     }
-  }
+  }, [_id, accessToken, by, orderId, storeId])
 
   useEffect(() => {
     init()
-  }, [orderId, storeId, by, run])
-
+  }, [init, reload])
+  const handleReload = () => {
+    setReload((prev) => prev + 1)
+  }
   const totalOrderSalePrice = items.reduce((total, item) => {
     if (item.productId?.salePrice) {
       return total + item.productId?.salePrice.$numberDecimal * item.count
@@ -127,6 +148,7 @@ const OrderDetailInfo = ({
   const saleFromZenpii =
     totalOrderSalePrice - totalProducts(items, userLevel).amountFromUser1
 
+  console.log(order)
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -184,11 +206,62 @@ const OrderDetailInfo = ({
                   />
                 </div>
               )}
-            <button className='ms-auto btn btn-outline-primary rounded-1 ripple'>
-              {t('orderDetail.return')}
-            </button>
-          </div>
+            {by === 'user' &&
+              order.status === 'Delivered' &&
+              calcTime(order.updatedAt) < 360 && (
+                <div className='ms-auto position-relative d-inline-block'>
+                  <button
+                    className='btn btn-outline-primary rounded-1 ripple text-nowrap'
+                    type='button'
+                    data-bs-toggle='modal'
+                    data-bs-target={`#request-return-order`}
+                    disabled={
+                      order.returnRequests &&
+                      order.returnRequests.status !== 'Rejected'
+                    }
+                  >
+                    {(() => {
+                      if (!order.returnRequests) {
+                        return t('orderDetail.return')
+                      }
+                      switch (order.returnRequests?.status) {
+                        case 'Pending':
+                          return t('orderDetail.sentReturn')
+                        case 'Approved':
+                          return t('orderDetail.returnApproved')
+                        case 'Rejected':
+                          return t('orderDetail.returnRejected')
+                        default:
+                          return t('orderDetail.return')
+                      }
+                    })()}
+                  </button>
 
+                  <Modal
+                    id={`request-return-order`}
+                    hasCloseBtn={false}
+                    title={`${t('orderDetail.return')}`}
+                  >
+                    <ReturnOrderForm
+                      reasons={returnReasons}
+                      orderId={order._id}
+                      userId={order.userId?._id}
+                      storeId={order.storeId?._id}
+                    />
+                  </Modal>
+                </div>
+              )}
+            {order.status === 'Returned' && (
+              <span className='ms-3'>
+                Lý do trả hàng: <b> {order.returnRequests?.reason}</b>
+              </span>
+            )}
+            <i
+              onClick={handleReload}
+              className='btn ms-2 fa-light
+              fa-arrow-rotate-left ms-auto'
+            ></i>
+          </div>
           <div className='container-fluid mb-3'>
             <div className='row py-2 border rounded-1'>
               <div className='col-sm-6'>

@@ -65,7 +65,6 @@ const SellerUpdateOrderStatus = ({
       })
   }
 
-  // Determine the list of statuses to display based on current statusValue
   const getStatusOptions = () => {
     const options = [
       { label: t('status.notProcessed'), value: 'Not processed' },
@@ -74,15 +73,30 @@ const SellerUpdateOrderStatus = ({
       { label: t('status.delivered'), value: 'Delivered' },
       { label: t('status.cancel'), value: 'Cancelled' }
     ]
-    if (statusValue === 'Processing') {
-      return options.filter((option) => option.value !== 'Not processed')
-    } else if (statusValue === 'Shipped' || statusValue === 'Delivered') {
-      return options.filter(
-        (option) =>
-          option.value !== 'Not processed' && option.value !== 'Processing'
-      )
+    switch (statusValue) {
+      case 'Not processed':
+        return options.filter(
+          (option) =>
+            !['Shipped', 'Delivered', 'Not processed'].includes(option.value)
+        )
+      case 'Processing':
+        return options.filter(
+          (option) =>
+            !['Not processed', 'Delivered', 'Processing'].includes(option.value)
+        )
+      case 'Shipped':
+        return options.filter(
+          (option) =>
+            !['Not processed', 'Processing', 'Shipped', 'Cancelled'].includes(
+              option.value
+            )
+        )
+      case 'Delivered':
+      case 'Cancelled':
+        return options.filter((option) => option.value === statusValue)
+      default:
+        return options
     }
-    return options
   }
 
   return (

@@ -791,7 +791,11 @@ const CheckoutForm = ({
                       const vnpay = new VNPay({
                         tmnCode: 'M81536UR',
                         secureSecret: 'EU2OYS5JSUY59EUS9TSMOV1U9PI4L466',
+                        // tmnCode: '6VGI2BPJ',
+                        // secureSecret: 'HQ8GHY7QH6D2S1BVRKAJMI8UV5MKN3RA',
                         vnpayHost: 'https://sandbox.vnpayment.vn',
+                        // vnpayHost:
+                        //   'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html',
                         testMode: true, // optional
                         hashAlgorithm: 'SHA512' // optional
                       })

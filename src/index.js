@@ -32,7 +32,7 @@ function App() {
       <React.StrictMode>
         <ToastContainer
           className='toast-position'
-          position='top-right'
+          position='bottom-left'
           autoClose={1000}
           hideProgressBar={false}
           newestOnTop={false}

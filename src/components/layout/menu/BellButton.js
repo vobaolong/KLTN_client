@@ -63,7 +63,7 @@ const BellButton = ({ navFor = '' }) => {
       fetchNotifications(id)
     })
   }, [])
-  console.log(list)
+
   const popoverClickRootClose = (
     <Popover
       id='popover-trigger-click-root-close'

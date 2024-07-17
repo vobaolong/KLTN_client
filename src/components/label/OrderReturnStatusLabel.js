@@ -1,23 +1,17 @@
 import { useTranslation } from 'react-i18next'
 
 const bgColors = {
-  'Not processed': 'warning-rgba',
-  Processing: 'orange-rgba',
-  Shipped: 'primary-rgba',
-  Delivered: 'success-rgba',
-  Cancelled: 'danger-rgba',
-  Returned: 'danger-rgba'
+  Pending: 'primary-rgba',
+  Approved: 'success-rgba',
+  Rejected: 'danger-rgba'
 }
 const colors = {
-  'Not processed': 'warning',
-  Processing: 'orange',
-  Shipped: 'primary',
-  Delivered: 'success',
-  Cancelled: 'danger',
-  Returned: 'danger'
+  Pending: 'primary',
+  Approved: 'success',
+  Rejected: 'danger'
 }
 
-const OrderStatusLabel = ({ status = '', detail = true }) => {
+const OrderReturnStatusLabel = ({ status = '', detail = true }) => {
   const { t } = useTranslation()
 
   return (
@@ -35,4 +29,4 @@ const OrderStatusLabel = ({ status = '', detail = true }) => {
   )
 }
 
-export default OrderStatusLabel
+export default OrderReturnStatusLabel

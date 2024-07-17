@@ -123,40 +123,45 @@ const StoreLevelInfo = ({ store = {} }) => {
               />
             </div>
           </div>
-          {getToken() && getToken().role === 'user' && (
-            <div className='col-1 d-flex justify-content-end'>
-              <div className='menu-container'>
-                <button className='btn menu-button' onClick={handleMenuToggle}>
-                  <i className='fa fa-ellipsis-v'></i>
-                </button>
-                {showMenu && (
-                  <div className='menu d-inline-block'>
-                    <button
-                      type='button'
-                      data-bs-target='#report'
-                      data-bs-toggle='modal'
-                      className='btn--with-img menu-item'
-                    >
-                      <i className='fa-light fa-circle-info me-2'></i>
-                      {t('report')}
-                    </button>
-                    <Modal
-                      hasCloseBtn={false}
-                      title={t('dialog.report')}
-                      id='report'
-                    >
-                      <ListReport
-                        reasons={storeReasons}
-                        objectId={store._id}
-                        reportBy={user._id}
-                        isStore={true}
-                      />
-                    </Modal>
-                  </div>
-                )}
+          {getToken() &&
+            getToken().role === 'user' &&
+            user._id !== store?.ownerId?._id && (
+              <div className='col-1 d-flex justify-content-end'>
+                <div className='menu-container'>
+                  <button
+                    className='btn menu-button'
+                    onClick={handleMenuToggle}
+                  >
+                    <i className='fa fa-ellipsis-v'></i>
+                  </button>
+                  {showMenu && (
+                    <div className='menu d-inline-block'>
+                      <button
+                        type='button'
+                        data-bs-target='#report'
+                        data-bs-toggle='modal'
+                        className='btn--with-img menu-item'
+                      >
+                        <i className='fa-light fa-circle-info me-2'></i>
+                        {t('report')}
+                      </button>
+                      <Modal
+                        hasCloseBtn={false}
+                        title={t('dialog.report')}
+                        id='report'
+                      >
+                        <ListReport
+                          reasons={storeReasons}
+                          objectId={store._id}
+                          reportBy={user._id}
+                          isStore={true}
+                        />
+                      </Modal>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
     </div>
