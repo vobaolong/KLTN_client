@@ -20,6 +20,9 @@ import AdminVariantPage from './admin/VariantPage'
 import AdminCreateVariantPage from './admin/CreateVariantPage'
 import AdminEditVariantPage from './admin/EditVariantPage'
 import AdminVariantValuesPage from './admin/VariantValuePage'
+import AdminBrandPage from './admin/BrandPage'
+import AdminCreateBrandPage from './admin/CreateBrandPage'
+import AdminEditBrandPage from './admin/EditBrandPage'
 import AdminProductPage from './admin/ProductPage'
 import AdminOrderPage from './admin/OrderPage'
 import AdminOrderDetailPage from './admin/OrderDetailPage'
@@ -128,6 +131,19 @@ const Routes = () => {
           exact
           component={AdminVariantValuesPage}
         />
+        {/*  */}
+        <AdminRoute path='/admin/brand' exact component={AdminBrandPage} />
+        <AdminRoute
+          path='/admin/brand/create'
+          exact
+          component={AdminCreateBrandPage}
+        />
+        <AdminRoute
+          path='/admin/brand/edit/:brandId'
+          exact
+          component={AdminEditBrandPage}
+        />
+        {/*  */}
         <AdminRoute path='/admin/product' exact component={AdminProductPage} />
         <AdminRoute path='/admin/order' exact component={AdminOrderPage} />
         <AdminRoute

@@ -71,6 +71,7 @@ const ListBestSellerProduct = ({
       page: 1
     })
       .then((data) => {
+        console.log(data)
         if (isMounted.current) {
           if (data.error) setError(data.error)
           else setProducts(data.products)

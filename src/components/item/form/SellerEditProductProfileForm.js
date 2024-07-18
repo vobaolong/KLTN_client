@@ -12,6 +12,8 @@ import { t } from 'i18next'
 import { toast } from 'react-toastify'
 import { Link, useHistory } from 'react-router-dom'
 import Error from '../../ui/Error'
+import { listBrandByCategory } from '../../../apis/brand'
+import DropDownMenu from '../../ui/DropDownMenu'
 
 const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -22,7 +24,8 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [error, setError] = useState('')
   const history = useHistory()
-
+  const [brands, setBrands] = useState([])
+  const [selectedBrand, setSelectedBrand] = useState({ value: '', label: '' })
   useEffect(() => {
     const checkScroll = () => {
       const isBottom =
@@ -34,7 +37,33 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       window.removeEventListener('scroll', checkScroll)
     }
   }, [])
+  const fetchBrands = (categoryId) => {
+    if (!categoryId) return
 
+    setIsLoading(true)
+    listBrandByCategory(categoryId)
+      .then((data) => {
+        console.log('Fetched brands:', data.brands)
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setBrands(
+            data.brands.map((brand) => ({
+              value: brand._id,
+              label: brand.name
+            }))
+          )
+          if (data.brands.length <= 0) {
+            setBrands([{ value: '', label: t('productDetail.noBrand') }])
+          }
+        }
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setError('Server Error')
+        setIsLoading(false)
+      })
+  }
   useEffect(() => {
     setNewProduct({
       name: product.name,
@@ -43,7 +72,9 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
       price: product.price?.$numberDecimal,
       salePrice: product.salePrice?.$numberDecimal,
       categoryId: product.categoryId?._id,
+      brandId: product.brandId?._id,
       defaultCategory: product.categoryId,
+      defaultBrand: product.brandId,
       variantValueIds: product.variantValueIds?.map((v) => v._id),
       defaultVariantValues: product.variantValueIds,
       isValidName: true,
@@ -132,6 +163,7 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
     formData.set('price', newProduct.price)
     formData.set('salePrice', newProduct.salePrice)
     formData.set('categoryId', newProduct.categoryId)
+    formData.set('brandId', newProduct.brandId)
     if (newProduct.variantValueIds && newProduct.variantValueIds.length > 0)
       formData.set('variantValueIds', newProduct.variantValueIds.join('|'))
     setIsLoading(true)
@@ -153,7 +185,19 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
         }, 3000)
       })
   }
+  useEffect(() => {
+    if (newProduct.categoryId) {
+      fetchBrands(newProduct.categoryId)
+      console.log('Fetching brands for category:', newProduct.categoryId)
+    }
+  }, [newProduct.categoryId])
 
+  const handleBrandChange = (brand) => {
+    setSelectedBrand(brand)
+    setNewProduct((prev) => {
+      return { ...prev, brandId: brand }
+    })
+  }
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -208,6 +252,15 @@ const SellerEditProductProfileForm = ({ product = {}, storeId = '' }) => {
                   categoryId: category._id
                 })
               }
+            />
+          </div>
+          <div className='col-12 mt-3'>
+            <DropDownMenu
+              listItem={brands}
+              value={selectedBrand}
+              setValue={handleBrandChange}
+              label={t('productDetail.chooseBrand')}
+              size='lg'
             />
           </div>
 

@@ -28,6 +28,7 @@ const ProductSearchPage = () => {
     sortBy: 'sold',
     order: 'desc',
     categoryId: '',
+    brandId: '',
     limit: 20,
     page: 1
   })

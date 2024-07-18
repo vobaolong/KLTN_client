@@ -1,4 +1,3 @@
-import axios from 'axios'
 import qs from 'qs'
 const API = process.env.REACT_APP_API_URL
 
@@ -42,6 +41,7 @@ export const getProductByIdForManager = async (
 }
 
 //list product
+
 export const listActiveProducts = async (filter) => {
   const {
     search,
@@ -53,23 +53,46 @@ export const listActiveProducts = async (filter) => {
     minPrice,
     maxPrice,
     categoryId,
+    brandId,
     provinces
   } = filter
+
+  const queryParams = {
+    search,
+    rating,
+    minPrice,
+    maxPrice,
+    categoryId,
+    brandId,
+    sortBy,
+    order,
+    limit,
+    page,
+    provinces
+  }
+
+  const queryString = qs.stringify(queryParams, { encode: false })
+
+  const url = `${API}/active/products?${queryString}`
+
   try {
-    const res = await axios.get(
-      `${API}/active/products?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
-      {
-        params: {
-          provinces: provinces
-        },
-        paramsSerializer: (params) => {
-          return qs.stringify(params, { encode: false })
-        }
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
       }
-    )
-    return res.data
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    const data = await response.json()
+    console.log(data)
+    return data
   } catch (error) {
-    return console.log(error)
+    console.error('Error fetching active products:', error)
+    throw error
   }
 }
 
@@ -83,11 +106,12 @@ export const listSellingProductsByStore = async (filter, storeId) => {
     rating,
     minPrice,
     maxPrice,
-    categoryId
+    categoryId,
+    brandId
   } = filter
   try {
     const res = await fetch(
-      `${API}/selling/products/by/store/${storeId}?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
+      `${API}/selling/products/by/store/${storeId}?search=${search}&rating=${rating}&minPrice=${minPrice}&maxPrice=${maxPrice}&categoryId=${categoryId}&brandId=${brandId}&sortBy=${sortBy}&order=${order}&limit=${limit}&page=${page}`,
       {
         method: 'GET',
         headers: {

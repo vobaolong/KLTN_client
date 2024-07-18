@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getToken } from '../../../apis/auth'
@@ -13,6 +14,8 @@ import VariantSelector from '../../selector/VariantSelector'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import Error from '../../ui/Error'
+import { listBrandByCategory } from '../../../apis/brand'
+import DropDownMenu from '../../ui/DropDownMenu'
 
 const SellerCreateProductForm = ({ storeId = '' }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -22,9 +25,12 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
   const [isConfirmingCreate, setIsConfirmingCreate] = useState(false)
   const { t } = useTranslation()
   const { _id, accessToken } = getToken()
+  const [brands, setBrands] = useState([])
+  const [selectedBrand, setSelectedBrand] = useState({ value: '', label: '' })
   const [newProduct, setNewProduct] = useState({
     name: '',
     categoryId: '',
+    brandId: '',
     image0: '',
     image1: '',
     image2: '',
@@ -50,6 +56,7 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
     isValidPrice: true,
     isValidSalePrice: true
   })
+  console.log('selectedBrand', selectedBrand)
   useEffect(() => {
     const checkScroll = () => {
       const isBottom =
@@ -63,7 +70,33 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
       window.removeEventListener('scroll', checkScroll)
     }
   }, [])
+  const fetchBrands = (categoryId) => {
+    if (!categoryId) return
 
+    setIsLoading(true)
+    listBrandByCategory(categoryId)
+      .then((data) => {
+        console.log('Fetched brands:', data.brands)
+        if (data.error) {
+          setError(data.error)
+        } else {
+          setBrands(
+            data.brands.map((brand) => ({
+              value: brand._id,
+              label: brand.name
+            }))
+          )
+          if (data.brands.length <= 0) {
+            setBrands([{ value: '', label: t('productDetail.noBrand') }])
+          }
+        }
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setError('Server Error')
+        setIsLoading(false)
+      })
+  }
   const handleBackClick = (e) => {
     e.preventDefault()
     setIsConfirmingBack(true)
@@ -147,6 +180,7 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
   }
 
   const onSubmit = () => {
+    console.log('Current newProduct state:', newProduct)
     const formData = new FormData()
     formData.set('name', newProduct.name)
     formData.set('description', newProduct.description)
@@ -155,6 +189,9 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
     formData.set('salePrice', newProduct.salePrice)
     formData.set('image0', newProduct.image0)
     formData.set('categoryId', newProduct.categoryId)
+    if (newProduct.brandId) {
+      formData.set('brandId', newProduct.brandId)
+    }
     if (newProduct.variantValueIds && newProduct.variantValueIds.length > 0)
       formData.set('variantValueIds', newProduct.variantValueIds.join('|'))
     if (newProduct.image1) formData.set('image1', newProduct.image1)
@@ -186,7 +223,21 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
         }, 3000)
       })
   }
+  useEffect(() => {
+    if (newProduct.categoryId) {
+      fetchBrands(newProduct.categoryId)
+      console.log('Fetching brands for category:', newProduct.categoryId)
+    }
+  }, [newProduct.categoryId])
 
+  const handleBrandChange = (brand) => {
+    console.log('Brand selected:', brand)
+    setSelectedBrand(brand)
+    setNewProduct((prev) => {
+      console.log('Updating newProduct with brandId:', brand)
+      return { ...prev, brandId: brand }
+    })
+  }
   return (
     <div className='position-relative'>
       {isLoading && <Loading />}
@@ -265,6 +316,16 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
                   }
                 />
               </div>
+              <div className='col-12 mt-3'>
+                <DropDownMenu
+                  listItem={brands}
+                  value={selectedBrand}
+                  setValue={handleBrandChange}
+                  label={t('productDetail.chooseBrand')}
+                  size='lg'
+                />
+              </div>
+
               <div className='col-12 mt-3'>
                 <p>{t('productDetail.productImg')}</p>
                 <div className='d-flex flex-wrap justify-content-start gap-4 align-items-center'>
@@ -496,7 +557,7 @@ const SellerCreateProductForm = ({ storeId = '' }) => {
                   </small>
                 </span>
                 <VariantSelector
-                  label='Chosen variants'
+                  label='Phân loại đã chọn'
                   categoryId={newProduct.categoryId}
                   onSet={(variantValues) => {
                     setNewProduct({

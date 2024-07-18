@@ -73,7 +73,7 @@ const LineChart = ({
   return (
     <div className='bg-body box-shadow rounded-1 w-100 crosshair'>
       <h5 className='text-capitalize border-bottom p-3 text-start'>
-        {value} {t('breadcrumbs.overview')}
+        {t('breadcrumbs.overview')} {t(`${value}`)}
       </h5>
       <div className='p-3'>
         <Line

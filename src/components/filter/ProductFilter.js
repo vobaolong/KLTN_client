@@ -66,7 +66,8 @@ const ProductFilter = ({ filter, setFilter }) => {
       ...filter,
       rating: '',
       minPrice: 0,
-      maxPrice: ''
+      maxPrice: '',
+      provinces: null
     })
     setPrice({
       min: 0,
@@ -77,7 +78,8 @@ const ProductFilter = ({ filter, setFilter }) => {
     searchParams.delete('rating')
     searchParams.delete('minPrice')
     searchParams.delete('maxPrice')
-    history.push(`${location.pathname}?${searchParams.toString()}`)
+    searchParams.delete('provinces')
+    history.replace(`${location.pathname}?${searchParams.toString()}`)
   }
 
   const renderFilterRating = () => {

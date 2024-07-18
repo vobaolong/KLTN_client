@@ -136,7 +136,7 @@ const SellerSideBar = ({ user = {}, store = {} }) => {
             <i
               className={`${
                 path === 'review' ? 'fa-solid' : 'fa-light'
-              } w-10 text-center fa-star`}
+              } w-10 text-center fa-comment`}
             ></i>
             <span className='ms-3 res-hide-xl'>{t('review')}</span>
           </Link>

@@ -100,7 +100,7 @@ const AddVariantValueForm = ({ variantId = '', variantName = '', onRun }) => {
 
       {isConfirming && (
         <ConfirmDialog
-          title={`Add new value for '${variantName}'`}
+          title={`${t('addValue')} ${variantName}`}
           onSubmit={onSubmit}
           onClose={() => setIsConfirming(false)}
           message={t('confirmDialog')}

@@ -1083,7 +1083,7 @@ header {
   position: absolute;
   color: var(--muted-color);
   pointer-events: none;
-  left: 1px;
+  left: 13px;
   top: -25px;
   font-size: 0.9rem;
 }

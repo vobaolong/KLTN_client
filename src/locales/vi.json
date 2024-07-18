@@ -37,8 +37,11 @@
     "user": "Người dùng",
     "commission": "Chiết khấu",
     "variant": "Phân loại",
+    "brand": "Thương hiệu",
     "editVariant": "Chỉnh sửa phân loại",
+    "editBrand": "Chỉnh sửa thương hiệu",
     "addVariant": "Thêm phân loại",
+    "addBrand": "Thêm thương hiệu",
     "variantValues": "Thuộc tính phân loại",
     "addCategory": "Thêm ngành hàng",
     "home": "Trang chủ",
@@ -73,6 +76,12 @@
       "delete": "Xoá phân loại thành công",
       "none": "Ngành hàng này chưa có phân loại"
     },
+    "brand": {
+      "create": "Thêm thương hiệu thành công",
+      "update": "Chỉnh sửa thương hiệu thành công",
+      "delete": "Xoá thương hiệu thành công",
+      "none": "Ngành hàng này chưa có thương hiệu"
+    },
     "review": {
       "add": "Đánh giá sản phẩm thành công",
       "delete": "Xoá đánh giá thành công",
@@ -96,10 +105,10 @@
       "update": "Cập nhật giỏ hàng thành công"
     },
     "variantValue": {
-      "add": "Thêm giá trị thành công",
-      "delete": "Xoá giá trị thành công",
-      "update": "Cập nhật giá trị thành công",
-      "restore": "Khôi phục giá trị thành công"
+      "add": "Thêm thuộc tính thành công",
+      "delete": "Xoá thuộc tính thành công",
+      "update": "Cập nhật thuộc tính thành công",
+      "restore": "Khôi phục thuộc tính thành công"
     },
     "followStore": {
       "follow": "Theo dõi shop thành công",
@@ -271,6 +280,7 @@
   "showing": "Hiển thị",
   "of": "trên",
   "admin": {
+    "brands": "Thương hiệu",
     "adDashboard": {
       "overview": "Tổng quan",
       "dashboard": "Quản lý",
@@ -333,6 +343,8 @@
   },
   "review": "Đánh giá",
   "productDetail": {
+    "chooseBrand": "Thương hiệu",
+    "brand": "Thương hiệu",
     "export": "Xuất Excel",
     "all": "Tất cả",
     "selling": "Đang bán",
@@ -410,6 +422,7 @@
     "rating": "Đánh giá",
     "price": "Khoảng giá",
     "all": "Tất cả",
+    "brands": "Thương hiệu",
     "min": "Giá thấp nhất (₫)",
     "max": "Giá cao nhất (₫)",
     "latest": "Mới nhất",
@@ -596,12 +609,25 @@
     "createdAt": "Ngày tạo",
     "value": {
       "name": "Tên thuộc tính",
-      "add": "Thêm thuộc tính",
+      "add": "Thêm thuộc tính cho",
       "edit": "Sửa thuộc tính",
       "res": "Khôi phục thuộc tính",
       "value": "Thuộc tính",
       "valueOf": "Thuộc tính của"
     }
+  },
+  "brandDetail": {
+    "brands": "Thương hiệu",
+    "categories": "Ngành hàng",
+    "add": "Thêm thương hiệu",
+    "edit": "Sửa thương hiệu",
+    "del": "Xoá thương hiệu",
+    "res": "Khôi phục thương hiệu",
+    "name": "Tên thương hiệu",
+    "validName": "Vui lòng cung cấp tên thương hiệu phù hợp!",
+    "selectCategory": "Chọn ngành hàng",
+    "required": "Chưa chọn ngành hàng",
+    "createdAt": "Ngày tạo"
   },
   "staffDetail": {
     "staffList": "Danh sách nhân viên",
@@ -829,5 +855,7 @@
   "newPw": "Mật khẩu mới",
   "recoverPw": "Khôi phục mật khẩu",
   "confirmPw": "Xác nhận mật khẩu",
-  "backToLogin": "Quay lại đăng nhập"
+  "backToLogin": "Quay lại đăng nhập",
+  "user": "Người dùng",
+  "addValue": "Thêm thuộc tính cho"
 }

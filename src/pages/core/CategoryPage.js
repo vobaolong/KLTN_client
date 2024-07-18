@@ -27,6 +27,7 @@ const CategoryPage = () => {
     search: '',
     rating: '',
     categoryId,
+    brandId: '',
     minPrice: '',
     maxPrice: '',
     sortBy: 'sold',
@@ -61,10 +62,12 @@ const CategoryPage = () => {
           setListProducts(data.products)
         }
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
       .catch((error) => {
-        setError(error)
+        setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }
 

@@ -251,6 +251,11 @@ const DetailPage = () => {
                       )}
                     </span>
                   </div>
+                  {product.brandId.name && (
+                    <span className='mt-2'>
+                      Thương hiệu: {product.brandId.name}
+                    </span>
+                  )}
                   <div className='price-div d-flex flex-wrap justify-content-start align-items-center mt-3 bg-light px-3 py-2 rounded-1'>
                     {isLoading ? (
                       <Skeleton width={100} />
@@ -258,7 +263,7 @@ const DetailPage = () => {
                       <>
                         {product.salePrice?.$numberDecimal !==
                           product.price?.$numberDecimal && (
-                          <del className=' text-muted mt-1'>
+                          <del className='text-muted mt-1'>
                             {formatPrice(product.price?.$numberDecimal)}
                             <sup>₫</sup>
                           </del>
@@ -275,7 +280,7 @@ const DetailPage = () => {
                     )}
                   </div>
 
-                  <div className='mt-xl-4 mt-lg-3 mt-md-2 mt-sm-1'>
+                  <div className='mt-xl-3 mt-lg-2 mt-md-1'>
                     {isLoading ? (
                       <>
                         <Skeleton width={200} height={30} />

@@ -86,26 +86,15 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
           })
         }
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
       .catch((error) => {
         setError('Server Error')
         setIsLoading(false)
+        setTimeout(() => setError(''), 3000)
       })
   }
 
-  const exportFilter = { ...filter, limit: 1000 }
-  useEffect(() => {
-    listProductsForManager(_id, accessToken, exportFilter, storeId)
-      .then((data) => {
-        if (data.error) setError(data.error)
-        else {
-          setAllProducts(data.products)
-        }
-      })
-      .catch((error) => {
-        setError('Server Error')
-      })
-  })
   useEffect(() => {
     init()
   }, [filter, storeId, run, selectedOption])
@@ -317,6 +306,17 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                       />
                     </th>
 
+                    <th scope='col'>
+                      <SortByButton
+                        currentOrder={filter.order}
+                        currentSortBy={filter.sortBy}
+                        title={t('productDetail.brand')}
+                        sortBy='brandId'
+                        onSet={(order, sortBy) =>
+                          handleSetSortBy(order, sortBy)
+                        }
+                      />
+                    </th>
                     <th scope='col' className='text-end'>
                       <SortByButton
                         currentOrder={filter.order}
@@ -445,6 +445,7 @@ const StoreProductsTable = ({ storeId = '', selectedOption = 'all' }) => {
                           />
                         </small>
                       </td>
+                      <td>{product.brandId?.name}</td>
 
                       <td className='text-end'>
                         {formatPrice(product.price?.$numberDecimal)}
