@@ -1,48 +1,81 @@
 import { useSelector } from 'react-redux'
-import useToggle from '../../hooks/useToggle'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import AdminLayout from '../../components/layout/AdminLayout'
 import { useTranslation } from 'react-i18next'
 import AdminReportsTable from '../../components/table/AdminReportsTable'
+import { useHistory } from 'react-router-dom'
 
 const ReportPage = () => {
+  const history = useHistory()
   const { t } = useTranslation()
   const user = useSelector((state) => state.account.user)
-  const [flag, toggleFlag] = useToggle(true)
-  const paths = [
-    { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
-    { name: t('breadcrumbs.report'), url: '/admin/report' }
-  ]
+
+  const [activeTab, setActiveTab] = useState('store')
+
+  const reportTypes = useMemo(
+    () => [
+      { label: t('title.listReportShop'), value: 'store' },
+      { label: t('title.listReportProduct'), value: 'product' },
+      { label: t('title.listReportReview'), value: 'review' }
+    ],
+    [t]
+  )
+
+  const paths = useMemo(
+    () => [
+      { name: t('breadcrumbs.home'), url: '/admin/dashboard' },
+      { name: t('breadcrumbs.report'), url: '/admin/report' }
+    ],
+    [t]
+  )
+
+  const handleTabChange = useCallback(
+    (tab) => {
+      setActiveTab(tab)
+      history.push(`/admin/report/${tab}`)
+    },
+    [history]
+  )
+  useEffect(() => {
+    const path = history.location.pathname
+    const tab = path.split('/').pop()
+    if (reportTypes.some((type) => type.value === tab)) {
+      setActiveTab(tab)
+    }
+  }, [history, reportTypes])
+
   return (
     <AdminLayout user={user} paths={paths}>
       <div className='mb-2 bg-body rounded-top-1 box-shadow'>
         <ul className='nav nav-tabs'>
-          <li className='nav-item col-6 text-center pointer'>
-            <span
-              className={`nav-link ${flag ? 'active' : ''}`}
-              onClick={() => toggleFlag(true)}
-            >
-              <i
-                className={`${flag ? 'fa-solid' : 'fa-light'} fa-store me-2`}
-              ></i>
-              <span className='res-hide'>{t('title.listReportShop')}</span>
-            </span>
-          </li>
-          <li className='nav-item col-6 text-center pointer'>
-            <span
-              className={`nav-link ${!flag ? 'active' : ''}`}
-              onClick={() => toggleFlag(false)}
-            >
-              <i
-                className={`${flag ? 'fa-light' : 'fa-solid'} fa-box me-2`}
-              ></i>
-              <span className='res-hide'>{t('title.listReportProduct')}</span>
-            </span>
-          </li>
+          {reportTypes.map((type) => (
+            <li className='nav-item col-4 text-center pointer' key={type.value}>
+              <span
+                className={`nav-link ${
+                  activeTab === type.value ? 'active' : ''
+                }`}
+                onClick={() => handleTabChange(type.value)}
+              >
+                <i
+                  className={`${
+                    activeTab === type.value ? 'fa-solid' : 'fa-light'
+                  } ${
+                    type.value === 'store'
+                      ? 'fa-store'
+                      : type.value === 'product'
+                      ? 'fa-box'
+                      : 'fa-comment'
+                  } me-2`}
+                ></i>
+                <span className='res-hide'>{type.label}</span>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
-      <AdminReportsTable isStore={flag} />
+      <AdminReportsTable activeTab={activeTab} />
     </AdminLayout>
   )
 }
 
-export default ReportPage
+export default memo(ReportPage)

@@ -87,3 +87,19 @@ export const removeReview = async (userId, token, reviewId) => {
     return console.log(error)
   }
 }
+
+export const deleteReviews = async (userId, token, reviewId) => {
+  try {
+    const res = await fetch(`${API}/reviews/${reviewId}/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    return console.log(error)
+  }
+}

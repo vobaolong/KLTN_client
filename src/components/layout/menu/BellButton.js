@@ -95,7 +95,7 @@ const BellButton = ({ navFor = '' }) => {
             style={{ fontSize: '14px' }}
             className={`${
               l.isRead ? 'cus-notification-is-read' : 'cus-notification'
-            } nolink cus-dropdown w-100 px-3 py-2`}
+            } nolink cus-dropdown w-100 px-3 py-2 border-top`}
           >
             {l.message} <p>{l.objectId}</p>
             <p className='d-flex justify-content-between'>

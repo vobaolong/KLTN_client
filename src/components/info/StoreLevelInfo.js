@@ -10,12 +10,22 @@ import { getToken } from '../../apis/auth'
 import { useSelector } from 'react-redux'
 
 const storeReasons = [
-  { value: 'Sản phẩm cấm', label: 'Sản phẩm cấm' },
+  {
+    value: 'Người bán có đăng sản phẩm cấm',
+    label: 'Người bán có đăng sản phẩm cấm'
+  },
   {
     value: 'Người dùng có dấu hiệu lừa đảo',
     label: 'Người dùng có dấu hiệu lừa đảo'
   },
-  { value: 'Hàng giả, hàng nhái', label: 'Hàng giả, hàng nhái' }
+  {
+    value: 'Người bán có đăng hàng giả/nhái',
+    label: 'Người bán có đăng hàng giả/nhái'
+  },
+  {
+    value: 'Người dùng đăng tải nội dung phản cảm',
+    label: 'Người dùng đăng tải nội dung phản cảm'
+  }
 ]
 
 const StoreLevelInfo = ({ store = {} }) => {
@@ -155,6 +165,8 @@ const StoreLevelInfo = ({ store = {} }) => {
                           objectId={store._id}
                           reportBy={user._id}
                           isStore={true}
+                          isProduct={false}
+                          isReview={false}
                         />
                       </Modal>
                     </div>

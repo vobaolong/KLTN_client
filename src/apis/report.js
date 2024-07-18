@@ -1,10 +1,11 @@
 const API = process.env.REACT_APP_API_URL
 
 export const listReportsForAdmin = async (filter) => {
-  const { sortBy, order, limit, page, isStore } = filter
+  const { search, sortBy, order, limit, page, isStore, isProduct, isReview } =
+    filter
   try {
     const res = await fetch(
-      `${API}/reports/?sortBy=${sortBy}&isStore=${isStore}&order=${order}&limit=${limit}&page=${page}`,
+      `${API}/reports?search=${search}&sortBy=${sortBy}&isStore=${isStore}&isProduct=${isProduct}&isReview=${isReview}&order=${order}&limit=${limit}&page=${page}`,
       {
         method: 'GET',
         headers: {
@@ -27,6 +28,27 @@ export const reportByUser = async (data) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
+    })
+
+    if (!res.ok) {
+      throw new Error('Network response was not ok')
+    }
+
+    return await res.json()
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
+export const deleteReport = async (reportId) => {
+  try {
+    const res = await fetch(`${API}/reports/${reportId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
 
     if (!res.ok) {

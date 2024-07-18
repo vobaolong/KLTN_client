@@ -118,11 +118,11 @@ const ListReviews = ({ productId = '', storeId = '', userId = '' }) => {
       )
     return render
   }
-  const ratingsCounts = []
-  for (let i = 1; i <= 5; i++) {
-    const count = reviews.filter((review) => review.rating === i).length
-    ratingsCounts.push({ rating: i, count: count })
-  }
+  // const ratingsCounts = []
+  // for (let i = 1; i <= 5; i++) {
+  //   const count = reviews.filter((review) => review.rating === i).length
+  //   ratingsCounts.push({ rating: i, count: count })
+  // }
 
   return (
     <div className='position-relative'>

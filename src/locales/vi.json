@@ -28,6 +28,7 @@
     "myStore": "Shop của tôi"
   },
   "breadcrumbs": {
+    "review": "Đánh giá",
     "orderReturn": "Yêu cầu trả hàng",
     "report": "Báo cáo",
     "delivery": "Vận chuyển",
@@ -185,6 +186,7 @@
     "edit": "Bạn có chắc chắn cập nhật "
   },
   "title": {
+    "listReportReview": "Danh sách khiếu nại đánh giá",
     "listReportShop": "Danh sách báo cáo shop",
     "listReportProduct": "Danh sách báo cáo sản phẩm",
     "createTransaction": "Tiến hành giao dich",
@@ -206,7 +208,9 @@
     "userInSystem": "Người dùng trong hệ thống"
   },
   "dialog": {
+    "deleteReview": "Xóa đánh giá",
     "report": "Báo cáo",
+    "complaint": "Khiếu nại",
     "removeFeatured": "Xoá ảnh nổi bật",
     "removeImg": "Xoá hình ảnh",
     "logOut": "Đăng xuất",
@@ -299,7 +303,8 @@
     "deliveries": "Vận chuyển",
     "setting": "Cài đặt",
     "language": "Ngôn ngữ",
-    "reports": "Báo cáo"
+    "reports": "Báo cáo",
+    "reviews": "Đánh giá"
   },
   "order": "Đơn hàng",
   "home": "Trang chủ",
@@ -323,9 +328,10 @@
     "objectId": "Mã đối tượng",
     "reason": "Lý do",
     "createAt": "Ngày tạo",
-    "id": "Mã báo cáo"
+    "id": "Mã báo cáo",
+    "delete": "Xóa báo cáo"
   },
-
+  "review": "Đánh giá",
   "productDetail": {
     "export": "Xuất Excel",
     "all": "Tất cả",
@@ -530,6 +536,11 @@
     "feeValid": "Vui lòng cung cấp mức phí phù hợp! (>0₫)"
   },
   "status": {
+    "1": "1 Sao",
+    "2": "2 Sao",
+    "3": "3 Sao",
+    "4": "4 Sao",
+    "5": "5 Sao",
     "approved": "Phê duyệt",
     "rejected": "Từ chối",
     "pending": "Chưa giải quyết",
@@ -665,6 +676,7 @@
   "dragNDrop": "Kéo/Thả ảnh vào đây hoặc nhấn để chọn",
   "confirmDialog": "Bạn có chắc chắn về điều này không?",
   "button": {
+    "complaint": "Khiếu nại",
     "approve": "Phê duyệt",
     "reject": "Từ chối",
     "detail": "Chi tiết",

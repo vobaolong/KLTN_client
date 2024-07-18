@@ -25,6 +25,7 @@ import AdminOrderPage from './admin/OrderPage'
 import AdminOrderDetailPage from './admin/OrderDetailPage'
 import AdminTransactionPage from './admin/TransactionPage'
 import AdminReportPage from './admin/ReportPage'
+import AdminReviewPage from './admin/ReviewPage'
 //account
 import AccountProfilePage from './account/ProfilePage'
 import AccountAddressesPage from './account/AddressesPage'
@@ -46,6 +47,7 @@ import SellerReturnPage from './seller/ReturnPage'
 import SellerOrderDetailPage from './seller/OrderDetailPage'
 import SellerStaffPage from './seller/StaffPage'
 import SellerWalletPage from './seller/WalletPage'
+import SellerReviewPage from './seller/ReviewPage'
 import SellerCreateProductPage from './seller/CreateProductPage'
 import SellerEditProductPage from './seller/EditProductPage'
 //user
@@ -86,9 +88,15 @@ const Routes = () => {
           exact
           component={AdminCommissionPage}
         />
-        <AdminRoute path='/admin/report' exact component={AdminReportPage} />
+        <AdminRoute
+          exact
+          path='/admin/report/:type?'
+          component={AdminReportPage}
+        />
+
         <AdminRoute path='/admin/user' exact component={AdminUserPage} />
         <AdminRoute path='/admin/store' exact component={AdminStorePage} />
+        <AdminRoute path='/admin/review' exact component={AdminReviewPage} />
         <AdminRoute
           path='/admin/category'
           exact
@@ -238,11 +246,15 @@ const Routes = () => {
           component={SellerStaffPage}
         />
         <PrivateRoute
-          path='/seller/Wallet/:storeId'
+          path='/seller/wallet/:storeId'
           exact
           component={SellerWalletPage}
         />
-
+        <PrivateRoute
+          path='/seller/review/:storeId'
+          exact
+          component={SellerReviewPage}
+        />
         {/* user */}
         <Route path='/user/:userId' exact component={UserHomePage} />
         <Route path='/user/about/:userId' exact component={UserAboutPage} />

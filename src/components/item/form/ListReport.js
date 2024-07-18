@@ -5,7 +5,15 @@ import { socketId } from '../../..'
 import { toast } from 'react-toastify'
 import ConfirmDialog from '../../ui/ConfirmDialog'
 
-const ListReport = ({ reasons, objectId, reportBy, isStore }) => {
+const ListReport = ({
+  reasons,
+  objectId,
+  reportBy,
+  isStore,
+  isProduct,
+  isReview,
+  showOtherReason = false
+}) => {
   const [selectedReason, setSelectedReason] = useState('')
   const [otherReason, setOtherReason] = useState('')
   const { t } = useTranslation()
@@ -33,13 +41,17 @@ const ListReport = ({ reasons, objectId, reportBy, isStore }) => {
           objectId,
           reportBy,
           reason: reasonToSubmit,
-          isStore
+          isStore,
+          isProduct,
+          isReview
         })
         await reportByUser({
           objectId: objectId,
           reportBy: reportBy,
           reason: reasonToSubmit,
-          isStore: isStore
+          isStore: isStore,
+          isProduct: isProduct,
+          isReview: isReview
         })
         socketId.emit('notificationReport', {
           objectId: objectId,
@@ -68,7 +80,7 @@ const ListReport = ({ reasons, objectId, reportBy, isStore }) => {
         />
       )}
       <form onSubmit={handleSubmit}>
-        <div className='mb-3 d-flex flex-column gap-2'>
+        <div className='mb-3 d-flex flex-column'>
           <label className='form-label'>Chọn lý do báo cáo</label>
           {reasons.map((reason) => (
             <div className='form-check' key={reason.value}>
@@ -84,23 +96,26 @@ const ListReport = ({ reasons, objectId, reportBy, isStore }) => {
               <label className='form-check-label' htmlFor={reason.value}>
                 {reason.label}
               </label>
+              <hr className='m-3' />
             </div>
           ))}
-          <div className='form-check'>
-            <input
-              className='form-check-input pointer'
-              type='radio'
-              name='reportReason'
-              id='other'
-              value='other'
-              checked={selectedReason === 'other'}
-              onChange={handleReasonChange}
-            />
-            <label className='form-check-label' htmlFor='other'>
-              Khác
-            </label>
-          </div>
-          {selectedReason === 'other' && (
+          {showOtherReason && (
+            <div className='form-check'>
+              <input
+                className='form-check-input pointer'
+                type='radio'
+                name='reportReason'
+                id='other'
+                value='other'
+                checked={selectedReason === 'other'}
+                onChange={handleReasonChange}
+              />
+              <label className='form-check-label' htmlFor='other'>
+                Khác
+              </label>
+            </div>
+          )}
+          {selectedReason === 'other' && showOtherReason && (
             <input
               type='text'
               className='form-control mt-2'

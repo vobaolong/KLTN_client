@@ -179,6 +179,22 @@ const AdminSideBar = ({ user = {} }) => {
             <span className='ms-3 res-hide-lg'>{t('admin.reports')}</span>
           </Link>
         </li>
+        {/*  */}
+        <li className='nav-item'>
+          <Link
+            to={`/admin/review`}
+            className={`nav-link cus-sidebar-item cus-sidebar-item--db ripple link-dark ${
+              path === 'review' ? 'active' : ''
+            }`}
+          >
+            <i
+              className={`${
+                path === 'review' ? 'fa-solid' : 'fa-light'
+              } w-10 text-center fa-comment`}
+            ></i>
+            <span className='ms-3 res-hide-lg'>{t('admin.reviews')}</span>
+          </Link>
+        </li>
       </ul>
     </div>
   )

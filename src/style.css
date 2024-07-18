@@ -290,9 +290,7 @@ input:focus {
 .text-primary {
   color: var(--primary-color) !important;
 }
-.w-120 {
-  width: 150px;
-}
+
 .btn-outline-success {
   color: var(--success-color) !important;
   border-color: var(--success-color) !important;

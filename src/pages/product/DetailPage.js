@@ -219,7 +219,10 @@ const DetailPage = () => {
                                 reasons={productReasons}
                                 objectId={product._id}
                                 reportBy={user._id}
+                                isProduct={true}
                                 isStore={false}
+                                isReview={false}
+                                showOtherReason={true}
                               />
                             </Modal>
                           </div>
