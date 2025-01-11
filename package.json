@@ -8,7 +8,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^1.6.7",
+    "caniuse-lite": "^1.0.30001692",
     "chart.js": "^3.9.1",
+    "chartjs-plugin-crosshair": "^2.0.0",
     "dateformat": "^5.0.3",
     "faker": "^5.5.3",
     "gapi-script": "^1.2.0",
@@ -48,7 +50,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && copy .env build\\.env",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -71,6 +73,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-router-dom": "^5.3.3",
+    "cross-env": "^7.0.3"
   }
 }
