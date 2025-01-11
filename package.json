@@ -74,5 +74,8 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
     "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": "16.16.0"
   }
 }
