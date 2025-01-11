@@ -4,19 +4,8 @@ import { groupByDate } from '../../helper/groupBy'
 import { Line } from 'react-chartjs-2'
 import { Chart, registerables } from 'chart.js'
 import { useTranslation } from 'react-i18next'
-import CrosshairPlugin from 'chartjs-plugin-crosshair'
 
-const CustomCrosshairPlugin = function (plugin) {
-  const originalAfterDraw = plugin.afterDraw
-  plugin.afterDraw = function (chart, easing) {
-    if (chart && chart.crosshair) {
-      originalAfterDraw.call(this, chart, easing)
-    }
-  }
-  return plugin
-}
-
-Chart.register(...registerables, CustomCrosshairPlugin(CrosshairPlugin))
+Chart.register(...registerables)
 
 const LineChart = ({
   by = 'hours',
@@ -71,7 +60,7 @@ const LineChart = ({
   }, [items, by, role, sliceEnd])
 
   return (
-    <div className='bg-body box-shadow rounded-1 w-100 crosshair'>
+    <div className='bg-body box-shadow rounded-1 w-100'>
       <h5 className='text-capitalize border-bottom p-3 text-start'>
         {t('breadcrumbs.overview')} {t(`${value}`)}
       </h5>
@@ -83,7 +72,6 @@ const LineChart = ({
               mode: 'index',
               intersect: false
             },
-
             title: {
               display: true,
               text: title
@@ -101,7 +89,6 @@ const LineChart = ({
                 beginAtZero: true
               }
             },
-
             elements: {
               point: {
                 radius: 1,
@@ -113,22 +100,6 @@ const LineChart = ({
                 enabled: true,
                 mode: 'index',
                 intersect: false
-              },
-              crosshair: {
-                enabled: true,
-                line: {
-                  color: '#ccc',
-                  width: 1,
-                  dashPattern: [5, 5]
-                },
-                sync: {
-                  enabled: false,
-                  group: 1,
-                  suppressTooltips: false
-                },
-                zoom: {
-                  enabled: true
-                }
               }
             }
           }}
