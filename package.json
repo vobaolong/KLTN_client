@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^1.6.7",
     "caniuse-lite": "^1.0.30001692",
-    "chart.js": "4.0.1",
+    "chart.js": "3.9.1",
     "dateformat": "^5.0.3",
     "faker": "^5.5.3",
     "gapi-script": "^1.2.0",
